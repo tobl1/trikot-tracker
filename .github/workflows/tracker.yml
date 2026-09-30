@@ -1,0 +1,62 @@
+name: Trikot-Tracker
+
+on:
+  schedule:
+    - cron: "15 5 * * *"     # Gesamtlauf täglich 07:15 (Sommerzeit) bzw. 06:15 (Winterzeit)
+    - cron: "45 */3 * * *"   # Schnellcheck Thiago & Sondertrikots alle 3 Stunden
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "full = alles, priority = Schnellcheck, test = nur Test-Push"
+        type: choice
+        options: [full, priority, test]
+        default: full
+
+concurrency:
+  group: trikot-tracker
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Modus bestimmen
+        id: mode
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "mode=${{ inputs.mode }}" >> "$GITHUB_OUTPUT"
+          elif [ "${{ github.event.schedule }}" = "15 5 * * *" ]; then
+            echo "mode=full" >> "$GITHUB_OUTPUT"
+          else
+            echo "mode=priority" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Tracker ausführen
+        run: python tracker.py --mode ${{ steps.mode.outputs.mode }}
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+
+      - name: Ergebnisse speichern
+        if: steps.mode.outputs.mode != 'test'
+        run: |
+          git config user.name "trikot-tracker"
+          git config user.email "trikot-tracker@users.noreply.github.com"
+          git add state TREFFER.md
+          if ! git diff --cached --quiet; then
+            git commit -m "Tracker-Lauf $(date -u +'%Y-%m-%d %H:%M') UTC"
+            git pull --rebase --autostash
+            git push
+          fi
