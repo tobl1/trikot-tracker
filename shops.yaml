@@ -1,0 +1,64 @@
+# =====================================================================
+# Direkt abgefragte Shops
+# plattform: auto  = Shopify oder WooCommerce wird automatisch erkannt
+#            cfs   = Sonderanbindung Classic Football Shirts
+#            aus   = vorübergehend deaktiviert
+# Alle weiteren ~125 Shops laufen über FindYourJersey (fyj: an).
+# Nicht automatisch erkannte Shops stehen nach jedem Lauf in TREFFER.md
+# unter "Quellen-Status" und werden, falls bei FYJ gelistet, dort abgedeckt.
+# =====================================================================
+
+fyj: an
+
+shops:
+  - {name: Classic Football Shirts, url: "https://www.classicfootballshirts.co.uk", plattform: cfs}
+  - {name: Cult Kits, url: "https://www.cultkits.com"}
+  - {name: Classic11, url: "https://classic11.com"}
+  - {name: RB-Jerseys, url: "https://www.rb-jerseys.com"}
+  - {name: Vintage Football Shirts, url: "https://www.vintagefootballshirts.com"}
+  - {name: Retro Football Shirt Store, url: "https://www.retrofootballshirtstore.com"}
+  - {name: First Class Football Shirts, url: "https://www.firstclassfootballshirts.com"}
+  - {name: Football Shirt Kingdom, url: "https://footballshirtkingdom.com"}
+  - {name: Calcio Vintage, url: "https://calciovintage.com"}
+  - {name: Granny's Football Store, url: "https://grannysfootballstore.com"}
+  - {name: Retro Football Kits, url: "https://www.retrofootballkits.co.uk"}
+  - {name: TSPN Calcio, url: "https://tspncalcio.com"}
+  - {name: The Third Kit, url: "https://thethirdkit.co.uk"}
+  - {name: Topbinz, url: "https://www.topbinzfootballshirts.co.uk"}
+  - {name: Football Shirt Union, url: "https://footballshirtunion.com"}
+  - {name: Saturdays Football, url: "https://saturdaysfootball.com"}
+  - {name: The Football Boutique, url: "https://www.thefootballboutique.com"}
+  - {name: The Soccer Archive, url: "https://thesoccerarchive.com"}
+  - {name: We Love Football Shirts, url: "https://www.welovefootballshirts.com"}
+  - {name: RetrOriginalFootball, url: "https://retroriginalfootball.com"}
+  - {name: House of Football Shirts, url: "https://houseoffootballshirts.com"}
+  - {name: ClassicShirts-FC, url: "https://classicshirts-fc.com"}
+  - {name: Nostalgic Football Shirts, url: "https://nostalgicfootballshirts.com"}
+  - {name: Back to the Football, url: "https://backtothefootball.com"}
+  - {name: Vintage Football Area, url: "https://www.vintagefootballarea.com"}
+  - {name: 3kots, url: "https://3kots.com"}
+  - {name: Kit Launch, url: "https://kitlaunchfc.com"}
+  - {name: ReShirt, url: "https://reshirt.dk"}
+  - {name: Fodbold Shoppen, url: "https://fshoppen.dk"}
+  - {name: Kit Fever, url: "https://kitfever.com"}
+  - {name: Football Second Hand, url: "https://footballsecondhand.com"}
+  - {name: Football Thrift Shop, url: "https://footballthrift.shop"}
+  - {name: Swiat Koszulek Pilkarskich, url: "https://swiatkoszulekpilkarskich.pl"}
+  - {name: Classic-Shirts, url: "https://classic-shirts.com"}
+  - {name: The Kit Dealer, url: "https://www.thekitdealer.com"}
+  - {name: Throwback Jerseys NZ, url: "https://www.throwbackjerseysnz.com"}
+  - {name: FootballShirts.com, url: "https://footballshirts.com"}
+  - {name: Sense of Goal, url: "https://www.senseofgoal.com"}
+  - {name: Tiffozi Futbol, url: "https://tiffozifutbol.com"}
+  - {name: Kickoff Vintage, url: "https://kickoffvintage.com"}
+  - {name: Jerseys Hermanos, url: "https://jerseyshermanos.com"}
+  - {name: Nanos Football Jerseys, url: "https://nanosfootballjerseys.com"}
+  - {name: 1Klopp Shop, url: "https://1kloppshop.com"}
+  - {name: Kick It Vintage, url: "https://kickitvintage.de"}
+  - {name: The Hoff Classics, url: "https://www.thehoffclassics.com"}
+  - {name: Trikotparadies, url: "https://trikotparadies.shop"}
+
+# Marktplätze (eBay, Depop) werden nicht abgefragt, dort am besten in der
+# jeweiligen App dem Verkäufer folgen bzw. gespeicherte Suchen anlegen:
+#   Corner Flag Vintage (Depop), Classic Soccer Shop UK (eBay),
+#   Sporting Nostalgia (eBay), The Football House (eBay AU)

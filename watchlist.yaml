@@ -1,0 +1,192 @@
+# =====================================================================
+# Trikot-Tracker: Suchliste
+# Groß/Kleinschreibung und Akzente (é, ć, š, ü ...) werden automatisch ignoriert.
+# Alle Begriffe werden als ganze Wörter gesucht ("rodri" trifft nicht "rodrigo").
+# =====================================================================
+
+groessen:
+  # Erkannt werden: XL, XXL, 2XL, X-Large, XX-Large, Extra Large
+  # Kinder- und Damengrößen werden ausgeschlossen:
+  ausschliessen: ["boys", "boy", "youth", "kids", "kid", "junior", "jnr", "jr",
+                  "enfant", "enfants", "kinder", "nino", "ninos", "child", "children",
+                  "infant", "baby", "yxl", "xlb", "womens", "women", "ladies", "damen"]
+
+# Produkte, die keine Trikots sind oder nicht gewünscht sind
+produkt_ausschluss: ["shorts", "socks", "sock", "jacket", "track top", "tracksuit",
+                     "hoodie", "sweatshirt", "sweater", "pants", "trousers", "scarf", "bag",
+                     "cap", "hat", "programme", "ball", "boots", "poster", "sticker", "mug",
+                     "keyring", "towel", "pennant", "framed", "cushion", "goalkeeper",
+                     "torwart", "portero", "gk", "training", "pre-match", "prematch",
+                     "warm up", "polo", "t-shirt", "tee", "bib", "stutzen", "jacke", "schal"]
+
+# ---------------------------------------------------------------------
+# Spieler: Treffer = Suchbegriff im Titel UND kein Ausschlusswort
+# "vereine" ist ein STRIKTER Filter: ist er gesetzt, zählen nur Trikots
+# dieser Vereine/Nationalteams. Ohne "vereine" zählt jedes Trikot.
+# prioritaet "hoch" = auffällige Push-Nachricht + zusätzliche Checks alle 3 Std.
+# ---------------------------------------------------------------------
+spieler:
+
+  - name: Thiago
+    prioritaet: hoch
+    suche: ["thiago", "alcantara"]
+    ausschluss: ["thiago silva", "t. silva", "silva", "motta", "almada", "mendes",
+                 "neves", "djalo", "igor thiago", "galhardo", "messi", "rafinha"]
+    vereine: ["barcelona", "barca", "bayern", "munich", "munchen", "liverpool",
+              "spain", "spanien", "espana"]
+
+  - name: Verratti
+    suche: ["verratti"]
+
+  - name: Perišić
+    suche: ["perisic"]
+
+  - name: Olić
+    suche: ["olic"]
+    vereine: ["bayern", "munich", "munchen", "hamburg", "hamburger", "hsv", "croatia", "kroatien", "hrvatska"]
+
+  - name: Van der Vaart
+    suche: ["van der vaart", "vd vaart"]
+
+  - name: Van Nistelrooy
+    suche: ["van nistelrooy", "van nistelrooij", "nistelrooy"]
+
+  - name: Henry
+    suche: ["henry"]
+    vereine: ["arsenal"]
+
+  - name: Torres (Fernando)
+    suche: ["fernando torres", "torres"]
+    ausschluss: ["ferran", "pau torres", "diego torres", "oliver torres"]
+    vereine: ["atletico", "atleti", "liverpool"]
+
+  - name: Robben
+    suche: ["robben"]
+    vereine: ["bayern", "munich", "munchen"]
+
+  - name: Alonso (Xabi)
+    suche: ["xabi alonso", "alonso"]
+    ausschluss: ["marcos alonso", "m. alonso"]
+    vereine: ["real sociedad", "liverpool", "real madrid", "bayern", "munich", "munchen",
+              "spain", "spanien", "espana"]
+
+  - name: Cavani
+    suche: ["cavani"]
+
+  - name: Forlán
+    suche: ["forlan"]
+
+  - name: Ribéry
+    suche: ["ribery"]
+
+  - name: Juninho (Pernambucano)
+    suche: ["juninho"]
+    ausschluss: ["paulista"]
+    vereine: ["lyon", "vasco", "brazil", "brasil", "al-gharafa"]
+
+  - name: Benzema
+    suche: ["benzema"]
+
+  - name: Kroos
+    suche: ["kroos"]
+    ausschluss: ["felix kroos"]
+
+  - name: Rodri
+    suche: ["rodri"]
+    ausschluss: ["rodrigo", "rodrigues", "rodriguez"]
+    vereine: ["manchester city", "man city", "atletico", "atleti", "villarreal",
+              "spain", "spanien", "espana"]
+
+  - name: Valverde (Fede)
+    suche: ["fede valverde", "federico valverde", "valverde"]
+    vereine: ["real madrid", "uruguay"]
+
+  - name: Vidal (Arturo)
+    suche: ["arturo vidal", "vidal"]
+    ausschluss: ["aleix vidal"]
+    vereine: ["leverkusen", "juventus", "bayern", "munich", "munchen", "barcelona",
+              "barca", "inter", "chile"]
+
+  - name: Kimmich
+    suche: ["kimmich"]
+
+  - name: Barella
+    suche: ["barella"]
+
+  - name: Grimaldo
+    suche: ["grimaldo"]
+
+  - name: Frenkie de Jong
+    suche: ["frenkie", "f. de jong", "de jong"]
+    ausschluss: ["nigel", "luuk", "siem"]
+    vereine: ["ajax", "barcelona", "barca", "netherlands", "holland", "niederlande"]
+
+  - name: Marcos Llorente
+    suche: ["marcos llorente", "m. llorente", "llorente"]
+    ausschluss: ["fernando llorente", "f. llorente"]
+    vereine: ["atletico", "atleti", "real madrid", "alaves", "spain", "spanien", "espana"]
+
+  - name: Zé Roberto
+    suche: ["ze roberto"]
+
+# ---------------------------------------------------------------------
+# Sondertrikots (Thiago-Bezug): Beflockung egal, auch ohne Namen
+#   verein:       Namen, von denen mindestens einer im Titel stehen muss
+#   saisons:      z. B. "2010/11" erkennt auch 2010-11, 2010/2011, 10/11 usw.
+#   jahre:        einzelne Jahreszahlen, z. B. "2014"
+#   varianten:    alle | home | away | third (mehrere möglich)
+#   stichwoerter: mindestens eins muss vorkommen ...
+#   kombi:        ... oder ein Begriff aus "begriffe" UND eine Farbe
+#   suchanfragen: was in den Shop-Suchen eingegeben wird
+# ---------------------------------------------------------------------
+sondertrikots:
+
+  - name: "Barça 2010-2013"
+    prioritaet: hoch
+    verein: ["barcelona", "barca"]
+    saisons: ["2010/11", "2011/12", "2012/13"]
+    varianten: alle
+    suchanfragen: ["barcelona 2010", "barcelona 2011", "barcelona 2012"]
+
+  - name: "Bayern Wiesn 2021/22 (grün)"
+    prioritaet: hoch
+    verein: ["bayern"]            # bewusst ohne "München", sonst träfe es auch 1860-Wiesn-Trikots
+    saisons: ["2021/22"]
+    jahre: ["2021"]
+    varianten: alle
+    stichwoerter: ["oktoberfest", "wiesn"]
+    # "third", "fourth" usw. nur zusammen mit einer Farbe, sonst würde
+    # auch das reguläre Third-Trikot 21/22 gemeldet.
+    # Achtung: 2023/24 war ebenfalls grün, daher nur 21/22 bzw. 2021
+    kombi:
+      begriffe: ["third", "fourth", "4th", "special", "sondertrikot", "limited"]
+      farbe: ["green", "grun", "gruen", "verde"]
+    suchanfragen: ["bayern oktoberfest", "bayern wiesn", "bayern 2021"]
+
+  - name: "Liverpool Away 2021/22"
+    prioritaet: hoch
+    verein: ["liverpool"]
+    saisons: ["2021/22"]
+    varianten: [away]
+    suchanfragen: ["liverpool 2021"]
+
+  - name: "Liverpool Third 2022/23"
+    prioritaet: hoch
+    verein: ["liverpool"]
+    saisons: ["2022/23"]
+    varianten: [third]
+    suchanfragen: ["liverpool 2022"]
+
+  - name: "Spanien 2010/2011"
+    prioritaet: hoch
+    verein: ["spain", "spanien", "espana"]
+    jahre: ["2010", "2011"]
+    varianten: [home, away]
+    suchanfragen: ["spain 2010", "spain 2011"]
+
+  - name: "Spanien 2014"
+    prioritaet: hoch
+    verein: ["spain", "spanien", "espana"]
+    jahre: ["2014"]
+    varianten: [home, away]
+    suchanfragen: ["spain 2014"]
