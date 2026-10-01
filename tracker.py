@@ -43,6 +43,7 @@ UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
 TIMEOUT = 25
 DELAY = 2.0              # Pause zwischen zwei Anfragen an denselben Shop
 MAX_WORKERS = 8          # so viele Shops parallel
+SHOPIFY_PAGE_CAP = 100      # mehr Seiten liefert Shopify bei products.json nicht
 SHOPIFY_INTERVAL = 2.0   # Mindestabstand zwischen zwei Shopify-Anfragen, über alle Shops zusammen
 MAX_PUSH_HIGH = 5        # max. Einzel-Pushes (Thiago/Sondertrikots) pro Lauf, Rest gebündelt
 REPORT_HOURS = 36        # wie lange ein Treffer ohne Neusichtung in TREFFER.md bleibt
@@ -398,7 +399,7 @@ def shopify_to_item(shop, base, p, cents=False, currency=""):
 
 def shopify_full(http, shop, base, path="/products.json", currency="", stamps=None):
     items, n = [], 0
-    for page in range(1, 121):
+    for page in range(1, SHOPIFY_PAGE_CAP + 1):
         data = http.get(f"{base}{path}", {"limit": 250, "page": page})
         prods = (data or {}).get("products") or []
         if not prods:
@@ -415,24 +416,33 @@ def shopify_full(http, shop, base, path="/products.json", currency="", stamps=No
     return items, n
 
 
-def shopify_search(http, shop, base, queries, matcher, currency=""):
+def shopify_search(http, shop, base, queries, matcher, currency="", pages=2):
+    """Shopify-Suchseite (/search) statt suggest.json: suggest liefert max. 10 unscharfe Treffer
+    (bei VFA für "thiago" nur T. Silva). Vorfilter über den Handle, Details per /products/<handle>.js.
+    Shops mit nichtssagenden Handles (z. B. nur Ziffern) werden so nicht gefunden, die deckt der
+    Gesamtlauf über products.json ab"""
     items, n, handles = [], 0, set()
     for q in queries:
-        data = http.get(f"{base}/search/suggest.json", {
-            "q": q, "resources[type]": "product", "resources[limit]": 10,
-            "resources[options][unavailable_products]": "hide"})
-        prods = (((data or {}).get("resources") or {}).get("results") or {}).get("products") or []
-        n += len(prods)
-        for p in prods:
-            h = p.get("handle") or urlparse(p.get("url", "")).path.rstrip("/").split("/")[-1]
-            if not h or h in handles or not matcher.labels(p.get("title", "")):
-                continue
-            handles.add(h)
-            full = http.get(f"{base}/products/{h}.js")
-            if full:
-                it = shopify_to_item(shop, base, full, cents=True, currency=currency)
-                if it:
-                    items.append(it)
+        for page in range(1, pages + 1):
+            txt = http.get(f"{base}/search", {"q": q, "type": "product", "options[prefix]": "last",
+                                              "page": page}, want="text")
+            if not txt:
+                break
+            found = list(dict.fromkeys(re.findall(r"/products/([a-z0-9][a-z0-9_-]*)", txt)))
+            n += len(found)
+            for h in found:
+                if h in handles:
+                    continue
+                handles.add(h)
+                if not matcher.labels(h.replace("-", " ").replace("_", " ")):
+                    continue
+                full = http.get(f"{base}/products/{h}.js")
+                if full:
+                    it = shopify_to_item(shop, base, full, cents=True, currency=currency)
+                    if it:
+                        items.append(it)
+            if len(found) < 12:
+                break
     return items, n
 
 
@@ -731,8 +741,14 @@ def run_shop(shop, mode, matcher, platforms, currencies):
                 if n == 0 and not http.limited:
                     items, n = shopify_search(http, name, base, matcher.queries(), matcher, cur)
                     status["info"] = "nur Suche (products.json gesperrt)"
+                elif n >= SHOPIFY_PAGE_CAP * 250 and not http.limited:
+                    # Shopify liefert max. 100 Seiten (neueste zuerst), ältere Artikel nur per Suche
+                    known_urls = {it["url"] for it in items}
+                    extra, _ = shopify_search(http, name, base, matcher.queries(), matcher, cur)
+                    items += [it for it in extra if it["url"] not in known_urls]
+                    status["info"] = f"Katalog bei {n} gekappt, ältere Artikel per Suche"
             else:
-                items, n = shopify_search(http, name, base, matcher.queries(True), matcher, cur)
+                items, n = shopify_search(http, name, base, matcher.queries(True), matcher, cur, pages=1)
         elif plat.startswith("woo:"):
             ep = plat[4:]
             items, n = woo_run(http, name, ep, None if mode == "full" else matcher.queries(True))
@@ -1200,7 +1216,9 @@ def main():
                 entry["labels"] = sorted(set(entry["labels"]) | {l for l, _ in labs})
                 entry["prios"] = sorted(set(entry["prios"]) | {p for _, p in labs})
                 if it["source"] == "direkt":      # direkte Daten sind aktueller als FYJ
-                    entry.update(price=it["price"] or entry.get("price", ""), shop=it["shop"])
+                    entry.update(price=it["price"] or entry.get("price", ""), shop=it["shop"], via="direkt")
+                    if it.get("pruefen"):
+                        entry["pruefen"] = True
                     entry.pop("verkauft", None)
                     if grade:
                         entry["zustand"] = grade

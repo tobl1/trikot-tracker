@@ -115,6 +115,9 @@ TREFFER.md, also vorher sichern oder nicht committen). `--only "Name"` testet ei
   Treffer still übernehmen, keine Pushes
 - Thiago/Sondertrikots: einzeln mit Priorität 5, max. 5 pro Lauf; alles andere gebündelt in einer
   Nachricht. Hintergrund: Der erste echte Lauf schickte 17 Pushes, das fand der Nutzer zu viel
+- `via` eines Treffers springt auf "direkt", sobald ein direkt abgefragter Shop ihn liefert
+  (wichtig für die FYJ-Fundgrube und das Ausblenden nicht mehr gelieferter Treffer)
+- Gesamtlauf mit 76 Shops dauerte am 01.10.2026 ca. 57 Min. (Timeout jetzt 180 Min.)
 - Gleicher Artikel über FYJ und direkt: Deduplizierung über kanonische URL
   (ohne www, Query, Slash; Shopify-Pfade auf `/products/<handle>` gekürzt)
 
@@ -143,8 +146,11 @@ Ziel: FYJ irgendwann ganz abschalten
 - Classic Football Shirts fehlt bei FYJ komplett
 
 **Shopify** (Großteil der Shops): `products.json?limit=250&page=N` (Limit im Code 120 Seiten),
-Fallback `/collections/all/products.json`, dann Suche. Schnellcheck über
-`/search/suggest.json` (max. 10 Treffer je Begriff) plus `/products/<handle>.js` für Varianten.
+Fallback `/collections/all/products.json`, dann Suche. Suche (Schnellcheck, gekappte Kataloge)
+über die Suchseite `/search?q=…&type=product&page=N`, Vorfilter über den Handle, dann
+`/products/<handle>.js` für Varianten. **Nicht** `suggest.json`: max. 10 unscharfe Treffer, bei VFA
+lieferte "thiago" nur T. Silva. Shops mit Ziffern-Handles (The Football Temple) findet die Suche
+nicht, die laufen nur über den Gesamtlauf
 **products.json enthält keine Währung.**
 
 **WooCommerce:** Store API `/wp-json/wc/store/v1/products` (Fallback ohne `v1`), Preise in
@@ -183,8 +189,10 @@ We Love Football Shirts). **Diese Änderungen sind noch nicht durch einen echten
    Drosselung, kein einziges 429): 41/44 Shops ok, CFS 1.532, ReShirt 5, Swiat 111, FYJ 3.777.
    House of Football Shirts deaktiviert: laut Startseite "In-store only in The Hague", alle
    Shopify-Endpunkte leer. Saturdays Football, Vintage Football Area und
-   Vintage Football Shirts enden bei 25.000 Produkten (Shopify liefert max. 100 Seiten). Unkritisch,
-   da products.json die neuesten zuerst liefert (geprüft), es fehlen nur die ältesten Einträge
+   Vintage Football Shirts enden bei 25.000 Produkten (Shopify liefert max. 100 Seiten, neueste zuerst).
+   **Nicht unkritisch:** ältere, noch verfügbare Artikel fehlen (z. B. Thiago Bayern 19/20 bei VFA,
+   eingestellt 02/2024). Früher fing FYJ das auf. Seit 01.10.2026: bei gekapptem Katalog zusätzlich
+   `shopify_search` für alle Suchbegriffe
 2. **Feedback des Nutzers** zu den Erstlauf-Treffern einholen (Fehltreffer? Verpasstes?) und
    Matching nachschärfen. Bekannte Schwächen: "de Jong" ohne Vornamen kann Luuk/Nigel sein;
    "Llorente" + Spanien kann Fernando sein; Reissues werden mitgenommen und nur markiert
