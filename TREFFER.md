@@ -1,13 +1,13 @@
 # Trikot-Tracker
 
-Stand: 01.10.2026 21:48 Uhr (priority), 425 aktuelle Treffer in XL/XXL
+Stand: 02.10.2026 01:51 Uhr (priority), 425 aktuelle Treffer in XL/XXL
 
 ## Thiago (2)
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
 | [2013-14 BAYERN MUNCHEN *THIAGO* SHIRT XL](https://classic-shirts.com/product-eng-321702-2013-14-BAYERN-MUNCHEN-THIAGO-SHIRT-XL.html) | XL | 8/10 | £54.99 | Classic-Shirts | 01.10. |
-| [2019/20 - Bayern Munich - Thiago #6 (2XL)](https://www.vintagefootballarea.com/products/2019-20-bayern-munich-thiago-6-2xl-1) | XXL | Very Good | 93.00 USD | Vintage Football Area | 01.10. |
+| [2019/20 - Bayern Munich - Thiago #6 (2XL)](https://www.vintagefootballarea.com/products/2019-20-bayern-munich-thiago-6-2xl-1) | XXL | Very Good | 79.99 EUR | Vintage Football Area | 01.10. |
 
 ## Barça 2010-2013 (21)
 
@@ -41,7 +41,7 @@ Stand: 01.10.2026 21:48 Uhr (priority), 425 aktuelle Treffer in XL/XXL
 |---|---|---|---|---|---|
 | [Liverpool 2022/2023 Third Football Shirt  XL](https://casualfootballshirts.co.uk/products/liverpool-2022-2023-third-football-shirt-xl-1) | XL | Great | 75.00 USD | Casual Football Shirts | 01.10. |
 | [Liverpool 2022/2023 Third Football Shirt  XL](https://footballshirtkingdom.com/products/liverpool-2022-2023-third-football-shirt-xl) | XL | Great | 68.00 USD | Football Shirt Kingdom | 01.10. |
-| [2022-23 Liverpool Nike Third Shirt XXL](https://www.vintagefootballshirts.com/products/2022-23-liverpool-nike-third-shirt-xxl) | XXL |  | 68.00 USD | Vintage Football Shirts | 01.10. |
+| [2022-23 Liverpool Nike Third Shirt XXL](https://www.vintagefootballshirts.com/products/2022-23-liverpool-nike-third-shirt-xxl) | XXL |  | 62.95 EUR | Vintage Football Shirts | 01.10. |
 
 ## Spanien 2010/2011 (5)
 
@@ -82,7 +82,7 @@ Stand: 01.10.2026 21:48 Uhr (priority), 425 aktuelle Treffer in XL/XXL
 | [2008-10 Liverpool Home Shirt Alonso #14 - 8/10 - (XXL)](https://www.classicfootballshirts.co.uk/2008-10-liverpool-home-shirt-alonso-14-810-xxl-livh0809824.html) | XXL | 8/10 | £174.99 | Classic Football Shirts | 01.10. |
 | [2014-15 Bayern Munich Home Shirt Alonso #3 - 4/10 - (XL)](https://www.classicfootballshirts.co.uk/2014-15-bayern-munich-home-shirt-alonso-3-410-xl-bynh14748157.html) | XL | 4/10 | £39.99 | Classic Football Shirts | 01.10. |
 | [2003/05 Alonso #14 Vintage Liverpool Reebok Away Football Shirt (XL)](https://www.cultfootball.co.uk/products/2003-05-alonso-14-vintage-liverpool-reebok-away-football-shirt-xl) | XL | Very Good | 134.93 USD | Cult Football | 01.10. |
-| [2012/14 Spain Alonso #14 Away Shirt (XL) Adidas](https://www.cultkits.com/products/2012-14-spain-alonso-14-away-shirt-xl-adidas1441) | XL | Very Good | 135.00 USD | Cult Kits | 01.10. |
+| [2012/14 Spain Alonso #14 Away Shirt (XL) Adidas](https://www.cultkits.com/products/2012-14-spain-alonso-14-away-shirt-xl-adidas1441) | XL | Very Good | 119.95 EUR | Cult Kits | 01.10. |
 | [Xabi Alonso Bayern Munich 2014](https://esdeepoca.com/products/xabi-alonso-bayern-munich-2014) | XL | Very Good | 2100.00 MXN | Es de Época | 01.10. |
 | [2003/05 Alonso #14 Vintage Liverpool Reebok Away Football Shirt (XL)](https://footballshirtcollective.com/products/2003-05-alonso-14-vintage-liverpool-reebok-away-football-shirt-xl) | XL | Very Good | 135.00 USD | Football Shirt Collective | 01.10. |
 | [Original Liverpool 2004/05 Home - Alonso #14 Size fit XL](https://iconicjersey.com/products/original-liverpool-2004-05-home-alonso-14-size-fit-xl) | XL | 7/10 | 125.00 USD | Iconic Jersey | 01.10. |
