@@ -23,7 +23,7 @@ import threading
 import time
 import unicodedata
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import urljoin, urlparse
 from zoneinfo import ZoneInfo
 
 import requests
@@ -50,7 +50,7 @@ REPORT_HOURS = 36        # wie lange ein Treffer ohne Neusichtung in TREFFER.md 
 FYJ_API = "https://www.findyourjersey.org/api/jerseys"
 FYJ_SIZES = ["XL", "XXL"]
 FX_API = "https://api.frankfurter.dev/v1/latest"
-FYJ_EBAY_MAX_AGE_DAYS = 10   # ältere eBay-Daten bei FYJ gelten als verkauft/beendet
+FYJ_MARKETPLACES = ("ebay.", "depop.", "vinted.", "etsy.")   # über FYJ nicht übernehmen
 RECHECK_DAYS = 3             # FYJ-Treffer so oft auf der Shop-Seite nachprüfen (verkauft?)
 ENRICH_BUDGET = {"full": 150, "priority": 25}   # max. Seitenprüfungen pro Lauf
 NOTE_LEN = 160               # Länge der Zustandsnotiz
@@ -514,18 +514,13 @@ def cfs_run(http, shop, base, queries):
     return items, n
 
 
-def fyj_stale(r):
-    """eBay-Angebote aktualisiert FYJ teils seit Monaten nicht mehr, dann sind sie meist weg"""
-    if "ebay" not in (r.get("sourceType") or "").lower():
-        return False
-    try:
-        synced = dt.datetime.fromisoformat((r.get("lastSyncedAt") or "").replace("Z", "+00:00"))
-    except ValueError:
-        return True
-    return now() - synced > dt.timedelta(days=FYJ_EBAY_MAX_AGE_DAYS)
+def domain(url):
+    host = (urlparse(url).netloc or "").lower()
+    return host[4:] if host.startswith("www.") else host
 
 
-def fyj_run(http, matcher, priority):
+def fyj_run(http, matcher, priority, skip_domains=()):
+    """FYJ nur als Lückenfüller: keine Marktplätze, keine Shops, die direkt abgefragt werden"""
     # FYJ-Suche mit einzelnen, markanten Wörtern (z. B. "vaart" statt "van der vaart"),
     # Feinfilterung passiert lokal. Für Sondertrikots werden die Teams komplett geholt.
     queries = []
@@ -551,7 +546,8 @@ def fyj_run(http, matcher, priority):
                     title = r.get("description") or ""
                     if str(r.get("isReissue")).lower() == "true":   # kommt als Text "false"/"true"
                         continue   # Nachbauten, für den Nutzer uninteressant
-                    if fyj_stale(r):
+                    dom = domain(r.get("sourceUrl") or "")
+                    if not dom or dom in skip_domains or any(m in dom for m in FYJ_MARKETPLACES):
                         continue
                     extra = " ".join(str(x) for x in (r.get("player"), r.get("team")) if x)
                     price = f"{r.get('currentValue') or ''} {r.get('currency') or ''}".strip()
@@ -594,6 +590,42 @@ def smartweb_run(http, shop, base, queries, currency="DKK"):
                 img = (base + imgs[0]) if imgs and isinstance(imgs[0], str) and imgs[0].startswith("/") else ""
                 items.append(item("direkt", shop, url, title, title, price, img))
             if len(prods) < 48:
+                break
+    return items, n
+
+
+def idosell_run(http, shop, base, queries, matcher, max_pages=6):
+    """IdoSell (z. B. classic-shirts.com): Suche zeigt nur Verfügbares, 50 pro Seite, Blättern per counter.
+    Bei Sammelangeboten ("Multiple Sizes") stehen die noch verfügbaren Größen nur auf der Produktseite"""
+    items, n, urls = [], 0, set()
+    for q in queries:
+        for page in range(max_pages):
+            txt = http.get(f"{base}/search.php", {"text": q, "counter": page}, want="text")
+            if not txt:
+                break
+            tiles = BeautifulSoup(txt, "html.parser").select("div.product[data-product_id]")
+            n += len(tiles)
+            for el in tiles:
+                a = el.select_one("a.product__name")
+                if not a or not a.get("href"):
+                    continue
+                url = urljoin(base + "/", a["href"])
+                title = a.get_text(" ", strip=True)
+                if url in urls or not matcher.labels(title):
+                    continue
+                urls.add(url)
+                pr = el.select_one("strong.price")
+                price = (pr.find(string=True, recursive=False) or "").strip() if pr else ""
+                img = el.select_one("img")
+                src = urljoin(base + "/", img.get("src", "")) if img and img.get("src") else ""
+                size_text = title
+                if not ANY_SIZE_RX.search(norm(title)):
+                    detail = http.get(url, want="text") or ""
+                    sizes = [x.get_text(strip=True) for x in
+                             BeautifulSoup(detail, "html.parser").select(".projector_sizes__name")]
+                    size_text = " ".join(sizes) or "__keine__"
+                items.append(item("direkt", shop, url, title, size_text, price, src, pruefen=True))
+            if len(tiles) < 50:
                 break
     return items, n
 
@@ -641,6 +673,9 @@ def run_shop(shop, mode, matcher, platforms, currencies):
         if plat == "aus":
             status["fehler"] = "deaktiviert" + (f" ({shop['hinweis']})" if shop.get("hinweis") else "")
             return [], status
+        if mode == "priority" and str(shop.get("schnellcheck", "ja")).lower() in ("nein", "false", "no", "aus"):
+            status["info"] = "nur im Gesamtlauf"
+            return [], status
         if plat == "fyj":
             status["plattform"] = "über FYJ"
             status["fehler"] = ""
@@ -649,6 +684,10 @@ def run_shop(shop, mode, matcher, platforms, currencies):
         if plat == "smartweb":
             items, n = smartweb_run(http, name, base, matcher.queries(only_high=(mode == "priority")),
                                     shop.get("waehrung", "DKK"))
+            status.update(produkte=n)
+            return items, status
+        if plat == "idosell":
+            items, n = idosell_run(http, name, base, matcher.queries(only_high=(mode == "priority")), matcher)
             status.update(produkte=n)
             return items, status
         if plat == "prestashop":
@@ -852,7 +891,7 @@ def enrich(seen, ts, budget):
     """FYJ-Treffer auf der Shop-Seite prüfen: verkauft? Zustand? Neue zuerst, dann die ältesten Prüfungen"""
     due = dt.timedelta(days=RECHECK_DAYS)
     cand = [e for e in seen.values()
-            if e["last"] == ts and e.get("via") == "fyj" and not e.get("verkauft")
+            if e["last"] == ts and (e.get("via") == "fyj" or e.get("pruefen")) and not e.get("verkauft")
             and "ebay." not in e["url"]
             and (not e.get("geprueft") or now() - dt.datetime.fromisoformat(e["geprueft"]) > due)]
     cand.sort(key=lambda e: (bool(e.get("geprueft")), not is_high(e), e.get("geprueft") or ""))
@@ -1000,6 +1039,7 @@ def write_dashboard(seen, status_store, mode, ts):
         })
     quellen = status_store.get("quellen") or {}
     data = {"stand": ts, "modus": mode, "letzter_gesamtlauf": status_store.get("last_full", ""),
+            "fyj_shops": status_store.get("fyj_shops") or {},
             "kurse_datum": kurse.get("datum", ""), "treffer": items,
             "quellen": quellen.get("liste", []), "quellen_stand": quellen.get("zeit", "")}
     DASHBOARD_FILE.parent.mkdir(exist_ok=True)
@@ -1087,6 +1127,9 @@ def main():
     shops = shops_cfg.get("shops") or []
     if args.only:
         shops = [s for s in shops if args.only.lower() in s["name"].lower()]
+    # Shops, die direkt abgefragt werden: deren FYJ-Daten ignorieren (direkt ist aktueller und genauer)
+    direct_domains = {domain(s["url"]) for s in shops_cfg.get("shops") or []
+                      if (s.get("plattform") or "auto").lower() not in ("fyj", "aus")}
     use_fyj = str(shops_cfg.get("fyj", "an")).lower() in ("an", "true", "ja", "on") and not args.only
 
     lock = threading.Lock()
@@ -1100,7 +1143,7 @@ def main():
                 t0 = time.time()
                 st = {"name": "FindYourJersey", "plattform": "fyj", "produkte": 0, "fehler": ""}
                 try:
-                    its, n = fyj_run(http, matcher, args.mode == "priority")
+                    its, n = fyj_run(http, matcher, args.mode == "priority", direct_domains)
                     st["produkte"] = n
                     if n == 0 and args.mode == "full":
                         st["fehler"] = "keine Daten erhalten (Schnittstelle geändert oder gesperrt?)"
@@ -1177,9 +1220,21 @@ def main():
                 entry["zustand"] = grade
             if note:
                 entry["zustand_notiz"] = note
+            if it.get("pruefen"):
+                entry["pruefen"] = True
             seen[key] = entry
             if not first_run and not fresh_source:
                 new_entries.append(entry)
+
+    # Fundgrube: Shops, die nur über FYJ Treffer liefern (Kandidaten für direkte Anbindung)
+    if args.mode == "full" and fyj_status and not fyj_status.get("fehler"):
+        found = {}
+        for e in seen.values():
+            if e["last"] == ts and e.get("via") == "fyj" and not e.get("verkauft"):
+                found[domain(e["url"])] = found.get(domain(e["url"]), 0) + 1
+        old = status_store.get("fyj_shops") or {}
+        status_store["fyj_shops"] = {d: {"treffer": c, "seit": (old.get(d) or {}).get("seit", ts)}
+                                     for d, c in sorted(found.items(), key=lambda x: -x[1])}
 
     # Gesamtlauf: Treffer, die eine erfolgreich abgefragte Quelle nicht mehr liefert (verkauft oder
     # passt nach Regeländerung nicht mehr), sofort ausblenden statt erst nach REPORT_HOURS

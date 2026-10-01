@@ -96,6 +96,9 @@ CASES = [
     ("Kroatië 2008 Thuis Shirt Olic #18 (XL)", {"Olić"}),
     ("Maillot Espagne 2010 Domicile XL", {"Spanien 2010/2011"}),
     ("Koszulka Hiszpania 2014 XL", {"Spanien 2014"}),
+    ("2011-12 Barcelona Home Shirt Reissue (XL)", set()),
+    ("Spain 2010 Home Remake Shirt XL", set()),
+    ("2005-06 Liverpool Away Replica Shirt Alonso #14 (XL)", {"Alonso (Xabi)"}),
 ]
 
 

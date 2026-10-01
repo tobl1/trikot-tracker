@@ -23,7 +23,9 @@ produkt_ausschluss: ["shorts", "socks", "sock", "jacket", "track top", "tracksui
                      "warm up", "polo", "t-shirt", "tee", "bib", "stutzen", "jacke", "schal",
                      # Trainingsshirts in anderen Sprachen
                      "treino", "entrenamiento", "entreno", "allenamento", "entrainement",
-                     "trening", "trainingsshirt", "trainingstrikot"]
+                     "trening", "trainingsshirt", "trainingstrikot",
+                     # Nachbauten (nicht "replica", das heißt in UK einfach Fan-Trikot)
+                     "reissue", "re-issue", "remake", "reedition", "reedicion", "riedizione"]
 
 # ---------------------------------------------------------------------
 # Spieler: Treffer = Suchbegriff im Titel UND kein Ausschlusswort

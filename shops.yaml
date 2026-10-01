@@ -2,10 +2,12 @@
 # Direkt abgefragte Shops
 # plattform: auto       = Shopify oder WooCommerce wird automatisch erkannt
 #            cfs        = Sonderanbindung Classic Football Shirts
+#            idosell    = IdoSell-Suche (Classic-Shirts)
 #            smartweb   = dänisches Shopsystem (ReShirt)
 #            prestashop = PrestaShop mit JSON-Suche
 #            fyj        = nicht direkt, läuft über FindYourJersey mit
 #            aus        = deaktiviert
+# schnellcheck: nein = nur im nächtlichen Gesamtlauf abfragen
 # Entfernt (01.10.2026): Kit Fever (Domain gehört jetzt einem Modeshop),
 #                         Retro Football Kits (Shop geschlossen)
 # Alle weiteren ~125 Shops laufen über FindYourJersey (fyj: an).
@@ -47,7 +49,7 @@ shops:
   - {name: Football Second Hand, url: "https://footballsecondhand.com"}
   - {name: Football Thrift Shop, url: "https://footballthrift.shop"}
   - {name: Swiat Koszulek Pilkarskich, url: "https://swiatkoszulekpilkarskich.pl", plattform: prestashop}
-  - {name: Classic-Shirts, url: "https://classic-shirts.com", plattform: fyj}
+  - {name: Classic-Shirts, url: "https://classic-shirts.com", plattform: idosell}
   - {name: The Kit Dealer, url: "https://www.thekitdealer.com"}
   - {name: Throwback Jerseys NZ, url: "https://www.throwbackjerseysnz.com", plattform: aus, hinweis: "Wix, Drop jeden Freitag 20 Uhr NZ-Zeit"}
   - {name: FootballShirts.com, url: "https://footballshirts.com"}
@@ -61,6 +63,44 @@ shops:
   - {name: The Hoff Classics, url: "https://www.thehoffclassics.com", plattform: fyj}
   - {name: Trikotparadies, url: "https://trikotparadies.shop"}
   - {name: The Football Temple, url: "https://thefootballtemple.com"}   # NL, Titel auf Niederländisch
+
+# ---------------------------------------------------------------------
+# Ehemals nur über FYJ, seit 01.10.2026 direkt (Shopify). Nur im nächtlichen
+# Gesamtlauf, nicht im Schnellcheck, um die Last klein zu halten.
+# Bewusst NICHT direkt (laut FYJ ca. 20 % Nachbauten, FYJ sortiert die aus):
+#   first11shirts.com, footballshirtvintage.fr
+# ---------------------------------------------------------------------
+  - {name: Casual Football Shirts, url: "https://casualfootballshirts.co.uk", schnellcheck: nein}
+  - {name: Football Finery, url: "https://footballfinery.co.uk", schnellcheck: nein}
+  - {name: Green Sport Vintage, url: "https://greensportvintage.com", schnellcheck: nein}
+  - {name: Jersely, url: "https://jersely.com", schnellcheck: nein}
+  - {name: The Kitman 97, url: "https://thekitman97.com", schnellcheck: nein}
+  - {name: To The Jersey, url: "https://tothejersey.com", schnellcheck: nein}
+  - {name: Buy Sell Football Shirts, url: "https://buysellfootballshirts.co.uk", schnellcheck: nein}
+  - {name: Iconic Jersey, url: "https://iconicjersey.com", schnellcheck: nein}
+  - {name: Le 7 Sorelle, url: "https://le7sorelle.it", schnellcheck: nein}
+  - {name: STA Jerseys, url: "https://stajerseys.com", schnellcheck: nein}
+  - {name: Vintage Historic Sports, url: "https://vintagehistoricsports.fr", schnellcheck: nein}
+  - {name: Retrotrøjer, url: "https://xn--retrotrjer-6cb.dk", schnellcheck: nein}
+  - {name: Classic Pitchwear, url: "https://classicpitchwear.com", schnellcheck: nein}
+  - {name: Cult Football, url: "https://cultfootball.co.uk", schnellcheck: nein}
+  - {name: Es de Época, url: "https://esdeepoca.com", schnellcheck: nein}
+  - {name: Euromex Sports, url: "https://euromexsports.com", schnellcheck: nein}
+  - {name: First Street, url: "https://firststreet.store", schnellcheck: nein}
+  - {name: Football Shirt Collective, url: "https://footballshirtcollective.com", schnellcheck: nein}
+  - {name: Forever Soccer Jerseys, url: "https://foreversoccerjerseys.com", schnellcheck: nein}
+  - {name: Golaço Kits, url: "https://golacokits.com", schnellcheck: nein}
+  - {name: Legacy Football Shirts, url: "https://legacyfootballshirts.com", schnellcheck: nein}
+  - {name: Offside Boys, url: "https://offsideboys.com", schnellcheck: nein}
+  - {name: Oh Calcio, url: "https://ohcalcio.com", schnellcheck: nein}
+  - {name: One More Time, url: "https://onemoretimeshop.it", schnellcheck: nein}
+  - {name: Philly Soccer Jerseys, url: "https://phillysoccerjerseys.com", schnellcheck: nein}
+  - {name: Retro Football Shirts, url: "https://retrofootballshirts.com", schnellcheck: nein}
+  - {name: Special Football Shirts, url: "https://specialfootballshirts.com", schnellcheck: nein}
+  - {name: That Vintage Football Shirt, url: "https://thatvintagefootballshirt.com", schnellcheck: nein}
+  - {name: The Football Room, url: "https://thefootballroom-mty.com", schnellcheck: nein}
+  - {name: Vice Football Store, url: "https://vicefootballstore.com", schnellcheck: nein}
+  - {name: Vintage Football Jerseys, url: "https://vintage-football-jerseys.co.uk", schnellcheck: nein}
 
 # Marktplätze (eBay, Depop) werden nicht abgefragt, dort am besten in der
 # jeweiligen App dem Verkäufer folgen bzw. gespeicherte Suchen anlegen:

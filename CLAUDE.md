@@ -30,7 +30,7 @@ Einzeltrikots zum Nachbeflocken dazukommen, das sagt der Nutzer gesondert an.
 |---|---|
 | `tracker.py` | gesamtes Programm (Abfrage, Matching, Push, Bericht), bewusst eine Datei |
 | `watchlist.yaml` | Spieler mit Suchbegriffen, Ausschlüssen, Vereinsfilter; Sondertrikots; Größen; Produktausschlüsse |
-| `shops.yaml` | direkt abgefragte Shops mit `plattform` (auto, cfs, smartweb, prestashop, fyj, aus) |
+| `shops.yaml` | direkt abgefragte Shops mit `plattform` (auto, cfs, idosell, smartweb, prestashop, fyj, aus), optional `schnellcheck: nein` |
 | `.github/workflows/tracker.yml` | GitHub Actions: Gesamtlauf `30 3 * * *` UTC, Schnellcheck `45 7,13,19 * * *` UTC, manuell mit Modus |
 | `state/seen.json` | bekannte Treffer (Schlüssel = kanonische URL), wird vom Workflow committet |
 | `state/status.json` | erkannte Plattformen, erfolgreich abgefragte Quellen, Produktanzahlen, letzter Lauf |
@@ -120,6 +120,17 @@ TREFFER.md, also vorher sichern oder nicht committen). `--only "Name"` testet ei
 
 ## Quellen und technische Details
 
+**Strategie (entschieden 01.10.2026): direkt zuerst, FYJ nur als Lückenfüller und Fundgrube.**
+FYJ-Daten sind oft tagelang alt, teils fehlerhaft, Zustand nur grob. Deshalb: 31 Shopify-Shops,
+die vorher nur über FYJ kamen, direkt (`schnellcheck: nein`, nur nachts), classic-shirts.com per
+`idosell`. FYJ ignoriert Domains, die direkt abgefragt werden, und Marktplätze (eBay, Depop, Vinted,
+Etsy) komplett. `status.json` → `fyj_shops` listet Shops, die nur noch über FYJ Treffer liefern
+(im Dashboard unter Quellen-Status), daraus Kandidaten für direkte Anbindung vorschlagen.
+Bewusst über FYJ gelassen: first11shirts.com und footballshirtvintage.fr (ca. 20 % Nachbauten laut
+FYJ, die FYJ per `isReissue` aussortiert), Wix-Shops (Lineup Vintage, Original 11vs11, Bulishirts,
+Rare and Retro), unklare Systeme (kitts.de, Topbinz, The Shirt Collectors, Full90 Prints, Wave).
+Ziel: FYJ irgendwann ganz abschalten
+
 **FindYourJersey** (inoffizielle API, Nutzer sollte die Betreiber noch um Erlaubnis fragen):
 - `isReissue` kommt als **Text** `"false"`/`"true"`, nicht als Boolean (bis 01.10.2026 deshalb alles als Reissue markiert)
 - `GET https://www.findyourjersey.org/api/jerseys?search=<wort>&sizes=XL&limit=200&page=N`
@@ -142,6 +153,11 @@ Minor Units mit `currency_code`.
 **Classic Football Shirts (`cfs`):** Magento, Suche serverseitig gerendert unter
 `/catalogsearch/result/?q=<begriff>&p=N`; `.product-item`, Titel im `img alt` inkl. Zustand und
 Größe, z. B. "2013-14 Bayern Munich Away Shirt Thiago #6 - 5/10 - (L)"; Cloudflare davor.
+
+**Classic-Shirts (`idosell`):** `/search.php?text=<begriff>&counter=N` (0-basiert, 50 je Seite),
+zeigt **nur Verfügbares**; Kacheln `div.product[data-product_id]`, Titel `a.product__name`, Preis
+`strong.price`; Sammelangebote ("Multiple Sizes") → Produktseite, `.projector_sizes__name` listet nur
+verfügbare Größen. Zustand per Seitenprüfung (JSON-LD description "CONDITION: 8/10 …")
 
 **ReShirt (`smartweb`):** `/json/products?currencyIso=DKK&field=search&filter={}&id=<begriff>&limit=48&orderBy=-Id&page=N`;
 Größe steht im Titel ("… - XL"); Felder `Stock`/`Online` wirken unzuverlässig, nur `Soldout` wird genutzt.
