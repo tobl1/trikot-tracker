@@ -4,7 +4,7 @@
   "3kots": 554,
   "Back to the Football": 4366,
   "Calcio Vintage": 336,
-  "Classic Football Shirts": 1532,
+  "Classic Football Shirts": 1533,
   "Classic11": 5663,
   "Cult Kits": 21407,
   "FindYourJersey": 3777,
@@ -19,7 +19,7 @@
   "Jerseys Hermanos": 82,
   "Kick It Vintage": 353,
   "Kickoff Vintage": 2608,
-  "Kit Launch": 591,
+  "Kit Launch": 586,
   "Nanos Football Jerseys": 580,
   "Nostalgic Football Shirts": 1200,
   "RB-Jerseys": 605,
@@ -30,7 +30,7 @@
   "Swiat Koszulek Pilkarskich": 111,
   "TSPN Calcio": 1331,
   "The Kit Dealer": 625,
-  "The Soccer Archive": 4009,
+  "The Soccer Archive": 4014,
   "The Third Kit": 1294,
   "Tiffozi Futbol": 1110,
   "Trikotparadies": 3391,
@@ -101,10 +101,10 @@
    "ZAR": 18.6123
   }
  },
- "last_full": "2026-10-01T08:27:22.241932+00:00",
+ "last_full": "2026-10-01T11:45:23.511439+00:00",
  "last_run": {
   "mode": "full",
-  "time": "2026-10-01T08:27:22.241932+00:00"
+  "time": "2026-10-01T11:45:23.511439+00:00"
  },
  "platforms": {
   "https://1kloppshop.com": "shopify",
@@ -140,7 +140,7 @@
   "https://tspncalcio.com": "shopify",
   "https://www.cultkits.com": "shopify",
   "https://www.firstclassfootballshirts.com": "shopify",
-  "https://www.rb-jerseys.com": "woo:https://www.rb-jerseys.com/wp-json/wc/store/v1/products",
+  "https://www.rb-jerseys.com": "unbekannt",
   "https://www.retrofootballkits.co.uk": "unbekannt",
   "https://www.retrofootballshirtstore.com": "unbekannt",
   "https://www.senseofgoal.com": "shopify",
@@ -170,7 +170,24 @@
     "name": "House of Football Shirts",
     "plattform": "shopify",
     "produkte": 0,
-    "sekunden": 741.9
+    "rhythmus": {
+     "letzte": "",
+     "neu_30": 0,
+     "neu_7": 0,
+     "tage_30": 0,
+     "text": "seit 30 Tagen nichts Neues (0 in 90 Tagen)",
+     "typ": "ruhig"
+    },
+    "sekunden": 741.4
+   },
+   {
+    "anfragen": 9,
+    "fehler": "Shopsystem nicht automatisch erkannt",
+    "info": "",
+    "name": "RB-Jerseys",
+    "plattform": "unbekannt",
+    "produkte": 0,
+    "sekunden": 130.1
    },
    {
     "anfragen": 0,
@@ -197,7 +214,15 @@
     "name": "1Klopp Shop",
     "plattform": "shopify",
     "produkte": 265,
-    "sekunden": 63.6
+    "rhythmus": {
+     "letzte": "2026-07-05T16:19:44+01:00",
+     "neu_30": 0,
+     "neu_7": 0,
+     "tage_30": 0,
+     "text": "seit 30 Tagen nichts Neues (44 in 90 Tagen)",
+     "typ": "ruhig"
+    },
+    "sekunden": 63.7
    },
    {
     "anfragen": 8,
@@ -206,7 +231,7 @@
     "name": "3kots",
     "plattform": "woo",
     "produkte": 554,
-    "sekunden": 55.8
+    "sekunden": 54.5
    },
    {
     "anfragen": 46,
@@ -215,7 +240,7 @@
     "name": "Back to the Football",
     "plattform": "woo",
     "produkte": 4366,
-    "sekunden": 120.4
+    "sekunden": 121.0
    },
    {
     "anfragen": 4,
@@ -224,7 +249,15 @@
     "name": "Calcio Vintage",
     "plattform": "shopify",
     "produkte": 336,
-    "sekunden": 52.5
+    "rhythmus": {
+     "letzte": "2026-09-07T12:28:07+01:00",
+     "neu_30": 3,
+     "neu_7": 0,
+     "tage_30": 2,
+     "text": "laufend: an 2 von 30 Tagen neue Artikel, 0 in 7 Tagen, 3 in 30 Tagen",
+     "typ": "laufend"
+    },
+    "sekunden": 54.5
    },
    {
     "anfragen": 131,
@@ -232,8 +265,8 @@
     "info": "",
     "name": "Classic Football Shirts",
     "plattform": "cfs",
-    "produkte": 1532,
-    "sekunden": 261.5
+    "produkte": 1533,
+    "sekunden": 267.9
    },
    {
     "anfragen": 0,
@@ -251,7 +284,15 @@
     "name": "Classic11",
     "plattform": "shopify",
     "produkte": 5663,
-    "sekunden": 342.8
+    "rhythmus": {
+     "letzte": "2026-09-30T14:37:11+01:00",
+     "neu_30": 225,
+     "neu_7": 43,
+     "tage_30": 22,
+     "text": "laufend: an 22 von 30 Tagen neue Artikel, 43 in 7 Tagen, 225 in 30 Tagen",
+     "typ": "laufend"
+    },
+    "sekunden": 340.8
    },
    {
     "anfragen": 0,
@@ -269,7 +310,20 @@
     "name": "Cult Kits",
     "plattform": "shopify",
     "produkte": 21407,
-    "sekunden": 1122.7
+    "rhythmus": {
+     "abstand_tage": 1.0,
+     "letzte": "2026-10-01T09:08:22+01:00",
+     "letzter_schub": "2026-09-30T17:45:03+01:00",
+     "neu_30": 610,
+     "neu_7": 127,
+     "schuebe": 76,
+     "tage_30": 28,
+     "text": "Drops: 76 Schübe in 90 Tagen, etwa alle 1 Tage, 15x Mi, meist ab 18 Uhr, zuletzt 30.09. 18:45",
+     "typ": "drops",
+     "uhrzeit": 18,
+     "wochentag": "Mi"
+    },
+    "sekunden": 1130.6
    },
    {
     "anfragen": 3,
@@ -278,7 +332,20 @@
     "name": "First Class Football Shirts",
     "plattform": "shopify",
     "produkte": 167,
-    "sekunden": 34.9
+    "rhythmus": {
+     "abstand_tage": 7.7,
+     "letzte": "2026-09-21T15:08:32+01:00",
+     "letzter_schub": "2026-09-21T14:23:32+01:00",
+     "neu_30": 55,
+     "neu_7": 0,
+     "schuebe": 5,
+     "tage_30": 6,
+     "text": "Drops: 5 Schübe in 90 Tagen, etwa alle 8 Tage, 2x Mo, meist ab 17 Uhr, zuletzt 21.09. 15:23",
+     "typ": "drops",
+     "uhrzeit": 17,
+     "wochentag": "Mo"
+    },
+    "sekunden": 34.7
    },
    {
     "anfragen": 5,
@@ -287,7 +354,20 @@
     "name": "Fodbold Shoppen",
     "plattform": "shopify",
     "produkte": 640,
-    "sekunden": 66.0
+    "rhythmus": {
+     "abstand_tage": 14.0,
+     "letzte": "2026-09-28T07:59:10+02:00",
+     "letzter_schub": "2026-09-18T15:55:45+02:00",
+     "neu_30": 57,
+     "neu_7": 2,
+     "schuebe": 6,
+     "tage_30": 3,
+     "text": "Drops: 6 Schübe in 90 Tagen, etwa alle 14 Tage, 6x Fr, meist ab 15 Uhr, zuletzt 18.09. 15:55",
+     "typ": "drops",
+     "uhrzeit": 15,
+     "wochentag": "Fr"
+    },
+    "sekunden": 67.6
    },
    {
     "anfragen": 17,
@@ -296,7 +376,7 @@
     "name": "Football Second Hand",
     "plattform": "woo",
     "produkte": 1411,
-    "sekunden": 58.6
+    "sekunden": 60.7
    },
    {
     "anfragen": 27,
@@ -305,6 +385,19 @@
     "name": "Football Shirt Kingdom",
     "plattform": "shopify",
     "produkte": 6055,
+    "rhythmus": {
+     "abstand_tage": 1.1,
+     "letzte": "2026-09-28T12:43:20+01:00",
+     "letzter_schub": "2026-09-28T11:40:52+01:00",
+     "neu_30": 264,
+     "neu_7": 29,
+     "schuebe": 37,
+     "tage_30": 7,
+     "text": "Drops: 37 Schübe in 90 Tagen, etwa alle 1 Tage, 10x Mi, meist ab 12 Uhr, zuletzt 28.09. 12:40",
+     "typ": "drops",
+     "uhrzeit": 12,
+     "wochentag": "Mi"
+    },
     "sekunden": 382.2
    },
    {
@@ -314,7 +407,15 @@
     "name": "Football Shirt Union",
     "plattform": "shopify",
     "produkte": 70,
-    "sekunden": 38.8
+    "rhythmus": {
+     "letzte": "",
+     "neu_30": 0,
+     "neu_7": 0,
+     "tage_30": 0,
+     "text": "seit 30 Tagen nichts Neues (0 in 90 Tagen)",
+     "typ": "ruhig"
+    },
+    "sekunden": 39.3
    },
    {
     "anfragen": 20,
@@ -323,7 +424,7 @@
     "name": "Football Thrift Shop",
     "plattform": "woo",
     "produkte": 1785,
-    "sekunden": 62.7
+    "sekunden": 65.8
    },
    {
     "anfragen": 4,
@@ -332,7 +433,15 @@
     "name": "FootballShirts.com",
     "plattform": "shopify",
     "produkte": 481,
-    "sekunden": 53.9
+    "rhythmus": {
+     "letzte": "2026-09-24T20:27:15+02:00",
+     "neu_30": 58,
+     "neu_7": 1,
+     "tage_30": 15,
+     "text": "laufend: an 15 von 30 Tagen neue Artikel, 1 in 7 Tagen, 58 in 30 Tagen",
+     "typ": "laufend"
+    },
+    "sekunden": 53.8
    },
    {
     "anfragen": 7,
@@ -341,7 +450,20 @@
     "name": "Granny's Football Store",
     "plattform": "shopify",
     "produkte": 1173,
-    "sekunden": 91.6
+    "rhythmus": {
+     "abstand_tage": 0.5,
+     "letzte": "2026-09-26T09:51:18+01:00",
+     "letzter_schub": "2026-07-27T11:43:53+01:00",
+     "neu_30": 2,
+     "neu_7": 1,
+     "schuebe": 5,
+     "tage_30": 2,
+     "text": "Drops: 5 Schübe in 90 Tagen, etwa alle 1 Tage, 2x Mo, meist ab 19 Uhr, zuletzt 27.07. 12:43",
+     "typ": "drops",
+     "uhrzeit": 19,
+     "wochentag": "Mo"
+    },
+    "sekunden": 98.4
    },
    {
     "anfragen": 3,
@@ -350,6 +472,19 @@
     "name": "Jerseys Hermanos",
     "plattform": "shopify",
     "produkte": 82,
+    "rhythmus": {
+     "abstand_tage": 0.5,
+     "letzte": "2026-09-26T22:57:50+02:00",
+     "letzter_schub": "2026-08-17T14:13:46+02:00",
+     "neu_30": 2,
+     "neu_7": 1,
+     "schuebe": 5,
+     "tage_30": 2,
+     "text": "Drops: 5 Schübe in 90 Tagen, etwa alle 0 Tage, 3x So, meist ab 10 Uhr, zuletzt 17.08. 14:13",
+     "typ": "drops",
+     "uhrzeit": 10,
+     "wochentag": "So"
+    },
     "sekunden": 47.0
    },
    {
@@ -359,7 +494,20 @@
     "name": "Kick It Vintage",
     "plattform": "shopify",
     "produkte": 353,
-    "sekunden": 64.3
+    "rhythmus": {
+     "abstand_tage": 22.1,
+     "letzte": "2026-09-21T17:07:53+02:00",
+     "letzter_schub": "2026-09-20T18:11:47+02:00",
+     "neu_30": 56,
+     "neu_7": 0,
+     "schuebe": 4,
+     "tage_30": 2,
+     "text": "Drops: 4 Schübe in 90 Tagen, etwa alle 22 Tage, 3x Sa, meist ab 18 Uhr, zuletzt 20.09. 18:11",
+     "typ": "drops",
+     "uhrzeit": 18,
+     "wochentag": "Sa"
+    },
+    "sekunden": 62.2
    },
    {
     "anfragen": 13,
@@ -368,7 +516,20 @@
     "name": "Kickoff Vintage",
     "plattform": "shopify",
     "produkte": 2608,
-    "sekunden": 206.4
+    "rhythmus": {
+     "abstand_tage": 7.0,
+     "letzte": "2026-09-24T18:07:04+02:00",
+     "letzter_schub": "2026-09-24T18:02:46+02:00",
+     "neu_30": 401,
+     "neu_7": 100,
+     "schuebe": 12,
+     "tage_30": 4,
+     "text": "Drops: 12 Schübe in 90 Tagen, etwa alle 7 Tage, 12x Do, meist ab 16 Uhr, zuletzt 24.09. 18:02",
+     "typ": "drops",
+     "uhrzeit": 16,
+     "wochentag": "Do"
+    },
+    "sekunden": 204.8
    },
    {
     "anfragen": 5,
@@ -376,8 +537,21 @@
     "info": "",
     "name": "Kit Launch",
     "plattform": "shopify",
-    "produkte": 591,
-    "sekunden": 62.6
+    "produkte": 586,
+    "rhythmus": {
+     "abstand_tage": 2.9,
+     "letzte": "2026-09-25T12:00:54+02:00",
+     "letzter_schub": "2026-09-25T12:00:03+02:00",
+     "neu_30": 130,
+     "neu_7": 48,
+     "schuebe": 15,
+     "tage_30": 5,
+     "text": "Drops: 15 Schübe in 90 Tagen, etwa alle 3 Tage, 5x Fr, meist ab 12 Uhr, zuletzt 25.09. 12:00",
+     "typ": "drops",
+     "uhrzeit": 12,
+     "wochentag": "Fr"
+    },
+    "sekunden": 66.1
    },
    {
     "anfragen": 5,
@@ -386,7 +560,20 @@
     "name": "Nanos Football Jerseys",
     "plattform": "shopify",
     "produkte": 580,
-    "sekunden": 79.8
+    "rhythmus": {
+     "abstand_tage": 8.0,
+     "letzte": "2026-09-28T19:00:27+02:00",
+     "letzter_schub": "2026-09-28T19:00:02+02:00",
+     "neu_30": 168,
+     "neu_7": 37,
+     "schuebe": 7,
+     "tage_30": 4,
+     "text": "Drops: 7 Schübe in 90 Tagen, etwa alle 8 Tage, 3x Mo, meist ab 19 Uhr, zuletzt 28.09. 19:00",
+     "typ": "drops",
+     "uhrzeit": 19,
+     "wochentag": "Mo"
+    },
+    "sekunden": 79.7
    },
    {
     "anfragen": 7,
@@ -395,16 +582,20 @@
     "name": "Nostalgic Football Shirts",
     "plattform": "shopify",
     "produkte": 1200,
-    "sekunden": 109.8
-   },
-   {
-    "anfragen": 9,
-    "fehler": "",
-    "info": "",
-    "name": "RB-Jerseys",
-    "plattform": "woo",
-    "produkte": 605,
-    "sekunden": 33.4
+    "rhythmus": {
+     "abstand_tage": 21.1,
+     "letzte": "2026-09-19T12:09:13+02:00",
+     "letzter_schub": "2026-09-19T12:01:23+02:00",
+     "neu_30": 60,
+     "neu_7": 0,
+     "schuebe": 5,
+     "tage_30": 1,
+     "text": "Drops: 5 Schübe in 90 Tagen, etwa alle 21 Tage, 4x Sa, meist ab 11 Uhr, zuletzt 19.09. 12:01",
+     "typ": "drops",
+     "uhrzeit": 11,
+     "wochentag": "Sa"
+    },
+    "sekunden": 111.6
    },
    {
     "anfragen": 49,
@@ -422,7 +613,20 @@
     "name": "RetrOriginalFootball",
     "plattform": "shopify",
     "produkte": 891,
-    "sekunden": 83.9
+    "rhythmus": {
+     "abstand_tage": 52.0,
+     "letzte": "2026-09-18T11:10:12+02:00",
+     "letzter_schub": "2026-09-13T18:14:50+02:00",
+     "neu_30": 102,
+     "neu_7": 0,
+     "schuebe": 2,
+     "tage_30": 2,
+     "text": "Drops: 2 Schübe in 90 Tagen, etwa alle 52 Tage, 1x Do, meist ab 18 Uhr, zuletzt 13.09. 18:14",
+     "typ": "drops",
+     "uhrzeit": 18,
+     "wochentag": "Do"
+    },
+    "sekunden": 81.3
    },
    {
     "anfragen": 0,
@@ -440,7 +644,20 @@
     "name": "Saturdays Football",
     "plattform": "shopify",
     "produkte": 25000,
-    "sekunden": 1131.1
+    "rhythmus": {
+     "abstand_tage": 2.0,
+     "letzte": "2026-09-29T11:20:43-07:00",
+     "letzter_schub": "2026-09-17T08:19:03-07:00",
+     "neu_30": 163,
+     "neu_7": 8,
+     "schuebe": 23,
+     "tage_30": 13,
+     "text": "Drops: 23 Schübe in 90 Tagen, etwa alle 2 Tage, 7x Do, meist ab 19 Uhr, zuletzt 17.09. 17:19",
+     "typ": "drops",
+     "uhrzeit": 19,
+     "wochentag": "Do"
+    },
+    "sekunden": 1109.6
    },
    {
     "anfragen": 4,
@@ -449,7 +666,20 @@
     "name": "Sense of Goal",
     "plattform": "shopify",
     "produkte": 475,
-    "sekunden": 59.0
+    "rhythmus": {
+     "abstand_tage": 9.8,
+     "letzte": "2026-09-10T16:26:19+02:00",
+     "letzter_schub": "2026-09-10T16:21:55+02:00",
+     "neu_30": 61,
+     "neu_7": 0,
+     "schuebe": 4,
+     "tage_30": 2,
+     "text": "Drops: 4 Schübe in 90 Tagen, etwa alle 10 Tage, 1x Mo, meist ab 16 Uhr, zuletzt 10.09. 16:21",
+     "typ": "drops",
+     "uhrzeit": 16,
+     "wochentag": "Mo"
+    },
+    "sekunden": 61.3
    },
    {
     "anfragen": 56,
@@ -458,7 +688,7 @@
     "name": "Swiat Koszulek Pilkarskich",
     "plattform": "prestashop",
     "produkte": 111,
-    "sekunden": 111.8
+    "sekunden": 111.3
    },
    {
     "anfragen": 8,
@@ -467,7 +697,15 @@
     "name": "TSPN Calcio",
     "plattform": "shopify",
     "produkte": 1331,
-    "sekunden": 107.7
+    "rhythmus": {
+     "letzte": "2026-09-25T11:37:32+01:00",
+     "neu_30": 11,
+     "neu_7": 9,
+     "tage_30": 4,
+     "text": "laufend: an 4 von 30 Tagen neue Artikel, 9 in 7 Tagen, 11 in 30 Tagen",
+     "typ": "laufend"
+    },
+    "sekunden": 110.0
    },
    {
     "anfragen": 0,
@@ -485,7 +723,20 @@
     "name": "The Kit Dealer",
     "plattform": "shopify",
     "produkte": 625,
-    "sekunden": 61.4
+    "rhythmus": {
+     "abstand_tage": 12.9,
+     "letzte": "2026-09-30T14:17:04+08:00",
+     "letzter_schub": "2026-09-05T21:47:54+08:00",
+     "neu_30": 116,
+     "neu_7": 1,
+     "schuebe": 6,
+     "tage_30": 2,
+     "text": "Drops: 6 Schübe in 90 Tagen, etwa alle 13 Tage, 2x Mi, meist ab 9 Uhr, zuletzt 05.09. 15:47",
+     "typ": "drops",
+     "uhrzeit": 9,
+     "wochentag": "Mi"
+    },
+    "sekunden": 61.2
    },
    {
     "anfragen": 19,
@@ -493,8 +744,21 @@
     "info": "",
     "name": "The Soccer Archive",
     "plattform": "shopify",
-    "produkte": 4009,
-    "sekunden": 279.5
+    "produkte": 4014,
+    "rhythmus": {
+     "abstand_tage": 1.0,
+     "letzte": "2026-10-01T10:44:59+01:00",
+     "letzter_schub": "2026-10-01T08:20:18+01:00",
+     "neu_30": 278,
+     "neu_7": 83,
+     "schuebe": 53,
+     "tage_30": 22,
+     "text": "Drops: 53 Schübe in 90 Tagen, etwa alle 1 Tage, 23x Do, meist ab 9 Uhr, zuletzt 01.10. 09:20",
+     "typ": "drops",
+     "uhrzeit": 9,
+     "wochentag": "Do"
+    },
+    "sekunden": 273.8
    },
    {
     "anfragen": 15,
@@ -503,7 +767,7 @@
     "name": "The Third Kit",
     "plattform": "woo",
     "produkte": 1294,
-    "sekunden": 55.2
+    "sekunden": 55.3
    },
    {
     "anfragen": 7,
@@ -512,7 +776,20 @@
     "name": "Tiffozi Futbol",
     "plattform": "shopify",
     "produkte": 1110,
-    "sekunden": 108.9
+    "rhythmus": {
+     "abstand_tage": 4.1,
+     "letzte": "2026-09-30T18:59:43-04:00",
+     "letzter_schub": "2026-09-30T18:58:36-04:00",
+     "neu_30": 151,
+     "neu_7": 89,
+     "schuebe": 16,
+     "tage_30": 5,
+     "text": "Drops: 16 Schübe in 90 Tagen, etwa alle 4 Tage, 4x Di, meist ab 3 Uhr, zuletzt 01.10. 00:58",
+     "typ": "drops",
+     "uhrzeit": 3,
+     "wochentag": "Di"
+    },
+    "sekunden": 109.5
    },
    {
     "anfragen": 0,
@@ -530,7 +807,20 @@
     "name": "Trikotparadies",
     "plattform": "shopify",
     "produkte": 3391,
-    "sekunden": 196.5
+    "rhythmus": {
+     "abstand_tage": 7.0,
+     "letzte": "2026-09-28T12:18:10+02:00",
+     "letzter_schub": "2026-09-26T19:06:35+02:00",
+     "neu_30": 408,
+     "neu_7": 155,
+     "schuebe": 15,
+     "tage_30": 6,
+     "text": "Drops: 15 Schübe in 90 Tagen, etwa alle 7 Tage, 14x Fr, meist ab 19 Uhr, zuletzt 26.09. 19:06",
+     "typ": "drops",
+     "uhrzeit": 19,
+     "wochentag": "Fr"
+    },
+    "sekunden": 204.6
    },
    {
     "anfragen": 103,
@@ -539,7 +829,20 @@
     "name": "Vintage Football Area",
     "plattform": "shopify",
     "produkte": 25000,
-    "sekunden": 918.9
+    "rhythmus": {
+     "abstand_tage": 1.0,
+     "letzte": "2026-10-01T13:27:31+02:00",
+     "letzter_schub": "2026-10-01T09:41:01+02:00",
+     "neu_30": 2525,
+     "neu_7": 1033,
+     "schuebe": 69,
+     "tage_30": 26,
+     "text": "Drops: 69 Schübe in 90 Tagen, etwa alle 1 Tage, 15x Mi, meist ab 8 Uhr, zuletzt 01.10. 09:41",
+     "typ": "drops",
+     "uhrzeit": 8,
+     "wochentag": "Mi"
+    },
+    "sekunden": 924.7
    },
    {
     "anfragen": 103,
@@ -548,7 +851,20 @@
     "name": "Vintage Football Shirts",
     "plattform": "shopify",
     "produkte": 25000,
-    "sekunden": 1216.1
+    "rhythmus": {
+     "abstand_tage": 1.0,
+     "letzte": "2026-10-01T12:21:30+01:00",
+     "letzter_schub": "2026-10-01T09:32:12+01:00",
+     "neu_30": 951,
+     "neu_7": 208,
+     "schuebe": 65,
+     "tage_30": 23,
+     "text": "Drops: 65 Schübe in 90 Tagen, etwa alle 1 Tage, 14x Mi, meist ab 10 Uhr, zuletzt 01.10. 10:32",
+     "typ": "drops",
+     "uhrzeit": 10,
+     "wochentag": "Mi"
+    },
+    "sekunden": 1222.1
    },
    {
     "anfragen": 0,
@@ -560,7 +876,7 @@
     "sekunden": 0.0
    }
   ],
-  "zeit": "2026-10-01T08:27:22.241932+00:00"
+  "zeit": "2026-10-01T11:45:23.511439+00:00"
  },
  "sources_ok": [
   "1Klopp Shop",
