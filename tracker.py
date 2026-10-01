@@ -56,6 +56,7 @@ FYJ_MARKETPLACES = ("ebay.", "depop.", "vinted.", "etsy.")   # über FYJ nicht �
 RECHECK_DAYS = 3             # FYJ-Treffer so oft auf der Shop-Seite nachprüfen (verkauft?)
 ENRICH_BUDGET = {"full": 150, "priority": 25}   # max. Seitenprüfungen pro Lauf
 NOTE_LEN = 160               # Länge der Zustandsnotiz
+RUN_HISTORY = 120            # so viele Läufe für den Eingangsverlauf im Dashboard merken
 RHYTHM_DAYS = 90             # Zeitraum für die Drop-Analyse
 BATCH_GAP_MIN = 90           # Artikel mit höchstens so viel Abstand gehören zu einem Schub
 BATCH_MIN = 8                # ab so vielen Artikeln ist ein Schub ein Drop
@@ -397,7 +398,9 @@ def shopify_to_item(shop, base, p, cents=False, currency=""):
         price = f"{int(price) / 100:.2f}"
     price = f"{price} {currency}".strip() if price not in (None, "") else ""
     desc = p.get("body_html") or p.get("description") or ""
-    return item("direkt", shop, url, title, size_text, price, img, desc=desc)
+    # Produktart ("Tracktop", "Reissue", "Goal Keeper" ...) nur für Ausschlüsse, nicht fürs Matching
+    return item("direkt", shop, url, title, size_text, price, img, desc=desc,
+                typ=p.get("product_type") or p.get("type") or "")
 
 
 def shopify_full(http, shop, base, path="/products.json", currency="", stamps=None):
@@ -1043,7 +1046,7 @@ def current_entries(seen):
             if dt.datetime.fromisoformat(e["last"]) >= cutoff and not e.get("verkauft") and not e.get("weg")}
 
 
-def write_dashboard(seen, status_store, mode, ts):
+def write_dashboard(seen, status_store, mode, ts, watch_cfg):
     """docs/treffer.json für das Dashboard auf GitHub Pages"""
     kurse = status_store.get("kurse") or {}
     rates = kurse.get("rates") or {"EUR": 1.0}
@@ -1055,10 +1058,13 @@ def write_dashboard(seen, status_store, mode, ts):
             "groesse": e.get("size", ""), "labels": e["labels"], "hoch": is_high(e),
             "zustand": e.get("zustand", ""), "notiz": e.get("zustand_notiz", ""), "bild": e.get("image", ""),
             "erst": e["first"], "zuletzt": e["last"], "via": e.get("via", ""),
+            "still": bool(e.get("still")), "teuer": bool(e.get("teuer")),
         })
     quellen = status_store.get("quellen") or {}
     data = {"stand": ts, "modus": mode, "letzter_gesamtlauf": status_store.get("last_full", ""),
             "fyj_shops": status_store.get("fyj_shops") or {},
+            "laeufe": status_store.get("laeufe") or [],
+            "preisgrenze": (watch_cfg.get("preisgrenze") or {}),
             "kurse_datum": kurse.get("datum", ""), "treffer": items,
             "quellen": quellen.get("liste", []), "quellen_stand": quellen.get("zeit", "")}
     DASHBOARD_FILE.parent.mkdir(exist_ok=True)
@@ -1066,7 +1072,7 @@ def write_dashboard(seen, status_store, mode, ts):
 
 
 def write_report(seen, sources, sources_time, mode):
-    current = list(current_entries(seen).values())
+    current = [e for e in current_entries(seen).values() if not e.get("teuer")]
     groups = {}
     for e in current:
         for lab in e["labels"]:
@@ -1187,6 +1193,14 @@ def main():
 
     # Treffer auswerten
     ts = now().isoformat()
+    rates = fetch_rates(status_store)["rates"]
+    pg = watch.get("preisgrenze") or {}
+    max_eur = float(pg.get("max_eur") or 0)
+    no_limit = set(pg.get("ausnahmen") or [])
+
+    def too_expensive(e):
+        eur = to_eur(e.get("price"), rates)
+        return bool(max_eur and eur and eur > max_eur and not no_limit & set(e["labels"]))
     new_entries = []
     counts = status_store.setdefault("counts", {})
     for src_name, its, st in results:
@@ -1200,6 +1214,8 @@ def main():
             sources_ok.add(src_name)
             counts[src_name] = n_now
         for it in its:
+            if it.get("typ") and matcher.excluded(norm(it["typ"])):
+                continue
             labs = matcher.labels(it["match_text"])
             if not labs or not matcher.size_ok(it["size_text"], norm(it["match_text"])):
                 continue
@@ -1244,7 +1260,9 @@ def main():
             if it.get("pruefen"):
                 entry["pruefen"] = True
             seen[key] = entry
-            if not first_run and not fresh_source:
+            if first_run or fresh_source:
+                entry["still"] = True   # ohne Push übernommen (Erstlauf oder neue Quelle)
+            else:
                 new_entries.append(entry)
 
     # Fundgrube: Shops, die nur über FYJ Treffer liefern (Kandidaten für direkte Anbindung)
@@ -1270,12 +1288,19 @@ def main():
 
     # FYJ-Treffer auf der Shop-Seite prüfen (verkauft? Zustand?), neue zuerst, vor den Pushes
     checked = enrich(seen, ts, ENRICH_BUDGET.get(args.mode, 0))
-    new_entries = [e for e in new_entries if not e.get("verkauft")]
+    for e in seen.values():
+        if e["last"] == ts:
+            e["teuer"] = too_expensive(e)
+    new_entries = [e for e in new_entries if not e.get("verkauft") and not e.get("teuer")]
+    laeufe = status_store.setdefault("laeufe", [])
+    laeufe.append({"zeit": ts, "modus": args.mode, "neu": len(new_entries),
+                   "still": sum(1 for e in seen.values() if e["first"] == ts and e.get("still"))})
+    del laeufe[:-RUN_HISTORY]
 
     # Benachrichtigen
     repo = os.environ.get("GITHUB_REPOSITORY")
     if os.environ.get("DASHBOARD_URL"):
-        report_url = os.environ["DASHBOARD_URL"]
+        report_url = os.environ["DASHBOARD_URL"].rstrip("/") + "/#eingaenge"
     else:
         report_url = f"https://github.com/{repo}/blob/main/TREFFER.md" if repo else None
     if first_run:
@@ -1321,14 +1346,13 @@ def main():
         status_store["last_full"] = ts
         # Quellen-Status des Gesamtlaufs merken, damit ihn der Schnellcheck nicht überschreibt
         status_store["quellen"] = {"zeit": ts, "liste": run_sources}
-    fetch_rates(status_store)
     STATUS_FILE.write_text(json.dumps(status_store, ensure_ascii=False, indent=1, sort_keys=True), encoding="utf-8")
     full_src = status_store.get("quellen") or {}
     if full_src:
         write_report(seen, full_src["liste"], full_src["zeit"], args.mode)
     else:
         write_report(seen, run_sources, "", args.mode)
-    write_dashboard(seen, status_store, args.mode, ts)
+    write_dashboard(seen, status_store, args.mode, ts, watch)
 
     ok = sum(1 for s in statuses if not s["fehler"])
     print(f"Fertig ({args.mode}): {ok}/{len(statuses)} Shops ok, FYJ: "

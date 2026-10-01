@@ -35,7 +35,7 @@ Einzeltrikots zum Nachbeflocken dazukommen, das sagt der Nutzer gesondert an.
 | `state/seen.json` | bekannte Treffer (Schlüssel = kanonische URL), wird vom Workflow committet |
 | `state/status.json` | erkannte Plattformen, erfolgreich abgefragte Quellen, Produktanzahlen, letzter Lauf |
 | `TREFFER.md` | automatisch erzeugte Übersicht als Markdown, Quellen-Status immer vom letzten Gesamtlauf |
-| `docs/index.html` | Dashboard (GitHub Pages, Branch `main`, Ordner `/docs`), statisch, lädt `treffer.json` |
+| `docs/index.html` | Dashboard (GitHub Pages, Branch `main`, Ordner `/docs`), statisch, lädt `treffer.json`. Ansichten "Alle Treffer" und "Eingänge nach Lauf" (`#eingaenge`, gruppiert nach `first` = Zeitstempel des Laufs, Läufe aus `status.json` → `laeufe`; still übernommene Treffer, also Erstlauf oder neue Quelle, eingeklappt). Pushes verlinken auf `#eingaenge` |
 | `docs/treffer.json` | aktuelle Treffer inkl. EUR-Preis plus Quellen-Status, wird vom Workflow committet |
 
 Laufzeitumgebung: GitHub Actions, öffentliches Repo, Python 3.12,
@@ -77,7 +77,17 @@ TREFFER.md, also vorher sichern oder nicht committen). `--only "Name"` testet ei
   außer Thiago/Alcantara steht drin. Pro Sondertrikot abschaltbar mit `fremdflock: egal`
 - Labels werden bei jeder ersten Sichtung im Lauf **neu berechnet** (früher nur ergänzt, dadurch
   blieben alte Labels nach Regeländerungen hängen); Treffer ohne Label fallen nach 36 h raus
-- Reissues (FYJ `isReissue`, also Nachbauten) werden gar nicht erst erfasst
+- Reissues (FYJ `isReissue`) werden gar nicht erst erfasst. **Achtung, FYJ-Flag ist ein Sammelbecken**
+  (Recherche 01.10.2026): (a) Original-Trikot mit nachgedrucktem Flock ("Repro Flock", "flocage
+  reproduction récente", "Nameset: Remake", z. B. 089kits.de, footballshirtvintage.fr,
+  sundayfootballshirts.com), (b) reine Repro-Flocksätze (first11shirts.com "Name Set (Repro)"),
+  (c) offizielle Neuauflagen (adidas Originals, Score Draw, "Reedition"), (d) inoffizielle Kopien
+  ("Retro Remake"). Nutzer entscheidet noch, ob (a) mit Kennzeichnung angezeigt werden soll.
+  "Replica" bedeutet in UK das normale Fan-Trikot (Gegenteil von Player Issue), kein Fake
+- Shopify `product_type` wird gegen `produkt_ausschluss` geprüft (nicht fürs Matching): fängt z. B.
+  "Tracktop" bei "2010/11 - Espagne (XL)" (VFA), "Reissue" (Cult Kits), "Goal Keeper", "Shirt - Training"
+- **Preisgrenze** (`preisgrenze` in watchlist.yaml): über 150 € kein Push, im Dashboard standardmäßig
+  ausgeblendet (Schalter "auch über 150 €"); Ausnahme Label "Thiago". Dashboard rechnet selbst nach
 - Shopify: gibt es Größen-Varianten, zählen nur **verfügbare** XL/XXL-Varianten; sonst Größe aus
   Titel oder Größen-Tag
 - Testfälle: `tests/test_matching.py` (pytest, `python -m pytest tests/`), vor jeder Änderung an

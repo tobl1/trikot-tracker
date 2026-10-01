@@ -165,3 +165,13 @@ def test_condition_niederlaendisch():
     body = "Maat: XL<br>Seizoen: 2010<br>Stijl: Thuis Shirt<br>Merk: Nike<br>Staat van het shirt: 8/10"
     grade, note = tracker.condition_info("Spanje 2010 Thuis Shirt (XL)", body)
     assert grade == "8/10" and note.startswith("Staat van het shirt")
+
+
+@pytest.mark.parametrize("typ,excluded", [
+    ("Tracktop", True), ("Track jacket", True), ("Reissue", True), ("Goal Keeper", True),
+    ("Shirt - Training", True), ("Vintage Football Scarf", True),
+    ("Maillot", False), ("Football shirt", False), ("Shirt - Home", False), ("Jersey", False),
+    ("Liverpool Shirts", False),
+])
+def test_product_type_exclusion(typ, excluded):
+    assert M.excluded(tracker.norm(typ)) == excluded

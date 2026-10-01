@@ -87,8 +87,23 @@ summary{cursor:pointer;font-weight:600}
 .fyjnote b{color:var(--ink)}
 .more{display:block;margin:18px auto 0;font:inherit;background:var(--chip);color:var(--ink);border:0;border-radius:9px;padding:10px 18px;cursor:pointer}
 .err{color:var(--err);padding:30px 0}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin:4px 0 0}
+.tabs button{font:inherit;font-weight:600;background:none;border:0;border-bottom:2px solid transparent;color:var(--muted);padding:8px 12px;cursor:pointer}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.seg{display:inline-flex;background:var(--chip);border-radius:9px;padding:3px;gap:2px;flex:0 0 auto}
+.seg button{font:inherit;font-size:13px;border:0;background:none;color:var(--muted);padding:6px 10px;border-radius:7px;cursor:pointer;white-space:nowrap}
+.seg button[aria-pressed="true"]{background:var(--card);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.group{margin:0 0 22px}
+.group h2{font-size:15px;margin:0 0 10px;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
+.group h2 small{font-weight:400;color:var(--muted);font-size:13px}
+.group.quiet h2{font-weight:400;color:var(--muted);font-size:13px;margin:0 0 6px}
+.silent{margin-top:10px;background:none;border:0;padding:0}
+.silent summary{font-size:13px;font-weight:400;color:var(--muted)}
+.silent .grid{margin-top:10px}
 @media (max-width:520px){
   .controls{position:static}
+  .seg{width:100%;justify-content:space-between}
+  .seg button{flex:1 1 0;padding:6px 4px}
   .row.chips{flex-wrap:nowrap;margin-right:-16px;padding-right:16px}
   .row select{flex:1 1 40%;min-width:0}
   .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
@@ -108,16 +123,18 @@ summary{cursor:pointer;font-weight:600}
     <span class="meta" id="stand">lädt …</span>
   </header>
   <div class="stats" id="stats"></div>
+  <nav class="tabs" id="tabs">
+    <button data-view="all" aria-selected="true">Alle Treffer</button>
+    <button data-view="feed" aria-selected="false">Eingänge nach Lauf</button>
+  </nav>
 
   <div class="controls">
     <div class="row">
       <input type="search" id="q" placeholder="Suchen: Verein, Saison, Shop …" autocomplete="off">
-      <select id="sort" aria-label="Sortierung">
-        <option value="prio">Wichtig zuerst</option>
-        <option value="new">Neueste zuerst</option>
-        <option value="pasc">Preis aufsteigend</option>
-        <option value="pdesc">Preis absteigend</option>
-      </select>
+      <div class="seg" id="sort" role="group" aria-label="Sortierung">
+        <button data-s="prio">Wichtig</button><button data-s="new">Neueste</button>
+        <button data-s="pasc">Preis ↑</button><button data-s="pdesc">Preis ↓</button>
+      </div>
     </div>
     <div class="row chips" id="labels"></div>
     <div class="row">
@@ -126,10 +143,12 @@ summary{cursor:pointer;font-weight:600}
         <option value="">XL + XXL</option><option value="XL">nur XL</option><option value="XXL">nur XXL</option>
       </select>
       <label class="toggle"><input type="checkbox" id="onlynew"> nur neu (48 h)</label>
+      <label class="toggle"><input type="checkbox" id="expensive"> <span id="explabel">auch teurere</span></label>
     </div>
   </div>
 
   <div class="grid" id="grid"></div>
+  <div id="feed" hidden></div>
   <button class="more" id="more" hidden>Mehr anzeigen</button>
   <div class="empty" id="empty" hidden>Keine Treffer für diese Filter.</div>
 
@@ -153,8 +172,13 @@ summary{cursor:pointer;font-weight:600}
   const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   const host = u => { try { return new URL(u).hostname.replace(/^www\./, ""); } catch(e){ return ""; } };
 
-  let all = [], shown = PAGE;
-  const st = Object.assign({q:"", sort:"prio", labels:[], shop:"", size:"", onlynew:false}, store.get("filter") || {});
+  let all = [], shown = PAGE, runs = [], groupsShown = 12;
+  const st = Object.assign({q:"", sort:"prio", labels:[], shop:"", size:"", onlynew:false, expensive:false, view:"all"},
+                           store.get("filter") || {});
+  const MODE = {full: "Gesamtlauf", priority: "Schnellcheck"};
+  if (location.hash === "#eingaenge") st.view = "feed";
+  else if (location.hash === "#alle") st.view = "all";
+  const fmtRun = iso => new Date(iso).toLocaleString("de-DE", {weekday:"short", day:"2-digit", month:"2-digit", hour:"2-digit", minute:"2-digit"});
 
   function isNew(t){ return (Date.now() - new Date(t.erst)) / 36e5 < NEW_H; }
 
@@ -165,6 +189,7 @@ summary{cursor:pointer;font-weight:600}
       (!st.shop || t.shopName === st.shop) &&
       (!st.size || t.groesse === st.size) &&
       (!st.onlynew || t.neu) &&
+      (st.expensive || !t.teuer) &&
       (!q || t.hay.includes(q)));
     const byNew = (a, b) => b.erst.localeCompare(a.erst);
     const byPrice = dir => (a, b) => (a.eur == null) - (b.eur == null) || dir * ((a.eur ?? 0) - (b.eur ?? 0));
@@ -192,18 +217,59 @@ summary{cursor:pointer;font-weight:600}
       <div class="shop" title="seit ${fmtDate(t.erst)}">${esc(t.shopName)} · seit ${fmtDate(t.erst).slice(0, 6)}</div></div></a>`;
   }
 
+  function renderFeed(list){
+    // Treffer nach dem Lauf gruppieren, in dem sie zuerst auftauchten (erst = Zeitstempel des Laufs)
+    const byRun = {};
+    list.forEach(t => (byRun[t.erst] = byRun[t.erst] || []).push(t));
+    const info = Object.fromEntries(runs.map(r => [r.zeit, r]));
+    const week = Date.now() - 7 * 864e5;
+    const keys = [...new Set([...Object.keys(byRun), ...runs.filter(r => new Date(r.zeit) > week).map(r => r.zeit)])]
+      .sort().reverse();
+    const html = keys.slice(0, groupsShown).map(k => {
+      const items = byRun[k] || [], r = info[k];
+      const loud = items.filter(t => !t.still), quiet = items.filter(t => t.still);
+      const mode = r ? MODE[r.modus] || r.modus : "Lauf";
+      if (!items.length)
+        return `<section class="group quiet"><h2>${fmtRun(k)} · ${mode} · keine neuen Treffer</h2></section>`;
+      return `<section class="group"><h2>${fmtRun(k)} Uhr <small>${mode} · ${loud.length} neu` +
+        (quiet.length ? `, ${quiet.length} still übernommen` : "") + `</small></h2>` +
+        (loud.length ? `<div class="grid">${loud.map(card).join("")}</div>` : "") +
+        (quiet.length ? `<details class="silent"${loud.length ? "" : " open"}><summary>${quiet.length} still übernommen ` +
+          `(Erstlauf oder neue Quelle, ohne Push)</summary><div class="grid">${quiet.map(card).join("")}</div></details>` : "") +
+        `</section>`;
+    }).join("");
+    $("feed").innerHTML = html;
+    $("more").hidden = keys.length <= groupsShown;
+    $("more").textContent = "Ältere Läufe anzeigen";
+    return keys.length;
+  }
+
   function render(){
     store.set("filter", st);
     const list = filtered();
-    $("grid").innerHTML = list.slice(0, shown).map(card).join("");
+    const feed = st.view === "feed";
+    $("grid").hidden = feed; $("feed").hidden = !feed;
+    document.querySelectorAll("#tabs button").forEach(b => b.setAttribute("aria-selected", String(b.dataset.view === st.view)));
+    document.querySelectorAll("#sort button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.s === st.sort)));
     $("empty").hidden = list.length > 0;
-    $("more").hidden = list.length <= shown;
-    $("more").textContent = `Mehr anzeigen (${list.length - shown} weitere)`;
+    if (feed) {
+      $("grid").innerHTML = "";
+      renderFeed(list);
+    } else {
+      $("feed").innerHTML = "";
+      $("grid").innerHTML = list.slice(0, shown).map(card).join("");
+      $("more").hidden = list.length <= shown;
+      $("more").textContent = `Mehr anzeigen (${list.length - shown} weitere)`;
+    }
     document.querySelectorAll("#labels .chip").forEach(b => b.setAttribute("aria-pressed", String(st.labels.includes(b.dataset.l))));
   }
 
   function setup(data){
+    runs = data.laeufe || [];
+    const pg = data.preisgrenze || {}, limit = pg.max_eur || 0, exc = pg.ausnahmen || [];
+    $("explabel").textContent = limit ? `auch über ${limit} €` : "auch teurere";
     all = data.treffer.map(t => {
+      t.teuer = !!(limit && t.eur != null && t.eur > limit && !t.labels.some(l => exc.includes(l)));
       const shopName = /^[a-z0-9.-]+\.[a-z]{2,}$/i.test(t.shop) || t.shop === "FYJ" ? (host(t.url) || t.shop) : t.shop;
       return Object.assign(t, {shopName, neu: isNew(t), thiago: t.labels.some(l => l.startsWith("Thiago")),
         hay: (t.titel + " " + t.labels.join(" ") + " " + shopName + " " + (t.notiz || "")).toLowerCase()});
@@ -241,22 +307,27 @@ summary{cursor:pointer;font-weight:600}
              `<td class="${cls}">${esc(s.fehler || s.info || "ok")}</td></tr>`;
     }).join("");
 
-    $("q").value = st.q; $("sort").value = st.sort; $("shop").value = st.shop; $("size").value = st.size;
-    $("onlynew").checked = st.onlynew;
+    $("q").value = st.q; $("shop").value = st.shop; $("size").value = st.size;
+    $("onlynew").checked = st.onlynew; $("expensive").checked = st.expensive;
     render();
   }
 
-  const reset = () => { shown = PAGE; render(); };
+  const reset = () => { shown = PAGE; groupsShown = 12; render(); };
   $("q").addEventListener("input", e => { st.q = e.target.value; reset(); });
-  ["sort", "shop", "size"].forEach(id => $(id).addEventListener("change", e => { st[id] = e.target.value; reset(); }));
-  ["onlynew"].forEach(id => $(id).addEventListener("change", e => { st[id] = e.target.checked; reset(); }));
+  ["shop", "size"].forEach(id => $(id).addEventListener("change", e => { st[id] = e.target.value; reset(); }));
+  ["onlynew", "expensive"].forEach(id => $(id).addEventListener("change", e => { st[id] = e.target.checked; reset(); }));
+  $("sort").addEventListener("click", e => { const b = e.target.closest("button"); if (b) { st.sort = b.dataset.s; reset(); } });
+  $("tabs").addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    st.view = b.dataset.view; history.replaceState(null, "", st.view === "feed" ? "#eingaenge" : "#alle"); reset();
+  });
   $("labels").addEventListener("click", e => {
     const b = e.target.closest(".chip"); if (!b) return;
     const l = b.dataset.l;
     st.labels = st.labels.includes(l) ? st.labels.filter(x => x !== l) : [...st.labels, l];
     reset();
   });
-  $("more").addEventListener("click", () => { shown += PAGE; render(); });
+  $("more").addEventListener("click", () => { if (st.view === "feed") groupsShown += 12; else shown += PAGE; render(); });
 
   fetch("treffer.json", {cache: "no-store"})
     .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })

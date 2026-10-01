@@ -14,12 +14,18 @@ groessen:
                   "damska", "dziecieca", "femme", "mujer", "donna", "feminina", "feminino",
                   "infantil", "bambino", "dames"]
 
+# Preisgrenze in Euro: teurere Treffer gibt es nicht als Push und sie sind im Dashboard
+# standardmäßig ausgeblendet. Ausnahmen = Labels, für die keine Grenze gilt
+preisgrenze:
+  max_eur: 150
+  ausnahmen: ["Thiago"]
+
 # Produkte, die keine Trikots sind oder nicht gewünscht sind
 produkt_ausschluss: ["shorts", "socks", "sock", "jacket", "track top", "tracksuit",
                      "hoodie", "sweatshirt", "sweater", "pants", "trousers", "scarf", "bag",
                      "cap", "hat", "programme", "ball", "boots", "poster", "sticker", "mug",
                      "keyring", "towel", "pennant", "framed", "cushion", "goalkeeper",
-                     "torwart", "portero", "gk", "keeper", "training", "pre-match", "prematch",
+                     "torwart", "portero", "gk", "keeper", "goal keeper", "tracktop", "track jacket", "training", "pre-match", "prematch",
                      "warm up", "polo", "t-shirt", "tee", "bib", "stutzen", "jacke", "schal",
                      # Trainingsshirts in anderen Sprachen
                      "treino", "entrenamiento", "entreno", "allenamento", "entrainement",
