@@ -506,11 +506,12 @@
  },
  "classic-shirts.com/product-eng-272150-2012-13-fc-barcelona-shirt-xxl.html": {
   "first": "2026-10-01T14:14:58.073674+00:00",
+  "geprueft": "2026-10-01T15:51:22.811225+00:00",
   "image": "https://classic-shirts.com/hpeciai/f95c0a9fa7e9dc05b8638546624c33f3/pol_il_2012-13-FC-BARCELONA-KOSZULKA-XXL-272150.jpg",
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
+  "last": "2026-10-01T15:51:22.811225+00:00",
   "price": "£69.99",
   "prios": [
    "hoch"
@@ -520,7 +521,9 @@
   "size": "XXL",
   "title": "2012-13 FC BARCELONA SHIRT XXL",
   "url": "https://classic-shirts.com/product-eng-272150-2012-13-FC-BARCELONA-SHIRT-XXL.html",
-  "via": "direkt"
+  "via": "direkt",
+  "zustand": "9/10",
+  "zustand_notiz": "CONDITION: 9/10 DESCRIPTION: SPONSOR: QATAR FOUNDATION"
  },
  "classic-shirts.com/product-eng-272774-2011-12-spain-shirt-xl.html": {
   "first": "2026-09-30T22:29:38.239492+00:00",
@@ -529,16 +532,17 @@
   "labels": [
    "Spanien 2010/2011"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
+  "last": "2026-10-01T15:51:22.811225+00:00",
   "price": "£59.99",
   "prios": [
    "hoch"
   ],
+  "pruefen": true,
   "shop": "Classic-Shirts",
   "size": "XL",
   "title": "2011-12 SPAIN SHIRT XL",
   "url": "https://classic-shirts.com/product-eng-272774-2011-12-SPAIN-SHIRT-XL.html",
-  "via": "fyj",
+  "via": "direkt",
   "zustand": "9/10",
   "zustand_notiz": "CONDITION: 9/10 DESCRIPTION: SPONSOR:"
  },
@@ -683,16 +687,17 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
+  "last": "2026-10-01T15:51:22.811225+00:00",
   "price": "£39.99",
   "prios": [
    "hoch"
   ],
+  "pruefen": true,
   "shop": "Classic-Shirts",
   "size": "XXL",
   "title": "2012-13 FC BARCELONA SHIRT XXL",
   "url": "https://classic-shirts.com/product-eng-284075-2012-13-FC-BARCELONA-SHIRT-XXL.html",
-  "via": "fyj",
+  "via": "direkt",
   "zustand": "8/10",
   "zustand_notiz": "CONDITION: 8/10 DESCRIPTION: SPONSOR: QATAR FOUNDATION"
  },
@@ -759,16 +764,17 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
+  "last": "2026-10-01T15:51:22.811225+00:00",
   "price": "£89.99",
   "prios": [
    "hoch"
   ],
+  "pruefen": true,
   "shop": "Classic-Shirts",
   "size": "XL",
   "title": "2011-12 FC BARCELONA SHIRT XL",
   "url": "https://classic-shirts.com/product-eng-298739-2011-12-FC-BARCELONA-SHIRT-XL.html",
-  "via": "fyj",
+  "via": "direkt",
   "zustand": "8/10",
   "zustand_notiz": "CONDITION: 8/10 DESCRIPTION: TRACE OF TAILOR'S REPAIR, TINY HOLE SPONSOR: QATAR FOUNDATION PRODUCT CODE: 419880-010"
  },
@@ -819,16 +825,17 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
+  "last": "2026-10-01T15:51:22.811225+00:00",
   "price": "£79.99",
   "prios": [
    "hoch"
   ],
+  "pruefen": true,
   "shop": "Classic-Shirts",
   "size": "XXL",
   "title": "2012-13 FC BARCELONA BASIC SHIRT XXL",
   "url": "https://classic-shirts.com/product-eng-307567-2012-13-FC-BARCELONA-BASIC-SHIRT-XXL.html",
-  "via": "fyj",
+  "via": "direkt",
   "zustand": "9/10",
   "zustand_notiz": "CONDITION: 9/10 DESCRIPTION: SPONSOR: QATAR FOUNDATION PRODUCT CODE: 478323-410"
  },
@@ -839,16 +846,17 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
+  "last": "2026-10-01T15:51:22.811225+00:00",
   "price": "£99.99",
   "prios": [
    "hoch"
   ],
+  "pruefen": true,
   "shop": "Classic-Shirts",
   "size": "XXL",
   "title": "2011-12 FC BARCELONA SHIRT XXL",
   "url": "https://classic-shirts.com/product-eng-308670-2011-12-FC-BARCELONA-SHIRT-XXL.html",
-  "via": "fyj",
+  "via": "direkt",
   "zustand": "8/10",
   "zustand_notiz": "CONDITION: 8/10 DESCRIPTION: LITTLE PULLS SPONSOR: QATAR FOUNDATION PRODUCT CODE: 419877-486"
  },
@@ -879,16 +887,17 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
+  "last": "2026-10-01T15:51:22.811225+00:00",
   "price": "£89.99",
   "prios": [
    "hoch"
   ],
+  "pruefen": true,
   "shop": "Classic-Shirts",
   "size": "XXL",
   "title": "2012-13 FC BARCELONA SHIRT XXL",
   "url": "https://classic-shirts.com/product-eng-309877-2012-13-FC-BARCELONA-SHIRT-XXL.html",
-  "via": "fyj",
+  "via": "direkt",
   "zustand": "8/10",
   "zustand_notiz": "CONDITION: 8/10 DESCRIPTION: USED PRINTINGS SPONSOR: QATAR FOUNDATION PRODUCT CODE: 478323-410"
  },
@@ -1009,16 +1018,17 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
+  "last": "2026-10-01T15:51:22.811225+00:00",
   "price": "£139.99",
   "prios": [
    "hoch"
   ],
+  "pruefen": true,
   "shop": "Classic-Shirts",
   "size": "XL",
   "title": "2012-13 FC BARCELONA LONGSLEEVE SHIRT XL",
   "url": "https://classic-shirts.com/product-eng-321130-2012-13-FC-BARCELONA-LONGSLEEVE-SHIRT-XL.html",
-  "via": "fyj",
+  "via": "direkt",
   "zustand": "8/10",
   "zustand_notiz": "CONDITION: 8/10 DESCRIPTION: LITTLE PULLS, SLIGHTLY USED PRINTINGS AND LOGO SPONSOR: QATAR FOUNDATION"
  },
@@ -1029,16 +1039,17 @@
   "labels": [
    "Thiago"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
+  "last": "2026-10-01T15:51:22.811225+00:00",
   "price": "£54.99",
   "prios": [
    "hoch"
   ],
+  "pruefen": true,
   "shop": "Classic-Shirts",
   "size": "XL",
   "title": "2013-14 BAYERN MUNCHEN *THIAGO* SHIRT XL",
   "url": "https://classic-shirts.com/product-eng-321702-2013-14-BAYERN-MUNCHEN-THIAGO-SHIRT-XL.html",
-  "via": "fyj",
+  "via": "direkt",
   "zustand": "8/10",
   "zustand_notiz": "CONDITION: 8/10 DESCRIPTION: DIRTY, SLIGHTY USED PRINTINGS SPONSOR: T- PRODUCT CODE: Z25686 THIAGO ALCANTARA"
  },
@@ -1069,16 +1080,17 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
+  "last": "2026-10-01T15:51:22.811225+00:00",
   "price": "£149.99",
   "prios": [
    "hoch"
   ],
+  "pruefen": true,
   "shop": "Classic-Shirts",
   "size": "XL",
   "title": "2012-13 FC BARCELONA LONGSLEEVE XL",
   "url": "https://classic-shirts.com/product-eng-325791-2012-13-FC-BARCELONA-LONGSLEEVE-XL.html",
-  "via": "fyj",
+  "via": "direkt",
   "zustand": "9/10",
   "zustand_notiz": "CONDITION: 9/10 DESCRIPTION: SPONSOR: QATAR FOUNDATION PRODUCT CODE: 478327-815"
  },
@@ -1089,16 +1101,17 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
+  "last": "2026-10-01T15:51:22.811225+00:00",
   "price": "£99.99",
   "prios": [
    "hoch"
   ],
+  "pruefen": true,
   "shop": "Classic-Shirts",
   "size": "XL",
   "title": "2012-13 FC BARCELONA SHIRT XL",
   "url": "https://classic-shirts.com/product-eng-328441-2012-13-FC-BARCELONA-SHIRT-XL.html",
-  "via": "fyj",
+  "via": "direkt",
   "zustand": "8/10",
   "zustand_notiz": "CONDITION: 8/10 DESCRIPTION: SLIGHTLY USED PRINTINGS SPONSOR: QATAR FOUNDATION PRODUCT CODE: 478326-815"
  },
@@ -1325,16 +1338,17 @@
   "labels": [
    "Kimmich"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
+  "last": "2026-10-01T15:51:22.811225+00:00",
   "price": "£59.99",
   "prios": [
    "normal"
   ],
+  "pruefen": true,
   "shop": "Classic-Shirts",
   "size": "XXL",
   "title": "2021-22 BAYERN MUNCHEN *KIMMICH* SHIRT XXL",
   "url": "https://classic-shirts.com/product-eng-350244-2021-22-BAYERN-MUNCHEN-KIMMICH-SHIRT-XXL.html",
-  "via": "fyj",
+  "via": "direkt",
   "zustand": "8/10",
   "zustand_notiz": "CONDITION: 8/10 DESCRIPTION: SINGULAR PULLS SPONSOR: T- CODE: GM5313"
  },
@@ -1345,16 +1359,17 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
+  "last": "2026-10-01T15:51:22.811225+00:00",
   "price": "£34.99",
   "prios": [
    "hoch"
   ],
+  "pruefen": true,
   "shop": "Classic-Shirts",
   "size": "XL",
   "title": "2010-11 BARCELONA SHIRT XL",
   "url": "https://classic-shirts.com/product-eng-350953-2010-11-BARCELONA-SHIRT-XL.html",
-  "via": "fyj",
+  "via": "direkt",
   "zustand": "8/10",
   "zustand_notiz": "CONDITION: 8/10 DESCRIPTION: SPOT CODE: 382369-655"
  },
@@ -1781,16 +1796,17 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
+  "last": "2026-10-01T15:51:22.811225+00:00",
   "price": "£39.99",
   "prios": [
    "hoch"
   ],
+  "pruefen": true,
   "shop": "Classic-Shirts",
   "size": "XL",
   "title": "2011-12 BARCELONA SHIRT XL",
   "url": "https://classic-shirts.com/product-eng-364858-2011-12-BARCELONA-SHIRT-XL.html",
-  "via": "fyj",
+  "via": "direkt",
   "zustand": "8/10",
   "zustand_notiz": "CONDITION: 8/10 DESCRIPTION: SLIGHTLY USED PRINTINGS SPONSOR: QATAR FOUNDATION"
  },
@@ -2819,7 +2835,7 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
+  "last": "2026-10-01T15:51:22.811225+00:00",
   "price": "176.00 USD",
   "prios": [
    "hoch"
@@ -4370,7 +4386,7 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
+  "last": "2026-10-01T15:51:22.811225+00:00",
   "price": "£59.99",
   "prios": [
    "hoch"
@@ -4388,7 +4404,7 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
+  "last": "2026-10-01T15:51:22.811225+00:00",
   "price": "£29.99",
   "prios": [
    "hoch"
@@ -4441,7 +4457,7 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
+  "last": "2026-10-01T15:51:22.811225+00:00",
   "price": "£39.99",
   "prios": [
    "hoch"
@@ -4495,7 +4511,7 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
+  "last": "2026-10-01T15:51:22.811225+00:00",
   "price": "£59.99",
   "prios": [
    "hoch"
@@ -5006,7 +5022,7 @@
   "labels": [
    "Kimmich"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
+  "last": "2026-10-01T15:51:22.811225+00:00",
   "price": "£124.99",
   "prios": [
    "normal"
@@ -5224,7 +5240,7 @@
   "labels": [
    "Alonso (Xabi)"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
+  "last": "2026-10-01T15:51:22.811225+00:00",
   "price": "135.00 USD",
   "prios": [
    "normal"
@@ -5891,7 +5907,7 @@
   "labels": [
    "Liverpool Third 2022/23"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
+  "last": "2026-10-01T15:51:22.811225+00:00",
   "price": "68.00 USD",
   "prios": [
    "hoch"
@@ -6777,7 +6793,7 @@
   "labels": [
    "Ribéry"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
+  "last": "2026-10-01T15:51:22.811225+00:00",
   "price": "59.99 EUR",
   "prios": [
    "normal"
@@ -8144,7 +8160,7 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
+  "last": "2026-10-01T15:51:22.811225+00:00",
   "price": "59.95 EUR",
   "prios": [
    "hoch"
@@ -8162,7 +8178,7 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
+  "last": "2026-10-01T15:51:22.811225+00:00",
   "price": "49.95 EUR",
   "prios": [
    "hoch"
@@ -8180,7 +8196,7 @@
   "labels": [
    "Torres (Fernando)"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
+  "last": "2026-10-01T15:51:22.811225+00:00",
   "price": "124.95 EUR",
   "prios": [
    "normal"
@@ -8365,8 +8381,8 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
-  "price": "171.00 USD",
+  "last": "2026-10-01T15:51:22.811225+00:00",
+  "price": "170.00 USD",
   "prios": [
    "hoch"
   ],
@@ -8756,7 +8772,7 @@
   "labels": [
    "Alonso (Xabi)"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
+  "last": "2026-10-01T15:51:22.811225+00:00",
   "price": "140.00 USD",
   "prios": [
    "normal"
@@ -9945,6 +9961,23 @@
   "weg": "2026-10-01T14:14:58.073674+00:00",
   "zustand": "Very Good"
  },
+ "vintagefootballarea.com/products/2010-11-espagne-xl-4": {
+  "first": "2026-10-01T15:51:22.811225+00:00",
+  "image": "https://cdn.shopify.com/s/files/1/0027/9373/4190/files/IMG_7068_cd614387-6d2a-42af-b06b-b008bdf826fb.jpg?v=1695072725",
+  "labels": [
+   "Spanien 2010/2011"
+  ],
+  "last": "2026-10-01T15:51:22.811225+00:00",
+  "price": "47.00 USD",
+  "prios": [
+   "hoch"
+  ],
+  "shop": "Vintage Football Area",
+  "size": "XL",
+  "title": "2010/11 - Espagne (XL)",
+  "url": "https://www.vintagefootballarea.com/products/2010-11-espagne-xl-4",
+  "via": "direkt"
+ },
  "vintagefootballarea.com/products/2011-12-barcelone-fabregas-4-xl-femme": {
   "first": "2026-09-30T22:29:38.239492+00:00",
   "image": "https://cdn.shopify.com/s/files/1/0027/9373/4190/products/IMG_6959_3bb3c1d8-8b47-4e33-bdba-dee2630e11bc.jpg?v=1670514277",
@@ -10027,17 +10060,16 @@
   "labels": [
    "Spanien 2010/2011"
   ],
-  "last": "2026-10-01T11:45:23.511439+00:00",
-  "price": "51.77 EUR",
+  "last": "2026-10-01T15:51:22.811225+00:00",
+  "price": "53.00 USD",
   "prios": [
    "hoch"
   ],
-  "shop": "vintagefootballarea.com",
+  "shop": "Vintage Football Area",
   "size": "XL",
   "title": "2011/12 - Espagne (XL)",
   "url": "https://www.vintagefootballarea.com/products/2011-12-espagne-xl-13",
-  "via": "fyj",
-  "weg": "2026-10-01T14:14:58.073674+00:00",
+  "via": "direkt",
   "zustand": "Very Good"
  },
  "vintagefootballarea.com/products/2011-12-espagne-xl-15": {
@@ -10047,17 +10079,16 @@
   "labels": [
    "Spanien 2010/2011"
   ],
-  "last": "2026-10-01T11:45:23.511439+00:00",
-  "price": "40.26 EUR",
+  "last": "2026-10-01T15:51:22.811225+00:00",
+  "price": "41.00 USD",
   "prios": [
    "hoch"
   ],
-  "shop": "vintagefootballarea.com",
+  "shop": "Vintage Football Area",
   "size": "XL",
   "title": "2011/12 - Espagne (XL)",
   "url": "https://www.vintagefootballarea.com/products/2011-12-espagne-xl-15",
-  "via": "fyj",
-  "weg": "2026-10-01T14:14:58.073674+00:00",
+  "via": "direkt",
   "zustand": "Very Good"
  },
  "vintagefootballarea.com/products/2011-12-espagne-xl-18": {
@@ -10067,7 +10098,7 @@
   "labels": [
    "Spanien 2010/2011"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
+  "last": "2026-10-01T15:51:22.811225+00:00",
   "price": "58.00 USD",
   "prios": [
    "hoch"
@@ -10076,7 +10107,7 @@
   "size": "XL",
   "title": "2011/12 - Espagne (XL)",
   "url": "https://www.vintagefootballarea.com/products/2011-12-espagne-xl-18",
-  "via": "fyj",
+  "via": "direkt",
   "zustand": "Very Good"
  },
  "vintagefootballarea.com/products/2011-12-malaga-v-nistelrooy-9-xl-1": {
@@ -10238,7 +10269,7 @@
   "labels": [
    "Ribéry"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
+  "last": "2026-10-01T15:51:22.811225+00:00",
   "price": "110.00 USD",
   "prios": [
    "normal"
@@ -10293,17 +10324,16 @@
   "labels": [
    "Kimmich"
   ],
-  "last": "2026-10-01T11:45:23.511439+00:00",
-  "price": "74.79 EUR",
+  "last": "2026-10-01T15:51:22.811225+00:00",
+  "price": "76.00 USD",
   "prios": [
    "normal"
   ],
-  "shop": "vintagefootballarea.com",
+  "shop": "Vintage Football Area",
   "size": "XXL",
   "title": "2017/18 - Bayern Munich - Kimmich #32 (2XL)",
   "url": "https://www.vintagefootballarea.com/products/2017-18-bayern-munich-kimmich-32-2xl",
-  "via": "fyj",
-  "weg": "2026-10-01T14:14:58.073674+00:00",
+  "via": "direkt",
   "zustand": "Very Good"
  },
  "vintagefootballarea.com/products/2018-19-bayern-munich-kimmich-32-2xl-1": {
@@ -10332,17 +10362,16 @@
   "labels": [
    "Thiago"
   ],
-  "last": "2026-10-01T11:45:23.511439+00:00",
-  "price": "92.05 EUR",
+  "last": "2026-10-01T15:51:22.811225+00:00",
+  "price": "93.00 USD",
   "prios": [
    "hoch"
   ],
-  "shop": "vintagefootballarea.com",
+  "shop": "Vintage Football Area",
   "size": "XXL",
   "title": "2019/20 - Bayern Munich - Thiago #6 (2XL)",
   "url": "https://www.vintagefootballarea.com/products/2019-20-bayern-munich-thiago-6-2xl-1",
-  "via": "fyj",
-  "weg": "2026-10-01T14:14:58.073674+00:00",
+  "via": "direkt",
   "zustand": "Very Good"
  },
  "vintagefootballarea.com/products/2020-21-bayern-munich-kimmich-6-xl-3": {
@@ -10557,7 +10586,7 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
+  "last": "2026-10-01T15:51:22.811225+00:00",
   "price": "203.00 USD",
   "prios": [
    "hoch"
@@ -10574,7 +10603,7 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
+  "last": "2026-10-01T15:51:22.811225+00:00",
   "price": "203.00 USD",
   "prios": [
    "hoch"
@@ -10591,7 +10620,7 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
+  "last": "2026-10-01T15:51:22.811225+00:00",
   "price": "169.00 USD",
   "prios": [
    "hoch"
@@ -10608,7 +10637,7 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
+  "last": "2026-10-01T15:51:22.811225+00:00",
   "price": "203.00 USD",
   "prios": [
    "hoch"
@@ -10648,7 +10677,7 @@
   "labels": [
    "Vidal (Arturo)"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
+  "last": "2026-10-01T15:51:22.811225+00:00",
   "price": "88.00 USD",
   "prios": [
    "normal"
@@ -10665,7 +10694,7 @@
   "labels": [
    "Kimmich"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
+  "last": "2026-10-01T15:51:22.811225+00:00",
   "price": "88.00 USD",
   "prios": [
    "normal"
@@ -10682,7 +10711,7 @@
   "labels": [
    "Liverpool Third 2022/23"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
+  "last": "2026-10-01T15:51:22.811225+00:00",
   "price": "68.00 USD",
   "prios": [
    "hoch"

@@ -338,8 +338,8 @@
  },
  "last_full": "2026-10-01T14:14:58.073674+00:00",
  "last_run": {
-  "mode": "full",
-  "time": "2026-10-01T14:14:58.073674+00:00"
+  "mode": "priority",
+  "time": "2026-10-01T15:51:22.811225+00:00"
  },
  "platforms": {
   "https://1kloppshop.com": "shopify",
