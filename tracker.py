@@ -42,7 +42,7 @@ UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
 TIMEOUT = 25
 DELAY = 1.0              # Pause zwischen zwei Anfragen an denselben Shop
 MAX_WORKERS = 8          # so viele Shops parallel
-MAX_PUSH = 20            # max. Einzel-Pushes pro Lauf, Rest als Sammelnachricht
+MAX_PUSH_HIGH = 5        # max. Einzel-Pushes (Thiago/Sondertrikots) pro Lauf, Rest gebündelt
 REPORT_HOURS = 36        # wie lange ein Treffer ohne Neusichtung in TREFFER.md bleibt
 
 FYJ_API = "https://www.findyourjersey.org/api/jerseys"
@@ -323,10 +323,10 @@ def shopify_to_item(shop, base, p, cents=False):
     return item("direkt", shop, url, title, size_text, str(price or ""), img)
 
 
-def shopify_full(http, shop, base):
+def shopify_full(http, shop, base, path="/products.json"):
     items, n = [], 0
-    for page in range(1, 41):
-        data = http.get(f"{base}/products.json", {"limit": 250, "page": page})
+    for page in range(1, 121):
+        data = http.get(f"{base}{path}", {"limit": 250, "page": page})
         prods = (data or {}).get("products") or []
         if not prods:
             break
@@ -473,16 +473,99 @@ def fyj_run(http, matcher, priority):
     return items, n
 
 
+def smartweb_run(http, shop, base, queries, currency="DKK"):
+    """SmartWeb-Shops (z. B. ReShirt): interne Such-Schnittstelle /json/products"""
+    items, n, urls = [], 0, set()
+    for q in queries:
+        for page in range(1, 6):
+            data = http.get(f"{base}/json/products", {
+                "currencyIso": currency, "field": "search", "filter": "{}", "id": q,
+                "limit": 48, "orderBy": "-Id", "page": page})
+            prods = (data or {}).get("products") or []
+            if isinstance(prods, dict):
+                prods = list(prods.values())
+            if not prods:
+                break
+            n += len(prods)
+            for p in prods:
+                if str(p.get("Soldout")).lower() == "true":
+                    continue
+                handle = p.get("Handle") or ""
+                url = base + handle if handle.startswith("/") else handle
+                if not url or url in urls:
+                    continue
+                urls.add(url)
+                title = p.get("Title") or ""
+                price = ""
+                pr = p.get("Prices") or []
+                if isinstance(pr, list) and pr and isinstance(pr[0], dict):
+                    price = f"{pr[0].get('PriceMinWithVat', pr[0].get('PriceMin', ''))} {currency}"
+                imgs = p.get("Images") or []
+                img = (base + imgs[0]) if imgs and isinstance(imgs[0], str) and imgs[0].startswith("/") else ""
+                items.append(item("direkt", shop, url, title, title, price, img))
+            if len(prods) < 48:
+                break
+    return items, n
+
+
+def prestashop_run(http, shop, base, queries, matcher, search_path="/szukaj"):
+    """PrestaShop 1.7+: Suche liefert JSON, Größe steht erst auf der Produktseite"""
+    items, n, urls = [], 0, set()
+    for q in queries:
+        for page in range(1, 4):
+            http.s.headers.update({"Accept": "application/json", "X-Requested-With": "XMLHttpRequest"})
+            data = http.get(base + search_path, {"controller": "search", "s": q, "page": page})
+            http.s.headers.pop("X-Requested-With", None)
+            http.s.headers["Accept"] = "*/*"
+            prods = (data or {}).get("products") or []
+            if not prods:
+                break
+            n += len(prods)
+            for p in prods:
+                url, title = p.get("url") or "", p.get("name") or ""
+                if not url or url in urls or not matcher.labels(title):
+                    continue
+                urls.add(url)
+                page_html = http.get(url, want="text") or ""
+                soup = BeautifulSoup(page_html, "html.parser")
+                sizes = [e.get_text(" ", strip=True) for e in
+                         soup.select(".product-variants .radio-label, .product-variants option, "
+                                     ".product-variants .input-color + span")]
+                if soup.select_one(".product-unavailable, #product-availability .product-unavailable"):
+                    continue
+                img = ((p.get("cover") or {}).get("large") or {}).get("url", "")
+                items.append(item("direkt", shop, url, title, " ".join(sizes) or title, p.get("price", ""), img))
+            pag = (data or {}).get("pagination") or {}
+            if page >= int(pag.get("pages_count") or 1):
+                break
+    return items, n
+
+
 def run_shop(shop, mode, matcher, platforms):
     name, base = shop["name"], shop["url"].rstrip("/")
     plat = (shop.get("plattform") or "auto").lower()
     http = Http()
     t0 = time.time()
-    status = {"name": name, "plattform": plat, "produkte": 0, "treffer_roh": 0, "fehler": ""}
+    status = {"name": name, "plattform": plat, "produkte": 0, "fehler": "", "info": ""}
     try:
         if plat == "aus":
-            status["fehler"] = "deaktiviert"
+            status["fehler"] = "deaktiviert" + (f" ({shop['hinweis']})" if shop.get("hinweis") else "")
             return [], status
+        if plat == "fyj":
+            status["plattform"] = "über FYJ"
+            status["fehler"] = ""
+            status["info"] = "wird über FindYourJersey abgedeckt"
+            return [], status
+        if plat == "smartweb":
+            items, n = smartweb_run(http, name, base, matcher.queries(only_high=(mode == "priority")),
+                                    shop.get("waehrung", "DKK"))
+            status.update(produkte=n)
+            return items, status
+        if plat == "prestashop":
+            items, n = prestashop_run(http, name, base, matcher.queries(only_high=(mode == "priority")),
+                                      matcher, shop.get("suchpfad", "/szukaj"))
+            status.update(produkte=n)
+            return items, status
         if plat == "cfs":
             qs = matcher.queries(only_high=(mode == "priority"))
             items, n = cfs_run(http, name, base, qs)
@@ -501,8 +584,15 @@ def run_shop(shop, mode, matcher, platforms):
             plat = known
         status["plattform"] = plat.split(":")[0]
         if plat == "shopify":
-            items, n = (shopify_full(http, name, base) if mode == "full"
-                        else shopify_search(http, name, base, matcher.queries(True), matcher))
+            if mode == "full":
+                items, n = shopify_full(http, name, base)
+                if n == 0:   # manche Shops sperren products.json: erst Collection, dann Suche
+                    items, n = shopify_full(http, name, base, "/collections/all/products.json")
+                if n == 0:
+                    items, n = shopify_search(http, name, base, matcher.queries(), matcher)
+                    status["info"] = "nur Suche (products.json gesperrt)"
+            else:
+                items, n = shopify_search(http, name, base, matcher.queries(True), matcher)
         elif plat.startswith("woo:"):
             ep = plat[4:]
             items, n = woo_run(http, name, ep, None if mode == "full" else matcher.queries(True))
@@ -539,6 +629,15 @@ def push(topic, title, message, prio=3, click=None, image=None, tags=None, dry=F
         requests.post(server, json=payload, timeout=20)
     except requests.RequestException as e:
         print("Push fehlgeschlagen:", e, file=sys.stderr)
+
+
+def short(e, shop=False):
+    """Titel plus Größe (nur falls nicht schon im Titel) und optional Shop"""
+    extra = [] if (e.get("size") and SIZE_RX.search(norm(e["title"]))) else [e.get("size", "")]
+    if shop:
+        extra.append(e["shop"])
+    extra = [x for x in extra if x]
+    return e["title"] + (f" ({', '.join(extra)})" if extra else "")
 
 
 def push_label(entry):
@@ -584,7 +683,7 @@ def write_report(seen, statuses, mode, fyj_status):
     lines += ["## Quellen-Status", "", "| Quelle | System | Produkte | Anfragen | Hinweis |", "|---|---|---|---|---|"]
     for s in ([fyj_status] if fyj_status else []) + sorted(statuses, key=lambda s: (not s["fehler"], s["name"])):
         lines.append(f"| {s['name']} | {s.get('plattform', '')} | {s.get('produkte', 0)} | "
-                     f"{s.get('anfragen', '')} | {s.get('fehler') or 'ok'} |")
+                     f"{s.get('anfragen', '')} | {s.get('fehler') or s.get('info') or 'ok'} |")
     REPORT_FILE.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
@@ -664,14 +763,18 @@ def main():
 
     # Treffer auswerten
     ts = now().isoformat()
-    new_entries, silent_sources = [], []
+    new_entries = []
+    counts = status_store.setdefault("counts", {})
     for src_name, its, st in results:
         works = args.mode == "full" and st.get("produkte", 0) > 0 and not st.get("fehler")
-        fresh_source = works and src_name not in sources_ok
+        n_now, n_prev = st.get("produkte", 0), counts.get(src_name, 0)
+        # Neue Quelle ODER Bestand plötzlich viel größer (z. B. vorher abgeschnitten):
+        # dann still übernehmen statt eine Flut an "neuen" Treffern zu melden
+        jump = works and n_prev and n_now > n_prev * 1.3 and n_now - n_prev > 200
+        fresh_source = works and (src_name not in sources_ok or jump)
         if works:
             sources_ok.add(src_name)
-        if fresh_source and not first_run:
-            silent_sources.append(src_name)
+            counts[src_name] = n_now
         for it in its:
             labs = matcher.labels(it["match_text"])
             if not labs or not matcher.size_ok(it["size_text"], norm(it["match_text"])):
@@ -701,32 +804,35 @@ def main():
     repo = os.environ.get("GITHUB_REPOSITORY")
     report_url = f"https://github.com/{repo}/blob/main/TREFFER.md" if repo else None
     if first_run:
+        # Erstlauf: genau EINE Nachricht, alles andere steht in TREFFER.md
         cur = [e for e in seen.values() if e["last"] == ts]
         high = [e for e in cur if is_high(e)]
-        for e in sorted(high, key=lambda e: e["first"])[:15]:
-            push(topic, f"🔥 {push_label(e)} · {e['shop']}",
-                 f"{e['title']}\nGröße {e['size']} · {e['price']}", 4, e["url"], e["image"],
-                 ["fire"], args.dry_run)
-        push(topic, "🚀 Trikot-Tracker gestartet",
-             f"Erstlauf: {len(cur)} Treffer in XL/XXL, davon {len(high)} mit hoher Priorität. "
-             "Ab jetzt kommen nur noch neue Trikots.", 3, report_url, None, ["rocket"], args.dry_run)
+        lines = [f"• {push_label(e)}: {short(e)}" for e in high[:12]]
+        more = f"\n… und {len(high) - 12} weitere" if len(high) > 12 else ""
+        push(topic, f"🚀 Tracker gestartet: {len(cur)} Treffer",
+             f"Davon {len(high)} Thiago/Sondertrikots:\n" + "\n".join(lines) + more +
+             "\nAb jetzt kommen nur noch neue Trikots.",
+             3, report_url, None, ["rocket"], args.dry_run)
     else:
-        new_entries.sort(key=lambda e: (not is_high(e), e["title"]))
-        for e in new_entries[:MAX_PUSH]:
-            high = is_high(e)
-            push(topic, f"{'🔥' if high else '⚽'} {push_label(e)} · {e['shop']}",
+        high = sorted([e for e in new_entries if is_high(e)], key=lambda e: e["title"])
+        normal = sorted([e for e in new_entries if not is_high(e)], key=lambda e: e["title"])
+        # Thiago & Sondertrikots einzeln (max. MAX_PUSH_HIGH), Rest gebündelt
+        for e in high[:MAX_PUSH_HIGH]:
+            push(topic, f"🔥 {push_label(e)} · {e['shop']}",
                  f"{e['title']}\nGröße {e['size']} · {e['price']}",
-                 5 if high else 3, e["url"], e["image"], ["fire" if high else "soccer"], args.dry_run)
-        rest = new_entries[MAX_PUSH:]
-        if rest:
-            push(topic, f"➕ {len(rest)} weitere neue Treffer",
-                 "\n".join(f"• {push_label(e)}: {e['title']}" for e in rest[:25]),
-                 3, report_url, None, ["heavy_plus_sign"], args.dry_run)
-        if silent_sources and args.mode == "full":
-            push(topic, "ℹ️ Neue Quellen eingebunden",
-                 f"Erstmals erfolgreich abgefragt: {', '.join(silent_sources)}. "
-                 "Deren aktueller Bestand steht ohne Einzel-Push in TREFFER.md.",
-                 2, report_url, None, ["information_source"], args.dry_run)
+                 5, e["url"], e["image"], ["fire"], args.dry_run)
+        bundle = high[MAX_PUSH_HIGH:] + normal
+        if len(bundle) == 1:
+            e = bundle[0]
+            push(topic, f"⚽ {push_label(e)} · {e['shop']}",
+                 f"{e['title']}\nGröße {e['size']} · {e['price']}",
+                 3, e["url"], e["image"], ["soccer"], args.dry_run)
+        elif bundle:
+            push(topic, f"⚽ {len(bundle)} neue Treffer",
+                 "\n".join(f"• {push_label(e)}: {short(e, shop=True)}"
+                           for e in bundle[:20]) +
+                 (f"\n… und {len(bundle) - 20} weitere" if len(bundle) > 20 else ""),
+                 3, report_url, None, ["soccer"], args.dry_run)
 
     # Aufräumen: Einträge, die 60 Tage nicht mehr gesehen wurden, vergessen
     old = now() - dt.timedelta(days=60)
