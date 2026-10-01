@@ -19,7 +19,7 @@ produkt_ausschluss: ["shorts", "socks", "sock", "jacket", "track top", "tracksui
                      "hoodie", "sweatshirt", "sweater", "pants", "trousers", "scarf", "bag",
                      "cap", "hat", "programme", "ball", "boots", "poster", "sticker", "mug",
                      "keyring", "towel", "pennant", "framed", "cushion", "goalkeeper",
-                     "torwart", "portero", "gk", "training", "pre-match", "prematch",
+                     "torwart", "portero", "gk", "keeper", "training", "pre-match", "prematch",
                      "warm up", "polo", "t-shirt", "tee", "bib", "stutzen", "jacke", "schal",
                      # Trainingsshirts in anderen Sprachen
                      "treino", "entrenamiento", "entreno", "allenamento", "entrainement",
@@ -39,7 +39,7 @@ spieler:
     ausschluss: ["thiago silva", "t. silva", "silva", "motta", "almada", "mendes",
                  "neves", "djalo", "igor thiago", "galhardo", "messi", "rafinha"]
     vereine: ["barcelona", "barca", "bayern", "munich", "munchen", "liverpool",
-              "spain", "spanien", "espana"]
+              "spain", "spanien", "espana", "spanje", "espagne", "spagna", "espanha", "hiszpania"]
 
   - name: Verratti
     suche: ["verratti"]
@@ -49,7 +49,7 @@ spieler:
 
   - name: Olić
     suche: ["olic"]
-    vereine: ["bayern", "munich", "munchen", "hamburg", "hamburger", "hsv", "croatia", "kroatien", "hrvatska"]
+    vereine: ["bayern", "munich", "munchen", "hamburg", "hamburger", "hsv", "croatia", "kroatien", "hrvatska", "kroatie", "croatie", "croazia", "croacia", "chorwacja"]
 
   - name: Van der Vaart
     suche: ["van der vaart", "vd vaart"]
@@ -74,7 +74,7 @@ spieler:
     suche: ["xabi alonso", "alonso"]
     ausschluss: ["marcos alonso", "m. alonso"]
     vereine: ["real sociedad", "liverpool", "real madrid", "bayern", "munich", "munchen",
-              "spain", "spanien", "espana"]
+              "spain", "spanien", "espana", "spanje", "espagne", "spagna", "espanha", "hiszpania"]
 
   - name: Cavani
     suche: ["cavani"]
@@ -88,7 +88,7 @@ spieler:
   - name: Juninho (Pernambucano)
     suche: ["juninho"]
     ausschluss: ["paulista"]
-    vereine: ["lyon", "vasco", "brazil", "brasil", "al-gharafa"]
+    vereine: ["lyon", "vasco", "brazil", "brasil", "brazilie", "bresil", "brasile", "al-gharafa"]
 
   - name: Benzema
     suche: ["benzema"]
@@ -101,7 +101,7 @@ spieler:
     suche: ["rodri"]
     ausschluss: ["rodrigo", "rodrigues", "rodriguez"]
     vereine: ["manchester city", "man city", "atletico", "atleti", "villarreal",
-              "spain", "spanien", "espana"]
+              "spain", "spanien", "espana", "spanje", "espagne", "spagna", "espanha", "hiszpania"]
 
   - name: Valverde (Fede)
     suche: ["fede valverde", "federico valverde", "valverde"]
@@ -125,12 +125,12 @@ spieler:
   - name: Frenkie de Jong
     suche: ["frenkie", "f. de jong", "de jong"]
     ausschluss: ["nigel", "luuk", "siem"]
-    vereine: ["ajax", "barcelona", "barca", "netherlands", "holland", "niederlande"]
+    vereine: ["ajax", "barcelona", "barca", "netherlands", "holland", "niederlande", "nederland", "pays-bas", "olanda", "holanda"]
 
   - name: Marcos Llorente
     suche: ["marcos llorente", "m. llorente", "llorente"]
     ausschluss: ["fernando llorente", "f. llorente"]
-    vereine: ["atletico", "atleti", "real madrid", "alaves", "spain", "spanien", "espana"]
+    vereine: ["atletico", "atleti", "real madrid", "alaves", "spain", "spanien", "espana", "spanje", "espagne", "spagna", "espanha", "hiszpania"]
 
   - name: Zé Roberto
     suche: ["ze roberto"]
@@ -213,14 +213,14 @@ sondertrikots:
 
   - name: "Spanien 2010/2011"
     prioritaet: hoch
-    verein: ["spain", "spanien", "espana"]
+    verein: ["spain", "spanien", "espana", "spanje", "espagne", "spagna", "espanha", "hiszpania"]
     jahre: ["2010", "2011"]
     varianten: [home, away]
     suchanfragen: ["spain 2010", "spain 2011"]
 
   - name: "Spanien 2014"
     prioritaet: hoch
-    verein: ["spain", "spanien", "espana"]
+    verein: ["spain", "spanien", "espana", "spanje", "espagne", "spagna", "espanha", "hiszpania"]
     jahre: ["2014"]
     varianten: [home, away]
     suchanfragen: ["spain 2014"]

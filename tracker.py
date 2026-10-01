@@ -94,7 +94,7 @@ FLOCK_NUM_RX = re.compile(r"#\s?\d{1,2}(?!\d)|(?<![a-z0-9])(no|nr|num|number)\.?
 VARIANT_WORDS = {
     "home": ["home", "heim", "heimtrikot", "local", "thuis", "domicile", "casa", "1st"],
     "away": ["away", "auswarts", "auswartstrikot", "visitante", "uit", "exterieur", "trasferta", "2nd"],
-    "third": ["third", "3rd", "ausweich", "ausweichtrikot", "tercera", "troisieme", "terza"],
+    "third": ["third", "3rd", "ausweich", "ausweichtrikot", "tercera", "troisieme", "terza", "derde"],
 }
 VARIANT_RX = {k: any_rx(v) for k, v in VARIANT_WORDS.items()}
 
@@ -775,9 +775,9 @@ def rhythm(stamps):
 # ---------------------------------------------------------------------------
 SCORE_RX = re.compile(r"(?<![\d/.,])(10|[1-9](?:[.,]5)?)\s*/\s*10(?![\d/])")   # 8/10, nicht 2009/10
 NEW_TAG_RX = re.compile(r"(?<![a-z])(bnwt|bnwot|bnib|deadstock|brand new with tags|new with tags)(?![a-z])", re.I)
-COND_KEY_RX = re.compile(r"(?i)(?<![a-z])(condition|zustand|stan)\s*[:\-]")
+COND_KEY_RX = re.compile(r"(?i)(?<![a-z])(condition|zustand|stan|staat van het shirt|staat|estado|stato)\s*[:\-]")
 SOLD_RX = re.compile(r"(?i)outofstock|soldout|discontinued")
-COND_WORD_RX = re.compile(r"(?i)^(?:condition|zustand|stan)\s*[:\-]\s*(mint|excellent|very good|good|fair|poor|"
+COND_WORD_RX = re.compile(r"(?i)^(?:condition|zustand|stan|staat van het shirt|staat|estado|stato)\s*[:\-]\s*(mint|excellent|very good|good|fair|poor|"
                           r"used|new|like new|as new|perfect|great|average)(?![a-z])")
 
 

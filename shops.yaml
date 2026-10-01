@@ -60,6 +60,7 @@ shops:
   - {name: Kick It Vintage, url: "https://kickitvintage.de"}
   - {name: The Hoff Classics, url: "https://www.thehoffclassics.com", plattform: fyj}
   - {name: Trikotparadies, url: "https://trikotparadies.shop"}
+  - {name: The Football Temple, url: "https://thefootballtemple.com"}   # NL, Titel auf Niederländisch
 
 # Marktplätze (eBay, Depop) werden nicht abgefragt, dort am besten in der
 # jeweiligen App dem Verkäufer folgen bzw. gespeicherte Suchen anlegen:

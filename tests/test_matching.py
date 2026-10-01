@@ -82,6 +82,20 @@ CASES = [
     ("2012-13 Barcelona Home Shirt Thiago #11 (XL)", {"Thiago", "Barça 2010-2013"}),
     ("2010-11 Spain Home Shirt Alonso #14 (XL)", {"Alonso (Xabi)"}),
     ("2021-22 Liverpool Away Shirt Thiago #6 (XL)", {"Thiago", "Liverpool Away 2021/22"}),
+    # Neu (01.10.2026): niederländische Titel (The Football Temple) und andere Sprachen
+    ("Spanje 2010 Thuis Shirt (XL)", {"Spanien 2010/2011"}),
+    ("Spanje 2014 Uit Shirt (XXL)", {"Spanien 2014"}),
+    ("Spanje 2010 Thuis Shirt Iniesta #6 (XL)", set()),
+    ("Spanje 2014 Thuis Shirt Thiago #6 (XL)", {"Thiago", "Spanien 2014"}),
+    ("Barcelona 2012/2013 Uit Shirt (XL)", {"Barça 2010-2013"}),
+    ("Barcelona 2012/2013 Uit Shirt Messi #10 (XL)", set()),
+    ("Liverpool 2022/2023 Derde Shirt (XL)", {"Liverpool Third 2022/23"}),
+    ("Liverpool 2022/2023 Uit Shirt (XL)", set()),
+    ("Spanje 2010 Keeper Shirt Casillas (XL)", set()),
+    ("Nederland 2018 Thuis Shirt De Jong #21 (XL)", {"Frenkie de Jong"}),
+    ("Kroatië 2008 Thuis Shirt Olic #18 (XL)", {"Olić"}),
+    ("Maillot Espagne 2010 Domicile XL", {"Spanien 2010/2011"}),
+    ("Koszulka Hiszpania 2014 XL", {"Spanien 2014"}),
 ]
 
 
@@ -142,3 +156,9 @@ def test_rhythm_ruhig():
 def test_rhythm_taegliche_schuebe_sind_laufend():
     stamps = [x for k in range(1, 60) for x in _stamps(k, 10, 12)]
     assert tracker.rhythm(stamps)["typ"] == "laufend"
+
+
+def test_condition_niederlaendisch():
+    body = "Maat: XL<br>Seizoen: 2010<br>Stijl: Thuis Shirt<br>Merk: Nike<br>Staat van het shirt: 8/10"
+    grade, note = tracker.condition_info("Spanje 2010 Thuis Shirt (XL)", body)
+    assert grade == "8/10" and note.startswith("Staat van het shirt")
