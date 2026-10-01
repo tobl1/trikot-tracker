@@ -1,8 +1,110 @@
 {
- "last_full": "2026-09-30T22:29:38.239492+00:00",
+ "counts": {
+  "1Klopp Shop": 265,
+  "3kots": 554,
+  "Back to the Football": 4366,
+  "Calcio Vintage": 336,
+  "Classic Football Shirts": 1532,
+  "Classic11": 5663,
+  "Cult Kits": 21407,
+  "FindYourJersey": 3777,
+  "First Class Football Shirts": 167,
+  "Fodbold Shoppen": 640,
+  "Football Second Hand": 1411,
+  "Football Shirt Kingdom": 6055,
+  "Football Shirt Union": 70,
+  "Football Thrift Shop": 1785,
+  "FootballShirts.com": 481,
+  "Granny's Football Store": 1173,
+  "Jerseys Hermanos": 82,
+  "Kick It Vintage": 353,
+  "Kickoff Vintage": 2608,
+  "Kit Launch": 591,
+  "Nanos Football Jerseys": 580,
+  "Nostalgic Football Shirts": 1200,
+  "RB-Jerseys": 605,
+  "ReShirt": 5,
+  "RetrOriginalFootball": 891,
+  "Saturdays Football": 25000,
+  "Sense of Goal": 475,
+  "Swiat Koszulek Pilkarskich": 111,
+  "TSPN Calcio": 1331,
+  "The Kit Dealer": 625,
+  "The Soccer Archive": 4009,
+  "The Third Kit": 1294,
+  "Tiffozi Futbol": 1110,
+  "Trikotparadies": 3391,
+  "Vintage Football Area": 25000,
+  "Vintage Football Shirts": 25000
+ },
+ "currencies": {
+  "https://1kloppshop.com": "USD",
+  "https://calciovintage.com": "USD",
+  "https://classic11.com": "USD",
+  "https://footballshirtkingdom.com": "USD",
+  "https://footballshirts.com": "USD",
+  "https://footballshirtunion.com": "USD",
+  "https://fshoppen.dk": "USD",
+  "https://grannysfootballstore.com": "USD",
+  "https://houseoffootballshirts.com": "EUR",
+  "https://jerseyshermanos.com": "EUR",
+  "https://kickitvintage.de": "EUR",
+  "https://kickoffvintage.com": "USD",
+  "https://kitlaunchfc.com": "USD",
+  "https://nanosfootballjerseys.com": "USD",
+  "https://nostalgicfootballshirts.com": "USD",
+  "https://retroriginalfootball.com": "USD",
+  "https://saturdaysfootball.com": "USD",
+  "https://thesoccerarchive.com": "USD",
+  "https://tiffozifutbol.com": "USD",
+  "https://trikotparadies.shop": "EUR",
+  "https://tspncalcio.com": "USD",
+  "https://www.cultkits.com": "USD",
+  "https://www.firstclassfootballshirts.com": "USD",
+  "https://www.senseofgoal.com": "EUR",
+  "https://www.thekitdealer.com": "USD",
+  "https://www.vintagefootballarea.com": "USD",
+  "https://www.vintagefootballshirts.com": "USD"
+ },
+ "kurse": {
+  "datum": "2026-09-30",
+  "rates": {
+   "AUD": 1.6297,
+   "BRL": 5.9077,
+   "CAD": 1.6105,
+   "CHF": 0.9478,
+   "CNY": 7.613,
+   "CZK": 24.44,
+   "DKK": 7.4755,
+   "EUR": 1.0,
+   "GBP": 0.85463,
+   "HKD": 8.9095,
+   "HUF": 366.2,
+   "IDR": 20315.34,
+   "ILS": 3.4901,
+   "INR": 108.8205,
+   "ISK": 137.0,
+   "JPY": 178.27,
+   "KRW": 1539.06,
+   "MXN": 20.5816,
+   "MYR": 4.6306,
+   "NOK": 10.9015,
+   "NZD": 2.0115,
+   "PHP": 71.204,
+   "PLN": 4.369,
+   "RON": 5.2788,
+   "SEK": 11.331,
+   "SGD": 1.4503,
+   "THB": 38.113,
+   "TRY": 55.6596,
+   "USD": 1.1355,
+   "ZAR": 18.6123
+  }
+ },
+ "last_full": "2026-10-01T08:27:22.241932+00:00",
  "last_run": {
-  "mode": "priority",
-  "time": "2026-10-01T06:32:19.161502+00:00"
+  "mode": "full",
+  "time": "2026-10-01T08:27:22.241932+00:00"
  },
  "platforms": {
   "https://1kloppshop.com": "shopify",
@@ -51,6 +153,415 @@
   "https://www.vintagefootballshirts.com": "shopify",
   "https://www.welovefootballshirts.com": "unbekannt"
  },
+ "quellen": {
+  "liste": [
+   {
+    "anfragen": 79,
+    "fehler": "",
+    "name": "FindYourJersey",
+    "plattform": "fyj",
+    "produkte": 3777,
+    "sekunden": 156.2
+   },
+   {
+    "anfragen": 53,
+    "fehler": "keine Produkte erhalten",
+    "info": "nur Suche (products.json gesperrt)",
+    "name": "House of Football Shirts",
+    "plattform": "shopify",
+    "produkte": 0,
+    "sekunden": 741.9
+   },
+   {
+    "anfragen": 0,
+    "fehler": "deaktiviert (Wix, noch keine Anbindung)",
+    "info": "",
+    "name": "The Football Boutique",
+    "plattform": "aus",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 0,
+    "fehler": "deaktiviert (Wix, Drop jeden Freitag 20 Uhr NZ-Zeit)",
+    "info": "",
+    "name": "Throwback Jerseys NZ",
+    "plattform": "aus",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 4,
+    "fehler": "",
+    "info": "",
+    "name": "1Klopp Shop",
+    "plattform": "shopify",
+    "produkte": 265,
+    "sekunden": 63.6
+   },
+   {
+    "anfragen": 8,
+    "fehler": "",
+    "info": "",
+    "name": "3kots",
+    "plattform": "woo",
+    "produkte": 554,
+    "sekunden": 55.8
+   },
+   {
+    "anfragen": 46,
+    "fehler": "",
+    "info": "",
+    "name": "Back to the Football",
+    "plattform": "woo",
+    "produkte": 4366,
+    "sekunden": 120.4
+   },
+   {
+    "anfragen": 4,
+    "fehler": "",
+    "info": "",
+    "name": "Calcio Vintage",
+    "plattform": "shopify",
+    "produkte": 336,
+    "sekunden": 52.5
+   },
+   {
+    "anfragen": 131,
+    "fehler": "",
+    "info": "",
+    "name": "Classic Football Shirts",
+    "plattform": "cfs",
+    "produkte": 1532,
+    "sekunden": 261.5
+   },
+   {
+    "anfragen": 0,
+    "fehler": "",
+    "info": "wird über FindYourJersey abgedeckt",
+    "name": "Classic-Shirts",
+    "plattform": "über FYJ",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 25,
+    "fehler": "",
+    "info": "",
+    "name": "Classic11",
+    "plattform": "shopify",
+    "produkte": 5663,
+    "sekunden": 342.8
+   },
+   {
+    "anfragen": 0,
+    "fehler": "",
+    "info": "wird über FindYourJersey abgedeckt",
+    "name": "ClassicShirts-FC",
+    "plattform": "über FYJ",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 88,
+    "fehler": "",
+    "info": "",
+    "name": "Cult Kits",
+    "plattform": "shopify",
+    "produkte": 21407,
+    "sekunden": 1122.7
+   },
+   {
+    "anfragen": 3,
+    "fehler": "",
+    "info": "",
+    "name": "First Class Football Shirts",
+    "plattform": "shopify",
+    "produkte": 167,
+    "sekunden": 34.9
+   },
+   {
+    "anfragen": 5,
+    "fehler": "",
+    "info": "",
+    "name": "Fodbold Shoppen",
+    "plattform": "shopify",
+    "produkte": 640,
+    "sekunden": 66.0
+   },
+   {
+    "anfragen": 17,
+    "fehler": "",
+    "info": "",
+    "name": "Football Second Hand",
+    "plattform": "woo",
+    "produkte": 1411,
+    "sekunden": 58.6
+   },
+   {
+    "anfragen": 27,
+    "fehler": "",
+    "info": "",
+    "name": "Football Shirt Kingdom",
+    "plattform": "shopify",
+    "produkte": 6055,
+    "sekunden": 382.2
+   },
+   {
+    "anfragen": 3,
+    "fehler": "",
+    "info": "",
+    "name": "Football Shirt Union",
+    "plattform": "shopify",
+    "produkte": 70,
+    "sekunden": 38.8
+   },
+   {
+    "anfragen": 20,
+    "fehler": "",
+    "info": "",
+    "name": "Football Thrift Shop",
+    "plattform": "woo",
+    "produkte": 1785,
+    "sekunden": 62.7
+   },
+   {
+    "anfragen": 4,
+    "fehler": "",
+    "info": "",
+    "name": "FootballShirts.com",
+    "plattform": "shopify",
+    "produkte": 481,
+    "sekunden": 53.9
+   },
+   {
+    "anfragen": 7,
+    "fehler": "",
+    "info": "",
+    "name": "Granny's Football Store",
+    "plattform": "shopify",
+    "produkte": 1173,
+    "sekunden": 91.6
+   },
+   {
+    "anfragen": 3,
+    "fehler": "",
+    "info": "",
+    "name": "Jerseys Hermanos",
+    "plattform": "shopify",
+    "produkte": 82,
+    "sekunden": 47.0
+   },
+   {
+    "anfragen": 4,
+    "fehler": "",
+    "info": "",
+    "name": "Kick It Vintage",
+    "plattform": "shopify",
+    "produkte": 353,
+    "sekunden": 64.3
+   },
+   {
+    "anfragen": 13,
+    "fehler": "",
+    "info": "",
+    "name": "Kickoff Vintage",
+    "plattform": "shopify",
+    "produkte": 2608,
+    "sekunden": 206.4
+   },
+   {
+    "anfragen": 5,
+    "fehler": "",
+    "info": "",
+    "name": "Kit Launch",
+    "plattform": "shopify",
+    "produkte": 591,
+    "sekunden": 62.6
+   },
+   {
+    "anfragen": 5,
+    "fehler": "",
+    "info": "",
+    "name": "Nanos Football Jerseys",
+    "plattform": "shopify",
+    "produkte": 580,
+    "sekunden": 79.8
+   },
+   {
+    "anfragen": 7,
+    "fehler": "",
+    "info": "",
+    "name": "Nostalgic Football Shirts",
+    "plattform": "shopify",
+    "produkte": 1200,
+    "sekunden": 109.8
+   },
+   {
+    "anfragen": 9,
+    "fehler": "",
+    "info": "",
+    "name": "RB-Jerseys",
+    "plattform": "woo",
+    "produkte": 605,
+    "sekunden": 33.4
+   },
+   {
+    "anfragen": 49,
+    "fehler": "",
+    "info": "",
+    "name": "ReShirt",
+    "plattform": "smartweb",
+    "produkte": 5,
+    "sekunden": 96.2
+   },
+   {
+    "anfragen": 6,
+    "fehler": "",
+    "info": "",
+    "name": "RetrOriginalFootball",
+    "plattform": "shopify",
+    "produkte": 891,
+    "sekunden": 83.9
+   },
+   {
+    "anfragen": 0,
+    "fehler": "",
+    "info": "wird über FindYourJersey abgedeckt",
+    "name": "Retro Football Shirt Store",
+    "plattform": "über FYJ",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 103,
+    "fehler": "",
+    "info": "",
+    "name": "Saturdays Football",
+    "plattform": "shopify",
+    "produkte": 25000,
+    "sekunden": 1131.1
+   },
+   {
+    "anfragen": 4,
+    "fehler": "",
+    "info": "",
+    "name": "Sense of Goal",
+    "plattform": "shopify",
+    "produkte": 475,
+    "sekunden": 59.0
+   },
+   {
+    "anfragen": 56,
+    "fehler": "",
+    "info": "",
+    "name": "Swiat Koszulek Pilkarskich",
+    "plattform": "prestashop",
+    "produkte": 111,
+    "sekunden": 111.8
+   },
+   {
+    "anfragen": 8,
+    "fehler": "",
+    "info": "",
+    "name": "TSPN Calcio",
+    "plattform": "shopify",
+    "produkte": 1331,
+    "sekunden": 107.7
+   },
+   {
+    "anfragen": 0,
+    "fehler": "",
+    "info": "wird über FindYourJersey abgedeckt",
+    "name": "The Hoff Classics",
+    "plattform": "über FYJ",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 5,
+    "fehler": "",
+    "info": "",
+    "name": "The Kit Dealer",
+    "plattform": "shopify",
+    "produkte": 625,
+    "sekunden": 61.4
+   },
+   {
+    "anfragen": 19,
+    "fehler": "",
+    "info": "",
+    "name": "The Soccer Archive",
+    "plattform": "shopify",
+    "produkte": 4009,
+    "sekunden": 279.5
+   },
+   {
+    "anfragen": 15,
+    "fehler": "",
+    "info": "",
+    "name": "The Third Kit",
+    "plattform": "woo",
+    "produkte": 1294,
+    "sekunden": 55.2
+   },
+   {
+    "anfragen": 7,
+    "fehler": "",
+    "info": "",
+    "name": "Tiffozi Futbol",
+    "plattform": "shopify",
+    "produkte": 1110,
+    "sekunden": 108.9
+   },
+   {
+    "anfragen": 0,
+    "fehler": "",
+    "info": "wird über FindYourJersey abgedeckt",
+    "name": "Topbinz",
+    "plattform": "über FYJ",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 16,
+    "fehler": "",
+    "info": "",
+    "name": "Trikotparadies",
+    "plattform": "shopify",
+    "produkte": 3391,
+    "sekunden": 196.5
+   },
+   {
+    "anfragen": 103,
+    "fehler": "",
+    "info": "",
+    "name": "Vintage Football Area",
+    "plattform": "shopify",
+    "produkte": 25000,
+    "sekunden": 918.9
+   },
+   {
+    "anfragen": 103,
+    "fehler": "",
+    "info": "",
+    "name": "Vintage Football Shirts",
+    "plattform": "shopify",
+    "produkte": 25000,
+    "sekunden": 1216.1
+   },
+   {
+    "anfragen": 0,
+    "fehler": "",
+    "info": "wird über FindYourJersey abgedeckt",
+    "name": "We Love Football Shirts",
+    "plattform": "über FYJ",
+    "produkte": 0,
+    "sekunden": 0.0
+   }
+  ],
+  "zeit": "2026-10-01T08:27:22.241932+00:00"
+ },
  "sources_ok": [
   "1Klopp Shop",
   "3kots",
@@ -75,9 +586,11 @@
   "Nanos Football Jerseys",
   "Nostalgic Football Shirts",
   "RB-Jerseys",
+  "ReShirt",
   "RetrOriginalFootball",
   "Saturdays Football",
   "Sense of Goal",
+  "Swiat Koszulek Pilkarskich",
   "TSPN Calcio",
   "The Kit Dealer",
   "The Soccer Archive",
