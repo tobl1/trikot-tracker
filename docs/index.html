@@ -62,7 +62,8 @@ select{flex:0 1 auto;max-width:100%}
 .badge{font-size:11px;font-weight:700;letter-spacing:.03em;padding:3px 7px;border-radius:6px;background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.18)}
 .badge.new{background:var(--new);color:#fff}
 .badge.hi{background:var(--accent);color:var(--accent-ink)}
-.badge.re{background:var(--warn);color:#fff}
+.cond{font-size:12px;font-weight:700;color:var(--new);margin-right:4px}
+.note{font-size:12px;color:var(--muted);line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .body{padding:10px 12px 12px;display:flex;flex-direction:column;gap:6px;flex:1}
 .labels{font-size:12px;font-weight:600;color:var(--accent)}
 .title{font-size:14px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
@@ -79,6 +80,8 @@ summary{cursor:pointer;font-weight:600}
 .src td.n{text-align:right;font-variant-numeric:tabular-nums}
 .src .bad{color:var(--err)}
 .src .off{color:var(--muted)}
+.src td.rh{min-width:220px;color:var(--muted)}
+.src td.rh.drops{color:var(--accent);font-weight:600}
 .tablewrap{overflow-x:auto}
 .more{display:block;margin:18px auto 0;font:inherit;background:var(--chip);color:var(--ink);border:0;border-radius:9px;padding:10px 18px;cursor:pointer}
 .err{color:var(--err);padding:30px 0}
@@ -121,7 +124,6 @@ summary{cursor:pointer;font-weight:600}
         <option value="">XL + XXL</option><option value="XL">nur XL</option><option value="XXL">nur XXL</option>
       </select>
       <label class="toggle"><input type="checkbox" id="onlynew"> nur neu (48 h)</label>
-      <label class="toggle"><input type="checkbox" id="noreissue"> ohne Reissues</label>
     </div>
   </div>
 
@@ -131,7 +133,7 @@ summary{cursor:pointer;font-weight:600}
 
   <details id="sources">
     <summary id="srcsum">Quellen-Status</summary>
-    <div class="tablewrap"><table class="src"><thead><tr><th>Quelle</th><th>System</th><th class="n">Produkte</th><th>Hinweis</th></tr></thead><tbody id="srcbody"></tbody></table></div>
+    <div class="tablewrap"><table class="src"><thead><tr><th>Quelle</th><th>System</th><th class="n">Produkte</th><th>Neuzugänge</th><th>Hinweis</th></tr></thead><tbody id="srcbody"></tbody></table></div>
   </details>
 </div>
 
@@ -149,7 +151,7 @@ summary{cursor:pointer;font-weight:600}
   const host = u => { try { return new URL(u).hostname.replace(/^www\./, ""); } catch(e){ return ""; } };
 
   let all = [], shown = PAGE;
-  const st = Object.assign({q:"", sort:"prio", labels:[], shop:"", size:"", onlynew:false, noreissue:false}, store.get("filter") || {});
+  const st = Object.assign({q:"", sort:"prio", labels:[], shop:"", size:"", onlynew:false}, store.get("filter") || {});
 
   function isNew(t){ return (Date.now() - new Date(t.erst)) / 36e5 < NEW_H; }
 
@@ -160,7 +162,6 @@ summary{cursor:pointer;font-weight:600}
       (!st.shop || t.shopName === st.shop) &&
       (!st.size || t.groesse === st.size) &&
       (!st.onlynew || t.neu) &&
-      (!st.noreissue || !t.reissue) &&
       (!q || t.hay.includes(q)));
     const byNew = (a, b) => b.erst.localeCompare(a.erst);
     const byPrice = dir => (a, b) => (a.eur == null) - (b.eur == null) || dir * ((a.eur ?? 0) - (b.eur ?? 0));
@@ -172,8 +173,10 @@ summary{cursor:pointer;font-weight:600}
   }
 
   function card(t){
-    const badges = [t.neu && '<span class="badge new">NEU</span>', t.thiago && '<span class="badge hi">THIAGO</span>',
-                    t.reissue && '<span class="badge re">REISSUE</span>'].filter(Boolean).join("");
+    const badges = [t.neu && '<span class="badge new">NEU</span>', t.thiago && '<span class="badge hi">THIAGO</span>']
+      .filter(Boolean).join("");
+    const cond = t.zustand ? `<span class="cond">${esc(t.zustand)}</span>` : "";
+    const note = t.notiz ? `<div class="note" title="${esc(t.notiz)}">${esc(t.notiz)}</div>` : "";
     const orig = t.preis && (t.eur == null || !/EUR|€/.test(t.preis)) ? `<small>${esc(t.preis)}</small>` : "";
     const price = t.eur != null ? `<b>${eur(t.eur)}</b>${orig}` : `<b>${esc(t.preis || "?")}</b>`;
     const img = t.bild ? `<img loading="lazy" referrerpolicy="no-referrer" src="${esc(t.bild)}" alt="" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph',textContent:'👕'}))">`
@@ -181,8 +184,8 @@ summary{cursor:pointer;font-weight:600}
     return `<a class="card${t.hoch ? " hi" : ""}" href="${esc(t.url)}" target="_blank" rel="noopener">
       <div class="img">${img}</div><div class="badges">${badges}</div>
       <div class="body"><div class="labels">${esc(t.labels.join(" · "))}</div>
-      <div class="title">${esc(t.titel)}</div>
-      <div class="foot"><div class="price">${price}</div>${t.groesse ? `<span class="size">${esc(t.groesse)}</span>` : ""}</div>
+      <div class="title">${esc(t.titel)}</div>${note}
+      <div class="foot"><div class="price">${price}</div><div>${cond}${t.groesse ? `<span class="size">${esc(t.groesse)}</span>` : ""}</div></div>
       <div class="shop" title="seit ${fmtDate(t.erst)}">${esc(t.shopName)} · seit ${fmtDate(t.erst).slice(0, 6)}</div></div></a>`;
   }
 
@@ -200,7 +203,7 @@ summary{cursor:pointer;font-weight:600}
     all = data.treffer.map(t => {
       const shopName = /^[a-z0-9.-]+\.[a-z]{2,}$/i.test(t.shop) || t.shop === "FYJ" ? (host(t.url) || t.shop) : t.shop;
       return Object.assign(t, {shopName, neu: isNew(t), thiago: t.labels.some(l => l.startsWith("Thiago")),
-        hay: (t.titel + " " + t.labels.join(" ") + " " + shopName).toLowerCase()});
+        hay: (t.titel + " " + t.labels.join(" ") + " " + shopName + " " + (t.notiz || "")).toLowerCase()});
     });
     $("stand").textContent = `Stand ${fmtDate(data.stand)} Uhr (${data.modus === "full" ? "Gesamtlauf" : "Schnellcheck"})` +
       (data.letzter_gesamtlauf ? ` · letzter Gesamtlauf ${fmtDate(data.letzter_gesamtlauf)}` : "");
@@ -228,18 +231,19 @@ summary{cursor:pointer;font-weight:600}
     $("srcbody").innerHTML = src.map(s => {
       const cls = !s.fehler ? "" : /^deaktiviert/.test(s.fehler) ? "off" : "bad";
       return `<tr><td>${esc(s.name)}</td><td>${esc(s.plattform)}</td><td class="n">${(s.produkte || 0).toLocaleString("de-DE")}</td>` +
+             `<td class="rh ${(s.rhythmus || {}).typ || ""}">${esc((s.rhythmus || {}).text || "")}</td>` +
              `<td class="${cls}">${esc(s.fehler || s.info || "ok")}</td></tr>`;
     }).join("");
 
     $("q").value = st.q; $("sort").value = st.sort; $("shop").value = st.shop; $("size").value = st.size;
-    $("onlynew").checked = st.onlynew; $("noreissue").checked = st.noreissue;
+    $("onlynew").checked = st.onlynew;
     render();
   }
 
   const reset = () => { shown = PAGE; render(); };
   $("q").addEventListener("input", e => { st.q = e.target.value; reset(); });
   ["sort", "shop", "size"].forEach(id => $(id).addEventListener("change", e => { st[id] = e.target.value; reset(); }));
-  ["onlynew", "noreissue"].forEach(id => $(id).addEventListener("change", e => { st[id] = e.target.checked; reset(); }));
+  ["onlynew"].forEach(id => $(id).addEventListener("change", e => { st[id] = e.target.checked; reset(); }));
   $("labels").addEventListener("click", e => {
     const b = e.target.closest(".chip"); if (!b) return;
     const l = b.dataset.l;

@@ -50,6 +50,13 @@ REPORT_HOURS = 36        # wie lange ein Treffer ohne Neusichtung in TREFFER.md 
 FYJ_API = "https://www.findyourjersey.org/api/jerseys"
 FYJ_SIZES = ["XL", "XXL"]
 FX_API = "https://api.frankfurter.dev/v1/latest"
+FYJ_EBAY_MAX_AGE_DAYS = 10   # ältere eBay-Daten bei FYJ gelten als verkauft/beendet
+RECHECK_DAYS = 3             # FYJ-Treffer so oft auf der Shop-Seite nachprüfen (verkauft?)
+ENRICH_BUDGET = {"full": 150, "priority": 25}   # max. Seitenprüfungen pro Lauf
+NOTE_LEN = 160               # Länge der Zustandsnotiz
+RHYTHM_DAYS = 90             # Zeitraum für die Drop-Analyse
+BATCH_GAP_MIN = 90           # Artikel mit höchstens so viel Abstand gehören zu einem Schub
+BATCH_MIN = 8                # ab so vielen Artikeln ist ein Schub ein Drop
 
 
 # ---------------------------------------------------------------------------
@@ -79,6 +86,9 @@ def hit(rxs, text):
 SIZE_RX = re.compile(r"(?<![a-z0-9])(xxl|2xl|xl|xx-large|x-large|xx large|x large|extra large)(?![a-z0-9])")
 ANY_SIZE_RX = re.compile(r"(?<![a-z0-9])(xxs|xs|s|m|l|xl|xxl|2xl|3xl|xxxl|small|medium|large|"
                          r"x-large|xx-large|\d{2,3}\s?cm|yxl|yl|ym|ys|xlb|lb|mb|sb)(?![a-z0-9])")
+
+# Rückennummer im Titel: "#10", "# 10", "No. 10", "Nr 10", "Number 10"
+FLOCK_NUM_RX = re.compile(r"#\s?\d{1,2}(?!\d)|(?<![a-z0-9])(no|nr|num|number)\.?\s?\d{1,2}(?![\d/])")
 
 VARIANT_WORDS = {
     "home": ["home", "heim", "heimtrikot", "local", "thuis", "domicile", "casa", "1st"],
@@ -141,6 +151,9 @@ class Matcher:
                 "aus": any_rx(p.get("ausschluss")),
                 "vereine": any_rx(p.get("vereine")),
             })
+        ff = cfg.get("fremdflock") or {}
+        self.flock_ok = any_rx(ff.get("erlaubt"))
+        self.flock_names = any_rx(ff.get("namen"))
         self.kits = []
         for k in cfg.get("sondertrikots") or []:
             var = k.get("varianten", "alle")
@@ -159,6 +172,7 @@ class Matcher:
                 "kombi_b": any_rx(kombi.get("begriffe")),
                 "kombi_f": any_rx(kombi.get("farbe")),
                 "queries": k.get("suchanfragen") or [],
+                "fremdflock_egal": str(k.get("fremdflock", "")).lower() == "egal",
             })
 
     def excluded(self, text):
@@ -169,6 +183,12 @@ class Matcher:
         if not SIZE_RX.search(st):
             return False
         return not (hit(self.kids, st) or hit(self.kids, full_text))
+
+    def foreign_flock(self, t):
+        """Trikot mit Flock eines anderen Spielers (Thiago-Flock zählt nicht als fremd)"""
+        if hit(self.flock_ok, t):
+            return False
+        return bool(FLOCK_NUM_RX.search(t)) or hit(self.flock_names, t)
 
     def _variant_ok(self, kit, t):
         allowed = kit["varianten"]
@@ -199,6 +219,8 @@ class Matcher:
             if (k["saisons"] or k["jahre"]) and not (hit(k["saisons"], t) or hit(k["jahre"], t)):
                 continue
             if not self._variant_ok(k, t):
+                continue
+            if not k["fremdflock_egal"] and self.foreign_flock(t):
                 continue
             if k["stich"] or k["kombi_b"]:
                 ok = hit(k["stich"], t) or (hit(k["kombi_b"], t) and hit(k["kombi_f"], t))
@@ -314,10 +336,10 @@ class Http:
         return None
 
 
-def item(source, shop, url, title, size_text, price="", image="", extra=""):
+def item(source, shop, url, title, size_text, price="", image="", extra="", desc="", **more):
     return {"source": source, "shop": shop, "url": url, "title": title.strip(),
             "size_text": size_text or "", "price": price, "image": image or "",
-            "match_text": f"{title} {extra}".strip()}
+            "match_text": f"{title} {extra}".strip(), "desc": desc or "", **more}
 
 
 # ---------------------------------------------------------------------------
@@ -369,10 +391,11 @@ def shopify_to_item(shop, base, p, cents=False, currency=""):
     if price is not None and cents:
         price = f"{int(price) / 100:.2f}"
     price = f"{price} {currency}".strip() if price not in (None, "") else ""
-    return item("direkt", shop, url, title, size_text, price, img)
+    desc = p.get("body_html") or p.get("description") or ""
+    return item("direkt", shop, url, title, size_text, price, img, desc=desc)
 
 
-def shopify_full(http, shop, base, path="/products.json", currency=""):
+def shopify_full(http, shop, base, path="/products.json", currency="", stamps=None):
     items, n = [], 0
     for page in range(1, 121):
         data = http.get(f"{base}{path}", {"limit": 250, "page": page})
@@ -381,6 +404,8 @@ def shopify_full(http, shop, base, path="/products.json", currency=""):
             break
         n += len(prods)
         for p in prods:
+            if stamps is not None:
+                stamps.append(p.get("published_at") or p.get("created_at") or "")
             it = shopify_to_item(shop, base, p, currency=currency)
             if it:
                 items.append(it)
@@ -428,7 +453,8 @@ def woo_to_item(shop, p):
         price = str(price or "")
     imgs = p.get("images") or []
     img = imgs[0].get("src", "") if imgs else ""
-    return item("direkt", shop, p.get("permalink") or "", title, size_text, price.strip(), img)
+    desc = (p.get("short_description") or "") + " " + (p.get("description") or "")
+    return item("direkt", shop, p.get("permalink") or "", title, size_text, price.strip(), img, desc=desc)
 
 
 def woo_endpoint(http, base):
@@ -487,6 +513,17 @@ def cfs_run(http, shop, base, queries):
     return items, n
 
 
+def fyj_stale(r):
+    """eBay-Angebote aktualisiert FYJ teils seit Monaten nicht mehr, dann sind sie meist weg"""
+    if "ebay" not in (r.get("sourceType") or "").lower():
+        return False
+    try:
+        synced = dt.datetime.fromisoformat((r.get("lastSyncedAt") or "").replace("Z", "+00:00"))
+    except ValueError:
+        return True
+    return now() - synced > dt.timedelta(days=FYJ_EBAY_MAX_AGE_DAYS)
+
+
 def fyj_run(http, matcher, priority):
     # FYJ-Suche mit einzelnen, markanten Wörtern (z. B. "vaart" statt "van der vaart"),
     # Feinfilterung passiert lokal. Für Sondertrikots werden die Teams komplett geholt.
@@ -512,11 +549,14 @@ def fyj_run(http, matcher, priority):
                 for r in rows:
                     title = r.get("description") or ""
                     if str(r.get("isReissue")).lower() == "true":   # kommt als Text "false"/"true"
-                        title += " (Reissue)"
+                        continue   # Nachbauten, für den Nutzer uninteressant
+                    if fyj_stale(r):
+                        continue
                     extra = " ".join(str(x) for x in (r.get("player"), r.get("team")) if x)
                     price = f"{r.get('currentValue') or ''} {r.get('currency') or ''}".strip()
                     items.append(item("fyj", r.get("sourceType") or "FYJ", r.get("sourceUrl") or "",
-                                      title, r.get("size") or "", price, r.get("imageUrl"), extra))
+                                      title, r.get("size") or "", price, r.get("imageUrl"), extra,
+                                      fyj_condition=r.get("condition") or ""))
                 if len(rows) < 200:
                     break
     return items, n
@@ -643,7 +683,9 @@ def run_shop(shop, mode, matcher, platforms, currencies):
                 cur = shopify_currency(http, base) or cur
                 currencies[base] = cur
             if mode == "full":
-                items, n = shopify_full(http, name, base, currency=cur)
+                stamps = []
+                items, n = shopify_full(http, name, base, currency=cur, stamps=stamps)
+                status["rhythmus"] = rhythm(stamps)
                 if n == 0 and not http.limited:   # manche Shops sperren products.json: erst Collection, dann Suche
                     items, n = shopify_full(http, name, base, "/collections/all/products.json", cur)
                 if n == 0 and not http.limited:
@@ -673,6 +715,169 @@ def run_shop(shop, mode, matcher, platforms, currencies):
 
 
 # ---------------------------------------------------------------------------
+# Drop-Rhythmus (nur Shopify: products.json enthält published_at für den ganzen Katalog)
+# ---------------------------------------------------------------------------
+WEEKDAYS = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]
+
+
+def rhythm(stamps):
+    """Wann stellt ein Shop neue Artikel ein? Schub = viele Artikel kurz hintereinander"""
+    t = now()
+    ds = []
+    for x in stamps:
+        try:
+            d = dt.datetime.fromisoformat(str(x).replace("Z", "+00:00"))
+        except ValueError:
+            continue
+        if d.tzinfo and t - dt.timedelta(days=RHYTHM_DAYS) <= d <= t:
+            ds.append(d)
+    ds.sort()
+    out = {"neu_7": sum(d >= t - dt.timedelta(days=7) for d in ds),
+           "neu_30": sum(d >= t - dt.timedelta(days=30) for d in ds),
+           "tage_30": len({d.astimezone(TZ).date() for d in ds if d >= t - dt.timedelta(days=30)}),
+           "letzte": ds[-1].isoformat() if ds else ""}
+    batches = []
+    for d in ds:
+        if batches and d - batches[-1][-1] <= dt.timedelta(minutes=BATCH_GAP_MIN):
+            batches[-1].append(d)
+        else:
+            batches.append([d])
+    big = [b for b in batches if len(b) >= BATCH_MIN]
+    share = sum(len(b) for b in big) / len(ds) if ds else 0
+    if not out["neu_30"]:
+        out["typ"], out["text"] = "ruhig", f"seit 30 Tagen nichts Neues ({len(ds)} in {RHYTHM_DAYS} Tagen)"
+    elif len(big) >= 2 and share >= 0.6:
+        starts = [b[0].astimezone(TZ) for b in big]
+        gaps = sorted((b - a).total_seconds() / 86400 for a, b in zip(starts, starts[1:]))
+        gap = gaps[len(gaps) // 2]
+        wd = max(set(s.weekday() for s in starts), key=[s.weekday() for s in starts].count)
+        hr = max(set(s.hour for s in starts), key=[s.hour for s in starts].count)
+        n_wd = sum(s.weekday() == wd for s in starts)
+        out.update(typ="drops", schuebe=len(big), abstand_tage=round(gap, 1), wochentag=WEEKDAYS[wd],
+                   uhrzeit=hr, letzter_schub=big[-1][0].isoformat())
+        out["text"] = (f"Drops: {len(big)} Schübe in {RHYTHM_DAYS} Tagen, etwa alle {gap:.0f} Tage, "
+                       f"{n_wd}x {WEEKDAYS[wd]}, meist ab {hr} Uhr, zuletzt {starts[-1]:%d.%m. %H:%M}")
+    else:
+        out["typ"] = "laufend"
+        out["text"] = (f"laufend: an {out['tage_30']} von 30 Tagen neue Artikel, "
+                       f"{out['neu_7']} in 7 Tagen, {out['neu_30']} in 30 Tagen")
+    return out
+
+
+# ---------------------------------------------------------------------------
+# Zustand und Verfügbarkeit
+# ---------------------------------------------------------------------------
+SCORE_RX = re.compile(r"(?<![\d/.,])(10|[1-9](?:[.,]5)?)\s*/\s*10(?![\d/])")   # 8/10, nicht 2009/10
+NEW_TAG_RX = re.compile(r"(?<![a-z])(bnwt|bnwot|bnib|deadstock|brand new with tags|new with tags)(?![a-z])", re.I)
+COND_KEY_RX = re.compile(r"(?i)(?<![a-z])(condition|zustand|stan)\s*[:\-]")
+SOLD_RX = re.compile(r"(?i)outofstock|soldout|discontinued")
+COND_WORD_RX = re.compile(r"(?i)^(?:condition|zustand|stan)\s*[:\-]\s*(mint|excellent|very good|good|fair|poor|"
+                          r"used|new|like new|as new|perfect|great|average)(?![a-z])")
+
+
+def plain(text):
+    text = html.unescape(re.sub(r"<[^>]+>", " ", str(text or "")))
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def condition_info(title, desc, fallback=""):
+    """('8/10' | 'BNWT' | FYJ-Angabe wie 'Very Good' | '', Notiz ab 'Condition:' oder '')"""
+    text = plain(desc)
+    m = SCORE_RX.search(title) or SCORE_RX.search(text)
+    if m:
+        grade = m.group(1).replace(",", ".") + "/10"
+    else:
+        t = NEW_TAG_RX.search(f"{title} {text}")
+        grade = t.group(1).upper() if t and len(t.group(1)) <= 9 else ("BNWT" if t else fallback)
+    note = ""
+    k = COND_KEY_RX.search(text)
+    if k:
+        w = COND_WORD_RX.search(text[k.start():])
+        if w and (not grade or grade == fallback):
+            grade = w.group(1).title()
+        note = text[k.start():k.start() + NOTE_LEN]
+        if len(text) > k.start() + NOTE_LEN:
+            note = note.rsplit(" ", 1)[0] + " …"
+    return grade, note
+
+
+def ld_products(data):
+    """alle schema.org-Product-Objekte aus JSON-LD (auch in @graph oder Listen)"""
+    if isinstance(data, list):
+        for x in data:
+            yield from ld_products(x)
+    elif isinstance(data, dict):
+        typ = data.get("@type")
+        if typ in ("Product", "ProductGroup") or (isinstance(typ, list) and "Product" in typ):
+            yield data
+        for key in ("@graph", "hasVariant"):
+            if key in data:
+                yield from ld_products(data[key])
+
+
+def check_page(http, url):
+    """Produktseite: {'verfuegbar': True/False/None, 'desc': str} oder None bei Fehler"""
+    txt = http.get(url, want="text")
+    if not txt:
+        return None
+    soup = BeautifulSoup(txt, "html.parser")
+    avail, desc = [], ""
+    for tag in soup.find_all("script", type="application/ld+json"):
+        try:
+            data = json.loads(tag.string or "")
+        except ValueError:
+            continue
+        for prod in ld_products(data):
+            desc = desc or plain(prod.get("description"))
+            offers = prod.get("offers") or []
+            for o in offers if isinstance(offers, list) else [offers]:
+                if isinstance(o, dict) and o.get("availability"):
+                    avail.append(str(o["availability"]))
+    if not desc:
+        meta = soup.find("meta", attrs={"name": "description"}) or soup.find("meta", property="og:description")
+        desc = plain(meta.get("content")) if meta else ""
+    ok = None
+    if avail:
+        ok = any(not SOLD_RX.search(a) for a in avail)
+    return {"verfuegbar": ok, "desc": desc}
+
+
+def enrich(seen, ts, budget):
+    """FYJ-Treffer auf der Shop-Seite prüfen: verkauft? Zustand? Neue zuerst, dann die ältesten Prüfungen"""
+    due = dt.timedelta(days=RECHECK_DAYS)
+    cand = [e for e in seen.values()
+            if e["last"] == ts and e.get("via") == "fyj" and not e.get("verkauft")
+            and "ebay." not in e["url"]
+            and (not e.get("geprueft") or now() - dt.datetime.fromisoformat(e["geprueft"]) > due)]
+    cand.sort(key=lambda e: (bool(e.get("geprueft")), not is_high(e), e.get("geprueft") or ""))
+    by_host = {}
+    for e in cand[:budget]:
+        by_host.setdefault(urlparse(e["url"]).netloc, []).append(e)
+
+    def work(entries):
+        http = Http(SHOPIFY_GATE if "/products/" in entries[0]["url"] else None)
+        for e in entries:
+            try:
+                res = check_page(http, e["url"])
+            except requests.RequestException:
+                res = None
+            if res is None:
+                continue
+            e["geprueft"] = ts
+            if res["verfuegbar"] is False:
+                e["verkauft"] = ts
+            grade, note = condition_info(e["title"], res["desc"])
+            if grade:
+                e["zustand"] = grade
+            if note:
+                e["zustand_notiz"] = note
+
+    with cf.ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
+        list(ex.map(work, by_host.values()))
+    return min(len(cand), budget)
+
+
+# ---------------------------------------------------------------------------
 # Benachrichtigung
 # ---------------------------------------------------------------------------
 def push(topic, title, message, prio=3, click=None, image=None, tags=None, dry=False):
@@ -699,6 +904,13 @@ def short(e, shop=False):
         extra.append(e["shop"])
     extra = [x for x in extra if x]
     return e["title"] + (f" ({', '.join(extra)})" if extra else "")
+
+
+def detail_line(e):
+    """Titel plus Zeile mit Größe, Preis, Zustand und ggf. Zustandsnotiz"""
+    parts = [f"Größe {e['size']}", e.get("price", ""), f"Zustand {e['zustand']}" if e.get("zustand") else ""]
+    text = e["title"] + "\n" + " · ".join(x for x in parts if x)
+    return text + (f"\n{e['zustand_notiz']}" if e.get("zustand_notiz") else "")
 
 
 def push_label(entry):
@@ -763,7 +975,8 @@ def to_eur(price, rates):
 def current_entries(seen):
     """{Schlüssel: Eintrag} aller Treffer, die in den letzten REPORT_HOURS gesehen wurden"""
     cutoff = now() - dt.timedelta(hours=REPORT_HOURS)
-    return {k: e for k, e in seen.items() if dt.datetime.fromisoformat(e["last"]) >= cutoff}
+    return {k: e for k, e in seen.items()
+            if dt.datetime.fromisoformat(e["last"]) >= cutoff and not e.get("verkauft") and not e.get("weg")}
 
 
 def write_dashboard(seen, status_store, mode, ts):
@@ -776,7 +989,7 @@ def write_dashboard(seen, status_store, mode, ts):
             "id": key, "titel": e["title"], "url": e["url"], "shop": e["shop"],
             "preis": e.get("price", ""), "eur": to_eur(e.get("price"), rates),
             "groesse": e.get("size", ""), "labels": e["labels"], "hoch": is_high(e),
-            "reissue": "(reissue)" in e["title"].lower(), "bild": e.get("image", ""),
+            "zustand": e.get("zustand", ""), "notiz": e.get("zustand_notiz", ""), "bild": e.get("image", ""),
             "erst": e["first"], "zuletzt": e["last"], "via": e.get("via", ""),
         })
     quellen = status_store.get("quellen") or {}
@@ -806,13 +1019,14 @@ def write_report(seen, sources, sources_time, mode):
         lines += ["Aktuell keine Treffer.", ""]
     for lab in sorted(groups, key=gkey):
         es = sorted(groups[lab], key=lambda e: e["first"], reverse=True)
-        lines += [f"## {lab} ({len(es)})", "", "| Trikot | Größe | Preis | Shop | seit |",
-                  "|---|---|---|---|---|"]
+        lines += [f"## {lab} ({len(es)})", "", "| Trikot | Größe | Zustand | Preis | Shop | seit |",
+                  "|---|---|---|---|---|---|"]
         for e in es:
             t = e["title"].replace("|", "/")
             size = (e.get("size") or "").replace("|", "/")[:25]
             first = dt.datetime.fromisoformat(e["first"]).astimezone(TZ)
-            lines.append(f"| [{t}]({e['url']}) | {size} | {e.get('price', '')} | {e['shop']} | {first:%d.%m.} |")
+            cond = (e.get("zustand") or "").replace("|", "/")
+            lines.append(f"| [{t}]({e['url']}) | {size} | {cond} | {e.get('price', '')} | {e['shop']} | {first:%d.%m.} |")
         lines.append("")
     when = dt.datetime.fromisoformat(sources_time).astimezone(TZ) if sources_time else None
     lines += ["## Quellen-Status", "",
@@ -860,6 +1074,8 @@ def main():
     platforms = status_store.setdefault("platforms", {})
     currencies = status_store.setdefault("currencies", {})
     sources_ok = set(status_store.setdefault("sources_ok", []))
+    # Reissues (Nachbauten) werden seit 01.10.2026 nicht mehr erfasst
+    seen = {k: v for k, v in seen.items() if "(Reissue)" not in v["title"]}
     first_run = not seen
 
     shops = shops_cfg.get("shops") or []
@@ -923,24 +1139,56 @@ def main():
                 continue
             key = canon_url(it["url"])
             size = SIZE_RX.search(norm(it["size_text"]))
+            grade, note = condition_info(it["title"], it.get("desc"), it.get("fyj_condition", ""))
             entry = seen.get(key)
             if entry:
+                # Labels pro Lauf neu berechnen (sonst bleiben alte Regeln ewig hängen),
+                # innerhalb eines Laufs aus mehreren Quellen zusammenführen
+                if entry["last"] != ts:
+                    entry["labels"], entry["prios"] = [], []
                 entry["last"] = ts
+                entry.pop("weg", None)
                 entry["labels"] = sorted(set(entry["labels"]) | {l for l, _ in labs})
-                entry["prios"] = sorted(set(entry.get("prios", [])) | {p for _, p in labs})
+                entry["prios"] = sorted(set(entry["prios"]) | {p for _, p in labs})
                 if it["source"] == "direkt":      # direkte Daten sind aktueller als FYJ
                     entry.update(price=it["price"] or entry.get("price", ""), shop=it["shop"])
+                    entry.pop("verkauft", None)
+                    if grade:
+                        entry["zustand"] = grade
+                    if note:
+                        entry["zustand_notiz"] = note
+                elif grade and not entry.get("zustand"):
+                    entry["zustand"] = grade
                 if it["source"] == entry.get("via"):
-                    entry["title"] = it["title"]  # korrigiert z. B. alte, falsche Reissue-Markierungen
+                    entry["title"] = it["title"]
                 continue
             entry = {"title": it["title"], "url": it["url"], "shop": it["shop"],
                      "price": it["price"], "image": it["image"],
                      "size": size.group(0).upper() if size else "",
                      "labels": sorted({l for l, _ in labs}), "prios": sorted({p for _, p in labs}),
                      "first": ts, "last": ts, "via": it["source"]}
+            if grade:
+                entry["zustand"] = grade
+            if note:
+                entry["zustand_notiz"] = note
             seen[key] = entry
             if not first_run and not fresh_source:
                 new_entries.append(entry)
+
+    # Gesamtlauf: Treffer, die eine erfolgreich abgefragte Quelle nicht mehr liefert (verkauft oder
+    # passt nach Regeländerung nicht mehr), sofort ausblenden statt erst nach REPORT_HOURS
+    if args.mode == "full" and not args.only:
+        ok_src = {st["name"] for _, _, st in results if not st.get("fehler")}
+        for e in seen.values():
+            src = "FindYourJersey" if e.get("via") == "fyj" else e["shop"]
+            if e["last"] != ts and src in ok_src:
+                e.setdefault("weg", ts)
+            elif e["last"] == ts:
+                e.pop("weg", None)
+
+    # FYJ-Treffer auf der Shop-Seite prüfen (verkauft? Zustand?), neue zuerst, vor den Pushes
+    checked = enrich(seen, ts, ENRICH_BUDGET.get(args.mode, 0))
+    new_entries = [e for e in new_entries if not e.get("verkauft")]
 
     # Benachrichtigen
     repo = os.environ.get("GITHUB_REPOSITORY")
@@ -964,13 +1212,13 @@ def main():
         # Thiago & Sondertrikots einzeln (max. MAX_PUSH_HIGH), Rest gebündelt
         for e in high[:MAX_PUSH_HIGH]:
             push(topic, f"🔥 {push_label(e)} · {e['shop']}",
-                 f"{e['title']}\nGröße {e['size']} · {e['price']}",
+                 detail_line(e),
                  5, e["url"], e["image"], ["fire"], args.dry_run)
         bundle = high[MAX_PUSH_HIGH:] + normal
         if len(bundle) == 1:
             e = bundle[0]
             push(topic, f"⚽ {push_label(e)} · {e['shop']}",
-                 f"{e['title']}\nGröße {e['size']} · {e['price']}",
+                 detail_line(e),
                  3, e["url"], e["image"], ["soccer"], args.dry_run)
         elif bundle:
             push(topic, f"⚽ {len(bundle)} neue Treffer",
@@ -1003,7 +1251,7 @@ def main():
     ok = sum(1 for s in statuses if not s["fehler"])
     print(f"Fertig ({args.mode}): {ok}/{len(statuses)} Shops ok, FYJ: "
           f"{(fyj_status or {}).get('fehler') or 'ok' if fyj_status else 'aus'}, "
-          f"{len(new_entries)} neue Treffer, Erstlauf: {first_run}")
+          f"{len(new_entries)} neue Treffer, {checked} Seiten geprüft, Erstlauf: {first_run}")
     for s in statuses:
         if s["fehler"]:
             print(f"  - {s['name']}: {s['fehler']}")

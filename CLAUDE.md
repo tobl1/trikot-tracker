@@ -17,8 +17,11 @@ Aufbau, getroffene Entscheidungen und offene Punkte. Bitte bei größeren Änder
 Automatische Suche nach Vintage-Fußballtrikots der Lieblingsspieler des Nutzers in **XL oder XXL**
 (L ausdrücklich nicht) bei vielen Online-Shops, mit Push-Benachrichtigung bei neuen Treffern.
 **Thiago (Alcântara) ist absolute Priorität #1.** Gesucht werden primär Trikots mit
-Spielerbeflockung, für Thiago zusätzlich bestimmte Trikots unabhängig von der Beflockung
-(siehe `sondertrikots` in `watchlist.yaml`). Später sollen eventuell seltene unbeflockte
+Spielerbeflockung, für Thiago zusätzlich bestimmte Trikots (siehe `sondertrikots` in
+`watchlist.yaml`), und zwar **nur mit Thiago-Flock oder ganz ohne Flock**, weil der Nutzer
+Thiago nachbeflocken lassen will (Messi-Barça 12/13 ist also kein Treffer).
+Grundhaltung des Nutzers: alles in sinnvollem Rahmen, Kompromiss aus "Neues sofort sehen" und
+wenig Last auf den Shops; lieber langsam und nachts als Sperren riskieren. Später sollen eventuell seltene unbeflockte
 Einzeltrikots zum Nachbeflocken dazukommen, das sagt der Nutzer gesondert an.
 
 ## Aufbau
@@ -67,14 +70,37 @@ TREFFER.md, also vorher sichern oder nicht committen). `--only "Name"` testet ei
   jeweils Home und Away
 - Varianten-Logik: erlaubtes Wort im Titel → ok; anderes Variantenwort → nein; gar keins → nur ok,
   wenn "home" erlaubt ist
-- Größe: XL, XXL, 2XL, X-Large, XX-Large, Extra Large; Kinder- und Damengrößen raus (YXL, XLB, boys …)
+- Größe: XL, XXL, 2XL, X-Large, XX-Large, Extra Large; Kinder- und Damengrößen raus (YXL, XLB, boys,
+  "young xl", damska, feminina, infantil …)
+- Trainingsshirts raus, auch "treino", "entrenamiento", "allenamento", "trening" usw.
+- Sondertrikots: fremd beflockt = Rückennummer (#10, No. 10) oder Name aus `fremdflock.namen`,
+  außer Thiago/Alcantara steht drin. Pro Sondertrikot abschaltbar mit `fremdflock: egal`
+- Labels werden bei jeder ersten Sichtung im Lauf **neu berechnet** (früher nur ergänzt, dadurch
+  blieben alte Labels nach Regeländerungen hängen); Treffer ohne Label fallen nach 36 h raus
+- Reissues (FYJ `isReissue`, also Nachbauten) werden gar nicht erst erfasst
 - Shopify: gibt es Größen-Varianten, zählen nur **verfügbare** XL/XXL-Varianten; sonst Größe aus
   Titel oder Größen-Tag
-- Testfälle: Es gab 50 Titel-Testfälle (alle grün). Bitte als `tests/test_matching.py` mit pytest
-  neu anlegen, bevor die Matching-Logik geändert wird. Wichtige Fälle: Thiago Silva ≠ Thiago,
+- Testfälle: `tests/test_matching.py` (pytest, `python -m pytest tests/`), vor jeder Änderung an
+  Matching, Zustand oder Rhythmus erweitern und laufen lassen. Wichtige Fälle: Thiago Silva ≠ Thiago,
   Ferran ≠ Fernando Torres, Marcos ≠ Xabi Alonso, Wiesn 2023 grün = nein, 1860 Wiesn = nein,
   Liverpool 21/22 ohne "away" = nein, "Hamburger SV" = HSV, 3XL/XXXL = nein, "Short Sleeve" darf
   nicht als Shorts ausgeschlossen werden
+
+## Zustand, Verfügbarkeit, Drop-Rhythmus
+
+- **Zustand** (`zustand`, `zustand_notiz` in seen.json): Note wie "8/10" aus Titel (CFS: "- 8/10 -")
+  oder Beschreibung (Shopify `body_html`, Woo `description`), sonst BNWT, sonst Wort nach
+  "Condition:", sonst FYJ-Feld `condition` ("Very Good"). Notiz = Text ab "Condition:", 160 Zeichen
+- **FYJ-Treffer werden auf der Shop-Seite geprüft** (`enrich`): JSON-LD Product liefert
+  `offers.availability` (OutOfStock → `verkauft`, fliegt raus) und `description` (Zustand).
+  Neue Treffer zuerst und vor den Pushes, dann alle 3 Tage erneut; max. 150 Seiten pro Gesamtlauf,
+  25 pro Schnellcheck. Beispiel: von zwei Thiago-Trikots bei classic-shirts war eins laut FYJ
+  verfügbar, laut Shop ausverkauft
+- eBay über FYJ: Angebote mit `lastSyncedAt` älter als 10 Tage gelten als weg (FYJ aktualisiert
+  eBay teils seit Monaten nicht). Nutzer will langfristig prüfen, ob eBay überhaupt sinnvoll ist
+- **Drop-Rhythmus** (`rhythm()`, nur Shopify): aus `published_at` des ganzen Katalogs, 90 Tage
+  rückwirkend. Schub = mind. 8 Artikel mit max. 90 Min. Abstand; "drops" wenn mind. 2 Schübe und
+  60 % der Artikel in Schüben, sonst "laufend" bzw. "ruhig". Steht im Quellen-Status des Dashboards
 
 ## Benachrichtigungslogik
 
@@ -154,8 +180,12 @@ We Love Football Shirts). **Diese Änderungen sind noch nicht durch einen echten
 6. Optional direkte Anbindung der FYJ-gedeckten Shops (We Love Football Shirts läuft z. B. auf
    Lightspeed, das hat oft `?format=json`; Classic-Shirts ist vermutlich IdoSell), weil FYJ nur
    nächtlich aktualisiert
-7. Drop-Zeiten anderer Shops: Nutzer kennt sie noch nicht und meldet sie nach; bis dahin täglicher Lauf
-   plus Schnellcheck 3x täglich. Bei bekannten Drops gezielte Läufe kurz danach
+7. **Adaptiver Zeitplan** aus dem Drop-Rhythmus: Drop-Shops nur kurz nach ihrem typischen Drop
+   gezielt prüfen, "laufend"-Shops im Schnellcheck, "ruhig" nur nachts. Erst ein paar Gesamtläufe
+   Rhythmus-Daten ansehen und mit dem Nutzer abstimmen. Für Woo/CFS/FYJ gibt es keine
+   Zeitstempel, dort müsste man neue Produkt-IDs selbst mitzählen
+8. Backlog: Social-Media-Accounts der Shops auf Drop-Ankündigungen beobachten (Nutzer: eher später)
+9. Backlog: eBay als Kanal bewerten (viele Treffer veraltet, Kindergrößen als "Young XL")
 
 ## Bekannte Rahmenbedingungen
 

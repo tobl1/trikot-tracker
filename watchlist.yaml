@@ -9,7 +9,10 @@ groessen:
   # Kinder- und Damengrößen werden ausgeschlossen:
   ausschliessen: ["boys", "boy", "youth", "kids", "kid", "junior", "jnr", "jr",
                   "enfant", "enfants", "kinder", "nino", "ninos", "child", "children",
-                  "infant", "baby", "yxl", "xlb", "womens", "women", "ladies", "damen"]
+                  "infant", "baby", "yxl", "xlb", "womens", "women", "ladies", "damen",
+                  "young xl", "young xxl", "young 2xl",
+                  "damska", "dziecieca", "femme", "mujer", "donna", "feminina", "feminino",
+                  "infantil", "bambino", "dames"]
 
 # Produkte, die keine Trikots sind oder nicht gewünscht sind
 produkt_ausschluss: ["shorts", "socks", "sock", "jacket", "track top", "tracksuit",
@@ -17,7 +20,10 @@ produkt_ausschluss: ["shorts", "socks", "sock", "jacket", "track top", "tracksui
                      "cap", "hat", "programme", "ball", "boots", "poster", "sticker", "mug",
                      "keyring", "towel", "pennant", "framed", "cushion", "goalkeeper",
                      "torwart", "portero", "gk", "training", "pre-match", "prematch",
-                     "warm up", "polo", "t-shirt", "tee", "bib", "stutzen", "jacke", "schal"]
+                     "warm up", "polo", "t-shirt", "tee", "bib", "stutzen", "jacke", "schal",
+                     # Trainingsshirts in anderen Sprachen
+                     "treino", "entrenamiento", "entreno", "allenamento", "entrainement",
+                     "trening", "trainingsshirt", "trainingstrikot"]
 
 # ---------------------------------------------------------------------
 # Spieler: Treffer = Suchbegriff im Titel UND kein Ausschlusswort
@@ -130,7 +136,35 @@ spieler:
     suche: ["ze roberto"]
 
 # ---------------------------------------------------------------------
-# Sondertrikots (Thiago-Bezug): Beflockung egal, auch ohne Namen
+# Sondertrikots (Thiago-Bezug): nur mit Thiago-Flock oder ganz ohne Flock,
+# damit Thiago nachbeflockt werden kann. Als fremd beflockt gilt ein Titel mit
+# Rückennummer (#10, No. 10) oder einem der Namen unten, außer "erlaubt" steht drin.
+# Pro Sondertrikot abschaltbar mit  fremdflock: egal
+# ---------------------------------------------------------------------
+fremdflock:
+  erlaubt: ["thiago", "alcantara"]
+  namen: [
+    # Barça 2010 bis 2013
+    "messi", "xavi", "iniesta", "villa", "pedro", "puyol", "pique", "busquets", "alves",
+    "fabregas", "cesc", "alexis", "sanchez", "abidal", "mascherano", "keita", "adriano",
+    "bojan", "afellay", "valdes", "tello", "cuenca", "song", "alba", "montoya", "maxwell",
+    "bartra", "fontas", "pinto", "sergi roberto", "dos santos", "ibrahimovic", "neymar",
+    # Bayern 2021/22
+    "lewandowski", "muller", "mueller", "kimmich", "goretzka", "sane", "gnabry", "coman",
+    "davies", "neuer", "sule", "upamecano", "hernandez", "pavard", "musiala", "sabitzer",
+    "choupo-moting", "tolisso", "nianzou", "roca", "stanisic", "ulreich",
+    # Liverpool 2021 bis 2023
+    "salah", "mane", "firmino", "van dijk", "alexander-arnold", "trent", "robertson",
+    "henderson", "fabinho", "jota", "diaz", "nunez", "alisson", "matip", "konate", "gomez",
+    "milner", "oxlade-chamberlain", "chamberlain", "elliott", "tsimikas", "minamino", "origi",
+    "carvalho", "gakpo", "bajcetic",
+    # Spanien 2010 bis 2014
+    "casillas", "ramos", "capdevila", "alonso", "torres", "fabregas", "silva", "navas",
+    "llorente", "mata", "arbeloa", "albiol", "marchena", "reina", "de gea", "koke", "costa",
+    "azpilicueta", "cazorla", "juanfran", "javi martinez", "martinez", "santi cazorla"]
+
+# ---------------------------------------------------------------------
+# Sondertrikots (Thiago-Bezug)
 #   verein:       Namen, von denen mindestens einer im Titel stehen muss
 #   saisons:      z. B. "2010/11" erkennt auch 2010-11, 2010/2011, 10/11 usw.
 #   jahre:        einzelne Jahreszahlen, z. B. "2014"
