@@ -35,7 +35,7 @@ shops:
   - {name: The Soccer Archive, url: "https://thesoccerarchive.com"}
   - {name: We Love Football Shirts, url: "https://www.welovefootballshirts.com", plattform: fyj}
   - {name: RetrOriginalFootball, url: "https://retroriginalfootball.com"}
-  - {name: House of Football Shirts, url: "https://houseoffootballshirts.com"}
+  - {name: House of Football Shirts, url: "https://houseoffootballshirts.com", plattform: aus, hinweis: "nur noch Laden in Den Haag, kein Online-Sortiment (01.10.2026)"}
   - {name: ClassicShirts-FC, url: "https://classicshirts-fc.com", plattform: fyj}
   - {name: Nostalgic Football Shirts, url: "https://nostalgicfootballshirts.com"}
   - {name: Back to the Football, url: "https://backtothefootball.com"}

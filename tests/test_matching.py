@@ -137,3 +137,8 @@ def test_rhythm_laufend():
 
 def test_rhythm_ruhig():
     assert tracker.rhythm(_stamps(45, 12, 3))["typ"] == "ruhig"
+
+
+def test_rhythm_taegliche_schuebe_sind_laufend():
+    stamps = [x for k in range(1, 60) for x in _stamps(k, 10, 12)]
+    assert tracker.rhythm(stamps)["typ"] == "laufend"

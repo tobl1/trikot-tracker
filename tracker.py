@@ -57,6 +57,7 @@ NOTE_LEN = 160               # Länge der Zustandsnotiz
 RHYTHM_DAYS = 90             # Zeitraum für die Drop-Analyse
 BATCH_GAP_MIN = 90           # Artikel mit höchstens so viel Abstand gehören zu einem Schub
 BATCH_MIN = 8                # ab so vielen Artikeln ist ein Schub ein Drop
+DROP_MIN_GAP_DAYS = 3        # Schübe fast täglich zählen als "laufend", nicht als Drops
 
 
 # ---------------------------------------------------------------------------
@@ -670,8 +671,8 @@ def run_shop(shop, mode, matcher, platforms, currencies):
                 else:
                     ep = woo_endpoint(http, base)
                     detected = ("woo:" + ep) if ep else "unbekannt"
-                if detected == "unbekannt" and http.limited and known and known != "unbekannt":
-                    detected = known   # nur gedrosselt, bekannte Plattform behalten
+                if detected == "unbekannt" and known and known != "unbekannt":
+                    detected = known   # vermutlich nur ein Aussetzer, bekannte Plattform behalten
                 known = platforms[base] = detected
             plat = known
             if plat != "shopify":
@@ -746,21 +747,26 @@ def rhythm(stamps):
     share = sum(len(b) for b in big) / len(ds) if ds else 0
     if not out["neu_30"]:
         out["typ"], out["text"] = "ruhig", f"seit 30 Tagen nichts Neues ({len(ds)} in {RHYTHM_DAYS} Tagen)"
-    elif len(big) >= 2 and share >= 0.6:
-        starts = [b[0].astimezone(TZ) for b in big]
-        gaps = sorted((b - a).total_seconds() / 86400 for a, b in zip(starts, starts[1:]))
-        gap = gaps[len(gaps) // 2]
+        return out
+    starts = [b[0].astimezone(TZ) for b in big]
+    gaps = sorted((b - a).total_seconds() / 86400 for a, b in zip(starts, starts[1:]))
+    gap = gaps[len(gaps) // 2] if gaps else 0
+    if len(big) >= 2 and share >= 0.6 and gap >= DROP_MIN_GAP_DAYS:
         wd = max(set(s.weekday() for s in starts), key=[s.weekday() for s in starts].count)
         hr = max(set(s.hour for s in starts), key=[s.hour for s in starts].count)
         n_wd = sum(s.weekday() == wd for s in starts)
         out.update(typ="drops", schuebe=len(big), abstand_tage=round(gap, 1), wochentag=WEEKDAYS[wd],
                    uhrzeit=hr, letzter_schub=big[-1][0].isoformat())
-        out["text"] = (f"Drops: {len(big)} Schübe in {RHYTHM_DAYS} Tagen, etwa alle {gap:.0f} Tage, "
-                       f"{n_wd}x {WEEKDAYS[wd]}, meist ab {hr} Uhr, zuletzt {starts[-1]:%d.%m. %H:%M}")
-    else:
+        out["text"] = (f"Drops etwa alle {gap:.0f} Tage, meist {WEEKDAYS[wd]} ({n_wd} von {len(big)}) "
+                       f"ab {hr} Uhr, zuletzt {starts[-1]:%d.%m. %H:%M}")
+    elif out["tage_30"] >= 8:
         out["typ"] = "laufend"
         out["text"] = (f"laufend: an {out['tage_30']} von 30 Tagen neue Artikel, "
                        f"{out['neu_7']} in 7 Tagen, {out['neu_30']} in 30 Tagen")
+    else:
+        out["typ"] = "unregelmäßig"
+        out["text"] = (f"unregelmäßig: an {out['tage_30']} von 30 Tagen neue Artikel, "
+                       f"{out['neu_30']} in 30 Tagen, zuletzt {ds[-1].astimezone(TZ):%d.%m.}")
     return out
 
 
