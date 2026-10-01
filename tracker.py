@@ -712,7 +712,7 @@ def is_high(entry):
 # ---------------------------------------------------------------------------
 # Preise
 # ---------------------------------------------------------------------------
-CUR_CODE_RX = re.compile(r"\b(EUR|GBP|USD|DKK|SEK|NOK|PLN|CHF|AUD|NZD|CAD|JPY|CZK|HUF)\b")
+CUR_CODE_RX = re.compile(r"\b([A-Z]{3})\b")   # ISO-Code, ob es einen Kurs gibt, prüft to_eur()
 CUR_SYMBOLS = [("£", "GBP"), ("€", "EUR"), ("zł", "PLN"), ("$", "USD")]
 NUM_RX = re.compile(r"\d[\d.,\s]*\d|\d")
 

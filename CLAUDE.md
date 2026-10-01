@@ -131,11 +131,12 @@ We Love Football Shirts). **Diese Änderungen sind noch nicht durch einen echten
 
 ## Offene Punkte (Priorität von oben nach unten)
 
-1. **Nach dem nächsten Gesamtlauf auf GitHub** Quellen-Status prüfen (steht jetzt dauerhaft in
-   TREFFER.md und im Dashboard). Lokal am 01.10.2026 getestet: ReShirt ok (5 Produkte), Swiat ok
-   (111 Produkte, 2 Treffer), FYJ ok (3.777). Shopify lokal wegen IP-Sperre nicht prüfbar, CFS lokal
-   0 Produkte (Cloudflare, auf GitHub lief es). Prüfen: keine "unvollständig"-Meldungen bei
-   Shopify, House of Football Shirts, CFS > 0, Dauer des Laufs mit Shopify-Bremse
+1. ~~Quellen-Status prüfen~~ erledigt mit dem Gesamtlauf am 01.10.2026 10:27 Uhr (ca. 22 Min. mit
+   Drosselung, kein einziges 429): 41/44 Shops ok, CFS 1.532, ReShirt 5, Swiat 111, FYJ 3.777.
+   Offen: **House of Football Shirts liefert 0 Produkte** (products.json, Collection und Suche leer,
+   53 Anfragen), Ursache noch nicht untersucht. Saturdays Football, Vintage Football Area und
+   Vintage Football Shirts enden bei 25.000 Produkten (Shopify liefert max. 100 Seiten). Unkritisch,
+   da products.json die neuesten zuerst liefert (geprüft), es fehlen nur die ältesten Einträge
 2. **Feedback des Nutzers** zu den Erstlauf-Treffern einholen (Fehltreffer? Verpasstes?) und
    Matching nachschärfen. Bekannte Schwächen: "de Jong" ohne Vornamen kann Luuk/Nigel sein;
    "Llorente" + Spanien kann Fernando sein; Reissues werden mitgenommen und nur markiert
