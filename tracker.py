@@ -38,6 +38,7 @@ REPORT_FILE = ROOT / "TREFFER.md"
 DASHBOARD_FILE = ROOT / "docs" / "treffer.json"
 
 TZ = ZoneInfo("Europe/Berlin")
+BUY_COUNTRY = "DE"       # Preise/Währung so, wie ein Käufer in Deutschland sie sieht
 UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/128.0 Safari/537.36")
 TIMEOUT = 25
@@ -288,6 +289,8 @@ class Http:
     def __init__(self, gate=None):
         self.s = requests.Session()
         self.s.headers.update({"User-Agent": UA, "Accept-Language": "en,de;q=0.8"})
+        # Shopify Markets: ohne das Cookie bekäme der GitHub-Server (USA) US-Preise in USD
+        self.s.cookies.set("localization", BUY_COUNTRY)
         self.gate = gate
         self.last = 0.0
         self.count = 0
@@ -729,7 +732,7 @@ def run_shop(shop, mode, matcher, platforms, currencies):
         status["plattform"] = plat.split(":")[0]
         if plat == "shopify":
             cur = shop.get("waehrung") or currencies.get(base, "")
-            if mode == "full" and not shop.get("waehrung"):
+            if not shop.get("waehrung"):   # jedes Mal, die Währung hängt vom Markt (Land) ab
                 cur = shopify_currency(http, base) or cur
                 currencies[base] = cur
             if mode == "full":

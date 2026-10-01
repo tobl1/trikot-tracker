@@ -200,7 +200,10 @@ We Love Football Shirts). **Diese Änderungen sind noch nicht durch einen echten
    Gesamtlauf, gemerkt in `status.json` unter `currencies` (überschreibbar mit `waehrung:` in
    shops.yaml); EZB-Kurse über `api.frankfurter.dev`, zuletzt bekannte Kurse als Fallback;
    `parse_price()` erkennt Codes und £/€/zł/$. Offen: "$" wird pauschal als USD gelesen;
-   CFS zeigt Preise je nach Abruf-Standort in anderer Währung, im Blick behalten
+   CFS zeigt Preise je nach Abruf-Standort in anderer Währung, im Blick behalten.
+   **Shopify Markets:** der GitHub-Server (USA) bekam US-Preise in USD (VFA: 93 $ statt 79,99 €).
+   Deshalb Cookie `localization=DE` in jeder Session (`BUY_COUNTRY`), `/cart.js`-Währung wird
+   in jedem Lauf neu gelesen
 4. ~~Dashboard per GitHub Pages~~ umgesetzt (01.10.2026): Nutzer hat entschieden, das Repo
    öffentlich zu machen (Pages wäre auch mit Pro öffentlich erreichbar, öffentliches Repo spart
    außerdem Actions-Minuten). Push-Links zeigen per `DASHBOARD_URL` aufs Dashboard
