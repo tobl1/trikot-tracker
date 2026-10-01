@@ -100,7 +100,13 @@ TREFFER.md, also vorher sichern oder nicht committen). `--only "Name"` testet ei
   eBay teils seit Monaten nicht). Nutzer will langfristig prüfen, ob eBay überhaupt sinnvoll ist
 - **Drop-Rhythmus** (`rhythm()`, nur Shopify): aus `published_at` des ganzen Katalogs, 90 Tage
   rückwirkend. Schub = mind. 8 Artikel mit max. 90 Min. Abstand; "drops" wenn mind. 2 Schübe und
-  60 % der Artikel in Schüben, sonst "laufend" bzw. "ruhig". Steht im Quellen-Status des Dashboards
+  60 % der Artikel in Schüben und Abstand im Median mind. 3 Tage, sonst "laufend" (an mind. 8 von
+  30 Tagen neu), "unregelmäßig" oder "ruhig". Steht im Quellen-Status des Dashboards.
+  Erste Messung 01.10.2026, klare Drop-Shops: Kickoff Vintage Do 16 bis 18 Uhr wöchentlich (12/12),
+  Trikotparadies Fr 19 Uhr wöchentlich (14/15), Fodbold Shoppen alle 14 Tage Fr 15 Uhr (6/6),
+  Kick It Vintage ca. alle 3 Wochen Sa 18 Uhr, Nostalgic Football Shirts ca. alle 3 Wochen Sa 11 bis 12 Uhr
+- Plattform-Erkennung: ist ein Shop schon bekannt und die Erkennung schlägt einmal fehl, bleibt die
+  bekannte Plattform (RB-Jerseys fiel am 01.10.2026 sonst wegen eines Aussetzers raus)
 
 ## Benachrichtigungslogik
 
@@ -159,8 +165,8 @@ We Love Football Shirts). **Diese Änderungen sind noch nicht durch einen echten
 
 1. ~~Quellen-Status prüfen~~ erledigt mit dem Gesamtlauf am 01.10.2026 10:27 Uhr (ca. 22 Min. mit
    Drosselung, kein einziges 429): 41/44 Shops ok, CFS 1.532, ReShirt 5, Swiat 111, FYJ 3.777.
-   Offen: **House of Football Shirts liefert 0 Produkte** (products.json, Collection und Suche leer,
-   53 Anfragen), Ursache noch nicht untersucht. Saturdays Football, Vintage Football Area und
+   House of Football Shirts deaktiviert: laut Startseite "In-store only in The Hague", alle
+   Shopify-Endpunkte leer. Saturdays Football, Vintage Football Area und
    Vintage Football Shirts enden bei 25.000 Produkten (Shopify liefert max. 100 Seiten). Unkritisch,
    da products.json die neuesten zuerst liefert (geprüft), es fehlen nur die ältesten Einträge
 2. **Feedback des Nutzers** zu den Erstlauf-Treffern einholen (Fehltreffer? Verpasstes?) und
