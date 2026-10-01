@@ -1,0 +1,161 @@
+# CLAUDE.md: Trikot-Tracker
+
+Übergabe aus einem Chat mit Claude (claude.ai), Stand 01.10.2026. Diese Datei beschreibt Ziel,
+Aufbau, getroffene Entscheidungen und offene Punkte. Bitte bei größeren Änderungen aktuell halten.
+
+## Kommunikation mit dem Nutzer
+
+- Deutsch, locker, direkt
+- **Niemals Gedankenstriche (—) in Sätzen**, auch nicht in Push-Texten, README oder TREFFER.md.
+  Bindestriche in Wörtern ("Rekord-Sieger") sind okay
+- Wenn "Stichpunkte" gewünscht: prägnant, ohne Punkt am Ende, viel Inhalt in kurzer Form
+- Bei Unklarheiten oder fehlenden wichtigen Infos nachfragen
+- Eigene Aussagen kritisch prüfen, Unsicherheiten offen benennen
+
+## Ziel
+
+Automatische Suche nach Vintage-Fußballtrikots der Lieblingsspieler des Nutzers in **XL oder XXL**
+(L ausdrücklich nicht) bei vielen Online-Shops, mit Push-Benachrichtigung bei neuen Treffern.
+**Thiago (Alcântara) ist absolute Priorität #1.** Gesucht werden primär Trikots mit
+Spielerbeflockung, für Thiago zusätzlich bestimmte Trikots unabhängig von der Beflockung
+(siehe `sondertrikots` in `watchlist.yaml`). Später sollen eventuell seltene unbeflockte
+Einzeltrikots zum Nachbeflocken dazukommen, das sagt der Nutzer gesondert an.
+
+## Aufbau
+
+| Datei | Zweck |
+|---|---|
+| `tracker.py` | gesamtes Programm (Abfrage, Matching, Push, Bericht), bewusst eine Datei |
+| `watchlist.yaml` | Spieler mit Suchbegriffen, Ausschlüssen, Vereinsfilter; Sondertrikots; Größen; Produktausschlüsse |
+| `shops.yaml` | direkt abgefragte Shops mit `plattform` (auto, cfs, smartweb, prestashop, fyj, aus) |
+| `.github/workflows/tracker.yml` | GitHub Actions: Gesamtlauf täglich 05:15 UTC, Schnellcheck `45 */3 * * *`, manuell mit Modus |
+| `state/seen.json` | bekannte Treffer (Schlüssel = kanonische URL), wird vom Workflow committet |
+| `state/status.json` | erkannte Plattformen, erfolgreich abgefragte Quellen, Produktanzahlen, letzter Lauf |
+| `TREFFER.md` | automatisch erzeugte Übersicht, aktuell das "Dashboard" |
+
+Laufzeitumgebung: GitHub Actions, **privates Repo** (2.000 Freiminuten/Monat), Python 3.12,
+`ubuntu-24.04`, `actions/checkout@v6`, `actions/setup-python@v6`. Erster echter Gesamtlauf: ca. 3 Min.
+
+Benachrichtigung: **ntfy** (ntfy.sh, iPhone-App), Thema im Secret `NTFY_TOPIC`. Veröffentlicht per
+JSON-POST an den Server-Root. Telegram wurde verworfen (kostenpflichtige Verifizierung).
+Niemals das Thema oder andere Secrets in Code, Logs oder Commits schreiben.
+
+## Modi
+
+- `full`: alle Shops komplett plus FindYourJersey; erkennt Plattformen neu
+- `priority`: nur Einträge mit `prioritaet: hoch` (Thiago + Sondertrikots) über Shop-Suchen,
+  nutzt die in `status.json` gemerkten Plattformen
+- `test`: nur Test-Push
+
+Lokal testen: `python tracker.py --mode full --dry-run` (sendet nichts, schreibt aber state und
+TREFFER.md, also vorher sichern oder nicht committen). `--only "Name"` testet einzelne Shops.
+
+## Matching-Regeln (wichtig, vom Nutzer so festgelegt)
+
+- Text wird normalisiert (Kleinschreibung, Akzente weg, ß→ss, Gedankenstriche→`-`),
+  Begriffe werden als **ganze Wörter** gesucht (`rodri` trifft nicht `rodrigo`)
+- `vereine` bei Spielern ist ein **strikter Filter**. Bewusst gesetzt:
+  Henry nur Arsenal; Torres nur Atlético und Liverpool; Robben nur Bayern;
+  Olić nur Bayern, HSV, Kroatien (nicht Wolfsburg, nicht ZSKA); Juninho = Pernambucano
+- Sondertrikots Thiago: Barça 2010/11 bis 2012/13 (alle Varianten); Bayern Wiesn-Trikot 2021/22
+  grün (nur 21/22 bzw. 2021, **2023 war auch grün**; "third/fourth/special" zählen nur mit
+  Farbangabe, sonst käme das reguläre Third 21/22; Vereinsfilter nur "bayern", sonst träfe es
+  1860-Wiesn-Trikots); Liverpool Away 21/22; Liverpool Third 22/23; Spanien 2010/2011 und 2014
+  jeweils Home und Away
+- Varianten-Logik: erlaubtes Wort im Titel → ok; anderes Variantenwort → nein; gar keins → nur ok,
+  wenn "home" erlaubt ist
+- Größe: XL, XXL, 2XL, X-Large, XX-Large, Extra Large; Kinder- und Damengrößen raus (YXL, XLB, boys …)
+- Shopify: gibt es Größen-Varianten, zählen nur **verfügbare** XL/XXL-Varianten; sonst Größe aus
+  Titel oder Größen-Tag
+- Testfälle: Es gab 50 Titel-Testfälle (alle grün). Bitte als `tests/test_matching.py` mit pytest
+  neu anlegen, bevor die Matching-Logik geändert wird. Wichtige Fälle: Thiago Silva ≠ Thiago,
+  Ferran ≠ Fernando Torres, Marcos ≠ Xabi Alonso, Wiesn 2023 grün = nein, 1860 Wiesn = nein,
+  Liverpool 21/22 ohne "away" = nein, "Hamburger SV" = HSV, 3XL/XXXL = nein, "Short Sleeve" darf
+  nicht als Shorts ausgeschlossen werden
+
+## Benachrichtigungslogik
+
+- Erstlauf (leeres seen.json): genau **eine** Zusammenfassung
+- Neue Quelle oder Bestandssprung (>30 % und >200 Produkte mehr als beim letzten Gesamtlauf):
+  Treffer still übernehmen, keine Pushes
+- Thiago/Sondertrikots: einzeln mit Priorität 5, max. 5 pro Lauf; alles andere gebündelt in einer
+  Nachricht. Hintergrund: Der erste echte Lauf schickte 17 Pushes, das fand der Nutzer zu viel
+- Gleicher Artikel über FYJ und direkt: Deduplizierung über kanonische URL
+  (ohne www, Query, Slash; Shopify-Pfade auf `/products/<handle>` gekürzt)
+
+## Quellen und technische Details
+
+**FindYourJersey** (inoffizielle API, Nutzer sollte die Betreiber noch um Erlaubnis fragen):
+- `GET https://www.findyourjersey.org/api/jerseys?search=<wort>&sizes=XL&limit=200&page=N`
+- `limit` > 200 ergibt HTTP 400; Paginierung über `page`; `sizes` filtert zuverlässig, "2XL" läuft unter XXL
+- Mehrwort-Suche wirkt nicht wie UND, daher nur einzelne markante Wörter, Feinfilter lokal
+- Felder: description, size, year (Saisonbeginn), team, player (oft leer), sourceType, sourceUrl,
+  currentValue, currency, imageUrl, createdAt, isReissue
+- `/api/retailers` liefert ~125 Händler; Neuzugänge hatten Zeitstempel um 02:40 UTC, vermutlich
+  nächtlicher Abgleich, daher für Drops zu langsam
+- Classic Football Shirts fehlt bei FYJ komplett
+
+**Shopify** (Großteil der Shops): `products.json?limit=250&page=N` (Limit im Code 120 Seiten),
+Fallback `/collections/all/products.json`, dann Suche. Schnellcheck über
+`/search/suggest.json` (max. 10 Treffer je Begriff) plus `/products/<handle>.js` für Varianten.
+**products.json enthält keine Währung.**
+
+**WooCommerce:** Store API `/wp-json/wc/store/v1/products` (Fallback ohne `v1`), Preise in
+Minor Units mit `currency_code`.
+
+**Classic Football Shirts (`cfs`):** Magento, Suche serverseitig gerendert unter
+`/catalogsearch/result/?q=<begriff>&p=N`; `.product-item`, Titel im `img alt` inkl. Zustand und
+Größe, z. B. "2013-14 Bayern Munich Away Shirt Thiago #6 - 5/10 - (L)"; Cloudflare davor.
+
+**ReShirt (`smartweb`):** `/json/products?currencyIso=DKK&field=search&filter={}&id=<begriff>&limit=48&orderBy=-Id&page=N`;
+Größe steht im Titel ("… - XL"); Felder `Stock`/`Online` wirken unzuverlässig, nur `Soldout` wird genutzt.
+**Gegen den echten Shop noch nicht getestet.**
+
+**Swiat Koszulek (`prestashop`):** `/szukaj?controller=search&s=<begriff>` mit
+`Accept: application/json` + `X-Requested-With: XMLHttpRequest` liefert JSON; Größe nur auf der
+Produktseite (`.product-variants .radio-label`); Cloudflare-Challenge-Skript auf der Seite,
+eventuell werden GitHub-IPs geblockt. **Noch nicht live getestet.**
+
+## Stand nach dem ersten echten Gesamtlauf
+
+33 von 46 Shops direkt ok (Shopify/Woo/CFS), FYJ ok (3.777 Kandidaten). Danach geändert:
+Kit Fever entfernt (Domain gehört jetzt einem Modeshop), Retro Football Kits entfernt
+(Shopify "Unavailable Shop"), Seitenlimit angehoben (4 Shops waren bei 10.000 abgeschnitten),
+House of Football Shirts per Such-Fallback, ReShirt und Swiat neu, 6 Shops auf `plattform: fyj`
+(Classic-Shirts, ClassicShirts-FC, Retro Football Shirt Store, The Hoff Classics, Topbinz,
+We Love Football Shirts). **Diese Änderungen sind noch nicht durch einen echten Lauf bestätigt.**
+
+## Offene Punkte (Priorität von oben nach unten)
+
+1. **Nach dem nächsten Gesamtlauf** Quellen-Status in TREFFER.md prüfen, besonders ReShirt,
+   Swiat, House of Football Shirts und die vier großen Shops
+2. **Feedback des Nutzers** zu den Erstlauf-Treffern einholen (Fehltreffer? Verpasstes?) und
+   Matching nachschärfen. Bekannte Schwächen: "de Jong" ohne Vornamen kann Luuk/Nigel sein;
+   "Llorente" + Spanien kann Fernando sein; Reissues werden mitgenommen und nur markiert
+3. **Währungen vereinheitlichen**, Voraussetzung für Preissortierung: Shopify-Währung pro Shop
+   ermitteln (z. B. `/cart.js` oder `/meta.json`, ungeprüft), FYJ/Woo/SmartWeb liefern sie mit;
+   in EUR umrechnen (tagesaktuelle EZB-Kurse, z. B. frankfurter.app), Originalpreis zusätzlich anzeigen.
+   Achtung: CFS zeigt Preise je nach Standort des Abrufs in anderer Währung
+4. **Dashboard per GitHub Pages** (Nutzer bevorzugt das): Tracker schreibt `docs/treffer.json`,
+   statisches `docs/index.html` mit Sortierung nach Preis (EUR), Filter Spieler/Shop/Größe,
+   Vorschaubildern, "NEU"-Badge (< 48 h), mobilfreundlich. **Vorher klären:** Pages bei privatem
+   Repo nur mit GitHub Pro; Alternative Repo öffentlich machen (dann sind Suchliste und Treffer
+   öffentlich, Secrets bleiben geheim). Nutzer will das noch gemeinsam anschauen, also nachfragen
+5. **Wix-Shops anbinden:** The Football Boutique und Throwback Jerseys NZ (beide `plattform: aus`).
+   Throwback NZ droppt **jeden Freitag 20:00 NZ-Zeit** (aktuell Fr 07:00 UTC wegen NZDT, ab April
+   08:00 UTC). Danach Extra-Lauf kurz nach dem Drop einplanen, Zeitzonenwechsel beachten
+6. Optional direkte Anbindung der FYJ-gedeckten Shops (We Love Football Shirts läuft z. B. auf
+   Lightspeed, das hat oft `?format=json`; Classic-Shirts ist vermutlich IdoSell), weil FYJ nur
+   nächtlich aktualisiert
+7. Drop-Zeiten anderer Shops: Nutzer kennt sie noch nicht und meldet sie nach; bis dahin täglicher Lauf
+   plus 3-stündlicher Schnellcheck. Bei bekannten Drops gezielte Läufe kurz danach
+
+## Bekannte Rahmenbedingungen
+
+- GitHub-Cron ist unpünktlich (10 bis 30 Min.); für minutengenaue Drops ggf. externer Trigger
+  (cron-job.org → `workflow_dispatch`)
+- Geplante Workflows werden nach 60 Tagen ohne Repo-Aktivität deaktiviert; die Commits des
+  Trackers zählen als Aktivität
+- Höflich bleiben: 1 Sekunde Pause pro Shop, max. 8 Shops parallel
+- Marktplätze (eBay-Händler, Depop) werden bewusst nicht abgefragt; dem Nutzer wurde empfohlen,
+  dort in den Apps Verkäufern zu folgen bzw. gespeicherte Suchen anzulegen
