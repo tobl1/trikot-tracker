@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Trikot-Tracker</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚽</text></svg>">
+<meta name="theme-color" content="#0f1720">
+<style>
+:root{
+  --bg:#f4f5f2; --card:#ffffff; --ink:#151a1e; --muted:#5d666e; --line:#e2e4df;
+  --accent:#a3123a; --accent-ink:#ffffff; --chip:#eceee9; --chip-on:#151a1e; --chip-on-ink:#ffffff;
+  --new:#0f7b4f; --warn:#b4540a; --err:#b42318; --shadow:0 1px 2px rgba(0,0,0,.06),0 4px 14px rgba(0,0,0,.05);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f1720; --card:#17212b; --ink:#e9edf0; --muted:#9aa6b1; --line:#26323d;
+    --accent:#e0466e; --accent-ink:#ffffff; --chip:#1f2b36; --chip-on:#e9edf0; --chip-on-ink:#0f1720;
+    --new:#3ecf8e; --warn:#f0a35e; --err:#ff7b72; --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0f1720; --card:#17212b; --ink:#e9edf0; --muted:#9aa6b1; --line:#26323d;
+  --accent:#e0466e; --accent-ink:#ffffff; --chip:#1f2b36; --chip-on:#e9edf0; --chip-on-ink:#0f1720;
+  --new:#3ecf8e; --warn:#f0a35e; --err:#ff7b72; --shadow:none;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px 48px}
+header{padding:22px 0 10px;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px}
+h1{font-size:22px;margin:0;letter-spacing:-.01em}
+.meta{color:var(--muted);font-size:13px}
+.stats{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 14px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 12px;min-width:92px}
+.stat b{display:block;font-size:20px;font-variant-numeric:tabular-nums}
+.stat span{color:var(--muted);font-size:12px}
+.controls{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0 8px;border-bottom:1px solid var(--line);margin-bottom:14px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.row+.row{margin-top:8px}
+input[type=search],select{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:9px;padding:8px 10px;min-height:38px}
+input[type=search]{flex:1 1 200px;min-width:0}
+select{flex:0 1 auto;max-width:100%}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;-webkit-overflow-scrolling:touch}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;font:inherit;font-size:13px;border:1px solid transparent;background:var(--chip);color:var(--ink);border-radius:999px;padding:6px 11px;cursor:pointer;white-space:nowrap}
+.chip[aria-pressed="true"]{background:var(--chip-on);color:var(--chip-on-ink)}
+.chip.hi{border-color:var(--accent)}
+.chip small{opacity:.65;margin-left:3px}
+.toggle{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);cursor:pointer;user-select:none}
+.toggle input{accent-color:var(--accent);width:16px;height:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;text-decoration:none;position:relative}
+.card:hover{border-color:var(--muted)}
+.card.hi{border-color:var(--accent)}
+.img{aspect-ratio:1/1;background:var(--chip);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.img img{width:100%;height:100%;object-fit:cover;display:block}
+.img .ph{font-size:40px;opacity:.35}
+.badges{position:absolute;top:8px;left:8px;display:flex;gap:4px;flex-wrap:wrap}
+.badge{font-size:11px;font-weight:700;letter-spacing:.03em;padding:3px 7px;border-radius:6px;background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.18)}
+.badge.new{background:var(--new);color:#fff}
+.badge.hi{background:var(--accent);color:var(--accent-ink)}
+.badge.re{background:var(--warn);color:#fff}
+.body{padding:10px 12px 12px;display:flex;flex-direction:column;gap:6px;flex:1}
+.labels{font-size:12px;font-weight:600;color:var(--accent)}
+.title{font-size:14px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.foot{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;gap:8px}
+.price b{font-size:17px;font-variant-numeric:tabular-nums}
+.price small{display:block;color:var(--muted);font-size:12px}
+.size{font-weight:700;font-size:13px;border:1.5px solid var(--ink);border-radius:6px;padding:1px 6px}
+.shop{font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.empty{padding:40px 0;text-align:center;color:var(--muted)}
+details{margin-top:34px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+summary{cursor:pointer;font-weight:600}
+.src{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
+.src th,.src td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.src td.n{text-align:right;font-variant-numeric:tabular-nums}
+.src .bad{color:var(--err)}
+.src .off{color:var(--muted)}
+.tablewrap{overflow-x:auto}
+.more{display:block;margin:18px auto 0;font:inherit;background:var(--chip);color:var(--ink);border:0;border-radius:9px;padding:10px 18px;cursor:pointer}
+.err{color:var(--err);padding:30px 0}
+@media (max-width:520px){
+  .controls{position:static}
+  .row.chips{flex-wrap:nowrap;margin-right:-16px;padding-right:16px}
+  .row select{flex:1 1 40%;min-width:0}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  .body{padding:8px 9px 10px}
+  .title{font-size:13px}
+  .price b{font-size:15px}
+  h1{font-size:20px}
+  .stat{min-width:0;flex:1 1 0;padding:6px 9px}
+  .stat b{font-size:17px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>⚽ Trikot-Tracker</h1>
+    <span class="meta" id="stand">lädt …</span>
+  </header>
+  <div class="stats" id="stats"></div>
+
+  <div class="controls">
+    <div class="row">
+      <input type="search" id="q" placeholder="Suchen: Verein, Saison, Shop …" autocomplete="off">
+      <select id="sort" aria-label="Sortierung">
+        <option value="prio">Wichtig zuerst</option>
+        <option value="new">Neueste zuerst</option>
+        <option value="pasc">Preis aufsteigend</option>
+        <option value="pdesc">Preis absteigend</option>
+      </select>
+    </div>
+    <div class="row chips" id="labels"></div>
+    <div class="row">
+      <select id="shop" aria-label="Shop"><option value="">Alle Shops</option></select>
+      <select id="size" aria-label="Größe">
+        <option value="">XL + XXL</option><option value="XL">nur XL</option><option value="XXL">nur XXL</option>
+      </select>
+      <label class="toggle"><input type="checkbox" id="onlynew"> nur neu (48 h)</label>
+      <label class="toggle"><input type="checkbox" id="noreissue"> ohne Reissues</label>
+    </div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+  <button class="more" id="more" hidden>Mehr anzeigen</button>
+  <div class="empty" id="empty" hidden>Keine Treffer für diese Filter.</div>
+
+  <details id="sources">
+    <summary id="srcsum">Quellen-Status</summary>
+    <div class="tablewrap"><table class="src"><thead><tr><th>Quelle</th><th>System</th><th class="n">Produkte</th><th>Hinweis</th></tr></thead><tbody id="srcbody"></tbody></table></div>
+  </details>
+</div>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  const PAGE = 60, NEW_H = 48;
+  const store = {
+    get(k){ try { return JSON.parse(localStorage.getItem("tt:" + k)); } catch(e){ return null; } },
+    set(k, v){ try { localStorage.setItem("tt:" + k, JSON.stringify(v)); } catch(e){} }
+  };
+  const fmtDate = iso => iso ? new Date(iso).toLocaleString("de-DE", {day:"2-digit", month:"2-digit", hour:"2-digit", minute:"2-digit"}) : "";
+  const eur = v => v == null ? "" : v.toLocaleString("de-DE", {style:"currency", currency:"EUR", maximumFractionDigits: v < 100 ? 2 : 0});
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const host = u => { try { return new URL(u).hostname.replace(/^www\./, ""); } catch(e){ return ""; } };
+
+  let all = [], shown = PAGE;
+  const st = Object.assign({q:"", sort:"prio", labels:[], shop:"", size:"", onlynew:false, noreissue:false}, store.get("filter") || {});
+
+  function isNew(t){ return (Date.now() - new Date(t.erst)) / 36e5 < NEW_H; }
+
+  function filtered(){
+    const q = st.q.trim().toLowerCase();
+    let out = all.filter(t =>
+      (!st.labels.length || t.labels.some(l => st.labels.includes(l))) &&
+      (!st.shop || t.shopName === st.shop) &&
+      (!st.size || t.groesse === st.size) &&
+      (!st.onlynew || t.neu) &&
+      (!st.noreissue || !t.reissue) &&
+      (!q || t.hay.includes(q)));
+    const byNew = (a, b) => b.erst.localeCompare(a.erst);
+    const byPrice = dir => (a, b) => (a.eur == null) - (b.eur == null) || dir * ((a.eur ?? 0) - (b.eur ?? 0));
+    const cmp = {
+      prio: (a, b) => (b.thiago - a.thiago) || (b.hoch - a.hoch) || (b.neu - a.neu) || byNew(a, b),
+      new: byNew, pasc: byPrice(1), pdesc: byPrice(-1)
+    }[st.sort] || byNew;
+    return out.sort(cmp);
+  }
+
+  function card(t){
+    const badges = [t.neu && '<span class="badge new">NEU</span>', t.thiago && '<span class="badge hi">THIAGO</span>',
+                    t.reissue && '<span class="badge re">REISSUE</span>'].filter(Boolean).join("");
+    const orig = t.preis && (t.eur == null || !/EUR|€/.test(t.preis)) ? `<small>${esc(t.preis)}</small>` : "";
+    const price = t.eur != null ? `<b>${eur(t.eur)}</b>${orig}` : `<b>${esc(t.preis || "?")}</b>`;
+    const img = t.bild ? `<img loading="lazy" referrerpolicy="no-referrer" src="${esc(t.bild)}" alt="" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph',textContent:'👕'}))">`
+                       : '<span class="ph">👕</span>';
+    return `<a class="card${t.hoch ? " hi" : ""}" href="${esc(t.url)}" target="_blank" rel="noopener">
+      <div class="img">${img}</div><div class="badges">${badges}</div>
+      <div class="body"><div class="labels">${esc(t.labels.join(" · "))}</div>
+      <div class="title">${esc(t.titel)}</div>
+      <div class="foot"><div class="price">${price}</div>${t.groesse ? `<span class="size">${esc(t.groesse)}</span>` : ""}</div>
+      <div class="shop" title="seit ${fmtDate(t.erst)}">${esc(t.shopName)} · seit ${fmtDate(t.erst).slice(0, 6)}</div></div></a>`;
+  }
+
+  function render(){
+    store.set("filter", st);
+    const list = filtered();
+    $("grid").innerHTML = list.slice(0, shown).map(card).join("");
+    $("empty").hidden = list.length > 0;
+    $("more").hidden = list.length <= shown;
+    $("more").textContent = `Mehr anzeigen (${list.length - shown} weitere)`;
+    document.querySelectorAll("#labels .chip").forEach(b => b.setAttribute("aria-pressed", String(st.labels.includes(b.dataset.l))));
+  }
+
+  function setup(data){
+    all = data.treffer.map(t => {
+      const shopName = /^[a-z0-9.-]+\.[a-z]{2,}$/i.test(t.shop) || t.shop === "FYJ" ? (host(t.url) || t.shop) : t.shop;
+      return Object.assign(t, {shopName, neu: isNew(t), thiago: t.labels.some(l => l.startsWith("Thiago")),
+        hay: (t.titel + " " + t.labels.join(" ") + " " + shopName).toLowerCase()});
+    });
+    $("stand").textContent = `Stand ${fmtDate(data.stand)} Uhr (${data.modus === "full" ? "Gesamtlauf" : "Schnellcheck"})` +
+      (data.letzter_gesamtlauf ? ` · letzter Gesamtlauf ${fmtDate(data.letzter_gesamtlauf)}` : "");
+    const nNew = all.filter(t => t.neu).length, nTh = all.filter(t => t.thiago).length;
+    const shops = [...new Set(all.map(t => t.shopName))];
+    $("stats").innerHTML = [[all.length, "Treffer"], [nNew, "neu (48 h)"], [nTh, "Thiago"], [shops.length, "Shops"]]
+      .map(([n, l]) => `<div class="stat"><b>${n}</b><span>${l}</span></div>`).join("");
+
+    const counts = {};
+    all.forEach(t => t.labels.forEach(l => counts[l] = (counts[l] || 0) + 1));
+    const hi = new Set(all.filter(t => t.hoch).flatMap(t => t.labels));
+    const labels = Object.keys(counts).sort((a, b) =>
+      (b.startsWith("Thiago") - a.startsWith("Thiago")) || (hi.has(b) - hi.has(a)) || a.localeCompare(b, "de"));
+    st.labels = st.labels.filter(l => counts[l]);
+    $("labels").innerHTML = labels.map(l =>
+      `<button class="chip${hi.has(l) ? " hi" : ""}" data-l="${esc(l)}" aria-pressed="false">${esc(l)}<small>${counts[l]}</small></button>`).join("");
+    $("shop").innerHTML = '<option value="">Alle Shops</option>' +
+      shops.sort((a, b) => a.localeCompare(b, "de")).map(s => `<option>${esc(s)}</option>`).join("");
+    if (!shops.includes(st.shop)) st.shop = "";
+
+    const src = data.quellen || [];
+    const bad = src.filter(s => s.fehler && !/^deaktiviert/.test(s.fehler));
+    $("srcsum").textContent = `Quellen-Status` + (data.quellen_stand ? ` vom Gesamtlauf ${fmtDate(data.quellen_stand)}` : "") +
+      `: ${src.length - bad.length} ok` + (bad.length ? `, ${bad.length} mit Problemen` : "");
+    $("srcbody").innerHTML = src.map(s => {
+      const cls = !s.fehler ? "" : /^deaktiviert/.test(s.fehler) ? "off" : "bad";
+      return `<tr><td>${esc(s.name)}</td><td>${esc(s.plattform)}</td><td class="n">${(s.produkte || 0).toLocaleString("de-DE")}</td>` +
+             `<td class="${cls}">${esc(s.fehler || s.info || "ok")}</td></tr>`;
+    }).join("");
+
+    $("q").value = st.q; $("sort").value = st.sort; $("shop").value = st.shop; $("size").value = st.size;
+    $("onlynew").checked = st.onlynew; $("noreissue").checked = st.noreissue;
+    render();
+  }
+
+  const reset = () => { shown = PAGE; render(); };
+  $("q").addEventListener("input", e => { st.q = e.target.value; reset(); });
+  ["sort", "shop", "size"].forEach(id => $(id).addEventListener("change", e => { st[id] = e.target.value; reset(); }));
+  ["onlynew", "noreissue"].forEach(id => $(id).addEventListener("change", e => { st[id] = e.target.checked; reset(); }));
+  $("labels").addEventListener("click", e => {
+    const b = e.target.closest(".chip"); if (!b) return;
+    const l = b.dataset.l;
+    st.labels = st.labels.includes(l) ? st.labels.filter(x => x !== l) : [...st.labels, l];
+    reset();
+  });
+  $("more").addEventListener("click", () => { shown += PAGE; render(); });
+
+  fetch("treffer.json", {cache: "no-store"})
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(setup)
+    .catch(e => { $("grid").innerHTML = `<div class="err">Daten konnten nicht geladen werden (${esc(e.message)}).</div>`; $("stand").textContent = ""; });
+})();
+</script>
+</body>
+</html>

@@ -3,9 +3,10 @@
 Sucht automatisch Vintage-Trikots deiner Lieblingsspieler und Wunsch-Trikots in XL/XXL
 und schickt neue Treffer per ntfy-Push aufs Handy.
 
-- **Gesamtlauf** täglich gegen 7 Uhr: rund 46 Shops direkt plus ~125 Shops über FindYourJersey
-- **Schnellcheck** alle 3 Stunden: Thiago und die Sondertrikots in den direkt angebundenen Shops
-- **Übersicht** aller aktuell verfügbaren Treffer: [TREFFER.md](TREFFER.md) (wird bei jedem Lauf aktualisiert)
+- **Gesamtlauf** nachts gegen 5:30 Uhr: rund 46 Shops direkt plus ~125 Shops über FindYourJersey
+- **Schnellcheck** 3x täglich (ca. 9:45, 15:45, 21:45 Uhr): Thiago und die Sondertrikots in den direkt angebundenen Shops
+- **Dashboard** mit Bildern, Filtern und Preisen in Euro: https://tobl1.github.io/trikot-tracker/
+- **Übersicht** als Liste: [TREFFER.md](TREFFER.md) (beides wird bei jedem Lauf aktualisiert)
 
 ## Dateien
 
@@ -15,7 +16,8 @@ und schickt neue Treffer per ntfy-Push aufs Handy.
 | `shops.yaml` | direkt abgefragte Shops |
 | `tracker.py` | das Programm |
 | `.github/workflows/tracker.yml` | Zeitsteuerung |
-| `TREFFER.md`, `state/` | entstehen automatisch, nicht bearbeiten |
+| `docs/index.html` | Dashboard-Seite |
+| `TREFFER.md`, `state/`, `docs/treffer.json` | entstehen automatisch, nicht bearbeiten |
 
 ## Einrichtung
 
@@ -51,5 +53,6 @@ Dateien direkt auf GitHub bearbeiten (Datei öffnen, Stift-Symbol, speichern).
 - Wird ein Shop zum ersten Mal erfolgreich abgefragt, kommt dessen Bestand ohne Einzel-Pushes
   in die Übersicht, damit es keine Flut an Nachrichten gibt
 - Treffer, die 36 Stunden nicht mehr gesehen wurden (verkauft), verschwinden aus der Übersicht
-- Ein privates Repository hat 2.000 Freiminuten pro Monat, der Tracker braucht voraussichtlich
-  deutlich weniger. Verbrauch: Settings → Billing
+- Das Repository ist öffentlich, damit das Dashboard über GitHub Pages läuft. Dadurch sind
+  Actions-Minuten unbegrenzt. Das ntfy-Thema liegt als Secret und bleibt geheim
+- Die Abfragen sind bewusst gedrosselt (Shopify sperrt sonst die IP), ein Gesamtlauf dauert daher länger

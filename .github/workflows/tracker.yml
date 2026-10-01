@@ -2,8 +2,8 @@ name: Trikot-Tracker
 
 on:
   schedule:
-    - cron: "15 5 * * *"     # Gesamtlauf täglich 07:15 (Sommerzeit) bzw. 06:15 (Winterzeit)
-    - cron: "45 */3 * * *"   # Schnellcheck Thiago & Sondertrikots alle 3 Stunden
+    - cron: "30 3 * * *"     # Gesamtlauf nachts 05:30 (Sommerzeit) bzw. 04:30 (Winterzeit), nach dem FYJ-Abgleich
+    - cron: "45 7,13,19 * * *"   # Schnellcheck Thiago & Sondertrikots 3x täglich (09:45, 15:45, 21:45 Sommerzeit)
   workflow_dispatch:
     inputs:
       mode:
@@ -22,7 +22,7 @@ permissions:
 jobs:
   run:
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v6
 
@@ -38,7 +38,7 @@ jobs:
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "mode=${{ inputs.mode }}" >> "$GITHUB_OUTPUT"
-          elif [ "${{ github.event.schedule }}" = "15 5 * * *" ]; then
+          elif [ "${{ github.event.schedule }}" = "30 3 * * *" ]; then
             echo "mode=full" >> "$GITHUB_OUTPUT"
           else
             echo "mode=priority" >> "$GITHUB_OUTPUT"
@@ -48,13 +48,14 @@ jobs:
         run: python tracker.py --mode ${{ steps.mode.outputs.mode }}
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          DASHBOARD_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
 
       - name: Ergebnisse speichern
         if: steps.mode.outputs.mode != 'test'
         run: |
           git config user.name "trikot-tracker"
           git config user.email "trikot-tracker@users.noreply.github.com"
-          git add state TREFFER.md
+          git add state TREFFER.md docs/treffer.json
           if ! git diff --cached --quiet; then
             git commit -m "Tracker-Lauf $(date -u +'%Y-%m-%d %H:%M') UTC"
             git pull --rebase --autostash

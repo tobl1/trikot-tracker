@@ -28,13 +28,16 @@ Einzeltrikots zum Nachbeflocken dazukommen, das sagt der Nutzer gesondert an.
 | `tracker.py` | gesamtes Programm (Abfrage, Matching, Push, Bericht), bewusst eine Datei |
 | `watchlist.yaml` | Spieler mit Suchbegriffen, Ausschlüssen, Vereinsfilter; Sondertrikots; Größen; Produktausschlüsse |
 | `shops.yaml` | direkt abgefragte Shops mit `plattform` (auto, cfs, smartweb, prestashop, fyj, aus) |
-| `.github/workflows/tracker.yml` | GitHub Actions: Gesamtlauf täglich 05:15 UTC, Schnellcheck `45 */3 * * *`, manuell mit Modus |
+| `.github/workflows/tracker.yml` | GitHub Actions: Gesamtlauf `30 3 * * *` UTC, Schnellcheck `45 7,13,19 * * *` UTC, manuell mit Modus |
 | `state/seen.json` | bekannte Treffer (Schlüssel = kanonische URL), wird vom Workflow committet |
 | `state/status.json` | erkannte Plattformen, erfolgreich abgefragte Quellen, Produktanzahlen, letzter Lauf |
-| `TREFFER.md` | automatisch erzeugte Übersicht, aktuell das "Dashboard" |
+| `TREFFER.md` | automatisch erzeugte Übersicht als Markdown, Quellen-Status immer vom letzten Gesamtlauf |
+| `docs/index.html` | Dashboard (GitHub Pages, Branch `main`, Ordner `/docs`), statisch, lädt `treffer.json` |
+| `docs/treffer.json` | aktuelle Treffer inkl. EUR-Preis plus Quellen-Status, wird vom Workflow committet |
 
-Laufzeitumgebung: GitHub Actions, **privates Repo** (2.000 Freiminuten/Monat), Python 3.12,
-`ubuntu-24.04`, `actions/checkout@v6`, `actions/setup-python@v6`. Erster echter Gesamtlauf: ca. 3 Min.
+Laufzeitumgebung: GitHub Actions, öffentliches Repo, Python 3.12,
+`ubuntu-24.04`, `actions/checkout@v6`, `actions/setup-python@v6`. Erster echter Gesamtlauf: ca. 3 Min. (vor der Drosselung, jetzt deutlich länger; Timeout 90 Min.)
+Öffentliches Repo (seit 01.10.2026), dadurch unbegrenzte Actions-Minuten.
 
 Benachrichtigung: **ntfy** (ntfy.sh, iPhone-App), Thema im Secret `NTFY_TOPIC`. Veröffentlicht per
 JSON-POST an den Server-Root. Telegram wurde verworfen (kostenpflichtige Verifizierung).
@@ -86,6 +89,7 @@ TREFFER.md, also vorher sichern oder nicht committen). `--only "Name"` testet ei
 ## Quellen und technische Details
 
 **FindYourJersey** (inoffizielle API, Nutzer sollte die Betreiber noch um Erlaubnis fragen):
+- `isReissue` kommt als **Text** `"false"`/`"true"`, nicht als Boolean (bis 01.10.2026 deshalb alles als Reissue markiert)
 - `GET https://www.findyourjersey.org/api/jerseys?search=<wort>&sizes=XL&limit=200&page=N`
 - `limit` > 200 ergibt HTTP 400; Paginierung über `page`; `sizes` filtert zuverlässig, "2XL" läuft unter XXL
 - Mehrwort-Suche wirkt nicht wie UND, daher nur einzelne markante Wörter, Feinfilter lokal
@@ -127,20 +131,22 @@ We Love Football Shirts). **Diese Änderungen sind noch nicht durch einen echten
 
 ## Offene Punkte (Priorität von oben nach unten)
 
-1. **Nach dem nächsten Gesamtlauf** Quellen-Status in TREFFER.md prüfen, besonders ReShirt,
-   Swiat, House of Football Shirts und die vier großen Shops
+1. **Nach dem nächsten Gesamtlauf auf GitHub** Quellen-Status prüfen (steht jetzt dauerhaft in
+   TREFFER.md und im Dashboard). Lokal am 01.10.2026 getestet: ReShirt ok (5 Produkte), Swiat ok
+   (111 Produkte, 2 Treffer), FYJ ok (3.777). Shopify lokal wegen IP-Sperre nicht prüfbar, CFS lokal
+   0 Produkte (Cloudflare, auf GitHub lief es). Prüfen: keine "unvollständig"-Meldungen bei
+   Shopify, House of Football Shirts, CFS > 0, Dauer des Laufs mit Shopify-Bremse
 2. **Feedback des Nutzers** zu den Erstlauf-Treffern einholen (Fehltreffer? Verpasstes?) und
    Matching nachschärfen. Bekannte Schwächen: "de Jong" ohne Vornamen kann Luuk/Nigel sein;
    "Llorente" + Spanien kann Fernando sein; Reissues werden mitgenommen und nur markiert
-3. **Währungen vereinheitlichen**, Voraussetzung für Preissortierung: Shopify-Währung pro Shop
-   ermitteln (z. B. `/cart.js` oder `/meta.json`, ungeprüft), FYJ/Woo/SmartWeb liefern sie mit;
-   in EUR umrechnen (tagesaktuelle EZB-Kurse, z. B. frankfurter.app), Originalpreis zusätzlich anzeigen.
-   Achtung: CFS zeigt Preise je nach Standort des Abrufs in anderer Währung
-4. **Dashboard per GitHub Pages** (Nutzer bevorzugt das): Tracker schreibt `docs/treffer.json`,
-   statisches `docs/index.html` mit Sortierung nach Preis (EUR), Filter Spieler/Shop/Größe,
-   Vorschaubildern, "NEU"-Badge (< 48 h), mobilfreundlich. **Vorher klären:** Pages bei privatem
-   Repo nur mit GitHub Pro; Alternative Repo öffentlich machen (dann sind Suchliste und Treffer
-   öffentlich, Secrets bleiben geheim). Nutzer will das noch gemeinsam anschauen, also nachfragen
+3. **Währungen**: größtenteils umgesetzt (01.10.2026). Shopify-Währung per `/cart.js` je Shop im
+   Gesamtlauf, gemerkt in `status.json` unter `currencies` (überschreibbar mit `waehrung:` in
+   shops.yaml); EZB-Kurse über `api.frankfurter.dev`, zuletzt bekannte Kurse als Fallback;
+   `parse_price()` erkennt Codes und £/€/zł/$. Offen: "$" wird pauschal als USD gelesen;
+   CFS zeigt Preise je nach Abruf-Standort in anderer Währung, im Blick behalten
+4. ~~Dashboard per GitHub Pages~~ umgesetzt (01.10.2026): Nutzer hat entschieden, das Repo
+   öffentlich zu machen (Pages wäre auch mit Pro öffentlich erreichbar, öffentliches Repo spart
+   außerdem Actions-Minuten). Push-Links zeigen per `DASHBOARD_URL` aufs Dashboard
 5. **Wix-Shops anbinden:** The Football Boutique und Throwback Jerseys NZ (beide `plattform: aus`).
    Throwback NZ droppt **jeden Freitag 20:00 NZ-Zeit** (aktuell Fr 07:00 UTC wegen NZDT, ab April
    08:00 UTC). Danach Extra-Lauf kurz nach dem Drop einplanen, Zeitzonenwechsel beachten
@@ -148,7 +154,7 @@ We Love Football Shirts). **Diese Änderungen sind noch nicht durch einen echten
    Lightspeed, das hat oft `?format=json`; Classic-Shirts ist vermutlich IdoSell), weil FYJ nur
    nächtlich aktualisiert
 7. Drop-Zeiten anderer Shops: Nutzer kennt sie noch nicht und meldet sie nach; bis dahin täglicher Lauf
-   plus 3-stündlicher Schnellcheck. Bei bekannten Drops gezielte Läufe kurz danach
+   plus Schnellcheck 3x täglich. Bei bekannten Drops gezielte Läufe kurz danach
 
 ## Bekannte Rahmenbedingungen
 
@@ -156,6 +162,14 @@ We Love Football Shirts). **Diese Änderungen sind noch nicht durch einen echten
   (cron-job.org → `workflow_dispatch`)
 - Geplante Workflows werden nach 60 Tagen ohne Repo-Aktivität deaktiviert; die Commits des
   Trackers zählen als Aktivität
-- Höflich bleiben: 1 Sekunde Pause pro Shop, max. 8 Shops parallel
+- Höflich bleiben: 2 Sekunden Pause pro Shop, max. 8 Shops parallel. Nutzer will lieber langsame
+  Läufe (auch über Stunden, nachts) als Sperren riskieren. Schnellcheck deshalb nur 3x täglich,
+  er ist mit ca. 400 Shopify-Anfragen pro Lauf (13 Begriffe x 27 Shops) der größere Lastfaktor
+- **Shopify drosselt pro IP über alle Shops hinweg** (Cloudflare davor, festgestellt 01.10.2026):
+  8 Shops parallel ergaben nach ca. 1 Min. flächendeckend HTTP 429, danach blieb der
+  Python-Client an der IP minutenlang gesperrt (curl nicht). Deshalb `SHOPIFY_GATE`: gemeinsamer
+  Mindestabstand `SHOPIFY_INTERVAL` für alle Shopify-Abrufe, bei 429 pausieren alle. Bleibt es bei
+  429, gilt der Shop als "unvollständig" (früher wurde das still als Katalogende gewertet)
+  und eine bekannte Plattform wird nicht mit "unbekannt" überschrieben
 - Marktplätze (eBay-Händler, Depop) werden bewusst nicht abgefragt; dem Nutzer wurde empfohlen,
   dort in den Apps Verkäufern zu folgen bzw. gespeicherte Suchen anzulegen

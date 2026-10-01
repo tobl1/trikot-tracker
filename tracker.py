@@ -35,18 +35,21 @@ STATE_DIR = ROOT / "state"
 SEEN_FILE = STATE_DIR / "seen.json"
 STATUS_FILE = STATE_DIR / "status.json"
 REPORT_FILE = ROOT / "TREFFER.md"
+DASHBOARD_FILE = ROOT / "docs" / "treffer.json"
 
 TZ = ZoneInfo("Europe/Berlin")
 UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/128.0 Safari/537.36")
 TIMEOUT = 25
-DELAY = 1.0              # Pause zwischen zwei Anfragen an denselben Shop
+DELAY = 2.0              # Pause zwischen zwei Anfragen an denselben Shop
 MAX_WORKERS = 8          # so viele Shops parallel
+SHOPIFY_INTERVAL = 2.0   # Mindestabstand zwischen zwei Shopify-Anfragen, über alle Shops zusammen
 MAX_PUSH_HIGH = 5        # max. Einzel-Pushes (Thiago/Sondertrikots) pro Lauf, Rest gebündelt
 REPORT_HOURS = 36        # wie lange ein Treffer ohne Neusichtung in TREFFER.md bleibt
 
 FYJ_API = "https://www.findyourjersey.org/api/jerseys"
 FYJ_SIZES = ["XL", "XXL"]
+FX_API = "https://api.frankfurter.dev/v1/latest"
 
 
 # ---------------------------------------------------------------------------
@@ -235,29 +238,67 @@ class Matcher:
 # ---------------------------------------------------------------------------
 # HTTP
 # ---------------------------------------------------------------------------
+class RateGate:
+    """Gemeinsame Bremse über mehrere Shops. Shopify drosselt pro IP über alle Shops hinweg,
+    8 Shops parallel mit je 1 Anfrage/Sek. ergeben nach ca. 1 Min. flächendeckend HTTP 429"""
+    def __init__(self, interval):
+        self.interval = interval
+        self.lock = threading.Lock()
+        self.next = 0.0
+
+    def wait(self):
+        with self.lock:
+            slot = max(time.time(), self.next)
+            self.next = slot + self.interval
+        time.sleep(max(0.0, slot - time.time()))
+
+    def penalize(self, seconds):
+        with self.lock:
+            self.next = max(self.next, time.time() + seconds)
+
+
+SHOPIFY_GATE = RateGate(SHOPIFY_INTERVAL)
+
+
 class Http:
-    def __init__(self):
+    def __init__(self, gate=None):
         self.s = requests.Session()
         self.s.headers.update({"User-Agent": UA, "Accept-Language": "en,de;q=0.8"})
+        self.gate = gate
         self.last = 0.0
         self.count = 0
+        self.limited = 0     # Anfragen, die trotz Wiederholung gedrosselt blieben (429)
 
     def get(self, url, params=None, want="json"):
-        for attempt in range(3):
+        attempts = 5 if self.gate else 3
+        for attempt in range(attempts):
             wait = DELAY - (time.time() - self.last)
             if wait > 0:
                 time.sleep(wait)
+            if self.gate:
+                self.gate.wait()
             self.last = time.time()
             self.count += 1
             try:
                 r = self.s.get(url, params=params, timeout=TIMEOUT)
             except requests.RequestException:
-                if attempt == 2:
+                if attempt == attempts - 1:
                     raise
                 time.sleep(3)
                 continue
             if r.status_code == 429:
-                time.sleep(15 * (attempt + 1))
+                if attempt == attempts - 1:
+                    self.limited += 1
+                    return None
+                try:
+                    pause = min(float(r.headers.get("Retry-After", 0)), 60)
+                except ValueError:
+                    pause = 0
+                pause = max(pause, 15 * (attempt + 1))
+                if self.gate:
+                    self.gate.penalize(pause)   # alle Shops hinter der Bremse pausieren
+                else:
+                    time.sleep(pause)
                 continue
             if r.status_code >= 500 and attempt < 2:
                 time.sleep(5)
@@ -285,7 +326,14 @@ def item(source, shop, url, title, size_text, price="", image="", extra=""):
 SIZE_ATTR_RX = re.compile(r"size|grosse|groesse|taille|talla|maat|rozmiar|storrelse|koko|tamanho|taglia")
 
 
-def shopify_to_item(shop, base, p, cents=False):
+def shopify_currency(http, base):
+    """products.json enthält keine Währung, /cart.js schon"""
+    data = http.get(f"{base}/cart.js")
+    cur = (data or {}).get("currency") if isinstance(data, dict) else None
+    return cur if isinstance(cur, str) and len(cur) == 3 else ""
+
+
+def shopify_to_item(shop, base, p, cents=False, currency=""):
     title = p.get("title") or ""
     handle = p.get("handle") or ""
     url = f"{base}/products/{handle}"
@@ -320,10 +368,11 @@ def shopify_to_item(shop, base, p, cents=False):
     price = avail[0].get("price")
     if price is not None and cents:
         price = f"{int(price) / 100:.2f}"
-    return item("direkt", shop, url, title, size_text, str(price or ""), img)
+    price = f"{price} {currency}".strip() if price not in (None, "") else ""
+    return item("direkt", shop, url, title, size_text, price, img)
 
 
-def shopify_full(http, shop, base, path="/products.json"):
+def shopify_full(http, shop, base, path="/products.json", currency=""):
     items, n = [], 0
     for page in range(1, 121):
         data = http.get(f"{base}{path}", {"limit": 250, "page": page})
@@ -332,7 +381,7 @@ def shopify_full(http, shop, base, path="/products.json"):
             break
         n += len(prods)
         for p in prods:
-            it = shopify_to_item(shop, base, p)
+            it = shopify_to_item(shop, base, p, currency=currency)
             if it:
                 items.append(it)
         if len(prods) < 250:
@@ -340,7 +389,7 @@ def shopify_full(http, shop, base, path="/products.json"):
     return items, n
 
 
-def shopify_search(http, shop, base, queries, matcher):
+def shopify_search(http, shop, base, queries, matcher, currency=""):
     items, n, handles = [], 0, set()
     for q in queries:
         data = http.get(f"{base}/search/suggest.json", {
@@ -355,7 +404,7 @@ def shopify_search(http, shop, base, queries, matcher):
             handles.add(h)
             full = http.get(f"{base}/products/{h}.js")
             if full:
-                it = shopify_to_item(shop, base, full, cents=True)
+                it = shopify_to_item(shop, base, full, cents=True, currency=currency)
                 if it:
                     items.append(it)
     return items, n
@@ -462,7 +511,7 @@ def fyj_run(http, matcher, priority):
                 n += len(rows)
                 for r in rows:
                     title = r.get("description") or ""
-                    if r.get("isReissue"):
+                    if str(r.get("isReissue")).lower() == "true":   # kommt als Text "false"/"true"
                         title += " (Reissue)"
                     extra = " ".join(str(x) for x in (r.get("player"), r.get("team")) if x)
                     price = f"{r.get('currentValue') or ''} {r.get('currency') or ''}".strip()
@@ -541,7 +590,7 @@ def prestashop_run(http, shop, base, queries, matcher, search_path="/szukaj"):
     return items, n
 
 
-def run_shop(shop, mode, matcher, platforms):
+def run_shop(shop, mode, matcher, platforms, currencies):
     name, base = shop["name"], shop["url"].rstrip("/")
     plat = (shop.get("plattform") or "auto").lower()
     http = Http()
@@ -573,26 +622,35 @@ def run_shop(shop, mode, matcher, platforms):
             return items, status
         if plat == "auto":
             known = platforms.get(base)
+            http.gate = SHOPIFY_GATE   # die Erkennung fragt zuerst Shopify-Pfade ab
             if mode == "full" or not known:
                 data = http.get(f"{base}/products.json", {"limit": 1})
                 if isinstance(data, dict) and "products" in data:
-                    known = "shopify"
+                    detected = "shopify"
                 else:
                     ep = woo_endpoint(http, base)
-                    known = ("woo:" + ep) if ep else "unbekannt"
-                platforms[base] = known
+                    detected = ("woo:" + ep) if ep else "unbekannt"
+                if detected == "unbekannt" and http.limited and known and known != "unbekannt":
+                    detected = known   # nur gedrosselt, bekannte Plattform behalten
+                known = platforms[base] = detected
             plat = known
+            if plat != "shopify":
+                http.gate = None
         status["plattform"] = plat.split(":")[0]
         if plat == "shopify":
+            cur = shop.get("waehrung") or currencies.get(base, "")
+            if mode == "full" and not shop.get("waehrung"):
+                cur = shopify_currency(http, base) or cur
+                currencies[base] = cur
             if mode == "full":
-                items, n = shopify_full(http, name, base)
-                if n == 0:   # manche Shops sperren products.json: erst Collection, dann Suche
-                    items, n = shopify_full(http, name, base, "/collections/all/products.json")
-                if n == 0:
-                    items, n = shopify_search(http, name, base, matcher.queries(), matcher)
+                items, n = shopify_full(http, name, base, currency=cur)
+                if n == 0 and not http.limited:   # manche Shops sperren products.json: erst Collection, dann Suche
+                    items, n = shopify_full(http, name, base, "/collections/all/products.json", cur)
+                if n == 0 and not http.limited:
+                    items, n = shopify_search(http, name, base, matcher.queries(), matcher, cur)
                     status["info"] = "nur Suche (products.json gesperrt)"
             else:
-                items, n = shopify_search(http, name, base, matcher.queries(True), matcher)
+                items, n = shopify_search(http, name, base, matcher.queries(True), matcher, cur)
         elif plat.startswith("woo:"):
             ep = plat[4:]
             items, n = woo_run(http, name, ep, None if mode == "full" else matcher.queries(True))
@@ -600,13 +658,16 @@ def run_shop(shop, mode, matcher, platforms):
             status["fehler"] = "Shopsystem nicht automatisch erkannt"
             return [], status
         status["produkte"] = n
-        if n == 0 and mode == "full":
-            status["fehler"] = "keine Produkte erhalten"
         return items, status
     except Exception as e:  # ein kaputter Shop soll nie den ganzen Lauf stoppen
         status["fehler"] = f"{type(e).__name__}: {str(e)[:120]}"
         return [], status
     finally:
+        if not status["fehler"] and plat not in ("aus", "fyj"):
+            if http.limited:
+                status["fehler"] = f"unvollständig, {http.limited}x gedrosselt (HTTP 429)"
+            elif status["produkte"] == 0 and mode == "full":
+                status["fehler"] = "keine Produkte erhalten"
         status["sekunden"] = round(time.time() - t0, 1)
         status["anfragen"] = http.count
 
@@ -649,12 +710,85 @@ def is_high(entry):
 
 
 # ---------------------------------------------------------------------------
-# Bericht
+# Preise
 # ---------------------------------------------------------------------------
-def write_report(seen, statuses, mode, fyj_status):
+CUR_CODE_RX = re.compile(r"\b(EUR|GBP|USD|DKK|SEK|NOK|PLN|CHF|AUD|NZD|CAD|JPY|CZK|HUF)\b")
+CUR_SYMBOLS = [("£", "GBP"), ("€", "EUR"), ("zł", "PLN"), ("$", "USD")]
+NUM_RX = re.compile(r"\d[\d.,\s]*\d|\d")
+
+
+def parse_price(s):
+    """'£124.99', '79.35 GBP', '1.299,00 kr DKK' -> (Betrag, Währung) bzw. (None, '')"""
+    s = str(s or "")
+    m = CUR_CODE_RX.search(s.upper())
+    cur = m.group(1) if m else next((c for sym, c in CUR_SYMBOLS if sym in s), "")
+    m = NUM_RX.search(s)
+    if not m:
+        return None, cur
+    num = re.sub(r"\s", "", m.group(0))
+    if "," in num and "." in num:
+        dec = "," if num.rfind(",") > num.rfind(".") else "."
+        num = num.replace("." if dec == "," else ",", "").replace(",", ".")
+    elif "," in num:
+        num = num.replace(",", ".") if re.search(r",\d{1,2}$", num) else num.replace(",", "")
+    elif re.fullmatch(r"\d{1,3}(\.\d{3})+", num):
+        num = num.replace(".", "")
+    try:
+        return float(num), cur
+    except ValueError:
+        return None, cur
+
+
+def fetch_rates(status_store):
+    """EZB-Kurse (1 EUR = x Fremdwährung) über frankfurter.dev, bei Fehler die zuletzt gemerkten"""
+    try:
+        r = requests.get(FX_API, params={"base": "EUR"}, timeout=TIMEOUT)
+        data = r.json()
+        if data.get("rates"):
+            status_store["kurse"] = {"datum": data.get("date", ""), "rates": {**data["rates"], "EUR": 1.0}}
+    except (requests.RequestException, ValueError):
+        pass
+    return status_store.get("kurse") or {"datum": "", "rates": {"EUR": 1.0}}
+
+
+def to_eur(price, rates):
+    amount, cur = parse_price(price)
+    rate = rates.get(cur)
+    return round(amount / rate, 2) if amount is not None and rate else None
+
+
+# ---------------------------------------------------------------------------
+# Bericht und Dashboard
+# ---------------------------------------------------------------------------
+def current_entries(seen):
+    """{Schlüssel: Eintrag} aller Treffer, die in den letzten REPORT_HOURS gesehen wurden"""
     cutoff = now() - dt.timedelta(hours=REPORT_HOURS)
-    current = [e for e in seen.values()
-               if dt.datetime.fromisoformat(e["last"]) >= cutoff]
+    return {k: e for k, e in seen.items() if dt.datetime.fromisoformat(e["last"]) >= cutoff}
+
+
+def write_dashboard(seen, status_store, mode, ts):
+    """docs/treffer.json für das Dashboard auf GitHub Pages"""
+    kurse = status_store.get("kurse") or {}
+    rates = kurse.get("rates") or {"EUR": 1.0}
+    items = []
+    for key, e in current_entries(seen).items():
+        items.append({
+            "id": key, "titel": e["title"], "url": e["url"], "shop": e["shop"],
+            "preis": e.get("price", ""), "eur": to_eur(e.get("price"), rates),
+            "groesse": e.get("size", ""), "labels": e["labels"], "hoch": is_high(e),
+            "reissue": "(reissue)" in e["title"].lower(), "bild": e.get("image", ""),
+            "erst": e["first"], "zuletzt": e["last"], "via": e.get("via", ""),
+        })
+    quellen = status_store.get("quellen") or {}
+    data = {"stand": ts, "modus": mode, "letzter_gesamtlauf": status_store.get("last_full", ""),
+            "kurse_datum": kurse.get("datum", ""), "treffer": items,
+            "quellen": quellen.get("liste", []), "quellen_stand": quellen.get("zeit", "")}
+    DASHBOARD_FILE.parent.mkdir(exist_ok=True)
+    DASHBOARD_FILE.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+
+
+def write_report(seen, sources, sources_time, mode):
+    current = list(current_entries(seen).values())
     groups = {}
     for e in current:
         for lab in e["labels"]:
@@ -680,8 +814,11 @@ def write_report(seen, statuses, mode, fyj_status):
             first = dt.datetime.fromisoformat(e["first"]).astimezone(TZ)
             lines.append(f"| [{t}]({e['url']}) | {size} | {e.get('price', '')} | {e['shop']} | {first:%d.%m.} |")
         lines.append("")
-    lines += ["## Quellen-Status", "", "| Quelle | System | Produkte | Anfragen | Hinweis |", "|---|---|---|---|---|"]
-    for s in ([fyj_status] if fyj_status else []) + sorted(statuses, key=lambda s: (not s["fehler"], s["name"])):
+    when = dt.datetime.fromisoformat(sources_time).astimezone(TZ) if sources_time else None
+    lines += ["## Quellen-Status", "",
+              f"Vom letzten Gesamtlauf ({when:%d.%m.%Y %H:%M} Uhr)" if when else "Vom aktuellen Lauf", "",
+              "| Quelle | System | Produkte | Anfragen | Hinweis |", "|---|---|---|---|---|"]
+    for s in sources:
         lines.append(f"| {s['name']} | {s.get('plattform', '')} | {s.get('produkte', 0)} | "
                      f"{s.get('anfragen', '')} | {s.get('fehler') or s.get('info') or 'ok'} |")
     REPORT_FILE.write_text("\n".join(lines) + "\n", encoding="utf-8")
@@ -721,6 +858,7 @@ def main():
     seen = load_json(SEEN_FILE, {})
     status_store = load_json(STATUS_FILE, {"platforms": {}, "sources_ok": []})
     platforms = status_store.setdefault("platforms", {})
+    currencies = status_store.setdefault("currencies", {})
     sources_ok = set(status_store.setdefault("sources_ok", []))
     first_run = not seen
 
@@ -732,7 +870,7 @@ def main():
     lock = threading.Lock()
     results, statuses, fyj_status = [], [], None
     with cf.ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
-        futs = {ex.submit(run_shop, s, args.mode, matcher, platforms): s for s in shops}
+        futs = {ex.submit(run_shop, s, args.mode, matcher, platforms, currencies): s for s in shops}
         fyj_fut = None
         if use_fyj:
             def fyj_job():
@@ -749,6 +887,8 @@ def main():
                     st["fehler"] = f"{type(e).__name__}: {str(e)[:120]}"
                     return [], st
                 finally:
+                    if http.limited and not st["fehler"]:
+                        st["fehler"] = f"unvollständig, {http.limited}x gedrosselt (HTTP 429)"
                     st["anfragen"] = http.count
                     st["sekunden"] = round(time.time() - t0, 1)
             fyj_fut = ex.submit(fyj_job)
@@ -790,6 +930,8 @@ def main():
                 entry["prios"] = sorted(set(entry.get("prios", [])) | {p for _, p in labs})
                 if it["source"] == "direkt":      # direkte Daten sind aktueller als FYJ
                     entry.update(price=it["price"] or entry.get("price", ""), shop=it["shop"])
+                if it["source"] == entry.get("via"):
+                    entry["title"] = it["title"]  # korrigiert z. B. alte, falsche Reissue-Markierungen
                 continue
             entry = {"title": it["title"], "url": it["url"], "shop": it["shop"],
                      "price": it["price"], "image": it["image"],
@@ -802,7 +944,10 @@ def main():
 
     # Benachrichtigen
     repo = os.environ.get("GITHUB_REPOSITORY")
-    report_url = f"https://github.com/{repo}/blob/main/TREFFER.md" if repo else None
+    if os.environ.get("DASHBOARD_URL"):
+        report_url = os.environ["DASHBOARD_URL"]
+    else:
+        report_url = f"https://github.com/{repo}/blob/main/TREFFER.md" if repo else None
     if first_run:
         # Erstlauf: genau EINE Nachricht, alles andere steht in TREFFER.md
         cur = [e for e in seen.values() if e["last"] == ts]
@@ -841,10 +986,19 @@ def main():
     SEEN_FILE.write_text(json.dumps(seen, ensure_ascii=False, indent=1, sort_keys=True), encoding="utf-8")
     status_store["sources_ok"] = sorted(sources_ok)
     status_store["last_run"] = {"mode": args.mode, "time": ts}
-    if args.mode == "full":
+    run_sources = ([fyj_status] if fyj_status else []) + sorted(statuses, key=lambda s: (not s["fehler"], s["name"]))
+    if args.mode == "full" and not args.only:
         status_store["last_full"] = ts
+        # Quellen-Status des Gesamtlaufs merken, damit ihn der Schnellcheck nicht überschreibt
+        status_store["quellen"] = {"zeit": ts, "liste": run_sources}
+    fetch_rates(status_store)
     STATUS_FILE.write_text(json.dumps(status_store, ensure_ascii=False, indent=1, sort_keys=True), encoding="utf-8")
-    write_report(seen, statuses, args.mode, fyj_status)
+    full_src = status_store.get("quellen") or {}
+    if full_src:
+        write_report(seen, full_src["liste"], full_src["zeit"], args.mode)
+    else:
+        write_report(seen, run_sources, "", args.mode)
+    write_dashboard(seen, status_store, args.mode, ts)
 
     ok = sum(1 for s in statuses if not s["fehler"])
     print(f"Fertig ({args.mode}): {ok}/{len(statuses)} Shops ok, FYJ: "
