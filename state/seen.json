@@ -511,7 +511,7 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T15:51:22.811225+00:00",
+  "last": "2026-10-01T19:48:27.039534+00:00",
   "price": "£69.99",
   "prios": [
    "hoch"
@@ -519,6 +519,7 @@
   "pruefen": true,
   "shop": "Classic-Shirts",
   "size": "XXL",
+  "teuer": false,
   "title": "2012-13 FC BARCELONA SHIRT XXL",
   "url": "https://classic-shirts.com/product-eng-272150-2012-13-FC-BARCELONA-SHIRT-XXL.html",
   "via": "direkt",
@@ -532,7 +533,7 @@
   "labels": [
    "Spanien 2010/2011"
   ],
-  "last": "2026-10-01T15:51:22.811225+00:00",
+  "last": "2026-10-01T19:48:27.039534+00:00",
   "price": "£59.99",
   "prios": [
    "hoch"
@@ -540,6 +541,7 @@
   "pruefen": true,
   "shop": "Classic-Shirts",
   "size": "XL",
+  "teuer": false,
   "title": "2011-12 SPAIN SHIRT XL",
   "url": "https://classic-shirts.com/product-eng-272774-2011-12-SPAIN-SHIRT-XL.html",
   "via": "direkt",
@@ -687,7 +689,7 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T15:51:22.811225+00:00",
+  "last": "2026-10-01T19:48:27.039534+00:00",
   "price": "£39.99",
   "prios": [
    "hoch"
@@ -695,6 +697,7 @@
   "pruefen": true,
   "shop": "Classic-Shirts",
   "size": "XXL",
+  "teuer": false,
   "title": "2012-13 FC BARCELONA SHIRT XXL",
   "url": "https://classic-shirts.com/product-eng-284075-2012-13-FC-BARCELONA-SHIRT-XXL.html",
   "via": "direkt",
@@ -764,7 +767,7 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T15:51:22.811225+00:00",
+  "last": "2026-10-01T19:48:27.039534+00:00",
   "price": "£89.99",
   "prios": [
    "hoch"
@@ -772,6 +775,7 @@
   "pruefen": true,
   "shop": "Classic-Shirts",
   "size": "XL",
+  "teuer": false,
   "title": "2011-12 FC BARCELONA SHIRT XL",
   "url": "https://classic-shirts.com/product-eng-298739-2011-12-FC-BARCELONA-SHIRT-XL.html",
   "via": "direkt",
@@ -825,7 +829,7 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T15:51:22.811225+00:00",
+  "last": "2026-10-01T19:48:27.039534+00:00",
   "price": "£79.99",
   "prios": [
    "hoch"
@@ -833,6 +837,7 @@
   "pruefen": true,
   "shop": "Classic-Shirts",
   "size": "XXL",
+  "teuer": false,
   "title": "2012-13 FC BARCELONA BASIC SHIRT XXL",
   "url": "https://classic-shirts.com/product-eng-307567-2012-13-FC-BARCELONA-BASIC-SHIRT-XXL.html",
   "via": "direkt",
@@ -846,7 +851,7 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T15:51:22.811225+00:00",
+  "last": "2026-10-01T19:48:27.039534+00:00",
   "price": "£99.99",
   "prios": [
    "hoch"
@@ -854,6 +859,7 @@
   "pruefen": true,
   "shop": "Classic-Shirts",
   "size": "XXL",
+  "teuer": false,
   "title": "2011-12 FC BARCELONA SHIRT XXL",
   "url": "https://classic-shirts.com/product-eng-308670-2011-12-FC-BARCELONA-SHIRT-XXL.html",
   "via": "direkt",
@@ -887,7 +893,7 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T15:51:22.811225+00:00",
+  "last": "2026-10-01T19:48:27.039534+00:00",
   "price": "£89.99",
   "prios": [
    "hoch"
@@ -895,6 +901,7 @@
   "pruefen": true,
   "shop": "Classic-Shirts",
   "size": "XXL",
+  "teuer": false,
   "title": "2012-13 FC BARCELONA SHIRT XXL",
   "url": "https://classic-shirts.com/product-eng-309877-2012-13-FC-BARCELONA-SHIRT-XXL.html",
   "via": "direkt",
@@ -1018,7 +1025,7 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T15:51:22.811225+00:00",
+  "last": "2026-10-01T19:48:27.039534+00:00",
   "price": "£139.99",
   "prios": [
    "hoch"
@@ -1026,6 +1033,7 @@
   "pruefen": true,
   "shop": "Classic-Shirts",
   "size": "XL",
+  "teuer": true,
   "title": "2012-13 FC BARCELONA LONGSLEEVE SHIRT XL",
   "url": "https://classic-shirts.com/product-eng-321130-2012-13-FC-BARCELONA-LONGSLEEVE-SHIRT-XL.html",
   "via": "direkt",
@@ -1039,7 +1047,7 @@
   "labels": [
    "Thiago"
   ],
-  "last": "2026-10-01T15:51:22.811225+00:00",
+  "last": "2026-10-01T19:48:27.039534+00:00",
   "price": "£54.99",
   "prios": [
    "hoch"
@@ -1047,6 +1055,7 @@
   "pruefen": true,
   "shop": "Classic-Shirts",
   "size": "XL",
+  "teuer": false,
   "title": "2013-14 BAYERN MUNCHEN *THIAGO* SHIRT XL",
   "url": "https://classic-shirts.com/product-eng-321702-2013-14-BAYERN-MUNCHEN-THIAGO-SHIRT-XL.html",
   "via": "direkt",
@@ -1080,7 +1089,7 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T15:51:22.811225+00:00",
+  "last": "2026-10-01T19:48:27.039534+00:00",
   "price": "£149.99",
   "prios": [
    "hoch"
@@ -1088,6 +1097,7 @@
   "pruefen": true,
   "shop": "Classic-Shirts",
   "size": "XL",
+  "teuer": true,
   "title": "2012-13 FC BARCELONA LONGSLEEVE XL",
   "url": "https://classic-shirts.com/product-eng-325791-2012-13-FC-BARCELONA-LONGSLEEVE-XL.html",
   "via": "direkt",
@@ -1101,7 +1111,7 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T15:51:22.811225+00:00",
+  "last": "2026-10-01T19:48:27.039534+00:00",
   "price": "£99.99",
   "prios": [
    "hoch"
@@ -1109,6 +1119,7 @@
   "pruefen": true,
   "shop": "Classic-Shirts",
   "size": "XL",
+  "teuer": false,
   "title": "2012-13 FC BARCELONA SHIRT XL",
   "url": "https://classic-shirts.com/product-eng-328441-2012-13-FC-BARCELONA-SHIRT-XL.html",
   "via": "direkt",
@@ -1338,7 +1349,7 @@
   "labels": [
    "Kimmich"
   ],
-  "last": "2026-10-01T15:51:22.811225+00:00",
+  "last": "2026-10-01T19:48:27.039534+00:00",
   "price": "£59.99",
   "prios": [
    "normal"
@@ -1346,6 +1357,7 @@
   "pruefen": true,
   "shop": "Classic-Shirts",
   "size": "XXL",
+  "teuer": false,
   "title": "2021-22 BAYERN MUNCHEN *KIMMICH* SHIRT XXL",
   "url": "https://classic-shirts.com/product-eng-350244-2021-22-BAYERN-MUNCHEN-KIMMICH-SHIRT-XXL.html",
   "via": "direkt",
@@ -1359,7 +1371,7 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T15:51:22.811225+00:00",
+  "last": "2026-10-01T19:48:27.039534+00:00",
   "price": "£34.99",
   "prios": [
    "hoch"
@@ -1367,6 +1379,7 @@
   "pruefen": true,
   "shop": "Classic-Shirts",
   "size": "XL",
+  "teuer": false,
   "title": "2010-11 BARCELONA SHIRT XL",
   "url": "https://classic-shirts.com/product-eng-350953-2010-11-BARCELONA-SHIRT-XL.html",
   "via": "direkt",
@@ -1796,7 +1809,7 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T15:51:22.811225+00:00",
+  "last": "2026-10-01T19:48:27.039534+00:00",
   "price": "£39.99",
   "prios": [
    "hoch"
@@ -1804,6 +1817,7 @@
   "pruefen": true,
   "shop": "Classic-Shirts",
   "size": "XL",
+  "teuer": false,
   "title": "2011-12 BARCELONA SHIRT XL",
   "url": "https://classic-shirts.com/product-eng-364858-2011-12-BARCELONA-SHIRT-XL.html",
   "via": "direkt",
@@ -2835,13 +2849,14 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T15:51:22.811225+00:00",
-  "price": "176.00 USD",
+  "last": "2026-10-01T19:48:27.039534+00:00",
+  "price": "155.95 EUR",
   "prios": [
    "hoch"
   ],
   "shop": "Classic11",
   "size": "XXL",
+  "teuer": true,
   "title": "2011/12 Barcelona Away La Liga Football Shirt (XXL)",
   "url": "https://classic11.com/products/2011-12-barcelona-away-la-liga-football-shirt-xxl",
   "via": "direkt",
@@ -4386,13 +4401,14 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T15:51:22.811225+00:00",
+  "last": "2026-10-01T19:48:27.039534+00:00",
   "price": "£59.99",
   "prios": [
    "hoch"
   ],
   "shop": "Classic Football Shirts",
   "size": "XL",
+  "teuer": false,
   "title": "2011-12 Barcelona Home Shirt - 5/10 - (XL)",
   "url": "https://www.classicfootballshirts.co.uk/2011-12-barcelona-home-shirt-510-xl-barh11933253.html",
   "via": "direkt",
@@ -4404,13 +4420,14 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T15:51:22.811225+00:00",
+  "last": "2026-10-01T19:48:27.039534+00:00",
   "price": "£29.99",
   "prios": [
    "hoch"
   ],
   "shop": "Classic Football Shirts",
   "size": "XL",
+  "teuer": false,
   "title": "2011-12 Barcelona SC Home Shirt - 5/10 - (XL)",
   "url": "https://www.classicfootballshirts.co.uk/2011-12-barcelona-sc-home-shirt-510-xl-bsch11065739.html",
   "via": "direkt",
@@ -4457,13 +4474,14 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T15:51:22.811225+00:00",
+  "last": "2026-10-01T19:48:27.039534+00:00",
   "price": "£39.99",
   "prios": [
    "hoch"
   ],
   "shop": "Classic Football Shirts",
   "size": "XL",
+  "teuer": false,
   "title": "2012-13 Barcelona Away Shirt - 6/10 - (XL)",
   "url": "https://www.classicfootballshirts.co.uk/2012-13-barcelona-away-shirt-610-xl-bara12256333.html",
   "via": "direkt",
@@ -4511,13 +4529,14 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T15:51:22.811225+00:00",
+  "last": "2026-10-01T19:48:27.039534+00:00",
   "price": "£59.99",
   "prios": [
    "hoch"
   ],
   "shop": "Classic Football Shirts",
   "size": "XL",
+  "teuer": false,
   "title": "2012-13 Barcelona Home Shirt - 5/10 - (XL)",
   "url": "https://www.classicfootballshirts.co.uk/2012-13-barcelona-home-shirt-510-xl-barh12697206.html",
   "via": "direkt",
@@ -5022,13 +5041,14 @@
   "labels": [
    "Kimmich"
   ],
-  "last": "2026-10-01T15:51:22.811225+00:00",
+  "last": "2026-10-01T19:48:27.039534+00:00",
   "price": "£124.99",
   "prios": [
    "normal"
   ],
   "shop": "Classic Football Shirts",
   "size": "XXL",
+  "teuer": false,
   "title": "2021-22 Bayern Munich Authentic Home Shirt Kimmich #6 (XXL)",
   "url": "https://www.classicfootballshirts.co.uk/2021-22-bayern-munich-authentic-home-shirt-kimmich-6-xxl-bynh21527972.html",
   "via": "direkt"
@@ -6828,13 +6848,14 @@
   "labels": [
    "Robben"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
-  "price": "150.00 USD",
+  "last": "2026-10-01T19:48:27.039534+00:00",
+  "price": "129.99 EUR",
   "prios": [
    "normal"
   ],
   "shop": "Kickoff Vintage",
   "size": "X-LARGE",
+  "teuer": false,
   "title": "BAYERN MUNICH 2009/10 ROBBEN HOME SHIRT (XL) ADIDAS",
   "url": "https://kickoffvintage.com/products/bayern-munich-2009-10-robben-home-shirt-xl-adidas-bay-00194",
   "via": "direkt",
@@ -6847,13 +6868,14 @@
   "labels": [
    "Kroos"
   ],
-  "last": "2026-10-01T14:14:58.073674+00:00",
-  "price": "139.00 USD",
+  "last": "2026-10-01T19:48:27.039534+00:00",
+  "price": "119.99 EUR",
   "prios": [
    "normal"
   ],
   "shop": "Kickoff Vintage",
   "size": "X-LARGE",
+  "teuer": false,
   "title": "GERMANY 2010 KROOS HOME SHIRT (XL) ADIDAS",
   "url": "https://kickoffvintage.com/products/germany-2010-kroos-home-shirt-xl-adidas-ger-00152",
   "via": "direkt",
@@ -8160,13 +8182,14 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T15:51:22.811225+00:00",
+  "last": "2026-10-01T19:48:27.039534+00:00",
   "price": "59.95 EUR",
   "prios": [
    "hoch"
   ],
   "shop": "Sense of Goal",
   "size": "XL",
+  "teuer": false,
   "title": "Barcelona 2012-13 Auswärts Trikot (XL) nike",
   "url": "https://www.senseofgoal.com/products/barcelona-2012-13-auswarts-trikot-xl-nike-2",
   "via": "direkt",
@@ -8178,13 +8201,14 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T15:51:22.811225+00:00",
+  "last": "2026-10-01T19:48:27.039534+00:00",
   "price": "49.95 EUR",
   "prios": [
    "hoch"
   ],
   "shop": "Sense of Goal",
   "size": "XXL",
+  "teuer": false,
   "title": "FC Barcelona 2011-12 Trainingsjacke (XXL) nike",
   "url": "https://www.senseofgoal.com/products/fc-barcelona-2011-12-trainingsjacke-xxl-nike",
   "via": "direkt",
@@ -8196,13 +8220,14 @@
   "labels": [
    "Torres (Fernando)"
   ],
-  "last": "2026-10-01T15:51:22.811225+00:00",
+  "last": "2026-10-01T19:48:27.039534+00:00",
   "price": "124.95 EUR",
   "prios": [
    "normal"
   ],
   "shop": "Sense of Goal",
   "size": "XXL",
+  "teuer": false,
   "title": "Liverpool 2008-09 \"Torres\" Auswärts Trikot XXL adidas",
   "url": "https://www.senseofgoal.com/products/liverpool-2008-09-torres-auswarts-trikot-xxl-adidas",
   "via": "direkt",
@@ -8381,13 +8406,14 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T15:51:22.811225+00:00",
-  "price": "170.00 USD",
+  "last": "2026-10-01T19:48:27.039534+00:00",
+  "price": "150.95 EUR",
   "prios": [
    "hoch"
   ],
   "shop": "The Kit Dealer",
   "size": "XL",
+  "teuer": true,
   "title": "FC Barcelona 2011-12 Away Shirt",
   "url": "https://www.thekitdealer.com/products/fc-barcelona-2011-12-home-shirt",
   "via": "direkt",
@@ -8772,13 +8798,14 @@
   "labels": [
    "Alonso (Xabi)"
   ],
-  "last": "2026-10-01T15:51:22.811225+00:00",
-  "price": "140.00 USD",
+  "last": "2026-10-01T19:48:27.039534+00:00",
+  "price": "126.95 EUR",
   "prios": [
    "normal"
   ],
   "shop": "Tiffozi Futbol",
   "size": "XL",
+  "teuer": false,
   "title": "LIVERPOOL ALONSO 2006-2007 ORIGINAL JERSEY Size XL",
   "url": "https://tiffozifutbol.com/products/liverpool-alonso-2006-2007-original-jersey-size-xl",
   "via": "direkt",
@@ -10060,13 +10087,14 @@
   "labels": [
    "Spanien 2010/2011"
   ],
-  "last": "2026-10-01T15:51:22.811225+00:00",
-  "price": "53.00 USD",
+  "last": "2026-10-01T19:48:27.039534+00:00",
+  "price": "44.99 EUR",
   "prios": [
    "hoch"
   ],
   "shop": "Vintage Football Area",
   "size": "XL",
+  "teuer": false,
   "title": "2011/12 - Espagne (XL)",
   "url": "https://www.vintagefootballarea.com/products/2011-12-espagne-xl-13",
   "via": "direkt",
@@ -10079,13 +10107,14 @@
   "labels": [
    "Spanien 2010/2011"
   ],
-  "last": "2026-10-01T15:51:22.811225+00:00",
-  "price": "41.00 USD",
+  "last": "2026-10-01T19:48:27.039534+00:00",
+  "price": "34.99 EUR",
   "prios": [
    "hoch"
   ],
   "shop": "Vintage Football Area",
   "size": "XL",
+  "teuer": false,
   "title": "2011/12 - Espagne (XL)",
   "url": "https://www.vintagefootballarea.com/products/2011-12-espagne-xl-15",
   "via": "direkt",
@@ -10098,13 +10127,14 @@
   "labels": [
    "Spanien 2010/2011"
   ],
-  "last": "2026-10-01T15:51:22.811225+00:00",
-  "price": "58.00 USD",
+  "last": "2026-10-01T19:48:27.039534+00:00",
+  "price": "49.99 EUR",
   "prios": [
    "hoch"
   ],
   "shop": "Vintage Football Area",
   "size": "XL",
+  "teuer": false,
   "title": "2011/12 - Espagne (XL)",
   "url": "https://www.vintagefootballarea.com/products/2011-12-espagne-xl-18",
   "via": "direkt",
@@ -10269,13 +10299,14 @@
   "labels": [
    "Ribéry"
   ],
-  "last": "2026-10-01T15:51:22.811225+00:00",
-  "price": "110.00 USD",
+  "last": "2026-10-01T19:48:27.039534+00:00",
+  "price": "94.99 EUR",
   "prios": [
    "normal"
   ],
   "shop": "Vintage Football Area",
   "size": "XL",
+  "teuer": false,
   "title": "2013/14 - Bayern Munich - Ribery #7 (XL)",
   "url": "https://www.vintagefootballarea.com/products/2013-14-bayern-munich-ribery-7-xl-4",
   "via": "direkt",
@@ -10324,13 +10355,14 @@
   "labels": [
    "Kimmich"
   ],
-  "last": "2026-10-01T15:51:22.811225+00:00",
-  "price": "76.00 USD",
+  "last": "2026-10-01T19:48:27.039534+00:00",
+  "price": "64.99 EUR",
   "prios": [
    "normal"
   ],
   "shop": "Vintage Football Area",
   "size": "XXL",
+  "teuer": false,
   "title": "2017/18 - Bayern Munich - Kimmich #32 (2XL)",
   "url": "https://www.vintagefootballarea.com/products/2017-18-bayern-munich-kimmich-32-2xl",
   "via": "direkt",
@@ -10586,13 +10618,14 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T15:51:22.811225+00:00",
-  "price": "203.00 USD",
+  "last": "2026-10-01T19:48:27.039534+00:00",
+  "price": "188.95 EUR",
   "prios": [
    "hoch"
   ],
   "shop": "Vintage Football Shirts",
   "size": "XL",
+  "teuer": true,
   "title": "2010-11 Barcelona Nike Away Shirt XL",
   "url": "https://www.vintagefootballshirts.com/products/2010-11-barcelona-nike-away-shirt-xl",
   "via": "direkt"
@@ -10603,13 +10636,14 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T15:51:22.811225+00:00",
-  "price": "203.00 USD",
+  "last": "2026-10-01T19:48:27.039534+00:00",
+  "price": "188.95 EUR",
   "prios": [
    "hoch"
   ],
   "shop": "Vintage Football Shirts",
   "size": "XL",
+  "teuer": true,
   "title": "2010-11 Barcelona Nike Away Shirt XL",
   "url": "https://www.vintagefootballshirts.com/products/2010-11-barcelona-nike-away-shirt-xl-1",
   "via": "direkt"
@@ -10620,13 +10654,14 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T15:51:22.811225+00:00",
-  "price": "169.00 USD",
+  "last": "2026-10-01T19:48:27.039534+00:00",
+  "price": "157.95 EUR",
   "prios": [
    "hoch"
   ],
   "shop": "Vintage Football Shirts",
   "size": "XXL",
+  "teuer": true,
   "title": "2010-11 Barcelona Nike Away Shirt XXL",
   "url": "https://www.vintagefootballshirts.com/products/2010-11-barcelona-nike-away-shirt-xxl",
   "via": "direkt"
@@ -10637,13 +10672,14 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-01T15:51:22.811225+00:00",
-  "price": "203.00 USD",
+  "last": "2026-10-01T19:48:27.039534+00:00",
+  "price": "188.95 EUR",
   "prios": [
    "hoch"
   ],
   "shop": "Vintage Football Shirts",
   "size": "XL",
+  "teuer": true,
   "title": "2011-12 Barcelona Nike Home Shirt *BNIB*",
   "url": "https://www.vintagefootballshirts.com/products/2011-12-barcelona-nike-home-shirt-bnib-xl-45518",
   "via": "direkt",
@@ -10677,13 +10713,14 @@
   "labels": [
    "Vidal (Arturo)"
   ],
-  "last": "2026-10-01T15:51:22.811225+00:00",
-  "price": "88.00 USD",
+  "last": "2026-10-01T19:48:27.039534+00:00",
+  "price": "81.95 EUR",
   "prios": [
    "normal"
   ],
   "shop": "Vintage Football Shirts",
   "size": "XL",
+  "teuer": false,
   "title": "2015-16 Bayern Munich adidas Home Shirt Vidal #23 XL",
   "url": "https://www.vintagefootballshirts.com/products/2015-16-bayern-munich-adidas-home-shirt-vidal-23-xl",
   "via": "direkt"
