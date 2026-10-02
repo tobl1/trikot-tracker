@@ -31,7 +31,20 @@ produkt_ausschluss: ["shorts", "socks", "sock", "jacket", "track top", "tracksui
                      "treino", "entrenamiento", "entreno", "allenamento", "entrainement",
                      "trening", "trainingsshirt", "trainingstrikot",
                      # Nachbauten (nicht "replica", das heißt in UK einfach Fan-Trikot)
-                     "reissue", "re-issue", "remake", "reedition", "reedicion", "riedizione"]
+                     "reissue", "re-issue", "remake", "reedition", "reedicion", "riedizione",
+                     "repro", "score draw", "nameset",
+                     # andere Vereine mit gleichem Namen
+                     "barcelona sc", "barcelona s.c.", "barcelona sporting", "guayaquil"]
+
+# Hersteller, die auf ein inoffizielles Fan-Produkt hindeuten (aus den Produktdaten der Shop-Seite,
+# z. B. classic-shirts.com "Producer: Official")
+hersteller_ausschluss: ["official"]
+
+# Einzelne Artikel gezielt ausblenden (vom Nutzer gemeldete Fehltreffer)
+ausschluss_urls:
+  - https://www.vintagefootballarea.com/products/2010-11-espagne-xl-4          # Trainingsjacke
+  - https://classic-shirts.com/product-eng-350953-2010-11-BARCELONA-SHIRT-XL.html  # Nike-Trainingsshirt
+  - https://classic-shirts.com/product-eng-362874-2022-23-BARCELONA-F-DE-JONG-SHIRT-XL.html  # Hersteller "Official"
 
 # ---------------------------------------------------------------------
 # Spieler: Treffer = Suchbegriff im Titel UND kein Ausschlusswort

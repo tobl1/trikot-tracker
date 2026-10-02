@@ -54,13 +54,17 @@ FYJ_SIZES = ["XL", "XXL"]
 FX_API = "https://api.frankfurter.dev/v1/latest"
 FYJ_MARKETPLACES = ("ebay.", "depop.", "vinted.", "etsy.")   # über FYJ nicht übernehmen
 RECHECK_DAYS = 3             # FYJ-Treffer so oft auf der Shop-Seite nachprüfen (verkauft?)
-ENRICH_BUDGET = {"full": 150, "priority": 25}   # max. Seitenprüfungen pro Lauf
+CHECK_VERSION = 2            # erhöhen, wenn die Seitenprüfung mehr auswertet: dann wird alles neu geprüft
+ENRICH_BUDGET = {"full": 150, "priority": 25, "drop": 25}   # max. Seitenprüfungen pro Lauf
 NOTE_LEN = 160               # Länge der Zustandsnotiz
 RUN_HISTORY = 120            # so viele Läufe für den Eingangsverlauf im Dashboard merken
 RHYTHM_DAYS = 90             # Zeitraum für die Drop-Analyse
 BATCH_GAP_MIN = 90           # Artikel mit höchstens so viel Abstand gehören zu einem Schub
 BATCH_MIN = 8                # ab so vielen Artikeln ist ein Schub ein Drop
 DROP_MIN_GAP_DAYS = 3        # Schübe fast täglich zählen als "laufend", nicht als Drops
+DROP_MIN_SHARE = 0.5         # gemessener Drop zählt als Termin, wenn mind. so viele Schübe am selben Wochentag
+DROP_WINDOW_MIN = 180        # so lange nach Drop-Beginn prüft der Drop-Run den Shop
+DROP_RECHECK_MIN = 25        # Mindestabstand zwischen zwei Drop-Prüfungen desselben Shops
 
 
 # ---------------------------------------------------------------------------
@@ -155,6 +159,8 @@ class Matcher:
                 "aus": any_rx(p.get("ausschluss")),
                 "vereine": any_rx(p.get("vereine")),
             })
+        self.brand_ex = any_rx(cfg.get("hersteller_ausschluss"))
+        self.url_ex = {canon_url(u) for u in cfg.get("ausschluss_urls") or []}
         ff = cfg.get("fremdflock") or {}
         self.flock_ok = any_rx(ff.get("erlaubt"))
         self.flock_names = any_rx(ff.get("namen"))
@@ -422,6 +428,28 @@ def shopify_full(http, shop, base, path="/products.json", currency="", stamps=No
     return items, n
 
 
+def shopify_recent(http, shop, base, currency="", days=3, max_pages=3):
+    """Drop-Run: products.json liefert die neuesten zuerst, daher reichen die ersten Seiten"""
+    items, n = [], 0
+    since = now() - dt.timedelta(days=days)
+    for page in range(1, max_pages + 1):
+        data = http.get(f"{base}/products.json", {"limit": 250, "page": page})
+        prods = (data or {}).get("products") or []
+        n += len(prods)
+        old = False
+        for p in prods:
+            it = shopify_to_item(shop, base, p, currency=currency)
+            if it:
+                items.append(it)
+            try:
+                old = old or dt.datetime.fromisoformat(p.get("published_at") or p.get("created_at")) < since
+            except (TypeError, ValueError):
+                pass
+        if old or len(prods) < 250:
+            break
+    return items, n
+
+
 def shopify_search(http, shop, base, queries, matcher, currency="", pages=2):
     """Shopify-Suchseite (/search) statt suggest.json: suggest liefert max. 10 unscharfe Treffer
     (bei VFA für "thiago" nur T. Silva). Vorfilter über den Handle, Details per /products/<handle>.js.
@@ -472,6 +500,12 @@ def woo_to_item(shop, p):
     img = imgs[0].get("src", "") if imgs else ""
     desc = (p.get("short_description") or "") + " " + (p.get("description") or "")
     return item("direkt", shop, p.get("permalink") or "", title, size_text, price.strip(), img, desc=desc)
+
+
+def woo_recent(http, shop, endpoint):
+    data = http.get(endpoint, {"per_page": 100, "orderby": "date", "order": "desc"})
+    data = data if isinstance(data, list) else []
+    return [it for it in (woo_to_item(shop, p) for p in data) if it], len(data)
 
 
 def woo_endpoint(http, base):
@@ -719,7 +753,7 @@ def run_shop(shop, mode, matcher, platforms, currencies):
         if plat == "auto":
             known = platforms.get(base)
             http.gate = SHOPIFY_GATE   # die Erkennung fragt zuerst Shopify-Pfade ab
-            if mode == "full" or not known:
+            if mode == "full" or not known or known == "unbekannt":
                 data = http.get(f"{base}/products.json", {"limit": 1})
                 if isinstance(data, dict) and "products" in data:
                     detected = "shopify"
@@ -738,7 +772,9 @@ def run_shop(shop, mode, matcher, platforms, currencies):
             if not shop.get("waehrung"):   # jedes Mal, die Währung hängt vom Markt (Land) ab
                 cur = shopify_currency(http, base) or cur
                 currencies[base] = cur
-            if mode == "full":
+            if mode == "drop":
+                items, n = shopify_recent(http, name, base, cur)
+            elif mode == "full":
                 stamps = []
                 items, n = shopify_full(http, name, base, currency=cur, stamps=stamps)
                 status["rhythmus"] = rhythm(stamps)
@@ -755,6 +791,8 @@ def run_shop(shop, mode, matcher, platforms, currencies):
                     status["info"] = f"Katalog bei {n} gekappt, ältere Artikel per Suche"
             else:
                 items, n = shopify_search(http, name, base, matcher.queries(True), matcher, cur, pages=1)
+        elif plat.startswith("woo:") and mode == "drop":
+            items, n = woo_recent(http, name, plat[4:])
         elif plat.startswith("woo:"):
             ep = plat[4:]
             items, n = woo_run(http, name, ep, None if mode == "full" else matcher.queries(True))
@@ -817,7 +855,7 @@ def rhythm(stamps):
         hr = max(set(s.hour for s in starts), key=[s.hour for s in starts].count)
         n_wd = sum(s.weekday() == wd for s in starts)
         out.update(typ="drops", schuebe=len(big), abstand_tage=round(gap, 1), wochentag=WEEKDAYS[wd],
-                   uhrzeit=hr, letzter_schub=big[-1][0].isoformat())
+                   uhrzeit=hr, anteil=round(n_wd / len(big), 2), letzter_schub=big[-1][0].isoformat())
         out["text"] = (f"Drops etwa alle {gap:.0f} Tage, meist {WEEKDAYS[wd]} ({n_wd} von {len(big)}) "
                        f"ab {hr} Uhr, zuletzt {starts[-1]:%d.%m. %H:%M}")
     elif out["tage_30"] >= 8:
@@ -831,6 +869,36 @@ def rhythm(stamps):
     return out
 
 
+def drop_slots(shop, status_store):
+    """[(Wochentag 0-6, Stunde, Minute, Quelle)]: fest aus shops.yaml plus gemessen aus dem Rhythmus"""
+    slots = []
+    for x in shop.get("drop") or []:
+        m = re.match(r"(Mo|Di|Mi|Do|Fr|Sa|So)\s+(\d{1,2}):(\d{2})$", str(x).strip())
+        if m:
+            slots.append((WEEKDAYS.index(m.group(1)), int(m.group(2)), int(m.group(3)), "fest"))
+    for q in (status_store.get("quellen") or {}).get("liste", []):
+        r = q.get("rhythmus") or {}
+        if q.get("name") == shop["name"] and r.get("typ") == "drops" and r.get("anteil", 0) >= DROP_MIN_SHARE:
+            slots.append((WEEKDAYS.index(r["wochentag"]), int(r["uhrzeit"]), 0, "gemessen"))
+    return slots
+
+
+def drop_due(shop, status_store, t):
+    """Fälliger Drop-Slot (Text) oder None. Fenster: ab Drop-Zeit DROP_WINDOW_MIN Minuten"""
+    last = (status_store.get("drop_checks") or {}).get(shop["name"])
+    if last and t - dt.datetime.fromisoformat(last) < dt.timedelta(minutes=DROP_RECHECK_MIN):
+        return None
+    local = t.astimezone(TZ)
+    for wd, h, mi, src in drop_slots(shop, status_store):
+        start = (local - dt.timedelta(days=(local.weekday() - wd) % 7)).replace(hour=h, minute=mi, second=0,
+                                                                                 microsecond=0)
+        if start > local:
+            start -= dt.timedelta(days=7)
+        if local - start <= dt.timedelta(minutes=DROP_WINDOW_MIN):
+            return f"{WEEKDAYS[wd]} {h:02d}:{mi:02d} ({src})"
+    return None
+
+
 # ---------------------------------------------------------------------------
 # Zustand und Verfügbarkeit
 # ---------------------------------------------------------------------------
@@ -840,6 +908,12 @@ COND_KEY_RX = re.compile(r"(?i)(?<![a-z])(condition|zustand|stan|staat van het s
 SOLD_RX = re.compile(r"(?i)outofstock|soldout|discontinued")
 COND_WORD_RX = re.compile(r"(?i)^(?:condition|zustand|stan|staat van het shirt|staat|estado|stato)\s*[:\-]\s*(mint|excellent|very good|good|fair|poor|"
                           r"used|new|like new|as new|perfect|great|average)(?![a-z])")
+
+
+def below_min(grade, minimum):
+    """'6/10' unter Mindestnote 7? Ohne Note oder ohne Vorgabe: nein"""
+    m = re.match(r"(\d+(?:\.\d)?)/10$", grade or "")
+    return bool(minimum and m and float(m.group(1)) < float(minimum))
 
 
 def plain(text):
@@ -888,7 +962,7 @@ def check_page(http, url):
     if not txt:
         return None
     soup = BeautifulSoup(txt, "html.parser")
-    avail, desc = [], ""
+    avail, desc, brand = [], "", ""
     for tag in soup.find_all("script", type="application/ld+json"):
         try:
             data = json.loads(tag.string or "")
@@ -896,6 +970,8 @@ def check_page(http, url):
             continue
         for prod in ld_products(data):
             desc = desc or plain(prod.get("description"))
+            b = prod.get("brand")
+            brand = brand or plain(b.get("name") if isinstance(b, dict) else b)
             offers = prod.get("offers") or []
             for o in offers if isinstance(offers, list) else [offers]:
                 if isinstance(o, dict) and o.get("availability"):
@@ -906,16 +982,17 @@ def check_page(http, url):
     ok = None
     if avail:
         ok = any(not SOLD_RX.search(a) for a in avail)
-    return {"verfuegbar": ok, "desc": desc}
+    return {"verfuegbar": ok, "desc": desc, "marke": brand}
 
 
-def enrich(seen, ts, budget):
+def enrich(seen, ts, budget, matcher):
     """FYJ-Treffer auf der Shop-Seite prüfen: verkauft? Zustand? Neue zuerst, dann die ältesten Prüfungen"""
     due = dt.timedelta(days=RECHECK_DAYS)
     cand = [e for e in seen.values()
             if e["last"] == ts and (e.get("via") == "fyj" or e.get("pruefen")) and not e.get("verkauft")
             and "ebay." not in e["url"]
-            and (not e.get("geprueft") or now() - dt.datetime.fromisoformat(e["geprueft"]) > due)]
+            and (not e.get("geprueft") or e.get("pruef_v") != CHECK_VERSION
+                 or now() - dt.datetime.fromisoformat(e["geprueft"]) > due)]
     cand.sort(key=lambda e: (bool(e.get("geprueft")), not is_high(e), e.get("geprueft") or ""))
     by_host = {}
     for e in cand[:budget]:
@@ -930,9 +1007,11 @@ def enrich(seen, ts, budget):
                 res = None
             if res is None:
                 continue
-            e["geprueft"] = ts
+            e["geprueft"], e["pruef_v"] = ts, CHECK_VERSION
             if res["verfuegbar"] is False:
                 e["verkauft"] = ts
+            if res["marke"] and hit(matcher.brand_ex, norm(res["marke"])):
+                e["aussortiert"] = f"Hersteller {res['marke']}"
             grade, note = condition_info(e["title"], res["desc"])
             if grade:
                 e["zustand"] = grade
@@ -1043,7 +1122,8 @@ def current_entries(seen):
     """{Schlüssel: Eintrag} aller Treffer, die in den letzten REPORT_HOURS gesehen wurden"""
     cutoff = now() - dt.timedelta(hours=REPORT_HOURS)
     return {k: e for k, e in seen.items()
-            if dt.datetime.fromisoformat(e["last"]) >= cutoff and not e.get("verkauft") and not e.get("weg")}
+            if dt.datetime.fromisoformat(e["last"]) >= cutoff
+            and not (e.get("verkauft") or e.get("weg") or e.get("aussortiert"))}
 
 
 def write_dashboard(seen, status_store, mode, ts, watch_cfg):
@@ -1101,7 +1181,7 @@ def write_report(seen, sources, sources_time, mode):
         lines.append("")
     when = dt.datetime.fromisoformat(sources_time).astimezone(TZ) if sources_time else None
     lines += ["## Quellen-Status", "",
-              f"Vom letzten Gesamtlauf ({when:%d.%m.%Y %H:%M} Uhr)" if when else "Vom aktuellen Lauf", "",
+              f"Vom letzten Gesamt-Run ({when:%d.%m.%Y %H:%M} Uhr)" if when else "Vom aktuellen Run", "",
               "| Quelle | System | Produkte | Anfragen | Hinweis |", "|---|---|---|---|---|"]
     for s in sources:
         lines.append(f"| {s['name']} | {s.get('plattform', '')} | {s.get('produkte', 0)} | "
@@ -1121,7 +1201,7 @@ def load_json(path, default):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--mode", choices=["full", "priority", "test"], default="full")
+    ap.add_argument("--mode", choices=["full", "priority", "drop", "test"], default="full")
     ap.add_argument("--dry-run", action="store_true", help="nichts senden, nur ausgeben")
     ap.add_argument("--only", help="nur Shops, deren Name diesen Text enthält (zum Testen)")
     args = ap.parse_args()
@@ -1145,17 +1225,31 @@ def main():
     platforms = status_store.setdefault("platforms", {})
     currencies = status_store.setdefault("currencies", {})
     sources_ok = set(status_store.setdefault("sources_ok", []))
-    # Reissues (Nachbauten) werden seit 01.10.2026 nicht mehr erfasst
-    seen = {k: v for k, v in seen.items() if "(Reissue)" not in v["title"]}
+    # Reissues (Nachbauten) werden seit 01.10.2026 nicht mehr erfasst; gezielt ausgeschlossene
+    # Links und zu schlechter Zustand (min_zustand je Shop) fliegen sofort raus
+    min_grade = {s["name"]: s["min_zustand"] for s in shops_cfg.get("shops") or [] if s.get("min_zustand")}
+    seen = {k: v for k, v in seen.items()
+            if "(Reissue)" not in v["title"] and k not in matcher.url_ex
+            and not below_min(v.get("zustand", ""), min_grade.get(v["shop"]))}
     first_run = not seen
 
     shops = shops_cfg.get("shops") or []
     if args.only:
         shops = [s for s in shops if args.only.lower() in s["name"].lower()]
+    if args.mode == "drop":
+        # nur Shops, deren Drop gerade läuft; sonst sofort ohne jede Änderung beenden
+        due = {s["name"]: drop_due(s, status_store, now()) for s in shops
+               if (s.get("plattform") or "auto").lower() not in ("aus", "fyj")}
+        shops = [s for s in shops if due.get(s["name"])]
+        if not shops:
+            print("Drop-Run: kein Drop fällig")
+            return
+        print("Drop-Run:", ", ".join(f"{s['name']} {due[s['name']]}" for s in shops))
     # Shops, die direkt abgefragt werden: deren FYJ-Daten ignorieren (direkt ist aktueller und genauer)
     direct_domains = {domain(s["url"]) for s in shops_cfg.get("shops") or []
                       if (s.get("plattform") or "auto").lower() not in ("fyj", "aus")}
-    use_fyj = str(shops_cfg.get("fyj", "an")).lower() in ("an", "true", "ja", "on") and not args.only
+    use_fyj = (str(shops_cfg.get("fyj", "an")).lower() in ("an", "true", "ja", "on") and not args.only
+               and args.mode != "drop")
 
     lock = threading.Lock()
     results, statuses, fyj_status = [], [], None
@@ -1210,11 +1304,15 @@ def main():
         # dann still übernehmen statt eine Flut an "neuen" Treffern zu melden
         jump = works and n_prev and n_now > n_prev * 1.3 and n_now - n_prev > 200
         fresh_source = works and (src_name not in sources_ok or jump)
+        if args.mode != "full" and src_name not in sources_ok:
+            fresh_source = True   # noch nie im Gesamt-Run gewesen: Bestand still übernehmen
         if works:
             sources_ok.add(src_name)
             counts[src_name] = n_now
         for it in its:
             if it.get("typ") and matcher.excluded(norm(it["typ"])):
+                continue
+            if it["url"] and canon_url(it["url"]) in matcher.url_ex:
                 continue
             labs = matcher.labels(it["match_text"])
             if not labs or not matcher.size_ok(it["size_text"], norm(it["match_text"])):
@@ -1224,6 +1322,8 @@ def main():
             key = canon_url(it["url"])
             size = SIZE_RX.search(norm(it["size_text"]))
             grade, note = condition_info(it["title"], it.get("desc"), it.get("fyj_condition", ""))
+            if below_min(grade, min_grade.get(it["shop"])):
+                continue
             entry = seen.get(key)
             if entry:
                 # Labels pro Lauf neu berechnen (sonst bleiben alte Regeln ewig hängen),
@@ -1287,11 +1387,11 @@ def main():
                 e.pop("weg", None)
 
     # FYJ-Treffer auf der Shop-Seite prüfen (verkauft? Zustand?), neue zuerst, vor den Pushes
-    checked = enrich(seen, ts, ENRICH_BUDGET.get(args.mode, 0))
+    checked = enrich(seen, ts, ENRICH_BUDGET.get(args.mode, 0), matcher)
     for e in seen.values():
         if e["last"] == ts:
             e["teuer"] = too_expensive(e)
-    new_entries = [e for e in new_entries if not e.get("verkauft") and not e.get("teuer")]
+    new_entries = [e for e in new_entries if not e.get("verkauft") and not e.get("teuer") and not e.get("aussortiert")]
     laeufe = status_store.setdefault("laeufe", [])
     laeufe.append({"zeit": ts, "modus": args.mode, "neu": len(new_entries),
                    "still": sum(1 for e in seen.values() if e["first"] == ts and e.get("still"))})
@@ -1339,6 +1439,8 @@ def main():
     seen = {k: v for k, v in seen.items() if dt.datetime.fromisoformat(v["last"]) >= old}
 
     SEEN_FILE.write_text(json.dumps(seen, ensure_ascii=False, indent=1, sort_keys=True), encoding="utf-8")
+    if args.mode == "drop":
+        status_store.setdefault("drop_checks", {}).update({s["name"]: ts for s in shops})
     status_store["sources_ok"] = sorted(sources_ok)
     status_store["last_run"] = {"mode": args.mode, "time": ts}
     run_sources = ([fyj_status] if fyj_status else []) + sorted(statuses, key=lambda s: (not s["fehler"], s["name"]))

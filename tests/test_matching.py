@@ -99,6 +99,12 @@ CASES = [
     ("2011-12 Barcelona Home Shirt Reissue (XL)", set()),
     ("Spain 2010 Home Remake Shirt XL", set()),
     ("2005-06 Liverpool Away Replica Shirt Alonso #14 (XL)", {"Alonso (Xabi)"}),
+    # Neu (02.10.2026)
+    ("2011-12 Barcelona SC Home Shirt - 5/10 - (XL)", set()),
+    ("Barcelona S.C. 2012 Home Shirt XL", set()),
+    ("1998/99 FC Barcelona Home Name Set Rivaldo #11 (Repro)", set()),
+    ("1996/97 Chelsea Retro Home Shirt FA Cup Final (XL) Score Draw", set()),
+    ("2012-13 Barcelona Home Shirt Thiago #11 with official name set (XL)", {"Thiago", "Barça 2010-2013"}),
 ]
 
 
@@ -175,3 +181,38 @@ def test_condition_niederlaendisch():
 ])
 def test_product_type_exclusion(typ, excluded):
     assert M.excluded(tracker.norm(typ)) == excluded
+
+
+def _berlin(y, mo, d, h, mi):
+    return tracker.dt.datetime(y, mo, d, h, mi, tzinfo=tracker.TZ).astimezone(tracker.dt.timezone.utc)
+
+
+def test_drop_due_fest():
+    shop = {"name": "First 11 Shirts", "drop": ["Fr 19:00"]}
+    # 02.10.2026 ist ein Freitag
+    assert tracker.drop_due(shop, {}, _berlin(2026, 10, 2, 18, 50)) is None
+    assert tracker.drop_due(shop, {}, _berlin(2026, 10, 2, 19, 5))
+    assert tracker.drop_due(shop, {}, _berlin(2026, 10, 2, 21, 55))
+    assert tracker.drop_due(shop, {}, _berlin(2026, 10, 2, 22, 5)) is None
+    assert tracker.drop_due(shop, {}, _berlin(2026, 10, 3, 19, 5)) is None
+
+
+def test_drop_due_gemessen_und_abstand():
+    st = {"quellen": {"liste": [{"name": "Kickoff Vintage", "rhythmus": {
+        "typ": "drops", "wochentag": "Do", "uhrzeit": 16, "anteil": 1.0}}]}}
+    shop = {"name": "Kickoff Vintage"}
+    t = _berlin(2026, 10, 1, 16, 20)
+    assert tracker.drop_due(shop, st, t)
+    st["drop_checks"] = {"Kickoff Vintage": (t - tracker.dt.timedelta(minutes=10)).isoformat()}
+    assert tracker.drop_due(shop, st, t) is None        # gerade erst geprüft
+    st["quellen"]["liste"][0]["rhythmus"]["anteil"] = 0.3
+    st["drop_checks"] = {}
+    assert tracker.drop_due(shop, st, t) is None        # Wochentag zu unsicher
+
+
+@pytest.mark.parametrize("grade,minimum,below", [
+    ("6/10", 7, True), ("5/10", 7, True), ("7/10", 7, False), ("9.5/10", 7, False),
+    ("BNWT", 7, False), ("", 7, False), ("6/10", None, False),
+])
+def test_below_min(grade, minimum, below):
+    assert tracker.below_min(grade, minimum) == below

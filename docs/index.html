@@ -125,7 +125,7 @@ summary{cursor:pointer;font-weight:600}
   <div class="stats" id="stats"></div>
   <nav class="tabs" id="tabs">
     <button data-view="all" aria-selected="true">Alle Treffer</button>
-    <button data-view="feed" aria-selected="false">Eingänge nach Lauf</button>
+    <button data-view="feed" aria-selected="false">Neu pro Run</button>
   </nav>
 
   <div class="controls">
@@ -175,7 +175,7 @@ summary{cursor:pointer;font-weight:600}
   let all = [], shown = PAGE, runs = [], groupsShown = 12;
   const st = Object.assign({q:"", sort:"prio", labels:[], shop:"", size:"", onlynew:false, expensive:false, view:"all"},
                            store.get("filter") || {});
-  const MODE = {full: "Gesamtlauf", priority: "Schnellcheck"};
+  const MODE = {full: "Gesamt-Run", priority: "Schnell-Run", drop: "Drop-Run"};
   if (location.hash === "#eingaenge") st.view = "feed";
   else if (location.hash === "#alle") st.view = "all";
   const fmtRun = iso => new Date(iso).toLocaleString("de-DE", {weekday:"short", day:"2-digit", month:"2-digit", hour:"2-digit", minute:"2-digit"});
@@ -228,14 +228,14 @@ summary{cursor:pointer;font-weight:600}
     const html = keys.slice(0, groupsShown).map(k => {
       const items = byRun[k] || [], r = info[k];
       const loud = items.filter(t => !t.still), quiet = items.filter(t => t.still);
-      const mode = r ? MODE[r.modus] || r.modus : "Lauf";
+      const mode = r ? MODE[r.modus] || r.modus : "Run";
       if (!items.length)
         return `<section class="group quiet"><h2>${fmtRun(k)} · ${mode} · keine neuen Treffer</h2></section>`;
       return `<section class="group"><h2>${fmtRun(k)} Uhr <small>${mode} · ${loud.length} neu` +
         (quiet.length ? `, ${quiet.length} still übernommen` : "") + `</small></h2>` +
         (loud.length ? `<div class="grid">${loud.map(card).join("")}</div>` : "") +
         (quiet.length ? `<details class="silent"${loud.length ? "" : " open"}><summary>${quiet.length} still übernommen ` +
-          `(Erstlauf oder neue Quelle, ohne Push)</summary><div class="grid">${quiet.map(card).join("")}</div></details>` : "") +
+          `(erster Run oder neue Quelle, ohne Push)</summary><div class="grid">${quiet.map(card).join("")}</div></details>` : "") +
         `</section>`;
     }).join("");
     $("feed").innerHTML = html;
@@ -274,8 +274,8 @@ summary{cursor:pointer;font-weight:600}
       return Object.assign(t, {shopName, neu: isNew(t), thiago: t.labels.some(l => l.startsWith("Thiago")),
         hay: (t.titel + " " + t.labels.join(" ") + " " + shopName + " " + (t.notiz || "")).toLowerCase()});
     });
-    $("stand").textContent = `Stand ${fmtDate(data.stand)} Uhr (${data.modus === "full" ? "Gesamtlauf" : "Schnellcheck"})` +
-      (data.letzter_gesamtlauf ? ` · letzter Gesamtlauf ${fmtDate(data.letzter_gesamtlauf)}` : "");
+    $("stand").textContent = `Stand ${fmtDate(data.stand)} Uhr (${MODE[data.modus] || data.modus})` +
+      (data.letzter_gesamtlauf ? ` · letzter Gesamt-Run ${fmtDate(data.letzter_gesamtlauf)}` : "");
     const nNew = all.filter(t => t.neu).length, nTh = all.filter(t => t.thiago).length;
     const shops = [...new Set(all.map(t => t.shopName))];
     $("stats").innerHTML = [[all.length, "Treffer"], [nNew, "neu (48 h)"], [nTh, "Thiago"], [shops.length, "Shops"]]
@@ -298,7 +298,7 @@ summary{cursor:pointer;font-weight:600}
       fyj.map(([d, v]) => `${esc(d)} (${v.treffer}${(Date.now() - new Date(v.seit)) / 864e5 < 7 ? ", neu" : ""})`).join(", ") : "";
     const src = data.quellen || [];
     const bad = src.filter(s => s.fehler && !/^deaktiviert/.test(s.fehler));
-    $("srcsum").textContent = `Quellen-Status` + (data.quellen_stand ? ` vom Gesamtlauf ${fmtDate(data.quellen_stand)}` : "") +
+    $("srcsum").textContent = `Quellen-Status` + (data.quellen_stand ? ` vom Gesamt-Run ${fmtDate(data.quellen_stand)}` : "") +
       `: ${src.length - bad.length} ok` + (bad.length ? `, ${bad.length} mit Problemen` : "");
     $("srcbody").innerHTML = src.map(s => {
       const cls = !s.fehler ? "" : /^deaktiviert/.test(s.fehler) ? "off" : "bad";

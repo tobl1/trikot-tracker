@@ -31,7 +31,7 @@ Einzeltrikots zum Nachbeflocken dazukommen, das sagt der Nutzer gesondert an.
 | `tracker.py` | gesamtes Programm (Abfrage, Matching, Push, Bericht), bewusst eine Datei |
 | `watchlist.yaml` | Spieler mit Suchbegriffen, Ausschlüssen, Vereinsfilter; Sondertrikots; Größen; Produktausschlüsse |
 | `shops.yaml` | direkt abgefragte Shops mit `plattform` (auto, cfs, idosell, smartweb, prestashop, fyj, aus), optional `schnellcheck: nein` |
-| `.github/workflows/tracker.yml` | GitHub Actions: Gesamtlauf `30 3 * * *` UTC, Schnellcheck `45 7,13,19 * * *` UTC, manuell mit Modus |
+| `.github/workflows/tracker.yml` | GitHub Actions: Gesamt-Run `30 3 * * *` UTC, Schnell-Run `45 7,13,19 * * *` UTC, Drop-Run als Rückfall `10,40 11-21 * * 4,5,6` UTC, manuell mit Modus (full, priority, drop, test) |
 | `state/seen.json` | bekannte Treffer (Schlüssel = kanonische URL), wird vom Workflow committet |
 | `state/status.json` | erkannte Plattformen, erfolgreich abgefragte Quellen, Produktanzahlen, letzter Lauf |
 | `TREFFER.md` | automatisch erzeugte Übersicht als Markdown, Quellen-Status immer vom letzten Gesamtlauf |
@@ -39,7 +39,8 @@ Einzeltrikots zum Nachbeflocken dazukommen, das sagt der Nutzer gesondert an.
 | `docs/treffer.json` | aktuelle Treffer inkl. EUR-Preis plus Quellen-Status, wird vom Workflow committet |
 
 Laufzeitumgebung: GitHub Actions, öffentliches Repo, Python 3.12,
-`ubuntu-24.04`, `actions/checkout@v6`, `actions/setup-python@v6`. Erster echter Gesamtlauf: ca. 3 Min. (vor der Drosselung, jetzt deutlich länger; Timeout 90 Min.)
+`ubuntu-24.04`, `actions/checkout@v6`, `actions/setup-python@v6`. Gesamt-Run mit 77 Shops ca. 50 bis 60 Min.
+(bewusst gedrosselt), Timeout 180 Min.
 Öffentliches Repo (seit 01.10.2026), dadurch unbegrenzte Actions-Minuten.
 
 Benachrichtigung: **ntfy** (ntfy.sh, iPhone-App), Thema im Secret `NTFY_TOPIC`. Veröffentlicht per
@@ -51,7 +52,13 @@ Niemals das Thema oder andere Secrets in Code, Logs oder Commits schreiben.
 - `full`: alle Shops komplett plus FindYourJersey; erkennt Plattformen neu
 - `priority`: nur Einträge mit `prioritaet: hoch` (Thiago + Sondertrikots) über Shop-Suchen,
   nutzt die in `status.json` gemerkten Plattformen
+- `drop`: nur Shops, deren Drop gerade fällig ist (`drop_due`): feste Zeiten aus shops.yaml
+  (`drop: ["Fr 19:00"]`, deutsche Zeit) plus gemessene aus dem Rhythmus (typ "drops", mind. 50 % der
+  Schübe am selben Wochentag). Fenster 180 Min. ab Drop-Beginn, je Shop höchstens alle 25 Min.
+  Shopify: nur die ersten products.json-Seiten (neueste zuerst), Woo: neueste 100. Ist nichts
+  fällig, endet der Run sofort ohne Schreiben. Quellen ohne bisherigen Gesamt-Run werden still übernommen
 - `test`: nur Test-Push
+- Sprachgebrauch gegenüber dem Nutzer: "Run" statt "Lauf" (Gesamt-Run, Schnell-Run, Drop-Run)
 
 Lokal testen: `python tracker.py --mode full --dry-run` (sendet nichts, schreibt aber state und
 TREFFER.md, also vorher sichern oder nicht committen). `--only "Name"` testet einzelne Shops.
@@ -86,8 +93,16 @@ TREFFER.md, also vorher sichern oder nicht committen). `--only "Name"` testet ei
   "Replica" bedeutet in UK das normale Fan-Trikot (Gegenteil von Player Issue), kein Fake
 - Shopify `product_type` wird gegen `produkt_ausschluss` geprüft (nicht fürs Matching): fängt z. B.
   "Tracktop" bei "2010/11 - Espagne (XL)" (VFA), "Reissue" (Cult Kits), "Goal Keeper", "Shirt - Training"
+- `hersteller_ausschluss` (watchlist): Marke aus JSON-LD der Shop-Seite, z. B. classic-shirts.com
+  "Producer: Official" = inoffizielles Fan-Produkt → `aussortiert`. `ausschluss_urls`: einzelne vom
+  Nutzer gemeldete Fehltreffer. `min_zustand` (shops.yaml, aktuell CFS 7): schlechtere Noten raus.
+  "Barcelona SC" (Ecuador) und Nachbau-Begriffe (repro, score draw, nameset) in `produkt_ausschluss`.
+  Nicht per Text erkennbar: z. B. Nike-Trainingsshirt "2010-11 BARCELONA SHIRT XL" (classic-shirts),
+  dafür wäre Bilderkennung nötig (mit Nutzer besprochen, noch offen)
+- `CHECK_VERSION`: erhöhen, wenn die Seitenprüfung mehr auswertet, dann wird alles neu geprüft
 - **Preisgrenze** (`preisgrenze` in watchlist.yaml): über 150 € kein Push, im Dashboard standardmäßig
-  ausgeblendet (Schalter "auch über 150 €"); Ausnahme Label "Thiago". Dashboard rechnet selbst nach
+  ausgeblendet (Schalter "auch über 150 €"); Ausnahme nur Label "Thiago" (Sondertrikots ausdrücklich
+  nicht, Nutzer 02.10.2026). Dashboard rechnet selbst nach
 - Shopify: gibt es Größen-Varianten, zählen nur **verfügbare** XL/XXL-Varianten; sonst Größe aus
   Titel oder Größen-Tag
 - Testfälle: `tests/test_matching.py` (pytest, `python -m pytest tests/`), vor jeder Änderung an
@@ -155,7 +170,7 @@ Ziel: FYJ irgendwann ganz abschalten
   nächtlicher Abgleich, daher für Drops zu langsam
 - Classic Football Shirts fehlt bei FYJ komplett
 
-**Shopify** (Großteil der Shops): `products.json?limit=250&page=N` (Limit im Code 120 Seiten),
+**Shopify** (Großteil der Shops): `products.json?limit=250&page=N` (max. 100 Seiten, `SHOPIFY_PAGE_CAP`),
 Fallback `/collections/all/products.json`, dann Suche. Suche (Schnellcheck, gekappte Kataloge)
 über die Suchseite `/search?q=…&type=product&page=N`, Vorfilter über den Handle, dann
 `/products/<handle>.js` für Varianten. **Nicht** `suggest.json`: max. 10 unscharfe Treffer, bei VFA
@@ -183,15 +198,6 @@ Größe steht im Titel ("… - XL"); Felder `Stock`/`Online` wirken unzuverläss
 `Accept: application/json` + `X-Requested-With: XMLHttpRequest` liefert JSON; Größe nur auf der
 Produktseite (`.product-variants .radio-label`); Cloudflare-Challenge-Skript auf der Seite,
 eventuell werden GitHub-IPs geblockt. **Noch nicht live getestet.**
-
-## Stand nach dem ersten echten Gesamtlauf
-
-33 von 46 Shops direkt ok (Shopify/Woo/CFS), FYJ ok (3.777 Kandidaten). Danach geändert:
-Kit Fever entfernt (Domain gehört jetzt einem Modeshop), Retro Football Kits entfernt
-(Shopify "Unavailable Shop"), Seitenlimit angehoben (4 Shops waren bei 10.000 abgeschnitten),
-House of Football Shirts per Such-Fallback, ReShirt und Swiat neu, 6 Shops auf `plattform: fyj`
-(Classic-Shirts, ClassicShirts-FC, Retro Football Shirt Store, The Hoff Classics, Topbinz,
-We Love Football Shirts). **Diese Änderungen sind noch nicht durch einen echten Lauf bestätigt.**
 
 ## Offene Punkte (Priorität von oben nach unten)
 
@@ -232,8 +238,13 @@ We Love Football Shirts). **Diese Änderungen sind noch nicht durch einen echten
 
 ## Bekannte Rahmenbedingungen
 
-- GitHub-Cron ist unpünktlich (10 bis 30 Min.); für minutengenaue Drops ggf. externer Trigger
-  (cron-job.org → `workflow_dispatch`)
+- **GitHub-Cron ist sehr unzuverlässig**: am 02.10.2026 startete der Gesamt-Run für 03:30 UTC erst
+  um 09:58 UTC, der Schnell-Run 07:45 UTC fiel ganz aus. Für Drops externer Trigger nötig
+  (cron-job.org → `workflow_dispatch` mit fein granuliertem Token, nur Actions read/write auf
+  diesem Repo). Einrichtung macht der Nutzer selbst (Token nie in Chat, Code oder Logs)
+- Topbinz blockt alle automatischen Abrufe (HTTP 403 schon auf der Startseite), bleibt über FYJ;
+  laut Nutzer Drop Fr 19 Uhr. first11shirts.com laut Nutzer ebenfalls Fr 19 Uhr (feste Drop-Zeit),
+  letzte Neuzugänge aber Do 01.10. gegen 21 Uhr, Rhythmus beobachten
 - Geplante Workflows werden nach 60 Tagen ohne Repo-Aktivität deaktiviert; die Commits des
   Trackers zählen als Aktivität
 - Höflich bleiben: 2 Sekunden Pause pro Shop, max. 8 Shops parallel. Nutzer will lieber langsame

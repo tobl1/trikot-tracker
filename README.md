@@ -5,6 +5,7 @@ und schickt neue Treffer per ntfy-Push aufs Handy.
 
 - **Gesamtlauf** nachts gegen 5:30 Uhr: rund 46 Shops direkt plus ~125 Shops über FindYourJersey
 - **Schnellcheck** 3x täglich (ca. 9:45, 15:45, 21:45 Uhr): Thiago und die Sondertrikots in den direkt angebundenen Shops
+- **Drop-Run**: prüft Shops kurz nach ihrem Drop (feste Zeiten aus `shops.yaml` und automatisch erkannte)
 - **Dashboard** mit Bildern, Filtern und Preisen in Euro: https://tobl1.github.io/trikot-tracker/
 - **Übersicht** als Liste: [TREFFER.md](TREFFER.md) (beides wird bei jedem Lauf aktualisiert)
 

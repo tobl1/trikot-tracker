@@ -8,6 +8,9 @@
 #            fyj        = nicht direkt, läuft über FindYourJersey mit
 #            aus        = deaktiviert
 # schnellcheck: nein = nur im nächtlichen Gesamtlauf abfragen
+# min_zustand: 7     = Treffer mit schlechterer Note (z. B. 6/10) ausblenden
+# drop: ["Fr 19:00"] = feste Drop-Zeit (deutsche Zeit), wird im Drop-Run kurz danach geprüft;
+#                      Drop-Zeiten aus dem gemessenen Rhythmus kommen automatisch dazu
 # Entfernt (01.10.2026): Kit Fever (Domain gehört jetzt einem Modeshop),
 #                         Retro Football Kits (Shop geschlossen)
 # Alle weiteren ~125 Shops laufen über FindYourJersey (fyj: an).
@@ -18,7 +21,7 @@
 fyj: an
 
 shops:
-  - {name: Classic Football Shirts, url: "https://www.classicfootballshirts.co.uk", plattform: cfs}
+  - {name: Classic Football Shirts, url: "https://www.classicfootballshirts.co.uk", plattform: cfs, min_zustand: 7}
   - {name: Cult Kits, url: "https://www.cultkits.com"}
   - {name: Classic11, url: "https://classic11.com"}
   - {name: RB-Jerseys, url: "https://www.rb-jerseys.com"}
@@ -30,7 +33,7 @@ shops:
   - {name: Granny's Football Store, url: "https://grannysfootballstore.com"}
   - {name: TSPN Calcio, url: "https://tspncalcio.com"}
   - {name: The Third Kit, url: "https://thethirdkit.co.uk"}
-  - {name: Topbinz, url: "https://www.topbinzfootballshirts.co.uk", plattform: fyj}
+  - {name: Topbinz, url: "https://www.topbinzfootballshirts.co.uk", plattform: fyj, hinweis: "blockt Abrufe (403), Drop Fr 19 Uhr laut Nutzer"}
   - {name: Football Shirt Union, url: "https://footballshirtunion.com"}
   - {name: Saturdays Football, url: "https://saturdaysfootball.com"}
   - {name: The Football Boutique, url: "https://www.thefootballboutique.com", plattform: aus, hinweis: "Wix, noch keine Anbindung"}
@@ -68,7 +71,7 @@ shops:
 # Ehemals nur über FYJ, seit 01.10.2026 direkt (Shopify). Nur im nächtlichen
 # Gesamtlauf, nicht im Schnellcheck, um die Last klein zu halten.
 # Bewusst NICHT direkt (laut FYJ ca. 20 % Nachbauten, FYJ sortiert die aus):
-#   first11shirts.com, footballshirtvintage.fr
+#   footballshirtvintage.fr (first11shirts.com benennt Nachbauten im Titel, läuft daher direkt)
 # ---------------------------------------------------------------------
   - {name: Casual Football Shirts, url: "https://casualfootballshirts.co.uk", schnellcheck: nein}
   - {name: Football Finery, url: "https://footballfinery.co.uk", schnellcheck: nein}
@@ -101,6 +104,8 @@ shops:
   - {name: The Football Room, url: "https://thefootballroom-mty.com", schnellcheck: nein}
   - {name: Vice Football Store, url: "https://vicefootballstore.com", schnellcheck: nein}
   - {name: Vintage Football Jerseys, url: "https://vintage-football-jerseys.co.uk", schnellcheck: nein}
+
+  - {name: First 11 Shirts, url: "https://first11shirts.com", drop: ["Fr 19:00"]}   # Nachbauten per Titel ("Reissue", "Repro", "Score Draw") ausgeschlossen
 
 # Marktplätze (eBay, Depop) werden nicht abgefragt, dort am besten in der
 # jeweiligen App dem Verkäufer folgen bzw. gespeicherte Suchen anlegen:
