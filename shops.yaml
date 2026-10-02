@@ -105,7 +105,8 @@ shops:
   - {name: Vice Football Store, url: "https://vicefootballstore.com", schnellcheck: nein}
   - {name: Vintage Football Jerseys, url: "https://vintage-football-jerseys.co.uk", schnellcheck: nein}
 
-  - {name: First 11 Shirts, url: "https://first11shirts.com", drop: ["Fr 19:00"]}   # Nachbauten per Titel ("Reissue", "Repro", "Score Draw") ausgeschlossen
+  - {name: First 11 Shirts, url: "https://first11shirts.com", drop: ["Fr 19:00"]}
+  - {name: Football Cat, url: "https://footballcat.eu", plattform: aus, hinweis: "Bot-Schutz (JS-Prüfung), wird bewusst nicht umgangen; Drop Sa 16 Uhr laut Nutzer; nicht bei FYJ"}   # Nachbauten per Titel ("Reissue", "Repro", "Score Draw") ausgeschlossen
 
 # Marktplätze (eBay, Depop) werden nicht abgefragt, dort am besten in der
 # jeweiligen App dem Verkäufer folgen bzw. gespeicherte Suchen anlegen:

@@ -127,11 +127,31 @@ TREFFER.md, also vorher sichern oder nicht committen). `--only "Name"` testet ei
   rückwirkend. Schub = mind. 8 Artikel mit max. 90 Min. Abstand; "drops" wenn mind. 2 Schübe und
   60 % der Artikel in Schüben und Abstand im Median mind. 3 Tage, sonst "laufend" (an mind. 8 von
   30 Tagen neu), "unregelmäßig" oder "ruhig". Steht im Quellen-Status des Dashboards.
+  Seit 02.10.2026 minutengenau: pro Wochentag mit mind. 3 Drops und 25 % der Schübe ein Termin
+  (`termine`, mehrere möglich, z. B. Football Finery Di und Fr 10:59), Median-Uhrzeit, Streuung,
+  Verschiebung erkannt, wenn die letzten 4 Drops über 60 Min. abweichen. Wird bei jedem
+  Gesamt-Run neu berechnet, Drop-Kalender im Dashboard.
+  Messung 02.10.2026: first11shirts Do 18:29 (±8, nicht Fr wie vom Nutzer vermutet), First Street
+  Do 10:56, Football Finery Di+Fr 10:59, Fodbold Fr 15:36 alle 14 Tage, Jersely So 20:00, Offside
+  Boys Di 18:00 alle 14 Tage, The Football Temple Sa 13:00, The Kitman 97 Sa ca. 16:52 (±72),
+  Kickoff Vintage Do ca. 17 Uhr (wandert seit August von 13:24 auf ca. 18 Uhr).
   Erste Messung 01.10.2026, klare Drop-Shops: Kickoff Vintage Do 16 bis 18 Uhr wöchentlich (12/12),
   Trikotparadies Fr 19 Uhr wöchentlich (14/15), Fodbold Shoppen alle 14 Tage Fr 15 Uhr (6/6),
   Kick It Vintage ca. alle 3 Wochen Sa 18 Uhr, Nostalgic Football Shirts ca. alle 3 Wochen Sa 11 bis 12 Uhr
 - Plattform-Erkennung: ist ein Shop schon bekannt und die Erkennung schlägt einmal fehl, bleibt die
   bekannte Plattform (RB-Jerseys fiel am 01.10.2026 sonst wegen eines Aussetzers raus)
+
+## Bildprüfung (Claude)
+
+- Nur für hoch priorisierte Treffer (Thiago, Sondertrikots), vor den Pushes, max. 40/10/10 pro
+  Gesamt-/Schnell-/Drop-Run, jeder Treffer nur einmal (`bild_check` in seen.json)
+- Offizielles Python-SDK `anthropic`, Modell `claude-opus-5-5`, `effort: low`, strukturierte Ausgabe
+  (`VISION_SCHEMA`), serverseitiger Fallback (`fallbacks: "default"`, Beta `server-side-fallback-2026-07-01`)
+- Bild wird selbst geladen und als base64 geschickt (manche Shops blocken Fremdabrufe)
+- Aussortiert (`aussortiert`) bei Training/Jacke/Fan-Shirt/anderes, bei fremdem Flock (außer Thiago-Label)
+  und bei "passt nicht" nur für Sondertrikots (Thiago-Treffer nie wegen Saison-Zweifeln)
+- Läuft nur mit Secret `ANTHROPIC_API_KEY`, ohne Schlüssel wird nichts geprüft. Kosten: einmalig ca.
+  1 € für den Bestand, danach Cent-Beträge pro Monat
 
 ## Benachrichtigungslogik
 
@@ -240,10 +260,13 @@ eventuell werden GitHub-IPs geblockt. **Noch nicht live getestet.**
 
 - **GitHub-Cron ist sehr unzuverlässig**: am 02.10.2026 startete der Gesamt-Run für 03:30 UTC erst
   um 09:58 UTC, der Schnell-Run 07:45 UTC fiel ganz aus. Für Drops externer Trigger nötig
-  (cron-job.org → `workflow_dispatch` mit fein granuliertem Token, nur Actions read/write auf
-  diesem Repo). Einrichtung macht der Nutzer selbst (Token nie in Chat, Code oder Logs)
+  (cron-job.org → `workflow_dispatch` mit Fine-grained Token: Repository access "Only select
+  repositories" → trikot-tracker, Permission "Actions: Read and write", Ablauf 1 Jahr mit
+  Erinnerung). Einrichtung macht der Nutzer selbst (Token nie in Chat, Code oder Logs)
 - The Third Kit liefert seit 02.10.2026 aus GitHub heraus nichts mehr (lokal ok), vermutlich Sperre
   für Rechenzentrums-IPs. Allgemein: Shops mit Fehler im letzten Gesamt-Run deckt FYJ wieder ab
+- footballcat.eu (Drop Sa 16 Uhr laut Nutzer): JS-Bot-Schutz ("challenge_passed"-Cookie), wird
+  **bewusst nicht umgangen**, nicht bei FYJ. Nur per Instagram/Newsletter verfolgbar
 - Topbinz blockt alle automatischen Abrufe (HTTP 403 schon auf der Startseite), bleibt über FYJ;
   laut Nutzer Drop Fr 19 Uhr. first11shirts.com laut Nutzer ebenfalls Fr 19 Uhr (feste Drop-Zeit),
   letzte Neuzugänge aber Do 01.10. gegen 21 Uhr, Rhythmus beobachten

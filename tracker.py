@@ -52,6 +52,8 @@ REPORT_HOURS = 36        # wie lange ein Treffer ohne Neusichtung in TREFFER.md 
 FYJ_API = "https://www.findyourjersey.org/api/jerseys"
 FYJ_SIZES = ["XL", "XXL"]
 FX_API = "https://api.frankfurter.dev/v1/latest"
+VISION_MODEL = "claude-opus-5-5"
+VISION_BUDGET = {"full": 40, "priority": 10, "drop": 10}   # max. Bildprüfungen pro Run
 FYJ_MARKETPLACES = ("ebay.", "depop.", "vinted.", "etsy.")   # über FYJ nicht übernehmen
 RECHECK_DAYS = 3             # FYJ-Treffer so oft auf der Shop-Seite nachprüfen (verkauft?)
 CHECK_VERSION = 2            # erhöhen, wenn die Seitenprüfung mehr auswertet: dann wird alles neu geprüft
@@ -64,6 +66,10 @@ BATCH_MIN = 8                # ab so vielen Artikeln ist ein Schub ein Drop
 DROP_MIN_GAP_DAYS = 3        # Schübe fast täglich zählen als "laufend", nicht als Drops
 DROP_MIN_SHARE = 0.5         # gemessener Drop zählt als Termin, wenn mind. so viele Schübe am selben Wochentag
 DROP_WINDOW_MIN = 180        # so lange nach Drop-Beginn prüft der Drop-Run den Shop
+DROP_LEAD_MIN = 15           # gemessene Drops: so viele Minuten vor der typischen Uhrzeit anfangen
+DROP_DAY_SHARE = 0.25        # ein Wochentag wird Drop-Termin, wenn mind. so viele Schübe darauf fallen
+DROP_DAY_MIN = 3             # und mindestens so viele Drops an diesem Wochentag
+DROP_MAX_SPREAD_MIN = 120    # sehr große Streuung nicht unbegrenzt ins Fenster übernehmen
 DROP_RECHECK_MIN = 25        # Mindestabstand zwischen zwei Drop-Prüfungen desselben Shops
 
 
@@ -851,13 +857,32 @@ def rhythm(stamps):
     gaps = sorted((b - a).total_seconds() / 86400 for a, b in zip(starts, starts[1:]))
     gap = gaps[len(gaps) // 2] if gaps else 0
     if len(big) >= 2 and share >= 0.6 and gap >= DROP_MIN_GAP_DAYS:
-        wd = max(set(s.weekday() for s in starts), key=[s.weekday() for s in starts].count)
-        hr = max(set(s.hour for s in starts), key=[s.hour for s in starts].count)
-        n_wd = sum(s.weekday() == wd for s in starts)
-        out.update(typ="drops", schuebe=len(big), abstand_tage=round(gap, 1), wochentag=WEEKDAYS[wd],
-                   uhrzeit=hr, anteil=round(n_wd / len(big), 2), letzter_schub=big[-1][0].isoformat())
-        out["text"] = (f"Drops etwa alle {gap:.0f} Tage, meist {WEEKDAYS[wd]} ({n_wd} von {len(big)}) "
-                       f"ab {hr} Uhr, zuletzt {starts[-1]:%d.%m. %H:%M}")
+        # pro Wochentag mit genug Schüben einen Termin (manche Shops droppen z. B. Di und Fr)
+        termine = []
+        for wd in range(7):
+            dom = [s for s in starts if s.weekday() == wd]
+            if len(dom) < DROP_DAY_MIN or len(dom) / len(big) < DROP_DAY_SHARE:
+                continue
+            mins = sorted(s.hour * 60 + s.minute for s in dom)
+            med = mins[len(mins) // 2]
+            recent = sorted(s.hour * 60 + s.minute for s in dom[-4:])
+            shifted = len(dom) >= 6 and abs(recent[len(recent) // 2] - med) > 60
+            if shifted:   # Uhrzeit hat sich zuletzt verschoben: die letzten Drops zählen
+                med, mins = recent[len(recent) // 2], recent
+            spread = (mins[(3 * len(mins)) // 4] - mins[len(mins) // 4]) // 2
+            termine.append({"tag": WEEKDAYS[wd], "uhrzeit": med // 60, "minute": med % 60, "streuung_min": spread,
+                            "anzahl": len(dom), "verschoben": shifted})
+        termine.sort(key=lambda x: -x["anzahl"])
+        top = termine[0] if termine else {"tag": WEEKDAYS[starts[-1].weekday()], "uhrzeit": starts[-1].hour,
+                                           "minute": 0, "streuung_min": 0, "anzahl": 1, "verschoben": False}
+        out.update(typ="drops", schuebe=len(big), abstand_tage=round(gap, 1), termine=termine,
+                   wochentag=top["tag"], uhrzeit=top["uhrzeit"], minute=top["minute"],
+                   anteil=round(sum(x["anzahl"] for x in termine) / len(big), 2),
+                   letzter_schub=big[-1][0].isoformat())
+        parts = [f"{x['tag']} gegen {x['uhrzeit']:02d}:{x['minute']:02d} (±{x['streuung_min']} Min., {x['anzahl']}x"
+                 + (", zuletzt verschoben" if x["verschoben"] else "") + ")" for x in termine]
+        out["text"] = (f"Drops etwa alle {gap:.0f} Tage: " + ("; ".join(parts) or "kein fester Wochentag")
+                       + f"; {len(big)} Schübe in {RHYTHM_DAYS} Tagen, zuletzt {starts[-1]:%d.%m. %H:%M}")
     elif out["tage_30"] >= 8:
         out["typ"] = "laufend"
         out["text"] = (f"laufend: an {out['tage_30']} von 30 Tagen neue Artikel, "
@@ -870,17 +895,46 @@ def rhythm(stamps):
 
 
 def drop_slots(shop, status_store):
-    """[(Wochentag 0-6, Stunde, Minute, Quelle)]: fest aus shops.yaml plus gemessen aus dem Rhythmus"""
+    """[(Wochentag 0-6, Stunde, Minute, Quelle, Fenster in Min.)]: fest aus shops.yaml plus gemessen"""
     slots = []
     for x in shop.get("drop") or []:
         m = re.match(r"(Mo|Di|Mi|Do|Fr|Sa|So)\s+(\d{1,2}):(\d{2})$", str(x).strip())
         if m:
-            slots.append((WEEKDAYS.index(m.group(1)), int(m.group(2)), int(m.group(3)), "fest"))
+            slots.append((WEEKDAYS.index(m.group(1)), int(m.group(2)), int(m.group(3)), "fest", DROP_WINDOW_MIN))
     for q in (status_store.get("quellen") or {}).get("liste", []):
         r = q.get("rhythmus") or {}
-        if q.get("name") == shop["name"] and r.get("typ") == "drops" and r.get("anteil", 0) >= DROP_MIN_SHARE:
-            slots.append((WEEKDAYS.index(r["wochentag"]), int(r["uhrzeit"]), 0, "gemessen"))
+        if q.get("name") != shop["name"] or r.get("typ") != "drops" or r.get("anteil", 0) < DROP_MIN_SHARE:
+            continue
+        termine = r.get("termine") or [{"tag": r["wochentag"], "uhrzeit": r["uhrzeit"],
+                                        "minute": r.get("minute", 0), "streuung_min": r.get("streuung_min", 0)}]
+        for x in termine:
+            # etwas vor der typischen Zeit beginnen, bei großer Streuung entsprechend früher und länger
+            early = DROP_LEAD_MIN + min(int(x.get("streuung_min", 0)), DROP_MAX_SPREAD_MIN)
+            start = max(int(x["uhrzeit"]) * 60 + int(x.get("minute", 0)) - early, 0)
+            slots.append((WEEKDAYS.index(x["tag"]), start // 60, start % 60, "gemessen", DROP_WINDOW_MIN + early))
     return slots
+
+
+def drop_calendar(shops, status_store):
+    """Alle Drop-Termine fürs Dashboard: feste (shops.yaml) und gemessene (Rhythmus)"""
+    rhythms = {q.get("name"): q.get("rhythmus") or {} for q in (status_store.get("quellen") or {}).get("liste", [])}
+    out = []
+    for shop in shops:
+        if (shop.get("plattform") or "auto").lower() in ("aus", "fyj"):
+            continue
+        for x in shop.get("drop") or []:
+            m = re.match(r"(Mo|Di|Mi|Do|Fr|Sa|So)\s+(\d{1,2}):(\d{2})$", str(x).strip())
+            if m:
+                out.append({"shop": shop["name"], "tag": m.group(1), "zeit": f"{int(m.group(2)):02d}:{m.group(3)}",
+                            "quelle": "fest"})
+        r = rhythms.get(shop["name"]) or {}
+        if r.get("typ") == "drops" and r.get("anteil", 0) >= DROP_MIN_SHARE:
+            for x in r.get("termine") or []:
+                out.append({"shop": shop["name"], "tag": x["tag"], "zeit": f"{x['uhrzeit']:02d}:{x['minute']:02d}",
+                            "quelle": "gemessen", "streuung": x.get("streuung_min", 0), "anzahl": x.get("anzahl", 0),
+                            "abstand": r.get("abstand_tage"), "verschoben": x.get("verschoben", False)})
+    out.sort(key=lambda d: (WEEKDAYS.index(d["tag"]), d["zeit"], d["shop"]))
+    return out
 
 
 def drop_due(shop, status_store, t):
@@ -889,12 +943,12 @@ def drop_due(shop, status_store, t):
     if last and t - dt.datetime.fromisoformat(last) < dt.timedelta(minutes=DROP_RECHECK_MIN):
         return None
     local = t.astimezone(TZ)
-    for wd, h, mi, src in drop_slots(shop, status_store):
+    for wd, h, mi, src, window in drop_slots(shop, status_store):
         start = (local - dt.timedelta(days=(local.weekday() - wd) % 7)).replace(hour=h, minute=mi, second=0,
                                                                                  microsecond=0)
         if start > local:
             start -= dt.timedelta(days=7)
-        if local - start <= dt.timedelta(minutes=DROP_WINDOW_MIN):
+        if local - start <= dt.timedelta(minutes=window):
             return f"{WEEKDAYS[wd]} {h:02d}:{mi:02d} ({src})"
     return None
 
@@ -1024,6 +1078,106 @@ def enrich(seen, ts, budget, matcher):
 
 
 # ---------------------------------------------------------------------------
+# Bildprüfung mit Claude (nur Thiago- und Sondertrikot-Kandidaten, braucht ANTHROPIC_API_KEY)
+# ---------------------------------------------------------------------------
+VISION_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "art": {"type": "string", "enum": ["spieltrikot", "trainingsshirt", "jacke_oder_oberteil",
+                                           "fan_oder_freizeitshirt", "anderes", "unklar"]},
+        "passt_zur_beschreibung": {"type": "boolean"},
+        "flock": {"type": "string", "enum": ["ohne", "thiago", "anderer_spieler", "nicht_sichtbar"]},
+        "begruendung": {"type": "string"},
+    },
+    "required": ["art", "passt_zur_beschreibung", "flock", "begruendung"],
+    "additionalProperties": False,
+}
+VISION_PROMPT = """Du prüfst ein Produktfoto aus einem Shop für gebrauchte Fußballtrikots.
+Titel im Shop: {title}
+Gesucht wird: {wanted}
+
+Beurteile nur, was auf dem Foto zu sehen ist:
+- art: Ist das ein echtes Spieltrikot (Heim, Auswärts, Third, wie es die Mannschaft in der Saison trug)
+  oder ein Trainingsshirt, eine Jacke/ein Oberteil, ein Fan- oder Freizeitshirt, etwas anderes?
+  Hinweise: Spieltrikots tragen meist den Hauptsponsor der Saison auf der Brust; Trainingsshirts
+  haben oft keinen oder einen anderen Sponsor und schlichteres Design.
+- passt_zur_beschreibung: Passt das Trikot (Verein, Saison, Variante) zum Gesuchten?
+- flock: Rückenbeflockung, falls sichtbar (ohne, Thiago, anderer Spieler, nicht sichtbar).
+- begruendung: ein kurzer deutscher Satz.
+Wenn du dir nicht sicher bist, wähle "unklar"."""
+
+
+def vision_check(e, http, client):
+    """Bild laden und von Claude einordnen lassen; dict wie VISION_SCHEMA oder None"""
+    import base64
+    img = e.get("image") or ""
+    if not img.startswith("http"):
+        return None
+    r = http.s.get(img, timeout=TIMEOUT)
+    ctype = (r.headers.get("Content-Type") or "").split(";")[0].strip()
+    if r.status_code != 200 or ctype not in ("image/jpeg", "image/png", "image/webp", "image/gif") \
+            or len(r.content) > 4_500_000:
+        return None
+    wanted = ", ".join(e["labels"])
+    response = client.beta.messages.create(
+        model=VISION_MODEL,
+        max_tokens=2000,
+        betas=["server-side-fallback-2026-07-01"],
+        fallbacks="default",                      # bei Ablehnung springt ein anderes Modell ein
+        output_config={"effort": "low", "format": {"type": "json_schema", "schema": VISION_SCHEMA}},
+        messages=[{"role": "user", "content": [
+            {"type": "image", "source": {"type": "base64", "media_type": ctype,
+                                         "data": base64.standard_b64encode(r.content).decode()}},
+            {"type": "text", "text": VISION_PROMPT.format(title=e["title"], wanted=wanted)},
+        ]}],
+    )
+    if response.stop_reason == "refusal":
+        return None
+    text = next((b.text for b in response.content if b.type == "text"), "")
+    return json.loads(text) if text else None
+
+
+def vision_verdict(res, e):
+    """Grund zum Aussortieren oder None. Nur bei eindeutigen Befunden"""
+    if res["art"] in ("trainingsshirt", "jacke_oder_oberteil", "fan_oder_freizeitshirt", "anderes"):
+        return f"Bild: {res['art'].replace('_', ' ')}"
+    thiago = any(l.startswith("Thiago") for l in e["labels"])
+    if res["flock"] == "anderer_spieler" and not thiago:
+        return "Bild: Flock eines anderen Spielers"
+    if not res["passt_zur_beschreibung"] and res["art"] == "spieltrikot" and not thiago:
+        return "Bild: anderes Trikot als gesucht"
+    return None
+
+
+def vision_enrich(seen, ts, budget):
+    """Neue hoch priorisierte Treffer per Bild prüfen, vor den Pushes. Ohne API-Schlüssel: nichts"""
+    if not os.environ.get("ANTHROPIC_API_KEY") or budget <= 0:
+        return 0
+    import anthropic
+    client = anthropic.Anthropic(max_retries=3)
+    cand = [e for e in seen.values()
+            if e["last"] == ts and is_high(e) and not e.get("bild_check")
+            and not (e.get("verkauft") or e.get("weg") or e.get("aussortiert") or e.get("teuer"))]
+    cand.sort(key=lambda e: e["first"], reverse=True)
+    http, done = Http(), 0
+    for e in cand[:budget]:
+        try:
+            res = vision_check(e, http, client)
+        except (anthropic.APIError, requests.RequestException, ValueError) as ex:
+            print(f"Bildprüfung fehlgeschlagen ({e['title'][:40]}): {type(ex).__name__}", file=sys.stderr)
+            continue
+        if not res:
+            continue
+        done += 1
+        e["bild_check"] = {"art": res["art"], "flock": res["flock"], "passt": res["passt_zur_beschreibung"],
+                           "grund": res["begruendung"][:200], "zeit": ts}
+        verdict = vision_verdict(res, e)
+        if verdict:
+            e["aussortiert"] = verdict
+    return done
+
+
+# ---------------------------------------------------------------------------
 # Benachrichtigung
 # ---------------------------------------------------------------------------
 def push(topic, title, message, prio=3, click=None, image=None, tags=None, dry=False):
@@ -1126,7 +1280,7 @@ def current_entries(seen):
             and not (e.get("verkauft") or e.get("weg") or e.get("aussortiert"))}
 
 
-def write_dashboard(seen, status_store, mode, ts, watch_cfg):
+def write_dashboard(seen, status_store, mode, ts, watch_cfg, shops):
     """docs/treffer.json für das Dashboard auf GitHub Pages"""
     kurse = status_store.get("kurse") or {}
     rates = kurse.get("rates") or {"EUR": 1.0}
@@ -1139,11 +1293,13 @@ def write_dashboard(seen, status_store, mode, ts, watch_cfg):
             "zustand": e.get("zustand", ""), "notiz": e.get("zustand_notiz", ""), "bild": e.get("image", ""),
             "erst": e["first"], "zuletzt": e["last"], "via": e.get("via", ""),
             "still": bool(e.get("still")), "teuer": bool(e.get("teuer")),
+            "bild_ok": bool(e.get("bild_check")) and not e.get("aussortiert"),
         })
     quellen = status_store.get("quellen") or {}
     data = {"stand": ts, "modus": mode, "letzter_gesamtlauf": status_store.get("last_full", ""),
             "fyj_shops": status_store.get("fyj_shops") or {},
             "laeufe": status_store.get("laeufe") or [],
+            "drops": drop_calendar(shops, status_store),
             "preisgrenze": (watch_cfg.get("preisgrenze") or {}),
             "kurse_datum": kurse.get("datum", ""), "treffer": items,
             "quellen": quellen.get("liste", []), "quellen_stand": quellen.get("zeit", "")}
@@ -1393,6 +1549,7 @@ def main():
     for e in seen.values():
         if e["last"] == ts:
             e["teuer"] = too_expensive(e)
+    viewed = vision_enrich(seen, ts, VISION_BUDGET.get(args.mode, 0))
     new_entries = [e for e in new_entries if not e.get("verkauft") and not e.get("teuer") and not e.get("aussortiert")]
     laeufe = status_store.setdefault("laeufe", [])
     laeufe.append({"zeit": ts, "modus": args.mode, "neu": len(new_entries),
@@ -1456,12 +1613,12 @@ def main():
         write_report(seen, full_src["liste"], full_src["zeit"], args.mode)
     else:
         write_report(seen, run_sources, "", args.mode)
-    write_dashboard(seen, status_store, args.mode, ts, watch)
+    write_dashboard(seen, status_store, args.mode, ts, watch, shops_cfg.get("shops") or [])
 
     ok = sum(1 for s in statuses if not s["fehler"])
     print(f"Fertig ({args.mode}): {ok}/{len(statuses)} Shops ok, FYJ: "
           f"{(fyj_status or {}).get('fehler') or 'ok' if fyj_status else 'aus'}, "
-          f"{len(new_entries)} neue Treffer, {checked} Seiten geprüft, Erstlauf: {first_run}")
+          f"{len(new_entries)} neue Treffer, {checked} Seiten und {viewed} Bilder geprüft, Erstlauf: {first_run}")
     for s in statuses:
         if s["fehler"]:
             print(f"  - {s['name']}: {s['fehler']}")

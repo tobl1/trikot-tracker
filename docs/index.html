@@ -73,7 +73,7 @@ select{flex:0 1 auto;max-width:100%}
 .size{font-weight:700;font-size:13px;border:1.5px solid var(--ink);border-radius:6px;padding:1px 6px}
 .shop{font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .empty{padding:40px 0;text-align:center;color:var(--muted)}
-details{margin-top:34px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+details{margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
 summary{cursor:pointer;font-weight:600}
 .src{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
 .src th,.src td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
@@ -152,6 +152,11 @@ summary{cursor:pointer;font-weight:600}
   <button class="more" id="more" hidden>Mehr anzeigen</button>
   <div class="empty" id="empty" hidden>Keine Treffer für diese Filter.</div>
 
+  <details id="dropcal">
+    <summary id="dropsum">Drop-Kalender</summary>
+    <div class="tablewrap"><table class="src"><thead><tr><th>Tag</th><th>Uhrzeit</th><th>Shop</th><th>Quelle</th></tr></thead><tbody id="dropbody"></tbody></table></div>
+  </details>
+
   <details id="sources">
     <summary id="srcsum">Quellen-Status</summary>
     <p class="fyjnote" id="fyjshops"></p>
@@ -201,7 +206,8 @@ summary{cursor:pointer;font-weight:600}
   }
 
   function card(t){
-    const badges = [t.neu && '<span class="badge new">NEU</span>', t.thiago && '<span class="badge hi">THIAGO</span>']
+    const badges = [t.neu && '<span class="badge new">NEU</span>', t.thiago && '<span class="badge hi">THIAGO</span>',
+                    t.bild_ok && '<span class="badge" title="Foto von Claude geprüft: echtes Spieltrikot">✓ FOTO</span>']
       .filter(Boolean).join("");
     const cond = t.zustand ? `<span class="cond">${esc(t.zustand)}</span>` : "";
     const note = t.notiz ? `<div class="note" title="${esc(t.notiz)}">${esc(t.notiz)}</div>` : "";
@@ -293,6 +299,17 @@ summary{cursor:pointer;font-weight:600}
       shops.sort((a, b) => a.localeCompare(b, "de")).map(s => `<option>${esc(s)}</option>`).join("");
     if (!shops.includes(st.shop)) st.shop = "";
 
+    const drops = data.drops || [];
+    const fixedVsMeasured = shop => {
+      const f = drops.filter(d => d.shop === shop && d.quelle === "fest"), m = drops.filter(d => d.shop === shop && d.quelle === "gemessen");
+      return f.length && m.length && !f.some(x => m.some(y => y.tag === x.tag)) ? " · Messung weicht ab" : "";
+    };
+    $("dropsum").textContent = `Drop-Kalender (${new Set(drops.map(d => d.shop)).size} Shops)`;
+    $("dropbody").innerHTML = drops.map(d => `<tr><td>${esc(d.tag)}</td><td>${esc(d.zeit)}` +
+      (d.streuung ? ` <small>±${d.streuung} Min.</small>` : "") + `</td><td>${esc(d.shop)}</td><td class="${d.quelle === "fest" ? "off" : ""}">` +
+      (d.quelle === "fest" ? "feste Angabe" + fixedVsMeasured(d.shop)
+        : `gemessen, ${d.anzahl}x` + (d.abstand ? `, etwa alle ${Math.round(d.abstand)} Tage` : "") + (d.verschoben ? ", Zeit zuletzt verschoben" : "")) +
+      `</td></tr>`).join("");
     const fyj = Object.entries(data.fyj_shops || {});
     $("fyjshops").innerHTML = fyj.length ? "<b>Nur über FindYourJersey</b> (Kandidaten für direkte Abfrage): " +
       fyj.map(([d, v]) => `${esc(d)} (${v.treffer}${(Date.now() - new Date(v.seit)) / 864e5 < 7 ? ", neu" : ""})`).join(", ") : "";
