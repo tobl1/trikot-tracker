@@ -1,32 +1,33 @@
 {
  "counts": {
   "1Klopp Shop": 265,
-  "3kots": 555,
-  "Back to the Football": 4366,
+  "3kots": 560,
+  "Back to the Football": 4386,
   "Buy Sell Football Shirts": 1392,
   "Calcio Vintage": 336,
   "Casual Football Shirts": 16453,
-  "Classic Football Shirts": 1531,
+  "Classic Football Shirts": 1533,
   "Classic Pitchwear": 140,
-  "Classic-Shirts": 1225,
+  "Classic-Shirts": 1224,
   "Classic11": 5665,
   "Cult Football": 927,
-  "Cult Kits": 21423,
+  "Cult Kits": 21436,
   "Es de Época": 527,
-  "Euromex Sports": 3543,
+  "Euromex Sports": 3544,
   "FindYourJersey": 3777,
+  "First 11 Shirts": 6458,
   "First Class Football Shirts": 167,
   "First Street": 935,
   "Fodbold Shoppen": 640,
   "Football Finery": 6374,
-  "Football Second Hand": 1399,
+  "Football Second Hand": 1418,
   "Football Shirt Collective": 3722,
   "Football Shirt Kingdom": 6085,
   "Football Shirt Union": 69,
-  "Football Thrift Shop": 1774,
+  "Football Thrift Shop": 1772,
   "FootballShirts.com": 482,
   "Forever Soccer Jerseys": 1588,
-  "Golaço Kits": 4178,
+  "Golaço Kits": 4179,
   "Granny's Football Store": 1173,
   "Green Sport Vintage": 1556,
   "Iconic Jersey": 894,
@@ -34,36 +35,36 @@
   "Jerseys Hermanos": 82,
   "Kick It Vintage": 353,
   "Kickoff Vintage": 2692,
-  "Kit Launch": 645,
+  "Kit Launch": 639,
   "Le 7 Sorelle": 12262,
   "Legacy Football Shirts": 742,
   "Nanos Football Jerseys": 580,
   "Nostalgic Football Shirts": 1200,
   "Offside Boys": 1208,
-  "Oh Calcio": 228,
+  "Oh Calcio": 229,
   "One More Time": 191,
-  "Philly Soccer Jerseys": 188,
-  "RB-Jerseys": 606,
+  "Philly Soccer Jerseys": 197,
+  "RB-Jerseys": 607,
   "ReShirt": 5,
   "RetrOriginalFootball": 891,
   "Retro Football Shirts": 313,
   "Retrotrøjer": 611,
-  "STA Jerseys": 652,
+  "STA Jerseys": 645,
   "Saturdays Football": 25000,
   "Sense of Goal": 475,
   "Special Football Shirts": 82,
   "Swiat Koszulek Pilkarskich": 111,
-  "TSPN Calcio": 1332,
+  "TSPN Calcio": 1333,
   "That Vintage Football Shirt": 176,
   "The Football Room": 806,
   "The Football Temple": 1999,
   "The Kit Dealer": 623,
   "The Kitman 97": 1419,
-  "The Soccer Archive": 4042,
+  "The Soccer Archive": 4056,
   "The Third Kit": 1294,
   "Tiffozi Futbol": 620,
-  "To The Jersey": 6106,
-  "Trikotparadies": 3391,
+  "To The Jersey": 6093,
+  "Trikotparadies": 3512,
   "Vice Football Store": 577,
   "Vintage Football Area": 25000,
   "Vintage Football Jerseys": 572,
@@ -80,6 +81,7 @@
   "https://cultfootball.co.uk": "EUR",
   "https://esdeepoca.com": "MXN",
   "https://euromexsports.com": "USD",
+  "https://first11shirts.com": "EUR",
   "https://firststreet.store": "EUR",
   "https://footballfinery.co.uk": "EUR",
   "https://footballshirtcollective.com": "EUR",
@@ -143,10 +145,6 @@
   "bulishirts.com": {
    "seit": "2026-10-01T14:14:58.073674+00:00",
    "treffer": 1
-  },
-  "first11shirts.com": {
-   "seit": "2026-10-01T14:14:58.073674+00:00",
-   "treffer": 2
   },
   "footballshirtvintage.fr": {
    "seit": "2026-10-01T14:14:58.073674+00:00",
@@ -248,12 +246,18 @@
    "neu": 0,
    "still": 0,
    "zeit": "2026-10-02T14:25:37.194591+00:00"
+  },
+  {
+   "modus": "full",
+   "neu": 0,
+   "still": 7,
+   "zeit": "2026-10-02T19:06:54.841007+00:00"
   }
  ],
- "last_full": "2026-10-02T10:46:29.976565+00:00",
+ "last_full": "2026-10-02T19:06:54.841007+00:00",
  "last_run": {
-  "mode": "priority",
-  "time": "2026-10-02T14:25:37.194591+00:00"
+  "mode": "full",
+  "time": "2026-10-02T19:06:54.841007+00:00"
  },
  "platforms": {
   "https://1kloppshop.com": "shopify",
@@ -269,6 +273,7 @@
   "https://cultfootball.co.uk": "shopify",
   "https://esdeepoca.com": "shopify",
   "https://euromexsports.com": "shopify",
+  "https://first11shirts.com": "shopify",
   "https://firststreet.store": "shopify",
   "https://footballfinery.co.uk": "shopify",
   "https://footballsecondhand.com": "woo:https://footballsecondhand.com/wp-json/wc/store/v1/products",
@@ -395,7 +400,7 @@
      "text": "seit 30 Tagen nichts Neues (44 in 90 Tagen)",
      "typ": "ruhig"
     },
-    "sekunden": 55.4
+    "sekunden": 56.7
    },
    {
     "anfragen": 8,
@@ -403,8 +408,8 @@
     "info": "",
     "name": "3kots",
     "plattform": "woo",
-    "produkte": 555,
-    "sekunden": 57.7
+    "produkte": 560,
+    "sekunden": 68.8
    },
    {
     "anfragen": 46,
@@ -412,8 +417,8 @@
     "info": "",
     "name": "Back to the Football",
     "plattform": "woo",
-    "produkte": 4366,
-    "sekunden": 117.6
+    "produkte": 4386,
+    "sekunden": 119.1
    },
    {
     "anfragen": 8,
@@ -430,7 +435,7 @@
      "text": "laufend: an 8 von 30 Tagen neue Artikel, 6 in 7 Tagen, 19 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 127.9
+    "sekunden": 127.7
    },
    {
     "anfragen": 4,
@@ -464,7 +469,7 @@
      "text": "laufend: an 9 von 30 Tagen neue Artikel, 115 in 7 Tagen, 781 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 1087.6
+    "sekunden": 1077.8
    },
    {
     "anfragen": 131,
@@ -472,8 +477,8 @@
     "info": "",
     "name": "Classic Football Shirts",
     "plattform": "cfs",
-    "produkte": 1531,
-    "sekunden": 261.6
+    "produkte": 1533,
+    "sekunden": 262.2
    },
    {
     "anfragen": 3,
@@ -490,7 +495,7 @@
      "text": "seit 30 Tagen nichts Neues (20 in 90 Tagen)",
      "typ": "ruhig"
     },
-    "sekunden": 48.1
+    "sekunden": 48.0
    },
    {
     "anfragen": 66,
@@ -498,8 +503,8 @@
     "info": "",
     "name": "Classic-Shirts",
     "plattform": "idosell",
-    "produkte": 1225,
-    "sekunden": 200.0
+    "produkte": 1224,
+    "sekunden": 192.5
    },
    {
     "anfragen": 25,
@@ -510,13 +515,13 @@
     "produkte": 5665,
     "rhythmus": {
      "letzte": "2026-10-02T10:09:26+01:00",
-     "neu_30": 221,
-     "neu_7": 34,
-     "tage_30": 22,
-     "text": "laufend: an 22 von 30 Tagen neue Artikel, 34 in 7 Tagen, 221 in 30 Tagen",
+     "neu_30": 214,
+     "neu_7": 33,
+     "tage_30": 21,
+     "text": "laufend: an 21 von 30 Tagen neue Artikel, 33 in 7 Tagen, 214 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 340.9
+    "sekunden": 351.3
    },
    {
     "anfragen": 0,
@@ -536,6 +541,7 @@
     "produkte": 927,
     "rhythmus": {
      "abstand_tage": 11.3,
+     "anteil": 0.38,
      "letzte": "2026-09-28T15:07:01+01:00",
      "letzter_schub": "2026-09-28T14:30:08+01:00",
      "neu_30": 77,
@@ -547,7 +553,7 @@
      "uhrzeit": 8,
      "wochentag": "Sa"
     },
-    "sekunden": 96.1
+    "sekunden": 96.0
    },
    {
     "anfragen": 88,
@@ -555,16 +561,16 @@
     "info": "",
     "name": "Cult Kits",
     "plattform": "shopify",
-    "produkte": 21423,
+    "produkte": 21436,
     "rhythmus": {
-     "letzte": "2026-10-01T16:55:13+01:00",
-     "neu_30": 611,
-     "neu_7": 121,
+     "letzte": "2026-10-02T17:30:17+01:00",
+     "neu_30": 612,
+     "neu_7": 118,
      "tage_30": 27,
-     "text": "laufend: an 27 von 30 Tagen neue Artikel, 121 in 7 Tagen, 611 in 30 Tagen",
+     "text": "laufend: an 27 von 30 Tagen neue Artikel, 118 in 7 Tagen, 612 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 1254.9
+    "sekunden": 1250.8
    },
    {
     "anfragen": 5,
@@ -581,7 +587,7 @@
      "text": "laufend: an 18 von 30 Tagen neue Artikel, 22 in 7 Tagen, 86 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 79.9
+    "sekunden": 80.2
    },
    {
     "anfragen": 17,
@@ -589,16 +595,39 @@
     "info": "",
     "name": "Euromex Sports",
     "plattform": "shopify",
-    "produkte": 3543,
+    "produkte": 3544,
     "rhythmus": {
-     "letzte": "2026-09-30T15:56:24-04:00",
-     "neu_30": 22,
-     "neu_7": 8,
-     "tage_30": 8,
-     "text": "laufend: an 8 von 30 Tagen neue Artikel, 8 in 7 Tagen, 22 in 30 Tagen",
+     "letzte": "2026-10-02T12:25:48-04:00",
+     "neu_30": 23,
+     "neu_7": 9,
+     "tage_30": 9,
+     "text": "laufend: an 9 von 30 Tagen neue Artikel, 9 in 7 Tagen, 23 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 271.4
+    "sekunden": 271.7
+   },
+   {
+    "anfragen": 28,
+    "fehler": "",
+    "info": "",
+    "name": "First 11 Shirts",
+    "plattform": "shopify",
+    "produkte": 6458,
+    "rhythmus": {
+     "abstand_tage": 7.0,
+     "anteil": 1.0,
+     "letzte": "2026-10-01T18:59:12+02:00",
+     "letzter_schub": "2026-10-01T18:44:14+02:00",
+     "neu_30": 553,
+     "neu_7": 133,
+     "schuebe": 13,
+     "tage_30": 6,
+     "text": "Drops etwa alle 7 Tage, meist Do (13 von 13) ab 18 Uhr, zuletzt 01.10. 18:44",
+     "typ": "drops",
+     "uhrzeit": 18,
+     "wochentag": "Do"
+    },
+    "sekunden": 240.8
    },
    {
     "anfragen": 3,
@@ -609,6 +638,7 @@
     "produkte": 167,
     "rhythmus": {
      "abstand_tage": 7.7,
+     "anteil": 0.4,
      "letzte": "2026-09-21T15:08:32+01:00",
      "letzter_schub": "2026-09-21T14:23:32+01:00",
      "neu_30": 55,
@@ -631,6 +661,7 @@
     "produkte": 935,
     "rhythmus": {
      "abstand_tage": 7.0,
+     "anteil": 0.85,
      "letzte": "2026-10-02T12:07:51+08:00",
      "letzter_schub": "2026-09-24T16:58:34+08:00",
      "neu_30": 180,
@@ -642,7 +673,7 @@
      "uhrzeit": 10,
      "wochentag": "Do"
     },
-    "sekunden": 97.0
+    "sekunden": 104.5
    },
    {
     "anfragen": 5,
@@ -653,6 +684,7 @@
     "produkte": 640,
     "rhythmus": {
      "abstand_tage": 14.0,
+     "anteil": 1.0,
      "letzte": "2026-09-28T07:59:10+02:00",
      "letzter_schub": "2026-09-18T15:55:45+02:00",
      "neu_30": 57,
@@ -664,7 +696,7 @@
      "uhrzeit": 15,
      "wochentag": "Fr"
     },
-    "sekunden": 64.7
+    "sekunden": 65.1
    },
    {
     "anfragen": 28,
@@ -675,10 +707,11 @@
     "produkte": 6374,
     "rhythmus": {
      "abstand_tage": 3.0,
+     "anteil": 0.42,
      "letzte": "2026-10-02T10:00:54+01:00",
      "letzter_schub": "2026-10-02T10:00:09+01:00",
      "neu_30": 379,
-     "neu_7": 130,
+     "neu_7": 126,
      "schuebe": 31,
      "tage_30": 13,
      "text": "Drops etwa alle 3 Tage, meist Di (13 von 31) ab 10 Uhr, zuletzt 02.10. 11:00",
@@ -686,16 +719,16 @@
      "uhrzeit": 10,
      "wochentag": "Di"
     },
-    "sekunden": 447.6
+    "sekunden": 445.6
    },
    {
-    "anfragen": 16,
+    "anfragen": 17,
     "fehler": "",
     "info": "",
     "name": "Football Second Hand",
     "plattform": "woo",
-    "produkte": 1399,
-    "sekunden": 58.8
+    "produkte": 1418,
+    "sekunden": 57.1
    },
    {
     "anfragen": 17,
@@ -706,6 +739,7 @@
     "produkte": 3722,
     "rhythmus": {
      "abstand_tage": 9.2,
+     "anteil": 0.27,
      "letzte": "2026-09-28T19:29:23+01:00",
      "letzter_schub": "2026-09-28T19:16:40+01:00",
      "neu_30": 100,
@@ -717,7 +751,7 @@
      "uhrzeit": 9,
      "wochentag": "Fr"
     },
-    "sekunden": 272.4
+    "sekunden": 268.5
    },
    {
     "anfragen": 27,
@@ -734,7 +768,7 @@
      "text": "laufend: an 8 von 30 Tagen neue Artikel, 59 in 7 Tagen, 294 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 376.3
+    "sekunden": 374.2
    },
    {
     "anfragen": 3,
@@ -751,7 +785,7 @@
      "text": "seit 30 Tagen nichts Neues (0 in 90 Tagen)",
      "typ": "ruhig"
     },
-    "sekunden": 40.3
+    "sekunden": 38.6
    },
    {
     "anfragen": 20,
@@ -759,8 +793,8 @@
     "info": "",
     "name": "Football Thrift Shop",
     "plattform": "woo",
-    "produkte": 1774,
-    "sekunden": 61.1
+    "produkte": 1772,
+    "sekunden": 67.1
    },
    {
     "anfragen": 4,
@@ -771,13 +805,13 @@
     "produkte": 482,
     "rhythmus": {
      "letzte": "2026-10-01T14:59:47+02:00",
-     "neu_30": 56,
+     "neu_30": 55,
      "neu_7": 1,
-     "tage_30": 15,
-     "text": "laufend: an 15 von 30 Tagen neue Artikel, 1 in 7 Tagen, 56 in 30 Tagen",
+     "tage_30": 14,
+     "text": "laufend: an 14 von 30 Tagen neue Artikel, 1 in 7 Tagen, 55 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 47.6
+    "sekunden": 49.9
    },
    {
     "anfragen": 9,
@@ -794,7 +828,7 @@
      "text": "unregelmäßig: an 3 von 30 Tagen neue Artikel, 14 in 30 Tagen, zuletzt 01.10.",
      "typ": "unregelmäßig"
     },
-    "sekunden": 143.2
+    "sekunden": 139.1
    },
    {
     "anfragen": 19,
@@ -802,16 +836,16 @@
     "info": "",
     "name": "Golaço Kits",
     "plattform": "shopify",
-    "produkte": 4178,
+    "produkte": 4179,
     "rhythmus": {
-     "letzte": "2026-10-01T17:36:56-04:00",
-     "neu_30": 520,
-     "neu_7": 115,
-     "tage_30": 25,
-     "text": "laufend: an 25 von 30 Tagen neue Artikel, 115 in 7 Tagen, 520 in 30 Tagen",
+     "letzte": "2026-10-02T14:19:30-04:00",
+     "neu_30": 519,
+     "neu_7": 116,
+     "tage_30": 26,
+     "text": "laufend: an 26 von 30 Tagen neue Artikel, 116 in 7 Tagen, 519 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 296.1
+    "sekunden": 300.3
    },
    {
     "anfragen": 7,
@@ -828,7 +862,7 @@
      "text": "unregelmäßig: an 2 von 30 Tagen neue Artikel, 2 in 30 Tagen, zuletzt 26.09.",
      "typ": "unregelmäßig"
     },
-    "sekunden": 96.5
+    "sekunden": 94.7
    },
    {
     "anfragen": 9,
@@ -845,7 +879,7 @@
      "text": "unregelmäßig: an 1 von 30 Tagen neue Artikel, 1 in 30 Tagen, zuletzt 25.09.",
      "typ": "unregelmäßig"
     },
-    "sekunden": 143.7
+    "sekunden": 143.8
    },
    {
     "anfragen": 6,
@@ -856,6 +890,7 @@
     "produkte": 894,
     "rhythmus": {
      "abstand_tage": 18.9,
+     "anteil": 0.4,
      "letzte": "2026-09-28T11:46:09+10:00",
      "letzter_schub": "2026-09-25T17:58:42+10:00",
      "neu_30": 223,
@@ -867,7 +902,7 @@
      "uhrzeit": 11,
      "wochentag": "Mi"
     },
-    "sekunden": 97.0
+    "sekunden": 96.7
    },
    {
     "anfragen": 13,
@@ -878,6 +913,7 @@
     "produkte": 2566,
     "rhythmus": {
      "abstand_tage": 7.0,
+     "anteil": 0.57,
      "letzte": "2026-09-28T20:00:03+02:00",
      "letzter_schub": "2026-09-27T19:16:01+02:00",
      "neu_30": 138,
@@ -889,7 +925,7 @@
      "uhrzeit": 20,
      "wochentag": "So"
     },
-    "sekunden": 208.1
+    "sekunden": 209.0
    },
    {
     "anfragen": 3,
@@ -906,7 +942,7 @@
      "text": "unregelmäßig: an 1 von 30 Tagen neue Artikel, 1 in 30 Tagen, zuletzt 26.09.",
      "typ": "unregelmäßig"
     },
-    "sekunden": 40.4
+    "sekunden": 40.1
    },
    {
     "anfragen": 4,
@@ -917,18 +953,19 @@
     "produkte": 353,
     "rhythmus": {
      "abstand_tage": 22.1,
+     "anteil": 0.67,
      "letzte": "2026-09-21T17:07:53+02:00",
      "letzter_schub": "2026-09-20T18:11:47+02:00",
      "neu_30": 56,
      "neu_7": 0,
-     "schuebe": 4,
+     "schuebe": 3,
      "tage_30": 2,
-     "text": "Drops etwa alle 22 Tage, meist Sa (3 von 4) ab 18 Uhr, zuletzt 20.09. 18:11",
+     "text": "Drops etwa alle 22 Tage, meist Sa (2 von 3) ab 18 Uhr, zuletzt 20.09. 18:11",
      "typ": "drops",
      "uhrzeit": 18,
      "wochentag": "Sa"
     },
-    "sekunden": 61.8
+    "sekunden": 61.3
    },
    {
     "anfragen": 13,
@@ -939,6 +976,7 @@
     "produkte": 2692,
     "rhythmus": {
      "abstand_tage": 7.0,
+     "anteil": 1.0,
      "letzte": "2026-10-01T18:00:12+02:00",
      "letzter_schub": "2026-10-01T17:56:25+02:00",
      "neu_30": 485,
@@ -950,7 +988,7 @@
      "uhrzeit": 16,
      "wochentag": "Do"
     },
-    "sekunden": 192.6
+    "sekunden": 190.8
    },
    {
     "anfragen": 5,
@@ -958,16 +996,16 @@
     "info": "",
     "name": "Kit Launch",
     "plattform": "shopify",
-    "produkte": 645,
+    "produkte": 639,
     "rhythmus": {
-     "letzte": "2026-10-02T12:00:33+02:00",
-     "neu_30": 191,
-     "neu_7": 61,
+     "letzte": "2026-10-02T19:26:33+02:00",
+     "neu_30": 187,
+     "neu_7": 62,
      "tage_30": 6,
-     "text": "unregelmäßig: an 6 von 30 Tagen neue Artikel, 191 in 30 Tagen, zuletzt 02.10.",
+     "text": "unregelmäßig: an 6 von 30 Tagen neue Artikel, 187 in 30 Tagen, zuletzt 02.10.",
      "typ": "unregelmäßig"
     },
-    "sekunden": 66.9
+    "sekunden": 64.9
    },
    {
     "anfragen": 52,
@@ -979,12 +1017,12 @@
     "rhythmus": {
      "letzte": "2026-10-01T17:14:58+02:00",
      "neu_30": 189,
-     "neu_7": 83,
+     "neu_7": 58,
      "tage_30": 8,
-     "text": "laufend: an 8 von 30 Tagen neue Artikel, 83 in 7 Tagen, 189 in 30 Tagen",
+     "text": "laufend: an 8 von 30 Tagen neue Artikel, 58 in 7 Tagen, 189 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 823.4
+    "sekunden": 845.4
    },
    {
     "anfragen": 5,
@@ -994,19 +1032,20 @@
     "plattform": "shopify",
     "produkte": 742,
     "rhythmus": {
-     "abstand_tage": 7.9,
+     "abstand_tage": 8.4,
+     "anteil": 0.44,
      "letzte": "2026-09-30T16:10:37+02:00",
      "letzter_schub": "2026-09-30T16:09:53+02:00",
      "neu_30": 121,
      "neu_7": 40,
-     "schuebe": 10,
+     "schuebe": 9,
      "tage_30": 6,
-     "text": "Drops etwa alle 8 Tage, meist So (4 von 10) ab 16 Uhr, zuletzt 30.09. 16:09",
+     "text": "Drops etwa alle 8 Tage, meist So (4 von 9) ab 15 Uhr, zuletzt 30.09. 16:09",
      "typ": "drops",
-     "uhrzeit": 16,
+     "uhrzeit": 15,
      "wochentag": "So"
     },
-    "sekunden": 80.6
+    "sekunden": 80.0
    },
    {
     "anfragen": 5,
@@ -1017,6 +1056,7 @@
     "produkte": 580,
     "rhythmus": {
      "abstand_tage": 8.0,
+     "anteil": 0.43,
      "letzte": "2026-09-28T19:00:27+02:00",
      "letzter_schub": "2026-09-28T19:00:02+02:00",
      "neu_30": 168,
@@ -1028,7 +1068,7 @@
      "uhrzeit": 19,
      "wochentag": "Mo"
     },
-    "sekunden": 71.9
+    "sekunden": 71.8
    },
    {
     "anfragen": 7,
@@ -1039,6 +1079,7 @@
     "produkte": 1200,
     "rhythmus": {
      "abstand_tage": 21.1,
+     "anteil": 0.8,
      "letzte": "2026-09-19T12:09:13+02:00",
      "letzter_schub": "2026-09-19T12:01:23+02:00",
      "neu_30": 60,
@@ -1050,7 +1091,7 @@
      "uhrzeit": 11,
      "wochentag": "Sa"
     },
-    "sekunden": 102.6
+    "sekunden": 103.1
    },
    {
     "anfragen": 7,
@@ -1061,6 +1102,7 @@
     "produkte": 1208,
     "rhythmus": {
      "abstand_tage": 14.0,
+     "anteil": 0.57,
      "letzte": "2026-09-23T14:54:09-04:00",
      "letzter_schub": "2026-09-23T12:00:00-04:00",
      "neu_30": 104,
@@ -1072,7 +1114,7 @@
      "uhrzeit": 17,
      "wochentag": "Di"
     },
-    "sekunden": 112.2
+    "sekunden": 113.0
    },
    {
     "anfragen": 3,
@@ -1080,16 +1122,16 @@
     "info": "",
     "name": "Oh Calcio",
     "plattform": "shopify",
-    "produkte": 228,
+    "produkte": 229,
     "rhythmus": {
-     "letzte": "2026-09-30T16:44:07+02:00",
-     "neu_30": 124,
-     "neu_7": 11,
-     "tage_30": 4,
-     "text": "unregelmäßig: an 4 von 30 Tagen neue Artikel, 124 in 30 Tagen, zuletzt 30.09.",
+     "letzte": "2026-10-02T16:55:04+02:00",
+     "neu_30": 125,
+     "neu_7": 2,
+     "tage_30": 5,
+     "text": "unregelmäßig: an 5 von 30 Tagen neue Artikel, 125 in 30 Tagen, zuletzt 02.10.",
      "typ": "unregelmäßig"
     },
-    "sekunden": 48.6
+    "sekunden": 48.7
    },
    {
     "anfragen": 3,
@@ -1106,7 +1148,7 @@
      "text": "unregelmäßig: an 2 von 30 Tagen neue Artikel, 5 in 30 Tagen, zuletzt 26.09.",
      "typ": "unregelmäßig"
     },
-    "sekunden": 48.0
+    "sekunden": 47.9
    },
    {
     "anfragen": 3,
@@ -1114,21 +1156,22 @@
     "info": "",
     "name": "Philly Soccer Jerseys",
     "plattform": "shopify",
-    "produkte": 188,
+    "produkte": 197,
     "rhythmus": {
-     "abstand_tage": 43.8,
-     "letzte": "2026-09-11T17:54:12-04:00",
-     "letzter_schub": "2026-09-11T17:53:55-04:00",
-     "neu_30": 32,
-     "neu_7": 0,
-     "schuebe": 3,
-     "tage_30": 2,
-     "text": "Drops etwa alle 44 Tage, meist Fr (2 von 3) ab 17 Uhr, zuletzt 11.09. 23:53",
+     "abstand_tage": 20.8,
+     "anteil": 0.75,
+     "letzte": "2026-10-02T14:41:45-04:00",
+     "letzter_schub": "2026-10-02T13:34:24-04:00",
+     "neu_30": 41,
+     "neu_7": 9,
+     "schuebe": 4,
+     "tage_30": 3,
+     "text": "Drops etwa alle 21 Tage, meist Fr (3 von 4) ab 17 Uhr, zuletzt 02.10. 19:34",
      "typ": "drops",
      "uhrzeit": 17,
      "wochentag": "Fr"
     },
-    "sekunden": 48.8
+    "sekunden": 48.4
    },
    {
     "anfragen": 9,
@@ -1136,8 +1179,8 @@
     "info": "",
     "name": "RB-Jerseys",
     "plattform": "woo",
-    "produkte": 606,
-    "sekunden": 32.4
+    "produkte": 607,
+    "sekunden": 32.5
    },
    {
     "anfragen": 49,
@@ -1157,6 +1200,7 @@
     "produkte": 891,
     "rhythmus": {
      "abstand_tage": 52.0,
+     "anteil": 0.5,
      "letzte": "2026-09-18T11:10:12+02:00",
      "letzter_schub": "2026-09-13T18:14:50+02:00",
      "neu_30": 102,
@@ -1168,7 +1212,7 @@
      "uhrzeit": 18,
      "wochentag": "Do"
     },
-    "sekunden": 84.0
+    "sekunden": 84.3
    },
    {
     "anfragen": 0,
@@ -1205,6 +1249,7 @@
     "produkte": 611,
     "rhythmus": {
      "abstand_tage": 4.0,
+     "anteil": 0.31,
      "letzte": "2026-09-30T20:19:48+02:00",
      "letzter_schub": "2026-09-30T12:48:41+02:00",
      "neu_30": 60,
@@ -1216,7 +1261,7 @@
      "uhrzeit": 9,
      "wochentag": "Do"
     },
-    "sekunden": 79.6
+    "sekunden": 80.1
    },
    {
     "anfragen": 5,
@@ -1224,16 +1269,16 @@
     "info": "",
     "name": "STA Jerseys",
     "plattform": "shopify",
-    "produkte": 652,
+    "produkte": 645,
     "rhythmus": {
      "letzte": "2026-10-01T19:42:05-07:00",
-     "neu_30": 175,
-     "neu_7": 79,
+     "neu_30": 170,
+     "neu_7": 75,
      "tage_30": 21,
-     "text": "laufend: an 21 von 30 Tagen neue Artikel, 79 in 7 Tagen, 175 in 30 Tagen",
+     "text": "laufend: an 21 von 30 Tagen neue Artikel, 75 in 7 Tagen, 170 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 80.1
+    "sekunden": 77.6
    },
    {
     "anfragen": 168,
@@ -1250,7 +1295,7 @@
      "text": "laufend: an 15 von 30 Tagen neue Artikel, 14 in 7 Tagen, 169 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 2181.4
+    "sekunden": 2241.2
    },
    {
     "anfragen": 4,
@@ -1261,6 +1306,7 @@
     "produkte": 475,
     "rhythmus": {
      "abstand_tage": 9.8,
+     "anteil": 0.25,
      "letzte": "2026-09-10T16:26:19+02:00",
      "letzter_schub": "2026-09-10T16:21:55+02:00",
      "neu_30": 61,
@@ -1272,7 +1318,7 @@
      "uhrzeit": 16,
      "wochentag": "Mo"
     },
-    "sekunden": 49.7
+    "sekunden": 49.3
    },
    {
     "anfragen": 3,
@@ -1289,7 +1335,7 @@
      "text": "seit 30 Tagen nichts Neues (0 in 90 Tagen)",
      "typ": "ruhig"
     },
-    "sekunden": 47.1
+    "sekunden": 45.6
    },
    {
     "anfragen": 56,
@@ -1298,7 +1344,7 @@
     "name": "Swiat Koszulek Pilkarskich",
     "plattform": "prestashop",
     "produkte": 111,
-    "sekunden": 111.2
+    "sekunden": 111.1
    },
    {
     "anfragen": 8,
@@ -1306,16 +1352,16 @@
     "info": "",
     "name": "TSPN Calcio",
     "plattform": "shopify",
-    "produkte": 1332,
+    "produkte": 1333,
     "rhythmus": {
-     "letzte": "2026-10-01T15:39:38+01:00",
-     "neu_30": 11,
+     "letzte": "2026-10-02T15:52:01+01:00",
+     "neu_30": 12,
      "neu_7": 2,
-     "tage_30": 4,
-     "text": "unregelmäßig: an 4 von 30 Tagen neue Artikel, 11 in 30 Tagen, zuletzt 01.10.",
+     "tage_30": 5,
+     "text": "unregelmäßig: an 5 von 30 Tagen neue Artikel, 12 in 30 Tagen, zuletzt 02.10.",
      "typ": "unregelmäßig"
     },
-    "sekunden": 111.7
+    "sekunden": 109.8
    },
    {
     "anfragen": 3,
@@ -1332,7 +1378,7 @@
      "text": "seit 30 Tagen nichts Neues (1 in 90 Tagen)",
      "typ": "ruhig"
     },
-    "sekunden": 47.6
+    "sekunden": 48.3
    },
    {
     "anfragen": 6,
@@ -1343,6 +1389,7 @@
     "produkte": 806,
     "rhythmus": {
      "abstand_tage": 6.9,
+     "anteil": 0.46,
      "letzte": "2026-09-30T18:17:49-06:00",
      "letzter_schub": "2026-09-26T13:34:24-06:00",
      "neu_30": 132,
@@ -1354,7 +1401,7 @@
      "uhrzeit": 2,
      "wochentag": "Fr"
     },
-    "sekunden": 95.5
+    "sekunden": 93.5
    },
    {
     "anfragen": 10,
@@ -1365,18 +1412,19 @@
     "produkte": 1999,
     "rhythmus": {
      "abstand_tage": 7.0,
+     "anteil": 0.81,
      "letzte": "2026-09-26T13:02:25+02:00",
      "letzter_schub": "2026-09-26T13:00:03+02:00",
      "neu_30": 393,
      "neu_7": 96,
-     "schuebe": 17,
+     "schuebe": 16,
      "tage_30": 5,
-     "text": "Drops etwa alle 7 Tage, meist Sa (14 von 17) ab 13 Uhr, zuletzt 26.09. 13:00",
+     "text": "Drops etwa alle 7 Tage, meist Sa (13 von 16) ab 13 Uhr, zuletzt 26.09. 13:00",
      "typ": "drops",
      "uhrzeit": 13,
      "wochentag": "Sa"
     },
-    "sekunden": 159.8
+    "sekunden": 165.8
    },
    {
     "anfragen": 0,
@@ -1396,6 +1444,7 @@
     "produkte": 623,
     "rhythmus": {
      "abstand_tage": 12.9,
+     "anteil": 0.33,
      "letzte": "2026-09-30T14:17:04+08:00",
      "letzter_schub": "2026-09-05T21:47:54+08:00",
      "neu_30": 116,
@@ -1407,7 +1456,7 @@
      "uhrzeit": 9,
      "wochentag": "Mi"
     },
-    "sekunden": 49.3
+    "sekunden": 49.4
    },
    {
     "anfragen": 8,
@@ -1417,16 +1466,17 @@
     "plattform": "shopify",
     "produkte": 1419,
     "rhythmus": {
-     "abstand_tage": 11.1,
+     "abstand_tage": 7.2,
+     "anteil": 0.88,
      "letzte": "2026-09-30T19:54:12+02:00",
      "letzter_schub": "2026-09-30T18:23:41+02:00",
      "neu_30": 65,
      "neu_7": 24,
-     "schuebe": 9,
+     "schuebe": 8,
      "tage_30": 3,
-     "text": "Drops etwa alle 11 Tage, meist Sa (8 von 9) ab 17 Uhr, zuletzt 30.09. 18:23",
+     "text": "Drops etwa alle 7 Tage, meist Sa (7 von 8) ab 15 Uhr, zuletzt 30.09. 18:23",
      "typ": "drops",
-     "uhrzeit": 17,
+     "uhrzeit": 15,
      "wochentag": "Sa"
     },
     "sekunden": 128.7
@@ -1437,16 +1487,16 @@
     "info": "",
     "name": "The Soccer Archive",
     "plattform": "shopify",
-    "produkte": 4042,
+    "produkte": 4056,
     "rhythmus": {
-     "letzte": "2026-10-02T11:00:58+01:00",
-     "neu_30": 301,
-     "neu_7": 93,
-     "tage_30": 23,
-     "text": "laufend: an 23 von 30 Tagen neue Artikel, 93 in 7 Tagen, 301 in 30 Tagen",
+     "letzte": "2026-10-02T15:34:00+01:00",
+     "neu_30": 308,
+     "neu_7": 96,
+     "tage_30": 22,
+     "text": "laufend: an 22 von 30 Tagen neue Artikel, 96 in 7 Tagen, 308 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 265.9
+    "sekunden": 272.2
    },
    {
     "anfragen": 5,
@@ -1457,6 +1507,7 @@
     "produkte": 620,
     "rhythmus": {
      "abstand_tage": 4.1,
+     "anteil": 0.25,
      "letzte": "2026-09-30T18:59:43-04:00",
      "letzter_schub": "2026-09-30T18:58:36-04:00",
      "neu_30": 132,
@@ -1468,7 +1519,7 @@
      "uhrzeit": 3,
      "wochentag": "Di"
     },
-    "sekunden": 64.9
+    "sekunden": 62.8
    },
    {
     "anfragen": 27,
@@ -1476,13 +1527,14 @@
     "info": "",
     "name": "To The Jersey",
     "plattform": "shopify",
-    "produkte": 6106,
+    "produkte": 6093,
     "rhythmus": {
      "abstand_tage": 5.5,
+     "anteil": 0.4,
      "letzte": "2026-10-02T00:53:28+02:00",
      "letzter_schub": "2026-10-02T00:49:59+02:00",
-     "neu_30": 872,
-     "neu_7": 499,
+     "neu_30": 870,
+     "neu_7": 362,
      "schuebe": 15,
      "tage_30": 9,
      "text": "Drops etwa alle 6 Tage, meist Sa (6 von 15) ab 12 Uhr, zuletzt 02.10. 00:49",
@@ -1490,7 +1542,7 @@
      "uhrzeit": 12,
      "wochentag": "Sa"
     },
-    "sekunden": 431.5
+    "sekunden": 431.4
    },
    {
     "anfragen": 0,
@@ -1502,26 +1554,27 @@
     "sekunden": 0.0
    },
    {
-    "anfragen": 16,
+    "anfragen": 17,
     "fehler": "",
     "info": "",
     "name": "Trikotparadies",
     "plattform": "shopify",
-    "produkte": 3391,
+    "produkte": 3512,
     "rhythmus": {
      "abstand_tage": 7.0,
-     "letzte": "2026-09-28T12:18:10+02:00",
-     "letzter_schub": "2026-09-26T19:06:35+02:00",
-     "neu_30": 408,
-     "neu_7": 155,
-     "schuebe": 14,
-     "tage_30": 6,
-     "text": "Drops etwa alle 7 Tage, meist Fr (13 von 14) ab 19 Uhr, zuletzt 26.09. 19:06",
+     "anteil": 0.93,
+     "letzte": "2026-10-02T19:00:34+02:00",
+     "letzter_schub": "2026-10-02T19:00:01+02:00",
+     "neu_30": 529,
+     "neu_7": 169,
+     "schuebe": 15,
+     "tage_30": 7,
+     "text": "Drops etwa alle 7 Tage, meist Fr (14 von 15) ab 19 Uhr, zuletzt 02.10. 19:00",
      "typ": "drops",
      "uhrzeit": 19,
      "wochentag": "Fr"
     },
-    "sekunden": 256.7
+    "sekunden": 284.5
    },
    {
     "anfragen": 5,
@@ -1532,6 +1585,7 @@
     "produkte": 577,
     "rhythmus": {
      "abstand_tage": 23.5,
+     "anteil": 0.33,
      "letzte": "2026-10-01T17:35:50+01:00",
      "letzter_schub": "2026-09-21T14:59:39+01:00",
      "neu_30": 64,
@@ -1543,7 +1597,7 @@
      "uhrzeit": 11,
      "wochentag": "Mo"
     },
-    "sekunden": 80.3
+    "sekunden": 77.4
    },
    {
     "anfragen": 391,
@@ -1553,14 +1607,14 @@
     "plattform": "shopify",
     "produkte": 25000,
     "rhythmus": {
-     "letzte": "2026-10-02T11:41:00+02:00",
-     "neu_30": 2549,
-     "neu_7": 1056,
-     "tage_30": 26,
-     "text": "laufend: an 26 von 30 Tagen neue Artikel, 1056 in 7 Tagen, 2549 in 30 Tagen",
+     "letzte": "2026-10-02T16:46:20+02:00",
+     "neu_30": 2537,
+     "neu_7": 1037,
+     "tage_30": 25,
+     "text": "laufend: an 25 von 30 Tagen neue Artikel, 1037 in 7 Tagen, 2537 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 2559.5
+    "sekunden": 2620.5
    },
    {
     "anfragen": 5,
@@ -1577,24 +1631,24 @@
      "text": "unregelmäßig: an 3 von 30 Tagen neue Artikel, 16 in 30 Tagen, zuletzt 27.09.",
      "typ": "unregelmäßig"
     },
-    "sekunden": 80.3
+    "sekunden": 79.7
    },
    {
-    "anfragen": 230,
+    "anfragen": 231,
     "fehler": "",
     "info": "Katalog bei 25000 gekappt, ältere Artikel per Suche",
     "name": "Vintage Football Shirts",
     "plattform": "shopify",
     "produkte": 25000,
     "rhythmus": {
-     "letzte": "2026-10-02T10:54:12+01:00",
-     "neu_30": 961,
-     "neu_7": 224,
-     "tage_30": 23,
-     "text": "laufend: an 23 von 30 Tagen neue Artikel, 224 in 7 Tagen, 961 in 30 Tagen",
+     "letzte": "2026-10-02T17:00:01+01:00",
+     "neu_30": 963,
+     "neu_7": 214,
+     "tage_30": 22,
+     "text": "laufend: an 22 von 30 Tagen neue Artikel, 214 in 7 Tagen, 963 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 2520.6
+    "sekunden": 2582.6
    },
    {
     "anfragen": 7,
@@ -1605,6 +1659,7 @@
     "produkte": 1013,
     "rhythmus": {
      "abstand_tage": 5.3,
+     "anteil": 0.23,
      "letzte": "2026-09-24T13:52:39+02:00",
      "letzter_schub": "2026-09-23T18:33:53+02:00",
      "neu_30": 136,
@@ -1616,7 +1671,7 @@
      "uhrzeit": 14,
      "wochentag": "Do"
     },
-    "sekunden": 110.8
+    "sekunden": 111.0
    },
    {
     "anfragen": 0,
@@ -1628,7 +1683,7 @@
     "sekunden": 0.0
    }
   ],
-  "zeit": "2026-10-02T10:46:29.976565+00:00"
+  "zeit": "2026-10-02T19:06:54.841007+00:00"
  },
  "sources_ok": [
   "1Klopp Shop",
@@ -1646,6 +1701,7 @@
   "Es de Época",
   "Euromex Sports",
   "FindYourJersey",
+  "First 11 Shirts",
   "First Class Football Shirts",
   "First Street",
   "Fodbold Shoppen",
