@@ -133,6 +133,9 @@
   "https://www.vintagefootballshirts.com": "EUR",
   "https://xn--retrotrjer-6cb.dk": "DKK"
  },
+ "drop_checks": {
+  "Philly Soccer Jerseys": "2026-10-02T22:31:25.080957+00:00"
+ },
  "fyj_shops": {
   "arsijstore.com": {
    "seit": "2026-10-01T14:14:58.073674+00:00",
@@ -258,12 +261,18 @@
    "neu": 0,
    "still": 0,
    "zeit": "2026-10-02T21:59:41.090621+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-02T22:31:25.080957+00:00"
   }
  ],
  "last_full": "2026-10-02T21:59:41.090621+00:00",
  "last_run": {
-  "mode": "full",
-  "time": "2026-10-02T21:59:41.090621+00:00"
+  "mode": "drop",
+  "time": "2026-10-02T22:31:25.080957+00:00"
  },
  "platforms": {
   "https://1kloppshop.com": "shopify",
