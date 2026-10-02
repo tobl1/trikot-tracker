@@ -98,7 +98,7 @@ TREFFER.md, also vorher sichern oder nicht committen). `--only "Name"` testet ei
   Nutzer gemeldete Fehltreffer. `min_zustand` (shops.yaml, aktuell CFS 7): schlechtere Noten raus.
   "Barcelona SC" (Ecuador) und Nachbau-Begriffe (repro, score draw, nameset) in `produkt_ausschluss`.
   Nicht per Text erkennbar: z. B. Nike-Trainingsshirt "2010-11 BARCELONA SHIRT XL" (classic-shirts),
-  dafür wäre Bilderkennung nötig (mit Nutzer besprochen, noch offen)
+  nur per `ausschluss_urls` (Bilderkennung verworfen, soll kostenlos bleiben)
 - `CHECK_VERSION`: erhöhen, wenn die Seitenprüfung mehr auswertet, dann wird alles neu geprüft
 - **Preisgrenze** (`preisgrenze` in watchlist.yaml): über 150 € kein Push, im Dashboard standardmäßig
   ausgeblendet (Schalter "auch über 150 €"); Ausnahme nur Label "Thiago" (Sondertrikots ausdrücklich
@@ -141,17 +141,11 @@ TREFFER.md, also vorher sichern oder nicht committen). `--only "Name"` testet ei
 - Plattform-Erkennung: ist ein Shop schon bekannt und die Erkennung schlägt einmal fehl, bleibt die
   bekannte Plattform (RB-Jerseys fiel am 01.10.2026 sonst wegen eines Aussetzers raus)
 
-## Bildprüfung (Claude)
+## Bildprüfung
 
-- Nur für hoch priorisierte Treffer (Thiago, Sondertrikots), vor den Pushes, max. 40/10/10 pro
-  Gesamt-/Schnell-/Drop-Run, jeder Treffer nur einmal (`bild_check` in seen.json)
-- Offizielles Python-SDK `anthropic`, Modell `claude-opus-5-5`, `effort: low`, strukturierte Ausgabe
-  (`VISION_SCHEMA`), serverseitiger Fallback (`fallbacks: "default"`, Beta `server-side-fallback-2026-07-01`)
-- Bild wird selbst geladen und als base64 geschickt (manche Shops blocken Fremdabrufe)
-- Aussortiert (`aussortiert`) bei Training/Jacke/Fan-Shirt/anderes, bei fremdem Flock (außer Thiago-Label)
-  und bei "passt nicht" nur für Sondertrikots (Thiago-Treffer nie wegen Saison-Zweifeln)
-- Läuft nur mit Secret `ANTHROPIC_API_KEY`, ohne Schlüssel wird nichts geprüft. Kosten: einmalig ca.
-  1 € für den Bestand, danach Cent-Beträge pro Monat
+Mit Claude (Vision) gebaut und am 03.10.2026 auf Wunsch des Nutzers wieder entfernt: **alles soll
+komplett kostenlos bleiben**, also keine kostenpflichtigen APIs einbauen. Fehltreffer, die nur
+auf dem Foto erkennbar sind (z. B. Trainingsshirt ohne Hinweis im Titel), über `ausschluss_urls`.
 
 ## Benachrichtigungslogik
 

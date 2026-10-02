@@ -52,8 +52,6 @@ REPORT_HOURS = 36        # wie lange ein Treffer ohne Neusichtung in TREFFER.md 
 FYJ_API = "https://www.findyourjersey.org/api/jerseys"
 FYJ_SIZES = ["XL", "XXL"]
 FX_API = "https://api.frankfurter.dev/v1/latest"
-VISION_MODEL = "claude-opus-5-5"
-VISION_BUDGET = {"full": 40, "priority": 10, "drop": 10}   # max. Bildprüfungen pro Run
 FYJ_MARKETPLACES = ("ebay.", "depop.", "vinted.", "etsy.")   # über FYJ nicht übernehmen
 RECHECK_DAYS = 3             # FYJ-Treffer so oft auf der Shop-Seite nachprüfen (verkauft?)
 CHECK_VERSION = 2            # erhöhen, wenn die Seitenprüfung mehr auswertet: dann wird alles neu geprüft
@@ -1078,106 +1076,6 @@ def enrich(seen, ts, budget, matcher):
 
 
 # ---------------------------------------------------------------------------
-# Bildprüfung mit Claude (nur Thiago- und Sondertrikot-Kandidaten, braucht ANTHROPIC_API_KEY)
-# ---------------------------------------------------------------------------
-VISION_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "art": {"type": "string", "enum": ["spieltrikot", "trainingsshirt", "jacke_oder_oberteil",
-                                           "fan_oder_freizeitshirt", "anderes", "unklar"]},
-        "passt_zur_beschreibung": {"type": "boolean"},
-        "flock": {"type": "string", "enum": ["ohne", "thiago", "anderer_spieler", "nicht_sichtbar"]},
-        "begruendung": {"type": "string"},
-    },
-    "required": ["art", "passt_zur_beschreibung", "flock", "begruendung"],
-    "additionalProperties": False,
-}
-VISION_PROMPT = """Du prüfst ein Produktfoto aus einem Shop für gebrauchte Fußballtrikots.
-Titel im Shop: {title}
-Gesucht wird: {wanted}
-
-Beurteile nur, was auf dem Foto zu sehen ist:
-- art: Ist das ein echtes Spieltrikot (Heim, Auswärts, Third, wie es die Mannschaft in der Saison trug)
-  oder ein Trainingsshirt, eine Jacke/ein Oberteil, ein Fan- oder Freizeitshirt, etwas anderes?
-  Hinweise: Spieltrikots tragen meist den Hauptsponsor der Saison auf der Brust; Trainingsshirts
-  haben oft keinen oder einen anderen Sponsor und schlichteres Design.
-- passt_zur_beschreibung: Passt das Trikot (Verein, Saison, Variante) zum Gesuchten?
-- flock: Rückenbeflockung, falls sichtbar (ohne, Thiago, anderer Spieler, nicht sichtbar).
-- begruendung: ein kurzer deutscher Satz.
-Wenn du dir nicht sicher bist, wähle "unklar"."""
-
-
-def vision_check(e, http, client):
-    """Bild laden und von Claude einordnen lassen; dict wie VISION_SCHEMA oder None"""
-    import base64
-    img = e.get("image") or ""
-    if not img.startswith("http"):
-        return None
-    r = http.s.get(img, timeout=TIMEOUT)
-    ctype = (r.headers.get("Content-Type") or "").split(";")[0].strip()
-    if r.status_code != 200 or ctype not in ("image/jpeg", "image/png", "image/webp", "image/gif") \
-            or len(r.content) > 4_500_000:
-        return None
-    wanted = ", ".join(e["labels"])
-    response = client.beta.messages.create(
-        model=VISION_MODEL,
-        max_tokens=2000,
-        betas=["server-side-fallback-2026-07-01"],
-        fallbacks="default",                      # bei Ablehnung springt ein anderes Modell ein
-        output_config={"effort": "low", "format": {"type": "json_schema", "schema": VISION_SCHEMA}},
-        messages=[{"role": "user", "content": [
-            {"type": "image", "source": {"type": "base64", "media_type": ctype,
-                                         "data": base64.standard_b64encode(r.content).decode()}},
-            {"type": "text", "text": VISION_PROMPT.format(title=e["title"], wanted=wanted)},
-        ]}],
-    )
-    if response.stop_reason == "refusal":
-        return None
-    text = next((b.text for b in response.content if b.type == "text"), "")
-    return json.loads(text) if text else None
-
-
-def vision_verdict(res, e):
-    """Grund zum Aussortieren oder None. Nur bei eindeutigen Befunden"""
-    if res["art"] in ("trainingsshirt", "jacke_oder_oberteil", "fan_oder_freizeitshirt", "anderes"):
-        return f"Bild: {res['art'].replace('_', ' ')}"
-    thiago = any(l.startswith("Thiago") for l in e["labels"])
-    if res["flock"] == "anderer_spieler" and not thiago:
-        return "Bild: Flock eines anderen Spielers"
-    if not res["passt_zur_beschreibung"] and res["art"] == "spieltrikot" and not thiago:
-        return "Bild: anderes Trikot als gesucht"
-    return None
-
-
-def vision_enrich(seen, ts, budget):
-    """Neue hoch priorisierte Treffer per Bild prüfen, vor den Pushes. Ohne API-Schlüssel: nichts"""
-    if not os.environ.get("ANTHROPIC_API_KEY") or budget <= 0:
-        return 0
-    import anthropic
-    client = anthropic.Anthropic(max_retries=3)
-    cand = [e for e in seen.values()
-            if e["last"] == ts and is_high(e) and not e.get("bild_check")
-            and not (e.get("verkauft") or e.get("weg") or e.get("aussortiert") or e.get("teuer"))]
-    cand.sort(key=lambda e: e["first"], reverse=True)
-    http, done = Http(), 0
-    for e in cand[:budget]:
-        try:
-            res = vision_check(e, http, client)
-        except (anthropic.APIError, requests.RequestException, ValueError) as ex:
-            print(f"Bildprüfung fehlgeschlagen ({e['title'][:40]}): {type(ex).__name__}", file=sys.stderr)
-            continue
-        if not res:
-            continue
-        done += 1
-        e["bild_check"] = {"art": res["art"], "flock": res["flock"], "passt": res["passt_zur_beschreibung"],
-                           "grund": res["begruendung"][:200], "zeit": ts}
-        verdict = vision_verdict(res, e)
-        if verdict:
-            e["aussortiert"] = verdict
-    return done
-
-
-# ---------------------------------------------------------------------------
 # Benachrichtigung
 # ---------------------------------------------------------------------------
 def push(topic, title, message, prio=3, click=None, image=None, tags=None, dry=False):
@@ -1293,7 +1191,6 @@ def write_dashboard(seen, status_store, mode, ts, watch_cfg, shops):
             "zustand": e.get("zustand", ""), "notiz": e.get("zustand_notiz", ""), "bild": e.get("image", ""),
             "erst": e["first"], "zuletzt": e["last"], "via": e.get("via", ""),
             "still": bool(e.get("still")), "teuer": bool(e.get("teuer")),
-            "bild_ok": bool(e.get("bild_check")) and not e.get("aussortiert"),
         })
     quellen = status_store.get("quellen") or {}
     data = {"stand": ts, "modus": mode, "letzter_gesamtlauf": status_store.get("last_full", ""),
@@ -1549,7 +1446,6 @@ def main():
     for e in seen.values():
         if e["last"] == ts:
             e["teuer"] = too_expensive(e)
-    viewed = vision_enrich(seen, ts, VISION_BUDGET.get(args.mode, 0))
     new_entries = [e for e in new_entries if not e.get("verkauft") and not e.get("teuer") and not e.get("aussortiert")]
     laeufe = status_store.setdefault("laeufe", [])
     laeufe.append({"zeit": ts, "modus": args.mode, "neu": len(new_entries),
@@ -1618,7 +1514,7 @@ def main():
     ok = sum(1 for s in statuses if not s["fehler"])
     print(f"Fertig ({args.mode}): {ok}/{len(statuses)} Shops ok, FYJ: "
           f"{(fyj_status or {}).get('fehler') or 'ok' if fyj_status else 'aus'}, "
-          f"{len(new_entries)} neue Treffer, {checked} Seiten und {viewed} Bilder geprüft, Erstlauf: {first_run}")
+          f"{len(new_entries)} neue Treffer, {checked} Seiten geprüft, Erstlauf: {first_run}")
     for s in statuses:
         if s["fehler"]:
             print(f"  - {s['name']}: {s['fehler']}")

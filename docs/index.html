@@ -206,8 +206,7 @@ summary{cursor:pointer;font-weight:600}
   }
 
   function card(t){
-    const badges = [t.neu && '<span class="badge new">NEU</span>', t.thiago && '<span class="badge hi">THIAGO</span>',
-                    t.bild_ok && '<span class="badge" title="Foto von Claude geprüft: echtes Spieltrikot">✓ FOTO</span>']
+    const badges = [t.neu && '<span class="badge new">NEU</span>', t.thiago && '<span class="badge hi">THIAGO</span>']
       .filter(Boolean).join("");
     const cond = t.zustand ? `<span class="cond">${esc(t.zustand)}</span>` : "";
     const note = t.notiz ? `<div class="note" title="${esc(t.notiz)}">${esc(t.notiz)}</div>` : "";

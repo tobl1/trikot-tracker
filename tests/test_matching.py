@@ -218,58 +218,6 @@ def test_below_min(grade, minimum, below):
     assert tracker.below_min(grade, minimum) == below
 
 
-class _FakeBlock:
-    type = "text"
-
-    def __init__(self, text):
-        self.text = text
-
-
-class _FakeClient:
-    """Nachbau von anthropic.Anthropic für Tests: merkt sich den Aufruf, antwortet mit festem JSON"""
-    def __init__(self, answer):
-        self.answer, self.calls = answer, []
-        self.beta = self
-        self.messages = self
-
-    def create(self, **kw):
-        self.calls.append(kw)
-        return type("R", (), {"stop_reason": "end_turn", "content": [_FakeBlock(tracker.json.dumps(self.answer))]})()
-
-
-class _FakeHttp:
-    def __init__(self):
-        resp = type("Resp", (), {"status_code": 200, "headers": {"Content-Type": "image/jpeg"}, "content": b"\xff\xd8x"})()
-        self.s = type("S", (), {"get": lambda self_, url, timeout=None: resp})()
-
-
-def test_vision_check_request_and_verdict():
-    e = {"title": "2010-11 BARCELONA SHIRT XL", "image": "https://x/img.jpg", "labels": ["Barça 2010-2013"]}
-    client = _FakeClient({"art": "trainingsshirt", "passt_zur_beschreibung": False, "flock": "ohne",
-                          "begruendung": "Dri-Fit ohne Sponsor"})
-    res = tracker.vision_check(e, _FakeHttp(), client)
-    kw = client.calls[0]
-    assert kw["model"] == "claude-opus-5-5" and kw["fallbacks"] == "default"
-    assert kw["betas"] == ["server-side-fallback-2026-07-01"]
-    assert kw["output_config"]["format"]["type"] == "json_schema"
-    assert kw["messages"][0]["content"][0]["source"]["media_type"] == "image/jpeg"
-    assert tracker.vision_verdict(res, e) == "Bild: trainingsshirt"
-
-
-@pytest.mark.parametrize("art,flock,passt,labels,out", [
-    ("spieltrikot", "ohne", True, ["Barça 2010-2013"], None),
-    ("spieltrikot", "anderer_spieler", True, ["Barça 2010-2013"], "Bild: Flock eines anderen Spielers"),
-    ("spieltrikot", "anderer_spieler", True, ["Thiago", "Barça 2010-2013"], None),
-    ("spieltrikot", "ohne", False, ["Spanien 2014"], "Bild: anderes Trikot als gesucht"),
-    ("jacke_oder_oberteil", "ohne", True, ["Spanien 2010/2011"], "Bild: jacke oder oberteil"),
-    ("unklar", "nicht_sichtbar", False, ["Thiago"], None),
-    ("spieltrikot", "thiago", False, ["Thiago"], None),          # Thiago nie wegen Saison-Zweifel raus
-])
-def test_vision_verdict(art, flock, passt, labels, out):
-    res = {"art": art, "flock": flock, "passt_zur_beschreibung": passt, "begruendung": ""}
-    assert tracker.vision_verdict(res, {"labels": labels}) == out
-
-
 def _drop_stamps(weeks, weekday, hhmm_list, count=12):
     """je Woche ein Schub am gegebenen Wochentag; hhmm_list[i] = Uhrzeit in Woche i (älteste zuerst)"""
     today = tracker.now().astimezone(tracker.TZ)
