@@ -1,6 +1,6 @@
 # Trikot-Tracker
 
-Stand: 02.10.2026 21:09 Uhr (full), 239 aktuelle Treffer in XL/XXL
+Stand: 03.10.2026 00:00 Uhr (full), 240 aktuelle Treffer in XL/XXL
 
 ## Thiago (2)
 
@@ -54,7 +54,7 @@ Stand: 02.10.2026 21:09 Uhr (full), 239 aktuelle Treffer in XL/XXL
 | [2014/15 Bayern Munich Home Football Shirt (2XL) Adidas #3 Alonso](https://casualfootballshirts.co.uk/products/2014-15-bayern-munich-home-football-shirt-2xl-adidas-3-alonso) | 2XL | Excellent | 80.00 GBP | Casual Football Shirts | 01.10. |
 | [2014/15 Bayern Munich Home Football Shirt (2XL) Adidas #3 Alonso](https://footballfinery.co.uk/products/2014-15-bayern-munich-home-football-shirt-2xl-adidas-3-alonso-ff302752) | 2XL | Excellent | 96.95 EUR | Football Finery | 01.10. |
 | [2005-06 Liverpool Away L/S Shirt Alonso #14 - 7/10 - (XXL)](https://www.classicfootballshirts.co.uk/2005-06-liverpool-away-ls-shirt-alonso-14-710-xxl-liva05298749.html) | XXL | 7/10 | £124.99 | Classic Football Shirts | 01.10. |
-| [2003/05 Alonso #14 Vintage Liverpool Reebok Away Football Shirt (XL)](https://www.cultfootball.co.uk/products/2003-05-alonso-14-vintage-liverpool-reebok-away-football-shirt-xl) | XL | Very Good | 119.97 EUR | Cult Football | 01.10. |
+| [2003/05 Alonso #14 Vintage Liverpool Reebok Away Football Shirt (XL)](https://www.cultfootball.co.uk/products/2003-05-alonso-14-vintage-liverpool-reebok-away-football-shirt-xl) | XL | Very Good | 120.01 EUR | Cult Football | 01.10. |
 | [2012/14 Spain Alonso #14 Away Shirt (XL) Adidas](https://www.cultkits.com/products/2012-14-spain-alonso-14-away-shirt-xl-adidas1441) | XL | Very Good | 120.95 EUR | Cult Kits | 01.10. |
 | [Xabi Alonso Bayern Munich 2014](https://esdeepoca.com/products/xabi-alonso-bayern-munich-2014) | XL | Very Good | 2100.00 MXN | Es de Época | 01.10. |
 | [2003/05 Alonso #14 Vintage Liverpool Reebok Away Football Shirt (XL)](https://footballshirtcollective.com/products/2003-05-alonso-14-vintage-liverpool-reebok-away-football-shirt-xl) | XL | Very Good | 120.95 EUR | Football Shirt Collective | 01.10. |
@@ -136,7 +136,7 @@ Stand: 02.10.2026 21:09 Uhr (full), 239 aktuelle Treffer in XL/XXL
 | [Maglia calcio vintage Arsenal Henry Nike Fly Emirates *NEW* XXL Premier League](https://greensportvintage.com/products/maglia-calcio-vintage-arsenal-henry-nike-fly-emirates-new-xxl-premier-league) | XXL |  | 149.90 EUR | Green Sport Vintage | 01.10. |
 | [maglia henry Arsenal vintage Nike 2002 2003 Invicibles O2 XL Highbury Premier](https://greensportvintage.com/products/maglia-henry-arsenal-vintage-nike-2002-2003-invicibles-o2-xl-highbury-premier) | XL |  | 119.90 EUR | Green Sport Vintage | 01.10. |
 | [2005 / 2006 – maillot extérieur Arsenal – Henry #14 (XL)](https://backtothefootball.com/produit/2005-2006-maillot-exterieur-arsenal-henry-14-xl-2/) | XL | 8/10 | 139.99 EUR | Back to the Football | 01.10. |
-| [2011/12 Arsenal Home 125th Anniversary Football Shirt Henry #12 (XL)](https://classic11.com/products/2011-12-arsenal-home-125th-anniversary-football-shirt-xl-1) | XL | 9/10 | 143.95 EUR | Classic11 | 01.10. |
+| [2011/12 Arsenal Home 125th Anniversary Football Shirt Henry #12 (XL)](https://classic11.com/products/2011-12-arsenal-home-125th-anniversary-football-shirt-xl-1) | XL | 9/10 | 144.95 EUR | Classic11 | 01.10. |
 | [2006/07 - Arsenal FC - Henry #14 (XL)](https://www.vintagefootballarea.com/products/2006-07-arsenal-fc-henry-14-xl-4) | XL |  | 149.99 EUR | Vintage Football Area | 01.10. |
 
 ## Juninho (Pernambucano) (1)
@@ -193,7 +193,7 @@ Stand: 02.10.2026 21:09 Uhr (full), 239 aktuelle Treffer in XL/XXL
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
-| [2010/11 Club Brugge Home Football Shirt Perišić #44 (XL)](https://classic11.com/products/2010-11-club-brugge-home-football-shirt-perisic-44-xl) | XL | 9/10 | 143.95 EUR | Classic11 | 01.10. |
+| [2010/11 Club Brugge Home Football Shirt Perišić #44 (XL)](https://classic11.com/products/2010-11-club-brugge-home-football-shirt-perisic-44-xl) | XL | 9/10 | 144.95 EUR | Classic11 | 01.10. |
 | [Koszulka piłkarska Borussia Dortmund 2011/12 Home 44 Perisic [XXL]](https://footballthrift.shop/borussia-dortmund-2011-12-home-44-perisic-xxl/) | XXL |  | 90.00 USD | Football Thrift Shop | 01.10. |
 | [Club Brugge KV 2010/2011 Away Perisic #44 Player of The Year Soccer Jersey (XXL)](https://www.original11vs11.com/product-page/222-131) | XXL | Very Good | 126.00 USD | original11vs11.com | 01.10. |
 
@@ -273,7 +273,7 @@ Stand: 02.10.2026 21:09 Uhr (full), 239 aktuelle Treffer in XL/XXL
 | [ATLETICO MADRID 2003/04 HOME FOOTBALL SHIRT ‘TORRES #9’ (XL)](https://vintage-football-jerseys.co.uk/products/copy-atletico-madrid-1997-98-home-football-shirt-m) | XL | Very Good | 119.99 GBP | Vintage Football Jerseys | 01.10. |
 | [2017/18 - Atlético Madrid - Third - F.TORRES #9 (XL)](https://vintagehistoricsports.fr/products/2017-18-atletico-madrid-third-f-torres-9-xl) | XL |  | 139.00 EUR | Vintage Historic Sports | 01.10. |
 | [2010-12 LIVERPOOL *TORRES* SHIRT XXL](https://classic-shirts.com/product-eng-358465-2010-12-LIVERPOOL-TORRES-SHIRT-XXL.html) | XXL | 8/10 | £79.99 | Classic-Shirts | 01.10. |
-| [2007/08 Liverpool Away Premier League Football Shirt Torres #9 (XXL)](https://classic11.com/products/2007-08-liverpool-away-premier-league-football-shirt-torres-9-xxl) | XXL | 9/10 | 119.95 EUR | Classic11 | 01.10. |
+| [2007/08 Liverpool Away Premier League Football Shirt Torres #9 (XXL)](https://classic11.com/products/2007-08-liverpool-away-premier-league-football-shirt-torres-9-xxl) | XXL | 9/10 | 120.95 EUR | Classic11 | 01.10. |
 | [Koszulka piłkarska AUTHENTIC Atletico Madryt 2016/17 Away 9 Torres [XL]](https://footballthrift.shop/koszulka-pilkarska-authentic-atletico-madryt-2016-17-away-9-torres-xl/) | XL |  | 145.00 USD | Football Thrift Shop | 01.10. |
 | [Liverpool FC 2007/08 Heimtrikot – Fernando Torres #9 – Adidas (XL)](https://jersely.com/products/liverpool-fc-2007-08-heimtrikot-fernando-torres-9-adidas-xl) | XL | Very Good | 124.99 EUR | Jersely | 01.10. |
 | [Liverpool 2008-09 "Torres" Auswärts Trikot XXL adidas](https://www.senseofgoal.com/products/liverpool-2008-09-torres-auswarts-trikot-xxl-adidas) | XXL |  | 124.95 EUR | Sense of Goal | 01.10. |
@@ -316,13 +316,14 @@ Stand: 02.10.2026 21:09 Uhr (full), 239 aktuelle Treffer in XL/XXL
 | [2004/06 - Pays-Bas - Van Nistelrooy #10 (XL)](https://www.vintagefootballarea.com/products/2004-06-pays-bas-van-nistelrooy-10-xl-5) | XL | Very Good | 129.99 EUR | Vintage Football Area | 01.10. |
 | [2011/12 - Malaga - v.Nistelrooy #9 (XL)](https://www.vintagefootballarea.com/products/2011-12-malaga-v-nistelrooy-9-xl-1) | XL | 8.5/10 | 89.99 EUR | Vintage Football Area | 01.10. |
 
-## Verratti (4)
+## Verratti (5)
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
 | [2022/23 Italy Away Football Shirt (2XL) Puma #6 Verratti (BNWTs)](https://casualfootballshirts.co.uk/products/2022-23-italy-away-football-shirt-2xl-puma-6-verratti-bnwts) | 2XL | BNWT | 80.00 GBP | Casual Football Shirts | 01.10. |
 | [2022/23 Italy Away Football Shirt (2XL) Puma #6 Verratti (BNWTs)](https://footballfinery.co.uk/products/2022-23-italy-away-football-shirt-2xl-puma-6-verratti-bnwts-ff303625) | 2XL | BNWT | 96.95 EUR | Football Finery | 01.10. |
 | [PSG 2019/20 Away Verratti Meczowa](https://swiatkoszulekpilkarskich.pl/psg/678-942-psg-201920-away-verratti-meczowa.html) | XL |  | 569,00 zł | Swiat Koszulek Pilkarskich | 01.10. |
+| [2023-24 Italy Home Shirt Verratti #6 (XXL)](https://www.classicfootballshirts.co.uk/2023-24-italy-home-shirt-verratti-6-xxl-itah23932136.html) | XXL |  | £79.99 | Classic Football Shirts | 01.10. |
 | [ITALY VERRATTI 2022-2023 ORIGINAL PLAYER JERSEY Size XL](https://tiffozifutbol.com/products/italy-veratti-2022-2023-original-player-jersey-size-xl) | XL | 9/10 | 99.95 EUR | Tiffozi Futbol | 01.10. |
 
 ## Vidal (Arturo) (9)
@@ -358,14 +359,14 @@ Stand: 02.10.2026 21:09 Uhr (full), 239 aktuelle Treffer in XL/XXL
 
 ## Quellen-Status
 
-Vom letzten Gesamt-Run (02.10.2026 21:06 Uhr)
+Vom letzten Gesamt-Run (02.10.2026 23:59 Uhr)
 
 | Quelle | System | Produkte | Anfragen | Hinweis |
 |---|---|---|---|---|
 | FindYourJersey | fyj | 3777 | 79 | ok |
+| Football Cat | aus | 0 | 0 | deaktiviert (Bot-Schutz (JS-Prüfung), wird bewusst nicht umgangen; Drop Sa 16 Uhr laut Nutzer; nicht bei FYJ) |
 | House of Football Shirts | aus | 0 | 0 | deaktiviert (nur noch Laden in Den Haag, kein Online-Sortiment (01.10.2026)) |
 | The Football Boutique | aus | 0 | 0 | deaktiviert (Wix, noch keine Anbindung) |
-| The Third Kit | woo | 0 | 4 | keine Produkte erhalten |
 | Throwback Jerseys NZ | aus | 0 | 0 | deaktiviert (Wix, Drop jeden Freitag 20 Uhr NZ-Zeit) |
 | 1Klopp Shop | shopify | 265 | 4 | ok |
 | 3kots | woo | 560 | 8 | ok |
@@ -373,7 +374,7 @@ Vom letzten Gesamt-Run (02.10.2026 21:06 Uhr)
 | Buy Sell Football Shirts | shopify | 1392 | 8 | ok |
 | Calcio Vintage | shopify | 336 | 4 | ok |
 | Casual Football Shirts | shopify | 16453 | 68 | ok |
-| Classic Football Shirts | cfs | 1533 | 131 | ok |
+| Classic Football Shirts | cfs | 1537 | 131 | ok |
 | Classic Pitchwear | shopify | 140 | 3 | ok |
 | Classic-Shirts | idosell | 1224 | 66 | ok |
 | Classic11 | shopify | 5665 | 25 | ok |
@@ -387,14 +388,14 @@ Vom letzten Gesamt-Run (02.10.2026 21:06 Uhr)
 | First Street | shopify | 935 | 6 | ok |
 | Fodbold Shoppen | shopify | 640 | 5 | ok |
 | Football Finery | shopify | 6374 | 28 | ok |
-| Football Second Hand | woo | 1418 | 17 | ok |
+| Football Second Hand | woo | 1415 | 17 | ok |
 | Football Shirt Collective | shopify | 3722 | 17 | ok |
 | Football Shirt Kingdom | shopify | 6085 | 27 | ok |
 | Football Shirt Union | shopify | 69 | 3 | ok |
 | Football Thrift Shop | woo | 1772 | 20 | ok |
 | FootballShirts.com | shopify | 482 | 4 | ok |
 | Forever Soccer Jerseys | shopify | 1588 | 9 | ok |
-| Golaço Kits | shopify | 4179 | 19 | ok |
+| Golaço Kits | shopify | 4196 | 19 | ok |
 | Granny's Football Store | shopify | 1173 | 7 | ok |
 | Green Sport Vintage | shopify | 1556 | 9 | ok |
 | Iconic Jersey | shopify | 894 | 6 | ok |
@@ -405,20 +406,20 @@ Vom letzten Gesamt-Run (02.10.2026 21:06 Uhr)
 | Kit Launch | shopify | 639 | 5 | ok |
 | Le 7 Sorelle | shopify | 12262 | 52 | ok |
 | Legacy Football Shirts | shopify | 742 | 5 | ok |
-| Nanos Football Jerseys | shopify | 580 | 5 | ok |
+| Nanos Football Jerseys | shopify | 581 | 5 | ok |
 | Nostalgic Football Shirts | shopify | 1200 | 7 | ok |
-| Offside Boys | shopify | 1208 | 7 | ok |
+| Offside Boys | shopify | 1209 | 7 | ok |
 | Oh Calcio | shopify | 229 | 3 | ok |
-| One More Time | shopify | 191 | 3 | ok |
-| Philly Soccer Jerseys | shopify | 197 | 3 | ok |
+| One More Time | shopify | 190 | 3 | ok |
+| Philly Soccer Jerseys | shopify | 198 | 3 | ok |
 | RB-Jerseys | woo | 607 | 9 | ok |
 | ReShirt | smartweb | 5 | 49 | ok |
 | RetrOriginalFootball | shopify | 891 | 6 | ok |
 | Retro Football Shirt Store | über FYJ | 0 | 0 | wird über FindYourJersey abgedeckt |
 | Retro Football Shirts | shopify | 313 | 4 | ok |
 | Retrotrøjer | shopify | 611 | 5 | ok |
-| STA Jerseys | shopify | 645 | 5 | ok |
-| Saturdays Football | shopify | 25000 | 168 | Katalog bei 25000 gekappt, ältere Artikel per Suche |
+| STA Jerseys | shopify | 640 | 5 | ok |
+| Saturdays Football | shopify | 25000 | 161 | Katalog bei 25000 gekappt, ältere Artikel per Suche |
 | Sense of Goal | shopify | 475 | 4 | ok |
 | Special Football Shirts | shopify | 82 | 3 | ok |
 | Swiat Koszulek Pilkarskich | prestashop | 111 | 56 | ok |
@@ -428,14 +429,15 @@ Vom letzten Gesamt-Run (02.10.2026 21:06 Uhr)
 | The Football Temple | shopify | 1999 | 10 | ok |
 | The Hoff Classics | über FYJ | 0 | 0 | wird über FindYourJersey abgedeckt |
 | The Kit Dealer | shopify | 623 | 5 | ok |
-| The Kitman 97 | shopify | 1419 | 8 | ok |
+| The Kitman 97 | shopify | 1420 | 8 | ok |
 | The Soccer Archive | shopify | 4056 | 19 | ok |
+| The Third Kit | woo | 1294 | 15 | ok |
 | Tiffozi Futbol | shopify | 620 | 5 | ok |
 | To The Jersey | shopify | 6093 | 27 | ok |
 | Topbinz | über FYJ | 0 | 0 | wird über FindYourJersey abgedeckt |
 | Trikotparadies | shopify | 3512 | 17 | ok |
 | Vice Football Store | shopify | 577 | 5 | ok |
-| Vintage Football Area | shopify | 25000 | 391 | Katalog bei 25000 gekappt, ältere Artikel per Suche |
+| Vintage Football Area | shopify | 25000 | 396 | Katalog bei 25000 gekappt, ältere Artikel per Suche |
 | Vintage Football Jerseys | shopify | 572 | 5 | ok |
 | Vintage Football Shirts | shopify | 25000 | 231 | Katalog bei 25000 gekappt, ältere Artikel per Suche |
 | Vintage Historic Sports | shopify | 1013 | 7 | ok |

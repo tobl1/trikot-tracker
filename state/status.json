@@ -6,7 +6,7 @@
   "Buy Sell Football Shirts": 1392,
   "Calcio Vintage": 336,
   "Casual Football Shirts": 16453,
-  "Classic Football Shirts": 1533,
+  "Classic Football Shirts": 1537,
   "Classic Pitchwear": 140,
   "Classic-Shirts": 1224,
   "Classic11": 5665,
@@ -20,14 +20,14 @@
   "First Street": 935,
   "Fodbold Shoppen": 640,
   "Football Finery": 6374,
-  "Football Second Hand": 1418,
+  "Football Second Hand": 1415,
   "Football Shirt Collective": 3722,
   "Football Shirt Kingdom": 6085,
   "Football Shirt Union": 69,
   "Football Thrift Shop": 1772,
   "FootballShirts.com": 482,
   "Forever Soccer Jerseys": 1588,
-  "Golaço Kits": 4179,
+  "Golaço Kits": 4196,
   "Granny's Football Store": 1173,
   "Green Sport Vintage": 1556,
   "Iconic Jersey": 894,
@@ -38,18 +38,18 @@
   "Kit Launch": 639,
   "Le 7 Sorelle": 12262,
   "Legacy Football Shirts": 742,
-  "Nanos Football Jerseys": 580,
+  "Nanos Football Jerseys": 581,
   "Nostalgic Football Shirts": 1200,
-  "Offside Boys": 1208,
+  "Offside Boys": 1209,
   "Oh Calcio": 229,
-  "One More Time": 191,
-  "Philly Soccer Jerseys": 197,
+  "One More Time": 190,
+  "Philly Soccer Jerseys": 198,
   "RB-Jerseys": 607,
   "ReShirt": 5,
   "RetrOriginalFootball": 891,
   "Retro Football Shirts": 313,
   "Retrotrøjer": 611,
-  "STA Jerseys": 645,
+  "STA Jerseys": 640,
   "Saturdays Football": 25000,
   "Sense of Goal": 475,
   "Special Football Shirts": 82,
@@ -59,7 +59,7 @@
   "The Football Room": 806,
   "The Football Temple": 1999,
   "The Kit Dealer": 623,
-  "The Kitman 97": 1419,
+  "The Kitman 97": 1420,
   "The Soccer Archive": 4056,
   "The Third Kit": 1294,
   "Tiffozi Futbol": 620,
@@ -252,12 +252,18 @@
    "neu": 0,
    "still": 7,
    "zeit": "2026-10-02T19:06:54.841007+00:00"
+  },
+  {
+   "modus": "full",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-02T21:59:41.090621+00:00"
   }
  ],
- "last_full": "2026-10-02T19:06:54.841007+00:00",
+ "last_full": "2026-10-02T21:59:41.090621+00:00",
  "last_run": {
   "mode": "full",
-  "time": "2026-10-02T19:06:54.841007+00:00"
+  "time": "2026-10-02T21:59:41.090621+00:00"
  },
  "platforms": {
   "https://1kloppshop.com": "shopify",
@@ -351,6 +357,15 @@
    },
    {
     "anfragen": 0,
+    "fehler": "deaktiviert (Bot-Schutz (JS-Prüfung), wird bewusst nicht umgangen; Drop Sa 16 Uhr laut Nutzer; nicht bei FYJ)",
+    "info": "",
+    "name": "Football Cat",
+    "plattform": "aus",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 0,
     "fehler": "deaktiviert (nur noch Laden in Den Haag, kein Online-Sortiment (01.10.2026))",
     "info": "",
     "name": "House of Football Shirts",
@@ -366,15 +381,6 @@
     "plattform": "aus",
     "produkte": 0,
     "sekunden": 0.0
-   },
-   {
-    "anfragen": 4,
-    "fehler": "keine Produkte erhalten",
-    "info": "",
-    "name": "The Third Kit",
-    "plattform": "woo",
-    "produkte": 0,
-    "sekunden": 43.5
    },
    {
     "anfragen": 0,
@@ -400,7 +406,7 @@
      "text": "seit 30 Tagen nichts Neues (44 in 90 Tagen)",
      "typ": "ruhig"
     },
-    "sekunden": 56.7
+    "sekunden": 59.2
    },
    {
     "anfragen": 8,
@@ -409,7 +415,7 @@
     "name": "3kots",
     "plattform": "woo",
     "produkte": 560,
-    "sekunden": 68.8
+    "sekunden": 56.1
    },
    {
     "anfragen": 46,
@@ -418,7 +424,7 @@
     "name": "Back to the Football",
     "plattform": "woo",
     "produkte": 4386,
-    "sekunden": 119.1
+    "sekunden": 117.9
    },
    {
     "anfragen": 8,
@@ -435,7 +441,7 @@
      "text": "laufend: an 8 von 30 Tagen neue Artikel, 6 in 7 Tagen, 19 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 127.7
+    "sekunden": 128.0
    },
    {
     "anfragen": 4,
@@ -452,7 +458,7 @@
      "text": "unregelmäßig: an 2 von 30 Tagen neue Artikel, 3 in 30 Tagen, zuletzt 07.09.",
      "typ": "unregelmäßig"
     },
-    "sekunden": 52.6
+    "sekunden": 52.5
    },
    {
     "anfragen": 68,
@@ -469,7 +475,7 @@
      "text": "laufend: an 9 von 30 Tagen neue Artikel, 115 in 7 Tagen, 781 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 1077.8
+    "sekunden": 1083.6
    },
    {
     "anfragen": 131,
@@ -477,8 +483,8 @@
     "info": "",
     "name": "Classic Football Shirts",
     "plattform": "cfs",
-    "produkte": 1533,
-    "sekunden": 262.2
+    "produkte": 1537,
+    "sekunden": 261.3
    },
    {
     "anfragen": 3,
@@ -495,7 +501,7 @@
      "text": "seit 30 Tagen nichts Neues (20 in 90 Tagen)",
      "typ": "ruhig"
     },
-    "sekunden": 48.0
+    "sekunden": 48.6
    },
    {
     "anfragen": 66,
@@ -504,7 +510,7 @@
     "name": "Classic-Shirts",
     "plattform": "idosell",
     "produkte": 1224,
-    "sekunden": 192.5
+    "sekunden": 168.6
    },
    {
     "anfragen": 25,
@@ -521,7 +527,7 @@
      "text": "laufend: an 21 von 30 Tagen neue Artikel, 33 in 7 Tagen, 214 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 351.3
+    "sekunden": 337.0
    },
    {
     "anfragen": 0,
@@ -544,16 +550,27 @@
      "anteil": 0.38,
      "letzte": "2026-09-28T15:07:01+01:00",
      "letzter_schub": "2026-09-28T14:30:08+01:00",
+     "minute": 17,
      "neu_30": 77,
      "neu_7": 34,
      "schuebe": 8,
      "tage_30": 4,
-     "text": "Drops etwa alle 11 Tage, meist Sa (3 von 8) ab 8 Uhr, zuletzt 28.09. 15:30",
+     "termine": [
+      {
+       "anzahl": 3,
+       "minute": 17,
+       "streuung_min": 113,
+       "tag": "Sa",
+       "uhrzeit": 10,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 11 Tage: Sa gegen 10:17 (±113 Min., 3x); 8 Schübe in 90 Tagen, zuletzt 28.09. 15:30",
      "typ": "drops",
-     "uhrzeit": 8,
+     "uhrzeit": 10,
      "wochentag": "Sa"
     },
-    "sekunden": 96.0
+    "sekunden": 96.3
    },
    {
     "anfragen": 88,
@@ -570,7 +587,7 @@
      "text": "laufend: an 27 von 30 Tagen neue Artikel, 118 in 7 Tagen, 612 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 1250.8
+    "sekunden": 1252.8
    },
    {
     "anfragen": 5,
@@ -587,7 +604,7 @@
      "text": "laufend: an 18 von 30 Tagen neue Artikel, 22 in 7 Tagen, 86 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 80.2
+    "sekunden": 79.4
    },
    {
     "anfragen": 17,
@@ -604,7 +621,7 @@
      "text": "laufend: an 9 von 30 Tagen neue Artikel, 9 in 7 Tagen, 23 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 271.7
+    "sekunden": 273.2
    },
    {
     "anfragen": 28,
@@ -618,16 +635,27 @@
      "anteil": 1.0,
      "letzte": "2026-10-01T18:59:12+02:00",
      "letzter_schub": "2026-10-01T18:44:14+02:00",
+     "minute": 29,
      "neu_30": 553,
      "neu_7": 133,
      "schuebe": 13,
      "tage_30": 6,
-     "text": "Drops etwa alle 7 Tage, meist Do (13 von 13) ab 18 Uhr, zuletzt 01.10. 18:44",
+     "termine": [
+      {
+       "anzahl": 13,
+       "minute": 29,
+       "streuung_min": 8,
+       "tag": "Do",
+       "uhrzeit": 18,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 7 Tage: Do gegen 18:29 (±8 Min., 13x); 13 Schübe in 90 Tagen, zuletzt 01.10. 18:44",
      "typ": "drops",
      "uhrzeit": 18,
      "wochentag": "Do"
     },
-    "sekunden": 240.8
+    "sekunden": 239.2
    },
    {
     "anfragen": 3,
@@ -638,16 +666,18 @@
     "produkte": 167,
     "rhythmus": {
      "abstand_tage": 7.7,
-     "anteil": 0.4,
+     "anteil": 0.0,
      "letzte": "2026-09-21T15:08:32+01:00",
      "letzter_schub": "2026-09-21T14:23:32+01:00",
-     "neu_30": 55,
+     "minute": 0,
+     "neu_30": 53,
      "neu_7": 0,
      "schuebe": 5,
-     "tage_30": 6,
-     "text": "Drops etwa alle 8 Tage, meist Mo (2 von 5) ab 17 Uhr, zuletzt 21.09. 15:23",
+     "tage_30": 5,
+     "termine": [],
+     "text": "Drops etwa alle 8 Tage: kein fester Wochentag; 5 Schübe in 90 Tagen, zuletzt 21.09. 15:23",
      "typ": "drops",
-     "uhrzeit": 17,
+     "uhrzeit": 15,
      "wochentag": "Mo"
     },
     "sekunden": 34.9
@@ -664,16 +694,27 @@
      "anteil": 0.85,
      "letzte": "2026-10-02T12:07:51+08:00",
      "letzter_schub": "2026-09-24T16:58:34+08:00",
+     "minute": 56,
      "neu_30": 180,
      "neu_7": 1,
      "schuebe": 13,
      "tage_30": 7,
-     "text": "Drops etwa alle 7 Tage, meist Do (11 von 13) ab 10 Uhr, zuletzt 24.09. 10:58",
+     "termine": [
+      {
+       "anzahl": 11,
+       "minute": 56,
+       "streuung_min": 7,
+       "tag": "Do",
+       "uhrzeit": 10,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 7 Tage: Do gegen 10:56 (±7 Min., 11x); 13 Schübe in 90 Tagen, zuletzt 24.09. 10:58",
      "typ": "drops",
      "uhrzeit": 10,
      "wochentag": "Do"
     },
-    "sekunden": 104.5
+    "sekunden": 97.0
    },
    {
     "anfragen": 5,
@@ -687,16 +728,27 @@
      "anteil": 1.0,
      "letzte": "2026-09-28T07:59:10+02:00",
      "letzter_schub": "2026-09-18T15:55:45+02:00",
+     "minute": 36,
      "neu_30": 57,
      "neu_7": 2,
      "schuebe": 6,
      "tage_30": 3,
-     "text": "Drops etwa alle 14 Tage, meist Fr (6 von 6) ab 15 Uhr, zuletzt 18.09. 15:55",
+     "termine": [
+      {
+       "anzahl": 6,
+       "minute": 36,
+       "streuung_min": 24,
+       "tag": "Fr",
+       "uhrzeit": 15,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 14 Tage: Fr gegen 15:36 (±24 Min., 6x); 6 Schübe in 90 Tagen, zuletzt 18.09. 15:55",
      "typ": "drops",
      "uhrzeit": 15,
      "wochentag": "Fr"
     },
-    "sekunden": 65.1
+    "sekunden": 66.2
    },
    {
     "anfragen": 28,
@@ -707,19 +759,38 @@
     "produkte": 6374,
     "rhythmus": {
      "abstand_tage": 3.0,
-     "anteil": 0.42,
+     "anteil": 0.84,
      "letzte": "2026-10-02T10:00:54+01:00",
      "letzter_schub": "2026-10-02T10:00:09+01:00",
+     "minute": 59,
      "neu_30": 379,
      "neu_7": 126,
      "schuebe": 31,
      "tage_30": 13,
-     "text": "Drops etwa alle 3 Tage, meist Di (13 von 31) ab 10 Uhr, zuletzt 02.10. 11:00",
+     "termine": [
+      {
+       "anzahl": 13,
+       "minute": 59,
+       "streuung_min": 0,
+       "tag": "Di",
+       "uhrzeit": 10,
+       "verschoben": false
+      },
+      {
+       "anzahl": 13,
+       "minute": 59,
+       "streuung_min": 0,
+       "tag": "Fr",
+       "uhrzeit": 10,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 3 Tage: Di gegen 10:59 (±0 Min., 13x); Fr gegen 10:59 (±0 Min., 13x); 31 Schübe in 90 Tagen, zuletzt 02.10. 11:00",
      "typ": "drops",
      "uhrzeit": 10,
      "wochentag": "Di"
     },
-    "sekunden": 445.6
+    "sekunden": 447.7
    },
    {
     "anfragen": 17,
@@ -727,8 +798,8 @@
     "info": "",
     "name": "Football Second Hand",
     "plattform": "woo",
-    "produkte": 1418,
-    "sekunden": 57.1
+    "produkte": 1415,
+    "sekunden": 58.6
    },
    {
     "anfragen": 17,
@@ -742,16 +813,27 @@
      "anteil": 0.27,
      "letzte": "2026-09-28T19:29:23+01:00",
      "letzter_schub": "2026-09-28T19:16:40+01:00",
+     "minute": 9,
      "neu_30": 100,
      "neu_7": 44,
      "schuebe": 11,
      "tage_30": 6,
-     "text": "Drops etwa alle 9 Tage, meist Fr (3 von 11) ab 9 Uhr, zuletzt 28.09. 20:16",
+     "termine": [
+      {
+       "anzahl": 3,
+       "minute": 9,
+       "streuung_min": 421,
+       "tag": "Fr",
+       "uhrzeit": 13,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 9 Tage: Fr gegen 13:09 (±421 Min., 3x); 11 Schübe in 90 Tagen, zuletzt 28.09. 20:16",
      "typ": "drops",
-     "uhrzeit": 9,
+     "uhrzeit": 13,
      "wochentag": "Fr"
     },
-    "sekunden": 268.5
+    "sekunden": 271.9
    },
    {
     "anfragen": 27,
@@ -768,7 +850,7 @@
      "text": "laufend: an 8 von 30 Tagen neue Artikel, 59 in 7 Tagen, 294 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 374.2
+    "sekunden": 374.4
    },
    {
     "anfragen": 3,
@@ -785,7 +867,7 @@
      "text": "seit 30 Tagen nichts Neues (0 in 90 Tagen)",
      "typ": "ruhig"
     },
-    "sekunden": 38.6
+    "sekunden": 39.1
    },
    {
     "anfragen": 20,
@@ -794,7 +876,7 @@
     "name": "Football Thrift Shop",
     "plattform": "woo",
     "produkte": 1772,
-    "sekunden": 67.1
+    "sekunden": 60.5
    },
    {
     "anfragen": 4,
@@ -811,7 +893,7 @@
      "text": "laufend: an 14 von 30 Tagen neue Artikel, 1 in 7 Tagen, 55 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 49.9
+    "sekunden": 46.3
    },
    {
     "anfragen": 9,
@@ -828,7 +910,7 @@
      "text": "unregelmäßig: an 3 von 30 Tagen neue Artikel, 14 in 30 Tagen, zuletzt 01.10.",
      "typ": "unregelmäßig"
     },
-    "sekunden": 139.1
+    "sekunden": 143.1
    },
    {
     "anfragen": 19,
@@ -836,16 +918,16 @@
     "info": "",
     "name": "Golaço Kits",
     "plattform": "shopify",
-    "produkte": 4179,
+    "produkte": 4196,
     "rhythmus": {
-     "letzte": "2026-10-02T14:19:30-04:00",
-     "neu_30": 519,
-     "neu_7": 116,
+     "letzte": "2026-10-02T16:47:12-04:00",
+     "neu_30": 527,
+     "neu_7": 122,
      "tage_30": 26,
-     "text": "laufend: an 26 von 30 Tagen neue Artikel, 116 in 7 Tagen, 519 in 30 Tagen",
+     "text": "laufend: an 26 von 30 Tagen neue Artikel, 122 in 7 Tagen, 527 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 300.3
+    "sekunden": 300.0
    },
    {
     "anfragen": 7,
@@ -862,7 +944,7 @@
      "text": "unregelmäßig: an 2 von 30 Tagen neue Artikel, 2 in 30 Tagen, zuletzt 26.09.",
      "typ": "unregelmäßig"
     },
-    "sekunden": 94.7
+    "sekunden": 92.6
    },
    {
     "anfragen": 9,
@@ -874,12 +956,12 @@
     "rhythmus": {
      "letzte": "2026-09-25T22:19:12+02:00",
      "neu_30": 1,
-     "neu_7": 1,
+     "neu_7": 0,
      "tage_30": 1,
      "text": "unregelmäßig: an 1 von 30 Tagen neue Artikel, 1 in 30 Tagen, zuletzt 25.09.",
      "typ": "unregelmäßig"
     },
-    "sekunden": 143.8
+    "sekunden": 143.7
    },
    {
     "anfragen": 6,
@@ -890,19 +972,21 @@
     "produkte": 894,
     "rhythmus": {
      "abstand_tage": 18.9,
-     "anteil": 0.4,
+     "anteil": 0.0,
      "letzte": "2026-09-28T11:46:09+10:00",
      "letzter_schub": "2026-09-25T17:58:42+10:00",
+     "minute": 0,
      "neu_30": 223,
      "neu_7": 1,
      "schuebe": 5,
      "tage_30": 6,
-     "text": "Drops etwa alle 19 Tage, meist Mi (2 von 5) ab 11 Uhr, zuletzt 25.09. 09:58",
+     "termine": [],
+     "text": "Drops etwa alle 19 Tage: kein fester Wochentag; 5 Schübe in 90 Tagen, zuletzt 25.09. 09:58",
      "typ": "drops",
-     "uhrzeit": 11,
-     "wochentag": "Mi"
+     "uhrzeit": 9,
+     "wochentag": "Fr"
     },
-    "sekunden": 96.7
+    "sekunden": 96.6
    },
    {
     "anfragen": 13,
@@ -916,16 +1000,27 @@
      "anteil": 0.57,
      "letzte": "2026-09-28T20:00:03+02:00",
      "letzter_schub": "2026-09-27T19:16:01+02:00",
+     "minute": 0,
      "neu_30": 138,
      "neu_7": 61,
      "schuebe": 14,
      "tage_30": 5,
-     "text": "Drops etwa alle 7 Tage, meist So (8 von 14) ab 20 Uhr, zuletzt 27.09. 19:16",
+     "termine": [
+      {
+       "anzahl": 8,
+       "minute": 0,
+       "streuung_min": 6,
+       "tag": "So",
+       "uhrzeit": 20,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 7 Tage: So gegen 20:00 (±6 Min., 8x); 14 Schübe in 90 Tagen, zuletzt 27.09. 19:16",
      "typ": "drops",
      "uhrzeit": 20,
      "wochentag": "So"
     },
-    "sekunden": 209.0
+    "sekunden": 208.6
    },
    {
     "anfragen": 3,
@@ -942,7 +1037,7 @@
      "text": "unregelmäßig: an 1 von 30 Tagen neue Artikel, 1 in 30 Tagen, zuletzt 26.09.",
      "typ": "unregelmäßig"
     },
-    "sekunden": 40.1
+    "sekunden": 40.5
    },
    {
     "anfragen": 4,
@@ -953,19 +1048,21 @@
     "produkte": 353,
     "rhythmus": {
      "abstand_tage": 22.1,
-     "anteil": 0.67,
+     "anteil": 0.0,
      "letzte": "2026-09-21T17:07:53+02:00",
      "letzter_schub": "2026-09-20T18:11:47+02:00",
+     "minute": 0,
      "neu_30": 56,
      "neu_7": 0,
      "schuebe": 3,
      "tage_30": 2,
-     "text": "Drops etwa alle 22 Tage, meist Sa (2 von 3) ab 18 Uhr, zuletzt 20.09. 18:11",
+     "termine": [],
+     "text": "Drops etwa alle 22 Tage: kein fester Wochentag; 3 Schübe in 90 Tagen, zuletzt 20.09. 18:11",
      "typ": "drops",
      "uhrzeit": 18,
-     "wochentag": "Sa"
+     "wochentag": "So"
     },
-    "sekunden": 61.3
+    "sekunden": 61.2
    },
    {
     "anfragen": 13,
@@ -979,16 +1076,27 @@
      "anteil": 1.0,
      "letzte": "2026-10-01T18:00:12+02:00",
      "letzter_schub": "2026-10-01T17:56:25+02:00",
+     "minute": 57,
      "neu_30": 485,
      "neu_7": 84,
      "schuebe": 13,
      "tage_30": 5,
-     "text": "Drops etwa alle 7 Tage, meist Do (13 von 13) ab 16 Uhr, zuletzt 01.10. 17:56",
+     "termine": [
+      {
+       "anzahl": 13,
+       "minute": 57,
+       "streuung_min": 50,
+       "tag": "Do",
+       "uhrzeit": 16,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 7 Tage: Do gegen 16:57 (±50 Min., 13x); 13 Schübe in 90 Tagen, zuletzt 01.10. 17:56",
      "typ": "drops",
      "uhrzeit": 16,
      "wochentag": "Do"
     },
-    "sekunden": 190.8
+    "sekunden": 196.4
    },
    {
     "anfragen": 5,
@@ -1005,7 +1113,7 @@
      "text": "unregelmäßig: an 6 von 30 Tagen neue Artikel, 187 in 30 Tagen, zuletzt 02.10.",
      "typ": "unregelmäßig"
     },
-    "sekunden": 64.9
+    "sekunden": 66.8
    },
    {
     "anfragen": 52,
@@ -1022,7 +1130,7 @@
      "text": "laufend: an 8 von 30 Tagen neue Artikel, 58 in 7 Tagen, 189 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 845.4
+    "sekunden": 833.4
    },
    {
     "anfragen": 5,
@@ -1036,16 +1144,27 @@
      "anteil": 0.44,
      "letzte": "2026-09-30T16:10:37+02:00",
      "letzter_schub": "2026-09-30T16:09:53+02:00",
+     "minute": 34,
      "neu_30": 121,
      "neu_7": 40,
      "schuebe": 9,
      "tage_30": 6,
-     "text": "Drops etwa alle 8 Tage, meist So (4 von 9) ab 15 Uhr, zuletzt 30.09. 16:09",
+     "termine": [
+      {
+       "anzahl": 4,
+       "minute": 34,
+       "streuung_min": 134,
+       "tag": "So",
+       "uhrzeit": 19,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 8 Tage: So gegen 19:34 (±134 Min., 4x); 9 Schübe in 90 Tagen, zuletzt 30.09. 16:09",
      "typ": "drops",
-     "uhrzeit": 15,
+     "uhrzeit": 19,
      "wochentag": "So"
     },
-    "sekunden": 80.0
+    "sekunden": 80.4
    },
    {
     "anfragen": 5,
@@ -1053,22 +1172,41 @@
     "info": "",
     "name": "Nanos Football Jerseys",
     "plattform": "shopify",
-    "produkte": 580,
+    "produkte": 581,
     "rhythmus": {
      "abstand_tage": 8.0,
-     "anteil": 0.43,
-     "letzte": "2026-09-28T19:00:27+02:00",
+     "anteil": 0.86,
+     "letzte": "2026-10-02T21:57:24+02:00",
      "letzter_schub": "2026-09-28T19:00:02+02:00",
-     "neu_30": 168,
-     "neu_7": 37,
+     "minute": 0,
+     "neu_30": 169,
+     "neu_7": 38,
      "schuebe": 7,
-     "tage_30": 4,
-     "text": "Drops etwa alle 8 Tage, meist Mo (3 von 7) ab 19 Uhr, zuletzt 28.09. 19:00",
+     "tage_30": 5,
+     "termine": [
+      {
+       "anzahl": 3,
+       "minute": 0,
+       "streuung_min": 0,
+       "tag": "Mo",
+       "uhrzeit": 19,
+       "verschoben": false
+      },
+      {
+       "anzahl": 3,
+       "minute": 0,
+       "streuung_min": 34,
+       "tag": "So",
+       "uhrzeit": 18,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 8 Tage: Mo gegen 19:00 (±0 Min., 3x); So gegen 18:00 (±34 Min., 3x); 7 Schübe in 90 Tagen, zuletzt 28.09. 19:00",
      "typ": "drops",
      "uhrzeit": 19,
      "wochentag": "Mo"
     },
-    "sekunden": 71.8
+    "sekunden": 75.7
    },
    {
     "anfragen": 7,
@@ -1082,16 +1220,27 @@
      "anteil": 0.8,
      "letzte": "2026-09-19T12:09:13+02:00",
      "letzter_schub": "2026-09-19T12:01:23+02:00",
+     "minute": 1,
      "neu_30": 60,
      "neu_7": 0,
      "schuebe": 5,
      "tage_30": 1,
-     "text": "Drops etwa alle 21 Tage, meist Sa (4 von 5) ab 11 Uhr, zuletzt 19.09. 12:01",
+     "termine": [
+      {
+       "anzahl": 4,
+       "minute": 1,
+       "streuung_min": 52,
+       "tag": "Sa",
+       "uhrzeit": 12,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 21 Tage: Sa gegen 12:01 (±52 Min., 4x); 5 Schübe in 90 Tagen, zuletzt 19.09. 12:01",
      "typ": "drops",
-     "uhrzeit": 11,
+     "uhrzeit": 12,
      "wochentag": "Sa"
     },
-    "sekunden": 103.1
+    "sekunden": 101.2
    },
    {
     "anfragen": 7,
@@ -1099,22 +1248,33 @@
     "info": "",
     "name": "Offside Boys",
     "plattform": "shopify",
-    "produkte": 1208,
+    "produkte": 1209,
     "rhythmus": {
      "abstand_tage": 14.0,
      "anteil": 0.57,
-     "letzte": "2026-09-23T14:54:09-04:00",
+     "letzte": "2026-10-02T17:20:47-04:00",
      "letzter_schub": "2026-09-23T12:00:00-04:00",
-     "neu_30": 104,
-     "neu_7": 0,
+     "minute": 59,
+     "neu_30": 105,
+     "neu_7": 1,
      "schuebe": 7,
-     "tage_30": 2,
-     "text": "Drops etwa alle 14 Tage, meist Di (4 von 7) ab 17 Uhr, zuletzt 23.09. 18:00",
+     "tage_30": 3,
+     "termine": [
+      {
+       "anzahl": 4,
+       "minute": 59,
+       "streuung_min": 0,
+       "tag": "Di",
+       "uhrzeit": 17,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 14 Tage: Di gegen 17:59 (±0 Min., 4x); 7 Schübe in 90 Tagen, zuletzt 23.09. 18:00",
      "typ": "drops",
      "uhrzeit": 17,
      "wochentag": "Di"
     },
-    "sekunden": 113.0
+    "sekunden": 112.9
    },
    {
     "anfragen": 3,
@@ -1139,7 +1299,7 @@
     "info": "",
     "name": "One More Time",
     "plattform": "shopify",
-    "produkte": 191,
+    "produkte": 190,
     "rhythmus": {
      "letzte": "2026-09-26T17:31:32+02:00",
      "neu_30": 5,
@@ -1148,7 +1308,7 @@
      "text": "unregelmäßig: an 2 von 30 Tagen neue Artikel, 5 in 30 Tagen, zuletzt 26.09.",
      "typ": "unregelmäßig"
     },
-    "sekunden": 47.9
+    "sekunden": 48.9
    },
    {
     "anfragen": 3,
@@ -1156,22 +1316,33 @@
     "info": "",
     "name": "Philly Soccer Jerseys",
     "plattform": "shopify",
-    "produkte": 197,
+    "produkte": 198,
     "rhythmus": {
      "abstand_tage": 20.8,
      "anteil": 0.75,
-     "letzte": "2026-10-02T14:41:45-04:00",
+     "letzte": "2026-10-02T14:54:41-04:00",
      "letzter_schub": "2026-10-02T13:34:24-04:00",
-     "neu_30": 41,
-     "neu_7": 9,
+     "minute": 7,
+     "neu_30": 42,
+     "neu_7": 10,
      "schuebe": 4,
      "tage_30": 3,
-     "text": "Drops etwa alle 21 Tage, meist Fr (3 von 4) ab 17 Uhr, zuletzt 02.10. 19:34",
+     "termine": [
+      {
+       "anzahl": 3,
+       "minute": 7,
+       "streuung_min": 129,
+       "tag": "Fr",
+       "uhrzeit": 22,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 21 Tage: Fr gegen 22:07 (±129 Min., 3x); 4 Schübe in 90 Tagen, zuletzt 02.10. 19:34",
      "typ": "drops",
-     "uhrzeit": 17,
+     "uhrzeit": 22,
      "wochentag": "Fr"
     },
-    "sekunden": 48.4
+    "sekunden": 47.6
    },
    {
     "anfragen": 9,
@@ -1200,17 +1371,19 @@
     "produkte": 891,
     "rhythmus": {
      "abstand_tage": 52.0,
-     "anteil": 0.5,
+     "anteil": 0.0,
      "letzte": "2026-09-18T11:10:12+02:00",
      "letzter_schub": "2026-09-13T18:14:50+02:00",
+     "minute": 0,
      "neu_30": 102,
      "neu_7": 0,
      "schuebe": 2,
      "tage_30": 2,
-     "text": "Drops etwa alle 52 Tage, meist Do (1 von 2) ab 18 Uhr, zuletzt 13.09. 18:14",
+     "termine": [],
+     "text": "Drops etwa alle 52 Tage: kein fester Wochentag; 2 Schübe in 90 Tagen, zuletzt 13.09. 18:14",
      "typ": "drops",
      "uhrzeit": 18,
-     "wochentag": "Do"
+     "wochentag": "So"
     },
     "sekunden": 84.3
    },
@@ -1238,7 +1411,7 @@
      "text": "unregelmäßig: an 1 von 30 Tagen neue Artikel, 1 in 30 Tagen, zuletzt 14.09.",
      "typ": "unregelmäßig"
     },
-    "sekunden": 62.7
+    "sekunden": 62.5
    },
    {
     "anfragen": 5,
@@ -1249,19 +1422,38 @@
     "produkte": 611,
     "rhythmus": {
      "abstand_tage": 4.0,
-     "anteil": 0.31,
+     "anteil": 0.56,
      "letzte": "2026-09-30T20:19:48+02:00",
      "letzter_schub": "2026-09-30T12:48:41+02:00",
-     "neu_30": 60,
+     "minute": 50,
+     "neu_30": 56,
      "neu_7": 14,
      "schuebe": 16,
-     "tage_30": 14,
-     "text": "Drops etwa alle 4 Tage, meist Do (5 von 16) ab 9 Uhr, zuletzt 30.09. 12:48",
+     "tage_30": 13,
+     "termine": [
+      {
+       "anzahl": 5,
+       "minute": 50,
+       "streuung_min": 33,
+       "tag": "Do",
+       "uhrzeit": 21,
+       "verschoben": false
+      },
+      {
+       "anzahl": 4,
+       "minute": 8,
+       "streuung_min": 392,
+       "tag": "Di",
+       "uhrzeit": 12,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 4 Tage: Do gegen 21:50 (±33 Min., 5x); Di gegen 12:08 (±392 Min., 4x); 16 Schübe in 90 Tagen, zuletzt 30.09. 12:48",
      "typ": "drops",
-     "uhrzeit": 9,
+     "uhrzeit": 21,
      "wochentag": "Do"
     },
-    "sekunden": 80.1
+    "sekunden": 78.1
    },
    {
     "anfragen": 5,
@@ -1269,19 +1461,19 @@
     "info": "",
     "name": "STA Jerseys",
     "plattform": "shopify",
-    "produkte": 645,
+    "produkte": 640,
     "rhythmus": {
      "letzte": "2026-10-01T19:42:05-07:00",
-     "neu_30": 170,
-     "neu_7": 75,
+     "neu_30": 166,
+     "neu_7": 73,
      "tage_30": 21,
-     "text": "laufend: an 21 von 30 Tagen neue Artikel, 75 in 7 Tagen, 170 in 30 Tagen",
+     "text": "laufend: an 21 von 30 Tagen neue Artikel, 73 in 7 Tagen, 166 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 77.6
+    "sekunden": 79.6
    },
    {
-    "anfragen": 168,
+    "anfragen": 161,
     "fehler": "",
     "info": "Katalog bei 25000 gekappt, ältere Artikel per Suche",
     "name": "Saturdays Football",
@@ -1295,7 +1487,7 @@
      "text": "laufend: an 15 von 30 Tagen neue Artikel, 14 in 7 Tagen, 169 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 2241.2
+    "sekunden": 2199.3
    },
    {
     "anfragen": 4,
@@ -1306,19 +1498,21 @@
     "produkte": 475,
     "rhythmus": {
      "abstand_tage": 9.8,
-     "anteil": 0.25,
+     "anteil": 0.0,
      "letzte": "2026-09-10T16:26:19+02:00",
      "letzter_schub": "2026-09-10T16:21:55+02:00",
+     "minute": 0,
      "neu_30": 61,
      "neu_7": 0,
      "schuebe": 4,
      "tage_30": 2,
-     "text": "Drops etwa alle 10 Tage, meist Mo (1 von 4) ab 16 Uhr, zuletzt 10.09. 16:21",
+     "termine": [],
+     "text": "Drops etwa alle 10 Tage: kein fester Wochentag; 4 Schübe in 90 Tagen, zuletzt 10.09. 16:21",
      "typ": "drops",
      "uhrzeit": 16,
-     "wochentag": "Mo"
+     "wochentag": "Do"
     },
-    "sekunden": 49.3
+    "sekunden": 51.9
    },
    {
     "anfragen": 3,
@@ -1335,7 +1529,7 @@
      "text": "seit 30 Tagen nichts Neues (0 in 90 Tagen)",
      "typ": "ruhig"
     },
-    "sekunden": 45.6
+    "sekunden": 47.6
    },
    {
     "anfragen": 56,
@@ -1344,7 +1538,7 @@
     "name": "Swiat Koszulek Pilkarskich",
     "plattform": "prestashop",
     "produkte": 111,
-    "sekunden": 111.1
+    "sekunden": 111.2
    },
    {
     "anfragen": 8,
@@ -1361,7 +1555,7 @@
      "text": "unregelmäßig: an 5 von 30 Tagen neue Artikel, 12 in 30 Tagen, zuletzt 02.10.",
      "typ": "unregelmäßig"
     },
-    "sekunden": 109.8
+    "sekunden": 107.9
    },
    {
     "anfragen": 3,
@@ -1378,7 +1572,7 @@
      "text": "seit 30 Tagen nichts Neues (1 in 90 Tagen)",
      "typ": "ruhig"
     },
-    "sekunden": 48.3
+    "sekunden": 48.1
    },
    {
     "anfragen": 6,
@@ -1389,19 +1583,38 @@
     "produkte": 806,
     "rhythmus": {
      "abstand_tage": 6.9,
-     "anteil": 0.46,
+     "anteil": 0.75,
      "letzte": "2026-09-30T18:17:49-06:00",
      "letzter_schub": "2026-09-26T13:34:24-06:00",
+     "minute": 19,
      "neu_30": 132,
      "neu_7": 53,
-     "schuebe": 13,
+     "schuebe": 12,
      "tage_30": 10,
-     "text": "Drops etwa alle 7 Tage, meist Fr (6 von 13) ab 2 Uhr, zuletzt 26.09. 21:34",
+     "termine": [
+      {
+       "anzahl": 6,
+       "minute": 19,
+       "streuung_min": 87,
+       "tag": "Fr",
+       "uhrzeit": 3,
+       "verschoben": true
+      },
+      {
+       "anzahl": 3,
+       "minute": 18,
+       "streuung_min": 564,
+       "tag": "Sa",
+       "uhrzeit": 5,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 7 Tage: Fr gegen 03:19 (±87 Min., 6x, zuletzt verschoben); Sa gegen 05:18 (±564 Min., 3x); 12 Schübe in 90 Tagen, zuletzt 26.09. 21:34",
      "typ": "drops",
-     "uhrzeit": 2,
+     "uhrzeit": 3,
      "wochentag": "Fr"
     },
-    "sekunden": 93.5
+    "sekunden": 95.4
    },
    {
     "anfragen": 10,
@@ -1415,16 +1628,27 @@
      "anteil": 0.81,
      "letzte": "2026-09-26T13:02:25+02:00",
      "letzter_schub": "2026-09-26T13:00:03+02:00",
+     "minute": 0,
      "neu_30": 393,
      "neu_7": 96,
      "schuebe": 16,
      "tage_30": 5,
-     "text": "Drops etwa alle 7 Tage, meist Sa (13 von 16) ab 13 Uhr, zuletzt 26.09. 13:00",
+     "termine": [
+      {
+       "anzahl": 13,
+       "minute": 0,
+       "streuung_min": 0,
+       "tag": "Sa",
+       "uhrzeit": 13,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 7 Tage: Sa gegen 13:00 (±0 Min., 13x); 16 Schübe in 90 Tagen, zuletzt 26.09. 13:00",
      "typ": "drops",
      "uhrzeit": 13,
      "wochentag": "Sa"
     },
-    "sekunden": 165.8
+    "sekunden": 159.9
    },
    {
     "anfragen": 0,
@@ -1444,19 +1668,21 @@
     "produkte": 623,
     "rhythmus": {
      "abstand_tage": 12.9,
-     "anteil": 0.33,
+     "anteil": 0.0,
      "letzte": "2026-09-30T14:17:04+08:00",
      "letzter_schub": "2026-09-05T21:47:54+08:00",
+     "minute": 0,
      "neu_30": 116,
      "neu_7": 1,
      "schuebe": 6,
      "tage_30": 2,
-     "text": "Drops etwa alle 13 Tage, meist Mi (2 von 6) ab 9 Uhr, zuletzt 05.09. 15:47",
+     "termine": [],
+     "text": "Drops etwa alle 13 Tage: kein fester Wochentag; 6 Schübe in 90 Tagen, zuletzt 05.09. 15:47",
      "typ": "drops",
-     "uhrzeit": 9,
-     "wochentag": "Mi"
+     "uhrzeit": 15,
+     "wochentag": "Sa"
     },
-    "sekunden": 49.4
+    "sekunden": 51.4
    },
    {
     "anfragen": 8,
@@ -1464,22 +1690,33 @@
     "info": "",
     "name": "The Kitman 97",
     "plattform": "shopify",
-    "produkte": 1419,
+    "produkte": 1420,
     "rhythmus": {
      "abstand_tage": 7.2,
      "anteil": 0.88,
-     "letzte": "2026-09-30T19:54:12+02:00",
+     "letzte": "2026-10-02T22:31:30+02:00",
      "letzter_schub": "2026-09-30T18:23:41+02:00",
-     "neu_30": 65,
-     "neu_7": 24,
+     "minute": 52,
+     "neu_30": 66,
+     "neu_7": 25,
      "schuebe": 8,
-     "tage_30": 3,
-     "text": "Drops etwa alle 7 Tage, meist Sa (7 von 8) ab 15 Uhr, zuletzt 30.09. 18:23",
+     "tage_30": 4,
+     "termine": [
+      {
+       "anzahl": 7,
+       "minute": 52,
+       "streuung_min": 72,
+       "tag": "Sa",
+       "uhrzeit": 16,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 7 Tage: Sa gegen 16:52 (±72 Min., 7x); 8 Schübe in 90 Tagen, zuletzt 30.09. 18:23",
      "typ": "drops",
-     "uhrzeit": 15,
+     "uhrzeit": 16,
      "wochentag": "Sa"
     },
-    "sekunden": 128.7
+    "sekunden": 128.9
    },
    {
     "anfragen": 19,
@@ -1496,7 +1733,16 @@
      "text": "laufend: an 22 von 30 Tagen neue Artikel, 96 in 7 Tagen, 308 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 272.2
+    "sekunden": 265.8
+   },
+   {
+    "anfragen": 15,
+    "fehler": "",
+    "info": "",
+    "name": "The Third Kit",
+    "plattform": "woo",
+    "produkte": 1294,
+    "sekunden": 54.8
    },
    {
     "anfragen": 5,
@@ -1510,16 +1756,27 @@
      "anteil": 0.25,
      "letzte": "2026-09-30T18:59:43-04:00",
      "letzter_schub": "2026-09-30T18:58:36-04:00",
+     "minute": 58,
      "neu_30": 132,
      "neu_7": 54,
      "schuebe": 16,
      "tage_30": 5,
-     "text": "Drops etwa alle 4 Tage, meist Di (4 von 16) ab 3 Uhr, zuletzt 01.10. 00:58",
+     "termine": [
+      {
+       "anzahl": 4,
+       "minute": 58,
+       "streuung_min": 0,
+       "tag": "Di",
+       "uhrzeit": 3,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 4 Tage: Di gegen 03:58 (±0 Min., 4x); 16 Schübe in 90 Tagen, zuletzt 01.10. 00:58",
      "typ": "drops",
      "uhrzeit": 3,
      "wochentag": "Di"
     },
-    "sekunden": 62.8
+    "sekunden": 66.9
    },
    {
     "anfragen": 27,
@@ -1530,19 +1787,38 @@
     "produkte": 6093,
     "rhythmus": {
      "abstand_tage": 5.5,
-     "anteil": 0.4,
+     "anteil": 0.73,
      "letzte": "2026-10-02T00:53:28+02:00",
      "letzter_schub": "2026-10-02T00:49:59+02:00",
+     "minute": 52,
      "neu_30": 870,
      "neu_7": 362,
      "schuebe": 15,
      "tage_30": 9,
-     "text": "Drops etwa alle 6 Tage, meist Sa (6 von 15) ab 12 Uhr, zuletzt 02.10. 00:49",
+     "termine": [
+      {
+       "anzahl": 6,
+       "minute": 52,
+       "streuung_min": 149,
+       "tag": "Sa",
+       "uhrzeit": 15,
+       "verschoben": false
+      },
+      {
+       "anzahl": 5,
+       "minute": 46,
+       "streuung_min": 54,
+       "tag": "Fr",
+       "uhrzeit": 14,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 6 Tage: Sa gegen 15:52 (±149 Min., 6x); Fr gegen 14:46 (±54 Min., 5x); 15 Schübe in 90 Tagen, zuletzt 02.10. 00:49",
      "typ": "drops",
-     "uhrzeit": 12,
+     "uhrzeit": 15,
      "wochentag": "Sa"
     },
-    "sekunden": 431.4
+    "sekunden": 431.9
    },
    {
     "anfragen": 0,
@@ -1565,16 +1841,27 @@
      "anteil": 0.93,
      "letzte": "2026-10-02T19:00:34+02:00",
      "letzter_schub": "2026-10-02T19:00:01+02:00",
+     "minute": 0,
      "neu_30": 529,
      "neu_7": 169,
      "schuebe": 15,
      "tage_30": 7,
-     "text": "Drops etwa alle 7 Tage, meist Fr (14 von 15) ab 19 Uhr, zuletzt 02.10. 19:00",
+     "termine": [
+      {
+       "anzahl": 14,
+       "minute": 0,
+       "streuung_min": 0,
+       "tag": "Fr",
+       "uhrzeit": 19,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 7 Tage: Fr gegen 19:00 (±0 Min., 14x); 15 Schübe in 90 Tagen, zuletzt 02.10. 19:00",
      "typ": "drops",
      "uhrzeit": 19,
      "wochentag": "Fr"
     },
-    "sekunden": 284.5
+    "sekunden": 272.1
    },
    {
     "anfragen": 5,
@@ -1585,22 +1872,24 @@
     "produkte": 577,
     "rhythmus": {
      "abstand_tage": 23.5,
-     "anteil": 0.33,
+     "anteil": 0.0,
      "letzte": "2026-10-01T17:35:50+01:00",
      "letzter_schub": "2026-09-21T14:59:39+01:00",
+     "minute": 0,
      "neu_30": 64,
      "neu_7": 1,
      "schuebe": 3,
      "tage_30": 5,
-     "text": "Drops etwa alle 23 Tage, meist Mo (1 von 3) ab 11 Uhr, zuletzt 21.09. 15:59",
+     "termine": [],
+     "text": "Drops etwa alle 23 Tage: kein fester Wochentag; 3 Schübe in 90 Tagen, zuletzt 21.09. 15:59",
      "typ": "drops",
-     "uhrzeit": 11,
+     "uhrzeit": 15,
      "wochentag": "Mo"
     },
-    "sekunden": 77.4
+    "sekunden": 79.7
    },
    {
-    "anfragen": 391,
+    "anfragen": 396,
     "fehler": "",
     "info": "Katalog bei 25000 gekappt, ältere Artikel per Suche",
     "name": "Vintage Football Area",
@@ -1614,7 +1903,7 @@
      "text": "laufend: an 25 von 30 Tagen neue Artikel, 1037 in 7 Tagen, 2537 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 2620.5
+    "sekunden": 2614.7
    },
    {
     "anfragen": 5,
@@ -1631,7 +1920,7 @@
      "text": "unregelmäßig: an 3 von 30 Tagen neue Artikel, 16 in 30 Tagen, zuletzt 27.09.",
      "typ": "unregelmäßig"
     },
-    "sekunden": 79.7
+    "sekunden": 80.2
    },
    {
     "anfragen": 231,
@@ -1648,7 +1937,7 @@
      "text": "laufend: an 22 von 30 Tagen neue Artikel, 214 in 7 Tagen, 963 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 2582.6
+    "sekunden": 2566.7
    },
    {
     "anfragen": 7,
@@ -1659,19 +1948,21 @@
     "produkte": 1013,
     "rhythmus": {
      "abstand_tage": 5.3,
-     "anteil": 0.23,
+     "anteil": 0.0,
      "letzte": "2026-09-24T13:52:39+02:00",
      "letzter_schub": "2026-09-23T18:33:53+02:00",
+     "minute": 0,
      "neu_30": 136,
      "neu_7": 0,
      "schuebe": 13,
      "tage_30": 8,
-     "text": "Drops etwa alle 5 Tage, meist Do (3 von 13) ab 14 Uhr, zuletzt 23.09. 18:33",
+     "termine": [],
+     "text": "Drops etwa alle 5 Tage: kein fester Wochentag; 13 Schübe in 90 Tagen, zuletzt 23.09. 18:33",
      "typ": "drops",
-     "uhrzeit": 14,
-     "wochentag": "Do"
+     "uhrzeit": 18,
+     "wochentag": "Mi"
     },
-    "sekunden": 111.0
+    "sekunden": 111.1
    },
    {
     "anfragen": 0,
@@ -1683,7 +1974,7 @@
     "sekunden": 0.0
    }
   ],
-  "zeit": "2026-10-02T19:06:54.841007+00:00"
+  "zeit": "2026-10-02T21:59:41.090621+00:00"
  },
  "sources_ok": [
   "1Klopp Shop",
