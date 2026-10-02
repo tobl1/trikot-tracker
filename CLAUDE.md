@@ -242,6 +242,8 @@ eventuell werden GitHub-IPs geblockt. **Noch nicht live getestet.**
   um 09:58 UTC, der Schnell-Run 07:45 UTC fiel ganz aus. Für Drops externer Trigger nötig
   (cron-job.org → `workflow_dispatch` mit fein granuliertem Token, nur Actions read/write auf
   diesem Repo). Einrichtung macht der Nutzer selbst (Token nie in Chat, Code oder Logs)
+- The Third Kit liefert seit 02.10.2026 aus GitHub heraus nichts mehr (lokal ok), vermutlich Sperre
+  für Rechenzentrums-IPs. Allgemein: Shops mit Fehler im letzten Gesamt-Run deckt FYJ wieder ab
 - Topbinz blockt alle automatischen Abrufe (HTTP 403 schon auf der Startseite), bleibt über FYJ;
   laut Nutzer Drop Fr 19 Uhr. first11shirts.com laut Nutzer ebenfalls Fr 19 Uhr (feste Drop-Zeit),
   letzte Neuzugänge aber Do 01.10. gegen 21 Uhr, Rhythmus beobachten

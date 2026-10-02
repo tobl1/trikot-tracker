@@ -1246,8 +1246,10 @@ def main():
             return
         print("Drop-Run:", ", ".join(f"{s['name']} {due[s['name']]}" for s in shops))
     # Shops, die direkt abgefragt werden: deren FYJ-Daten ignorieren (direkt ist aktueller und genauer)
+    # Ausnahme: Shops, die im letzten Gesamt-Run nicht funktioniert haben, deckt FYJ wieder ab
+    failed = {q["name"] for q in (status_store.get("quellen") or {}).get("liste", []) if q.get("fehler")}
     direct_domains = {domain(s["url"]) for s in shops_cfg.get("shops") or []
-                      if (s.get("plattform") or "auto").lower() not in ("fyj", "aus")}
+                      if (s.get("plattform") or "auto").lower() not in ("fyj", "aus") and s["name"] not in failed}
     use_fyj = (str(shops_cfg.get("fyj", "an")).lower() in ("an", "true", "ja", "on") and not args.only
                and args.mode != "drop")
 
