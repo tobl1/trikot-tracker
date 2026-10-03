@@ -308,6 +308,35 @@ class Http:
         self.count = 0
         self.limited = 0     # Anfragen, die trotz Wiederholung gedrosselt blieben (429)
 
+    def post(self, url, json=None, headers=None):
+        """POST mit derselben Pause und Wiederholung bei Drosselung wie get(); liefert JSON oder None"""
+        for attempt in range(3):
+            wait = DELAY - (time.time() - self.last)
+            if wait > 0:
+                time.sleep(wait)
+            self.last = time.time()
+            self.count += 1
+            try:
+                r = self.s.post(url, json=json, headers=headers, timeout=TIMEOUT)
+            except requests.RequestException:
+                if attempt == 2:
+                    raise
+                time.sleep(3)
+                continue
+            if r.status_code == 429:
+                if attempt == 2:
+                    self.limited += 1
+                    return None
+                time.sleep(15 * (attempt + 1))
+                continue
+            if r.status_code != 200:
+                return None
+            try:
+                return r.json()
+            except ValueError:
+                return None
+        return None
+
     def get(self, url, params=None, want="json"):
         attempts = 5 if self.gate else 3
         for attempt in range(attempts):
@@ -685,6 +714,56 @@ def idosell_run(http, shop, base, queries, matcher, max_pages=6):
     return items, n
 
 
+WIX_STORES_APP = "1380b703-ce81-ff05-f115-39571d94dfcd"
+WIX_QUERY = """query getProducts($offset: Int, $limit: Int) { catalog {
+ category(categoryId: "00000000-000000-000000-000000000001") {
+ productsWithMetaData(limit: $limit, offset: $offset, onlyVisible: true) { totalCount list {
+ id name urlPart price currency isInStock productType media { url }
+ options { title selections { description value } } } } } } }"""
+
+
+def wix_run(http, shop, base, max_pages=120):
+    """Wix Stores: öffentliche Shop-Schnittstelle, die auch die Shop-Seite für "Mehr laden" nutzt.
+    Anonymer Besucher-Schlüssel aus /_api/v1/access-tokens, dann 100 Produkte pro Abfrage"""
+    tokens = http.get(f"{base}/_api/v1/access-tokens")
+    inst = (((tokens or {}).get("apps") or {}).get(WIX_STORES_APP) or {}).get("instance")
+    if not inst:
+        return [], 0
+    items, n = [], 0
+    for page in range(max_pages):
+        data = http.post(f"{base}/_api/wix-ecommerce-storefront-web/api", headers={"Authorization": inst},
+                         json={"query": WIX_QUERY, "variables": {"offset": page * 100, "limit": 100},
+                               "operationName": "getProducts"})
+        block = ((((data or {}).get("data") or {}).get("catalog") or {}).get("category") or {}) \
+            .get("productsWithMetaData") or {}
+        prods = block.get("list") or []
+        n += len(prods)
+        for p in prods:
+            if not p.get("isInStock") or not p.get("urlPart"):
+                continue
+            sizes, grade = [], ""
+            for o in p.get("options") or []:
+                title = norm(o.get("title"))
+                vals = [x.get("description") or x.get("value") or "" for x in o.get("selections") or []]
+                if "youth" in title or "kid" in title:
+                    sizes += ["youth"] + vals           # Kindergröße, wird über die Ausschlüsse aussortiert
+                elif SIZE_ATTR_RX.search(title):
+                    sizes += vals
+                elif "condition" in title and vals:
+                    grade = vals[0]
+            media = (p.get("media") or [{}])[0].get("url") or ""
+            img = media if media.startswith("http") else (f"https://static.wixstatic.com/media/{media}" if media else "")
+            price = f"{p.get('price')} {p.get('currency') or ''}".strip() if p.get("price") is not None else ""
+            items.append(item("direkt", shop, f"{base}/product-page/{p['urlPart']}", p.get("name") or "",
+                              f"{p.get('name') or ''} {' '.join(sizes)}", price, img,
+                              desc=p.get("name") or "",   # Zustand steht bei manchen im Titel ("USED: Excellent")
+                              typ=p.get("productType") if p.get("productType") not in ("physical", None) else "",
+                              fyj_condition=grade))
+        if len(prods) < 100 or n >= (block.get("totalCount") or 0):
+            break
+    return items, n
+
+
 def prestashop_run(http, shop, base, queries, matcher, search_path="/szukaj"):
     """PrestaShop 1.7+: Suche liefert JSON, Größe steht erst auf der Produktseite"""
     items, n, urls = [], 0, set()
@@ -739,6 +818,10 @@ def run_shop(shop, mode, matcher, platforms, currencies):
         if plat == "smartweb":
             items, n = smartweb_run(http, name, base, matcher.queries(only_high=(mode == "priority")),
                                     shop.get("waehrung", "DKK"))
+            status.update(produkte=n)
+            return items, status
+        if plat == "wix":
+            items, n = wix_run(http, name, base)
             status.update(produkte=n)
             return items, status
         if plat == "idosell":
@@ -897,9 +980,9 @@ def drop_slots(shop, status_store):
     """[(Wochentag 0-6, Stunde, Minute, Quelle, Fenster in Min.)]: fest aus shops.yaml plus gemessen"""
     slots = []
     for x in shop.get("drop") or []:
-        m = re.match(r"(Mo|Di|Mi|Do|Fr|Sa|So)\s+(\d{1,2}):(\d{2})$", str(x).strip())
-        if m:
-            slots.append((WEEKDAYS.index(m.group(1)), int(m.group(2)), int(m.group(3)), "fest", DROP_WINDOW_MIN))
+        slot = fixed_slot(x)
+        if slot:
+            slots.append((*slot, "fest", DROP_WINDOW_MIN))
     for q in (status_store.get("quellen") or {}).get("liste", []):
         r = q.get("rhythmus") or {}
         if q.get("name") != shop["name"] or r.get("typ") != "drops" or r.get("anteil", 0) < DROP_MIN_SHARE:
@@ -914,6 +997,22 @@ def drop_slots(shop, status_store):
     return slots
 
 
+def fixed_slot(spec, ref=None):
+    """'Fr 19:00' (deutsche Zeit) oder 'Fr 20:00 Pacific/Auckland' -> (Wochentag, Stunde, Minute) in deutscher
+    Zeit, für die Woche um ref (Zeitumstellungen in beiden Ländern werden so automatisch berücksichtigt)"""
+    m = re.match(r"(Mo|Di|Mi|Do|Fr|Sa|So)\s+(\d{1,2}):(\d{2})(?:\s+([A-Za-z_]+/[A-Za-z_]+))?$", str(spec).strip())
+    if not m:
+        return None
+    wd, h, mi = WEEKDAYS.index(m.group(1)), int(m.group(2)), int(m.group(3))
+    if not m.group(4):
+        return wd, h, mi
+    zone = ZoneInfo(m.group(4))
+    local = (ref or now()).astimezone(zone)
+    day = local - dt.timedelta(days=(local.weekday() - wd) % 7)
+    berlin = day.replace(hour=h, minute=mi, second=0, microsecond=0).astimezone(TZ)
+    return berlin.weekday(), berlin.hour, berlin.minute
+
+
 def drop_calendar(shops, status_store):
     """Alle Drop-Termine fürs Dashboard: feste (shops.yaml) und gemessene (Rhythmus)"""
     rhythms = {q.get("name"): q.get("rhythmus") or {} for q in (status_store.get("quellen") or {}).get("liste", [])}
@@ -922,9 +1021,9 @@ def drop_calendar(shops, status_store):
         if (shop.get("plattform") or "auto").lower() in ("aus", "fyj"):
             continue
         for x in shop.get("drop") or []:
-            m = re.match(r"(Mo|Di|Mi|Do|Fr|Sa|So)\s+(\d{1,2}):(\d{2})$", str(x).strip())
-            if m:
-                out.append({"shop": shop["name"], "tag": m.group(1), "zeit": f"{int(m.group(2)):02d}:{m.group(3)}",
+            slot = fixed_slot(x)
+            if slot:
+                out.append({"shop": shop["name"], "tag": WEEKDAYS[slot[0]], "zeit": f"{slot[1]:02d}:{slot[2]:02d}",
                             "quelle": "fest"})
         r = rhythms.get(shop["name"]) or {}
         if r.get("typ") == "drops" and r.get("anteil", 0) >= DROP_MIN_SHARE:
@@ -957,9 +1056,9 @@ def drop_due(shop, status_store, t):
 # ---------------------------------------------------------------------------
 SCORE_RX = re.compile(r"(?<![\d/.,])(10|[1-9](?:[.,]5)?)\s*/\s*10(?![\d/])")   # 8/10, nicht 2009/10
 NEW_TAG_RX = re.compile(r"(?<![a-z])(bnwt|bnwot|bnib|deadstock|brand new with tags|new with tags)(?![a-z])", re.I)
-COND_KEY_RX = re.compile(r"(?i)(?<![a-z])(condition|zustand|stan|staat van het shirt|staat|estado|stato)\s*[:\-]")
+COND_KEY_RX = re.compile(r"(?i)(?<![a-z])(condition|zustand|stan|staat van het shirt|staat|estado|stato|used)\s*[:\-]")
 SOLD_RX = re.compile(r"(?i)outofstock|soldout|discontinued")
-COND_WORD_RX = re.compile(r"(?i)^(?:condition|zustand|stan|staat van het shirt|staat|estado|stato)\s*[:\-]\s*(mint|excellent|very good|good|fair|poor|"
+COND_WORD_RX = re.compile(r"(?i)^(?:condition|zustand|stan|staat van het shirt|staat|estado|stato|used)\s*[:\-]\s*(mint|excellent|very good|good|fair|poor|"
                           r"used|new|like new|as new|perfect|great|average)(?![a-z])")
 
 
@@ -1246,6 +1345,58 @@ def write_report(seen, sources, sources_time, mode):
 # ---------------------------------------------------------------------------
 # Hauptprogramm
 # ---------------------------------------------------------------------------
+FLAG_RX = re.compile(r"(?im)^(grund|id|kommentar)\s*:\s*(.*)$")
+
+
+def parse_flag(body):
+    """Issue-Text aus dem Dashboard -> {'grund', 'id', 'kommentar'} oder None"""
+    found = {k.lower(): v.strip() for k, v in FLAG_RX.findall(body or "")}
+    return found if found.get("grund") and found.get("id") else None
+
+
+def apply_flags(seen, status_store, ts):
+    """Im Dashboard gemeldete Treffer (GitHub-Issues mit Label "flag") übernehmen und Issues schließen.
+    Nur Issues des Repo-Inhabers zählen (öffentliches Repo). Gibt die Zahl neuer Meldungen zurück"""
+    token, repo = os.environ.get("GITHUB_TOKEN"), os.environ.get("GITHUB_REPOSITORY")
+    owner = os.environ.get("GITHUB_REPOSITORY_OWNER") or (repo or "").split("/")[0]
+    flags = status_store.setdefault("flags", {})
+    new = 0
+    if token and repo:
+        api = f"https://api.github.com/repos/{repo}/issues"
+        hdr = {"Authorization": f"Bearer {token}", "Accept": "application/vnd.github+json"}
+        try:
+            issues = requests.get(api, params={"labels": "flag", "state": "open", "per_page": 100},
+                                  headers=hdr, timeout=TIMEOUT).json()
+        except (requests.RequestException, ValueError):
+            issues = []
+        for iss in issues if isinstance(issues, list) else []:
+            if (iss.get("user") or {}).get("login") != owner:
+                continue
+            f = parse_flag(iss.get("body"))
+            if not f:
+                continue
+            flags[f["id"]] = {"grund": f["grund"].lower(), "kommentar": f.get("kommentar", ""),
+                              "zeit": ts, "issue": iss.get("number"), "titel": (iss.get("title") or "")[:120]}
+            new += 1
+            e = seen.get(f["id"])
+            msg = (f"Übernommen: Treffer ist ab sofort ausgeblendet ({f['grund']})." if e else
+                   "Übernommen, der Treffer war schon nicht mehr in der Liste.")
+            try:
+                requests.post(f"{api}/{iss['number']}/comments", json={"body": msg}, headers=hdr, timeout=TIMEOUT)
+                requests.patch(f"{api}/{iss['number']}", json={"state": "closed"}, headers=hdr, timeout=TIMEOUT)
+            except requests.RequestException:
+                pass
+    for key, f in flags.items():
+        e = seen.get(key)
+        if not e:
+            continue
+        if f["grund"].startswith("ausverkauft"):
+            e.setdefault("verkauft", f["zeit"])
+        else:
+            e["aussortiert"] = f"Gemeldet: {f['grund']}" + (f" ({f['kommentar']})" if f.get("kommentar") else "")
+    return new
+
+
 def recently_done(status_store, mode):
     """Hat ein Run dieses Modus kürzlich stattgefunden? (Sperre für die GitHub-Rückfall-Zeitpläne)"""
     limit = FALLBACK_SKIP_HOURS.get(mode)
@@ -1306,15 +1457,20 @@ def main():
     shops = shops_cfg.get("shops") or []
     if args.only:
         shops = [s for s in shops if args.only.lower() in s["name"].lower()]
+    # Meldungen aus dem Dashboard (GitHub-Issues) in jedem Run übernehmen
+    new_flags = apply_flags(seen, status_store, now().isoformat()) if not args.dry_run else 0
+    if new_flags:
+        print(f"{new_flags} Meldung(en) aus dem Dashboard übernommen")
     if args.mode == "drop":
-        # nur Shops, deren Drop gerade läuft; sonst sofort ohne jede Änderung beenden
+        # nur Shops, deren Drop gerade läuft; sonst sofort ohne jede Änderung beenden (außer es gab Meldungen)
         due = {s["name"]: drop_due(s, status_store, now()) for s in shops
                if (s.get("plattform") or "auto").lower() not in ("aus", "fyj")}
         shops = [s for s in shops if due.get(s["name"])]
-        if not shops:
+        if not shops and not new_flags:
             print("Drop-Run: kein Drop fällig")
             return
-        print("Drop-Run:", ", ".join(f"{s['name']} {due[s['name']]}" for s in shops))
+        if shops:
+            print("Drop-Run:", ", ".join(f"{s['name']} {due[s['name']]}" for s in shops))
     # Shops, die direkt abgefragt werden: deren FYJ-Daten ignorieren (direkt ist aktueller und genauer)
     # Ausnahme: Shops, die im letzten Gesamt-Run nicht funktioniert haben, deckt FYJ wieder ab
     failed = {q["name"] for q in (status_store.get("quellen") or {}).get("liste", []) if q.get("fehler")}
@@ -1323,6 +1479,7 @@ def main():
     use_fyj = (str(shops_cfg.get("fyj", "an")).lower() in ("an", "true", "ja", "on") and not args.only
                and args.mode != "drop")
 
+    flagged = set(status_store.get("flags") or {})
     lock = threading.Lock()
     results, statuses, fyj_status = [], [], None
     with cf.ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
@@ -1384,7 +1541,7 @@ def main():
         for it in its:
             if it.get("typ") and matcher.excluded(norm(it["typ"])):
                 continue
-            if it["url"] and canon_url(it["url"]) in matcher.url_ex:
+            if it["url"] and (canon_url(it["url"]) in matcher.url_ex or canon_url(it["url"]) in flagged):
                 continue
             labs = matcher.labels(it["match_text"])
             if not labs or not matcher.size_ok(it["size_text"], norm(it["match_text"])):

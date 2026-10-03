@@ -21,6 +21,7 @@ concurrency:
 
 permissions:
   contents: write
+  issues: write          # Meldungen aus dem Dashboard lesen und nach Übernahme schließen
 
 jobs:
   run:
@@ -52,6 +53,7 @@ jobs:
         run: python tracker.py --mode ${{ steps.mode.outputs.mode }} ${{ github.event_name == 'schedule' && '--rueckfall' || '' }}
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DASHBOARD_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
 
       - name: Ergebnisse speichern

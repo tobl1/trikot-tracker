@@ -147,6 +147,17 @@ Mit Claude (Vision) gebaut und am 03.10.2026 auf Wunsch des Nutzers wieder entfe
 komplett kostenlos bleiben**, also keine kostenpflichtigen APIs einbauen. Fehltreffer, die nur
 auf dem Foto erkennbar sind (z. B. Trainingsshirt ohne Hinweis im Titel), über `ausschluss_urls`.
 
+## Meldungen aus dem Dashboard
+
+- Fähnchen an jeder Kachel → Grund (unpassend, ausverkauft, falsche groesse, kein original, sonstiges)
+  + Kommentar → vorausgefülltes GitHub-Issue mit Label `flag` (Body-Zeilen `grund:`, `id:` = Schlüssel
+  aus seen.json, `kommentar:`). Dashboard blendet lokal sofort aus (localStorage)
+- `apply_flags()` in jedem Run (auch Drop-Run, der dafür nicht früh abbricht): nur Issues des
+  Repo-Inhabers (öffentliches Repo!), speichert in `status.json` → `flags`, kommentiert und schließt
+  das Issue. ausverkauft → `verkauft`, sonst → `aussortiert`; gemeldete URLs werden nie wieder aufgenommen
+- **Für Claude:** gemeldete Fehltreffer regelmäßig mit `gh issue list --label flag --state all` lesen
+  und daraus Matching-Regeln ableiten (mit Testfall), statt nur einzeln auszublenden
+
 ## Benachrichtigungslogik
 
 - Erstlauf (leeres seen.json): genau **eine** Zusammenfassung
@@ -203,6 +214,17 @@ Größe, z. B. "2013-14 Bayern Munich Away Shirt Thiago #6 - 5/10 - (L)"; Cloudf
 zeigt **nur Verfügbares**; Kacheln `div.product[data-product_id]`, Titel `a.product__name`, Preis
 `strong.price`; Sammelangebote ("Multiple Sizes") → Produktseite, `.projector_sizes__name` listet nur
 verfügbare Größen. Zustand per Seitenprüfung (JSON-LD description "CONDITION: 8/10 …")
+
+**Wix (`wix`, seit 04.10.2026):** anonymer Besucher-Schlüssel aus `/_api/v1/access-tokens` →
+`apps["1380b703-ce81-ff05-f115-39571d94dfcd"].instance` (Wix Stores), dann POST
+`/_api/wix-ecommerce-storefront-web/api` (GraphQL `catalog.category("00000000-000000-000000-000000000001")
+.productsWithMetaData(limit:100, offset)`), Header `Authorization: <instance>`. Das ist die Schnittstelle,
+die der Shop selbst für "Mehr laden" nutzt, keine Bot-Sperre. Felder: name, urlPart (`/product-page/<urlPart>`),
+price, currency, isInStock, media[0].url (`static.wixstatic.com/media/<id>`), options (Größe: "Size",
+"Taille", "Mens size"; "Youth size" = Kinder; "Condition"). Shops: Lineup Vintage, Original 11vs11,
+Rare and Retro, The Football Boutique, Throwback Jerseys NZ. Bulishirts liefert 0 (bleibt FYJ).
+kitts.de ist **kein** Wix, sondern ein Sharetribe-Marktplatz (bleibt FYJ). Lineup nennt neuere Trikots
+"Rétro", ältere "Vintage" (vermutlich beides Originale, nicht geprüft)
 
 **ReShirt (`smartweb`):** `/json/products?currencyIso=DKK&field=search&filter={}&id=<begriff>&limit=48&orderBy=-Id&page=N`;
 Größe steht im Titel ("… - XL"); Felder `Stock`/`Online` wirken unzuverlässig, nur `Soldout` wird genutzt.

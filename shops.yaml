@@ -3,13 +3,15 @@
 # plattform: auto       = Shopify oder WooCommerce wird automatisch erkannt
 #            cfs        = Sonderanbindung Classic Football Shirts
 #            idosell    = IdoSell-Suche (Classic-Shirts)
+#            wix        = Wix Stores (öffentliche Shop-Schnittstelle)
 #            smartweb   = dänisches Shopsystem (ReShirt)
 #            prestashop = PrestaShop mit JSON-Suche
 #            fyj        = nicht direkt, läuft über FindYourJersey mit
 #            aus        = deaktiviert
 # schnellcheck: nein = nur im nächtlichen Gesamtlauf abfragen
 # min_zustand: 7     = Treffer mit schlechterer Note (z. B. 6/10) ausblenden
-# drop: ["Fr 19:00"] = feste Drop-Zeit (deutsche Zeit), wird im Drop-Run kurz danach geprüft;
+# drop: ["Fr 19:00"] = feste Drop-Zeit (deutsche Zeit, oder mit Zeitzone: "Fr 20:00 Pacific/Auckland"),
+#                      wird im Drop-Run kurz danach geprüft;
 #                      Drop-Zeiten aus dem gemessenen Rhythmus kommen automatisch dazu
 # Entfernt (01.10.2026): Kit Fever (Domain gehört jetzt einem Modeshop),
 #                         Retro Football Kits (Shop geschlossen)
@@ -36,7 +38,7 @@ shops:
   - {name: Topbinz, url: "https://www.topbinzfootballshirts.co.uk", plattform: fyj, hinweis: "blockt Abrufe (403), Drop Fr 19 Uhr laut Nutzer"}
   - {name: Football Shirt Union, url: "https://footballshirtunion.com"}
   - {name: Saturdays Football, url: "https://saturdaysfootball.com"}
-  - {name: The Football Boutique, url: "https://www.thefootballboutique.com", plattform: aus, hinweis: "Wix, noch keine Anbindung"}
+  - {name: The Football Boutique, url: "https://www.thefootballboutique.com", plattform: wix}
   - {name: The Soccer Archive, url: "https://thesoccerarchive.com"}
   - {name: We Love Football Shirts, url: "https://www.welovefootballshirts.com", plattform: fyj}
   - {name: RetrOriginalFootball, url: "https://retroriginalfootball.com"}
@@ -54,7 +56,7 @@ shops:
   - {name: Swiat Koszulek Pilkarskich, url: "https://swiatkoszulekpilkarskich.pl", plattform: prestashop}
   - {name: Classic-Shirts, url: "https://classic-shirts.com", plattform: idosell}
   - {name: The Kit Dealer, url: "https://www.thekitdealer.com"}
-  - {name: Throwback Jerseys NZ, url: "https://www.throwbackjerseysnz.com", plattform: aus, hinweis: "Wix, Drop jeden Freitag 20 Uhr NZ-Zeit"}
+  - {name: Throwback Jerseys NZ, url: "https://www.throwbackjerseysnz.com", plattform: wix, drop: ["Fr 20:00 Pacific/Auckland"]}
   - {name: FootballShirts.com, url: "https://footballshirts.com"}
   - {name: Sense of Goal, url: "https://www.senseofgoal.com"}
   - {name: Tiffozi Futbol, url: "https://tiffozifutbol.com"}
@@ -107,6 +109,13 @@ shops:
 
   - {name: First 11 Shirts, url: "https://first11shirts.com", drop: ["Fr 19:00"]}
   - {name: Football Cat, url: "https://footballcat.eu", plattform: aus, hinweis: "Bot-Schutz (JS-Prüfung), wird bewusst nicht umgangen; Drop Sa 16 Uhr laut Nutzer; nicht bei FYJ"}   # Nachbauten per Titel ("Reissue", "Repro", "Score Draw") ausgeschlossen
+
+# Wix-Shops (seit 04.10.2026 direkt über die öffentliche Shop-Schnittstelle), große nur nachts
+  - {name: Lineup Vintage, url: "https://www.lineupvintageshop.com", plattform: wix, schnellcheck: nein}
+  - {name: Original 11vs11, url: "https://www.original11vs11.com", plattform: wix, schnellcheck: nein}
+  - {name: Rare and Retro, url: "https://www.rareandretrosports.com", plattform: wix, schnellcheck: nein}
+# Bulishirts (Wix) liefert über die Schnittstelle 0 Produkte, bleibt über FYJ.
+# kitts.de ist ein Marktplatz (Sharetribe, viele private Verkäufer), bleibt bewusst über FYJ.
 
 # Marktplätze (eBay, Depop) werden nicht abgefragt, dort am besten in der
 # jeweiligen App dem Verkäufer folgen bzw. gespeicherte Suchen anlegen:

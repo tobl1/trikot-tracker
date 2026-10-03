@@ -93,6 +93,21 @@ summary{cursor:pointer;font-weight:600}
 .seg{display:inline-flex;background:var(--chip);border-radius:9px;padding:3px;gap:2px;flex:0 0 auto}
 .seg button{font:inherit;font-size:13px;border:0;background:none;color:var(--muted);padding:6px 10px;border-radius:7px;cursor:pointer;white-space:nowrap}
 .seg button[aria-pressed="true"]{background:var(--card);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.flag{position:absolute;top:6px;right:6px;width:32px;height:32px;border-radius:50%;border:0;cursor:pointer;
+  background:var(--card);color:var(--muted);font-size:15px;box-shadow:0 1px 3px rgba(0,0,0,.2);opacity:.85}
+.flag:hover{color:var(--err);opacity:1}
+.sheet{position:fixed;inset:0;z-index:20;background:rgba(0,0,0,.45);display:flex;align-items:flex-end;justify-content:center}
+.sheet[hidden]{display:none}
+.sheet .box{background:var(--card);color:var(--ink);width:100%;max-width:480px;border-radius:14px 14px 0 0;padding:16px 16px 20px}
+@media (min-width:600px){.sheet{align-items:center}.sheet .box{border-radius:14px}}
+.sheet h3{margin:0 0 4px;font-size:16px}
+.sheet .what{color:var(--muted);font-size:13px;margin:0 0 12px}
+.sheet .reasons{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.sheet textarea{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:8px;min-height:60px}
+.sheet .actions{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
+.sheet .actions button{font:inherit;border:0;border-radius:9px;padding:9px 14px;cursor:pointer;background:var(--chip);color:var(--ink)}
+.sheet .actions .go{background:var(--accent);color:var(--accent-ink)}
+.sheet .hint{font-size:12px;color:var(--muted);margin-top:10px}
 .group{margin:0 0 22px}
 .group h2{font-size:15px;margin:0 0 10px;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
 .group h2 small{font-weight:400;color:var(--muted);font-size:13px}
@@ -164,6 +179,23 @@ summary{cursor:pointer;font-weight:600}
   </details>
 </div>
 
+<div class="sheet" id="flagsheet" hidden>
+  <div class="box" role="dialog" aria-labelledby="flagtitle">
+    <h3 id="flagtitle">Treffer melden</h3>
+    <p class="what" id="flagwhat"></p>
+    <div class="reasons" id="flagreasons">
+      <button class="chip" data-r="unpassend" aria-pressed="true">Unpassend</button>
+      <button class="chip" data-r="ausverkauft" aria-pressed="false">Ausverkauft</button>
+      <button class="chip" data-r="falsche groesse" aria-pressed="false">Falsche Größe</button>
+      <button class="chip" data-r="kein original" aria-pressed="false">Kein Original</button>
+      <button class="chip" data-r="sonstiges" aria-pressed="false">Sonstiges</button>
+    </div>
+    <textarea id="flagnote" placeholder="Kommentar (optional), z. B. &quot;ist ein Trainingsshirt&quot;"></textarea>
+    <div class="actions"><button id="flagcancel">Abbrechen</button><button class="go" id="flaggo">Auf GitHub melden</button></div>
+    <p class="hint">Öffnet ein vorausgefülltes GitHub-Issue, dort nur noch auf "Submit" tippen. Der nächste Run blendet den Treffer dauerhaft aus.</p>
+  </div>
+</div>
+
 <script>
 (function(){
   const $ = id => document.getElementById(id);
@@ -187,6 +219,29 @@ summary{cursor:pointer;font-weight:600}
 
   function isNew(t){ return (Date.now() - new Date(t.erst)) / 36e5 < NEW_H; }
 
+  // Melden: GitHub-Issue mit Label "flag", der Tracker übernimmt es im nächsten Run
+  const REPO = location.hostname.endsWith("github.io")
+    ? `${location.hostname.split(".")[0]}/${location.pathname.split("/")[1] || "trikot-tracker"}` : "tobl1/trikot-tracker";
+  const flagged = new Set(store.get("flagged") || []);
+  let flagItem = null, flagReason = "unpassend";
+  function openFlag(t){
+    flagItem = t; flagReason = "unpassend"; $("flagnote").value = "";
+    $("flagwhat").textContent = `${t.titel} · ${t.shopName}`;
+    document.querySelectorAll("#flagreasons .chip").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.r === flagReason)));
+    $("flagsheet").hidden = false;
+  }
+  function sendFlag(){
+    const t = flagItem, note = $("flagnote").value.trim().replace(/\s+/g, " ");
+    const body = [`Gemeldet über das Dashboard. Bitte nur unten auf "Submit new issue" tippen.`, "",
+      `grund: ${flagReason}`, `id: ${t.id}`, `kommentar: ${note}`, "",
+      `url: ${t.url}`, `titel: ${t.titel}`, `shop: ${t.shopName}, preis: ${t.preis}, labels: ${t.labels.join(", ")}`].join("\n");
+    const url = `https://github.com/${REPO}/issues/new?labels=flag&title=${encodeURIComponent(`Flag: ${flagReason} · ${t.titel}`.slice(0, 200))}` +
+                `&body=${encodeURIComponent(body)}`;
+    window.open(url, "_blank", "noopener");
+    flagged.add(t.id); store.set("flagged", [...flagged]);
+    $("flagsheet").hidden = true; render();
+  }
+
   function filtered(){
     const q = st.q.trim().toLowerCase();
     let out = all.filter(t =>
@@ -195,6 +250,7 @@ summary{cursor:pointer;font-weight:600}
       (!st.size || t.groesse === st.size) &&
       (!st.onlynew || t.neu) &&
       (st.expensive || !t.teuer) &&
+      !flagged.has(t.id) &&
       (!q || t.hay.includes(q)));
     const byNew = (a, b) => b.erst.localeCompare(a.erst);
     const byPrice = dir => (a, b) => (a.eur == null) - (b.eur == null) || dir * ((a.eur ?? 0) - (b.eur ?? 0));
@@ -216,6 +272,7 @@ summary{cursor:pointer;font-weight:600}
                        : '<span class="ph">👕</span>';
     return `<a class="card${t.hoch ? " hi" : ""}" href="${esc(t.url)}" target="_blank" rel="noopener">
       <div class="img">${img}</div><div class="badges">${badges}</div>
+      <button class="flag" data-id="${esc(t.id)}" title="Treffer melden (unpassend, ausverkauft …)" aria-label="Treffer melden">⚑</button>
       <div class="body"><div class="labels">${esc(t.labels.join(" · "))}</div>
       <div class="title">${esc(t.titel)}</div>${note}
       <div class="foot"><div class="price">${price}</div><div>${cond}${t.groesse ? `<span class="size">${esc(t.groesse)}</span>` : ""}</div></div>
@@ -343,6 +400,19 @@ summary{cursor:pointer;font-weight:600}
     st.labels = st.labels.includes(l) ? st.labels.filter(x => x !== l) : [...st.labels, l];
     reset();
   });
+  document.addEventListener("click", e => {
+    const b = e.target.closest(".flag"); if (!b) return;
+    e.preventDefault(); e.stopPropagation();
+    const t = all.find(x => x.id === b.dataset.id); if (t) openFlag(t);
+  }, true);
+  $("flagreasons").addEventListener("click", e => {
+    const b = e.target.closest(".chip"); if (!b) return;
+    flagReason = b.dataset.r;
+    document.querySelectorAll("#flagreasons .chip").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+  });
+  $("flagcancel").addEventListener("click", () => { $("flagsheet").hidden = true; });
+  $("flagsheet").addEventListener("click", e => { if (e.target.id === "flagsheet") $("flagsheet").hidden = true; });
+  $("flaggo").addEventListener("click", sendFlag);
   $("more").addEventListener("click", () => { if (st.view === "feed") groupsShown += 12; else shown += PAGE; render(); });
 
   fetch("treffer.json", {cache: "no-store"})

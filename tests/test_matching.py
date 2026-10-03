@@ -260,3 +260,61 @@ def test_recently_done():
     assert not tracker.recently_done(st, "drop")
     st["last_full"] = (t - tracker.dt.timedelta(hours=21)).isoformat()
     assert not tracker.recently_done(st, "full")
+
+
+def test_fixed_slot_zeitzonen():
+    berlin = lambda y, mo, d: tracker.dt.datetime(y, mo, d, 12, 0, tzinfo=tracker.TZ)
+    # Fr 20:00 Neuseeland: Oktober (NZ Sommerzeit, DE Sommerzeit) = Fr 09:00 bei uns
+    assert tracker.fixed_slot("Fr 20:00 Pacific/Auckland", berlin(2026, 10, 9)) == (4, 9, 0)
+    # November (NZ Sommerzeit, DE Winterzeit) = Fr 08:00
+    assert tracker.fixed_slot("Fr 20:00 Pacific/Auckland", berlin(2026, 11, 13)) == (4, 8, 0)
+    # Mai (NZ Winterzeit, DE Sommerzeit) = Fr 10:00
+    assert tracker.fixed_slot("Fr 20:00 Pacific/Auckland", berlin(2027, 5, 14)) == (4, 10, 0)
+    assert tracker.fixed_slot("Sa 13:00") == (5, 13, 0)
+    assert tracker.fixed_slot("Samstag 13 Uhr") is None
+
+
+class _WixHttp:
+    def __init__(self):
+        self.calls = 0
+
+    def get(self, url, params=None, want="json"):
+        return {"apps": {tracker.WIX_STORES_APP: {"instance": "x"}}}
+
+    def post(self, url, json=None, headers=None):
+        self.calls += 1
+        prods = [
+            {"name": "adidas AC Milan 04/05 Home Jersey - Kaka #22 - XL - USED: Excellent", "urlPart": "milan-kaka",
+             "price": 200.0, "currency": "USD", "isInStock": True, "productType": "physical",
+             "media": [{"url": "abc~mv2.jpg"}], "options": [{"title": "Mens size", "selections": [{"description": "XL"}]}]},
+            {"name": "Barcelona 2011/12 Home", "urlPart": "barca-kid", "price": 80.0, "currency": "USD", "isInStock": True,
+             "media": [], "options": [{"title": "Youth size", "selections": [{"description": "XL"}]}]},
+            {"name": "Sold shirt", "urlPart": "sold", "price": 1.0, "currency": "USD", "isInStock": False, "options": []},
+        ]
+        return {"data": {"catalog": {"category": {"productsWithMetaData": {"totalCount": 3, "list": prods}}}}}
+
+
+def test_wix_run():
+    items, n = tracker.wix_run(_WixHttp(), "Rare and Retro", "https://www.rareandretrosports.com")
+    assert n == 3 and len(items) == 2
+    kaka, kid = items
+    assert kaka["url"] == "https://www.rareandretrosports.com/product-page/milan-kaka"
+    assert kaka["image"] == "https://static.wixstatic.com/media/abc~mv2.jpg" and kaka["price"] == "200.0 USD"
+    assert tracker.condition_info(kaka["title"], kaka["desc"])[0] == "Excellent"
+    assert M.size_ok(kaka["size_text"], tracker.norm(kaka["match_text"]))
+    assert not M.size_ok(kid["size_text"], tracker.norm(kid["match_text"]))   # Youth size raus
+
+
+def test_parse_flag():
+    body = "<!-- Hinweis -->\ngrund: unpassend\nid: classic-shirts.com/product-eng-1-x.html\nurl: https://x\n\nkommentar: nur Trainingsshirt\n"
+    assert tracker.parse_flag(body) == {"grund": "unpassend", "id": "classic-shirts.com/product-eng-1-x.html",
+                                        "kommentar": "nur Trainingsshirt"}
+    assert tracker.parse_flag("irgendein Text") is None
+
+
+def test_apply_flags_ohne_token(monkeypatch):
+    monkeypatch.delenv("GITHUB_TOKEN", raising=False)
+    seen = {"a": {"labels": []}, "b": {"labels": []}}
+    st = {"flags": {"a": {"grund": "ausverkauft", "zeit": "t"}, "b": {"grund": "unpassend", "kommentar": "Jacke", "zeit": "t"}}}
+    assert tracker.apply_flags(seen, st, "t") == 0
+    assert seen["a"]["verkauft"] == "t" and seen["b"]["aussortiert"] == "Gemeldet: unpassend (Jacke)"
