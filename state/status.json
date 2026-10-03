@@ -134,7 +134,9 @@
   "https://xn--retrotrjer-6cb.dk": "DKK"
  },
  "drop_checks": {
-  "Philly Soccer Jerseys": "2026-10-02T22:31:25.080957+00:00"
+  "Philly Soccer Jerseys": "2026-10-02T22:31:25.080957+00:00",
+  "The Kitman 97": "2026-10-03T15:07:55.644740+00:00",
+  "To The Jersey": "2026-10-03T15:07:55.644740+00:00"
  },
  "fyj_shops": {
   "arsijstore.com": {
@@ -285,12 +287,18 @@
    "neu": 0,
    "still": 0,
    "zeit": "2026-10-03T13:01:11.815592+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-03T15:07:55.644740+00:00"
   }
  ],
  "last_full": "2026-10-03T10:11:34.695657+00:00",
  "last_run": {
-  "mode": "priority",
-  "time": "2026-10-03T13:01:11.815592+00:00"
+  "mode": "drop",
+  "time": "2026-10-03T15:07:55.644740+00:00"
  },
  "platforms": {
   "https://1kloppshop.com": "shopify",
