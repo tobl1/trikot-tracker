@@ -46,6 +46,7 @@ CASES = [
     ("2004-05 Lyon Home Shirt Juninho #8 (XL)", {"Juninho (Pernambucano)"}),
     ("2023-24 Man City Home Shirt Rodri #16 (XL)", {"Rodri"}),
     ("2023-24 Man City Home Shirt Rodrigo #16 (XL)", set()),
+    ("2018-19 Spain Adidas Home Shirt #Thiago10 BNWT Size XL", {"Thiago"}),   # Name und Nummer zusammen
     ("2019-20 Ajax Home Shirt De Jong #21 (XL)", {"Frenkie de Jong"}),
     ("2014-15 Feyenoord Home Shirt Luuk de Jong (XL)", set()),
     ("2010-11 PSV Home Shirt Van der Vaart XL", {"Van der Vaart"}),
@@ -359,3 +360,25 @@ def test_desc_title_vorrang():
     assert not tracker.desc_not_jersey(d, "2010-11 Millwall '125 Year' Anniversary Shirt *BNIB* 5XL")
     assert tracker.desc_not_jersey("Le t-shirt en détail : T-shirt en excellent état", "2011/12 - Espagne (XL)")
     assert tracker.desc_not_jersey("Liverpool adidas T-Shirt", "2025-26 Liverpool adidas '95 T-Shirt *w/tags*")
+
+
+def test_artikelcode_sondertrikot():
+    title = "2022-23 LIVERPOOL SHIRT XXL"
+    desc = "CONDITION: 9/10 DESCRIPTION: SPONSOR: STANDARD CHARTERED CODE: DM1835-377"
+    assert M.labels(title) == []                       # ohne Variante im Titel: nein
+    assert M.needs_detail(title)                       # aber Beschreibung nachladen lohnt
+    assert {l for l, _ in M.labels(title, desc=desc)} == {"Liverpool Third 2022/23"}
+    assert M.labels("2022-23 LIVERPOOL SALAH #11 SHIRT XXL", desc=desc) == [] or \
+        "Liverpool Third 2022/23" not in {l for l, _ in M.labels("2022-23 LIVERPOOL SALAH #11 SHIRT XXL", desc=desc)}
+    assert not M.needs_detail("2022-23 LIVERPOOL THIRD SHIRT XXL")   # Variante steht da, kein Nachladen
+    assert not M.needs_detail("2019-20 LIVERPOOL SHIRT XXL")
+
+
+@pytest.mark.parametrize("title,expected", [
+    ("2022-23 LIVERPOOL *WINFIELD* SHIRT XL", set()),                       # Sternchen = fremder Flock
+    ("2012-13 FC BARCELONA *BNWT* SHIRT XL", {"Barça 2010-2013"}),          # Zusatz, kein Flock
+    ("2011-12 FC BARCELONA *THIAGO* SHIRT XL", {"Thiago", "Barça 2010-2013"}),
+    ("2012-13 FC BARCELONA *PLAYER ISSUE* SHIRT XXL", {"Barça 2010-2013"}),
+])
+def test_sternchen_flock(title, expected):
+    assert {l for l, _ in M.labels(title)} == expected

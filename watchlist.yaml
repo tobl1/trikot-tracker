@@ -203,6 +203,8 @@ fremdflock:
 #   stichwoerter: mindestens eins muss vorkommen ...
 #   kombi:        ... oder ein Begriff aus "begriffe" UND eine Farbe
 #   suchanfragen: was in den Shop-Suchen eingegeben wird
+#   codes:        Hersteller-Artikelcodes; steht einer im Titel oder in der Beschreibung, zählt das
+#                 Trikot auch ohne Varianten- oder Saisonangabe
 # ---------------------------------------------------------------------
 sondertrikots:
 
@@ -240,6 +242,7 @@ sondertrikots:
     verein: ["liverpool"]
     saisons: ["2022/23"]
     varianten: [third]
+    codes: ["DM1835-377"]      # Nike-Artikelcode, zählt auch ohne "Third" im Titel (z. B. classic-shirts)
     suchanfragen: ["liverpool 2022"]
 
   - name: "Spanien 2010/2011"

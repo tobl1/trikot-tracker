@@ -85,7 +85,8 @@ def norm(s):
 
 
 def word_rx(phrase):
-    return re.compile(r"(?<![a-z0-9])" + re.escape(norm(phrase)) + r"(?![a-z0-9])")
+    # Danach darf eine Ziffer folgen ("#Thiago10"), aber kein Buchstabe ("rodri" ≠ "rodrigo")
+    return re.compile(r"(?<![a-z0-9])" + re.escape(norm(phrase)) + r"(?![a-z])")
 
 
 def any_rx(phrases):
@@ -99,6 +100,11 @@ def hit(rxs, text):
 SIZE_RX = re.compile(r"(?<![a-z0-9])(xxl|2xl|xl|xx-large|x-large|xx large|x large|extra large)(?![a-z0-9])")
 ANY_SIZE_RX = re.compile(r"(?<![a-z0-9])(xxs|xs|s|m|l|xl|xxl|2xl|3xl|xxxl|small|medium|large|"
                          r"x-large|xx-large|\d{2,3}\s?cm|yxl|yl|ym|ys|xlb|lb|mb|sb)(?![a-z0-9])")
+
+# Sternchen-Wörter wie "*WINFIELD*" (classic-shirts) sind Beflockungen, außer diese Zusätze
+STAR_RX = re.compile(r"\*([^*]{2,40})\*")
+STAR_TAGS = re.compile(r"(?i)^(bnwt|bnib|bnwot|bnip|w/ ?tags|with tags|mint|new|rare|signed|autographed|player issue|"
+                       r"match worn|match issue|sample|prototype|ls|l/s|long ?sleeve|basic|retro|vintage)$")
 
 # Rückennummer im Titel: "#10", "# 10", "No. 10", "Nr 10", "Number 10"
 FLOCK_NUM_RX = re.compile(r"#\s?\d{1,2}(?!\d)|(?<![a-z0-9])(no|nr|num|number)\.?\s?\d{1,2}(?![\d/])")
@@ -192,6 +198,7 @@ class Matcher:
                 "kombi_f": any_rx(kombi.get("farbe")),
                 "queries": k.get("suchanfragen") or [],
                 "fremdflock_egal": str(k.get("fremdflock", "")).lower() == "egal",
+                "codes": any_rx(k.get("codes")),
             })
 
     def excluded(self, text):
@@ -212,10 +219,13 @@ class Matcher:
             return False
         return not (hit(self.kids, st) or hit(self.kids, full_text))
 
-    def foreign_flock(self, t):
-        """Trikot mit Flock eines anderen Spielers (Thiago-Flock zählt nicht als fremd)"""
+    def foreign_flock(self, t, star=False):
+        """Trikot mit Flock eines anderen Spielers (Thiago-Flock zählt nicht als fremd).
+        star: Titel enthält ein Sternchen-Wort, das kein bekannter Zusatz ist (classic-shirts "*NAME*")"""
         if hit(self.flock_ok, t):
             return False
+        if star:
+            return True
         return bool(FLOCK_NUM_RX.search(t)) or hit(self.flock_names, t)
 
     def _variant_ok(self, kit, t):
@@ -229,19 +239,32 @@ class Matcher:
             return False
         return "home" in allowed   # ohne Angabe ist es meist das Heimtrikot
 
-    def labels(self, text, fyj_reissue=False):
-        """Gibt [(label, prio)] zurück, ohne Größenprüfung. Nachbauten nur als Repro-Flock für repro_labels"""
+    def labels(self, text, fyj_reissue=False, desc=""):
+        """Gibt [(label, prio)] zurück, ohne Größenprüfung. Nachbauten nur als Repro-Flock für repro_labels.
+        desc (Beschreibung) wird nur für Artikelcodes der Sondertrikots herangezogen"""
         t = norm(text)
         if not t or self.excluded(t):
             return []
-        out = self._labels(t)
+        starred = [x.strip() for x in STAR_RX.findall(str(text)) if not STAR_TAGS.match(x.strip())]
+        star = any(not hit(self.flock_ok, norm(x)) for x in starred)
+        out = self._labels(t, norm(plain(desc)) if desc else "", star)
         if hit(self.nachbau, t) or fyj_reissue:
             if not (hit(self.repro_muster, t) or fyj_reissue):
                 return []
             out = [(l, p) for l, p in out if l in self.repro_labels]
         return out
 
-    def _labels(self, t):
+    def needs_detail(self, text):
+        """Sondertrikot mit Artikelcodes: Verein und Saison passen, Variante fehlt im Titel. Dann lohnt
+        es, die Beschreibung der Produktseite nachzuladen (z. B. classic-shirts nennt dort den Code)"""
+        t = norm(text)
+        for k in self.kits:
+            if k["codes"] and hit(k["verein"], t) and (hit(k["saisons"], t) or hit(k["jahre"], t)) \
+                    and not self._variant_ok(k, t):
+                return True
+        return False
+
+    def _labels(self, t, d="", star=False):
         out = []
         for p in self.players:
             if not hit(p["suche"], t) or hit(p["aus"], t):
@@ -250,13 +273,17 @@ class Matcher:
                 continue
             out.append((p["name"], p["prio"]))
         for k in self.kits:
+            if k["codes"] and hit(k["codes"], f"{t} {d}"):     # Artikelcode eindeutig, Variante egal
+                if k["fremdflock_egal"] or not self.foreign_flock(t, star):
+                    out.append((k["name"], k["prio"]))
+                continue
             if not hit(k["verein"], t):
                 continue
             if (k["saisons"] or k["jahre"]) and not (hit(k["saisons"], t) or hit(k["jahre"], t)):
                 continue
             if not self._variant_ok(k, t):
                 continue
-            if not k["fremdflock_egal"] and self.foreign_flock(t):
+            if not k["fremdflock_egal"] and self.foreign_flock(t, star):
                 continue
             if k["stich"] or k["kombi_b"]:
                 ok = hit(k["stich"], t) or (hit(k["kombi_b"], t) and hit(k["kombi_f"], t))
@@ -715,7 +742,15 @@ def idosell_run(http, shop, base, queries, matcher, max_pages=6):
                     continue
                 url = urljoin(base + "/", a["href"])
                 title = a.get_text(" ", strip=True)
-                if url in urls or not matcher.labels(title):
+                desc, detail = "", None
+                if url not in urls and not matcher.labels(title) and matcher.needs_detail(title):
+                    detail = http.get(url, want="text") or ""     # Code steht nur auf der Produktseite
+                    for tag in BeautifulSoup(detail, "html.parser").find_all("script", type="application/ld+json"):
+                        try:
+                            desc = desc or " ".join(plain(p.get("description")) for p in ld_products(json.loads(tag.string or "")))
+                        except ValueError:
+                            pass
+                if url in urls or not matcher.labels(title, desc=desc):
                     continue
                 urls.add(url)
                 pr = el.select_one("strong.price")
@@ -724,11 +759,11 @@ def idosell_run(http, shop, base, queries, matcher, max_pages=6):
                 src = urljoin(base + "/", img.get("src", "")) if img and img.get("src") else ""
                 size_text = title
                 if not ANY_SIZE_RX.search(norm(title)):
-                    detail = http.get(url, want="text") or ""
+                    detail = detail if detail is not None else (http.get(url, want="text") or "")
                     sizes = [x.get_text(strip=True) for x in
                              BeautifulSoup(detail, "html.parser").select(".projector_sizes__name")]
                     size_text = " ".join(sizes) or "__keine__"
-                items.append(item("direkt", shop, url, title, size_text, price, src, pruefen=True))
+                items.append(item("direkt", shop, url, title, size_text, price, src, pruefen=True, desc=desc))
             if len(tiles) < 50:
                 break
     return items, n
@@ -1586,7 +1621,7 @@ def main():
             if it.get("desc") and it.get("source") == "direkt" and desc_not_jersey(it["desc"], it["title"]) \
                     and it.get("desc") != it.get("title"):
                 continue
-            labs = matcher.labels(it["match_text"], it.get("fyj_reissue", False))
+            labs = matcher.labels(it["match_text"], it.get("fyj_reissue", False), it.get("desc", ""))
             if not labs or not matcher.size_ok(it["size_text"], norm(it["match_text"])):
                 continue
             if not it["url"]:

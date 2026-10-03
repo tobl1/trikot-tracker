@@ -67,7 +67,14 @@ TREFFER.md, also vorher sichern oder nicht committen). `--only "Name"` testet ei
 ## Matching-Regeln (wichtig, vom Nutzer so festgelegt)
 
 - Text wird normalisiert (Kleinschreibung, Akzente weg, ß→ss, Gedankenstriche→`-`),
-  Begriffe werden als **ganze Wörter** gesucht (`rodri` trifft nicht `rodrigo`)
+  Begriffe werden als **ganze Wörter** gesucht (`rodri` trifft nicht `rodrigo`); eine **Ziffer direkt
+  danach ist erlaubt** ("#Thiago10", vintageauthenticretro.com, bis 04.10.2026 deshalb verpasst)
+- Sondertrikots können `codes` haben (Hersteller-Artikelcode, z. B. Liverpool Third 22/23 = Nike
+  DM1835-377): Code in Titel oder Beschreibung zählt ohne Varianten-/Saisonangabe. Classic-Shirts
+  nennt den Code nur auf der Produktseite, `needs_detail()` lädt sie in genau diesen Grenzfällen nach.
+  DB2560-688 = Liverpool **Home** 21/22; Away-21/22-Code noch unbekannt
+- Classic-Shirts markiert Flock mit Sternchen ("*WINFIELD*"): Sternchen-Wort ohne bekannten Zusatz
+  (BNWT, SIGNED, PLAYER ISSUE …, `STAR_TAGS`) gilt als fremder Flock, außer Thiago
 - `vereine` bei Spielern ist ein **strikter Filter**. Bewusst gesetzt:
   Henry nur Arsenal; Torres nur Atlético und Liverpool; Robben nur Bayern;
   Olić nur Bayern, HSV, Kroatien (nicht Wolfsburg, nicht ZSKA); Juninho = Pernambucano
