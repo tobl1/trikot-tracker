@@ -115,8 +115,53 @@ shops:
   - {name: Lineup Vintage, url: "https://www.lineupvintageshop.com", plattform: wix, schnellcheck: nein}
   - {name: Original 11vs11, url: "https://www.original11vs11.com", plattform: wix, schnellcheck: nein}
   - {name: Rare and Retro, url: "https://www.rareandretrosports.com", plattform: wix, schnellcheck: nein}
-# Bulishirts (Wix) liefert über die Schnittstelle 0 Produkte, bleibt über FYJ.
+# Bulishirts (Wix, neuer Katalog V3) läuft seit 05.10.2026 direkt, siehe unten.
 # kitts.de ist ein Marktplatz (Sharetribe, viele private Verkäufer), bleibt bewusst über FYJ.
+
+# ---------------------------------------------------------------------
+# Neu seit 05.10.2026 (Recherche, vom Nutzer freigegeben), nur im nächtlichen Gesamt-Run
+# ---------------------------------------------------------------------
+# Deutschland, Schweiz, Österreich
+  - {name: Football Trikots Berlin, url: "https://footballtrikotsberlin.com", schnellcheck: nein}
+  - {name: Trikotstoff, url: "https://trikotstoff.de", schnellcheck: nein}
+  - {name: SG Vintage Jerseys, url: "https://sg-vintage-jerseys.de", schnellcheck: nein}
+  - {name: 089 Kits, url: "https://www.089kits.de", plattform: wix, schnellcheck: nein}
+  - {name: Retroshirts CH, url: "https://retroshirts.ch", schnellcheck: nein}
+  - {name: Original Football Shop, url: "https://originalfootball.shop", schnellcheck: nein}
+# Benelux
+  - {name: The Footballshirt Vault, url: "https://thefootballshirtvault.com", schnellcheck: nein}
+  - {name: Kick and Rush, url: "https://kickandrushshop.nl", schnellcheck: nein}
+  - {name: Belgian Football Classics, url: "https://belgianfootballclassics.com", schnellcheck: nein}
+# Skandinavien
+  - {name: Din Fodboldtrøje, url: "https://dinfodboldtroje.com", schnellcheck: nein}
+  - {name: Pardon My Kicks, url: "https://pardonmykicks.se", schnellcheck: nein}
+# Frankreich, Spanien, Italien
+  - {name: The Football Market, url: "https://thefootballmarket.com", schnellcheck: nein}
+  - {name: La Surface, url: "https://lasurface.shop", schnellcheck: nein}
+  - {name: Vintage Football FR, url: "https://www.vintage-football.com", plattform: wix, schnellcheck: nein}
+  - {name: Real Vintage Football, url: "https://realvintagefootball.com", schnellcheck: nein}
+  - {name: Futmaniacos, url: "https://futmaniacos.com", schnellcheck: nein}
+  - {name: Arsij Store, url: "https://www.arsijstore.com", schnellcheck: nein}
+  - {name: Maglie Calcio Vintage, url: "https://magliecalciovintage.it", schnellcheck: nein}
+# UK
+  - {name: Football Finds, url: "https://footballfinds.co.uk", schnellcheck: nein}
+  - {name: The 12th Man Retro, url: "https://the12thmanretro.com", schnellcheck: nein}
+  - {name: Full Time Fits, url: "https://fulltimefits.com", schnellcheck: nein}
+  - {name: Squadra Football, url: "https://squadrafootball.com", schnellcheck: nein}
+  - {name: Infinity Football Shirts, url: "https://infinityfootballshirts.com", schnellcheck: nein}
+# Herkunft unklar (EUR)
+  - {name: Vintage Sports Clothing, url: "https://vintagesportsclothing.com", schnellcheck: nein}
+  - {name: Modeziege, url: "https://modeziege.net", schnellcheck: nein}
+  - {name: Football Legends Kits, url: "https://footballlegendskits.com", schnellcheck: nein}
+# Außerhalb Europas
+  - {name: Vintage Authentic Retro, url: "https://vintageauthenticretro.com", schnellcheck: nein}
+  - {name: FTBL HVN, url: "https://ftblhvn.com", schnellcheck: nein}
+  - {name: Kit Collector, url: "https://kitcollector.club", schnellcheck: nein}
+  - {name: Retro Screamers, url: "https://retroscreamers.com", schnellcheck: nein}
+  - {name: Galactic Soccer Kits, url: "https://www.galacticsoccerkits.com", plattform: wix, schnellcheck: nein}
+  - {name: Sunday Football Shirts, url: "https://sundayfootballshirts.com", schnellcheck: nein}
+  - {name: Lockerhaus, url: "https://lockerhaus.store", schnellcheck: nein}
+  - {name: Bulishirts, url: "https://www.bulishirts.com", plattform: wix, schnellcheck: nein}
 
 # Marktplätze (eBay, Depop) werden nicht abgefragt, dort am besten in der
 # jeweiligen App dem Verkäufer folgen bzw. gespeicherte Suchen anlegen:

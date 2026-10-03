@@ -414,6 +414,12 @@ T90 = "Nike Total 90 (2004-06)"
     ("2004-06 Arsenal Home Shirt Henry #14 (XL)", True),
     ("2004-05 FC Porto Home Shirt (XL)", True),
     ("2004 Porto Alegre Gremio Shirt XL", False),
+    ("2004-05 Valencia Home Shirt Aimar #21 (XL)", True),         # Valencia nur beflockt
+    ("2004-05 Valencia Home Shirt (XL)", False),
+    ("2004-05 PSV Eindhoven Home Shirt *PARK* XL", True),
+    ("2004-05 PSV Home Shirt XL", False),
+    ("Australia 2004-06 Home Shirt Viduka 9 XL", True),
+    ("Australia 2004-06 Home Shirt XL - 8/10", False),
     ("2004/05 Inter Milan Training Shirt XL", False),
     ("2004 GREECE UEFA EURO 2004 PORTUGAL SHIRT XL", False),
     ("Original Portugal Away Jersey 2002-2004 #11 Ronaldo - XL", False),
@@ -433,3 +439,11 @@ def test_neuauflage_kennzeichen():
     assert M.reissue("Portugal 2004 Home Shirt (2025 Reissue) XL")
     assert not M.reissue("2004-06 Portugal Home Shirt Figo #7 XL")
     assert M.labels("2015-16 Bayern Munich Thiago #6 Reissue (XL)") == []    # Thiago-Reissue bleibt raus
+
+
+def test_wix_text_v3():
+    d = '{"nodes":[{"type":"PARAGRAPH","nodes":[{"type":"TEXT","textData":{"text":"Zustand 9/10"}}]},' \
+        '{"type":"PARAGRAPH","nodes":[{"type":"TEXT","textData":{"text":"Repro Flock"}}]}]}'
+    txt = tracker.wix_text(d)
+    assert "Zustand 9/10" in txt and M.repro_flock(txt)
+    assert tracker.wix_text("<p>Condition: Excellent</p>") == "Condition: Excellent"

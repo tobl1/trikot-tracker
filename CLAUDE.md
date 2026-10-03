@@ -140,8 +140,12 @@ TREFFER.md, also vorher sichern oder nicht committen). `--only "Name"` testet ei
   2004/05 und 2004-06, Porto 2004/05 (ohne "Porto Alegre"). Weitere mögliche T90-Teams: USA,
   Türkei, Russland (EM 2004), Australien; Man United, Valencia, PSG, PSV, BVB, Corinthians.
   Nicht Chelsea (damals Umbro, eine Quelle irrt)
+- Valencia, Australien, PSV (seit 05.10.2026) **nur beflockt** (`fremdflock: pflicht`, `has_flock()`:
+  Rückennummer, Sternchen-Name, bekannter Spielername oder alleinstehende Nummer)
 - `season_rxs` versteht echte Bereiche: "2004/06" = 2004-06 (vorher fälschlich wie 2004/05)
 - Neue Kategorien werden beim ersten Gesamt-Run still übernommen (`known_labels` in status.json)
+- Still übernommene Treffer (neue Shops/Kategorien) lösen **eine** Sammelnachricht aus ("🆕 N Treffer
+  aus neuen Shops/Kategorien", Link auf `#eingaenge`)
 
 ## Zustand, Verfügbarkeit, Drop-Rhythmus
 
@@ -205,6 +209,11 @@ auf dem Foto erkennbar sind (z. B. Trainingsshirt ohne Hinweis im Titel), über 
 
 ## Quellen und technische Details
 
+**05.10.2026: 42 weitere Shops** aus der Recherche direkt angebunden (Abschnitt "Neu seit 05.10.2026"
+in shops.yaml, alle `schnellcheck: nein`), damit 115 Shops. Bewusst nicht: originaltrikot.de (Gambio),
+wavememorabilia, classicfootballcollectibles, fancyfootballshirts, kitmenapparel, theshirttemple
+(Mehraufwand/unklar), 44trikots (passwortgeschützt), Marktplätze und Nachbau-Shops
+
 **Strategie (entschieden 01.10.2026): direkt zuerst, FYJ nur als Lückenfüller und Fundgrube.**
 FYJ-Daten sind oft tagelang alt, teils fehlerhaft, Zustand nur grob. Deshalb: 31 Shopify-Shops,
 die vorher nur über FYJ kamen, direkt (`schnellcheck: nein`, nur nachts), classic-shirts.com per
@@ -257,6 +266,15 @@ price, currency, isInStock, media[0].url (`static.wixstatic.com/media/<id>`), op
 Rare and Retro, The Football Boutique, Throwback Jerseys NZ. Bulishirts liefert 0 (bleibt FYJ).
 kitts.de ist **kein** Wix, sondern ein Sharetribe-Marktplatz (bleibt FYJ). Lineup nennt neuere Trikots
 "Rétro", ältere "Vintage" (vermutlich beides Originale, nicht geprüft)
+
+**Wix, neuer Katalog V3** (089kits, vintage-football.com, Bulishirts): Standard-Kategorie liefert 0,
+dann `{ catalog { categories(limit: 100) { list { id name } } } }` und Kategorie "All Products" bzw.
+alle Kategorien zusammen (Bulishirts: 67 Anfragen). Beschreibung (`description`) kommt als Rich-Text-JSON,
+`wix_text()` holt den Text raus
+
+**Repro-Flock in der Beschreibung** (z. B. 089kits "Repro Flock", sundayfootballshirts "Nameset: Remake"):
+bei direkt abgefragten Shops wie FYJ-Reissue behandelt, zählt also nur für Thiago (Kennzeichen REPRO-FLOCK)
+und Kategorien aus `nachbau_erlaubt_fuer`
 
 **ReShirt (`smartweb`):** `/json/products?currencyIso=DKK&field=search&filter={}&id=<begriff>&limit=48&orderBy=-Id&page=N`;
 Größe steht im Titel ("… - XL"); Felder `Stock`/`Online` wirken unzuverlässig, nur `Soldout` wird genutzt.

@@ -200,7 +200,8 @@ class Matcher:
                 "kombi_b": any_rx(kombi.get("begriffe")),
                 "kombi_f": any_rx(kombi.get("farbe")),
                 "queries": k.get("suchanfragen") or [],
-                "fremdflock_egal": str(k.get("fremdflock", "")).lower() == "egal",
+                "fremdflock_egal": str(k.get("fremdflock", "")).lower() in ("egal", "pflicht"),
+                "flock_pflicht": str(k.get("fremdflock", "")).lower() == "pflicht",
                 "codes": any_rx(k.get("codes")),
                 "aus": any_rx(k.get("ausschluss")),
             })
@@ -236,6 +237,13 @@ class Matcher:
         if star:
             return True
         return bool(FLOCK_NUM_RX.search(t)) or hit(self.flock_names, t)
+
+    def has_flock(self, t, star=False):
+        """Irgendein Flock erkennbar: Rückennummer, Sternchen-Name, bekannter Spielername oder
+        eine alleinstehende Rückennummer ("PORTUGAL 7 FIGO"), nicht Saison, Note oder Größe"""
+        return bool(star or FLOCK_NUM_RX.search(t) or hit(self.flock_names, t) or hit(self.flock_ok, t)
+                    or any(hit(p["suche"], t) for p in self.players)
+                    or re.search(r"(?<![\d/.\-])\b([1-9]|[1-9]\d)\b(?![\d/.\-]|\s?(ans|years|jahre|/10))", t))
 
     def _variant_ok(self, kit, t):
         allowed = kit["varianten"]
@@ -294,6 +302,8 @@ class Matcher:
             if not self._variant_ok(k, t):
                 continue
             if not k["fremdflock_egal"] and self.foreign_flock(t, star):
+                continue
+            if k["flock_pflicht"] and not self.has_flock(t, star):
                 continue
             if k["stich"] or k["kombi_b"]:
                 ok = hit(k["stich"], t) or (hit(k["kombi_b"], t) and hit(k["kombi_f"], t))
@@ -780,10 +790,14 @@ def idosell_run(http, shop, base, queries, matcher, max_pages=6):
 
 
 WIX_STORES_APP = "1380b703-ce81-ff05-f115-39571d94dfcd"
-WIX_QUERY = """query getProducts($offset: Int, $limit: Int) { catalog {
- category(categoryId: "00000000-000000-000000-000000000001") {
+WIX_ALL = "00000000-000000-000000-000000000001"   # "Alle Produkte" im alten Katalog; neuer Katalog (V3) hat eigene IDs
+WIX_ALL_NAMES = re.compile(r"(?i)^(all products|alle produkte|alle artikel|tous les produits|todos los productos|"
+                           r"tutti i prodotti|alle producten|all)$")
+WIX_CATS = "{ catalog { categories(limit: 100) { list { id name } } } }"
+WIX_QUERY = """query getProducts($offset: Int, $limit: Int, $cid: String!) { catalog {
+ category(categoryId: $cid) {
  productsWithMetaData(limit: $limit, offset: $offset, onlyVisible: true) { totalCount list {
- id name urlPart price currency isInStock productType media { url }
+ id name urlPart price currency isInStock productType description media { url }
  options { title selections { description value } } } } } } }"""
 
 
@@ -794,39 +808,84 @@ def wix_run(http, shop, base, max_pages=120):
     inst = (((tokens or {}).get("apps") or {}).get(WIX_STORES_APP) or {}).get("instance")
     if not inst:
         return [], 0
-    items, n = [], 0
-    for page in range(max_pages):
-        data = http.post(f"{base}/_api/wix-ecommerce-storefront-web/api", headers={"Authorization": inst},
-                         json={"query": WIX_QUERY, "variables": {"offset": page * 100, "limit": 100},
-                               "operationName": "getProducts"})
-        block = ((((data or {}).get("data") or {}).get("catalog") or {}).get("category") or {}) \
+    api, hdr = f"{base}/_api/wix-ecommerce-storefront-web/api", {"Authorization": inst}
+
+    def fetch(cid, offset):
+        data = http.post(api, headers=hdr, json={"query": WIX_QUERY, "operationName": "getProducts",
+                                                 "variables": {"offset": offset, "limit": 100, "cid": cid}})
+        return ((((data or {}).get("data") or {}).get("catalog") or {}).get("category") or {}) \
             .get("productsWithMetaData") or {}
-        prods = block.get("list") or []
-        n += len(prods)
-        for p in prods:
-            if not p.get("isInStock") or not p.get("urlPart"):
-                continue
-            sizes, grade = [], ""
-            for o in p.get("options") or []:
-                title = norm(o.get("title"))
-                vals = [x.get("description") or x.get("value") or "" for x in o.get("selections") or []]
-                if "youth" in title or "kid" in title:
-                    sizes += ["youth"] + vals           # Kindergröße, wird über die Ausschlüsse aussortiert
-                elif SIZE_ATTR_RX.search(title):
-                    sizes += vals
-                elif "condition" in title and vals:
-                    grade = vals[0]
-            media = (p.get("media") or [{}])[0].get("url") or ""
-            img = media if media.startswith("http") else (f"https://static.wixstatic.com/media/{media}" if media else "")
-            price = f"{p.get('price')} {p.get('currency') or ''}".strip() if p.get("price") is not None else ""
-            items.append(item("direkt", shop, f"{base}/product-page/{p['urlPart']}", p.get("name") or "",
-                              f"{p.get('name') or ''} {' '.join(sizes)}", price, img,
-                              desc=p.get("name") or "",   # Zustand steht bei manchen im Titel ("USED: Excellent")
-                              typ=p.get("productType") if p.get("productType") not in ("physical", None) else "",
-                              fyj_condition=grade))
-        if len(prods) < 100 or n >= (block.get("totalCount") or 0):
-            break
+
+    first = fetch(WIX_ALL, 0)
+    cats = [WIX_ALL]
+    if not first.get("list"):
+        # Neuer Wix-Katalog: Kategorie "All Products" suchen, sonst alle Kategorien zusammennehmen
+        lst = ((((http.post(api, headers=hdr, json={"query": WIX_CATS}) or {}).get("data") or {})
+                .get("catalog") or {}).get("categories") or {}).get("list") or []
+        all_cat = [c["id"] for c in lst if WIX_ALL_NAMES.match((c.get("name") or "").strip())]
+        cats = all_cat[:1] or [c["id"] for c in lst]
+        first = None
+    items, n, seen_ids = [], 0, set()
+    for cid in cats:
+        for page in range(max_pages):
+            block = first if (first is not None and cid == WIX_ALL and page == 0) else fetch(cid, page * 100)
+            prods = block.get("list") or []
+            key = lambda p: p.get("id") or p.get("urlPart")
+            items += wix_items(shop, base, [p for p in prods if key(p) not in seen_ids])
+            seen_ids |= {key(p) for p in prods}
+            n += len(prods)
+            if len(prods) < 100 or (page + 1) * 100 >= (block.get("totalCount") or 0):
+                break
     return items, n
+
+
+def wix_text(desc):
+    """Beschreibung: neuer Wix-Katalog liefert Rich-Text als JSON ("textData": {"text": ...}), alter HTML"""
+    if isinstance(desc, str) and desc.lstrip().startswith("{"):
+        try:
+            data = json.loads(desc)
+        except ValueError:
+            return plain(desc)
+        out = []
+
+        def walk(x):
+            if isinstance(x, dict):
+                if isinstance(x.get("textData"), dict):
+                    out.append(str(x["textData"].get("text") or ""))
+                for v in x.values():
+                    walk(v)
+            elif isinstance(x, list):
+                for v in x:
+                    walk(v)
+        walk(data)
+        return " ".join(out)
+    return plain(desc)
+
+
+def wix_items(shop, base, prods):
+    items = []
+    for p in prods:
+        if not p.get("isInStock") or not p.get("urlPart"):
+            continue
+        sizes, grade = [], ""
+        for o in p.get("options") or []:
+            title = norm(o.get("title"))
+            vals = [x.get("description") or x.get("value") or "" for x in o.get("selections") or []]
+            if "youth" in title or "kid" in title:
+                sizes += ["youth"] + vals           # Kindergröße, wird über die Ausschlüsse aussortiert
+            elif SIZE_ATTR_RX.search(title):
+                sizes += vals
+            elif "condition" in title and vals:
+                grade = vals[0]
+        media = (p.get("media") or [{}])[0].get("url") or ""
+        img = media if media.startswith("http") else (f"https://static.wixstatic.com/media/{media}" if media else "")
+        price = f"{p.get('price')} {p.get('currency') or ''}".strip() if p.get("price") is not None else ""
+        items.append(item("direkt", shop, f"{base}/product-page/{p['urlPart']}", p.get("name") or "",
+                          f"{p.get('name') or ''} {' '.join(sizes)}", price, img,
+                          desc=f"{p.get('name') or ''} {wix_text(p.get('description'))}",   # Zustand teils im Titel
+                          typ=p.get("productType") if p.get("productType") not in ("physical", None) else "",
+                          fyj_condition=grade))
+    return items
 
 
 def prestashop_run(http, shop, base, queries, matcher, search_path="/szukaj"):
@@ -1644,6 +1703,8 @@ def main():
             if it.get("desc") and it.get("source") == "direkt" and desc_not_jersey(it["desc"], it["title"]) \
                     and it.get("desc") != it.get("title"):
                 continue
+            if it.get("desc") and it.get("source") == "direkt" and matcher.repro_flock(it["desc"]):
+                it["fyj_reissue"] = it["desc_repro"] = True   # wie FYJ-Reissue: nur Thiago/erlaubte Kategorien
             labs = matcher.labels(it["match_text"], it.get("fyj_reissue", False), it.get("desc", ""))
             if not labs or not matcher.size_ok(it["size_text"], norm(it["match_text"])):
                 continue
@@ -1689,7 +1750,8 @@ def main():
                 entry["zustand_notiz"] = note
             if it.get("pruefen"):
                 entry["pruefen"] = True
-            if matcher.repro_flock(it["match_text"]) or (it.get("fyj_reissue") and "Thiago" in entry["labels"]):
+            if matcher.repro_flock(it["match_text"]) or it.get("desc_repro") \
+                    or (it.get("fyj_reissue") and "Thiago" in entry["labels"]):
                 entry["repro"] = True
             elif it.get("fyj_reissue") or matcher.reissue(it["match_text"]):
                 entry["reissue"] = True
@@ -1767,6 +1829,18 @@ def main():
                            for e in bundle[:20]) +
                  (f"\n… und {len(bundle) - 20} weitere" if len(bundle) > 20 else ""),
                  3, report_url, None, ["soccer"], args.dry_run)
+
+    # Still übernommene Treffer (neue Shops, neue Kategorien): EINE Sammelnachricht statt Push-Flut
+    silent = [e for e in seen.values() if e["first"] == ts and e.get("still")
+              and not (e.get("verkauft") or e.get("teuer") or e.get("aussortiert"))]
+    if silent and not first_run:
+        silent.sort(key=lambda e: (not is_high(e), e["labels"], e["title"]))
+        srcs = sorted({e["shop"] for e in silent})
+        push(topic, f"🆕 {len(silent)} Treffer aus neuen Shops/Kategorien",
+             f"Aus {len(srcs)} Quellen: {', '.join(srcs[:8])}{' …' if len(srcs) > 8 else ''}\n" +
+             "\n".join(f"• {push_label(e)}: {short(e, shop=True)}" for e in silent[:15]) +
+             (f"\n… und {len(silent) - 15} weitere" if len(silent) > 15 else ""),
+             3, report_url, None, ["new"], args.dry_run)
 
     # Aufräumen: Einträge, die 60 Tage nicht mehr gesehen wurden, vergessen
     old = now() - dt.timedelta(days=60)

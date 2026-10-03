@@ -174,7 +174,7 @@ spieler:
 # Sondertrikots (Thiago-Bezug): nur mit Thiago-Flock oder ganz ohne Flock,
 # damit Thiago nachbeflockt werden kann. Als fremd beflockt gilt ein Titel mit
 # Rückennummer (#10, No. 10) oder einem der Namen unten, außer "erlaubt" steht drin.
-# Pro Sondertrikot abschaltbar mit  fremdflock: egal
+# Pro Sondertrikot abschaltbar mit  fremdflock: egal   (fremdflock: pflicht = NUR beflockte zählen)
 # ---------------------------------------------------------------------
 fremdflock:
   erlaubt: ["thiago", "alcantara"]
@@ -370,3 +370,31 @@ sondertrikots:
     varianten: alle
     fremdflock: egal
     suchanfragen: ["porto 2004"]
+
+  # Seit 04.10.2026, auf Wunsch des Nutzers nur beflockt (fremdflock: pflicht)
+  - name: "Nike Total 90 (2004-06)"
+    prioritaet: normal
+    verein: ["australia", "australien", "australie", "socceroos"]
+    saisons: ["2004/05", "2005/06", "2004/06"]
+    jahre: ["2004", "2005"]
+    ausschluss: ["2002-2004", "2002/2004", "2003-2004", "2003/2004", "greece", "griechenland", "grecia", "grece"]
+    varianten: alle
+    fremdflock: pflicht
+    suchanfragen: ["australia 2004", "australia 2005"]
+
+  - name: "Nike Total 90 (2004-06)"
+    prioritaet: normal
+    verein: ["valencia", "valence"]
+    saisons: ["2004/05"]
+    varianten: alle
+    fremdflock: pflicht
+    suchanfragen: ["valencia 2004"]
+
+  - name: "Nike Total 90 (2004-06)"
+    prioritaet: normal
+    verein: ["psv", "psv eindhoven"]
+    saisons: ["2004/05"]
+    varianten: alle
+    fremdflock: pflicht
+    suchanfragen: ["psv 2004"]
+
