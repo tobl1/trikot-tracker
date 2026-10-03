@@ -2,11 +2,11 @@ name: Trikot-Tracker
 
 on:
   schedule:
-    # Hauptauslöser ist cron-job.org (Gesamt-Run 5:30, Schnell-Run 9:45/15:45/21:45, Drop-Run alle 15 Min. 9-23 Uhr,
-    # jeweils deutsche Zeit). Die Zeitpläne hier sind nur Rückfall (--rueckfall) und laufen bewusst etwas später.
+    # Hauptauslöser ist cron-job.org (Gesamt-Run 5:30, Schnell-Run 9:45/15:45/21:45, Drop-Run 9-23 Uhr zu den
+    # Minuten 5/20/35/50, jeweils deutsche Zeit). Die Zeitpläne hier sind nur Rückfall (--rueckfall), laufen bewusst
+    # später. Kein Rückfall für Drop-Runs: GitHub hält nur EINEN wartenden Run, ein zusätzlicher Start verdrängt ihn.
     - cron: "30 5 * * *"     # Rückfall Gesamt-Run (7:30 Sommerzeit)
     - cron: "15 8,14,20 * * *"   # Rückfall Schnell-Run (10:15, 16:15, 22:15 Sommerzeit)
-    - cron: "10,40 7-21 * * *"   # Rückfall Drop-Run
   workflow_dispatch:
     inputs:
       mode:
@@ -43,8 +43,6 @@ jobs:
             echo "mode=${{ inputs.mode }}" >> "$GITHUB_OUTPUT"
           elif [ "${{ github.event.schedule }}" = "30 5 * * *" ]; then
             echo "mode=full" >> "$GITHUB_OUTPUT"
-          elif [ "${{ github.event.schedule }}" = "10,40 7-21 * * *" ]; then
-            echo "mode=drop" >> "$GITHUB_OUTPUT"
           else
             echo "mode=priority" >> "$GITHUB_OUTPUT"
           fi
