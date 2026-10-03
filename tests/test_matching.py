@@ -249,3 +249,14 @@ def test_rhythm_zwei_drop_tage_und_slots():
     st = {"quellen": {"liste": [{"name": "Football Finery", "rhythmus": r}]}}
     slots = tracker.drop_slots({"name": "Football Finery"}, st)
     assert sorted((tracker.WEEKDAYS[w], h, m) for w, h, m, *_ in slots) == [("Di", 10, 43), ("Fr", 10, 43)]
+
+
+def test_recently_done():
+    t = tracker.now()
+    st = {"last_full": (t - tracker.dt.timedelta(hours=5)).isoformat(),
+          "laeufe": [{"zeit": (t - tracker.dt.timedelta(hours=6)).isoformat(), "modus": "priority"}]}
+    assert tracker.recently_done(st, "full")
+    assert not tracker.recently_done(st, "priority")
+    assert not tracker.recently_done(st, "drop")
+    st["last_full"] = (t - tracker.dt.timedelta(hours=21)).isoformat()
+    assert not tracker.recently_done(st, "full")

@@ -57,6 +57,7 @@ RECHECK_DAYS = 3             # FYJ-Treffer so oft auf der Shop-Seite nachprüfen
 CHECK_VERSION = 2            # erhöhen, wenn die Seitenprüfung mehr auswertet: dann wird alles neu geprüft
 ENRICH_BUDGET = {"full": 150, "priority": 25, "drop": 25}   # max. Seitenprüfungen pro Lauf
 NOTE_LEN = 160               # Länge der Zustandsnotiz
+FALLBACK_SKIP_HOURS = {"full": 20, "priority": 4}   # GitHub-Zeitplan überspringt, wenn schon gelaufen
 RUN_HISTORY = 120            # so viele Läufe für den Eingangsverlauf im Dashboard merken
 RHYTHM_DAYS = 90             # Zeitraum für die Drop-Analyse
 BATCH_GAP_MIN = 90           # Artikel mit höchstens so viel Abstand gehören zu einem Schub
@@ -1245,6 +1246,17 @@ def write_report(seen, sources, sources_time, mode):
 # ---------------------------------------------------------------------------
 # Hauptprogramm
 # ---------------------------------------------------------------------------
+def recently_done(status_store, mode):
+    """Hat ein Run dieses Modus kürzlich stattgefunden? (Sperre für die GitHub-Rückfall-Zeitpläne)"""
+    limit = FALLBACK_SKIP_HOURS.get(mode)
+    if not limit:
+        return False
+    times = [l["zeit"] for l in status_store.get("laeufe") or [] if l.get("modus") == mode]
+    if mode == "full" and status_store.get("last_full"):
+        times.append(status_store["last_full"])
+    return any(now() - dt.datetime.fromisoformat(t) < dt.timedelta(hours=limit) for t in times)
+
+
 def load_json(path, default):
     try:
         return json.loads(path.read_text(encoding="utf-8"))
@@ -1257,6 +1269,8 @@ def main():
     ap.add_argument("--mode", choices=["full", "priority", "drop", "test"], default="full")
     ap.add_argument("--dry-run", action="store_true", help="nichts senden, nur ausgeben")
     ap.add_argument("--only", help="nur Shops, deren Name diesen Text enthält (zum Testen)")
+    ap.add_argument("--rueckfall", action="store_true",
+                    help="Start über den GitHub-Zeitplan: nur laufen, wenn cron-job.org den Run nicht schon erledigt hat")
     args = ap.parse_args()
 
     topic = os.environ.get("NTFY_TOPIC", "").strip()
@@ -1275,6 +1289,9 @@ def main():
     STATE_DIR.mkdir(exist_ok=True)
     seen = load_json(SEEN_FILE, {})
     status_store = load_json(STATUS_FILE, {"platforms": {}, "sources_ok": []})
+    if args.rueckfall and recently_done(status_store, args.mode):
+        print(f"Rückfall-Start übersprungen: {args.mode} lief schon vor kurzem (cron-job.org)")
+        return
     platforms = status_store.setdefault("platforms", {})
     currencies = status_store.setdefault("currencies", {})
     sources_ok = set(status_store.setdefault("sources_ok", []))
