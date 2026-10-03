@@ -64,7 +64,7 @@ shops:
   - {name: 1Klopp Shop, url: "https://1kloppshop.com"}
   - {name: Kick It Vintage, url: "https://kickitvintage.de"}
   - {name: The Hoff Classics, url: "https://www.thehoffclassics.com", plattform: fyj}
-  - {name: Trikotparadies, url: "https://trikotparadies.shop"}
+  - {name: Trikotparadies, url: "https://trikotparadies.shop", drop: ["Fr 19:00"]}
   - {name: The Football Temple, url: "https://thefootballtemple.com"}   # NL, Titel auf Niederländisch
 
 # ---------------------------------------------------------------------
@@ -76,7 +76,7 @@ shops:
   - {name: Casual Football Shirts, url: "https://casualfootballshirts.co.uk", schnellcheck: nein}
   - {name: Football Finery, url: "https://footballfinery.co.uk", schnellcheck: nein}
   - {name: Green Sport Vintage, url: "https://greensportvintage.com", schnellcheck: nein}
-  - {name: Jersely, url: "https://jersely.com", schnellcheck: nein}
+  - {name: Jersely, url: "https://jersely.com", schnellcheck: nein, drop: ["So 20:00"]}
   - {name: The Kitman 97, url: "https://thekitman97.com", schnellcheck: nein}
   - {name: To The Jersey, url: "https://tothejersey.com", schnellcheck: nein}
   - {name: Buy Sell Football Shirts, url: "https://buysellfootballshirts.co.uk", schnellcheck: nein}

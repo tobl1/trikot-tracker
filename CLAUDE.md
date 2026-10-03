@@ -31,7 +31,7 @@ Einzeltrikots zum Nachbeflocken dazukommen, das sagt der Nutzer gesondert an.
 | `tracker.py` | gesamtes Programm (Abfrage, Matching, Push, Bericht), bewusst eine Datei |
 | `watchlist.yaml` | Spieler mit Suchbegriffen, Ausschlüssen, Vereinsfilter; Sondertrikots; Größen; Produktausschlüsse |
 | `shops.yaml` | direkt abgefragte Shops mit `plattform` (auto, cfs, idosell, smartweb, prestashop, fyj, aus), optional `schnellcheck: nein` |
-| `.github/workflows/tracker.yml` | GitHub Actions: Gesamt-Run `30 3 * * *` UTC, Schnell-Run `45 7,13,19 * * *` UTC, Drop-Run als Rückfall `10,40 11-21 * * 4,5,6` UTC, manuell mit Modus (full, priority, drop, test) |
+| `.github/workflows/tracker.yml` | GitHub Actions: Gesamt-Run `30 3 * * *` UTC, Schnell-Run `45 7,13,19 * * *` UTC, Drop-Run als Rückfall `10,40 7-21 * * *` UTC, manuell mit Modus (full, priority, drop, test) |
 | `state/seen.json` | bekannte Treffer (Schlüssel = kanonische URL), wird vom Workflow committet |
 | `state/status.json` | erkannte Plattformen, erfolgreich abgefragte Quellen, Produktanzahlen, letzter Lauf |
 | `TREFFER.md` | automatisch erzeugte Übersicht als Markdown, Quellen-Status immer vom letzten Gesamtlauf |

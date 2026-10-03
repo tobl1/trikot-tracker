@@ -4,7 +4,7 @@ on:
   schedule:
     - cron: "30 3 * * *"     # Gesamtlauf nachts 05:30 (Sommerzeit) bzw. 04:30 (Winterzeit), nach dem FYJ-Abgleich
     - cron: "45 7,13,19 * * *"   # Schnellcheck Thiago & Sondertrikots 3x täglich (09:45, 15:45, 21:45 Sommerzeit)
-    - cron: "10,40 11-21 * * 4,5,6"   # Drop-Run Do bis Sa (Rückfall, GitHub ist oft stark verspätet; besser extern auslösen)
+    - cron: "10,40 7-21 * * *"   # Drop-Run täglich (Rückfall, GitHub ist oft stark verspätet; besser extern auslösen)
   workflow_dispatch:
     inputs:
       mode:
@@ -41,7 +41,7 @@ jobs:
             echo "mode=${{ inputs.mode }}" >> "$GITHUB_OUTPUT"
           elif [ "${{ github.event.schedule }}" = "30 3 * * *" ]; then
             echo "mode=full" >> "$GITHUB_OUTPUT"
-          elif [ "${{ github.event.schedule }}" = "10,40 11-21 * * 4,5,6" ]; then
+          elif [ "${{ github.event.schedule }}" = "10,40 7-21 * * *" ]; then
             echo "mode=drop" >> "$GITHUB_OUTPUT"
           else
             echo "mode=priority" >> "$GITHUB_OUTPUT"
