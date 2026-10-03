@@ -289,7 +289,8 @@ summary{cursor:pointer;font-weight:600}
     const badges = [t.gone && '<span class="badge gone">NICHT MEHR GELISTET</span>',
                     down && `<span class="badge down">PREIS ↓ von ${eur(f.eur)}</span>`,
                     t.neu && !t.gone && '<span class="badge new">NEU</span>', t.thiago && '<span class="badge hi">THIAGO</span>',
-                    t.repro && '<span class="badge re" title="Original-Trikot, Name und Nummer nachgedruckt">REPRO-FLOCK</span>']
+                    t.repro && '<span class="badge re" title="Original-Trikot, Name und Nummer nachgedruckt">REPRO-FLOCK</span>',
+                    t.reissue && '<span class="badge re" title="Neuauflage, z. B. Nikes T90-Reissue von 2025, kein Original von damals">NEUAUFLAGE</span>']
       .filter(Boolean).join("");
     const cond = t.zustand ? `<span class="cond">${esc(t.zustand)}</span>` : "";
     const note = t.notiz ? `<div class="note" title="${esc(t.notiz)}">${esc(t.notiz)}</div>` : "";

@@ -133,9 +133,14 @@ TREFFER.md, also vorher sichern oder nicht committen). `--only "Name"` testet ei
   2004/05, 2005/06, 2004/06 bzw. Jahren 2004/2005 (Nationalteams EM 2004 bis vor WM 2006),
   Inter und Juventus nur 2004/05. Ausschlüsse: Zeiträume 2002-2004/2003-2004, Griechenland
   (EM 2004 fand in Portugal statt). Nike-Neuauflagen von 2025 laufen über `nachbau` raus
-- Live-Test 04.10.2026 über FYJ: 78 Treffer in XL/XXL, viele über 150 €. Erweiterbar um weitere
-  T90-Teams (USA, Südkorea, Mexiko, Kroatien, Türkei; Vereine Barcelona, Arsenal, Man United,
-  Valencia, PSV, Porto, PSG, BVB, jeweils 2004/05)
+- Live-Test 04.10.2026 über FYJ: 78 Treffer in XL/XXL, viele über 150 €. **Preisgrenze 150 € gilt
+  auch hier** (Nutzer). **Neuauflagen erwünscht** (`nachbau_erlaubt_fuer`), Dashboard-Kennzeichen
+  "NEUAUFLAGE" (`reissue` am Treffer)
+- Seit 04.10.2026 zusätzlich: Südkorea, Mexiko, Kroatien (2004-06), Barcelona 2004/05, Arsenal
+  2004/05 und 2004-06, Porto 2004/05 (ohne "Porto Alegre"). Weitere mögliche T90-Teams: USA,
+  Türkei, Russland (EM 2004), Australien; Man United, Valencia, PSG, PSV, BVB, Corinthians.
+  Nicht Chelsea (damals Umbro, eine Quelle irrt)
+- `season_rxs` versteht echte Bereiche: "2004/06" = 2004-06 (vorher fälschlich wie 2004/05)
 - Neue Kategorien werden beim ersten Gesamt-Run still übernommen (`known_labels` in status.json)
 
 ## Zustand, Verfügbarkeit, Drop-Rhythmus

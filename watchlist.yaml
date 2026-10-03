@@ -39,6 +39,9 @@ produkt_ausschluss: ["shorts", "socks", "sock", "jacket", "track top", "tracksui
 nachbau: ["reissue", "re-issue", "remake", "reedition", "reedicion", "riedizione",
           "repro", "score draw", "nameset"]
 
+# Kategorien, in denen Neuauflagen ausdrücklich erwünscht sind (im Dashboard als "NEUAUFLAGE")
+nachbau_erlaubt_fuer: ["Nike Total 90 (2004-06)"]
+
 # Ausnahme: Original-Trikot mit NACHGEDRUCKTEM Flock ist für diese Labels erwünscht (im Dashboard
 # als "Repro-Flock" gekennzeichnet). Erkannt an den Mustern; FYJ-"Reissue" zählt bei diesen Labels auch
 repro_flock:
@@ -312,3 +315,58 @@ sondertrikots:
     varianten: alle
     fremdflock: egal
     suchanfragen: ["juventus 2004"]
+
+  - name: "Nike Total 90 (2004-06)"
+    prioritaet: normal
+    verein: ["south korea", "korea", "sudkorea", "suedkorea", "coree du sud", "corea del sur", "corea do sul"]
+    saisons: ["2004/05", "2005/06", "2004/06"]
+    jahre: ["2004", "2005"]
+    ausschluss: ["2002-2004", "2002/2004", "2003-2004", "2003/2004", "greece", "griechenland", "grecia", "grece"]
+    varianten: alle
+    fremdflock: egal
+    suchanfragen: ["korea 2004", "korea 2005"]
+
+  - name: "Nike Total 90 (2004-06)"
+    prioritaet: normal
+    verein: ["mexico", "mexiko", "mexique", "messico"]
+    saisons: ["2004/05", "2005/06", "2004/06"]
+    jahre: ["2004", "2005"]
+    ausschluss: ["2002-2004", "2002/2004", "2003-2004", "2003/2004", "greece", "griechenland", "grecia", "grece"]
+    varianten: alle
+    fremdflock: egal
+    suchanfragen: ["mexico 2004", "mexico 2005"]
+
+  - name: "Nike Total 90 (2004-06)"
+    prioritaet: normal
+    verein: ["croatia", "kroatien", "hrvatska", "kroatie", "croatie", "croazia", "croacia", "chorwacja"]
+    saisons: ["2004/05", "2005/06", "2004/06"]
+    jahre: ["2004", "2005"]
+    ausschluss: ["2002-2004", "2002/2004", "2003-2004", "2003/2004", "greece", "griechenland", "grecia", "grece"]
+    varianten: alle
+    fremdflock: egal
+    suchanfragen: ["croatia 2004", "croatia 2005"]
+
+  - name: "Nike Total 90 (2004-06)"
+    prioritaet: normal
+    verein: ["barcelona", "barca", "barcelone", "barcellona"]
+    saisons: ["2004/05"]
+    varianten: alle
+    fremdflock: egal
+    suchanfragen: ["barcelona 2004"]
+
+  - name: "Nike Total 90 (2004-06)"
+    prioritaet: normal
+    verein: ["arsenal"]
+    saisons: ["2004/05", "2004/06"]
+    varianten: alle
+    fremdflock: egal
+    suchanfragen: ["arsenal 2004"]
+
+  - name: "Nike Total 90 (2004-06)"
+    prioritaet: normal
+    verein: ["porto", "fc porto"]
+    saisons: ["2004/05"]
+    ausschluss: ["porto alegre"]
+    varianten: alle
+    fremdflock: egal
+    suchanfragen: ["porto 2004"]

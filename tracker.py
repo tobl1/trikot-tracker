@@ -122,7 +122,9 @@ def season_rxs(season):
     if not m:
         return []
     s = int(m.group(1))
-    e = s + 1
+    e = s // 100 * 100 + int(m.group(2))     # "2004/06" = 2004 bis 2006, "2010/11" = 2010 bis 2011
+    if e <= s:
+        e += 100
     s2, e2 = f"{s % 100:02d}", f"{e % 100:02d}"
     pats = [f"{s}/{e2}", f"{s}-{e2}", f"{s}/{e}", f"{s}-{e}", f"{s2}/{e2}", f"{s2}-{e2}",
             f"{s} {e2}", f"{s} {e}", f"{s}/ {e2}", f"{s} - {e2}", f"{s} / {e2}"]
@@ -171,6 +173,7 @@ class Matcher:
                 "vereine": any_rx(p.get("vereine")),
             })
         self.nachbau = any_rx(cfg.get("nachbau"))
+        self.nachbau_ok = set(cfg.get("nachbau_erlaubt_fuer") or [])
         rf = cfg.get("repro_flock") or {}
         self.repro_muster = any_rx(rf.get("muster"))
         self.repro_labels = set(rf.get("labels") or [])
@@ -209,6 +212,11 @@ class Matcher:
         """Produktart des Shops ("Tracktop", "Reissue", "Nameset" ...)"""
         t = norm(typ)
         return hit(self.exclude, t) or hit(self.nachbau, t)
+
+    def reissue(self, text):
+        """Nachbau/Neuauflage (z. B. Nikes T90-Reissues von 2025), ohne Repro-Flock-Muster"""
+        t = norm(text)
+        return hit(self.nachbau, t) and not hit(self.repro_muster, t)
 
     def repro_flock(self, text):
         """Original-Trikot mit nachgedrucktem Flock?"""
@@ -250,9 +258,10 @@ class Matcher:
         star = any(not hit(self.flock_ok, norm(x)) for x in starred)
         out = self._labels(t, norm(plain(desc)) if desc else "", star)
         if hit(self.nachbau, t) or fyj_reissue:
-            if not (hit(self.repro_muster, t) or fyj_reissue):
-                return []
-            out = [(l, p) for l, p in out if l in self.repro_labels]
+            allowed = set(self.nachbau_ok)
+            if hit(self.repro_muster, t) or fyj_reissue:
+                allowed |= self.repro_labels
+            out = [(l, p) for l, p in out if l in allowed]
         return out
 
     def needs_detail(self, text):
@@ -1375,7 +1384,7 @@ def write_dashboard(seen, status_store, mode, ts, watch_cfg, shops):
             "groesse": e.get("size", ""), "labels": e["labels"], "hoch": is_high(e),
             "zustand": e.get("zustand", ""), "notiz": e.get("zustand_notiz", ""), "bild": e.get("image", ""),
             "erst": e["first"], "zuletzt": e["last"], "via": e.get("via", ""),
-            "still": bool(e.get("still")), "teuer": bool(e.get("teuer")), "repro": bool(e.get("repro")),
+            "still": bool(e.get("still")), "teuer": bool(e.get("teuer")), "repro": bool(e.get("repro")), "reissue": bool(e.get("reissue")),
         })
     quellen = status_store.get("quellen") or {}
     data = {"stand": ts, "modus": mode, "letzter_gesamtlauf": status_store.get("last_full", ""),
@@ -1680,8 +1689,10 @@ def main():
                 entry["zustand_notiz"] = note
             if it.get("pruefen"):
                 entry["pruefen"] = True
-            if it.get("fyj_reissue") or matcher.repro_flock(it["match_text"]):
+            if matcher.repro_flock(it["match_text"]) or (it.get("fyj_reissue") and "Thiago" in entry["labels"]):
                 entry["repro"] = True
+            elif it.get("fyj_reissue") or matcher.reissue(it["match_text"]):
+                entry["reissue"] = True
             seen[key] = entry
             if first_run or fresh_source or (new_labels and set(entry["labels"]) <= new_labels):
                 entry["still"] = True   # ohne Push übernommen (Erstlauf, neue Quelle oder neue Kategorie)
