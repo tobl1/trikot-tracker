@@ -36,6 +36,7 @@ Einzeltrikots zum Nachbeflocken dazukommen, das sagt der Nutzer gesondert an.
 | `state/status.json` | erkannte Plattformen, erfolgreich abgefragte Quellen, Produktanzahlen, letzter Lauf |
 | `TREFFER.md` | automatisch erzeugte Übersicht als Markdown, Quellen-Status immer vom letzten Gesamtlauf |
 | `docs/index.html` | Dashboard (GitHub Pages, Branch `main`, Ordner `/docs`), statisch, lädt `treffer.json`. Ansichten "Alle Treffer" und "Eingänge nach Lauf" (`#eingaenge`, gruppiert nach `first` = Zeitstempel des Laufs, Läufe aus `status.json` → `laeufe`; still übernommene Treffer, also Erstlauf oder neue Quelle, eingeklappt). Pushes verlinken auf `#eingaenge` |
+| Dashboard-Extras | Favoriten (Stern, nur lokal im Browser, mit Datenkopie, "nicht mehr gelistet" und "Preis ↓"), gleiche Angebote eines Shops (gleicher Titel und Größe) zusammengefasst auf das günstigste ("+N gleiche im Shop"); Classic-Shirts hat oft mehrere Exemplare desselben Trikots |
 | `docs/treffer.json` | aktuelle Treffer inkl. EUR-Preis plus Quellen-Status, wird vom Workflow committet |
 
 Laufzeitumgebung: GitHub Actions, öffentliches Repo, Python 3.12,
@@ -84,7 +85,13 @@ TREFFER.md, also vorher sichern oder nicht committen). `--only "Name"` testet ei
   außer Thiago/Alcantara steht drin. Pro Sondertrikot abschaltbar mit `fremdflock: egal`
 - Labels werden bei jeder ersten Sichtung im Lauf **neu berechnet** (früher nur ergänzt, dadurch
   blieben alte Labels nach Regeländerungen hängen); Treffer ohne Label fallen nach 36 h raus
-- Reissues (FYJ `isReissue`) werden gar nicht erst erfasst. **Achtung, FYJ-Flag ist ein Sammelbecken**
+- **Nachbauten** (`nachbau` in watchlist: reissue, remake, repro, score draw, nameset …) sind raus,
+  **außer Repro-Flock bei Thiago** (Nutzer 04.10.2026): Original-Trikot mit nachgedrucktem Flock
+  (`repro_flock.muster`, z. B. "repro flock", "flocage reproduction", "nameset: remake") bzw. FYJ
+  `isReissue` bei Thiago-Label → Treffer mit `repro: true`, Dashboard-Kennzeichen "REPRO-FLOCK".
+- Beschreibung spricht nur von T-Shirt/Jacke (`desc_not_jersey`, z. B. VFA "Le t-shirt en détail") → raus,
+  außer der Titel nennt ausdrücklich ein Trikot (Shirt, Jersey, Maillot …)
+- Früher: Reissues (FYJ `isReissue`) wurden gar nicht erst erfasst. **Achtung, FYJ-Flag ist ein Sammelbecken**
   (Recherche 01.10.2026): (a) Original-Trikot mit nachgedrucktem Flock ("Repro Flock", "flocage
   reproduction récente", "Nameset: Remake", z. B. 089kits.de, footballshirtvintage.fr,
   sundayfootballshirts.com), (b) reine Repro-Flocksätze (first11shirts.com "Name Set (Repro)"),

@@ -87,6 +87,7 @@ summary{cursor:pointer;font-weight:600}
 .fyjnote b{color:var(--ink)}
 .more{display:block;margin:18px auto 0;font:inherit;background:var(--chip);color:var(--ink);border:0;border-radius:9px;padding:10px 18px;cursor:pointer}
 .err{color:var(--err);padding:30px 0}
+.more[hidden]{display:none}
 .tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin:4px 0 0}
 .tabs button{font:inherit;font-weight:600;background:none;border:0;border-bottom:2px solid transparent;color:var(--muted);padding:8px 12px;cursor:pointer}
 .tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
@@ -96,6 +97,14 @@ summary{cursor:pointer;font-weight:600}
 .flag{position:absolute;top:6px;right:6px;width:32px;height:32px;border-radius:50%;border:0;cursor:pointer;
   background:var(--card);color:var(--muted);font-size:15px;box-shadow:0 1px 3px rgba(0,0,0,.2);opacity:.85}
 .flag:hover{color:var(--err);opacity:1}
+.fav{position:absolute;top:6px;right:44px;width:32px;height:32px;border-radius:50%;border:0;cursor:pointer;
+  background:var(--card);color:var(--muted);font-size:17px;line-height:1;box-shadow:0 1px 3px rgba(0,0,0,.2);opacity:.85}
+.fav[aria-pressed="true"]{color:#e3a008;opacity:1}
+.badge.re{background:#6b4fbb;color:#fff}
+.badge.gone{background:var(--muted);color:var(--bg)}
+.badge.down{background:var(--new);color:#fff}
+.card.gone{opacity:.55}
+.dupes{font-size:12px;color:var(--muted)}
 .sheet{position:fixed;inset:0;z-index:20;background:rgba(0,0,0,.45);display:flex;align-items:flex-end;justify-content:center}
 .sheet[hidden]{display:none}
 .sheet .box{background:var(--card);color:var(--ink);width:100%;max-width:480px;border-radius:14px 14px 0 0;padding:16px 16px 20px}
@@ -141,6 +150,7 @@ summary{cursor:pointer;font-weight:600}
   <nav class="tabs" id="tabs">
     <button data-view="all" aria-selected="true">Alle Treffer</button>
     <button data-view="feed" aria-selected="false">Neu pro Run</button>
+    <button data-view="favs" aria-selected="false" id="favtab">Favoriten</button>
   </nav>
 
   <div class="controls">
@@ -159,11 +169,13 @@ summary{cursor:pointer;font-weight:600}
       </select>
       <label class="toggle"><input type="checkbox" id="onlynew"> nur neu (48 h)</label>
       <label class="toggle"><input type="checkbox" id="expensive"> <span id="explabel">auch teurere</span></label>
+      <label class="toggle"><input type="checkbox" id="dupes"> gleiche Angebote einzeln</label>
     </div>
   </div>
 
   <div class="grid" id="grid"></div>
   <div id="feed" hidden></div>
+  <div id="favs" hidden></div>
   <button class="more" id="more" hidden>Mehr anzeigen</button>
   <div class="empty" id="empty" hidden>Keine Treffer für diese Filter.</div>
 
@@ -210,10 +222,11 @@ summary{cursor:pointer;font-weight:600}
   const host = u => { try { return new URL(u).hostname.replace(/^www\./, ""); } catch(e){ return ""; } };
 
   let all = [], shown = PAGE, runs = [], groupsShown = 12;
-  const st = Object.assign({q:"", sort:"prio", labels:[], shop:"", size:"", onlynew:false, expensive:false, view:"all"},
+  const st = Object.assign({q:"", sort:"prio", labels:[], shop:"", size:"", onlynew:false, expensive:false, dupes:false, view:"all"},
                            store.get("filter") || {});
   const MODE = {full: "Gesamt-Run", priority: "Schnell-Run", drop: "Drop-Run"};
   if (location.hash === "#eingaenge") st.view = "feed";
+  else if (location.hash === "#favoriten") st.view = "favs";
   else if (location.hash === "#alle") st.view = "all";
   const fmtRun = iso => new Date(iso).toLocaleString("de-DE", {weekday:"short", day:"2-digit", month:"2-digit", hour:"2-digit", minute:"2-digit"});
 
@@ -223,6 +236,14 @@ summary{cursor:pointer;font-weight:600}
   const REPO = location.hostname.endsWith("github.io")
     ? `${location.hostname.split(".")[0]}/${location.pathname.split("/")[1] || "trikot-tracker"}` : "tobl1/trikot-tracker";
   const flagged = new Set(store.get("flagged") || []);
+  // Favoriten: lokal im Browser, mit Kopie der Daten (bleiben sichtbar, wenn der Artikel verschwindet)
+  const favs = store.get("favs") || {};
+  function toggleFav(t){
+    if (favs[t.id]) delete favs[t.id];
+    else favs[t.id] = {id: t.id, titel: t.titel, url: t.url, bild: t.bild, preis: t.preis, eur: t.eur, shopName: t.shopName,
+                       groesse: t.groesse, labels: t.labels, zustand: t.zustand, notiz: t.notiz, erst: t.erst, added: new Date().toISOString()};
+    store.set("favs", favs); render();
+  }
   let flagItem = null, flagReason = "unpassend";
   function openFlag(t){
     flagItem = t; flagReason = "unpassend"; $("flagnote").value = "";
@@ -243,7 +264,7 @@ summary{cursor:pointer;font-weight:600}
   }
 
   function filtered(){
-    const q = st.q.trim().toLowerCase();
+    const words = st.q.trim().toLowerCase().split(/\s+/).filter(Boolean);   // jedes Wort muss vorkommen
     let out = all.filter(t =>
       (!st.labels.length || t.labels.some(l => st.labels.includes(l))) &&
       (!st.shop || t.shopName === st.shop) &&
@@ -251,7 +272,8 @@ summary{cursor:pointer;font-weight:600}
       (!st.onlynew || t.neu) &&
       (st.expensive || !t.teuer) &&
       !flagged.has(t.id) &&
-      (!q || t.hay.includes(q)));
+      (st.dupes || st.view !== "all" || !t.dupOf) &&
+      words.every(w => t.hay.includes(w)));
     const byNew = (a, b) => b.erst.localeCompare(a.erst);
     const byPrice = dir => (a, b) => (a.eur == null) - (b.eur == null) || dir * ((a.eur ?? 0) - (b.eur ?? 0));
     const cmp = {
@@ -262,7 +284,12 @@ summary{cursor:pointer;font-weight:600}
   }
 
   function card(t){
-    const badges = [t.neu && '<span class="badge new">NEU</span>', t.thiago && '<span class="badge hi">THIAGO</span>']
+    const f = favs[t.id];
+    const down = f && !t.gone && f.eur != null && t.eur != null && t.eur < f.eur - 0.5;
+    const badges = [t.gone && '<span class="badge gone">NICHT MEHR GELISTET</span>',
+                    down && `<span class="badge down">PREIS ↓ von ${eur(f.eur)}</span>`,
+                    t.neu && !t.gone && '<span class="badge new">NEU</span>', t.thiago && '<span class="badge hi">THIAGO</span>',
+                    t.repro && '<span class="badge re" title="Original-Trikot, Name und Nummer nachgedruckt">REPRO-FLOCK</span>']
       .filter(Boolean).join("");
     const cond = t.zustand ? `<span class="cond">${esc(t.zustand)}</span>` : "";
     const note = t.notiz ? `<div class="note" title="${esc(t.notiz)}">${esc(t.notiz)}</div>` : "";
@@ -270,13 +297,15 @@ summary{cursor:pointer;font-weight:600}
     const price = t.eur != null ? `<b>${eur(t.eur)}</b>${orig}` : `<b>${esc(t.preis || "?")}</b>`;
     const img = t.bild ? `<img loading="lazy" referrerpolicy="no-referrer" src="${esc(t.bild)}" alt="" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph',textContent:'👕'}))">`
                        : '<span class="ph">👕</span>';
-    return `<a class="card${t.hoch ? " hi" : ""}" href="${esc(t.url)}" target="_blank" rel="noopener">
+    const dup = !st.dupes && t.dupes && t.dupes.length ? `<div class="dupes">+${t.dupes.length} gleiche im Shop (${t.dupRange})</div>` : "";
+    return `<a class="card${t.hoch ? " hi" : ""}${t.gone ? " gone" : ""}" href="${esc(t.url)}" target="_blank" rel="noopener">
       <div class="img">${img}</div><div class="badges">${badges}</div>
-      <button class="flag" data-id="${esc(t.id)}" title="Treffer melden (unpassend, ausverkauft …)" aria-label="Treffer melden">⚑</button>
+      <button class="fav" data-id="${esc(t.id)}" aria-pressed="${f ? "true" : "false"}" title="Favorit" aria-label="Favorit">${f ? "★" : "☆"}</button>
+      ${t.gone ? "" : `<button class="flag" data-id="${esc(t.id)}" title="Treffer melden (unpassend, ausverkauft …)" aria-label="Treffer melden">⚑</button>`}
       <div class="body"><div class="labels">${esc(t.labels.join(" · "))}</div>
       <div class="title">${esc(t.titel)}</div>${note}
       <div class="foot"><div class="price">${price}</div><div>${cond}${t.groesse ? `<span class="size">${esc(t.groesse)}</span>` : ""}</div></div>
-      <div class="shop" title="seit ${fmtDate(t.erst)}">${esc(t.shopName)} · seit ${fmtDate(t.erst).slice(0, 6)}</div></div></a>`;
+      ${dup}<div class="shop" title="seit ${fmtDate(t.erst)}">${esc(t.shopName)} · seit ${fmtDate(t.erst).slice(0, 6)}</div></div></a>`;
   }
 
   function renderFeed(list){
@@ -309,8 +338,21 @@ summary{cursor:pointer;font-weight:600}
   function render(){
     store.set("filter", st);
     const list = filtered();
-    const feed = st.view === "feed";
-    $("grid").hidden = feed; $("feed").hidden = !feed;
+    const feed = st.view === "feed", favView = st.view === "favs";
+    $("grid").hidden = feed || favView; $("feed").hidden = !feed; $("favs").hidden = !favView;
+    $("favtab").textContent = `Favoriten (${Object.keys(favs).length})`;
+    if (favView) {
+      const byId = Object.fromEntries(all.map(t => [t.id, t]));
+      const list = Object.values(favs).sort((a, b) => b.added.localeCompare(a.added))
+        .map(f => byId[f.id] || Object.assign({}, f, {gone: true, neu: false, hoch: false, thiago: (f.labels || []).some(l => l.startsWith("Thiago"))}));
+      $("favs").innerHTML = list.length ? `<div class="grid">${list.map(card).join("")}</div>`
+        : '<div class="empty">Noch keine Favoriten. Auf den Stern ☆ einer Kachel tippen. Gespeichert wird in diesem Browser.</div>';
+      $("grid").innerHTML = ""; $("feed").innerHTML = ""; $("empty").hidden = true; $("more").hidden = true;
+      document.querySelectorAll("#tabs button").forEach(b => b.setAttribute("aria-selected", String(b.dataset.view === st.view)));
+      store.set("filter", st);
+      return;
+    }
+    $("favs").innerHTML = "";
     document.querySelectorAll("#tabs button").forEach(b => b.setAttribute("aria-selected", String(b.dataset.view === st.view)));
     document.querySelectorAll("#sort button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.s === st.sort)));
     $("empty").hidden = list.length > 0;
@@ -335,6 +377,19 @@ summary{cursor:pointer;font-weight:600}
       const shopName = /^[a-z0-9.-]+\.[a-z]{2,}$/i.test(t.shop) || t.shop === "FYJ" ? (host(t.url) || t.shop) : t.shop;
       return Object.assign(t, {shopName, neu: isNew(t), thiago: t.labels.some(l => l.startsWith("Thiago")),
         hay: (t.titel + " " + t.labels.join(" ") + " " + shopName + " " + (t.notiz || "")).toLowerCase()});
+    });
+    // Gleiche Angebote eines Shops (gleicher Titel, gleiche Größe) zusammenfassen: günstigstes zeigen
+    const groups = {};
+    all.forEach(t => {
+      const k = `${t.shopName}|${t.titel.toLowerCase().replace(/[^a-z0-9/]+/g, " ").trim()}|${t.groesse}`;
+      (groups[k] = groups[k] || []).push(t);
+    });
+    Object.values(groups).filter(g => g.length > 1).forEach(g => {
+      g.sort((a, b) => (a.eur ?? 1e9) - (b.eur ?? 1e9));
+      const [first, ...rest] = g;
+      first.dupes = rest; rest.forEach(t => t.dupOf = first.id);
+      const prices = g.map(t => t.eur).filter(v => v != null);
+      first.dupRange = prices.length ? `${eur(Math.min(...prices))} bis ${eur(Math.max(...prices))}` : "";
     });
     $("stand").textContent = `Stand ${fmtDate(data.stand)} Uhr (${MODE[data.modus] || data.modus})` +
       (data.letzter_gesamtlauf ? ` · letzter Gesamt-Run ${fmtDate(data.letzter_gesamtlauf)}` : "");
@@ -381,18 +436,19 @@ summary{cursor:pointer;font-weight:600}
     }).join("");
 
     $("q").value = st.q; $("shop").value = st.shop; $("size").value = st.size;
-    $("onlynew").checked = st.onlynew; $("expensive").checked = st.expensive;
+    $("onlynew").checked = st.onlynew; $("expensive").checked = st.expensive; $("dupes").checked = st.dupes;
     render();
   }
 
   const reset = () => { shown = PAGE; groupsShown = 12; render(); };
   $("q").addEventListener("input", e => { st.q = e.target.value; reset(); });
   ["shop", "size"].forEach(id => $(id).addEventListener("change", e => { st[id] = e.target.value; reset(); }));
-  ["onlynew", "expensive"].forEach(id => $(id).addEventListener("change", e => { st[id] = e.target.checked; reset(); }));
+  ["onlynew", "expensive", "dupes"].forEach(id => $(id).addEventListener("change", e => { st[id] = e.target.checked; reset(); }));
   $("sort").addEventListener("click", e => { const b = e.target.closest("button"); if (b) { st.sort = b.dataset.s; reset(); } });
   $("tabs").addEventListener("click", e => {
     const b = e.target.closest("button"); if (!b) return;
-    st.view = b.dataset.view; history.replaceState(null, "", st.view === "feed" ? "#eingaenge" : "#alle"); reset();
+    st.view = b.dataset.view;
+    history.replaceState(null, "", {feed: "#eingaenge", favs: "#favoriten"}[st.view] || "#alle"); reset();
   });
   $("labels").addEventListener("click", e => {
     const b = e.target.closest(".chip"); if (!b) return;
@@ -401,6 +457,12 @@ summary{cursor:pointer;font-weight:600}
     reset();
   });
   document.addEventListener("click", e => {
+    const fb = e.target.closest(".fav");
+    if (fb) {
+      e.preventDefault(); e.stopPropagation();
+      const t = all.find(x => x.id === fb.dataset.id) || favs[fb.dataset.id]; if (t) toggleFav(t);
+      return;
+    }
     const b = e.target.closest(".flag"); if (!b) return;
     e.preventDefault(); e.stopPropagation();
     const t = all.find(x => x.id === b.dataset.id); if (t) openFlag(t);

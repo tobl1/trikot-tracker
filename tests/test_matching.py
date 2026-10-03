@@ -105,6 +105,12 @@ CASES = [
     ("1998/99 FC Barcelona Home Name Set Rivaldo #11 (Repro)", set()),
     ("1996/97 Chelsea Retro Home Shirt FA Cup Final (XL) Score Draw", set()),
     ("2012-13 Barcelona Home Shirt Thiago #11 with official name set (XL)", {"Thiago", "Barça 2010-2013"}),
+    # Neu (04.10.2026): Repro-Flock nur für Thiago, sonst bleiben Nachbauten draußen
+    ("2013-14 Bayern Munich Home Shirt Thiago #6 (XL) Repro Flock", {"Thiago"}),
+    ("Maillot Barcelone 2012-2013 HOME 11 THIAGO flocage reproduction récente XL", {"Thiago", "Barça 2010-2013"}),
+    ("2013-14 Bayern Munich Home Shirt Ribery #7 (XL) Repro Flock", set()),
+    ("2015-16 Bayern Munich Thiago #6 Reissue (XL)", set()),
+    ("1998/99 FC Barcelona Home Name Set Thiago #11 (Repro)", set()),
 ]
 
 
@@ -180,7 +186,7 @@ def test_condition_niederlaendisch():
     ("Liverpool Shirts", False),
 ])
 def test_product_type_exclusion(typ, excluded):
-    assert M.excluded(tracker.norm(typ)) == excluded
+    assert M.type_excluded(typ) == excluded
 
 
 def _berlin(y, mo, d, h, mi):
@@ -318,3 +324,38 @@ def test_apply_flags_ohne_token(monkeypatch):
     st = {"flags": {"a": {"grund": "ausverkauft", "zeit": "t"}, "b": {"grund": "unpassend", "kommentar": "Jacke", "zeit": "t"}}}
     assert tracker.apply_flags(seen, st, "t") == 0
     assert seen["a"]["verkauft"] == "t" and seen["b"]["aussortiert"] == "Gemeldet: unpassend (Jacke)"
+
+
+def test_fyj_reissue_nur_thiago():
+    assert {l for l, _ in M.labels("2013-14 Bayern Munich Thiago #6 XL", fyj_reissue=True)} == {"Thiago"}
+    assert M.labels("2009-10 Bayern Munich Ribery #7 XL", fyj_reissue=True) == []
+
+
+def test_type_excluded_nachbau():
+    assert M.type_excluded("Reissue") and M.type_excluded("Nameset") and not M.type_excluded("Football shirt")
+
+
+def test_repro_flock_kennzeichen():
+    assert M.repro_flock("Maillot Barcelone 2012-2013 HOME 11 THIAGO flocage reproduction récente XL")
+    assert M.repro_flock("2002-04 FC Bayern München Auswärtstrikot Makaay, Repro Flock")
+    assert not M.repro_flock("2013-14 Bayern Munich Home Shirt Thiago #6 (XL)")
+    assert {l for l, _ in M.labels("2015-16 Barcelone Home Vidal #22 XL")} == {"Vidal (Arturo)"}
+
+
+@pytest.mark.parametrize("desc,other", [
+    ("Etat : Excellent Taille : XL Equipementier : Adidas Le t-shirt en détail : T-shirt en excellent état.", True),
+    ("Etat : Excellent Le maillot en détail : Maillot dans un superbe état", False),
+    ("<p>Great condition home shirt with polo collar</p>", False),
+    ("Vintage track jacket, size XL", True),
+    ("Football shirt, comes with matching jacket zip", False),
+    ("", False),
+])
+def test_desc_not_jersey(desc, other):
+    assert tracker.desc_not_jersey(desc) == other
+
+
+def test_desc_title_vorrang():
+    d = "Millwall finished 9th under manager Kenny Jacket."
+    assert not tracker.desc_not_jersey(d, "2010-11 Millwall '125 Year' Anniversary Shirt *BNIB* 5XL")
+    assert tracker.desc_not_jersey("Le t-shirt en détail : T-shirt en excellent état", "2011/12 - Espagne (XL)")
+    assert tracker.desc_not_jersey("Liverpool adidas T-Shirt", "2025-26 Liverpool adidas '95 T-Shirt *w/tags*")

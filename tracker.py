@@ -164,6 +164,10 @@ class Matcher:
                 "aus": any_rx(p.get("ausschluss")),
                 "vereine": any_rx(p.get("vereine")),
             })
+        self.nachbau = any_rx(cfg.get("nachbau"))
+        rf = cfg.get("repro_flock") or {}
+        self.repro_muster = any_rx(rf.get("muster"))
+        self.repro_labels = set(rf.get("labels") or [])
         self.brand_ex = any_rx(cfg.get("hersteller_ausschluss"))
         self.url_ex = {canon_url(u) for u in cfg.get("ausschluss_urls") or []}
         ff = cfg.get("fremdflock") or {}
@@ -193,6 +197,15 @@ class Matcher:
     def excluded(self, text):
         return hit(self.exclude, text)
 
+    def type_excluded(self, typ):
+        """Produktart des Shops ("Tracktop", "Reissue", "Nameset" ...)"""
+        t = norm(typ)
+        return hit(self.exclude, t) or hit(self.nachbau, t)
+
+    def repro_flock(self, text):
+        """Original-Trikot mit nachgedrucktem Flock?"""
+        return hit(self.repro_muster, norm(text))
+
     def size_ok(self, size_text, full_text):
         st = norm(size_text)
         if not SIZE_RX.search(st):
@@ -216,11 +229,19 @@ class Matcher:
             return False
         return "home" in allowed   # ohne Angabe ist es meist das Heimtrikot
 
-    def labels(self, text):
-        """Gibt [(label, prio)] zurück, ohne Größenprüfung."""
+    def labels(self, text, fyj_reissue=False):
+        """Gibt [(label, prio)] zurück, ohne Größenprüfung. Nachbauten nur als Repro-Flock für repro_labels"""
         t = norm(text)
         if not t or self.excluded(t):
             return []
+        out = self._labels(t)
+        if hit(self.nachbau, t) or fyj_reissue:
+            if not (hit(self.repro_muster, t) or fyj_reissue):
+                return []
+            out = [(l, p) for l, p in out if l in self.repro_labels]
+        return out
+
+    def _labels(self, t):
         out = []
         for p in self.players:
             if not hit(p["suche"], t) or hit(p["aus"], t):
@@ -628,8 +649,7 @@ def fyj_run(http, matcher, priority, skip_domains=()):
                 n += len(rows)
                 for r in rows:
                     title = r.get("description") or ""
-                    if str(r.get("isReissue")).lower() == "true":   # kommt als Text "false"/"true"
-                        continue   # Nachbauten, für den Nutzer uninteressant
+                    reissue = str(r.get("isReissue")).lower() == "true"   # kommt als Text "false"/"true"
                     dom = domain(r.get("sourceUrl") or "")
                     if not dom or dom in skip_domains or any(m in dom for m in FYJ_MARKETPLACES):
                         continue
@@ -637,7 +657,7 @@ def fyj_run(http, matcher, priority, skip_domains=()):
                     price = f"{r.get('currentValue') or ''} {r.get('currency') or ''}".strip()
                     items.append(item("fyj", r.get("sourceType") or "FYJ", r.get("sourceUrl") or "",
                                       title, r.get("size") or "", price, r.get("imageUrl"), extra,
-                                      fyj_condition=r.get("condition") or ""))
+                                      fyj_condition=r.get("condition") or "", fyj_reissue=reissue))
                 if len(rows) < 200:
                     break
     return items, n
@@ -1062,6 +1082,24 @@ COND_WORD_RX = re.compile(r"(?i)^(?:condition|zustand|stan|staat van het shirt|s
                           r"used|new|like new|as new|perfect|great|average)(?![a-z])")
 
 
+DESC_OTHER_RX = re.compile(r"(?<![a-z])(t-shirt|t shirt|tee-shirt|tee shirt|jacket|veste|track top|tracktop)(?![a-z])")
+DESC_JERSEY_RX = re.compile(r"(?<![a-z])(maillot|jersey|trikot|camiseta|camisola|maglia|koszulka|shirt home|"
+                            r"football shirt|match shirt|home shirt|away shirt|third shirt|kit)(?![a-z])")
+
+
+TITLE_JERSEY_RX = re.compile(r"(?<![a-z-])(shirt|jersey|maillot|trikot|camiseta|maglia|koszulka)(?![a-z])")
+
+
+def desc_not_jersey(desc, title=""):
+    """Beschreibung spricht von T-Shirt/Jacke und nirgends von einem Trikot (z. B. VFA "Le t-shirt en détail").
+    Nennt schon der Titel ein Trikot, hat er Vorrang (Beschreibungen erwähnen z. B. Trainer "Kenny Jackett")"""
+    nt = norm(title)
+    if TITLE_JERSEY_RX.search(nt) and not DESC_OTHER_RX.search(nt):
+        return False
+    t = norm(plain(desc))
+    return bool(t and DESC_OTHER_RX.search(t) and not DESC_JERSEY_RX.search(t))
+
+
 def below_min(grade, minimum):
     """'6/10' unter Mindestnote 7? Ohne Note oder ohne Vorgabe: nein"""
     m = re.match(r"(\d+(?:\.\d)?)/10$", grade or "")
@@ -1164,6 +1202,8 @@ def enrich(seen, ts, budget, matcher):
                 e["verkauft"] = ts
             if res["marke"] and hit(matcher.brand_ex, norm(res["marke"])):
                 e["aussortiert"] = f"Hersteller {res['marke']}"
+            elif desc_not_jersey(res["desc"], e["title"]):
+                e["aussortiert"] = "Beschreibung: kein Trikot (T-Shirt/Jacke)"
             grade, note = condition_info(e["title"], res["desc"])
             if grade:
                 e["zustand"] = grade
@@ -1290,7 +1330,7 @@ def write_dashboard(seen, status_store, mode, ts, watch_cfg, shops):
             "groesse": e.get("size", ""), "labels": e["labels"], "hoch": is_high(e),
             "zustand": e.get("zustand", ""), "notiz": e.get("zustand_notiz", ""), "bild": e.get("image", ""),
             "erst": e["first"], "zuletzt": e["last"], "via": e.get("via", ""),
-            "still": bool(e.get("still")), "teuer": bool(e.get("teuer")),
+            "still": bool(e.get("still")), "teuer": bool(e.get("teuer")), "repro": bool(e.get("repro")),
         })
     quellen = status_store.get("quellen") or {}
     data = {"stand": ts, "modus": mode, "letzter_gesamtlauf": status_store.get("last_full", ""),
@@ -1539,11 +1579,14 @@ def main():
             sources_ok.add(src_name)
             counts[src_name] = n_now
         for it in its:
-            if it.get("typ") and matcher.excluded(norm(it["typ"])):
+            if it.get("typ") and matcher.type_excluded(it["typ"]):
                 continue
             if it["url"] and (canon_url(it["url"]) in matcher.url_ex or canon_url(it["url"]) in flagged):
                 continue
-            labs = matcher.labels(it["match_text"])
+            if it.get("desc") and it.get("source") == "direkt" and desc_not_jersey(it["desc"], it["title"]) \
+                    and it.get("desc") != it.get("title"):
+                continue
+            labs = matcher.labels(it["match_text"], it.get("fyj_reissue", False))
             if not labs or not matcher.size_ok(it["size_text"], norm(it["match_text"])):
                 continue
             if not it["url"]:
@@ -1588,6 +1631,8 @@ def main():
                 entry["zustand_notiz"] = note
             if it.get("pruefen"):
                 entry["pruefen"] = True
+            if it.get("fyj_reissue") or matcher.repro_flock(it["match_text"]):
+                entry["repro"] = True
             seen[key] = entry
             if first_run or fresh_source:
                 entry["still"] = True   # ohne Push übernommen (Erstlauf oder neue Quelle)

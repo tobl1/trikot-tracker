@@ -30,11 +30,21 @@ produkt_ausschluss: ["shorts", "socks", "sock", "jacket", "track top", "tracksui
                      # Trainingsshirts in anderen Sprachen
                      "treino", "entrenamiento", "entreno", "allenamento", "entrainement",
                      "trening", "trainingsshirt", "trainingstrikot",
-                     # Nachbauten (nicht "replica", das heißt in UK einfach Fan-Trikot)
-                     "reissue", "re-issue", "remake", "reedition", "reedicion", "riedizione",
-                     "repro", "score draw", "nameset",
                      # andere Vereine mit gleichem Namen
                      "barcelona sc", "barcelona s.c.", "barcelona sporting", "guayaquil"]
+
+# Nachbauten: neu produzierte Trikots, offizielle Neuauflagen, reine Flocksätze
+# (nicht "replica", das heißt in UK einfach Fan-Trikot)
+nachbau: ["reissue", "re-issue", "remake", "reedition", "reedicion", "riedizione",
+          "repro", "score draw", "nameset"]
+
+# Ausnahme: Original-Trikot mit NACHGEDRUCKTEM Flock ist für diese Labels erwünscht (im Dashboard
+# als "Repro-Flock" gekennzeichnet). Erkannt an den Mustern; FYJ-"Reissue" zählt bei diesen Labels auch
+repro_flock:
+  labels: ["Thiago"]
+  muster: ["repro flock", "flock repro", "repro print", "repro printing", "reprinted", "re-printed",
+           "re printed", "flocage reproduction", "reproduction flocage", "flocage repro", "repro flocage",
+           "nameset remake", "remake nameset", "remake print", "repro nameset", "repro name"]
 
 # Hersteller, die auf ein inoffizielles Fan-Produkt hindeuten (aus den Produktdaten der Shop-Seite,
 # z. B. classic-shirts.com "Producer: Official")
@@ -59,7 +69,7 @@ spieler:
     suche: ["thiago", "alcantara"]
     ausschluss: ["thiago silva", "t. silva", "silva", "motta", "almada", "mendes",
                  "neves", "djalo", "igor thiago", "galhardo", "messi", "rafinha"]
-    vereine: ["barcelona", "barca", "bayern", "munich", "munchen", "liverpool",
+    vereine: ["barcelona", "barca", "barcelone", "barcellona", "bayern", "munich", "munchen", "liverpool",
               "spain", "spanien", "espana", "spanje", "espagne", "spagna", "espanha", "hiszpania"]
 
   - name: Verratti
@@ -132,7 +142,7 @@ spieler:
     suche: ["arturo vidal", "vidal"]
     ausschluss: ["aleix vidal"]
     vereine: ["leverkusen", "juventus", "bayern", "munich", "munchen", "barcelona",
-              "barca", "inter", "chile"]
+              "barca", "barcelone", "barcellona", "inter", "chile"]
 
   - name: Kimmich
     suche: ["kimmich"]
@@ -146,7 +156,7 @@ spieler:
   - name: Frenkie de Jong
     suche: ["frenkie", "f. de jong", "de jong"]
     ausschluss: ["nigel", "luuk", "siem"]
-    vereine: ["ajax", "barcelona", "barca", "netherlands", "holland", "niederlande", "nederland", "pays-bas", "olanda", "holanda"]
+    vereine: ["ajax", "barcelona", "barca", "barcelone", "barcellona", "netherlands", "holland", "niederlande", "nederland", "pays-bas", "olanda", "holanda"]
 
   - name: Marcos Llorente
     suche: ["marcos llorente", "m. llorente", "llorente"]
@@ -198,7 +208,7 @@ sondertrikots:
 
   - name: "Barça 2010-2013"
     prioritaet: hoch
-    verein: ["barcelona", "barca"]
+    verein: ["barcelona", "barca", "barcelone", "barcellona"]
     saisons: ["2010/11", "2011/12", "2012/13"]
     varianten: alle
     suchanfragen: ["barcelona 2010", "barcelona 2011", "barcelona 2012"]
