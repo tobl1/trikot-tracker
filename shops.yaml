@@ -10,7 +10,8 @@
 #            aus        = deaktiviert
 # schnellcheck: nein = nur im nächtlichen Gesamtlauf abfragen
 # min_zustand: 7     = Treffer mit schlechterer Note (z. B. 6/10) ausblenden
-# drop: ["Fr 19:00"] = feste Drop-Zeit (deutsche Zeit, oder mit Zeitzone: "Fr 20:00 Pacific/Auckland"),
+# drop: ["Fr 19:00"] = feste Drop-Zeit (deutsche Zeit, oder mit Zeitzone: "Fr 20:00 Pacific/Auckland",
+#                      oder jeden Tag: "täglich 18:00 Europe/London"),
 #                      wird im Drop-Run kurz danach geprüft;
 #                      Drop-Zeiten aus dem gemessenen Rhythmus kommen automatisch dazu
 # Entfernt (01.10.2026): Kit Fever (Domain gehört jetzt einem Modeshop),
@@ -24,7 +25,7 @@ fyj: an
 
 shops:
   - {name: Classic Football Shirts, url: "https://www.classicfootballshirts.co.uk", plattform: cfs, min_zustand: 7}
-  - {name: Cult Kits, url: "https://www.cultkits.com"}
+  - {name: Cult Kits, url: "https://www.cultkits.com", drop: ["täglich 18:00 Europe/London"]}   # "Daily Drop" laut Shop
   - {name: Classic11, url: "https://classic11.com"}
   - {name: RB-Jerseys, url: "https://www.rb-jerseys.com"}
   - {name: Vintage Football Shirts, url: "https://www.vintagefootballshirts.com"}

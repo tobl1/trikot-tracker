@@ -199,6 +199,7 @@ class Matcher:
                 "queries": k.get("suchanfragen") or [],
                 "fremdflock_egal": str(k.get("fremdflock", "")).lower() == "egal",
                 "codes": any_rx(k.get("codes")),
+                "aus": any_rx(k.get("ausschluss")),
             })
 
     def excluded(self, text):
@@ -277,7 +278,7 @@ class Matcher:
                 if k["fremdflock_egal"] or not self.foreign_flock(t, star):
                     out.append((k["name"], k["prio"]))
                 continue
-            if not hit(k["verein"], t):
+            if not hit(k["verein"], t) or hit(k["aus"], t):
                 continue
             if (k["saisons"] or k["jahre"]) and not (hit(k["saisons"], t) or hit(k["jahre"], t)):
                 continue
@@ -1034,7 +1035,7 @@ def rhythm(stamps):
 def drop_slots(shop, status_store):
     """[(Wochentag 0-6, Stunde, Minute, Quelle, Fenster in Min.)]: fest aus shops.yaml plus gemessen"""
     slots = []
-    for x in shop.get("drop") or []:
+    for x in drop_specs(shop):
         slot = fixed_slot(x)
         if slot:
             slots.append((*slot, "fest", DROP_WINDOW_MIN))
@@ -1050,6 +1051,15 @@ def drop_slots(shop, status_store):
             start = max(int(x["uhrzeit"]) * 60 + int(x.get("minute", 0)) - early, 0)
             slots.append((WEEKDAYS.index(x["tag"]), start // 60, start % 60, "gemessen", DROP_WINDOW_MIN + early))
     return slots
+
+
+def drop_specs(shop):
+    """Drop-Angaben aus shops.yaml; "täglich 18:00 Europe/London" wird zu sieben Wochentagen"""
+    out = []
+    for x in shop.get("drop") or []:
+        m = re.match(r"(?i)t(ä|ae)glich\s+(.+)$", str(x).strip())
+        out += [f"{d} {m.group(2)}" for d in WEEKDAYS] if m else [str(x)]
+    return out
 
 
 def fixed_slot(spec, ref=None):
@@ -1075,7 +1085,7 @@ def drop_calendar(shops, status_store):
     for shop in shops:
         if (shop.get("plattform") or "auto").lower() in ("aus", "fyj"):
             continue
-        for x in shop.get("drop") or []:
+        for x in drop_specs(shop):
             slot = fixed_slot(x)
             if slot:
                 out.append({"shop": shop["name"], "tag": WEEKDAYS[slot[0]], "zeit": f"{slot[1]:02d}:{slot[2]:02d}",
@@ -1555,6 +1565,10 @@ def main():
                and args.mode != "drop")
 
     flagged = set(status_store.get("flags") or {})
+    # Neu angelegte Kategorien (Labels) beim ersten Gesamt-Run still übernehmen, sonst Push-Flut
+    all_labels = {p["name"] for p in matcher.players} | {k["name"] for k in matcher.kits}
+    known_labels = set(status_store.get("known_labels") or all_labels)   # erster Start: alles bekannt
+    new_labels = all_labels - known_labels
     lock = threading.Lock()
     results, statuses, fyj_status = [], [], None
     with cf.ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
@@ -1669,8 +1683,8 @@ def main():
             if it.get("fyj_reissue") or matcher.repro_flock(it["match_text"]):
                 entry["repro"] = True
             seen[key] = entry
-            if first_run or fresh_source:
-                entry["still"] = True   # ohne Push übernommen (Erstlauf oder neue Quelle)
+            if first_run or fresh_source or (new_labels and set(entry["labels"]) <= new_labels):
+                entry["still"] = True   # ohne Push übernommen (Erstlauf, neue Quelle oder neue Kategorie)
             else:
                 new_entries.append(entry)
 
@@ -1748,6 +1762,10 @@ def main():
     seen = {k: v for k, v in seen.items() if dt.datetime.fromisoformat(v["last"]) >= old}
 
     SEEN_FILE.write_text(json.dumps(seen, ensure_ascii=False, indent=1, sort_keys=True), encoding="utf-8")
+    if args.mode == "full" and not args.only:
+        status_store["known_labels"] = sorted(all_labels)
+    elif "known_labels" not in status_store:
+        status_store["known_labels"] = sorted(known_labels)
     if args.mode == "drop":
         status_store.setdefault("drop_checks", {}).update({s["name"]: ts for s in shops})
     status_store["sources_ok"] = sorted(sources_ok)

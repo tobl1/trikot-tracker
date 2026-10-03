@@ -12,7 +12,7 @@ groessen:
                   "infant", "baby", "yxl", "xlb", "womens", "women", "ladies", "damen",
                   "young xl", "young xxl", "young 2xl",
                   "damska", "dziecieca", "femme", "mujer", "donna", "feminina", "feminino",
-                  "infantil", "bambino", "dames"]
+                  "infantil", "bambino", "dames", "childs", "child's", "ans", "jongens", "kinderen"]
 
 # Preisgrenze in Euro: teurere Treffer gibt es nicht als Push und sie sind im Dashboard
 # standardmäßig ausgeblendet. Ausnahmen = Labels, für die keine Grenze gilt
@@ -25,7 +25,8 @@ produkt_ausschluss: ["shorts", "socks", "sock", "jacket", "track top", "tracksui
                      "hoodie", "sweatshirt", "sweater", "pants", "trousers", "scarf", "bag",
                      "cap", "hat", "programme", "ball", "boots", "poster", "sticker", "mug",
                      "keyring", "towel", "pennant", "framed", "cushion", "goalkeeper",
-                     "torwart", "portero", "gk", "keeper", "goal keeper", "tracktop", "track jacket", "training", "pre-match", "prematch",
+                     "torwart", "portero", "gk", "keeper", "goal keeper", "tracktop", "track jacket",
+                     "keepersshirt", "keepershirt", "torwarttrikot", "portiere", "gardien", "goleiro", "training", "pre-match", "prematch",
                      "warm up", "polo", "t-shirt", "tee", "bib", "stutzen", "jacke", "schal",
                      # Trainingsshirts in anderen Sprachen
                      "treino", "entrenamiento", "entreno", "allenamento", "entrainement",
@@ -203,6 +204,7 @@ fremdflock:
 #   stichwoerter: mindestens eins muss vorkommen ...
 #   kombi:        ... oder ein Begriff aus "begriffe" UND eine Farbe
 #   suchanfragen: was in den Shop-Suchen eingegeben wird
+#   ausschluss:   Begriffe, bei denen dieses Sondertrikot NICHT zählt
 #   codes:        Hersteller-Artikelcodes; steht einer im Titel oder in der Beschreibung, zählt das
 #                 Trikot auch ohne Varianten- oder Saisonangabe
 # ---------------------------------------------------------------------
@@ -258,3 +260,55 @@ sondertrikots:
     jahre: ["2014"]
     varianten: [home, away]
     suchanfragen: ["spain 2014"]
+
+  # -------------------------------------------------------------------
+  # Eigene Kategorie: Nike Total 90 (2004-06), mit oder ohne Flock (jeder Spieler)
+  # Template mit runder Brustnummer: Nationalteams von der EM 2004 bis vor der WM 2006,
+  # Vereine in der Saison 2004/05. Achtung: Nike hat 2025 Neuauflagen gebracht, die laufen
+  # über "nachbau" (reissue/remake) bzw. FYJ-isReissue raus.
+  # -------------------------------------------------------------------
+  - name: "Nike Total 90 (2004-06)"
+    prioritaet: normal
+    verein: ["brazil", "brasil", "brasilien", "bresil", "brazilie", "brasile"]
+    saisons: ["2004/05", "2005/06", "2004/06"]
+    jahre: ["2004", "2005"]
+    ausschluss: ["2002-2004", "2002/2004", "2003-2004", "2003/2004", "greece", "griechenland", "grecia", "grece"]
+    varianten: alle
+    fremdflock: egal
+    suchanfragen: ["brazil 2004", "brazil 2005"]
+
+  - name: "Nike Total 90 (2004-06)"
+    prioritaet: normal
+    verein: ["netherlands", "holland", "niederlande", "nederland", "pays-bas", "olanda", "holanda"]
+    saisons: ["2004/05", "2005/06", "2004/06"]
+    jahre: ["2004", "2005"]
+    ausschluss: ["2002-2004", "2002/2004", "2003-2004", "2003/2004", "greece", "griechenland", "grecia", "grece"]
+    varianten: alle
+    fremdflock: egal
+    suchanfragen: ["holland 2004", "netherlands 2004", "holland 2005"]
+
+  - name: "Nike Total 90 (2004-06)"
+    prioritaet: normal
+    verein: ["portugal", "portogallo"]
+    saisons: ["2004/05", "2005/06", "2004/06"]
+    jahre: ["2004", "2005"]
+    ausschluss: ["2002-2004", "2002/2004", "2003-2004", "2003/2004", "greece", "griechenland", "grecia", "grece"]
+    varianten: alle
+    fremdflock: egal
+    suchanfragen: ["portugal 2004", "portugal 2005"]
+
+  - name: "Nike Total 90 (2004-06)"
+    prioritaet: normal
+    verein: ["inter", "internazionale"]
+    saisons: ["2004/05"]
+    varianten: alle
+    fremdflock: egal
+    suchanfragen: ["inter 2004"]
+
+  - name: "Nike Total 90 (2004-06)"
+    prioritaet: normal
+    verein: ["juventus", "juve"]
+    saisons: ["2004/05"]
+    varianten: alle
+    fremdflock: egal
+    suchanfragen: ["juventus 2004"]

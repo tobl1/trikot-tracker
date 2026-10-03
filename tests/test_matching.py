@@ -129,6 +129,8 @@ def test_labels(title, expected):
     ("LIVERPOOL #6 THIAGO 2020-2021 FOOTBALL SHIRT JERSEY THIRD NIKE ORIGINAL YOUNG XL", False),
     ("Koszulka damska Liverpool FC 2021/22 Away [XL]", False),
     ("Camisa Barcelona 2011 Feminina GG XL", False),
+    ("Netherlands 2004/2005/2006 Away Football Shirt Childs XL", False),
+    ("2004/06 - Pays-Bas (16 ans) XL", False),
 ])
 def test_size(title, ok):
     assert size_ok(title) == ok
@@ -382,3 +384,32 @@ def test_artikelcode_sondertrikot():
 ])
 def test_sternchen_flock(title, expected):
     assert {l for l, _ in M.labels(title)} == expected
+
+
+def test_drop_taeglich():
+    shop = {"name": "Cult Kits", "drop": ["täglich 18:00 Europe/London"]}
+    slots = tracker.drop_slots(shop, {})
+    assert len(slots) == 7 and all((h, m) == (19, 0) for _, h, m, *_ in slots)   # 18 Uhr UK = 19 Uhr bei uns
+    assert tracker.drop_due(shop, {}, _berlin(2026, 10, 6, 19, 30))
+
+
+T90 = "Nike Total 90 (2004-06)"
+
+
+@pytest.mark.parametrize("title,yes", [
+    ("2004-06 Portugal Home Shirt Ronaldo #17 (XL)", True),
+    ("2004-06 Holland Away Shirt (XXL)", True),
+    ("Brazil 2004 Home Shirt Ronaldinho #10 XL", True),
+    ("2004-05 Inter Milan Home Shirt Adriano #10 (XL)", True),
+    ("2004-05 Juventus Away Shirt Del Piero #10 XL", True),
+    ("2006-08 Brazil Home Shirt (XL)", False),                 # WM-2006-Trikot, anderes Template
+    ("2005-06 Juventus Home Shirt (XL)", False),               # Vereine nur 2004/05
+    ("Portugal 2004 Home Shirt (2025 Reissue) XL", False),     # Nike-Neuauflage
+    ("2004 Netherlands Nike T90 Remake Shirt XL", False),
+    ("2004/05 Inter Milan Training Shirt XL", False),
+    ("2004 GREECE UEFA EURO 2004 PORTUGAL SHIRT XL", False),
+    ("Original Portugal Away Jersey 2002-2004 #11 Ronaldo - XL", False),
+    ("Brazilië (wedstrijd gedragen) keepersshirt 2004 Heurelho Gomes XL", False),
+])
+def test_total90(title, yes):
+    assert (T90 in {l for l, _ in M.labels(title)}) == yes

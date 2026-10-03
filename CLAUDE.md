@@ -125,6 +125,19 @@ TREFFER.md, also vorher sichern oder nicht committen). `--only "Name"` testet ei
   Liverpool 21/22 ohne "away" = nein, "Hamburger SV" = HSV, 3XL/XXXL = nein, "Short Sleeve" darf
   nicht als Shorts ausgeschlossen werden
 
+## Kategorie Nike Total 90 (2004-06)
+
+- Wunsch des Nutzers (04.10.2026): Nike-T90-Template (runde Brustnummer), mit oder ohne Flock
+  (`fremdflock: egal`), Priorität normal (gebündelte Pushes). Fünf Sondertrikot-Einträge mit gleichem
+  Namen (je Team einer, damit FYJ jedes Team abfragt): Brasilien, Holland, Portugal mit Saisons
+  2004/05, 2005/06, 2004/06 bzw. Jahren 2004/2005 (Nationalteams EM 2004 bis vor WM 2006),
+  Inter und Juventus nur 2004/05. Ausschlüsse: Zeiträume 2002-2004/2003-2004, Griechenland
+  (EM 2004 fand in Portugal statt). Nike-Neuauflagen von 2025 laufen über `nachbau` raus
+- Live-Test 04.10.2026 über FYJ: 78 Treffer in XL/XXL, viele über 150 €. Erweiterbar um weitere
+  T90-Teams (USA, Südkorea, Mexiko, Kroatien, Türkei; Vereine Barcelona, Arsenal, Man United,
+  Valencia, PSV, Porto, PSG, BVB, jeweils 2004/05)
+- Neue Kategorien werden beim ersten Gesamt-Run still übernommen (`known_labels` in status.json)
+
 ## Zustand, Verfügbarkeit, Drop-Rhythmus
 
 - **Zustand** (`zustand`, `zustand_notiz` in seen.json): Note wie "8/10" aus Titel (CFS: "- 8/10 -")
