@@ -45,7 +45,7 @@ Einzeltrikots zum Nachbeflocken dazukommen, das sagt der Nutzer gesondert an.
 | `tracker.py` | gesamtes Programm (Abfrage, Matching, Push, Bericht), bewusst eine Datei |
 | `watchlist.yaml` | Spieler mit Suchbegriffen, Ausschlüssen, Vereinsfilter; Sondertrikots; Größen; Produktausschlüsse |
 | `shops.yaml` | direkt abgefragte Shops mit `plattform` (auto, cfs, idosell, smartweb, prestashop, fyj, aus), optional `schnellcheck: nein` |
-| `.github/workflows/tracker.yml` | **Hauptauslöser cron-job.org** (seit 04.10.2026, `workflow_dispatch`): Gesamt-Run 5:30, Schnell-Run 9:45/15:45/21:45, Drop-Run `5-59/15 9-23` (deutsche Zeit, bewusst versetzt zu :45). GitHub-Zeitpläne nur Rückfall mit `--rueckfall` (überspringt, wenn Gesamt-Run < 20 h bzw. Schnell-Run < 4 h her): `30 5`, `15 8,14,20` UTC. **GitHub-Concurrency hält nur einen wartenden Run**, ein weiterer Start verdrängt ihn (`cancelled`). Deshalb Startzeiten entzerrt und kein Drop-Rückfall |
+| `.github/workflows/tracker.yml` | **Hauptauslöser cron-job.org** (seit 04.10.2026, `workflow_dispatch`): Gesamt-Run 5:30, Schnell-Run 9:45/15:45/21:45, Drop-Run `5-59/15 9-23` (deutsche Zeit, bewusst versetzt zu :45). GitHub-Zeitpläne nur Rückfall mit `--rueckfall` (überspringt, wenn Gesamt-Run < 20 h bzw. Schnell-Run < 5,5 h her): `30 5`, `15 9,15,21` UTC. Am 04.10.2026 startete ein Rückfall-Schnell-Run 4 h verspätet, lief trotz 4-h-Sperre, 63 Min. mit vielen 429 und verdrängte drei Drop-Runs (deshalb 5,5 h und spätere Zeiten, auch im Winter nach den cron-job.org-Runs). **GitHub-Concurrency hält nur einen wartenden Run**, ein weiterer Start verdrängt ihn (`cancelled`). Deshalb Startzeiten entzerrt und kein Drop-Rückfall |
 | `state/seen.json` | bekannte Treffer (Schlüssel = kanonische URL), wird vom Workflow committet |
 | `state/status.json` | erkannte Plattformen, erfolgreich abgefragte Quellen, Produktanzahlen, letzter Lauf |
 | `FEHLER.md`, `state/fehlerlog.json` | Fehler-Log: Quellen mit Fehlern je Run, abgebrochene Runs (Workflow-Schritt "Fehlschlag ins Fehler-Log"), zusammengefasst, 30 Tage |
@@ -53,7 +53,7 @@ Einzeltrikots zum Nachbeflocken dazukommen, das sagt der Nutzer gesondert an.
 | `TREFFER.md` | automatisch erzeugte Übersicht als Markdown, Quellen-Status immer vom letzten Gesamtlauf |
 | `docs/index.html` | Dashboard (GitHub Pages, Branch `main`, Ordner `/docs`), statisch, lädt `treffer.json`. Ansichten "Alle Treffer" und "Eingänge nach Lauf" (`#eingaenge`, gruppiert nach `first` = Zeitstempel des Laufs, Läufe aus `status.json` → `laeufe`; still übernommene Treffer, also Erstlauf oder neue Quelle, eingeklappt). Pushes verlinken auf `#eingaenge` |
 | Dashboard als Web-App | `manifest.webmanifest`, `icon.svg` + `icon-180/192/512.png` (Trikot mit 6), Start vom Homebildschirm im Vollbild. Kein Zoom (viewport, `touch-action`, iOS `gesturestart`), kein seitliches Scrollen, Eingaben 16 px (sonst zoomt iOS beim Tippen). Am Handy: Navigationsleiste unten, seltene Filter hinter "Filter"-Knopf |
-| Dashboard-Extras | Favoriten (Stern, nur lokal im Browser, mit Datenkopie, "nicht mehr gelistet" und "Preis ↓"), gleiche Angebote eines Shops (gleicher Titel und Größe) zusammengefasst auf das günstigste ("+N gleiche im Shop"); Classic-Shirts hat oft mehrere Exemplare desselben Trikots |
+| Dashboard-Extras | "Juckt nicht" (05.10.2026): im Melde-Sheet zuerst "Einfach ausblenden", nur lokal (localStorage `tt:hidden`), ohne Issue, mit Rückgängig-Toast; zurückholen über "N ausgeblendet" in den Filtern. Alter in der Kachel kurz: 5h, 3d, 1m (31 bis 60 Tage). Größe immer XL/XXL. Favoriten (Stern, nur lokal im Browser, mit Datenkopie, "nicht mehr gelistet" und "Preis ↓"), gleiche Angebote eines Shops (gleicher Titel und Größe) zusammengefasst auf das günstigste ("+N gleiche im Shop"); Classic-Shirts hat oft mehrere Exemplare desselben Trikots |
 | `docs/treffer.json` | aktuelle Treffer inkl. EUR-Preis plus Quellen-Status, wird vom Workflow committet |
 
 Laufzeitumgebung: GitHub Actions, öffentliches Repo, Python 3.12,
@@ -99,10 +99,13 @@ TREFFER.md, also vorher sichern oder nicht committen). `--only "Name"` testet ei
 - `vereine` bei Spielern ist ein **strikter Filter**. Bewusst gesetzt:
   Henry nur Arsenal; Torres nur Atlético und Liverpool; Robben nur Bayern;
   Olić nur Bayern, HSV, Kroatien (nicht Wolfsburg, nicht ZSKA); Juninho = Pernambucano
-- Sondertrikots Thiago: Barça 2010/11 bis 2012/13 (alle Varianten); Bayern Wiesn-Trikot 2021/22
+- Sondertrikots Thiago: Barça 2008/09 bis 2012/13 (alle Varianten, 08/09 und 09/10 seit 05.10.2026, Label
+  "Barça 2008-2013"); Bayern Wiesn-Trikot 2021/22
   grün (nur 21/22 bzw. 2021, **2023 war auch grün**; "third/fourth/special" zählen nur mit
   Farbangabe, sonst käme das reguläre Third 21/22; Vereinsfilter nur "bayern", sonst träfe es
-  1860-Wiesn-Trikots); Liverpool Away 21/22; Liverpool Third 22/23; Spanien 2010/2011 und 2014
+  1860-Wiesn-Trikots); Stichwörter seit 05.10.2026 auch "octoberfest", "wiesntrikot". **Check 05.10.2026:**
+  FYJ hat das 21/22-Trikot in keiner einzigen Größe, nur 2013/14 (Thiagos erste Bayern-Saison!), 2024/25 und
+  2025/26 als Oktoberfest-Trikot. Es ist also selten, kein Suchbegriff-Problem. Thiago war 21/22 schon in Liverpool; Liverpool Away 21/22; Liverpool Third 22/23; Spanien 2010/2011 und 2014
   jeweils Home und Away
 - Varianten-Logik: erlaubtes Wort im Titel → ok; anderes Variantenwort → nein; gar keins → nur ok,
   wenn "home" erlaubt ist
@@ -170,6 +173,14 @@ TREFFER.md, also vorher sichern oder nicht committen). `--only "Name"` testet ei
 - Neue Kategorien werden beim ersten Gesamt-Run still übernommen (`known_labels` in status.json)
 - Still übernommene Treffer (neue Shops/Kategorien) lösen **eine** Sammelnachricht aus ("🆕 N Treffer
   aus neuen Shops/Kategorien", Link auf `#eingaenge`)
+
+## Kategorie HSV 1990-2016
+
+- Seit 05.10.2026: HSV-Trikots der Saisons 1990/91 bis 2016/17, **nur beflockt**, Priorität normal,
+  Preisgrenze gilt. Vorab-Check über FYJ: ca. 10 beflockte Trikots in XL/XXL, etwa die Hälfte unter 150 €.
+  Verein "hamburger sv", "hsv", "hamburg", "hambourg"; Ausschluss Victoria, St. Pauli, Altona, Freezers …
+  Flock ohne Nummer über `flock_namen` **am Sondertrikot-Eintrag** (gilt nur für diesen Eintrag, nicht global
+  wie `flock_erkennung`; kurze Namen wie "son", "berg", "rost" wären global zu riskant)
 
 ## Kategorie WM 2006
 

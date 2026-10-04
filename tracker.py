@@ -65,7 +65,7 @@ RECHECK_DAYS = 3             # FYJ-Treffer so oft auf der Shop-Seite nachprüfen
 CHECK_VERSION = 2            # erhöhen, wenn die Seitenprüfung mehr auswertet: dann wird alles neu geprüft
 ENRICH_BUDGET = {"full": 400, "priority": 25, "drop": 25}   # max. Seitenprüfungen pro Lauf
 NOTE_LEN = 160               # Länge der Zustandsnotiz
-FALLBACK_SKIP_HOURS = {"full": 20, "priority": 4}   # GitHub-Zeitplan überspringt, wenn schon gelaufen
+FALLBACK_SKIP_HOURS = {"full": 20, "priority": 5.5}   # GitHub-Zeitplan überspringt, wenn schon gelaufen (Schnell-Runs alle 6 h)
 RUN_HISTORY = 120            # so viele Läufe für den Eingangsverlauf im Dashboard merken
 RHYTHM_DAYS = 90             # Zeitraum für die Drop-Analyse
 BATCH_GAP_MIN = 90           # Artikel mit höchstens so viel Abstand gehören zu einem Schub
@@ -225,6 +225,7 @@ class Matcher:
                 "fremdflock_egal": str(k.get("fremdflock", "")).lower() in ("egal", "pflicht"),
                 "flock_pflicht": str(k.get("fremdflock", "")).lower() == "pflicht",
                 "codes": any_rx(k.get("codes")),
+                "flock_namen": any_rx(k.get("flock_namen")),   # zusätzliche Flock-Namen nur für diesen Eintrag
                 "aus": any_rx(k.get("ausschluss")),
             })
 
@@ -326,7 +327,7 @@ class Matcher:
                 continue
             if not k["fremdflock_egal"] and self.foreign_flock(t, star):
                 continue
-            if k["flock_pflicht"] and not self.has_flock(t, star):
+            if k["flock_pflicht"] and not (self.has_flock(t, star) or hit(k["flock_namen"], t)):
                 continue
             if k["stich"] or k["kombi_b"]:
                 ok = hit(k["stich"], t) or (hit(k["kombi_b"], t) and hit(k["kombi_f"], t))

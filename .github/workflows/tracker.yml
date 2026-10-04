@@ -6,7 +6,7 @@ on:
     # Minuten 5/20/35/50, jeweils deutsche Zeit). Die Zeitpläne hier sind nur Rückfall (--rueckfall), laufen bewusst
     # später. Kein Rückfall für Drop-Runs: GitHub hält nur EINEN wartenden Run, ein zusätzlicher Start verdrängt ihn.
     - cron: "30 5 * * *"     # Rückfall Gesamt-Run (7:30 Sommerzeit)
-    - cron: "15 8,14,20 * * *"   # Rückfall Schnell-Run (10:15, 16:15, 22:15 Sommerzeit)
+    - cron: "15 9,15,21 * * *"   # Rückfall Schnell-Run (11:15/17:15/23:15 Sommerzeit, 10:15/16:15/22:15 Winterzeit)
   workflow_dispatch:
     inputs:
       mode:

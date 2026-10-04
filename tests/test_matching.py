@@ -36,8 +36,8 @@ CASES = [
     ("2005-06 Liverpool Away Shirt Alonso #14 (XXL)", {"Alonso (Xabi)"}),
     ("2018-19 Chelsea Home Shirt Marcos Alonso #3 (XL)", set()),
     ("2019-20 Real Madrid Home Shirt Marcos Alonso XL", set()),
-    ("2008-09 Hamburger SV Home Shirt Olic #11 (XL)", {"Olić"}),
-    ("2009-10 HSV Home Shirt Olić #11 XL", {"Olić"}),
+    ("2008-09 Hamburger SV Home Shirt Olic #11 (XL)", {"Olić", "HSV 1990-2016"}),
+    ("2009-10 HSV Home Shirt Olić #11 XL", {"Olić", "HSV 1990-2016"}),
     ("2010-11 Wolfsburg Home Shirt Olic XL", set()),
     ("2003-04 Arsenal Home Shirt Henry #14 (XL)", {"Henry"}),
     ("2008-09 Barcelona Home Shirt Henry #14 (XL)", set()),
@@ -51,9 +51,9 @@ CASES = [
     ("2014-15 Feyenoord Home Shirt Luuk de Jong (XL)", set()),
     ("2010-11 PSV Home Shirt Van der Vaart XL", {"Van der Vaart"}),
     # Sondertrikots
-    ("2011-12 Barcelona Home Shirt (XL)", {"Barça 2010-2013"}),
-    ("Barcelona 2010/2011 Away Shirt XL", {"Barça 2010-2013"}),
-    ("2009-10 Barcelona Home Shirt (XL)", set()),
+    ("2011-12 Barcelona Home Shirt (XL)", {"Barça 2008-2013"}),
+    ("Barcelona 2010/2011 Away Shirt XL", {"Barça 2008-2013"}),
+    ("2009-10 Barcelona Home Shirt (XL)", {"Barça 2008-2013"}),
     ("2021-22 Bayern Munich Oktoberfest Shirt (XL)", {"Bayern Wiesn 2021/22 (grün)"}),
     ("2021-22 Bayern Munich Green Fourth Shirt XL", {"Bayern Wiesn 2021/22 (grün)"}),
     ("2021-22 Bayern Munich Third Shirt XL", set()),
@@ -69,7 +69,7 @@ CASES = [
     # Produkt-Ausschlüsse
     ("2011-12 Barcelona Training Shirt (XL)", set()),
     ("2011-12 Barcelona Home Shorts (XL)", set()),
-    ("2012-13 Barcelona Home Short Sleeve Shirt (XL)", {"Barça 2010-2013"}),
+    ("2012-13 Barcelona Home Short Sleeve Shirt (XL)", {"Barça 2008-2013"}),
     # Neu (01.10.2026): Trainingsshirts in anderen Sprachen
     ("Spain 2014 Camisa de Treino Tam GG", set()),
     ("Barcelona 2011-12 Camiseta de Entrenamiento XL", set()),
@@ -80,7 +80,7 @@ CASES = [
     ("2010-11 Barcelona Away Shirt Villa #7 (XL)", set()),
     ("2010 Spain World Cup Home Shirt Torres #9 XL", set()),
     ("2021-22 Liverpool Away Shirt Salah #11 (XL)", set()),
-    ("2012-13 Barcelona Home Shirt Thiago #11 (XL)", {"Thiago", "Barça 2010-2013"}),
+    ("2012-13 Barcelona Home Shirt Thiago #11 (XL)", {"Thiago", "Barça 2008-2013"}),
     ("2010-11 Spain Home Shirt Alonso #14 (XL)", {"Alonso (Xabi)"}),
     ("2021-22 Liverpool Away Shirt Thiago #6 (XL)", {"Thiago", "Liverpool Away 2021/22"}),
     # Neu (01.10.2026): niederländische Titel (The Football Temple) und andere Sprachen
@@ -88,7 +88,7 @@ CASES = [
     ("Spanje 2014 Uit Shirt (XXL)", {"Spanien 2014"}),
     ("Spanje 2010 Thuis Shirt Iniesta #6 (XL)", set()),
     ("Spanje 2014 Thuis Shirt Thiago #6 (XL)", {"Thiago", "Spanien 2014"}),
-    ("Barcelona 2012/2013 Uit Shirt (XL)", {"Barça 2010-2013"}),
+    ("Barcelona 2012/2013 Uit Shirt (XL)", {"Barça 2008-2013"}),
     ("Barcelona 2012/2013 Uit Shirt Messi #10 (XL)", set()),
     ("Liverpool 2022/2023 Derde Shirt (XL)", {"Liverpool Third 2022/23"}),
     ("Liverpool 2022/2023 Uit Shirt (XL)", set()),
@@ -105,10 +105,10 @@ CASES = [
     ("Barcelona S.C. 2012 Home Shirt XL", set()),
     ("1998/99 FC Barcelona Home Name Set Rivaldo #11 (Repro)", set()),
     ("1996/97 Chelsea Retro Home Shirt FA Cup Final (XL) Score Draw", set()),
-    ("2012-13 Barcelona Home Shirt Thiago #11 with official name set (XL)", {"Thiago", "Barça 2010-2013"}),
+    ("2012-13 Barcelona Home Shirt Thiago #11 with official name set (XL)", {"Thiago", "Barça 2008-2013"}),
     # Neu (04.10.2026): Repro-Flock nur für Thiago, sonst bleiben Nachbauten draußen
     ("2013-14 Bayern Munich Home Shirt Thiago #6 (XL) Repro Flock", {"Thiago"}),
-    ("Maillot Barcelone 2012-2013 HOME 11 THIAGO flocage reproduction récente XL", {"Thiago", "Barça 2010-2013"}),
+    ("Maillot Barcelone 2012-2013 HOME 11 THIAGO flocage reproduction récente XL", {"Thiago", "Barça 2008-2013"}),
     ("2013-14 Bayern Munich Home Shirt Ribery #7 (XL) Repro Flock", set()),
     ("2015-16 Bayern Munich Thiago #6 Reissue (XL)", set()),
     ("1998/99 FC Barcelona Home Name Set Thiago #11 (Repro)", set()),
@@ -378,9 +378,9 @@ def test_artikelcode_sondertrikot():
 
 @pytest.mark.parametrize("title,expected", [
     ("2022-23 LIVERPOOL *WINFIELD* SHIRT XL", set()),                       # Sternchen = fremder Flock
-    ("2012-13 FC BARCELONA *BNWT* SHIRT XL", {"Barça 2010-2013"}),          # Zusatz, kein Flock
-    ("2011-12 FC BARCELONA *THIAGO* SHIRT XL", {"Thiago", "Barça 2010-2013"}),
-    ("2012-13 FC BARCELONA *PLAYER ISSUE* SHIRT XXL", {"Barça 2010-2013"}),
+    ("2012-13 FC BARCELONA *BNWT* SHIRT XL", {"Barça 2008-2013"}),          # Zusatz, kein Flock
+    ("2011-12 FC BARCELONA *THIAGO* SHIRT XL", {"Thiago", "Barça 2008-2013"}),
+    ("2012-13 FC BARCELONA *PLAYER ISSUE* SHIRT XXL", {"Barça 2008-2013"}),
 ])
 def test_sternchen_flock(title, expected):
     assert {l for l, _ in M.labels(title)} == expected
@@ -563,3 +563,39 @@ def test_short_size():
     assert tracker.short_size("2XL") == "XXL"
     assert tracker.short_size("XL") == "XL"
     assert tracker.short_size("") == ""
+
+
+@pytest.mark.parametrize("title,expected", [
+    ("2008-09 Barcelona Away Shirt (XL)", {"Barça 2008-2013"}),
+    ("2008/09 FC Barcelona Third Shirt XL", {"Barça 2008-2013"}),
+    ("2009-10 Barcelona Home Shirt (XXL)", {"Barça 2008-2013"}),
+    ("2009-10 Barcelona Away Shirt Henry #14 (XL)", set()),           # fremder Flock
+    ("2008-09 Barcelona Home Shirt Eto'o #9 (XL)", set()),
+    ("2007-08 Barcelona Home Shirt (XL)", set()),
+])
+def test_barca_2008_2010(title, expected):
+    assert {l for l, _ in M.labels(title)} == expected
+
+
+@pytest.mark.parametrize("title,expected", [
+    ("Trikot - Hamburger SV - Tony Yeboah - 1999/2000 - XL - Heim", True),      # Flock ohne Nummer
+    ("1998-99 HAMBURG *SPORL* SHIRT XL", True),
+    ("Original Hamburger SV 2013/14 Third - Calhanoglu #9 Size XXL", True),
+    ("Hamburger SV 11/12 Guerreiro", True),
+    ("2010-11 HAMBURG SHIRT XL", False),                                         # kein Flock
+    ("Hamburger SV 07/08 Kein Flock", False),
+    ("Erima SC Victoria Hamburg 1990s Long Sleeve Home Shirt #9 XL", False),
+    ("Hamburger SV thuisshirt 2017-2018 Kyriakos Papadopoulos", False),          # nach 2016
+    ("FC St. Pauli 2010/11 Home Shirt #10 XL", False),
+])
+def test_hsv(title, expected):
+    assert ("HSV 1990-2016" in {l for l, _ in M.labels(title)}) == expected
+
+
+@pytest.mark.parametrize("title", [
+    "Bayern Munich 2021-22 Octoberfest Shirt XL",
+    "FC Bayern München Wiesntrikot 2021 XL",
+    "FC Bayern Oktoberfest-Trikot 2021/22 grün",
+])
+def test_wiesn_schreibweisen(title):
+    assert "Bayern Wiesn 2021/22 (grün)" in {l for l, _ in M.labels(title)}

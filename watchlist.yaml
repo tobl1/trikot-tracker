@@ -173,29 +173,6 @@ spieler:
   - name: Zé Roberto
     suche: ["ze roberto"]
 
-# Zusätzliche Namen NUR für "nur beflockt" (fremdflock: pflicht, z. B. Total 90): Flock ohne Rückennummer
-# erkennen ("BRASILE 2004 - RONALDO - HOME"). Bewusst nicht in fremdflock.namen, weil Wörter wie "park",
-# "lee" oder "blanco" sonst unbeflockte Thiago-Sondertrikots aussortieren könnten
-flock_erkennung: [
-    "ronaldo", "ronaldinho", "adriano", "kaka", "roberto carlos", "cafu", "emerson", "ze roberto",
-    "juninho", "robinho", "juan", "lucio", "dida", "figo", "rui costa", "deco", "nuno gomes", "pauleta",
-    "maniche", "ricardo carvalho", "simao", "costinha", "davids", "kluivert", "seedorf", "cocu",
-    "stam", "makaay", "sneijder", "van persie", "kuyt", "van bommel", "heitinga", "babel",
-    "del piero", "nedved", "trezeguet", "ibrahimovic", "zambrotta", "cannavaro", "buffon",
-    "thuram", "camoranesi", "zebina", "vieri", "recoba", "martins", "stankovic", "veron",
-    "zanetti", "cambiasso", "materazzi", "cruz", "eto'o", "etoo", "giuly", "larsson", "van bronckhorst",
-    "bergkamp", "vieira", "pires", "ljungberg", "reyes", "cole", "lauren", "campbell", "fabregas",
-    "viduka", "kewell", "cahill", "schwarzer", "bresciano", "aloisi", "park", "ahn", "lee",
-    "borgetti", "marquez", "blanco", "osorio", "prso", "kovac", "simunic", "srna", "klasnic",
-    "aimar", "vicente", "mista", "baraja", "ayala", "angulo", "kezman", "vennegoor", "farfan",
-    "quaresma", "derlei", "maicon", "mccarthy", "carlos alberto",
-    # WM 2006
-    "ballack", "klose", "lahm", "schweinsteiger", "podolski", "frings", "kahn", "lehmann", "mertesacker",
-    "kuranyi", "odonkor", "totti", "pirlo", "gattuso", "toni", "inzaghi", "zidane", "henry", "makelele",
-    "riquelme", "crespo", "tevez", "saviola", "sorin", "messi", "gerrard", "lampard", "rooney", "beckham",
-    "owen", "crouch", "terry", "ferdinand", "raul", "torres", "villa", "xavi", "puyol", "casillas",
-    "shevchenko", "rosicky", "koller", "baros", "cech", "frei", "barnetta", "drogba", "kalou", "essien",
-    "appiah", "nakata", "nakamura", "ljungberg", "donovan", "mcbride", "reyna", "karimi", "daei"]
 
 # ---------------------------------------------------------------------
 # Sondertrikots (Thiago-Bezug): nur mit Thiago-Flock oder ganz ohne Flock,
@@ -211,6 +188,9 @@ fremdflock:
     "fabregas", "cesc", "alexis", "sanchez", "abidal", "mascherano", "keita", "adriano",
     "bojan", "afellay", "valdes", "tello", "cuenca", "song", "alba", "montoya", "maxwell",
     "bartra", "fontas", "pinto", "sergi roberto", "dos santos", "ibrahimovic", "neymar",
+    # Barça 2008 bis 2010
+    "eto'o", "etoo", "henry", "hleb", "yaya", "toure", "marquez", "gudjohnsen", "milito", "sylvinho",
+    "caceres", "chygrinskiy", "jeffren", "zlatan",
     # Bayern 2021/22
     "lewandowski", "muller", "mueller", "kimmich", "goretzka", "sane", "gnabry", "coman",
     "davies", "neuer", "sule", "upamecano", "hernandez", "pavard", "musiala", "sabitzer",
@@ -264,12 +244,12 @@ flock_erkennung: [
 # ---------------------------------------------------------------------
 sondertrikots:
 
-  - name: "Barça 2010-2013"
+  - name: "Barça 2008-2013"         # 08/09 und 09/10 seit 05.10.2026 (Nutzer), alle Varianten
     prioritaet: hoch
     verein: ["barcelona", "barca", "barcelone", "barcellona"]
-    saisons: ["2010/11", "2011/12", "2012/13"]
+    saisons: ["2008/09", "2009/10", "2010/11", "2011/12", "2012/13"]
     varianten: alle
-    suchanfragen: ["barcelona 2010", "barcelona 2011", "barcelona 2012"]
+    suchanfragen: ["barcelona 2008", "barcelona 2009", "barcelona 2010", "barcelona 2011", "barcelona 2012"]
 
   - name: "Bayern Wiesn 2021/22 (grün)"
     prioritaet: hoch
@@ -277,7 +257,7 @@ sondertrikots:
     saisons: ["2021/22"]
     jahre: ["2021"]
     varianten: alle
-    stichwoerter: ["oktoberfest", "wiesn"]
+    stichwoerter: ["oktoberfest", "wiesn", "octoberfest", "wiesntrikot", "oktoberfesttrikot", "wiesn-trikot"]
     # "third", "fourth" usw. nur zusammen mit einer Farbe, sonst würde
     # auch das reguläre Third-Trikot 21/22 gemeldet.
     # Achtung: 2023/24 war ebenfalls grün, daher nur 21/22 bzw. 2021
@@ -483,3 +463,30 @@ sondertrikots:
     varianten: alle
     fremdflock: pflicht
     suchanfragen: ["world cup 2006", "wm 2006", "2006 world cup"]
+
+  # HSV mit Flock, Saisons 1990/91 bis 2016/17 (Nutzer 05.10.2026). Vorab-Check über FYJ: ca. 10 beflockte
+  # Trikots in XL/XXL, etwa die Hälfte unter 150 €
+  - name: "HSV 1990-2016"
+    verein: ["hamburger sv", "hsv", "hamburg", "hambourg", "amburgo"]
+    saisons: ["1990/91", "1991/92", "1992/93", "1993/94", "1994/95", "1995/96", "1996/97", "1997/98", "1998/99", "1999/00", "2000/01", "2001/02", "2002/03", "2003/04", "2004/05", "2005/06", "2006/07", "2007/08", "2008/09", "2009/10", "2010/11", "2011/12", "2012/13", "2013/14", "2014/15", "2015/16", "2016/17"]
+    jahre: ["1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016"]
+    varianten: alle
+    fremdflock: pflicht
+    ausschluss: ["victoria", "pauli", "altona", "concordia", "harley", "freezers", "towers", "devils",
+                 "sea devils", "barmbek", "eintracht norderstedt"]
+    # Flock ohne Rückennummer erkennen ("Trikot - Hamburger SV - Tony Yeboah - 1999/2000"), nur für diesen Eintrag
+    flock_namen: ["yeboah", "barbarez", "mahdavikia", "romeo", "lauth", "kompany", "boateng", "de jong",
+                  "van buyten", "trochowski", "jarolim", "petric", "guerrero", "westermann", "rafael",
+                  "son", "calhanoglu", "lasogga", "adler", "holtby", "diekmeier", "rincon", "jansen",
+                  "aogo", "beister", "ilicevic", "muller", "mueller", "gregoritsch", "djourou", "spahic",
+                  "drobny", "rost", "demel", "reinhardt", "castelen", "wicky", "atouba", "sanogo",
+                  "choupo-moting", "berg", "elia", "pitroipa", "ljubicic", "rahn", "hoogma", "ujfalusi",
+                  "kientz", "tofting", "hertzsch", "fischer", "prager", "praeger", "cardoso", "sporl",
+                  "spoerl", "gravesen", "schotte", "guerreiro", "baron", "baeron", "hashemian", "takahara",
+                  "von heesen", "golz", "kober", "ivanauskas", "letchkov", "albertz", "spies", "butt",
+                  "hollerbach", "groth", "salihamidzic", "benjamin", "mathijsen", "zidan", "olic",
+                  "van der vaart", "van nistelrooy", "ze roberto", "jiracek", "badelj", "lam", "kacar",
+                  "arslan", "tah", "jung", "ostrzolek", "hunt", "kostic", "wood", "halilovic", "nicolai muller",
+                  "papadopoulos", "gotoku sakai", "sakai", "pollersbeck", "mavraj", "santos", "hahn",
+                  "ekdal", "cleber", "olic", "dore", "lauth", "furtok", "spork", "bode", "yordanov"]
+    suchanfragen: ["hamburger sv", "hsv", "hamburg"]
