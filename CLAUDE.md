@@ -165,6 +165,14 @@ TREFFER.md, also vorher sichern oder nicht committen). `--only "Name"` testet ei
 - Still übernommene Treffer (neue Shops/Kategorien) lösen **eine** Sammelnachricht aus ("🆕 N Treffer
   aus neuen Shops/Kategorien", Link auf `#eingaenge`)
 
+## Kategorie WM 2006
+
+- Seit 05.10.2026: alle 32 Teilnehmer (Ländernamen mehrsprachig), **nur beflockt**, Priorität normal,
+  Preisgrenze gilt. Saisons 2006/07, 2006/08, 2005/07 (Deutschland, England, Argentinien brachten das
+  WM-Trikot schon 2005) und Jahr 2006; nicht "2004-2006"/"2005/2006" (Vorgänger), nicht "Coupe de
+  France", Jugendturniere (U17 …) und "New England". Flock ohne Nummer über `flock_erkennung`
+  (WM-2006-Stars ergänzt). Live-Test über FYJ: 161 Treffer, fast alle plausibel
+
 ## Zustand, Verfügbarkeit, Drop-Rhythmus
 
 - **Zustand** (`zustand`, `zustand_notiz` in seen.json): Note wie "8/10" aus Titel (CFS: "- 8/10 -")

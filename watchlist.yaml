@@ -188,7 +188,14 @@ flock_erkennung: [
     "viduka", "kewell", "cahill", "schwarzer", "bresciano", "aloisi", "park", "ahn", "lee",
     "borgetti", "marquez", "blanco", "osorio", "prso", "kovac", "simunic", "srna", "klasnic",
     "aimar", "vicente", "mista", "baraja", "ayala", "angulo", "kezman", "vennegoor", "farfan",
-    "quaresma", "derlei", "maicon", "mccarthy", "carlos alberto"]
+    "quaresma", "derlei", "maicon", "mccarthy", "carlos alberto",
+    # WM 2006
+    "ballack", "klose", "lahm", "schweinsteiger", "podolski", "frings", "kahn", "lehmann", "mertesacker",
+    "kuranyi", "odonkor", "totti", "pirlo", "gattuso", "toni", "inzaghi", "zidane", "henry", "makelele",
+    "riquelme", "crespo", "tevez", "saviola", "sorin", "messi", "gerrard", "lampard", "rooney", "beckham",
+    "owen", "crouch", "terry", "ferdinand", "raul", "torres", "villa", "xavi", "puyol", "casillas",
+    "shevchenko", "rosicky", "koller", "baros", "cech", "frei", "barnetta", "drogba", "kalou", "essien",
+    "appiah", "nakata", "nakamura", "ljungberg", "donovan", "mcbride", "reyna", "karimi", "daei"]
 
 # ---------------------------------------------------------------------
 # Sondertrikots (Thiago-Bezug): nur mit Thiago-Flock oder ganz ohne Flock,
@@ -233,7 +240,14 @@ flock_erkennung: [
     "viduka", "kewell", "cahill", "schwarzer", "bresciano", "aloisi", "park", "ahn", "lee",
     "borgetti", "marquez", "blanco", "osorio", "prso", "kovac", "simunic", "srna", "klasnic",
     "aimar", "vicente", "mista", "baraja", "ayala", "angulo", "kezman", "vennegoor", "farfan",
-    "quaresma", "derlei", "maicon", "mccarthy", "carlos alberto"]
+    "quaresma", "derlei", "maicon", "mccarthy", "carlos alberto",
+    # WM 2006
+    "ballack", "klose", "lahm", "schweinsteiger", "podolski", "frings", "kahn", "lehmann", "mertesacker",
+    "kuranyi", "odonkor", "totti", "pirlo", "gattuso", "toni", "inzaghi", "zidane", "henry", "makelele",
+    "riquelme", "crespo", "tevez", "saviola", "sorin", "messi", "gerrard", "lampard", "rooney", "beckham",
+    "owen", "crouch", "terry", "ferdinand", "raul", "torres", "villa", "xavi", "puyol", "casillas",
+    "shevchenko", "rosicky", "koller", "baros", "cech", "frei", "barnetta", "drogba", "kalou", "essien",
+    "appiah", "nakata", "nakamura", "ljungberg", "donovan", "mcbride", "reyna", "karimi", "daei"]
 
 # ---------------------------------------------------------------------
 # Sondertrikots (Thiago-Bezug)
@@ -434,3 +448,38 @@ sondertrikots:
     fremdflock: pflicht
     suchanfragen: ["psv 2004"]
 
+  # -------------------------------------------------------------------
+  # Eigene Kategorie: WM 2006, alle 32 Teilnehmer, NUR beflockt (Nutzer 05.10.2026)
+  # Die WM-Trikots kamen teils schon 2005 (Shops: "2005-07", z. B. Deutschland, England), meist
+  # "2006-07"/"2006-08". "2004-2006" bzw. "2005/2006" sind Vorgänger (z. B. Holland T90) und zählen nicht.
+  # -------------------------------------------------------------------
+  - name: "WM 2006"
+    prioritaet: normal
+    verein: ["germany", "deutschland", "allemagne", "germania", "alemania", "duitsland", "niemcy", "dfb",
+             "costa rica", "poland", "polen", "pologne", "polonia", "polska",
+             "ecuador", "equateur", "england", "inghilterra", "inglaterra", "angleterre", "engeland", "anglia",
+             "paraguay", "trinidad", "sweden", "schweden", "suede", "svezia", "suecia", "zweden", "sverige",
+             "argentina", "argentinien", "argentine", "ivory coast", "elfenbeinkuste", "cote d ivoire",
+             "cote divoire", "costa d avorio", "costa de marfil", "ivoorkust",
+             "serbia and montenegro", "serbia montenegro", "serbien und montenegro", "serbie et montenegro",
+             "netherlands", "holland", "niederlande", "nederland", "pays-bas", "olanda", "holanda",
+             "mexico", "mexiko", "mexique", "messico", "iran", "angola", "portugal", "portogallo",
+             "italy", "italien", "italie", "italia", "ghana", "usa", "united states", "etats-unis",
+             "stati uniti", "estados unidos", "verenigde staten",
+             "czech", "czech republic", "tschechien", "republique tcheque", "repubblica ceca", "republica checa",
+             "tsjechie", "brazil", "brasil", "brasilien", "bresil", "brazilie", "brasile",
+             "croatia", "kroatien", "hrvatska", "kroatie", "croatie", "croazia", "croacia", "chorwacja",
+             "australia", "australien", "australie", "socceroos", "japan", "japon", "giappone",
+             "france", "frankreich", "francia", "frankrijk", "francja",
+             "switzerland", "schweiz", "suisse", "svizzera", "suiza", "zwitserland",
+             "south korea", "korea", "sudkorea", "suedkorea", "coree du sud", "corea del sur",
+             "togo", "spain", "spanien", "espana", "spanje", "espagne", "spagna", "espanha", "hiszpania",
+             "ukraine", "ucraina", "ucrania", "oekraine", "tunisia", "tunesien", "tunisie", "tunez",
+             "saudi arabia", "saudi-arabien", "arabie saoudite", "arabia saudita"]
+    saisons: ["2006/07", "2006/08", "2005/07"]
+    jahre: ["2006"]
+    ausschluss: ["2004-2006", "2004/2006", "2005-2006", "2005/2006", "new england", "coupe de france",
+                 "tour de france", "copa del rey", "u17", "u19", "u20", "u21"]
+    varianten: alle
+    fremdflock: pflicht
+    suchanfragen: ["world cup 2006", "wm 2006", "2006 world cup"]

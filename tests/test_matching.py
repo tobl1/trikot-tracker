@@ -482,3 +482,24 @@ def test_log_problems(tmp_path, monkeypatch):
     log = tracker.load_json(tmp_path / "log.json", {})
     assert log["Oh Calcio|keine Produkte erhalten"]["anzahl"] == 2
     assert "Oh Calcio" in (tmp_path / "FEHLER.md").read_text() and "FYJ" in (tmp_path / "FEHLER.md").read_text()
+
+
+WM06 = "WM 2006"
+
+
+@pytest.mark.parametrize("title,yes", [
+    ("Germany 2006 Home Shirt Ballack #13 (XL)", True),
+    ("2005-07 Germany Home Shirt Klose #11 (XL)", True),           # WM-Trikot kam 2005
+    ("Italy 2006 World Cup Home Shirt Totti 10 XL", True),
+    ("2006-08 Argentina Home Shirt Riquelme #10 (XXL)", True),
+    ("Maillot Equipe de France 2006 Domicile ZIDANE XL", True),
+    ("2006-07 England Home Shirt Gerrard #8 (XL)", True),
+    ("Germany 2006 Home Shirt (XL)", False),                        # nur beflockt
+    ("Netherlands 2004/2005/2006 Home Shirt Van Nistelrooy XL", False),   # T90-Vorgänger
+    ("New England Revolution 2006 Home Shirt Twellman #20 XL", False),
+    ("2006-07 Juventus Home Shirt Del Piero #10 XL", False),       # Verein, kein Land
+    ("Germany 2006 Training Shirt Ballack XL", False),
+    ("2006/07 - Coupe de France #11 (XL) [MATCH ISSUE]", False),
+])
+def test_wm2006(title, yes):
+    assert (WM06 in {l for l, _ in M.labels(title)}) == yes
