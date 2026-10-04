@@ -398,21 +398,27 @@ T90 = "Nike Total 90 (2004-06)"
 
 @pytest.mark.parametrize("title,yes", [
     ("2004-06 Portugal Home Shirt Ronaldo #17 (XL)", True),
-    ("2004-06 Holland Away Shirt (XXL)", True),
+    ("2004-06 Holland Away Shirt (XXL)", False),                # nur beflockt
+    ("2004-06 Holland Away Shirt Robben #11 (XXL)", True),
     ("Brazil 2004 Home Shirt Ronaldinho #10 XL", True),
     ("2004-05 Inter Milan Home Shirt Adriano #10 (XL)", True),
     ("2004-05 Juventus Away Shirt Del Piero #10 XL", True),
     ("2006-08 Brazil Home Shirt (XL)", False),                 # WM-2006-Trikot, anderes Template
     ("2005-06 Juventus Home Shirt (XL)", False),               # Vereine nur 2004/05
-    ("Portugal 2004 Home Shirt (2025 Reissue) XL", True),      # Neuauflagen hier erwünscht
-    ("2004 Netherlands Nike T90 Remake Shirt XL", True),
-    ("2004-06 South Korea Home Shirt (XL)", True),
+    ("Portugal 2004 Home Shirt (2025 Reissue) XL", False),     # Neuauflage ohne Flock
+    ("Portugal 2004 Home Shirt Ronaldo #17 (2025 Reissue) XL", True),   # Neuauflage mit Flock
+    ("2004 Netherlands Nike T90 Remake Shirt XL", False),
+    ("2004-06 South Korea Home Shirt Park #7 (XL)", True),
     ("Mexico 2004 Away Jersey Borgetti #9 XL", True),
     ("2004-06 Croatia Home Shirt Kovac #10 (XL)", True),
     ("2004-05 Barcelona Home Shirt Ronaldinho #10 (XL)", True),
     ("2005-06 Barcelona Home Shirt (XL)", False),
     ("2004-06 Arsenal Home Shirt Henry #14 (XL)", True),
-    ("2004-05 FC Porto Home Shirt (XL)", True),
+    ("2004-05 FC Porto Home Shirt Deco #10 (XL)", True),
+    ("2004-05 FC Porto Home Shirt (XL)", False),
+    ("BRASILE 2004 - RONALDO - HOME XL", True),                  # Name ohne Nummer zählt als Flock
+    ("JUVENTUS 2004/05 - THURAM - HOME XL", True),
+    ("2004-06 NETHERLANDS SHIRT XXL", False),
     ("2004 Porto Alegre Gremio Shirt XL", False),
     ("2004-05 Valencia Home Shirt Aimar #21 (XL)", True),         # Valencia nur beflockt
     ("2004-05 Valencia Home Shirt (XL)", False),
@@ -447,3 +453,8 @@ def test_wix_text_v3():
     txt = tracker.wix_text(d)
     assert "Zustand 9/10" in txt and M.repro_flock(txt)
     assert tracker.wix_text("<p>Condition: Excellent</p>") == "Condition: Excellent"
+
+
+def test_flock_erkennung_nur_fuer_pflicht():
+    # "blanco" (weiß) darf ein unbeflocktes Spanien-Sondertrikot nicht als fremd beflockt aussortieren
+    assert {l for l, _ in M.labels("Camiseta España 2010 blanco XL")} == {"Spanien 2010/2011"}

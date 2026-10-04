@@ -127,8 +127,11 @@ TREFFER.md, also vorher sichern oder nicht committen). `--only "Name"` testet ei
 
 ## Kategorie Nike Total 90 (2004-06)
 
-- Wunsch des Nutzers (04.10.2026): Nike-T90-Template (runde Brustnummer), mit oder ohne Flock
-  (`fremdflock: egal`), Priorität normal (gebündelte Pushes). Fünf Sondertrikot-Einträge mit gleichem
+- Wunsch des Nutzers (04.10.2026): Nike-T90-Template (runde Brustnummer), Priorität normal (gebündelte
+  Pushes). **Seit 05.10.2026 für alle T90-Teams nur beflockt** (`fremdflock: pflicht`). Flock ohne
+  Rückennummer ("BRASILE 2004 - RONALDO - HOME") wird über `flock_erkennung` (T90-Spieler 2004-06)
+  erkannt; die Liste gilt bewusst nur für "pflicht", nicht für den Fremdflock-Ausschluss der
+  Thiago-Sondertrikots ("park", "lee", "blanco" wären dort gefährlich). Fünf Sondertrikot-Einträge mit gleichem
   Namen (je Team einer, damit FYJ jedes Team abfragt): Brasilien, Holland, Portugal mit Saisons
   2004/05, 2005/06, 2004/06 bzw. Jahren 2004/2005 (Nationalteams EM 2004 bis vor WM 2006),
   Inter und Juventus nur 2004/05. Ausschlüsse: Zeiträume 2002-2004/2003-2004, Griechenland
@@ -140,8 +143,8 @@ TREFFER.md, also vorher sichern oder nicht committen). `--only "Name"` testet ei
   2004/05 und 2004-06, Porto 2004/05 (ohne "Porto Alegre"). Weitere mögliche T90-Teams: USA,
   Türkei, Russland (EM 2004), Australien; Man United, Valencia, PSG, PSV, BVB, Corinthians.
   Nicht Chelsea (damals Umbro, eine Quelle irrt)
-- Valencia, Australien, PSV (seit 05.10.2026) **nur beflockt** (`fremdflock: pflicht`, `has_flock()`:
-  Rückennummer, Sternchen-Name, bekannter Spielername oder alleinstehende Nummer)
+- `has_flock()`: Rückennummer, Sternchen-Name, Name aus fremdflock/flock_erkennung/Spielerliste oder
+  alleinstehende Nummer (nicht Saison, Note, Alter). Seit 05.10.2026 auch Valencia, Australien, PSV
 - `season_rxs` versteht echte Bereiche: "2004/06" = 2004-06 (vorher fälschlich wie 2004/05)
 - Neue Kategorien werden beim ersten Gesamt-Run still übernommen (`known_labels` in status.json)
 - Still übernommene Treffer (neue Shops/Kategorien) lösen **eine** Sammelnachricht aus ("🆕 N Treffer

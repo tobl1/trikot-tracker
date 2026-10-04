@@ -170,6 +170,23 @@ spieler:
   - name: Zé Roberto
     suche: ["ze roberto"]
 
+# Zusätzliche Namen NUR für "nur beflockt" (fremdflock: pflicht, z. B. Total 90): Flock ohne Rückennummer
+# erkennen ("BRASILE 2004 - RONALDO - HOME"). Bewusst nicht in fremdflock.namen, weil Wörter wie "park",
+# "lee" oder "blanco" sonst unbeflockte Thiago-Sondertrikots aussortieren könnten
+flock_erkennung: [
+    "ronaldo", "ronaldinho", "adriano", "kaka", "roberto carlos", "cafu", "emerson", "ze roberto",
+    "juninho", "robinho", "juan", "lucio", "dida", "figo", "rui costa", "deco", "nuno gomes", "pauleta",
+    "maniche", "ricardo carvalho", "simao", "costinha", "davids", "kluivert", "seedorf", "cocu",
+    "stam", "makaay", "sneijder", "van persie", "kuyt", "van bommel", "heitinga", "babel",
+    "del piero", "nedved", "trezeguet", "ibrahimovic", "zambrotta", "cannavaro", "buffon",
+    "thuram", "camoranesi", "zebina", "vieri", "recoba", "martins", "stankovic", "veron",
+    "zanetti", "cambiasso", "materazzi", "cruz", "eto'o", "etoo", "giuly", "larsson", "van bronckhorst",
+    "bergkamp", "vieira", "pires", "ljungberg", "reyes", "cole", "lauren", "campbell", "fabregas",
+    "viduka", "kewell", "cahill", "schwarzer", "bresciano", "aloisi", "park", "ahn", "lee",
+    "borgetti", "marquez", "blanco", "osorio", "prso", "kovac", "simunic", "srna", "klasnic",
+    "aimar", "vicente", "mista", "baraja", "ayala", "angulo", "kezman", "vennegoor", "farfan",
+    "quaresma", "derlei", "maicon", "mccarthy", "carlos alberto"]
+
 # ---------------------------------------------------------------------
 # Sondertrikots (Thiago-Bezug): nur mit Thiago-Flock oder ganz ohne Flock,
 # damit Thiago nachbeflockt werden kann. Als fremd beflockt gilt ein Titel mit
@@ -197,6 +214,23 @@ fremdflock:
     "casillas", "ramos", "capdevila", "alonso", "torres", "fabregas", "silva", "navas",
     "llorente", "mata", "arbeloa", "albiol", "marchena", "reina", "de gea", "koke", "costa",
     "azpilicueta", "cazorla", "juanfran", "javi martinez", "martinez", "santi cazorla"]
+
+# Zusätzliche Namen NUR für "nur beflockt" (fremdflock: pflicht, z. B. Total 90): Flock ohne Rückennummer
+# erkennen ("BRASILE 2004 - RONALDO - HOME"). Bewusst nicht in fremdflock.namen, weil Wörter wie "park",
+# "lee" oder "blanco" sonst unbeflockte Thiago-Sondertrikots aussortieren könnten
+flock_erkennung: [
+    "ronaldo", "ronaldinho", "adriano", "kaka", "roberto carlos", "cafu", "emerson", "ze roberto",
+    "juninho", "robinho", "juan", "lucio", "dida", "figo", "rui costa", "deco", "nuno gomes", "pauleta",
+    "maniche", "ricardo carvalho", "simao", "costinha", "davids", "kluivert", "seedorf", "cocu",
+    "stam", "makaay", "sneijder", "van persie", "kuyt", "van bommel", "heitinga", "babel",
+    "del piero", "nedved", "trezeguet", "ibrahimovic", "zambrotta", "cannavaro", "buffon",
+    "thuram", "camoranesi", "zebina", "vieri", "recoba", "martins", "stankovic", "veron",
+    "zanetti", "cambiasso", "materazzi", "cruz", "eto'o", "etoo", "giuly", "larsson", "van bronckhorst",
+    "bergkamp", "vieira", "pires", "ljungberg", "reyes", "cole", "lauren", "campbell", "fabregas",
+    "viduka", "kewell", "cahill", "schwarzer", "bresciano", "aloisi", "park", "ahn", "lee",
+    "borgetti", "marquez", "blanco", "osorio", "prso", "kovac", "simunic", "srna", "klasnic",
+    "aimar", "vicente", "mista", "baraja", "ayala", "angulo", "kezman", "vennegoor", "farfan",
+    "quaresma", "derlei", "maicon", "mccarthy", "carlos alberto"]
 
 # ---------------------------------------------------------------------
 # Sondertrikots (Thiago-Bezug)
@@ -265,7 +299,7 @@ sondertrikots:
     suchanfragen: ["spain 2014"]
 
   # -------------------------------------------------------------------
-  # Eigene Kategorie: Nike Total 90 (2004-06), mit oder ohne Flock (jeder Spieler)
+  # Eigene Kategorie: Nike Total 90 (2004-06), NUR beflockt (jeder Spieler), Nutzer 05.10.2026
   # Template mit runder Brustnummer: Nationalteams von der EM 2004 bis vor der WM 2006,
   # Vereine in der Saison 2004/05. Achtung: Nike hat 2025 Neuauflagen gebracht, die laufen
   # über "nachbau" (reissue/remake) bzw. FYJ-isReissue raus.
@@ -277,7 +311,7 @@ sondertrikots:
     jahre: ["2004", "2005"]
     ausschluss: ["2002-2004", "2002/2004", "2003-2004", "2003/2004", "greece", "griechenland", "grecia", "grece"]
     varianten: alle
-    fremdflock: egal
+    fremdflock: pflicht
     suchanfragen: ["brazil 2004", "brazil 2005"]
 
   - name: "Nike Total 90 (2004-06)"
@@ -287,7 +321,7 @@ sondertrikots:
     jahre: ["2004", "2005"]
     ausschluss: ["2002-2004", "2002/2004", "2003-2004", "2003/2004", "greece", "griechenland", "grecia", "grece"]
     varianten: alle
-    fremdflock: egal
+    fremdflock: pflicht
     suchanfragen: ["holland 2004", "netherlands 2004", "holland 2005"]
 
   - name: "Nike Total 90 (2004-06)"
@@ -297,7 +331,7 @@ sondertrikots:
     jahre: ["2004", "2005"]
     ausschluss: ["2002-2004", "2002/2004", "2003-2004", "2003/2004", "greece", "griechenland", "grecia", "grece"]
     varianten: alle
-    fremdflock: egal
+    fremdflock: pflicht
     suchanfragen: ["portugal 2004", "portugal 2005"]
 
   - name: "Nike Total 90 (2004-06)"
@@ -305,7 +339,7 @@ sondertrikots:
     verein: ["inter", "internazionale"]
     saisons: ["2004/05"]
     varianten: alle
-    fremdflock: egal
+    fremdflock: pflicht
     suchanfragen: ["inter 2004"]
 
   - name: "Nike Total 90 (2004-06)"
@@ -313,7 +347,7 @@ sondertrikots:
     verein: ["juventus", "juve"]
     saisons: ["2004/05"]
     varianten: alle
-    fremdflock: egal
+    fremdflock: pflicht
     suchanfragen: ["juventus 2004"]
 
   - name: "Nike Total 90 (2004-06)"
@@ -323,7 +357,7 @@ sondertrikots:
     jahre: ["2004", "2005"]
     ausschluss: ["2002-2004", "2002/2004", "2003-2004", "2003/2004", "greece", "griechenland", "grecia", "grece"]
     varianten: alle
-    fremdflock: egal
+    fremdflock: pflicht
     suchanfragen: ["korea 2004", "korea 2005"]
 
   - name: "Nike Total 90 (2004-06)"
@@ -333,7 +367,7 @@ sondertrikots:
     jahre: ["2004", "2005"]
     ausschluss: ["2002-2004", "2002/2004", "2003-2004", "2003/2004", "greece", "griechenland", "grecia", "grece"]
     varianten: alle
-    fremdflock: egal
+    fremdflock: pflicht
     suchanfragen: ["mexico 2004", "mexico 2005"]
 
   - name: "Nike Total 90 (2004-06)"
@@ -343,7 +377,7 @@ sondertrikots:
     jahre: ["2004", "2005"]
     ausschluss: ["2002-2004", "2002/2004", "2003-2004", "2003/2004", "greece", "griechenland", "grecia", "grece"]
     varianten: alle
-    fremdflock: egal
+    fremdflock: pflicht
     suchanfragen: ["croatia 2004", "croatia 2005"]
 
   - name: "Nike Total 90 (2004-06)"
@@ -351,7 +385,7 @@ sondertrikots:
     verein: ["barcelona", "barca", "barcelone", "barcellona"]
     saisons: ["2004/05"]
     varianten: alle
-    fremdflock: egal
+    fremdflock: pflicht
     suchanfragen: ["barcelona 2004"]
 
   - name: "Nike Total 90 (2004-06)"
@@ -359,7 +393,7 @@ sondertrikots:
     verein: ["arsenal"]
     saisons: ["2004/05", "2004/06"]
     varianten: alle
-    fremdflock: egal
+    fremdflock: pflicht
     suchanfragen: ["arsenal 2004"]
 
   - name: "Nike Total 90 (2004-06)"
@@ -368,10 +402,9 @@ sondertrikots:
     saisons: ["2004/05"]
     ausschluss: ["porto alegre"]
     varianten: alle
-    fremdflock: egal
+    fremdflock: pflicht
     suchanfragen: ["porto 2004"]
 
-  # Seit 04.10.2026, auf Wunsch des Nutzers nur beflockt (fremdflock: pflicht)
   - name: "Nike Total 90 (2004-06)"
     prioritaet: normal
     verein: ["australia", "australien", "australie", "socceroos"]

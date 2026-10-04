@@ -182,6 +182,7 @@ class Matcher:
         ff = cfg.get("fremdflock") or {}
         self.flock_ok = any_rx(ff.get("erlaubt"))
         self.flock_names = any_rx(ff.get("namen"))
+        self.flock_extra = any_rx(cfg.get("flock_erkennung"))
         self.kits = []
         for k in cfg.get("sondertrikots") or []:
             var = k.get("varianten", "alle")
@@ -242,6 +243,7 @@ class Matcher:
         """Irgendein Flock erkennbar: Rückennummer, Sternchen-Name, bekannter Spielername oder
         eine alleinstehende Rückennummer ("PORTUGAL 7 FIGO"), nicht Saison, Note oder Größe"""
         return bool(star or FLOCK_NUM_RX.search(t) or hit(self.flock_names, t) or hit(self.flock_ok, t)
+                    or hit(self.flock_extra, t)
                     or any(hit(p["suche"], t) for p in self.players)
                     or re.search(r"(?<![\d/.\-])\b([1-9]|[1-9]\d)\b(?![\d/.\-]|\s?(ans|years|jahre|/10))", t))
 
