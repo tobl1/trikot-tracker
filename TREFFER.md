@@ -1,6 +1,6 @@
 # Trikot-Tracker
 
-Stand: 04.10.2026 06:46 Uhr (full), 298 aktuelle Treffer in XL/XXL
+Stand: 04.10.2026 10:04 Uhr (priority), 297 aktuelle Treffer in XL/XXL
 
 ## Thiago (3)
 
@@ -10,13 +10,12 @@ Stand: 04.10.2026 06:46 Uhr (full), 298 aktuelle Treffer in XL/XXL
 | [2013-14 BAYERN MUNCHEN *THIAGO* SHIRT XL](https://classic-shirts.com/product-eng-321702-2013-14-BAYERN-MUNCHEN-THIAGO-SHIRT-XL.html) | XL | 8/10 | £54.99 | Classic-Shirts | 01.10. |
 | [2019/20 - Bayern Munich - Thiago #6 (2XL)](https://www.vintagefootballarea.com/products/2019-20-bayern-munich-thiago-6-2xl-1) | XXL | Very Good | 79.99 EUR | Vintage Football Area | 01.10. |
 
-## Barça 2010-2013 (25)
+## Barça 2010-2013 (24)
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
-| [giacca barcellona nike 2011/2012](https://le7sorelle.it/products/giacca-barcellona-nike-2011-2012) | XXL |  | 44.99 EUR | Le 7 Sorelle | 04.10. |
 | [Barcelona 2012/2013 Visitante (2XL)](https://futmaniacos.com/products/camiseta-barcelona-2012-2013-visitante-1) | 2XL |  | 55.95 EUR | Futmaniacos | 04.10. |
-| [Espanyol Barcelona 2012-13 Trikot auswärts BNWT - 10/10 - [XL]](https://retroshirts.ch/products/fussballtrikot-espanyolbarcelona-2012-13-auswarts-puma-xl-100734) | XL | 10/10 | 89.00 CHF | Retroshirts CH | 04.10. |
+| [giacca barcellona nike 2011/2012](https://le7sorelle.it/products/giacca-barcellona-nike-2011-2012) | XXL |  | 44.99 EUR | Le 7 Sorelle | 04.10. |
 | [Espanyol Barcelona 2012-13 Trikot heim - 9/10 - [XXL]](https://retroshirts.ch/products/fussballtrikot-espanyolbarcelona-2012-13-heim-puma-xxl-100736) | XXL | 9/10 | 79.00 CHF | Retroshirts CH | 04.10. |
 | [2012-13 FC BARCELONA SHIRT XXL](https://classic-shirts.com/product-eng-272150-2012-13-FC-BARCELONA-SHIRT-XXL.html) | XXL | 9/10 | £69.99 | Classic-Shirts | 01.10. |
 | [2011-12 BARCELONA HOME FOOTBALL *BNWT* Nike - XL](https://buysellfootballshirts.co.uk/products/2011-2012-barcelona-home-football-shirt-new-sizes) | XL | BNWT | 84.95 EUR | Buy Sell Football Shirts | 01.10. |
@@ -105,9 +104,9 @@ Stand: 04.10.2026 06:46 Uhr (full), 298 aktuelle Treffer in XL/XXL
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
-| [adidas - 2020/21 Real Madrid Home Benzema Home Jersey](https://www.thefootballboutique.com/product-page/adidas-2020-21-real-madrid-home-benzema-home-jersey) | X-LARGE | 9/10 | 110.0 USD | The Football Boutique | 04.10. |
 | [Maillot Adidas Football Real Madrid CF Home BENZEMA 2021/22 - XL](https://www.lineupvintageshop.com/product-page/maillot-adidas-football-real-madrid-cf-home-benzema-2021-22) | XL |  | 140.0 EUR | Lineup Vintage | 04.10. |
 | [Maillot Nike Football FFF Equipe de France Away Vintage BENZEMA 2014/15 - XL](https://www.lineupvintageshop.com/product-page/maillot-nike-football-fff-equipe-de-france-away-rétro-benzema-2014-15) | XL |  | 140.0 EUR | Lineup Vintage | 04.10. |
+| [adidas - 2020/21 Real Madrid Home Benzema Home Jersey](https://www.thefootballboutique.com/product-page/adidas-2020-21-real-madrid-home-benzema-home-jersey) | X-LARGE | 9/10 | 110.0 USD | The Football Boutique | 04.10. |
 | [Maillot Équipe de France vintage domicile #10 BENZEMA 2012-2013](https://thefootballmarket.com/products/maillot-equipe-de-france-vintage-domicile-10-benzema-2012-2013) | XL |  | 115.00 EUR | The Football Market | 04.10. |
 | [Maglia FRANCIA BENZEMA XL Home 2008](https://www.arsijstore.com/prodotti/nazionale/europa/francia/maglia-francia-benzema-xl-home-2008/) | XL | Very Good | 89.99 EUR | Arsij Store | 01.10. |
 | [2014/15 France Away Football Shirt (XL) Nike #10 Benzema](https://casualfootballshirts.co.uk/products/2014-15-france-away-football-shirt-xl-nike-10-benzema) | XL | Excellent | 80.00 GBP | Casual Football Shirts | 01.10. |
@@ -195,13 +194,13 @@ Stand: 04.10.2026 06:46 Uhr (full), 298 aktuelle Treffer in XL/XXL
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
-| [Germany 2010/2011 Home Kroos #18 Soccer Jersey (XL)](https://www.original11vs11.com/product-page/kroos-germany-2010-home-jersey-xl) | XL | Used | 108.0 USD | Original 11vs11 | 04.10. |
-| [Maillot Adidas Football Real Madrid CF Third Rétro KROOS 2018/19 - XL](https://www.lineupvintageshop.com/product-page/maillot-adidas-football-real-madrid-cf-third-rétro-kroos-2018-19) | XL |  | 140.0 EUR | Lineup Vintage | 04.10. |
-| [Maillot Adidas Football Allemagne Home Rétro KROOS 2018/19 - L, XL](https://www.lineupvintageshop.com/product-page/maillot-adidas-football-allemagne-home-rétro-kroos-2018-19) | XL |  | 120.0 EUR | Lineup Vintage | 04.10. |
-| [Adidas - Real Madrid 2020/21 Home Football Shirt 'KROOS'](https://pardonmykicks.se/products/adidas-real-madrid-2020-21-home-football-shirt-kroos) | XXL | 8.5/10 | 99.95 EUR | Pardon My Kicks | 04.10. |
-| [Deutschland 2018 Trikot auswärts BNWT - KROOS #8 - 10/10 - [XL]](https://retroshirts.ch/products/fussballtrikot-deutschland-2018-auswarts-adidas-kroos-xl-101132) | XL | 10/10 | 119.00 CHF | Retroshirts CH | 04.10. |
 | [Bayer 04 Leverkusen - Kroos #39 - Trikot 2008–2009 - XL](https://www.bulishirts.com/product-page/bayer-04-leverkusen-kroos-39-2008-2009-xl) | XL | 8/10 | 149.0 EUR | Bulishirts | 04.10. |
 | [DFB - Kroos #18 - Trikot 2010–2012 - XXL](https://www.bulishirts.com/product-page/dfb-kroos-18-2010-2012-xxl) | XXL | 9/10 | 129.0 EUR | Bulishirts | 04.10. |
+| [Maillot Adidas Football Allemagne Home Rétro KROOS 2018/19 - L, XL](https://www.lineupvintageshop.com/product-page/maillot-adidas-football-allemagne-home-rétro-kroos-2018-19) | XL |  | 120.0 EUR | Lineup Vintage | 04.10. |
+| [Maillot Adidas Football Real Madrid CF Third Rétro KROOS 2018/19 - XL](https://www.lineupvintageshop.com/product-page/maillot-adidas-football-real-madrid-cf-third-rétro-kroos-2018-19) | XL |  | 140.0 EUR | Lineup Vintage | 04.10. |
+| [Germany 2010/2011 Home Kroos #18 Soccer Jersey (XL)](https://www.original11vs11.com/product-page/kroos-germany-2010-home-jersey-xl) | XL | Used | 108.0 USD | Original 11vs11 | 04.10. |
+| [Adidas - Real Madrid 2020/21 Home Football Shirt 'KROOS'](https://pardonmykicks.se/products/adidas-real-madrid-2020-21-home-football-shirt-kroos) | XXL | 8.5/10 | 99.95 EUR | Pardon My Kicks | 04.10. |
+| [Deutschland 2018 Trikot auswärts BNWT - KROOS #8 - 10/10 - [XL]](https://retroshirts.ch/products/fussballtrikot-deutschland-2018-auswarts-adidas-kroos-xl-101132) | XL | 10/10 | 119.00 CHF | Retroshirts CH | 04.10. |
 | [2014-15 GERMANY *KROOS* SHIRT HOME - Multiple Sizes](https://classic-shirts.com/product-eng-371765-2014-15-GERMANY-KROOS-SHIRT-HOME-Multiple-Sizes.html) | XL | 8/10 | £59.99 | Classic-Shirts | 01.10. |
 | [2018-19 REAL MADRID *KROOS* SHIRT XL](https://classic-shirts.com/product-eng-382040--2018-19-REAL-MADRID-KROOS-SHIRT-XL.html) | XL | 9/10 | £69.99 | Classic-Shirts | 01.10. |
 | [Real Madrid 2023/24 - Home - Kroos #8](https://golacokits.com/products/real-madrid-2023-24-home-kroos-8) | XL | Good | 45.08 EUR | Golaço Kits | 01.10. |
@@ -230,19 +229,19 @@ Stand: 04.10.2026 06:46 Uhr (full), 298 aktuelle Treffer in XL/XXL
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
-| [2004-05 Valencia Basic Home Shirt Aimar #21 - 7/10 - (XXL)](https://www.classicfootballshirts.co.uk/2004-05-valencia-basic-home-shirt-aimar-21-710-xxl-valh04800257.html) | XXL | 7/10 | £89.99 | Classic Football Shirts | 04.10. |
-| [Juventus 2004-05 "Nedvěd" CL Heim Trikot (XXL) nike](https://www.senseofgoal.com/products/juventus-2004-05-nedved-cl-heim-trikot-xxl-nike) | XXL |  | 79.95 EUR | Sense of Goal | 04.10. |
-| [Juventus 2004-05 "Zambrotta" Auswärts Trikot (XL) nike](https://www.senseofgoal.com/products/juventus-2004-05-zambrotta-auswarts-trikot-xxl-nike) | XL |  | 99.95 EUR | Sense of Goal | 04.10. |
-| [NETHERLANDS DAVIDS 2004-2005 ORIGINAL JERSEY Size XL](https://tiffozifutbol.com/products/netherlands-davids-2004-2005-original-jersey-size-xl) | XL | 9.5/10 | 148.95 EUR | Tiffozi Futbol | 04.10. |
-| [2004-05 JUVENTUS *NEDVED* SHIRT XL](https://classic-shirts.com/product-eng-354467-2004-05-JUVENTUS-NEDVED-SHIRT-XL.html) | XL |  | £34.99 | Classic-Shirts | 04.10. |
-| [Juventus Auswärtstrikot 2004/05 – Cannavaro #28 – Nike – Größe XXL](https://jersely.com/products/juventus-auswartstrikot-2004-05-cannavaro-28-nike-grosse-xxl) | XXL |  | 139.99 EUR | Jersely | 04.10. |
-| [Niederlande 2004 Heimtrikot – Robben #19 – Größe XL](https://jersely.com/products/niederlande-2004-heimtrikot-robben-19-grosse-xl) | XL |  | 129.99 EUR | Jersely | 04.10. |
-| [2004/05 Inter Milan Away Size XL Recoba](https://offsideboys.com/products/2004-05-inter-milan-away-size-xl-recoba) | XL | 7/10 | 95.95 EUR | Offside Boys | 04.10. |
-| [Juventus uitshirt 2004-2005 Zlatan Ibrahimović maat – XL](https://kickandrushshop.nl/juventus-uitshirt-2004-2005-zlatan-ibrahimovic-maat-xl/) | XL |  | 124.90 EUR | Kick and Rush | 04.10. |
 | [Maglia JUVENTUS DEL PIERO XL Away 2004/05 CHAMPIONS LEAGUE](https://www.arsijstore.com/prodotti/serie-a/juventus/maglia-juventus-del-piero-xl-away-2004-05-champions-league/) | XL |  | 139.99 EUR | Arsij Store | 04.10. |
 | [Maglia JUVENTUS DEL PIERO XL Third 2004/05 Nuova](https://www.arsijstore.com/prodotti/serie-a/juventus/maglia-juventus-del-piero-xl-third-2004-05-nuova/) | XL |  | 149.99 EUR | Arsij Store | 04.10. |
+| [2004-05 JUVENTUS *NEDVED* SHIRT XL](https://classic-shirts.com/product-eng-354467-2004-05-JUVENTUS-NEDVED-SHIRT-XL.html) | XL |  | £34.99 | Classic-Shirts | 04.10. |
+| [2004-05 Valencia Basic Home Shirt Aimar #21 - 7/10 - (XXL)](https://www.classicfootballshirts.co.uk/2004-05-valencia-basic-home-shirt-aimar-21-710-xxl-valh04800257.html) | XXL | 7/10 | £89.99 | Classic Football Shirts | 04.10. |
+| [Juventus Auswärtstrikot 2004/05 – Cannavaro #28 – Nike – Größe XXL](https://jersely.com/products/juventus-auswartstrikot-2004-05-cannavaro-28-nike-grosse-xxl) | XXL |  | 139.99 EUR | Jersely | 04.10. |
+| [Niederlande 2004 Heimtrikot – Robben #19 – Größe XL](https://jersely.com/products/niederlande-2004-heimtrikot-robben-19-grosse-xl) | XL |  | 129.99 EUR | Jersely | 04.10. |
+| [Juventus uitshirt 2004-2005 Zlatan Ibrahimović maat – XL](https://kickandrushshop.nl/juventus-uitshirt-2004-2005-zlatan-ibrahimovic-maat-xl/) | XL |  | 124.90 EUR | Kick and Rush | 04.10. |
+| [2004/05 Inter Milan Away Size XL Recoba](https://offsideboys.com/products/2004-05-inter-milan-away-size-xl-recoba) | XL | 7/10 | 95.95 EUR | Offside Boys | 04.10. |
+| [Juventus 2004-05 "Nedvěd" CL Heim Trikot (XXL) nike](https://www.senseofgoal.com/products/juventus-2004-05-nedved-cl-heim-trikot-xxl-nike) | XXL |  | 79.95 EUR | Sense of Goal | 04.10. |
+| [Juventus 2004-05 "Zambrotta" Auswärts Trikot (XL) nike](https://www.senseofgoal.com/products/juventus-2004-05-zambrotta-auswarts-trikot-xxl-nike) | XL |  | 99.95 EUR | Sense of Goal | 04.10. |
 | [(XXL) Arsenal 2004-05 Home Shirt Henry #14](https://sundayfootballshirts.com/products/xxl-arsenal-2004-05-home-shirt-henry-14) | XXL | Fair | 450.00 MYR | Sunday Football Shirts | 04.10. |
 | [Maillot Juventus vintage domicile N°18 Hyuga 2004-2005](https://thefootballmarket.com/products/maillot-juventus-vintage-domicile-n-18-hyuga-2004-2005) | XL |  | 45.00 EUR | The Football Market | 04.10. |
+| [NETHERLANDS DAVIDS 2004-2005 ORIGINAL JERSEY Size XL](https://tiffozifutbol.com/products/netherlands-davids-2004-2005-original-jersey-size-xl) | XL | 9.5/10 | 148.95 EUR | Tiffozi Futbol | 04.10. |
 | [2004/05 - Juventus (XL) *university*](https://www.vintagefootballarea.com/products/2004-05-juventus-xl-university-1) | XL |  | 39.99 EUR | Vintage Football Area | 04.10. |
 | [Van Nistelrooy 10 Netherlands 2004/2005/2006 Home Football Shirt XL](https://casualfootballshirts.co.uk/products/van-nistelrooy-10-netherlands-2004-2005-2006-home-football-shirt-xl) | XL | Excellent | 119.99 GBP | Casual Football Shirts | 01.10. |
 | [2004-06 NETHERLANDS *V. NISTELROOY* SHIRT XXL](https://classic-shirts.com/product-eng-376829-2004-06-NETHERLANDS-V-NISTELROOY-SHIRT-XXL.html) | XXL | 6/10 | £69.99 | Classic-Shirts | 01.10. |
@@ -263,13 +262,13 @@ Stand: 04.10.2026 06:46 Uhr (full), 298 aktuelle Treffer in XL/XXL
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
-| [Maillot Nike Football FFF Equipe de France Away Vintage RIBERY 2012/13 - L & XL](https://www.lineupvintageshop.com/product-page/maillot-nike-football-fff-equipe-de-france-away-rétro-ribery-2012-13) | XL |  | 140.0 EUR | Lineup Vintage | 04.10. |
 | [2007-08 FC Bayern München Third Trikot XL Ribery](https://www.089kits.de/product-page/2007-08-fc-bayern-münchen-third-trikot-xl-ribery) | XL | 6/10 | 14.99 EUR | 089 Kits | 04.10. |
-| [Adidas - Bayern Munchen 2007/09 Home Football Shirt 'RIBERY'](https://pardonmykicks.se/products/adidas-bayern-munchen-2007-09-home-football-shirt-ribery-4) | XL | 8/10 | 90.95 EUR | Pardon My Kicks | 04.10. |
-| [Maillot Équipe de France rétro domicile N°22 RIBERY 2006-2007](https://thefootballmarket.com/products/maillot-france-retro-domicile-n-22-ribery-2006-2007) | XL |  | 115.00 EUR | The Football Market | 04.10. |
-| [Maillot de foot rétro domicile Équipe de France N°22 RIBERY 2006-2007](https://thefootballmarket.com/products/maillot-de-foot-retro-domicile-equipe-de-france-n-22-ribery-2006-2008) | XL |  | 55.00 EUR | The Football Market | 04.10. |
 | [FC Bayern München - Ribery #7 - Trikot 2010–2011 - XL](https://www.bulishirts.com/product-page/fc-bayern-münchen-ribery-7-trikot-2007-2008-xl) | XL | 9/10 | 89.0 EUR | Bulishirts | 04.10. |
 | [Frankreich - Ribery #22 - Trikot 2008–2009 - XL](https://www.bulishirts.com/product-page/frankreich-ribery-22-trikot-2008-2009-xl) | XL | 9/10 | 129.0 EUR | Bulishirts | 04.10. |
+| [Maillot Nike Football FFF Equipe de France Away Vintage RIBERY 2012/13 - L & XL](https://www.lineupvintageshop.com/product-page/maillot-nike-football-fff-equipe-de-france-away-rétro-ribery-2012-13) | XL |  | 140.0 EUR | Lineup Vintage | 04.10. |
+| [Adidas - Bayern Munchen 2007/09 Home Football Shirt 'RIBERY'](https://pardonmykicks.se/products/adidas-bayern-munchen-2007-09-home-football-shirt-ribery-4) | XL | 8/10 | 90.95 EUR | Pardon My Kicks | 04.10. |
+| [Maillot de foot rétro domicile Équipe de France N°22 RIBERY 2006-2007](https://thefootballmarket.com/products/maillot-de-foot-retro-domicile-equipe-de-france-n-22-ribery-2006-2008) | XL |  | 55.00 EUR | The Football Market | 04.10. |
+| [Maillot Équipe de France rétro domicile N°22 RIBERY 2006-2007](https://thefootballmarket.com/products/maillot-france-retro-domicile-n-22-ribery-2006-2007) | XL |  | 115.00 EUR | The Football Market | 04.10. |
 | [2008-09 FRANCE *RIBERY* SHIRT 2XL](https://classic-shirts.com/product-eng-301400-2008-09-FRANCE-RIBERY-SHIRT-2XL.html) | 2XL | 8/10 | £74.99 | Classic-Shirts | 01.10. |
 | [2008/09 Bayern Munich Home Football Shirt (XL) Adidas #7 Ribéry](https://casualfootballshirts.co.uk/products/2008-09-bayern-munich-home-football-shirt-xl-adidas-7-ribery) | XL | Excellent | 70.00 GBP | Casual Football Shirts | 01.10. |
 | [2009-10 BAYERN MUNCHEN *RIBERY* SHIRT XL](https://classic-shirts.com/product-eng-261578-2009-10-BAYERN-MUNCHEN-RIBERY-SHIRT-XL.html) | XL | 9/10 | £59.99 | Classic-Shirts | 01.10. |

@@ -202,7 +202,15 @@
   "The Kitman 97": "2026-10-03T15:07:55.644740+00:00",
   "To The Jersey": "2026-10-03T15:07:55.644740+00:00"
  },
- "flags": {},
+ "flags": {
+  "retroshirts.ch/products/fussballtrikot-espanyolbarcelona-2012-13-auswarts-puma-xl-100734": {
+   "grund": "unpassend",
+   "issue": 4,
+   "kommentar": "Ist Espanyol, nicht FC Barcelona",
+   "titel": "Flag: unpassend · Espanyol Barcelona 2012-13 Trikot auswärts BNWT - 10/10 - [XL]",
+   "zeit": "2026-10-04T07:45:41.743467+00:00"
+  }
+ },
  "fyj_shops": {
   "ballerscustomprinting.com": {
    "seit": "2026-10-01T14:14:58.073674+00:00",
@@ -394,12 +402,18 @@
    "neu": 3,
    "still": 146,
    "zeit": "2026-10-04T04:38:13.554139+00:00"
+  },
+  {
+   "modus": "priority",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-04T08:04:36.346679+00:00"
   }
  ],
  "last_full": "2026-10-04T04:38:13.554139+00:00",
  "last_run": {
-  "mode": "full",
-  "time": "2026-10-04T04:38:13.554139+00:00"
+  "mode": "priority",
+  "time": "2026-10-04T08:04:36.346679+00:00"
  },
  "platforms": {
   "https://1kloppshop.com": "shopify",
