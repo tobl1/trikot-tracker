@@ -251,7 +251,9 @@ sondertrikots:
     varianten: alle
     suchanfragen: ["barcelona 2008", "barcelona 2009", "barcelona 2010", "barcelona 2011", "barcelona 2012"]
 
-  - name: "Bayern Wiesn 2021/22 (grün)"
+  # Zwei Einträge, ein Label: das grüne Wiesn-Trikot 2021/22 und das Oktoberfest-Trikot 2013/14 (Thiagos erste
+  # Bayern-Saison, Nutzer 05.10.2026). Das 21/22-Trikot ist extrem selten (FYJ: in keiner Größe vorhanden)
+  - name: "Bayern Wiesn-Trikot"
     prioritaet: hoch
     verein: ["bayern"]            # bewusst ohne "München", sonst träfe es auch 1860-Wiesn-Trikots
     saisons: ["2021/22"]
@@ -265,6 +267,15 @@ sondertrikots:
       begriffe: ["third", "fourth", "4th", "special", "sondertrikot", "limited"]
       farbe: ["green", "grun", "gruen", "verde"]
     suchanfragen: ["bayern oktoberfest", "bayern wiesn", "bayern 2021"]
+
+  - name: "Bayern Wiesn-Trikot"   # Oktoberfest 2013/14 (Trikot, keine Jacke: "jacke", "track jacket" usw. sind ausgeschlossen)
+    prioritaet: hoch
+    verein: ["bayern"]
+    saisons: ["2013/14"]
+    jahre: ["2013"]
+    varianten: alle
+    stichwoerter: ["oktoberfest", "wiesn", "octoberfest", "wiesntrikot", "oktoberfesttrikot", "wiesn-trikot"]
+    suchanfragen: ["bayern oktoberfest"]
 
   - name: "Liverpool Away 2021/22"
     prioritaet: hoch

@@ -106,7 +106,8 @@ TREFFER.md, also vorher sichern oder nicht committen). `--only "Name"` testet ei
   Farbangabe, sonst käme das reguläre Third 21/22; Vereinsfilter nur "bayern", sonst träfe es
   1860-Wiesn-Trikots); Stichwörter seit 05.10.2026 auch "octoberfest", "wiesntrikot". **Check 05.10.2026:**
   FYJ hat das 21/22-Trikot in keiner einzigen Größe, nur 2013/14 (Thiagos erste Bayern-Saison!), 2024/25 und
-  2025/26 als Oktoberfest-Trikot. Es ist also selten, kein Suchbegriff-Problem. Thiago war 21/22 schon in Liverpool; Liverpool Away 21/22; Liverpool Third 22/23; Spanien 2010/2011 und 2014
+  2025/26 als Oktoberfest-Trikot. Es ist also selten, kein Suchbegriff-Problem. Thiago war 21/22 schon in Liverpool; seit 05.10.2026 deshalb zusätzlich das Oktoberfest-Trikot 2013/14 (Thiagos erste
+  Bayern-Saison), beide unter dem Label "Bayern Wiesn-Trikot" (zwei Einträge, gleicher Name); Liverpool Away 21/22; Liverpool Third 22/23; Spanien 2010/2011 und 2014
   jeweils Home und Away
 - Varianten-Logik: erlaubtes Wort im Titel → ok; anderes Variantenwort → nein; gar keins → nur ok,
   wenn "home" erlaubt ist

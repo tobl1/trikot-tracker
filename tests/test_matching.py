@@ -54,8 +54,8 @@ CASES = [
     ("2011-12 Barcelona Home Shirt (XL)", {"Barça 2008-2013"}),
     ("Barcelona 2010/2011 Away Shirt XL", {"Barça 2008-2013"}),
     ("2009-10 Barcelona Home Shirt (XL)", {"Barça 2008-2013"}),
-    ("2021-22 Bayern Munich Oktoberfest Shirt (XL)", {"Bayern Wiesn 2021/22 (grün)"}),
-    ("2021-22 Bayern Munich Green Fourth Shirt XL", {"Bayern Wiesn 2021/22 (grün)"}),
+    ("2021-22 Bayern Munich Oktoberfest Shirt (XL)", {"Bayern Wiesn-Trikot"}),
+    ("2021-22 Bayern Munich Green Fourth Shirt XL", {"Bayern Wiesn-Trikot"}),
     ("2021-22 Bayern Munich Third Shirt XL", set()),
     ("2023-24 Bayern Munich Oktoberfest Shirt green (XL)", set()),
     ("2021-22 1860 Munchen Wiesn Trikot XL", set()),
@@ -598,4 +598,17 @@ def test_hsv(title, expected):
     "FC Bayern Oktoberfest-Trikot 2021/22 grün",
 ])
 def test_wiesn_schreibweisen(title):
-    assert "Bayern Wiesn 2021/22 (grün)" in {l for l, _ in M.labels(title)}
+    assert "Bayern Wiesn-Trikot" in {l for l, _ in M.labels(title)}
+
+
+@pytest.mark.parametrize("title,expected", [
+    ("BAYERN MUNICH 2013/14 ADIDAS Oktoberfest Football Shirt XL", True),
+    ("Bayern Munich 2013-14 Oktoberfest Shirt (XXL)", True),
+    ("Bayern 2013-14 Oktoberfest Jacke (XL)", False),                    # Jacke, kein Trikot
+    ("BAYERN MUNICH 2013/14 ADIDAS Oktoberfest Track Jacket XL", False),
+    ("2013-14 Bayern Munich Home Shirt (XL)", False),                     # reguläres Heimtrikot
+    ("Bayern Munich 2024-25 Oktoberfest Shirt (XL)", False),              # falsche Saison
+    ("Bayern Munich 2013-14 Oktoberfest Shirt Robben #10 (XL)", False),   # fremder Flock
+])
+def test_wiesn_2013(title, expected):
+    assert ("Bayern Wiesn-Trikot" in {l for l, _ in M.labels(title)}) == expected
