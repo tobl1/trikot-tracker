@@ -209,7 +209,7 @@ auf dem Foto erkennbar sind (z. B. Trainingsshirt ohne Hinweis im Titel), über 
 
 ## Quellen und technische Details
 
-**05.10.2026: 42 weitere Shops** aus der Recherche direkt angebunden (Abschnitt "Neu seit 05.10.2026"
+**05.10.2026: 34 weitere Shops** aus der Recherche direkt angebunden (Abschnitt "Neu seit 05.10.2026"
 in shops.yaml, alle `schnellcheck: nein`), damit 115 Shops. Bewusst nicht: originaltrikot.de (Gambio),
 wavememorabilia, classicfootballcollectibles, fancyfootballshirts, kitmenapparel, theshirttemple
 (Mehraufwand/unklar), 44trikots (passwortgeschützt), Marktplätze und Nachbau-Shops
