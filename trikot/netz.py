@@ -2,6 +2,7 @@
 
 import threading
 import time
+from collections import Counter
 
 import requests
 
@@ -40,6 +41,7 @@ class Http:
         self.last = 0.0
         self.count = 0
         self.limited = 0     # Anfragen, die trotz Wiederholung gedrosselt blieben (429)
+        self.codes = Counter()   # andere Antworten als 200 (z. B. 403 = gesperrt, 404), für ehrliche Quellenwerte
 
     def post(self, url, json=None, headers=None):
         """POST mit derselben Pause und Wiederholung bei Drosselung wie get(); liefert JSON oder None"""
@@ -63,6 +65,7 @@ class Http:
                 time.sleep(15 * (attempt + 1))
                 continue
             if r.status_code != 200:
+                self.codes[r.status_code] += 1
                 return None
             try:
                 return r.json()
@@ -104,6 +107,8 @@ class Http:
             if r.status_code >= 500 and attempt < 2:
                 time.sleep(5)
                 continue
+            if r.status_code != 200:
+                self.codes[r.status_code] += 1
             if want == "json":
                 if r.status_code != 200:
                     return None

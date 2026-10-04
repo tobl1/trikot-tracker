@@ -1,7 +1,6 @@
 """Ausgaben: Dashboard-Daten, TREFFER.md, Fehler-Log, Fundgrube"""
 
 import datetime as dt
-import json
 
 import requests
 
@@ -49,7 +48,7 @@ def write_dashboard(seen, status_store, mode, ts, watch_cfg, shops):
             "kurse_datum": kurse.get("datum", ""), "treffer": items,
             "quellen": quellen.get("liste", []), "quellen_stand": quellen.get("zeit", "")}
     speicher.DASHBOARD_FILE.parent.mkdir(exist_ok=True)
-    speicher.DASHBOARD_FILE.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    speicher.save_json(speicher.DASHBOARD_FILE, data, compact=True)
 
 
 def write_report(seen, sources, sources_time, mode):
@@ -87,7 +86,7 @@ def write_report(seen, sources, sources_time, mode):
     for s in sources:
         lines.append(f"| {s['name']} | {s.get('plattform', '')} | {s.get('produkte', 0)} | "
                      f"{s.get('anfragen', '')} | {s.get('fehler') or s.get('info') or 'ok'} |")
-    speicher.REPORT_FILE.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    speicher.save_text(speicher.REPORT_FILE, "\n".join(lines) + "\n")
 
 
 def log_problems(problems, mode, ts):
@@ -103,7 +102,7 @@ def log_problems(problems, mode, ts):
             e["modi"].append(mode)
     cutoff = now() - dt.timedelta(days=ERROR_KEEP_DAYS)
     log = {k: v for k, v in log.items() if dt.datetime.fromisoformat(v["letzt"]) >= cutoff}
-    speicher.ERROR_LOG.write_text(json.dumps(log, ensure_ascii=False, indent=1, sort_keys=True), encoding="utf-8")
+    speicher.save_json(speicher.ERROR_LOG, log)
     rows = sorted(log.values(), key=lambda v: v["letzt"], reverse=True)
     fmt = lambda t: dt.datetime.fromisoformat(t).astimezone(TZ).strftime("%d.%m. %H:%M")
     lines = ["# Fehler-Log", "",
@@ -115,7 +114,7 @@ def log_problems(problems, mode, ts):
                      f"{str(v['meldung']).replace('|', '/')} | {', '.join(v['modi'])} |")
     if not rows:
         lines.append("| | | | | keine Probleme | |")
-    speicher.ERROR_REPORT.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    speicher.save_text(speicher.ERROR_REPORT, "\n".join(lines) + "\n")
 
 
 def fundgrube(status_store, shops, ts, force=False):
@@ -156,5 +155,5 @@ def fundgrube(status_store, shops, ts, force=False):
                      f"{'anbindbar' if c['empfohlen'] else 'eher nicht' if c['plattform'] != 'unbekannt' else 'System unklar'} |")
     if not cands:
         lines.append("| | | | | keine Kandidaten |")
-    speicher.FUNDGRUBE_REPORT.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    speicher.save_text(speicher.FUNDGRUBE_REPORT, "\n".join(lines) + "\n")
     return cands

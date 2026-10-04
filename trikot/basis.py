@@ -46,6 +46,9 @@ DROP_DAY_SHARE = 0.25        # ein Wochentag wird Drop-Termin, wenn mind. so vie
 DROP_DAY_MIN = 3             # und mindestens so viele Drops an diesem Wochentag
 DROP_MAX_SPREAD_MIN = 120    # sehr große Streuung nicht unbegrenzt ins Fenster übernehmen
 DROP_RECHECK_MIN = 25        # Mindestabstand zwischen zwei Drop-Prüfungen desselben Shops
+EINBRUCH_MIN = 100           # Bestandseinbruch erst ab so vielen Produkten beim letzten Gesamt-Run prüfen
+EINBRUCH_ANTEIL = 0.5        # unter diesem Anteil des letzten Bestands gilt es als Einbruch
+EINBRUCH_RUNS = 3            # so viele Gesamt-Runs in Folge, dann ist der kleinere Bestand echt
 
 
 def norm(s):

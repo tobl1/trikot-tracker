@@ -103,7 +103,8 @@ def run_shop(shop, mode, matcher, platforms, currencies):
             ep = plat[4:]
             items, n = woo_run(http, name, ep, None if mode == "full" else matcher.queries(True))
         else:
-            status["fehler"] = "Shopsystem nicht automatisch erkannt"
+            # Sperre (403/401) ehrlich benennen statt "nicht erkannt", z. B. Shops, die Rechenzentrums-IPs blocken
+            status["fehler"] = blocked_text(http) or "Shopsystem nicht automatisch erkannt"
             return [], status
         status["produkte"] = n
         return items, status
@@ -114,10 +115,25 @@ def run_shop(shop, mode, matcher, platforms, currencies):
         if not status["fehler"] and plat not in ("aus", "fyj"):
             if http.limited:
                 status["fehler"] = f"unvollständig, {http.limited}x gedrosselt (HTTP 429)"
+            elif status["produkte"] == 0 and blocked_text(http):
+                status["fehler"] = blocked_text(http)
             elif status["produkte"] == 0 and mode == "full":
-                status["fehler"] = "keine Produkte erhalten"
+                status["fehler"] = "keine Produkte erhalten" + (f" ({codes_text(http)})" if http.codes else "")
+        if http.codes and not status["fehler"]:
+            status["info"] = "; ".join(x for x in (status.get("info"), codes_text(http)) if x)
         status["sekunden"] = round(time.time() - t0, 1)
         status["anfragen"] = http.count
+
+
+def codes_text(http):
+    """'HTTP 404 ×3, 403 ×1': Antworten außer 200, häufigste zuerst"""
+    return "HTTP " + ", ".join(f"{c} ×{n}" for c, n in http.codes.most_common())
+
+
+def blocked_text(http):
+    """Text, wenn der Shop uns gesperrt hat (403/401), sonst leer"""
+    code = 403 if http.codes.get(403) else 401 if http.codes.get(401) else None
+    return f"gesperrt (HTTP {code}), blockt vermutlich Server-Adressen" if code else ""
 
 
 def detect_platform(base):

@@ -3,7 +3,6 @@
 import argparse
 import concurrent.futures as cf
 import datetime as dt
-import json
 import os
 import sys
 import threading
@@ -14,12 +13,12 @@ import yaml
 from . import speicher
 from .abgleich import Matcher
 from .basis import (
-    ENRICH_BUDGET, FALLBACK_SKIP_HOURS, MAX_PUSH_HIGH, MAX_WORKERS, ROOT, RUN_HISTORY, SIZE_RX, canon_url,
-    domain, is_high, norm, now, short_size,
+    EINBRUCH_ANTEIL, EINBRUCH_MIN, EINBRUCH_RUNS, ENRICH_BUDGET, FALLBACK_SKIP_HOURS, MAX_PUSH_HIGH,
+    MAX_WORKERS, ROOT, RUN_HISTORY, SIZE_RX, canon_url, domain, is_high, norm, now, short_size,
 )
 from .berichte import fundgrube, log_problems, write_dashboard, write_report
 from .issues import add_shops_from_issues, apply_flags, check_alarms
-from .melden import detail_line, push, push_label, short
+from .melden import OUTBOX_MAX_HOURS, detail_line, push, push_label, save_outbox, send_now, send_outbox, short
 from .netz import Http
 from .preise import fetch_rates, to_eur
 from .pruefung import enrich
@@ -41,9 +40,22 @@ def recently_done(status_store, mode):
     return any(now() - dt.datetime.fromisoformat(t) < dt.timedelta(hours=limit) for t in times)
 
 
+def stock_collapse(collapse, name, n_now, n_prev):
+    """Bestandseinbruch im Gesamt-Run: Fehlertext oder "". collapse zählt die Gesamt-Runs in Folge je Quelle"""
+    if n_prev >= EINBRUCH_MIN and 0 < n_now < n_prev * EINBRUCH_ANTEIL:
+        collapse[name] = collapse.get(name, 0) + 1
+        if collapse[name] < EINBRUCH_RUNS:
+            return (f"Bestandseinbruch: {n_now} statt {n_prev} Produkte "
+                    f"({collapse[name]}. Gesamt-Run in Folge), Abruffehler?")
+        return ""   # hält an: echter, kleinerer Bestand
+    collapse.pop(name, None)
+    return ""
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--mode", choices=["full", "priority", "drop", "test"], default="full")
+    ap.add_argument("--mode", choices=["full", "priority", "drop", "test", "senden"], default="full",
+                    help="senden = Postausgang verschicken (Workflow-Schritt nach dem Speichern)")
     ap.add_argument("--dry-run", action="store_true", help="nichts senden, nur ausgeben")
     ap.add_argument("--only", help="nur Shops, deren Name diesen Text enthält (zum Testen)")
     ap.add_argument("--alle", action="store_true",
@@ -57,9 +69,20 @@ def main():
         sys.exit("NTFY_TOPIC fehlt (GitHub Secret anlegen) oder --dry-run verwenden.")
 
     if args.mode == "test":
-        push(topic, "✅ Trikot-Tracker verbunden",
-             "Wenn du das liest, funktionieren die Benachrichtigungen.", 4,
-             tags=["white_check_mark"], dry=args.dry_run)
+        entry = {"title": "✅ Trikot-Tracker verbunden", "message": "Wenn du das liest, funktionieren die Benachrichtigungen.",
+                 "prio": 4, "tags": ["white_check_mark"]}
+        if args.dry_run:
+            print(f"[PUSH p4] {entry['title']}\n    {entry['message']}")
+        elif not send_now(topic, entry):
+            sys.exit("Test-Push wurde von ntfy nicht angenommen")
+        return
+    if args.mode == "senden":
+        sent, left, dropped = send_outbox(topic)
+        print(f"Postausgang: {sent} verschickt, {left} offen, {dropped} verworfen (älter als {OUTBOX_MAX_HOURS} Std.)")
+        problems = ([("ntfy", f"{left} Push(es) nicht zugestellt, der nächste Run versucht es erneut")] if left else []) + \
+                   ([("ntfy", f"{dropped} Push(es) verworfen, älter als {OUTBOX_MAX_HOURS} Std.")] if dropped else [])
+        if problems:
+            log_problems(problems, "senden", now().isoformat())
         return
 
     watch = yaml.safe_load((ROOT / "watchlist.yaml").read_text(encoding="utf-8"))
@@ -69,9 +92,13 @@ def main():
             print(f"{n_added} Shop(s) aus der Fundgrube aufgenommen")
     shops_cfg = yaml.safe_load(speicher.SHOPS_FILE.read_text(encoding="utf-8"))
     matcher = Matcher(watch)
-    speicher.STATE_DIR.mkdir(exist_ok=True)
-    seen = load_json(speicher.SEEN_FILE, {})
-    status_store = load_json(speicher.STATUS_FILE, {"platforms": {}, "sources_ok": []})
+    speicher.STATE_DIR.mkdir(parents=True, exist_ok=True)
+    try:   # beschädigte Daten: abbrechen statt still neu anfangen (Fehler-Log + Workflow-Fehlschlag)
+        seen = load_json(speicher.SEEN_FILE, {}, strict=True)
+        status_store = load_json(speicher.STATUS_FILE, {"platforms": {}, "sources_ok": []}, strict=True)
+    except speicher.DatenFehler as e:
+        log_problems([("Daten", str(e))], args.mode, now().isoformat())
+        sys.exit(str(e))
     if args.rueckfall and recently_done(status_store, args.mode):
         print(f"Rückfall-Start übersprungen: {args.mode} lief schon vor kurzem (cron-job.org)")
         return
@@ -169,9 +196,15 @@ def main():
         return bool(max_eur and eur and eur > max_eur and not no_limit & set(e["labels"]))
     new_entries = []
     counts = status_store.setdefault("counts", {})
+    collapse = status_store.setdefault("einbruch", {})
     for src_name, its, st in results:
-        works = args.mode == "full" and st.get("produkte", 0) > 0 and not st.get("fehler")
         n_now, n_prev = st.get("produkte", 0), counts.get(src_name, 0)
+        # Bestand plötzlich unter der Hälfte: eher ein Abruffehler (Seite geändert, halb gesperrt) als ein echter
+        # Ausverkauf. Dann als Fehler werten: Treffer werden nicht als "weg" ausgeblendet, FYJ springt ein.
+        # Hält es EINBRUCH_RUNS Gesamt-Runs an, ist es echt und der neue Bestand gilt
+        if args.mode == "full" and not st.get("fehler"):
+            st["fehler"] = stock_collapse(collapse, src_name, n_now, n_prev)
+        works = args.mode == "full" and st.get("produkte", 0) > 0 and not st.get("fehler")
         # Neue Quelle ODER Bestand plötzlich viel größer (z. B. vorher abgeschnitten):
         # dann still übernehmen statt eine Flut an "neuen" Treffern zu melden
         jump = works and n_prev and n_now > n_prev * 1.3 and n_now - n_prev > 200
@@ -347,7 +380,7 @@ def main():
     old = now() - dt.timedelta(days=60)
     seen = {k: v for k, v in seen.items() if dt.datetime.fromisoformat(v["last"]) >= old}
 
-    speicher.SEEN_FILE.write_text(json.dumps(seen, ensure_ascii=False, indent=1, sort_keys=True), encoding="utf-8")
+    speicher.save_json(speicher.SEEN_FILE, seen)
     if args.mode == "full" and not args.only:
         status_store["known_labels"] = sorted(all_labels)
     elif "known_labels" not in status_store:
@@ -361,7 +394,7 @@ def main():
         status_store["last_full"] = ts
         # Quellen-Status des Gesamtlaufs merken, damit ihn der Schnellcheck nicht überschreibt
         status_store["quellen"] = {"zeit": ts, "liste": run_sources}
-    speicher.STATUS_FILE.write_text(json.dumps(status_store, ensure_ascii=False, indent=1, sort_keys=True), encoding="utf-8")
+    speicher.save_json(speicher.STATUS_FILE, status_store)
     full_src = status_store.get("quellen") or {}
     if full_src:
         write_report(seen, full_src["liste"], full_src["zeit"], args.mode)
@@ -385,3 +418,7 @@ def main():
              f"{ok}/{len(statuses)} Shops ok, {len(new_entries)} neue Treffer"
              + (f". Probleme: {', '.join(bad[:8])}" + (" …" if len(bad) > 8 else "") if bad else ""),
              2, click=report_url, tags=["test_tube"], dry=args.dry_run)
+    # Pushes erst jetzt in den Postausgang schreiben; verschickt werden sie nach dem Speichern
+    n_out = save_outbox()
+    if n_out:
+        print(f"{n_out} Push(es) im Postausgang, Versand nach dem Speichern")

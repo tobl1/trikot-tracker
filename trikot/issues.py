@@ -163,5 +163,5 @@ def add_shops_from_issues():
         except requests.RequestException:
             pass
     if added:
-        speicher.SHOPS_FILE.write_text(text, encoding="utf-8")
+        speicher.save_text(speicher.SHOPS_FILE, text)
     return added

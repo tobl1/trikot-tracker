@@ -252,3 +252,90 @@ def test_check_page_json_ld():
     res = tracker.check_page(FakeHttp([("x.com", page)]), "https://x.com/p")
     assert res == {"verfuegbar": False, "desc": "CONDITION: 8/10", "marke": "Official"}
     assert tracker.check_page(FakeHttp([]), "https://x.com/p") is None   # Seite nicht erreichbar
+
+
+# ---------------------------------------------------------------------------
+# Ehrliche Quellenwerte, sicheres Speichern, Postausgang
+# ---------------------------------------------------------------------------
+import trikot.melden  # noqa: E402
+import trikot.quellen  # noqa: E402
+import trikot.speicher  # noqa: E402
+from trikot.lauf import stock_collapse  # noqa: E402
+
+
+def run_shop_mit(monkeypatch, http, shop):
+    monkeypatch.setattr(trikot.quellen, "Http", lambda *a, **k: http)
+    return trikot.quellen.run_shop(shop, "full", M, {}, {})
+
+
+def test_run_shop_meldet_sperre_statt_keine_produkte(monkeypatch):
+    http = FakeHttp([])
+    http.codes[403] = 2                     # Shop blockt Server-Adressen
+    items, st = run_shop_mit(monkeypatch, http, {"name": "CFS", "url": "https://cfs.co.uk", "plattform": "cfs"})
+    assert items == [] and st["fehler"].startswith("gesperrt (HTTP 403)")
+
+
+def test_run_shop_keine_produkte_mit_codes(monkeypatch):
+    http = FakeHttp([])
+    http.codes[404] = 1
+    _, st = run_shop_mit(monkeypatch, http, {"name": "CFS", "url": "https://cfs.co.uk", "plattform": "cfs"})
+    assert st["fehler"] == "keine Produkte erhalten (HTTP 404 ×1)"
+
+
+def test_run_shop_ok_mit_hinweis(monkeypatch):
+    http = FakeHttp([("/catalogsearch/result/", CFS_PAGE)])
+    http.codes[404] = 3                      # einzelne tote Links sind kein Fehler, aber sichtbar
+    items, st = run_shop_mit(monkeypatch, http, {"name": "CFS", "url": "https://cfs.co.uk", "plattform": "cfs"})
+    assert items and st["fehler"] == "" and st["info"] == "HTTP 404 ×3"
+
+
+def test_bestandseinbruch_dreimal_dann_echt():
+    c = {}
+    assert stock_collapse(c, "VFA", 25000, 24000) == ""                      # normal
+    assert stock_collapse(c, "VFA", 9000, 25000).startswith("Bestandseinbruch: 9000 statt 25000")
+    assert stock_collapse(c, "VFA", 9000, 25000).startswith("Bestandseinbruch")
+    assert stock_collapse(c, "VFA", 9000, 25000) == ""                         # 3. Mal: gilt als echt
+    assert stock_collapse({}, "Klein", 10, 80) == ""                           # kleine Shops nicht prüfen
+    c = {"VFA": 1}
+    assert stock_collapse(c, "VFA", 24000, 25000) == "" and "VFA" not in c     # erholt: Zähler weg
+
+
+def test_kaputte_datei_bricht_ab(tmp_path):
+    f = tmp_path / "seen.json"
+    f.write_text('{"a": 1', encoding="utf-8")                                    # abgeschnitten
+    with pytest.raises(trikot.speicher.DatenFehler):
+        trikot.speicher.load_json(f, {}, strict=True)
+    assert trikot.speicher.load_json(f, {"leer": True}) == {"leer": True}       # unkritische Dateien: Standard
+    assert trikot.speicher.load_json(tmp_path / "fehlt.json", [], strict=True) == []
+
+
+def test_speichern_ohne_zwischendatei(tmp_path):
+    f = tmp_path / "x" / "status.json"
+    trikot.speicher.save_json(f, {"b": 2, "a": 1})
+    assert json.loads(f.read_text(encoding="utf-8")) == {"a": 1, "b": 2}
+    assert not list(f.parent.glob("*.tmp"))
+
+
+def test_postausgang(tmp_path, monkeypatch):
+    monkeypatch.setattr(trikot.speicher, "OUTBOX_FILE", tmp_path / "postausgang.json")
+    trikot.melden.POSTAUSGANG.clear()
+    trikot.melden.push("thema", "🔥 Thiago · Shop", "Text", 5, "https://x", "https://img", ["fire"])
+    trikot.melden.push("thema", "⚽ 2 neue Treffer", "Text", 3)
+    assert trikot.melden.save_outbox() == 2 and not trikot.melden.POSTAUSGANG
+    saved = json.loads((tmp_path / "postausgang.json").read_text(encoding="utf-8"))
+    assert [e["title"] for e in saved] == ["🔥 Thiago · Shop", "⚽ 2 neue Treffer"]
+    assert "thema" not in json.dumps(saved)                                     # ntfy-Thema nie in Dateien
+    sent = []
+    monkeypatch.setattr(trikot.melden, "send_now", lambda topic, e: sent.append(e["title"]) or e["prio"] == 5)
+    assert trikot.melden.send_outbox("thema") == (1, 1, 0)                      # einer klappt, einer bleibt
+    left = json.loads((tmp_path / "postausgang.json").read_text(encoding="utf-8"))
+    assert [e["title"] for e in left] == ["⚽ 2 neue Treffer"]
+    left[0]["zeit"] = "2020-01-01T00:00:00+00:00"                               # zu alt: verwerfen
+    (tmp_path / "postausgang.json").write_text(json.dumps(left), encoding="utf-8")
+    assert trikot.melden.send_outbox("thema") == (0, 0, 1)
+
+
+def test_probelauf_schreibt_nichts_in_den_postausgang(capsys):
+    trikot.melden.POSTAUSGANG.clear()
+    trikot.melden.push("thema", "Titel", "Text", dry=True)
+    assert not trikot.melden.POSTAUSGANG and "[PUSH p3] Titel" in capsys.readouterr().out
