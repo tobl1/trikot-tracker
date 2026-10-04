@@ -80,7 +80,7 @@ select{flex:0 1 auto;max-width:100%}
 .badge{font-size:10.5px;font-weight:700;letter-spacing:.04em;padding:3px 7px;border-radius:7px;background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.18)}
 .badge.new{background:var(--new);color:#fff}
 .badge.hi{background:var(--accent);color:var(--accent-ink)}
-.cond{font-size:12px;font-weight:700;color:var(--new);margin-right:4px}
+.cond{font-size:11px;font-weight:700;color:var(--new);margin-right:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
 .note{font-size:12px;color:var(--muted);line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .body{padding:10px 12px 12px;display:flex;flex-direction:column;gap:6px;flex:1}
 .labels{font-size:12px;font-weight:600;color:var(--accent)}
@@ -88,7 +88,8 @@ select{flex:0 1 auto;max-width:100%}
 .foot{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;gap:8px}
 .price b{font-size:17px;font-variant-numeric:tabular-nums}
 .price small{display:block;color:var(--muted);font-size:12px}
-.size{font-weight:700;font-size:13px;border:1.5px solid var(--ink);border-radius:6px;padding:1px 6px}
+.size{font-weight:700;font-size:12px;border:1.5px solid var(--ink);border-radius:6px;padding:1px 5px;white-space:nowrap}
+.foot>div:last-child{display:flex;align-items:center;flex-wrap:nowrap;min-width:0}
 .shop{font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .empty{padding:40px 0;text-align:center;color:var(--muted)}
 details{margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 14px}
@@ -257,6 +258,7 @@ summary{cursor:pointer;font-weight:600}
 </div>
 
 <script>
+const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL" : /^(xl|x[- ]large|extra large)$/i.test(String(g).trim()) ? "XL" : g;
 (function(){
   const $ = id => document.getElementById(id);
   const PAGE = 60, NEW_H = 48;
@@ -327,7 +329,7 @@ summary{cursor:pointer;font-weight:600}
     let out = all.filter(t =>
       (!st.labels.length || t.labels.some(l => st.labels.includes(l))) &&
       (!st.shop || t.shopName === st.shop) &&
-      (!st.size || t.groesse === st.size) &&
+      (!st.size || shortSize(t.groesse) === st.size) &&
       (!st.onlynew || t.neu) &&
       (st.expensive || !t.teuer) &&
       !flagged.has(t.id) &&
@@ -369,7 +371,7 @@ summary{cursor:pointer;font-weight:600}
         : `<button class="flag" data-id="${esc(t.id)}" title="Treffer melden (unpassend, ausverkauft …)" aria-label="Treffer melden">⚑</button>`}
       <div class="body"><div class="labels">${esc(t.labels.join(" · "))}</div>
       <div class="title">${esc(t.titel)}</div>${note}
-      <div class="foot"><div class="price">${price}</div><div>${cond}${t.groesse ? `<span class="size">${esc(t.groesse)}</span>` : ""}</div></div>
+      <div class="foot"><div class="price">${price}</div><div>${cond}${t.groesse ? `<span class="size">${esc(shortSize(t.groesse))}</span>` : ""}</div></div>
       ${dup}<div class="shop" title="seit ${fmtDate(t.erst)}">${esc(t.shopName)} · seit ${fmtDate(t.erst).slice(0, 6)}</div></div></a>`;
   }
 

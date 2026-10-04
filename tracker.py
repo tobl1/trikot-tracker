@@ -106,6 +106,17 @@ def hit(rxs, text):
 
 
 SIZE_RX = re.compile(r"(?<![a-z0-9])(xxl|2xl|xl|xx-large|x-large|xx large|x large|extra large)(?![a-z0-9])")
+XXL_WORDS = {"xxl", "2xl", "xx-large", "xx large"}
+
+
+def short_size(text):
+    """Größe einheitlich kurz: "X-LARGE"/"Extra Large" -> XL, "2XL"/"XX-Large" -> XXL (Dashboard, Filter, Dubletten)"""
+    m = SIZE_RX.search(norm(text or ""))
+    if not m:
+        return text or ""
+    return "XXL" if m.group(1) in XXL_WORDS else "XL"
+
+
 ANY_SIZE_RX = re.compile(r"(?<![a-z0-9])(xxs|xs|s|m|l|xl|xxl|2xl|3xl|xxxl|small|medium|large|"
                          r"x-large|xx-large|\d{2,3}\s?cm|yxl|yl|ym|ys|xlb|lb|mb|sb)(?![a-z0-9])")
 
@@ -1521,7 +1532,7 @@ def write_dashboard(seen, status_store, mode, ts, watch_cfg, shops):
         items.append({
             "id": key, "titel": e["title"], "url": e["url"], "shop": e["shop"],
             "preis": e.get("price", ""), "eur": to_eur(e.get("price"), rates),
-            "groesse": e.get("size", ""), "labels": e["labels"], "hoch": is_high(e),
+            "groesse": short_size(e.get("size", "")), "labels": e["labels"], "hoch": is_high(e),
             "zustand": e.get("zustand", ""), "notiz": e.get("zustand_notiz", ""), "bild": e.get("image", ""),
             "erst": e["first"], "zuletzt": e["last"], "via": e.get("via", ""),
             "still": bool(e.get("still")), "teuer": bool(e.get("teuer")), "repro": bool(e.get("repro")), "reissue": bool(e.get("reissue")),
@@ -2026,7 +2037,7 @@ def main():
                 continue
             entry = {"title": it["title"], "url": it["url"], "shop": it["shop"],
                      "price": it["price"], "image": it["image"],
-                     "size": size.group(0).upper() if size else "",
+                     "size": short_size(size.group(0)) if size else "",
                      "labels": sorted({l for l, _ in labs}), "prios": sorted({p for _, p in labs}),
                      "first": ts, "last": ts, "via": it["source"]}
             if grade:

@@ -554,3 +554,12 @@ def test_fundgrube(tmp_path, monkeypatch):
     assert set(by) == {"good.com", "remake.com", "odd.net"}            # bekannte und Marktplätze raus
     assert by["good.com"]["empfohlen"] and not by["remake.com"]["empfohlen"] and not by["odd.net"]["empfohlen"]
     assert tracker.fundgrube(st, [], tracker.now().isoformat()) is None   # erst nach einer Woche wieder
+
+
+def test_short_size():
+    assert tracker.short_size("X-LARGE") == "XL"
+    assert tracker.short_size("Extra Large") == "XL"
+    assert tracker.short_size("XX-LARGE") == "XXL"
+    assert tracker.short_size("2XL") == "XXL"
+    assert tracker.short_size("XL") == "XL"
+    assert tracker.short_size("") == ""
