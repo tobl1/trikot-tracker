@@ -12,180 +12,247 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Trikots">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#0f1720">
+<meta name="theme-color" content="#000000">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
+/* Design angelehnt an "Crypto Trading Mobile App" (Dribbble): Schwarz, Anthrazit-Karten, Rot als einziger Akzent */
 :root{
-  --bg:#f4f5f2; --card:#ffffff; --ink:#151a1e; --muted:#5d666e; --line:#e2e4df;
-  --accent:#a3123a; --accent-ink:#ffffff; --chip:#eceee9; --chip-on:#151a1e; --chip-on-ink:#ffffff;
-  --new:#0f7b4f; --warn:#b4540a; --err:#b42318; --shadow:0 1px 2px rgba(0,0,0,.06),0 4px 14px rgba(0,0,0,.05);
+  --bg:#000; --card:#141414; --card2:#1d1d1d; --line:#2a2a2a; --ink:#fff; --muted:#8b8b8b;
+  --accent:#e0352f; --accent-ink:#fff; --accent-deep:#b8231e; --chip:#1d1d1d; --chip-on:#fff; --chip-on-ink:#000;
+  --new:#000; --new-ink:#fff; --good:#7fd6a4; --warn:#f0a35e; --err:#ff6b5e; --gold:#f5b73b; --shadow:none;
+  --r:22px; --r-sm:14px;
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#0f1720; --card:#17212b; --ink:#e9edf0; --muted:#9aa6b1; --line:#26323d;
-    --accent:#e0466e; --accent-ink:#ffffff; --chip:#1f2b36; --chip-on:#e9edf0; --chip-on-ink:#0f1720;
-    --new:#3ecf8e; --warn:#f0a35e; --err:#ff7b72; --shadow:none;
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#0f1720; --card:#17212b; --ink:#e9edf0; --muted:#9aa6b1; --line:#26323d;
-  --accent:#e0466e; --accent-ink:#ffffff; --chip:#1f2b36; --chip-on:#e9edf0; --chip-on-ink:#0f1720;
-  --new:#3ecf8e; --warn:#f0a35e; --err:#ff7b72; --shadow:none;
+:root[data-theme="light"]{
+  --bg:#f1f1ef; --card:#fff; --card2:#f4f4f2; --line:#e3e3df; --ink:#0d0d0d; --muted:#6f6f6f;
+  --chip:#fff; --chip-on:#0d0d0d; --chip-on-ink:#fff; --good:#178a50;
+  --shadow:0 1px 2px rgba(0,0,0,.05),0 6px 20px rgba(0,0,0,.05);
 }
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;overflow-x:hidden}
-body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-  overflow-x:hidden;touch-action:pan-x pan-y;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden;background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 "Inter Tight",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  font-feature-settings:"tnum" 0;overflow-x:hidden;touch-action:pan-x pan-y;-webkit-tap-highlight-color:transparent;-webkit-font-smoothing:antialiased}
 button,select,input,label,a{touch-action:manipulation}
 a{color:inherit}
+svg{display:block}
 .wrap{max-width:1180px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-right)) 48px max(16px,env(safe-area-inset-left))}
+
+/* Kopf: rundes Logo links, eckige Icon-Knöpfe rechts */
 .appbar{position:sticky;top:0;z-index:12;margin:0 -16px;padding:calc(10px + env(safe-area-inset-top)) 16px 10px;
-  display:flex;align-items:center;gap:12px;
-  background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(16px) saturate(160%);
-  -webkit-backdrop-filter:blur(16px) saturate(160%);border-bottom:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
-.logo{width:38px;height:38px;border-radius:10px;flex:0 0 auto;box-shadow:0 2px 8px rgba(0,0,0,.25)}
-.brand{min-width:0}
-h1{font-size:19px;margin:0;letter-spacing:-.02em;line-height:1.2}
-.meta{color:var(--muted);font-size:12px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.stats{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 12px}
-.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:9px 13px;min-width:92px}
-.stat b{display:block;font-size:20px;font-variant-numeric:tabular-nums}
-.stat span{color:var(--muted);font-size:12px}
-.controls{padding:10px 0 10px;border-bottom:1px solid var(--line);margin-bottom:14px}
-.fbtn{display:none;font:inherit;font-size:14px;font-weight:600;border:1px solid var(--line);background:var(--card);color:var(--ink);
-  border-radius:12px;padding:0 14px;min-height:42px;cursor:pointer;white-space:nowrap}
-.fbtn b{display:inline-block;min-width:18px;margin-left:6px;padding:0 5px;border-radius:9px;background:var(--accent);color:var(--accent-ink);font-size:12px}
+  display:flex;align-items:center;gap:8px;background:color-mix(in srgb,var(--bg) 78%,transparent);
+  backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%)}
+.logo{width:42px;height:42px;border-radius:50%;flex:0 0 auto;object-fit:cover}
+.appbar .sp{flex:1}
+.iconbtn{position:relative;width:44px;height:44px;border-radius:13px;border:0;background:var(--card2);color:var(--ink);
+  display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto;box-shadow:var(--shadow)}
+.iconbtn svg{width:20px;height:20px}
+.iconbtn .dot{position:absolute;top:9px;right:9px;min-width:16px;height:16px;padding:0 4px;border-radius:8px;background:var(--accent);
+  color:#fff;font-size:10px;font-weight:700;line-height:16px;text-align:center}
+.iconbtn .dot:empty{display:none}
+.headline{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:14px 0 18px}
+h1{font-size:40px;font-weight:400;letter-spacing:-.035em;line-height:1.02;margin:0}
+.upd{font-size:12px;color:var(--muted);text-align:right;line-height:1.35;white-space:nowrap}
+.upd b{display:block;color:var(--ink);font-weight:500}
+
+/* Hero: rote Karte mit großer Zahl, Strich-Diagramm und zwei Kacheln */
+.hero{background:var(--accent);color:#fff;border-radius:28px;padding:20px 20px 16px;margin:0 0 18px;overflow:hidden;position:relative}
+.hero .hl{font-size:15px;font-weight:500;opacity:.92}
+.hero .big{font-size:64px;font-weight:500;letter-spacing:-.045em;line-height:1;margin:4px 0 2px;font-variant-numeric:tabular-nums}
+.hero .sub{font-size:13px;opacity:.85}
+.bars{display:flex;align-items:flex-end;gap:2px;height:84px;margin:16px -20px 14px;padding:0 20px;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.bars i{flex:1 1 0;min-width:1px;max-width:4px;background:rgba(0,0,0,.55);border-radius:1px;min-height:6px}
+.bars i.z{background:rgba(0,0,0,.22)}
+.bars i.now{background:#fff}
+.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.tile{background:rgba(0,0,0,.16);border-radius:16px;padding:10px 12px}
+.tile span{display:block;font-size:12px;opacity:.85}
+.tile b{display:block;font-size:22px;font-weight:500;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.tile small{display:block;font-size:11px;opacity:.75;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* Bedienung */
+.controls{padding:0 0 12px;margin-bottom:6px}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.row+.row{margin-top:8px}
-input[type=search],select{font:inherit;font-size:16px;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px 12px;min-height:42px}
-input[type=search]:focus,select:focus{outline:2px solid color-mix(in srgb,var(--accent) 55%,transparent);outline-offset:0}
-input[type=search]{flex:1 1 200px;min-width:0}
-select{flex:0 1 auto;max-width:100%}
+.row+.row{margin-top:10px}
+input[type=search],select{font:inherit;font-size:16px;color:var(--ink);background:var(--card);border:1px solid var(--line);
+  border-radius:var(--r-sm);padding:9px 14px;min-height:46px;box-shadow:var(--shadow)}
+input[type=search]::placeholder{color:var(--muted)}
+input[type=search]:focus,select:focus{outline:none;border-color:var(--ink)}
+input[type=search]{flex:1 1 220px;min-width:0}
+select{flex:0 1 auto;max-width:100%;appearance:none;-webkit-appearance:none;padding-right:30px;
+  background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);
+  background-position:calc(100% - 17px) 50%,calc(100% - 12px) 50%;background-size:5px 5px;background-repeat:no-repeat}
 .chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;-webkit-overflow-scrolling:touch}
 .chips::-webkit-scrollbar{display:none}
-.chip{flex:0 0 auto;font:inherit;font-size:13px;border:1px solid transparent;background:var(--chip);color:var(--ink);border-radius:999px;padding:7px 12px;cursor:pointer;white-space:nowrap;transition:background .15s,color .15s}
-.chip[aria-pressed="true"]{background:var(--chip-on);color:var(--chip-on-ink)}
-.chip.hi{border-color:var(--accent)}
-.chip small{opacity:.65;margin-left:3px}
-.toggle{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);cursor:pointer;user-select:none}
+.chip{flex:0 0 auto;font:inherit;font-size:13px;font-weight:500;border:1px solid var(--line);background:transparent;color:var(--muted);
+  border-radius:999px;padding:7px 13px;cursor:pointer;white-space:nowrap;transition:border-color .15s,color .15s,background .15s}
+.chip[aria-pressed="true"]{border-color:var(--ink);color:var(--ink);background:var(--card2)}
+.chip.hi{color:var(--ink)}
+.chip.hi::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-right:6px;vertical-align:1px}
+.chip small{opacity:.6;margin-left:4px;font-weight:400}
+.toggle{display:inline-flex;align-items:center;gap:7px;font-size:13px;color:var(--muted);cursor:pointer;user-select:none}
 .toggle input{accent-color:var(--accent);width:16px;height:16px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;text-decoration:none;position:relative;transition:transform .15s,border-color .15s}
+.seg{display:inline-flex;gap:4px;flex:0 0 auto}
+.seg button{font:inherit;font-size:13px;font-weight:500;border:1px solid var(--line);background:transparent;color:var(--muted);
+  padding:7px 12px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.seg button[aria-pressed="true"]{border-color:var(--ink);color:var(--ink)}
+.fbtn{display:none}
+
+/* Kacheln */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}
+.card{background:var(--card);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;
+  text-decoration:none;position:relative;transition:transform .15s;padding:6px}
 .card:active{transform:scale(.985)}
-.card:hover{border-color:var(--muted)}
-.card.hi{border-color:var(--accent)}
-.img{aspect-ratio:1/1;background:var(--chip);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.card.hi{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent) 70%,transparent),var(--shadow)}
+.card.th{background:var(--accent);color:#fff}
+.img{aspect-ratio:1/1;background:var(--card2);display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:16px}
 .img img{width:100%;height:100%;object-fit:cover;display:block}
 .img .ph{font-size:40px;opacity:.35}
-.badges{position:absolute;top:8px;left:8px;right:84px;display:flex;gap:4px;flex-wrap:wrap;pointer-events:none}
-.badge{font-size:10.5px;font-weight:700;letter-spacing:.04em;padding:3px 7px;border-radius:7px;background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.18)}
-.badge.new{background:var(--new);color:#fff}
-.badge.hi{background:var(--accent);color:var(--accent-ink)}
-.cond{font-size:11px;font-weight:700;color:var(--new);margin-right:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.badges{position:absolute;top:14px;left:14px;right:96px;display:flex;gap:4px;flex-wrap:wrap;pointer-events:none}
+.badge{font-size:10.5px;font-weight:600;letter-spacing:.03em;padding:4px 8px;border-radius:999px;background:rgba(0,0,0,.72);color:#fff;
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.badge.new{background:var(--new);color:var(--new-ink)}
+.badge.hi{background:var(--accent);color:#fff}
+.card.th .badge.hi{background:#000}
+.badge.re{background:#5b47b0;color:#fff}
+.badge.gone{background:var(--muted);color:var(--bg)}
+.badge.down{background:var(--good);color:#000}
+.body{padding:10px 8px 6px;display:flex;flex-direction:column;gap:5px;flex:1}
+.labels{font-size:12px;font-weight:500;color:var(--accent)}
+.card.th .labels{color:#fff;opacity:.9}
+.title{font-size:14px;font-weight:400;line-height:1.3;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .note{font-size:12px;color:var(--muted);line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.body{padding:10px 12px 12px;display:flex;flex-direction:column;gap:6px;flex:1}
-.labels{font-size:12px;font-weight:600;color:var(--accent)}
-.title{font-size:14px;font-weight:500;line-height:1.3;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.foot{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;gap:8px}
-.price b{font-size:17px;font-variant-numeric:tabular-nums}
+.card.th .note,.card.th .shop,.card.th .dupes,.card.th .price small{color:rgba(255,255,255,.78)}
+.foot{margin-top:auto;padding-top:4px;display:flex;justify-content:space-between;align-items:flex-end;gap:8px}
+.price b{font-size:20px;font-weight:500;letter-spacing:-.02em;font-variant-numeric:tabular-nums;white-space:nowrap}
 .price small{display:block;color:var(--muted);font-size:12px}
-.size{font-weight:700;font-size:12px;border:1.5px solid var(--ink);border-radius:6px;padding:1px 5px;white-space:nowrap}
-.foot>div:last-child{display:flex;align-items:center;flex-wrap:nowrap;min-width:0}
+.foot>div:last-child{display:flex;align-items:center;flex-wrap:nowrap;min-width:0;gap:5px}
+.cond{font-size:11px;font-weight:500;color:var(--good);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.card.th .cond{color:#fff}
+.size{font-weight:600;font-size:11px;border:1px solid currentColor;border-radius:999px;padding:2px 7px;white-space:nowrap}
 .shop{font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dupes{font-size:12px;color:var(--muted)}
+.card.gone{opacity:.5}
+.fav,.flag,.bell{position:absolute;top:12px;width:36px;height:36px;border-radius:11px;border:0;cursor:pointer;display:flex;
+  align-items:center;justify-content:center;background:rgba(0,0,0,.55);color:#fff;font-size:16px;line-height:1;
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.fav{right:52px}.flag,.bell{right:12px}
+.fav svg,.flag svg,.bell svg{width:17px;height:17px}
+.fav[aria-pressed="true"]{color:var(--gold)}
+.bell[aria-pressed="true"]{background:var(--gold);color:#000}
 .empty{padding:40px 0;text-align:center;color:var(--muted)}
-details{margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 14px}
-summary{cursor:pointer;font-weight:600}
-.src{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
-.src th,.src td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.err{color:var(--err);padding:30px 0}
+.more{display:block;margin:18px auto 0;font:inherit;font-weight:500;background:transparent;color:var(--ink);border:1px solid var(--line);
+  border-radius:999px;padding:10px 20px;cursor:pointer}
+.more[hidden]{display:none}
+
+/* Aufklappbereiche */
+details{margin-top:8px;background:var(--card);border-radius:var(--r);padding:16px 18px;box-shadow:var(--shadow)}
+details:first-of-type{margin-top:22px}
+summary{cursor:pointer;font-weight:500;font-size:15px;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:22px;font-weight:300;color:var(--muted);line-height:1}
+details[open] summary::after{content:"−"}
+.src{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px}
+.src th{font-weight:500;color:var(--muted)}
+.src th,.src td{text-align:left;padding:8px 8px;border-bottom:1px solid var(--line);vertical-align:top}
 .src td.n{text-align:right;font-variant-numeric:tabular-nums}
 .src .bad{color:var(--err)}
 .src .off{color:var(--muted)}
 .src td.rh{min-width:220px;color:var(--muted)}
-.src td.rh.drops{color:var(--accent);font-weight:600}
+.src td.rh.drops{color:var(--accent);font-weight:500}
 .tablewrap{overflow-x:auto}
 .fyjnote{font-size:13px;color:var(--muted);margin:10px 0 0}
-.fyjnote b{color:var(--ink)}
-.addbtn{font:inherit;font-size:12px;font-weight:600;border:0;border-radius:8px;padding:5px 10px;cursor:pointer;background:var(--accent);color:var(--accent-ink);white-space:nowrap}
-.addbtn[disabled]{background:var(--chip);color:var(--muted);cursor:default}
-.more{display:block;margin:18px auto 0;font:inherit;background:var(--chip);color:var(--ink);border:0;border-radius:9px;padding:10px 18px;cursor:pointer}
-.err{color:var(--err);padding:30px 0}
-.more[hidden]{display:none}
-.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin:4px 0 0}
-.tabs button{font:inherit;font-weight:600;background:none;border:0;border-bottom:2px solid transparent;color:var(--muted);padding:8px 12px;cursor:pointer;display:flex;align-items:center;gap:6px}
-.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
-.tabs .ic{font-size:15px;line-height:1}
-.tabs small{font-weight:600;color:var(--muted)}
-.seg{display:inline-flex;background:var(--chip);border-radius:12px;padding:3px;gap:2px;flex:0 0 auto}
-.seg button{font:inherit;font-size:13px;border:0;background:none;color:var(--muted);padding:7px 11px;border-radius:9px;cursor:pointer;white-space:nowrap}
-.seg button[aria-pressed="true"]{background:var(--card);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.12)}
-.flag{position:absolute;top:6px;right:6px;width:32px;height:32px;border-radius:50%;border:0;cursor:pointer;
-  background:var(--card);color:var(--muted);font-size:15px;box-shadow:0 1px 3px rgba(0,0,0,.2);opacity:.85}
-.flag:hover{color:var(--err);opacity:1}
-.fav{position:absolute;top:6px;right:44px;width:32px;height:32px;border-radius:50%;border:0;cursor:pointer;
-  background:var(--card);color:var(--muted);font-size:17px;line-height:1;box-shadow:0 1px 3px rgba(0,0,0,.2);opacity:.85}
-.fav[aria-pressed="true"]{color:#e3a008;opacity:1}
-.bell{position:absolute;top:6px;right:6px;width:32px;height:32px;border-radius:50%;border:0;cursor:pointer;
-  background:var(--card);color:var(--muted);font-size:15px;box-shadow:0 1px 3px rgba(0,0,0,.2);opacity:.85}
-.bell[aria-pressed="true"]{background:#e3a008;color:#111;opacity:1}
-.badge.re{background:#6b4fbb;color:#fff}
-.badge.gone{background:var(--muted);color:var(--bg)}
-.badge.down{background:var(--new);color:#fff}
-.card.gone{opacity:.55}
-.dupes{font-size:12px;color:var(--muted)}
-.sheet{position:fixed;inset:0;z-index:20;background:rgba(0,0,0,.45);display:flex;align-items:flex-end;justify-content:center}
-.sheet[hidden]{display:none}
-.sheet .box{background:var(--card);color:var(--ink);width:100%;max-width:480px;border-radius:14px 14px 0 0;padding:16px 16px 20px}
-@media (min-width:600px){.sheet{align-items:center}.sheet .box{border-radius:14px}}
-.sheet h3{margin:0 0 4px;font-size:16px}
-.sheet .what{color:var(--muted);font-size:13px;margin:0 0 12px}
-.sheet .reasons{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
-.sheet textarea{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:8px;min-height:60px}
-.sheet .actions{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
-.sheet .actions button{font:inherit;border:0;border-radius:9px;padding:9px 14px;cursor:pointer;background:var(--chip);color:var(--ink)}
-.sheet .actions .go{background:var(--accent);color:var(--accent-ink)}
-.sheet .hint{font-size:12px;color:var(--muted);margin-top:10px}
-.sheet .hidebtn{width:100%;font:inherit;font-weight:600;border:0;border-radius:11px;padding:12px;cursor:pointer;background:var(--ink);color:var(--bg)}
-.sheet h3+.reasons{margin-top:8px}
-.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:30;background:var(--ink);color:var(--bg);border-radius:12px;padding:10px 14px;font-size:14px;display:flex;gap:14px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.3)}
-.toast[hidden]{display:none}
-.toast button{font:inherit;font-weight:700;background:none;border:0;color:inherit;text-decoration:underline;cursor:pointer;padding:0}
-.unhide{font:inherit;font-size:13px;background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;padding:6px 0}
-.unhide[hidden]{display:none}
-.group{margin:0 0 22px}
-.group h2{font-size:15px;margin:0 0 10px;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
+.fyjnote b{color:var(--ink);font-weight:500}
+.addbtn{font:inherit;font-size:12px;font-weight:600;border:0;border-radius:999px;padding:6px 12px;cursor:pointer;background:var(--accent);color:#fff;white-space:nowrap}
+.addbtn[disabled]{background:var(--card2);color:var(--muted);cursor:default}
+
+/* Ansichten: oben als Pillen (Desktop), unten als schlichte Leiste (Handy) */
+.tabs{display:flex;gap:6px;margin:0 0 14px}
+.tabs button{font:inherit;font-size:14px;font-weight:500;background:transparent;border:1px solid var(--line);color:var(--muted);
+  padding:8px 14px;border-radius:999px;cursor:pointer;display:flex;align-items:center;gap:7px}
+.tabs button svg{width:17px;height:17px}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tabs small{font-weight:500;opacity:.7}
+
+/* Feed */
+.group{margin:0 0 26px}
+.group h2{font-size:18px;font-weight:500;letter-spacing:-.01em;margin:0 0 10px;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
 .group h2 small{font-weight:400;color:var(--muted);font-size:13px}
 .group.quiet h2{font-weight:400;color:var(--muted);font-size:13px;margin:0 0 6px}
-.silent{margin-top:10px;background:none;border:0;padding:0}
-.silent summary{font-size:13px;font-weight:400;color:var(--muted)}
+.silent{margin-top:10px;background:none;border:0;padding:0;box-shadow:none}
+.silent summary{font-size:13px;font-weight:400;color:var(--muted);justify-content:flex-start}
+.silent summary::after{font-size:16px}
 .silent .grid{margin-top:10px}
+
+/* Sheet und Toast */
+.sheet{position:fixed;inset:0;z-index:20;background:rgba(0,0,0,.6);display:flex;align-items:flex-end;justify-content:center;
+  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.sheet[hidden]{display:none}
+.sheet .box{background:var(--card);color:var(--ink);width:100%;max-width:480px;border-radius:28px 28px 0 0;
+  padding:20px 18px calc(22px + env(safe-area-inset-bottom))}
+@media (min-width:600px){.sheet{align-items:center}.sheet .box{border-radius:28px}}
+.sheet h3{margin:0 0 4px;font-size:20px;font-weight:500;letter-spacing:-.02em}
+.sheet h3.small{font-size:15px;margin-top:4px}
+.sheet .what{color:var(--muted);font-size:13px;margin:0 0 14px}
+.sheet .reasons{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.sheet textarea{width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--card2);border:1px solid var(--line);border-radius:var(--r-sm);padding:10px;min-height:64px}
+.sheet .actions{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
+.sheet .actions button{font:inherit;font-weight:500;border:1px solid var(--line);border-radius:999px;padding:10px 16px;cursor:pointer;background:transparent;color:var(--ink)}
+.sheet .actions .go{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.sheet .hint{font-size:12px;color:var(--muted);margin-top:10px}
+.sheet .hidebtn{width:100%;font:inherit;font-size:16px;font-weight:600;border:0;border-radius:16px;padding:15px;cursor:pointer;background:var(--accent);color:#fff}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:30;background:var(--ink);color:var(--bg);
+  border-radius:999px;padding:11px 18px;font-size:14px;font-weight:500;display:flex;gap:16px;align-items:center;box-shadow:0 8px 30px rgba(0,0,0,.4);white-space:nowrap}
+.toast[hidden]{display:none}
+.toast button{font:inherit;font-weight:700;background:none;border:0;color:var(--accent);cursor:pointer;padding:0}
+.unhide{font:inherit;font-size:13px;background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;padding:6px 0}
+.unhide[hidden]{display:none}
+
 @media (min-width:721px){
-  .controls{position:sticky;top:calc(59px + env(safe-area-inset-top));z-index:5;background:var(--bg)}
+  .controls{position:sticky;top:calc(64px + env(safe-area-inset-top));z-index:5;background:var(--bg);padding-top:8px}
+  .hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:6px 24px;align-items:end}
+  .hero .bars{grid-column:2;grid-row:1 / span 3;margin:0;height:130px;padding:0}
+  .hero .bars i{max-width:7px}
+  .hero .tiles{grid-column:1}
+  #filterbtn{display:none}
 }
 @media (max-width:720px){
-  body{padding-bottom:calc(76px + env(safe-area-inset-bottom))}
-  .tabs{position:fixed;left:0;right:0;bottom:0;z-index:15;margin:0;gap:0;justify-content:space-around;border-bottom:0;
-    border-top:1px solid color-mix(in srgb,var(--line) 80%,transparent);padding:6px 8px calc(6px + env(safe-area-inset-bottom));
-    background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%)}
-  .tabs button{flex:1 1 0;flex-direction:column;gap:2px;font-size:11px;padding:4px 2px;border:0;border-radius:12px}
-  .tabs button[aria-selected="true"]{color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent)}
-  .tabs .ic{font-size:20px}
+  body{padding-bottom:calc(70px + env(safe-area-inset-bottom))}
+  /* Bewusst schlicht: dunkle Leiste, Icons mit Text, aktiver Eintrag weiß mit rotem Punkt */
+  .tabs{position:fixed;left:0;right:0;bottom:0;z-index:15;margin:0;gap:0;justify-content:space-around;
+    border-top:1px solid color-mix(in srgb,var(--line) 70%,transparent);padding:6px 8px calc(4px + env(safe-area-inset-bottom));
+    background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(20px) saturate(140%);-webkit-backdrop-filter:blur(20px) saturate(140%)}
+  .tabs button{flex:1 1 0;flex-direction:column;gap:3px;font-size:11px;padding:6px 2px 4px;border:0;border-radius:0;background:none;position:relative}
+  .tabs button svg{width:22px;height:22px}
+  .tabs button[aria-selected="true"]{color:var(--ink);background:none}
+  .tabs button[aria-selected="true"]::after{content:"";position:absolute;top:0;left:50%;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:var(--accent)}
   .tabs small{display:none}
-  .fbtn{display:inline-flex;align-items:center}
   .filters{display:none}
   .filters.open{display:flex}
   .chips{-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent);padding-right:24px}
 }
 @media (max-width:520px){
-  .seg{width:100%;justify-content:space-between}
+  h1{font-size:36px}
+  .hero{border-radius:26px;padding:18px 16px 14px}
+  .hero .big{font-size:56px}
+  .bars{margin:14px -16px 12px;padding:0 16px;height:70px}
+  .tile{padding:9px 10px;border-radius:14px}
+  .tile b{font-size:19px}
+  .seg{width:100%}
   .seg button{flex:1 1 0;padding:7px 4px}
   .row.chips{flex-wrap:nowrap}
   .row select{flex:1 1 40%;min-width:0}
-  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
-  .body{padding:8px 9px 10px}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+  .card{padding:5px;border-radius:20px}
+  .img{border-radius:15px}
+  .badges{top:11px;left:11px;right:86px}
+  .fav,.flag,.bell{top:10px;width:32px;height:32px;border-radius:10px}
+  .fav{right:46px}.flag,.bell{right:10px}
+  .body{padding:8px 6px 5px}
   .title{font-size:13px}
-  .price b{font-size:15px}
-  h1{font-size:20px}
-  .stat{min-width:0;flex:1 1 0;padding:6px 9px}
-  .stat b{font-size:17px}
+  .price b{font-size:17px}
 }
 </style>
 </head>
@@ -193,19 +260,25 @@ summary{cursor:pointer;font-weight:600}
 <div class="wrap">
   <header class="appbar">
     <img class="logo" src="icon-180.png" alt="">
-    <div class="brand"><h1>Trikot-Tracker</h1><span class="meta" id="stand">lädt …</span></div>
+    <span class="sp"></span>
+    <button class="iconbtn" id="searchbtn" aria-label="Suchen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg></button>
+    <button class="iconbtn" id="filterbtn" aria-expanded="false" aria-controls="filters" aria-label="Filter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg><span class="dot" id="filterdot"></span></button>
   </header>
-  <div class="stats" id="stats"></div>
+  <div class="headline"><h1>Trikot<br>Tracker</h1><div class="upd" id="stand">lädt …</div></div>
+  <section class="hero" id="hero" hidden>
+    <div><div class="hl">Neu in 48 Stunden</div><div class="big" id="bignew">0</div><div class="sub" id="bigsub"></div></div>
+    <div class="bars" id="bars" aria-hidden="true"></div>
+    <div class="tiles" id="tiles"></div>
+  </section>
   <nav class="tabs" id="tabs">
-    <button data-view="all" aria-selected="true"><span class="ic">⚽</span><span>Alle Treffer</span></button>
-    <button data-view="feed" aria-selected="false"><span class="ic">✨</span><span>Neu pro Run</span></button>
-    <button data-view="favs" aria-selected="false" id="favtab"><span class="ic">★</span><span>Favoriten <small id="favcount"></small></span></button>
+    <button data-view="all" aria-selected="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/></svg><span>Alle</span></button>
+    <button data-view="feed" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 16.5 5-5 4 4 8-8"/><path d="M15 7.5h5.5V13"/></svg><span>Neu pro Run</span></button>
+    <button data-view="favs" aria-selected="false" id="favtab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="m12 3.8 2.5 5.1 5.6.8-4 3.9.9 5.6-5-2.6-5 2.6.9-5.6-4-3.9 5.6-.8z"/></svg><span>Favoriten <small id="favcount"></small></span></button>
   </nav>
 
   <div class="controls">
     <div class="row">
       <input type="search" id="q" placeholder="Suchen: Verein, Saison, Shop …" autocomplete="off">
-      <button class="fbtn" id="filterbtn" aria-expanded="false" aria-controls="filters">Filter</button>
       <div class="seg" id="sort" role="group" aria-label="Sortierung">
         <button data-s="prio">Wichtig</button><button data-s="new">Neueste</button>
         <button data-s="pasc">Preis ↑</button><button data-s="pdesc">Preis ↓</button>
@@ -256,7 +329,7 @@ summary{cursor:pointer;font-weight:600}
     <p class="what" id="flagwhat"></p>
     <button class="hidebtn" id="hidego">Einfach ausblenden</button>
     <p class="hint" style="margin:6px 0 14px">Nur hier auf diesem Gerät, ohne Meldung. Zurückholen unter "Filter".</p>
-    <h3>Oder melden, damit ich die Regeln anpasse</h3>
+    <h3 class="small">Oder melden, damit ich die Regeln anpasse</h3>
     <div class="reasons" id="flagreasons">
       <button class="chip" data-r="unpassend" aria-pressed="true">Unpassend</button>
       <button class="chip" data-r="ausverkauft" aria-pressed="false">Ausverkauft</button>
@@ -317,7 +390,7 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     if (favs[t.id]) delete favs[t.id];
     else favs[t.id] = {id: t.id, titel: t.titel, url: t.url, bild: t.bild, preis: t.preis, eur: t.eur, shopName: t.shopName,
                        groesse: t.groesse, labels: t.labels, zustand: t.zustand, notiz: t.notiz, erst: t.erst, added: new Date().toISOString()};
-    store.set("favs", favs); render();
+    store.set("favs", favs); renderHero(); render();
   }
   let flagItem = null, flagReason = "unpassend";
   function openFlag(t){
@@ -366,6 +439,13 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     return out.sort(cmp);
   }
 
+  const IC = {
+    star: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="m12 3.8 2.5 5.1 5.6.8-4 3.9.9 5.6-5-2.6-5 2.6.9-5.6-4-3.9 5.6-.8z"/></svg>',
+    starOn: '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="m12 3.8 2.5 5.1 5.6.8-4 3.9.9 5.6-5-2.6-5 2.6.9-5.6-4-3.9 5.6-.8z"/></svg>',
+    flag: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 21V4.5"/><path d="M5.5 4.5h11l-2.2 4 2.2 4h-11"/></svg>',
+    bell: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></svg>'
+  };
+
   function age(iso){
     const h = (Date.now() - new Date(iso)) / 36e5;
     if (!(h >= 0)) return "";
@@ -379,7 +459,7 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     const down = f && !t.gone && f.eur != null && t.eur != null && t.eur < f.eur - 0.5;
     const badges = [t.gone && '<span class="badge gone">NICHT MEHR GELISTET</span>',
                     down && `<span class="badge down">PREIS ↓ von ${eur(f.eur)}</span>`,
-                    t.neu && !t.gone && '<span class="badge new">NEU</span>', t.thiago && '<span class="badge hi">THIAGO</span>',
+                    t.neu && !t.gone && '<span class="badge new">NEU</span>', t.thiago && t.gone && '<span class="badge hi">THIAGO</span>',
                     t.repro && '<span class="badge re" title="Original-Trikot, Name und Nummer nachgedruckt">REPRO-FLOCK</span>',
                     t.reissue && '<span class="badge re" title="Neuauflage, z. B. Nikes T90-Reissue von 2025, kein Original von damals">NEUAUFLAGE</span>']
       .filter(Boolean).join("");
@@ -393,12 +473,12 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     const dup = !st.dupes && t.dupes && t.dupes.length ? `<div class="dupes">` +
       [same ? `+${same} gleiche im Shop` : "", t.dupShops && t.dupShops.length ? `auch bei ${esc(t.dupShops.join(", "))}` : ""]
         .filter(Boolean).join(" · ") + ` (${t.dupRange})</div>` : "";
-    return `<a class="card${t.hoch ? " hi" : ""}${t.gone ? " gone" : ""}" href="${esc(t.url)}" target="_blank" rel="noopener">
+    return `<a class="card${t.thiago && !t.gone ? " th" : t.hoch ? " hi" : ""}${t.gone ? " gone" : ""}" href="${esc(t.url)}" target="_blank" rel="noopener">
       <div class="img">${img}</div><div class="badges">${badges}</div>
-      <button class="fav" data-id="${esc(t.id)}" aria-pressed="${f ? "true" : "false"}" title="Favorit" aria-label="Favorit">${f ? "★" : "☆"}</button>
+      <button class="fav" data-id="${esc(t.id)}" aria-pressed="${f ? "true" : "false"}" title="Favorit" aria-label="Favorit">${f ? IC.starOn : IC.star}</button>
       ${t.gone ? "" : st.view === "favs"
-        ? `<button class="bell" data-id="${esc(t.id)}" aria-pressed="${alarms.has(t.id)}" title="Preisalarm per Push" aria-label="Preisalarm">🔔</button>`
-        : `<button class="flag" data-id="${esc(t.id)}" title="Treffer melden (unpassend, ausverkauft …)" aria-label="Treffer melden">⚑</button>`}
+        ? `<button class="bell" data-id="${esc(t.id)}" aria-pressed="${alarms.has(t.id)}" title="Preisalarm per Push" aria-label="Preisalarm">${IC.bell}</button>`
+        : `<button class="flag" data-id="${esc(t.id)}" title="Treffer melden (unpassend, ausverkauft …)" aria-label="Ausblenden oder melden">${IC.flag}</button>`}
       <div class="body"><div class="labels">${esc(t.labels.join(" · "))}</div>
       <div class="title">${esc(t.titel)}</div>${note}
       <div class="foot"><div class="price">${price}</div><div>${cond}${t.groesse ? `<span class="size">${esc(shortSize(t.groesse))}</span>` : ""}</div></div>
@@ -439,7 +519,7 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     $("grid").hidden = feed || favView; $("feed").hidden = !feed; $("favs").hidden = !favView;
     $("favcount").textContent = Object.keys(favs).length ? `(${Object.keys(favs).length})` : "";
     const nf = (st.shop ? 1 : 0) + (st.size ? 1 : 0) + (st.onlynew ? 1 : 0) + (st.expensive ? 1 : 0) + (st.dupes ? 1 : 0);
-    $("filterbtn").innerHTML = "Filter" + (nf ? `<b>${nf}</b>` : "");
+    $("filterdot").textContent = nf || "";
     const nHidden = all.filter(t => hiddenIds.has(t.id)).length;
     $("unhide").hidden = !nHidden; $("unhide").textContent = `${nHidden} ausgeblendet · zurückholen`;
     if (favView) {
@@ -477,6 +557,32 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     });
   }
 
+  // Rote Hero-Karte: neue Treffer (48 h), Strich-Diagramm der Eingänge (14 Tage in 6-h-Schritten), drei Kacheln
+  function renderHero(){
+    const nNew = all.filter(t => t.neu && !t.still).length, nTh = all.filter(t => t.thiago).length;
+    const nStill = all.filter(t => t.neu && t.still).length;   // neue Shops/Kategorien, ohne Push übernommen
+    const nNewTh = all.filter(t => t.neu && t.thiago).length;
+    const shops = new Set(all.map(t => t.shopName)).size;
+    const favList = Object.values(favs), byId = Object.fromEntries(all.map(t => [t.id, t]));
+    const drops = favList.filter(f => byId[f.id] && f.eur != null && byId[f.id].eur != null && byId[f.id].eur < f.eur - 0.5).length;
+    $("bignew").textContent = nNew;
+    $("bigsub").textContent = [nNewTh ? `davon ${nNewTh} Thiago` : (nNew ? "Treffer seit vorgestern" : "gerade ruhig"),
+                               nStill ? `+${nStill} aus neuen Shops/Kategorien` : ""].filter(Boolean).join(" · ");
+    const STEP = 6 * 36e5, N = 56, end = Date.now(), buckets = new Array(N).fill(0);
+    all.forEach(t => {
+      if (t.still) return;   // still übernommene (neue Shops/Kategorien) würden das Bild verzerren
+      const i = N - 1 - Math.floor((end - new Date(t.erst)) / STEP);
+      if (i >= 0 && i < N) buckets[i]++;
+    });
+    const mx = Math.max(1, ...buckets);
+    $("bars").innerHTML = buckets.map((n, i) =>
+      `<i class="${n ? "" : "z"}${i === N - 1 && n ? " now" : ""}" style="height:${n ? Math.max(14, Math.round(Math.sqrt(n / mx) * 100)) : 8}%"></i>`).join("");
+    $("tiles").innerHTML = [["Treffer", all.length, `in ${shops} Shops`], ["Thiago", nTh, nNewTh ? `${nNewTh} neu` : "Priorität 1"],
+      ["Favoriten", favList.length, drops ? `${drops}× Preis ↓` : "lokal gemerkt"]]
+      .map(([l, n, sub]) => `<div class="tile"><span>${l}</span><b>${n}</b><small>${esc(sub)}</small></div>`).join("");
+    $("hero").hidden = false;
+  }
+
   function setup(data){
     runs = data.laeufe || [];
     const pg = data.preisgrenze || {}, limit = pg.max_eur || 0, exc = pg.ausnahmen || [];
@@ -504,12 +610,9 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
       first.dupRange = prices.length ? `${eur(Math.min(...prices))} bis ${eur(Math.max(...prices))}` : "";
       first.dupShops = [...new Set(rest.map(t => t.shopName).filter(n => n !== first.shopName))];
     });
-    $("stand").textContent = `Stand ${fmtDate(data.stand)} Uhr (${MODE[data.modus] || data.modus})` +
-      (data.letzter_gesamtlauf ? ` · letzter Gesamt-Run ${fmtDate(data.letzter_gesamtlauf)}` : "");
-    const nNew = all.filter(t => t.neu).length, nTh = all.filter(t => t.thiago).length;
+    $("stand").innerHTML = `Stand<b>${esc(fmtDate(data.stand))}</b>${esc(MODE[data.modus] || data.modus || "")}`;
+    renderHero();
     const shops = [...new Set(all.map(t => t.shopName))];
-    $("stats").innerHTML = [[all.length, "Treffer"], [nNew, "neu (48 h)"], [nTh, "Thiago"], [shops.length, "Shops"]]
-      .map(([n, l]) => `<div class="stat"><b>${n}</b><span>${l}</span></div>`).join("");
 
     const counts = {};
     all.forEach(t => t.labels.forEach(l => counts[l] = (counts[l] || 0) + 1));
@@ -623,6 +726,9 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
                 `&body=${encodeURIComponent(body)}`, "_blank", "noopener");
     const asked = new Set(store.get("shopadds") || []); asked.add(b.dataset.url); store.set("shopadds", [...asked]);
     b.disabled = true; b.textContent = "angefragt";
+  });
+  $("searchbtn").addEventListener("click", () => {
+    $("q").scrollIntoView({behavior: "smooth", block: "center"}); setTimeout(() => $("q").focus(), 250);
   });
   $("filterbtn").addEventListener("click", () => {
     const open = $("filters").classList.toggle("open");
