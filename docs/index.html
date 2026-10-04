@@ -120,6 +120,9 @@ summary{cursor:pointer;font-weight:600}
 .fav{position:absolute;top:6px;right:44px;width:32px;height:32px;border-radius:50%;border:0;cursor:pointer;
   background:var(--card);color:var(--muted);font-size:17px;line-height:1;box-shadow:0 1px 3px rgba(0,0,0,.2);opacity:.85}
 .fav[aria-pressed="true"]{color:#e3a008;opacity:1}
+.bell{position:absolute;top:6px;right:6px;width:32px;height:32px;border-radius:50%;border:0;cursor:pointer;
+  background:var(--card);color:var(--muted);font-size:15px;box-shadow:0 1px 3px rgba(0,0,0,.2);opacity:.85}
+.bell[aria-pressed="true"]{background:#e3a008;color:#111;opacity:1}
 .badge.re{background:#6b4fbb;color:#fff}
 .badge.gone{background:var(--muted);color:var(--bg)}
 .badge.down{background:var(--new);color:#fff}
@@ -275,6 +278,17 @@ summary{cursor:pointer;font-weight:600}
   const flagged = new Set(store.get("flagged") || []);
   // Favoriten: lokal im Browser, mit Kopie der Daten (bleiben sichtbar, wenn der Artikel verschwindet)
   const favs = store.get("favs") || {};
+  const alarms = new Set(store.get("alarms") || []);
+  function setAlarm(t){
+    // Preisalarm = GitHub-Issue mit Label "alarm"; beenden: Issue auf GitHub schließen
+    if (alarms.has(t.id)) { window.open(`https://github.com/${REPO}/issues?q=is%3Aissue+is%3Aopen+label%3Aalarm`, "_blank", "noopener"); return; }
+    const body = [`Preisalarm aus dem Dashboard. Bitte nur unten auf "Submit new issue" tippen.`,
+      `Beenden: dieses Issue schließen.`, "", `grund: alarm`, `id: ${t.id}`, "", `url: ${t.url}`, `titel: ${t.titel}`,
+      `preis: ${t.preis} (${t.eur != null ? t.eur.toFixed(2) + " €" : "?"})`].join("\n");
+    window.open(`https://github.com/${REPO}/issues/new?labels=alarm&title=${encodeURIComponent(("Preisalarm: " + t.titel).slice(0, 200))}` +
+                `&body=${encodeURIComponent(body)}`, "_blank", "noopener");
+    alarms.add(t.id); store.set("alarms", [...alarms]); render();
+  }
   function toggleFav(t){
     if (favs[t.id]) delete favs[t.id];
     else favs[t.id] = {id: t.id, titel: t.titel, url: t.url, bild: t.bild, preis: t.preis, eur: t.eur, shopName: t.shopName,
@@ -342,7 +356,9 @@ summary{cursor:pointer;font-weight:600}
     return `<a class="card${t.hoch ? " hi" : ""}${t.gone ? " gone" : ""}" href="${esc(t.url)}" target="_blank" rel="noopener">
       <div class="img">${img}</div><div class="badges">${badges}</div>
       <button class="fav" data-id="${esc(t.id)}" aria-pressed="${f ? "true" : "false"}" title="Favorit" aria-label="Favorit">${f ? "★" : "☆"}</button>
-      ${t.gone ? "" : `<button class="flag" data-id="${esc(t.id)}" title="Treffer melden (unpassend, ausverkauft …)" aria-label="Treffer melden">⚑</button>`}
+      ${t.gone ? "" : st.view === "favs"
+        ? `<button class="bell" data-id="${esc(t.id)}" aria-pressed="${alarms.has(t.id)}" title="Preisalarm per Push" aria-label="Preisalarm">🔔</button>`
+        : `<button class="flag" data-id="${esc(t.id)}" title="Treffer melden (unpassend, ausverkauft …)" aria-label="Treffer melden">⚑</button>`}
       <div class="body"><div class="labels">${esc(t.labels.join(" · "))}</div>
       <div class="title">${esc(t.titel)}</div>${note}
       <div class="foot"><div class="price">${price}</div><div>${cond}${t.groesse ? `<span class="size">${esc(t.groesse)}</span>` : ""}</div></div>
@@ -516,6 +532,12 @@ summary{cursor:pointer;font-weight:600}
     if (fb) {
       e.preventDefault(); e.stopPropagation();
       const t = all.find(x => x.id === fb.dataset.id) || favs[fb.dataset.id]; if (t) toggleFav(t);
+      return;
+    }
+    const bb = e.target.closest(".bell");
+    if (bb) {
+      e.preventDefault(); e.stopPropagation();
+      const t = all.find(x => x.id === bb.dataset.id) || favs[bb.dataset.id]; if (t) setAlarm(t);
       return;
     }
     const b = e.target.closest(".flag"); if (!b) return;

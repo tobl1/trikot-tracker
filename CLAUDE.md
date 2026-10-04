@@ -232,6 +232,12 @@ auf dem Foto erkennbar sind (z. B. Trainingsshirt ohne Hinweis im Titel), über 
 - **Für Claude:** gemeldete Fehltreffer regelmäßig mit `gh issue list --label flag --state all` lesen
   und daraus Matching-Regeln ableiten (mit Testfall), statt nur einzeln auszublenden
 
+## Preisalarm für Favoriten
+
+- Glocke in der Favoriten-Ansicht → GitHub-Issue mit Label `alarm` (`grund: alarm`, `id:`). `check_alarms()`
+  in jedem Run (nicht bei `--only`): Startpreis merken (`status.json` → `alarme`), Push bei Preissenkung,
+  bei verkauft/weg Push und Issue schließen. Nutzer beendet Alarm, indem er das Issue schließt
+
 ## Benachrichtigungslogik
 
 - Erstlauf (leeres seen.json): genau **eine** Zusammenfassung
@@ -313,6 +319,13 @@ alle Kategorien zusammen (Bulishirts: 67 Anfragen). Beschreibung (`description`)
 **Repro-Flock in der Beschreibung** (z. B. 089kits "Repro Flock", sundayfootballshirts "Nameset: Remake"):
 bei direkt abgefragten Shops wie FYJ-Reissue behandelt, zählt also nur für Thiago (Kennzeichen REPRO-FLOCK)
 und Kategorien aus `nachbau_erlaubt_fuer`
+
+**Eigene Shopsysteme (`html`, seit 05.10.2026):** allgemeine Anbindung über die Such-Ergebnisseite,
+pro Shop in shops.yaml konfiguriert (`suche` mit {q}, `link` CSS-Selektor, optional `groessen`). Produktseite
+nur für passende Titel (JSON-LD für Preis/Bild/Verfügbarkeit, Größe aus Auswahl oder "Size:/Taglia:").
+originaltrikot.de (Gambio, Suchseiten ca. 2 MB; Größen-Auswahl zeigt nur verfügbare; Shop bietet
+Beflockung auf Wunsch nachträglich an), wavememorabilia.com (IT, Matchworn/Player Issue).
+classicfootballcollectibles.com bewusst nicht: griechische Titel, bleibt über FYJ
 
 **ReShirt (`smartweb`):** `/json/products?currencyIso=DKK&field=search&filter={}&id=<begriff>&limit=48&orderBy=-Id&page=N`;
 Größe steht im Titel ("… - XL"); Felder `Stock`/`Online` wirken unzuverlässig, nur `Soldout` wird genutzt.

@@ -163,6 +163,15 @@ shops:
   - {name: Lockerhaus, url: "https://lockerhaus.store", schnellcheck: nein}
   - {name: Bulishirts, url: "https://www.bulishirts.com", plattform: wix, schnellcheck: nein}
 
+# Eigene Shopsysteme über die Such-Ergebnisseite (plattform: html), seit 05.10.2026
+  - {name: Originaltrikot, url: "https://www.originaltrikot.de", plattform: html, schnellcheck: nein,
+     suche: "/de/advanced_search_result.php?keywords={q}&inc_subcat=1", link: ".title a.product-url",
+     groessen: "select[name='modifiers[attribute][1]'] option"}
+  - {name: Wave Memorabilia, url: "https://wavememorabilia.com", plattform: html, schnellcheck: nein,
+     suche: "/ricerca.php?search={q}", link: "a[href^='articolo/']"}
+# classicfootballcollectibles.com bewusst nicht: griechische Titel und Adressen, Suche findet englische
+# Namen nicht; läuft über FYJ (dort mit englischen Titeln)
+
 # Marktplätze (eBay, Depop) werden nicht abgefragt, dort am besten in der
 # jeweiligen App dem Verkäufer folgen bzw. gespeicherte Suchen anlegen:
 #   Corner Flag Vintage (Depop), Classic Soccer Shop UK (eBay),

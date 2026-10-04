@@ -895,6 +895,65 @@ def wix_items(shop, base, prods):
     return items
 
 
+def html_run(http, shop, base, queries, matcher, cfg):
+    """Allgemeine Anbindung über Such-Ergebnisseiten (z. B. Gambio, eigene Shopsysteme), konfiguriert
+    in shops.yaml: suche (URL mit {q}), link (CSS-Selektor der Produktlinks), optional groessen (CSS
+    der Größen-Auswahl auf der Produktseite). Produktseiten werden nur für passende Titel geladen"""
+    from urllib.parse import quote_plus
+    items, n, urls = [], 0, set()
+    for q in queries:
+        txt = http.get(base + cfg["suche"].format(q=quote_plus(q)), want="text")
+        if not txt:
+            continue
+        links = BeautifulSoup(txt, "html.parser").select(cfg["link"])
+        n += len(links)
+        for a in links:
+            url = urljoin(base + "/", a.get("href", ""))
+            title = re.sub(r"\s*€\s*[\d.,]+.*$", "", a.get("title") or a.get_text(" ", strip=True)).strip()
+            if not title or url in urls or not matcher.labels(title):
+                continue
+            urls.add(url)
+            page = http.get(url, want="text") or ""
+            soup = BeautifulSoup(page, "html.parser")
+            desc, img, price, avail = "", "", "", []
+            for tag in soup.find_all("script", type="application/ld+json"):
+                try:
+                    data = json.loads(tag.string or "")
+                except ValueError:
+                    continue
+                for prod in ld_products(data):
+                    desc = desc or plain(prod.get("description"))
+                    im = prod.get("image")
+                    img = img or (im[0] if isinstance(im, list) and im else im if isinstance(im, str) else "")
+                    offers = prod.get("offers") or []
+                    for o in offers if isinstance(offers, list) else [offers]:
+                        if isinstance(o, dict):
+                            if o.get("availability"):
+                                avail.append(str(o["availability"]))
+                            if o.get("price") and not price:
+                                price = f"{o['price']} {o.get('priceCurrency') or ''}".strip()
+            if avail and all(SOLD_RX.search(x) for x in avail):
+                continue
+            text = re.sub(r"\s+", " ", soup.get_text(" "))
+            if not price:   # erster Preis über 0 (Seiten zeigen oft einen leeren Warenkorb "€ 0,00")
+                for m in re.finditer(r"€\s?[\d.]+,\d{2}|[\d.]+,\d{2}\s?€", a.get_text(" ", strip=True) + " " + text):
+                    if (parse_price(m.group(0))[0] or 0) > 0:
+                        price = m.group(0)
+                        break
+            sizes = [o.get_text(" ", strip=True) for o in soup.select(cfg["groessen"])] if cfg.get("groessen") else []
+            if not sizes:
+                m = re.search(r"(?i)(?:size|taglia|grö(?:ß|ss)e|talla|taille)\s*:\s*(\S{1,12})", text)
+                sizes = [m.group(1)] if m else []
+            size_text = " ".join(sizes) if sizes else title
+            if not img:
+                og = soup.find("meta", property="og:image")
+                img = og.get("content", "") if og else ""
+            cond = re.search(r"(?i)(?:condizioni|condition|zustand)\s*:\s*([a-z ]{3,20})", text)
+            items.append(item("direkt", shop, url, title, size_text, price, urljoin(base + "/", img) if img else "",
+                              desc=f"{desc} {'Condition: ' + cond.group(1) if cond else ''}".strip()))
+    return items, n
+
+
 def prestashop_run(http, shop, base, queries, matcher, search_path="/szukaj"):
     """PrestaShop 1.7+: Suche liefert JSON, Größe steht erst auf der Produktseite"""
     items, n, urls = [], 0, set()
@@ -949,6 +1008,10 @@ def run_shop(shop, mode, matcher, platforms, currencies):
         if plat == "smartweb":
             items, n = smartweb_run(http, name, base, matcher.queries(only_high=(mode == "priority")),
                                     shop.get("waehrung", "DKK"))
+            status.update(produkte=n)
+            return items, status
+        if plat == "html":
+            items, n = html_run(http, name, base, matcher.queries(only_high=(mode == "priority")), matcher, shop)
             status.update(produkte=n)
             return items, status
         if plat == "wix":
@@ -1597,6 +1660,69 @@ def log_problems(problems, mode, ts):
     ERROR_REPORT.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
+def owner_issues(label, state="open"):
+    """Issues des Repo-Inhabers mit diesem Label (öffentliches Repo: nur eigene zählen)"""
+    token, repo = os.environ.get("GITHUB_TOKEN"), os.environ.get("GITHUB_REPOSITORY")
+    if not (token and repo):
+        return [], None
+    owner = os.environ.get("GITHUB_REPOSITORY_OWNER") or repo.split("/")[0]
+    api = f"https://api.github.com/repos/{repo}/issues"
+    hdr = {"Authorization": f"Bearer {token}", "Accept": "application/vnd.github+json"}
+    out = []
+    for page in range(1, 6):
+        try:
+            batch = requests.get(api, params={"labels": label, "state": state, "per_page": 100, "page": page},
+                                 headers=hdr, timeout=TIMEOUT).json()
+        except (requests.RequestException, ValueError):
+            break
+        if not isinstance(batch, list) or not batch:
+            break
+        out += [i for i in batch if (i.get("user") or {}).get("login") == owner]
+        if len(batch) < 100:
+            break
+    return out, (api, hdr)
+
+
+def check_alarms(seen, status_store, ts, rates, mode, notify):
+    """Preisalarm für Favoriten (GitHub-Issues mit Label "alarm"): Push bei Preissenkung, bei
+    Verkauf/Verschwinden Push und Issue schließen. Geschlossene Issues = Alarm beendet"""
+    issues, api = owner_issues("alarm")
+    if api is None:
+        return
+    alarms = status_store.setdefault("alarme", {})
+    open_ids = set()
+    for iss in issues:
+        f = parse_flag(iss.get("body"))
+        if not f:
+            continue
+        open_ids.add(f["id"])
+        a = alarms.setdefault(f["id"], {"issue": iss["number"], "seit": ts})
+        e = seen.get(f["id"])
+        if not e:
+            continue
+        eur = to_eur(e.get("price"), rates)
+        if eur and a.get("eur") is None:
+            a["eur"] = eur
+        elif eur and a.get("eur") and eur < a["eur"] - 0.5:
+            notify(f"📉 Preis gesunken · {e['shop']}",
+                   f"{e['title']}\n{a['eur']:.2f} € → {eur:.2f} € (Größe {e.get('size', '')})", 4, e["url"])
+            a["eur"] = eur
+        gone = e.get("verkauft") or (mode == "full" and e.get("weg"))
+        if gone:
+            notify(f"🔕 Favorit nicht mehr verfügbar · {e['shop']}", e["title"], 3, e["url"])
+            hdr = api[1]
+            try:
+                requests.post(f"{api[0]}/{iss['number']}/comments", headers=hdr, timeout=TIMEOUT,
+                              json={"body": "Der Artikel ist verkauft oder nicht mehr gelistet, Alarm beendet."})
+                requests.patch(f"{api[0]}/{iss['number']}", headers=hdr, timeout=TIMEOUT, json={"state": "closed"})
+            except requests.RequestException:
+                pass
+            open_ids.discard(f["id"])
+    for k in list(alarms):
+        if k not in open_ids:
+            del alarms[k]
+
+
 def recently_done(status_store, mode):
     """Hat ein Run dieses Modus kürzlich stattgefunden? (Sperre für die GitHub-Rückfall-Zeitpläne)"""
     limit = FALLBACK_SKIP_HOURS.get(mode)
@@ -1876,6 +2002,11 @@ def main():
                            for e in bundle[:20]) +
                  (f"\n… und {len(bundle) - 20} weitere" if len(bundle) > 20 else ""),
                  3, report_url, None, ["soccer"], args.dry_run)
+
+    # Preisalarme für Favoriten
+    if not args.only:
+        check_alarms(seen, status_store, ts, rates, args.mode,
+                     lambda title, msg, prio, url: push(topic, title, msg, prio, url, None, ["bell"], args.dry_run))
 
     # Still übernommene Treffer (neue Shops, neue Kategorien): EINE Sammelnachricht statt Push-Flut
     silent = [e for e in seen.values() if e["first"] == ts and e.get("still")

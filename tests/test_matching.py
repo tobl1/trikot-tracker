@@ -503,3 +503,21 @@ WM06 = "WM 2006"
 ])
 def test_wm2006(title, yes):
     assert (WM06 in {l for l, _ in M.labels(title)}) == yes
+
+
+def test_check_alarms(monkeypatch):
+    issues = [{"number": 7, "body": "grund: alarm\nid: shop.de/products/x\n", "user": {"login": "me"}}]
+    monkeypatch.setattr(tracker, "owner_issues", lambda label, state="open": (issues, ("api", {})))
+    posted = []
+    monkeypatch.setattr(tracker.requests, "post", lambda *a, **k: posted.append(a))
+    monkeypatch.setattr(tracker.requests, "patch", lambda *a, **k: posted.append(a))
+    seen = {"shop.de/products/x": {"title": "Thiago XL", "shop": "S", "url": "u", "price": "100.00 EUR", "size": "XL"}}
+    st, pushes = {}, []
+    note = lambda *a: pushes.append(a)
+    tracker.check_alarms(seen, st, "t", {"EUR": 1.0}, "full", note)       # Startpreis merken
+    seen["shop.de/products/x"]["price"] = "80.00 EUR"
+    tracker.check_alarms(seen, st, "t", {"EUR": 1.0}, "full", note)       # gesunken -> Push
+    assert len(pushes) == 1 and "100.00 € → 80.00 €" in pushes[0][1]
+    seen["shop.de/products/x"]["verkauft"] = "t"
+    tracker.check_alarms(seen, st, "t", {"EUR": 1.0}, "full", note)       # verkauft -> Push, Issue zu
+    assert len(pushes) == 2 and posted and st["alarme"] == {}
