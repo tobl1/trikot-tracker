@@ -1,0 +1,19 @@
+name: Tests
+
+# Prüft bei jeder Änderung an Programm, Suchliste oder Shops die Testfälle (schnell, ca. 30 Sekunden)
+on:
+  push:
+    paths: ["tracker.py", "watchlist.yaml", "shops.yaml", "tests/**", "requirements.txt"]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt pytest
+      - run: python -m pytest tests/ -q -p no:cacheprovider

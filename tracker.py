@@ -36,6 +36,9 @@ SEEN_FILE = STATE_DIR / "seen.json"
 STATUS_FILE = STATE_DIR / "status.json"
 REPORT_FILE = ROOT / "TREFFER.md"
 DASHBOARD_FILE = ROOT / "docs" / "treffer.json"
+ERROR_LOG = STATE_DIR / "fehlerlog.json"
+ERROR_REPORT = ROOT / "FEHLER.md"
+ERROR_KEEP_DAYS = 30
 
 TZ = ZoneInfo("Europe/Berlin")
 BUY_COUNTRY = "DE"       # Preise/Währung so, wie ein Käufer in Deutschland sie sieht
@@ -1566,6 +1569,34 @@ def apply_flags(seen, status_store, ts):
     return new
 
 
+def log_problems(problems, mode, ts):
+    """Probleme sammeln: gleiche (Quelle, Meldung) zusammengefasst mit erstem/letztem Auftreten und Anzahl.
+    FEHLER.md ist die lesbare Fassung; Claude liest sie bei jeder neuen Anfrage (siehe CLAUDE.md)"""
+    log = load_json(ERROR_LOG, {})
+    for quelle, meldung in problems:
+        key = f"{quelle}|{meldung}"
+        e = log.setdefault(key, {"quelle": quelle, "meldung": meldung, "erst": ts, "anzahl": 0, "modi": []})
+        e["letzt"] = ts
+        e["anzahl"] += 1
+        if mode not in e["modi"]:
+            e["modi"].append(mode)
+    cutoff = now() - dt.timedelta(days=ERROR_KEEP_DAYS)
+    log = {k: v for k, v in log.items() if dt.datetime.fromisoformat(v["letzt"]) >= cutoff}
+    ERROR_LOG.write_text(json.dumps(log, ensure_ascii=False, indent=1, sort_keys=True), encoding="utf-8")
+    rows = sorted(log.values(), key=lambda v: v["letzt"], reverse=True)
+    fmt = lambda t: dt.datetime.fromisoformat(t).astimezone(TZ).strftime("%d.%m. %H:%M")
+    lines = ["# Fehler-Log", "",
+             f"Probleme der letzten {ERROR_KEEP_DAYS} Tage, zusammengefasst. Stand {fmt(ts)} Uhr. "
+             "Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.", "",
+             "| zuletzt | seit | Anzahl | Quelle | Meldung | Runs |", "|---|---|---|---|---|---|"]
+    for v in rows:
+        lines.append(f"| {fmt(v['letzt'])} | {fmt(v['erst'])} | {v['anzahl']} | {v['quelle']} | "
+                     f"{str(v['meldung']).replace('|', '/')} | {', '.join(v['modi'])} |")
+    if not rows:
+        lines.append("| | | | | keine Probleme | |")
+    ERROR_REPORT.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
 def recently_done(status_store, mode):
     """Hat ein Run dieses Modus kürzlich stattgefunden? (Sperre für die GitHub-Rückfall-Zeitpläne)"""
     limit = FALLBACK_SKIP_HOURS.get(mode)
@@ -1883,6 +1914,9 @@ def main():
     else:
         write_report(seen, run_sources, "", args.mode)
     write_dashboard(seen, status_store, args.mode, ts, watch, shops_cfg.get("shops") or [])
+    problems = [(s["name"], s["fehler"]) for s in run_sources
+                if s.get("fehler") and not str(s["fehler"]).startswith("deaktiviert")]
+    log_problems(problems, args.mode, ts)
 
     ok = sum(1 for s in statuses if not s["fehler"])
     print(f"Fertig ({args.mode}): {ok}/{len(statuses)} Shops ok, FYJ: "

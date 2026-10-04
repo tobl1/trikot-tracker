@@ -471,3 +471,14 @@ def test_flock_erkennung_nur_fuer_pflicht():
 ])
 def test_meldungen_0410(title, expected):
     assert {l for l, _ in M.labels(title)} == expected
+
+
+def test_log_problems(tmp_path, monkeypatch):
+    monkeypatch.setattr(tracker, "ERROR_LOG", tmp_path / "log.json")
+    monkeypatch.setattr(tracker, "ERROR_REPORT", tmp_path / "FEHLER.md")
+    t1 = tracker.now().isoformat()
+    tracker.log_problems([("Oh Calcio", "keine Produkte erhalten")], "full", t1)
+    tracker.log_problems([("Oh Calcio", "keine Produkte erhalten"), ("FYJ", "HTTP 500")], "priority", t1)
+    log = tracker.load_json(tmp_path / "log.json", {})
+    assert log["Oh Calcio|keine Produkte erhalten"]["anzahl"] == 2
+    assert "Oh Calcio" in (tmp_path / "FEHLER.md").read_text() and "FYJ" in (tmp_path / "FEHLER.md").read_text()

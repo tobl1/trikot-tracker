@@ -12,6 +12,18 @@ Aufbau, getroffene Entscheidungen und offene Punkte. Bitte bei größeren Änder
 - Bei Unklarheiten oder fehlenden wichtigen Infos nachfragen
 - Eigene Aussagen kritisch prüfen, Unsicherheiten offen benennen
 
+## Bei jeder neuen Anfrage zuerst (Wunsch des Nutzers, 05.10.2026)
+
+1. `git pull`, dann **`FEHLER.md`** lesen (Fehler-Log der Runs, zusammengefasst je Quelle und Meldung,
+   30 Tage) und neue oder gehäufte Probleme kurz analysieren und ansprechen. Der Nutzer will keine
+   Alarm-Pushes, sondern dass Claude das Log selbst prüft
+2. `gh issue list --label flag --state all` auf neue Meldungen prüfen, Muster in Regeln übersetzen
+3. **Einmal pro Woche** (Datum des letzten Checks unten unter "Wöchentliche Fundgrube" eintragen):
+   `docs/treffer.json` → `fyj_shops` auswerten, also Shops, die nur über FYJ Treffer liefern, und
+   dem Nutzer Kandidaten für direkte Anbindung vorschlagen
+
+Wöchentliche Fundgrube, letzter Check: noch keiner
+
 ## Ziel
 
 Automatische Suche nach Vintage-Fußballtrikots der Lieblingsspieler des Nutzers in **XL oder XXL**
@@ -34,6 +46,8 @@ Einzeltrikots zum Nachbeflocken dazukommen, das sagt der Nutzer gesondert an.
 | `.github/workflows/tracker.yml` | **Hauptauslöser cron-job.org** (seit 04.10.2026, `workflow_dispatch`): Gesamt-Run 5:30, Schnell-Run 9:45/15:45/21:45, Drop-Run `5-59/15 9-23` (deutsche Zeit, bewusst versetzt zu :45). GitHub-Zeitpläne nur Rückfall mit `--rueckfall` (überspringt, wenn Gesamt-Run < 20 h bzw. Schnell-Run < 4 h her): `30 5`, `15 8,14,20` UTC. **GitHub-Concurrency hält nur einen wartenden Run**, ein weiterer Start verdrängt ihn (`cancelled`). Deshalb Startzeiten entzerrt und kein Drop-Rückfall |
 | `state/seen.json` | bekannte Treffer (Schlüssel = kanonische URL), wird vom Workflow committet |
 | `state/status.json` | erkannte Plattformen, erfolgreich abgefragte Quellen, Produktanzahlen, letzter Lauf |
+| `FEHLER.md`, `state/fehlerlog.json` | Fehler-Log: Quellen mit Fehlern je Run, abgebrochene Runs (Workflow-Schritt "Fehlschlag ins Fehler-Log"), zusammengefasst, 30 Tage |
+| `.github/workflows/tests.yml` | Tests bei jedem Push auf Programm, Suchliste, Shops; der Tracker-Workflow testet zusätzlich vor jedem Run und bricht bei Fehlern ab |
 | `TREFFER.md` | automatisch erzeugte Übersicht als Markdown, Quellen-Status immer vom letzten Gesamtlauf |
 | `docs/index.html` | Dashboard (GitHub Pages, Branch `main`, Ordner `/docs`), statisch, lädt `treffer.json`. Ansichten "Alle Treffer" und "Eingänge nach Lauf" (`#eingaenge`, gruppiert nach `first` = Zeitstempel des Laufs, Läufe aus `status.json` → `laeufe`; still übernommene Treffer, also Erstlauf oder neue Quelle, eingeklappt). Pushes verlinken auf `#eingaenge` |
 | Dashboard als Web-App | `manifest.webmanifest`, `icon.svg` + `icon-180/192/512.png` (Trikot mit 6), Start vom Homebildschirm im Vollbild. Kein Zoom (viewport, `touch-action`, iOS `gesturestart`), kein seitliches Scrollen, Eingaben 16 px (sonst zoomt iOS beim Tippen). Am Handy: Navigationsleiste unten, seltene Filter hinter "Filter"-Knopf |
