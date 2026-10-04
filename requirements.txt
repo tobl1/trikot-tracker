@@ -1,3 +1,7 @@
-requests>=2.31
-PyYAML>=6.0
-beautifulsoup4>=4.12
+# Feste Versionen (getestet), damit ein neues Paket-Release nicht unbemerkt einen Run kaputt macht.
+# Aktualisieren: Versionen hier anheben, Tests laufen lassen, committen
+requests==2.34.2
+urllib3==2.8.0
+PyYAML==6.0.3
+beautifulsoup4==4.15.0
+soupsieve==2.10
