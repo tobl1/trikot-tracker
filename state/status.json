@@ -203,12 +203,152 @@
   "To The Jersey": "2026-10-03T15:07:55.644740+00:00"
  },
  "flags": {
+  "bulishirts.com/product-page/bayer-04-leverkusen-kroos-39-2008-2009-xl": {
+   "grund": "unpassend",
+   "issue": 5,
+   "kommentar": "Kroos bitte niemals Leverkusen",
+   "titel": "Flag: unpassend · Bayer 04 Leverkusen - Kroos #39 - Trikot 2008–2009 - XL",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "classic-shirts.com/product-eng-249718-2005-06-bayern-munchen-ze-roberto-shirt-xl.html": {
+   "grund": "unpassend",
+   "issue": 13,
+   "kommentar": "Schlechter nachträglicher Flock. Kannst du nicht wissen aber nimm Raus",
+   "titel": "Flag: unpassend · 2005-06 BAYERN MUNCHEN *ZE ROBERTO* SHIRT XL",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "classic-shirts.com/product-eng-284075-2012-13-fc-barcelona-shirt-xxl.html": {
+   "grund": "unpassend",
+   "issue": 20,
+   "kommentar": "Shirt",
+   "titel": "Flag: unpassend · 2012-13 FC BARCELONA SHIRT XXL",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "classic-shirts.com/product-eng-354467-2004-05-juventus-nedved-shirt-xl.html": {
+   "grund": "unpassend",
+   "issue": 11,
+   "kommentar": "Producer Official wollten wir ausschließen",
+   "titel": "Flag: unpassend · 2004-05 JUVENTUS *NEDVED* SHIRT XL",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "classic-shirts.com/product-eng-379732-2011-13-bayern-munchen-ribery-shirt-xl.html": {
+   "grund": "unpassend",
+   "issue": 2,
+   "kommentar": "Laut Bildern sieht es auch wie ein anderer Eintrag von C-S für etwa 10 Euro weniger, auch Ribery",
+   "titel": "Flag: unpassend · 2011-13 BAYERN MUNCHEN *RIBERY* SHIRT XL",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "footballfinery.co.uk/products/2020-21-chile-home-football-shirt-xl-nike-8-vidal-ff302017": {
+   "grund": "unpassend",
+   "issue": 15,
+   "kommentar": "Auch exakt das gleiche wie Casual Football Shirts scheinbar",
+   "titel": "Flag: unpassend · 2020/21 Chile Home Football Shirt (XL) Nike #8 Vidal",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "footballshirtkingdom.com/products/netherlands-2004-2005-2006-home-football-shirt-xl-8357": {
+   "grund": "unpassend",
+   "issue": 12,
+   "kommentar": "Casual Football Shirts ist wohl gleicher Shop? Mindestens gleiches Foto und Text, prüfen wir mal. Auch der Preis auf der Website hier ist eigentlich reduziert",
+   "titel": "Flag: unpassend · Van Nistelrooy 10 Netherlands 2004/2005/2006 Home Football Shirt XL",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "le7sorelle.it/products/giacca-barcellona-nike-2011-2012": {
+   "grund": "unpassend",
+   "issue": 21,
+   "kommentar": "Jacke",
+   "titel": "Flag: unpassend · giacca barcellona nike 2011/2012",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
   "retroshirts.ch/products/fussballtrikot-espanyolbarcelona-2012-13-auswarts-puma-xl-100734": {
    "grund": "unpassend",
    "issue": 4,
    "kommentar": "Ist Espanyol, nicht FC Barcelona",
    "titel": "Flag: unpassend · Espanyol Barcelona 2012-13 Trikot auswärts BNWT - 10/10 - [XL]",
    "zeit": "2026-10-04T07:45:41.743467+00:00"
+  },
+  "senseofgoal.com/products/fc-barcelona-2011-12-trainingsjacke-xxl-nike": {
+   "grund": "unpassend",
+   "issue": 19,
+   "kommentar": "Jacke",
+   "titel": "Flag: unpassend · FC Barcelona 2011-12 Trainingsjacke (XXL) nike",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "thefootballmarket.com/products/maillot-de-foot-retro-domicile-equipe-de-france-n-22-ribery-2006-2008": {
+   "grund": "unpassend",
+   "issue": 9,
+   "kommentar": "Zustand bodenlos",
+   "titel": "Flag: unpassend · Maillot de foot rétro domicile Équipe de France N°22 RIBERY 2006-2007",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "thefootballmarket.com/products/maillot-de-football-retro-equipe-despagne-n-4-raoul-2009-2010": {
+   "grund": "unpassend",
+   "issue": 8,
+   "kommentar": "Nicht existenter Spieler, komischer Flock",
+   "titel": "Flag: unpassend · Maillot de football retro équipe d'Espagne N°4 RAOUL 2009-2010",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "thefootballmarket.com/products/maillot-de-football-retro-equipe-despagne-n-7-maravilla-2009-2010": {
+   "grund": "unpassend",
+   "issue": 7,
+   "kommentar": "Nur ohne Flock bitte",
+   "titel": "Flag: unpassend · Maillot de football retro Equipe d'Espagne N°7 MARAVILLA 2009-2010",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "thefootballmarket.com/products/maillot-equipe-de-france-vintage-domicile-10-benzema-2012-2013": {
+   "grund": "unpassend",
+   "issue": 10,
+   "kommentar": "Glaube den ganzen Shop nehmen wir raus weil alles von denen hier absurd schlechter Zustand ist",
+   "titel": "Flag: unpassend · Maillot Équipe de France vintage domicile #10 BENZEMA 2012-2013",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "vintagefootballarea.com/products/2004-05-juventus-xl-university-1": {
+   "grund": "unpassend",
+   "issue": 6,
+   "kommentar": "Nur ein Shirt",
+   "titel": "Flag: unpassend · 2004/05 - Juventus (XL) *university*",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "vintagefootballarea.com/products/2010-11-barcelone-xl-13": {
+   "grund": "unpassend",
+   "issue": 16,
+   "kommentar": "Shirt",
+   "titel": "Flag: unpassend · 2010/11 - Barcelone (XL)",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "vintagefootballarea.com/products/2011-12-barcelone-xl-22": {
+   "grund": "unpassend",
+   "issue": 18,
+   "kommentar": "Shirt",
+   "titel": "Flag: unpassend · 2011/12 - Barcelone (XL)",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "vintagefootballarea.com/products/2011-12-espagne-xl-15": {
+   "grund": "unpassend",
+   "issue": 1,
+   "kommentar": "Ist ein Shirt",
+   "titel": "Flag: unpassend · 2011/12 - Espagne (XL)",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "vintagefootballarea.com/products/2012-13-barcelone-xl-44": {
+   "grund": "unpassend",
+   "issue": 17,
+   "kommentar": "Shirt",
+   "titel": "Flag: unpassend · 2012/13 - Barcelone (XL)",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "vintagefootballarea.com/products/2012-13-juventus-vidal-23-xl-1": {
+   "grund": "unpassend",
+   "issue": 3,
+   "kommentar": "Sehr falsch aussehender Flock: kein Problem deiner Erkennung, aber bitte ausblenden weil unnötig.",
+   "titel": "Flag: unpassend · 2012/13 - Juventus - Vidal #23 (XL)",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "vintagefootballarea.com/products/2013-14-juventus-vidal-23-xl-2": {
+   "grund": "unpassend",
+   "issue": 14,
+   "kommentar": "Flock leider kapitt",
+   "titel": "Flag: unpassend · 2013/14 - Juventus - Vidal #23 (XL)",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
   }
  },
  "fyj_shops": {
@@ -408,12 +548,18 @@
    "neu": 0,
    "still": 0,
    "zeit": "2026-10-04T08:04:36.346679+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-04T08:15:32.545492+00:00"
   }
  ],
  "last_full": "2026-10-04T04:38:13.554139+00:00",
  "last_run": {
-  "mode": "priority",
-  "time": "2026-10-04T08:04:36.346679+00:00"
+  "mode": "drop",
+  "time": "2026-10-04T08:15:32.545492+00:00"
  },
  "platforms": {
   "https://1kloppshop.com": "shopify",

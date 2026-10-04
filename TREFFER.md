@@ -1,6 +1,6 @@
 # Trikot-Tracker
 
-Stand: 04.10.2026 10:04 Uhr (priority), 297 aktuelle Treffer in XL/XXL
+Stand: 04.10.2026 10:15 Uhr (drop), 278 aktuelle Treffer in XL/XXL
 
 ## Thiago (3)
 
@@ -10,17 +10,15 @@ Stand: 04.10.2026 10:04 Uhr (priority), 297 aktuelle Treffer in XL/XXL
 | [2013-14 BAYERN MUNCHEN *THIAGO* SHIRT XL](https://classic-shirts.com/product-eng-321702-2013-14-BAYERN-MUNCHEN-THIAGO-SHIRT-XL.html) | XL | 8/10 | £54.99 | Classic-Shirts | 01.10. |
 | [2019/20 - Bayern Munich - Thiago #6 (2XL)](https://www.vintagefootballarea.com/products/2019-20-bayern-munich-thiago-6-2xl-1) | XXL | Very Good | 79.99 EUR | Vintage Football Area | 01.10. |
 
-## Barça 2010-2013 (24)
+## Barça 2010-2013 (18)
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
 | [Barcelona 2012/2013 Visitante (2XL)](https://futmaniacos.com/products/camiseta-barcelona-2012-2013-visitante-1) | 2XL |  | 55.95 EUR | Futmaniacos | 04.10. |
-| [giacca barcellona nike 2011/2012](https://le7sorelle.it/products/giacca-barcellona-nike-2011-2012) | XXL |  | 44.99 EUR | Le 7 Sorelle | 04.10. |
 | [Espanyol Barcelona 2012-13 Trikot heim - 9/10 - [XXL]](https://retroshirts.ch/products/fussballtrikot-espanyolbarcelona-2012-13-heim-puma-xxl-100736) | XXL | 9/10 | 79.00 CHF | Retroshirts CH | 04.10. |
 | [2012-13 FC BARCELONA SHIRT XXL](https://classic-shirts.com/product-eng-272150-2012-13-FC-BARCELONA-SHIRT-XXL.html) | XXL | 9/10 | £69.99 | Classic-Shirts | 01.10. |
 | [2011-12 BARCELONA HOME FOOTBALL *BNWT* Nike - XL](https://buysellfootballshirts.co.uk/products/2011-2012-barcelona-home-football-shirt-new-sizes) | XL | BNWT | 84.95 EUR | Buy Sell Football Shirts | 01.10. |
 | [2012-13 BARCELONA HOME FOOTBALL SHIRT *BNWT* Nike - XL](https://buysellfootballshirts.co.uk/products/2012-2013-barcelona-home-football-shirt-new-xl) | XL | BNWT | 108.95 EUR | Buy Sell Football Shirts | 01.10. |
-| [2012-13 FC BARCELONA SHIRT XXL](https://classic-shirts.com/product-eng-284075-2012-13-FC-BARCELONA-SHIRT-XXL.html) | XXL | 8/10 | £39.99 | Classic-Shirts | 01.10. |
 | [2011-12 FC BARCELONA SHIRT XL](https://classic-shirts.com/product-eng-298739-2011-12-FC-BARCELONA-SHIRT-XL.html) | XL | 8/10 | £89.99 | Classic-Shirts | 01.10. |
 | [2012-13 FC BARCELONA BASIC SHIRT XXL](https://classic-shirts.com/product-eng-307567-2012-13-FC-BARCELONA-BASIC-SHIRT-XXL.html) | XXL | 9/10 | £79.99 | Classic-Shirts | 01.10. |
 | [2011-12 FC BARCELONA SHIRT XXL](https://classic-shirts.com/product-eng-308670-2011-12-FC-BARCELONA-SHIRT-XXL.html) | XXL | 8/10 | £99.99 | Classic-Shirts | 01.10. |
@@ -29,14 +27,10 @@ Stand: 04.10.2026 10:04 Uhr (priority), 297 aktuelle Treffer in XL/XXL
 | [FC Barcelona 2012-2013 home shirt (XL)](https://www.classicpitchwear.com/products/barcelona-2012-2013-home-shirt-xl) | XL | Very Good | 65.00 EUR | Classic Pitchwear | 01.10. |
 | [FC Barcelona Auswärts 2012/13 XL](https://ohcalcio.com/products/fc-barcelona-auswarts-2012-13-xl-10) | XL | 8/10 | 69.95 EUR | Oh Calcio | 01.10. |
 | [Barcelona 2012-13 Auswärts Trikot (XL) nike](https://www.senseofgoal.com/products/barcelona-2012-13-auswarts-trikot-xl-nike-2) | XL |  | 59.95 EUR | Sense of Goal | 01.10. |
-| [FC Barcelona 2011-12 Trainingsjacke (XXL) nike](https://www.senseofgoal.com/products/fc-barcelona-2011-12-trainingsjacke-xxl-nike) | XXL |  | 49.95 EUR | Sense of Goal | 01.10. |
 | [FC Barcelona - 2012-13 - Auswärts - XL - Nike](https://tothejersey.com/en/products/fcbarcelona-2012-13-auswarts-xl-nike-n5980) | XL | 9/10 | 90.95 EUR | To The Jersey | 01.10. |
 | [Trikot - FC Barcelona - 2012/2013 - XL - Heim](https://trikotparadies.shop/products/trikot-heim-kopie-599) | XL | 9/10 | 49.00 EUR | Trikotparadies | 01.10. |
-| [2010/11 - Barcelone (XL)](https://www.vintagefootballarea.com/products/2010-11-barcelone-xl-13) | XL | Very Good | 34.99 EUR | Vintage Football Area | 01.10. |
 | [2010/11 - Barcelone (XL)](https://www.vintagefootballarea.com/products/2010-11-barcelone-xl-16) | XL | Very Good | 34.99 EUR | Vintage Football Area | 01.10. |
-| [2011/12 - Barcelone (XL)](https://www.vintagefootballarea.com/products/2011-12-barcelone-xl-22) | XL | Very Good | 34.99 EUR | Vintage Football Area | 01.10. |
 | [2012/13 - Barcelone (XL)](https://www.vintagefootballarea.com/products/2012-13-barcelone-xl-37) | XL | Very Good | 49.99 EUR | Vintage Football Area | 01.10. |
-| [2012/13 - Barcelone (XL)](https://www.vintagefootballarea.com/products/2012-13-barcelone-xl-44) | XL | Very Good | 34.99 EUR | Vintage Football Area | 01.10. |
 | [2012/13 - Barcelone (XL)](https://www.vintagefootballarea.com/products/2012-13-barcelone-xl-59) | XL | Very Good | 49.99 EUR | Vintage Football Area | 01.10. |
 
 ## Liverpool Away 2021/22 (1)
@@ -54,12 +48,10 @@ Stand: 04.10.2026 10:04 Uhr (priority), 297 aktuelle Treffer in XL/XXL
 | [Liverpool 2022/2023 Third Football Shirt  XL](https://footballshirtkingdom.com/products/liverpool-2022-2023-third-football-shirt-xl) | XL | Great | 60.95 EUR | Football Shirt Kingdom | 01.10. |
 | [2022-23 Liverpool Nike Third Shirt XXL](https://www.vintagefootballshirts.com/products/2022-23-liverpool-nike-third-shirt-xxl) | XXL |  | 63.95 EUR | Vintage Football Shirts | 01.10. |
 
-## Spanien 2010/2011 (5)
+## Spanien 2010/2011 (3)
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
-| [Maillot de football retro équipe d'Espagne N°4 RAOUL 2009-2010](https://thefootballmarket.com/products/maillot-de-football-retro-equipe-despagne-n-4-raoul-2009-2010) | XL |  | 55.00 EUR | The Football Market | 04.10. |
-| [Maillot de football retro Equipe d'Espagne N°7 MARAVILLA 2009-2010](https://thefootballmarket.com/products/maillot-de-football-retro-equipe-despagne-n-7-maravilla-2009-2010) | XL |  | 65.00 EUR | The Football Market | 04.10. |
 | [2011-12 SPAIN SHIRT XL](https://classic-shirts.com/product-eng-272774-2011-12-SPAIN-SHIRT-XL.html) | XL | 9/10 | £59.99 | Classic-Shirts | 01.10. |
 | [2011/12 - Espagne (XL)](https://www.vintagefootballarea.com/products/2011-12-espagne-xl-13) | XL | Very Good | 44.99 EUR | Vintage Football Area | 01.10. |
 | [2011/12 - Espagne (XL)](https://www.vintagefootballarea.com/products/2011-12-espagne-xl-18) | XL | Very Good | 49.99 EUR | Vintage Football Area | 01.10. |
@@ -100,14 +92,13 @@ Stand: 04.10.2026 10:04 Uhr (priority), 297 aktuelle Treffer in XL/XXL
 | [2024/25 - Inter Milan - Barella #23 (XL)](https://www.vintagefootballarea.com/products/2024-25-inter-milan-barella-23-xl-3) | XL | Very Good | 79.99 EUR | Vintage Football Area | 01.10. |
 | [Maglia Inter Home 2022/2023 Barella Year of the Rabbit versione store](https://wavememorabilia.com/articolo/5337/maglia-inter-home-20222023-barella-year-of-the-rabbit-versione-store) | XL | used | 146.76 EUR | wavememorabilia.com | 01.10. |
 
-## Benzema (28)
+## Benzema (27)
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
 | [Maillot Adidas Football Real Madrid CF Home BENZEMA 2021/22 - XL](https://www.lineupvintageshop.com/product-page/maillot-adidas-football-real-madrid-cf-home-benzema-2021-22) | XL |  | 140.0 EUR | Lineup Vintage | 04.10. |
 | [Maillot Nike Football FFF Equipe de France Away Vintage BENZEMA 2014/15 - XL](https://www.lineupvintageshop.com/product-page/maillot-nike-football-fff-equipe-de-france-away-rétro-benzema-2014-15) | XL |  | 140.0 EUR | Lineup Vintage | 04.10. |
 | [adidas - 2020/21 Real Madrid Home Benzema Home Jersey](https://www.thefootballboutique.com/product-page/adidas-2020-21-real-madrid-home-benzema-home-jersey) | X-LARGE | 9/10 | 110.0 USD | The Football Boutique | 04.10. |
-| [Maillot Équipe de France vintage domicile #10 BENZEMA 2012-2013](https://thefootballmarket.com/products/maillot-equipe-de-france-vintage-domicile-10-benzema-2012-2013) | XL |  | 115.00 EUR | The Football Market | 04.10. |
 | [Maglia FRANCIA BENZEMA XL Home 2008](https://www.arsijstore.com/prodotti/nazionale/europa/francia/maglia-francia-benzema-xl-home-2008/) | XL | Very Good | 89.99 EUR | Arsij Store | 01.10. |
 | [2014/15 France Away Football Shirt (XL) Nike #10 Benzema](https://casualfootballshirts.co.uk/products/2014-15-france-away-football-shirt-xl-nike-10-benzema) | XL | Excellent | 80.00 GBP | Casual Football Shirts | 01.10. |
 | [2008-09 OLYMPIQUE LYON *BENZEMA* SHIRT XL](https://classic-shirts.com/product-eng-376080-2008-09-OLYMPIQUE-LYON-BENZEMA-SHIRT-XL.html) | XL | 8/10 | £99.99 | Classic-Shirts | 01.10. |
@@ -190,11 +181,10 @@ Stand: 04.10.2026 10:04 Uhr (priority), 297 aktuelle Treffer in XL/XXL
 | [2020/21 - Bayern Munich - Kimmich #6 (XL)](https://www.vintagefootballarea.com/products/2020-21-bayern-munich-kimmich-6-xl-3) | XL | Very Good | 79.99 EUR | Vintage Football Area | 01.10. |
 | [2016-17 Bayern Munich adidas Home Shirt Kimmich #32 XL](https://www.vintagefootballshirts.com/products/2016-17-bayern-munich-adidas-home-shirt-kimmich-32-xl) | XL |  | 81.95 EUR | Vintage Football Shirts | 01.10. |
 
-## Kroos (30)
+## Kroos (29)
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
-| [Bayer 04 Leverkusen - Kroos #39 - Trikot 2008–2009 - XL](https://www.bulishirts.com/product-page/bayer-04-leverkusen-kroos-39-2008-2009-xl) | XL | 8/10 | 149.0 EUR | Bulishirts | 04.10. |
 | [DFB - Kroos #18 - Trikot 2010–2012 - XXL](https://www.bulishirts.com/product-page/dfb-kroos-18-2010-2012-xxl) | XXL | 9/10 | 129.0 EUR | Bulishirts | 04.10. |
 | [Maillot Adidas Football Allemagne Home Rétro KROOS 2018/19 - L, XL](https://www.lineupvintageshop.com/product-page/maillot-adidas-football-allemagne-home-rétro-kroos-2018-19) | XL |  | 120.0 EUR | Lineup Vintage | 04.10. |
 | [Maillot Adidas Football Real Madrid CF Third Rétro KROOS 2018/19 - XL](https://www.lineupvintageshop.com/product-page/maillot-adidas-football-real-madrid-cf-third-rétro-kroos-2018-19) | XL |  | 140.0 EUR | Lineup Vintage | 04.10. |
@@ -225,13 +215,12 @@ Stand: 04.10.2026 10:04 Uhr (priority), 297 aktuelle Treffer in XL/XXL
 | [2012/13 - Bayern Munich - Kroos #39 (2XL)](https://www.vintagefootballarea.com/products/2012-13-bayern-munich-kroos-39-2xl-1) | XXL | Very Good | 84.99 EUR | Vintage Football Area | 01.10. |
 | [2022-23 Real Madrid adidas Third Shirt Kroos #8 *w/tags* XL](https://www.vintagefootballshirts.com/products/2022-23-real-madrid-adidas-third-shirt-kroos-8-w-tags-xl) | XL |  | 123.95 EUR | Vintage Football Shirts | 01.10. |
 
-## Nike Total 90 (2004-06) (20)
+## Nike Total 90 (2004-06) (17)
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
 | [Maglia JUVENTUS DEL PIERO XL Away 2004/05 CHAMPIONS LEAGUE](https://www.arsijstore.com/prodotti/serie-a/juventus/maglia-juventus-del-piero-xl-away-2004-05-champions-league/) | XL |  | 139.99 EUR | Arsij Store | 04.10. |
 | [Maglia JUVENTUS DEL PIERO XL Third 2004/05 Nuova](https://www.arsijstore.com/prodotti/serie-a/juventus/maglia-juventus-del-piero-xl-third-2004-05-nuova/) | XL |  | 149.99 EUR | Arsij Store | 04.10. |
-| [2004-05 JUVENTUS *NEDVED* SHIRT XL](https://classic-shirts.com/product-eng-354467-2004-05-JUVENTUS-NEDVED-SHIRT-XL.html) | XL |  | £34.99 | Classic-Shirts | 04.10. |
 | [2004-05 Valencia Basic Home Shirt Aimar #21 - 7/10 - (XXL)](https://www.classicfootballshirts.co.uk/2004-05-valencia-basic-home-shirt-aimar-21-710-xxl-valh04800257.html) | XXL | 7/10 | £89.99 | Classic Football Shirts | 04.10. |
 | [Juventus Auswärtstrikot 2004/05 – Cannavaro #28 – Nike – Größe XXL](https://jersely.com/products/juventus-auswartstrikot-2004-05-cannavaro-28-nike-grosse-xxl) | XXL |  | 139.99 EUR | Jersely | 04.10. |
 | [Niederlande 2004 Heimtrikot – Robben #19 – Größe XL](https://jersely.com/products/niederlande-2004-heimtrikot-robben-19-grosse-xl) | XL |  | 129.99 EUR | Jersely | 04.10. |
@@ -242,10 +231,8 @@ Stand: 04.10.2026 10:04 Uhr (priority), 297 aktuelle Treffer in XL/XXL
 | [(XXL) Arsenal 2004-05 Home Shirt Henry #14](https://sundayfootballshirts.com/products/xxl-arsenal-2004-05-home-shirt-henry-14) | XXL | Fair | 450.00 MYR | Sunday Football Shirts | 04.10. |
 | [Maillot Juventus vintage domicile N°18 Hyuga 2004-2005](https://thefootballmarket.com/products/maillot-juventus-vintage-domicile-n-18-hyuga-2004-2005) | XL |  | 45.00 EUR | The Football Market | 04.10. |
 | [NETHERLANDS DAVIDS 2004-2005 ORIGINAL JERSEY Size XL](https://tiffozifutbol.com/products/netherlands-davids-2004-2005-original-jersey-size-xl) | XL | 9.5/10 | 148.95 EUR | Tiffozi Futbol | 04.10. |
-| [2004/05 - Juventus (XL) *university*](https://www.vintagefootballarea.com/products/2004-05-juventus-xl-university-1) | XL |  | 39.99 EUR | Vintage Football Area | 04.10. |
 | [Van Nistelrooy 10 Netherlands 2004/2005/2006 Home Football Shirt XL](https://casualfootballshirts.co.uk/products/van-nistelrooy-10-netherlands-2004-2005-2006-home-football-shirt-xl) | XL | Excellent | 119.99 GBP | Casual Football Shirts | 01.10. |
 | [2004-06 NETHERLANDS *V. NISTELROOY* SHIRT XXL](https://classic-shirts.com/product-eng-376829-2004-06-NETHERLANDS-V-NISTELROOY-SHIRT-XXL.html) | XXL | 6/10 | £69.99 | Classic-Shirts | 01.10. |
-| [Van Nistelrooy 10 Netherlands 2004/2005/2006 Home Football Shirt XL](https://footballshirtkingdom.com/products/netherlands-2004-2005-2006-home-football-shirt-xl-8357) | XL | Excellent | 144.95 EUR | Football Shirt Kingdom | 01.10. |
 | [Netherlands 2004/2005 Home Ruud Van Nistelrooy Soccer Jersey (XL)](https://www.original11vs11.com/product-page/netherlands-2004-home-ruud-van-nistelrooy-jersey-xl) | XL | Used | 144.0 USD | Original 11vs11 | 01.10. |
 | [Netherlands 2004 Home Shirt (#10 Van Nistelrooy) (XXL)](https://thekitman97.com/products/netherlands-2004-home-shirt-10-van-nistelrooy-xxl) | XXL | Very Good | 99.95 EUR | The Kitman 97 | 01.10. |
 | [2004/06 - Pays-Bas - Van Nistelrooy #10 (XL)](https://www.vintagefootballarea.com/products/2004-06-pays-bas-van-nistelrooy-10-xl-5) | XL | Very Good | 129.99 EUR | Vintage Football Area | 01.10. |
@@ -258,7 +245,7 @@ Stand: 04.10.2026 10:04 Uhr (priority), 297 aktuelle Treffer in XL/XXL
 | [Koszulka piłkarska Borussia Dortmund 2011/12 Home 44 Perisic [XXL]](https://footballthrift.shop/borussia-dortmund-2011-12-home-44-perisic-xxl/) | XXL |  | 90.00 USD | Football Thrift Shop | 01.10. |
 | [Club Brugge KV 2010/2011 Away Perisic #44 Player of The Year Soccer Jersey (XXL)](https://www.original11vs11.com/product-page/222-131) | XXL | Used | 126.0 USD | Original 11vs11 | 01.10. |
 
-## Ribéry (45)
+## Ribéry (43)
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
@@ -267,7 +254,6 @@ Stand: 04.10.2026 10:04 Uhr (priority), 297 aktuelle Treffer in XL/XXL
 | [Frankreich - Ribery #22 - Trikot 2008–2009 - XL](https://www.bulishirts.com/product-page/frankreich-ribery-22-trikot-2008-2009-xl) | XL | 9/10 | 129.0 EUR | Bulishirts | 04.10. |
 | [Maillot Nike Football FFF Equipe de France Away Vintage RIBERY 2012/13 - L & XL](https://www.lineupvintageshop.com/product-page/maillot-nike-football-fff-equipe-de-france-away-rétro-ribery-2012-13) | XL |  | 140.0 EUR | Lineup Vintage | 04.10. |
 | [Adidas - Bayern Munchen 2007/09 Home Football Shirt 'RIBERY'](https://pardonmykicks.se/products/adidas-bayern-munchen-2007-09-home-football-shirt-ribery-4) | XL | 8/10 | 90.95 EUR | Pardon My Kicks | 04.10. |
-| [Maillot de foot rétro domicile Équipe de France N°22 RIBERY 2006-2007](https://thefootballmarket.com/products/maillot-de-foot-retro-domicile-equipe-de-france-n-22-ribery-2006-2008) | XL |  | 55.00 EUR | The Football Market | 04.10. |
 | [Maillot Équipe de France rétro domicile N°22 RIBERY 2006-2007](https://thefootballmarket.com/products/maillot-france-retro-domicile-n-22-ribery-2006-2007) | XL |  | 115.00 EUR | The Football Market | 04.10. |
 | [2008-09 FRANCE *RIBERY* SHIRT 2XL](https://classic-shirts.com/product-eng-301400-2008-09-FRANCE-RIBERY-SHIRT-2XL.html) | 2XL | 8/10 | £74.99 | Classic-Shirts | 01.10. |
 | [2008/09 Bayern Munich Home Football Shirt (XL) Adidas #7 Ribéry](https://casualfootballshirts.co.uk/products/2008-09-bayern-munich-home-football-shirt-xl-adidas-7-ribery) | XL | Excellent | 70.00 GBP | Casual Football Shirts | 01.10. |
@@ -288,7 +274,6 @@ Stand: 04.10.2026 10:04 Uhr (priority), 297 aktuelle Treffer in XL/XXL
 | [2011-13 BAYERN MUNCHEN *RIBERY* SHIRT XL](https://classic-shirts.com/product-eng-374010-2011-13-BAYERN-MUNCHEN-RIBERY-SHIRT-XL.html) | XL | 8/10 | £59.99 | Classic-Shirts | 01.10. |
 | [2007-08 BAYERN MUNCHEN *RIBERY* SHIRT XXL](https://classic-shirts.com/product-eng-378590-2007-08-BAYERN-MUNCHEN-RIBERY-SHIRT-XXL.html) | XXL | 8/10 | £69.99 | Classic-Shirts | 01.10. |
 | [2010-11 BAYERN MUNCHEN *RIBERY* SHIRT XXL](https://classic-shirts.com/product-eng-378758-2010-11-BAYERN-MUNCHEN-RIBERY-SHIRT-XXL.html) | XXL | 8/10 | £79.99 | Classic-Shirts | 01.10. |
-| [2011-13 BAYERN MUNCHEN *RIBERY* SHIRT XL](https://classic-shirts.com/product-eng-379732-2011-13-BAYERN-MUNCHEN-RIBERY-SHIRT-XL.html) | XL | 7/10 | £44.99 | Classic-Shirts | 01.10. |
 | [2011-13 BAYERN MUNCHEN *RIBERY* SHIRT XXL](https://classic-shirts.com/product-eng-379842-2011-13-BAYERN-MUNCHEN-RIBERY-SHIRT-XXL.html) | XXL | 8/10 | £59.99 | Classic-Shirts | 01.10. |
 | [2011-13 BAYERN MUNCHEN *RIBERY* SHIRT XL](https://classic-shirts.com/product-eng-383317-2011-13-BAYERN-MUNCHEN-RIBERY-SHIRT-XL.html) | XL | 7/10 | £34.99 | Classic-Shirts | 01.10. |
 | [2007-08 Bayern Munich Third Shirt Ribery #7 - 7/10 - (XXL)](https://www.classicfootballshirts.co.uk/2007-08-bayern-munich-third-shirt-ribery-7-710-xxl-bynt07438173.html) | XXL | 7/10 | £89.99 | Classic Football Shirts | 01.10. |
@@ -367,7 +352,7 @@ Stand: 04.10.2026 10:04 Uhr (priority), 297 aktuelle Treffer in XL/XXL
 |---|---|---|---|---|---|
 | [Original Ajax 1999/00 Home - Van Der Vaart #43 Size XXL](https://iconicjersey.com/products/original-ajax-1999-00-home-f11436) | XXL | 8.5/10 | 122.95 EUR | Iconic Jersey | 01.10. |
 
-## Van Nistelrooy (16)
+## Van Nistelrooy (15)
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
@@ -376,7 +361,6 @@ Stand: 04.10.2026 10:04 Uhr (priority), 297 aktuelle Treffer in XL/XXL
 | [2006-08 NETHERLANDS *V.NISTELROOY* SHIRT XL](https://classic-shirts.com/product-eng-355615-2006-08-NETHERLANDS-V-NISTELROOY-SHIRT-XL.html) | XL | 8/10 | £59.99 | Classic-Shirts | 01.10. |
 | [2006-08 NETHERLANDS *V.NISTELROOY* SHIRT XL](https://classic-shirts.com/product-eng-369338-2006-08-NETHERLANDS-V-NISTELROOY-SHIRT-XL.html) | XL | 8/10 | £79.99 | Classic-Shirts | 01.10. |
 | [2004-06 NETHERLANDS *V. NISTELROOY* SHIRT XXL](https://classic-shirts.com/product-eng-376829-2004-06-NETHERLANDS-V-NISTELROOY-SHIRT-XXL.html) | XXL | 6/10 | £69.99 | Classic-Shirts | 01.10. |
-| [Van Nistelrooy 10 Netherlands 2004/2005/2006 Home Football Shirt XL](https://footballshirtkingdom.com/products/netherlands-2004-2005-2006-home-football-shirt-xl-8357) | XL | Excellent | 144.95 EUR | Football Shirt Kingdom | 01.10. |
 | [Netherlands 2004/2005 Home Ruud Van Nistelrooy Soccer Jersey (XL)](https://www.original11vs11.com/product-page/netherlands-2004-home-ruud-van-nistelrooy-jersey-xl) | XL | Used | 144.0 USD | Original 11vs11 | 01.10. |
 | [Original Holland Home Jersey 2006-2008 #9 Van Nistelrooy - XL](https://retroriginalfootball.com/products/original-holland-home-jersey-2006-2008-9-van-nistelrooy-xl-6788) | XL | Very Good | 109.00 EUR | RetrOriginalFootball | 01.10. |
 | [PSV 2000-2001 #8 Van Nistelrooy - XL (8/10)](https://thefootballroom-mty.com/en/products/4425) | XL | 8/10 | 131.95 EUR | The Football Room | 01.10. |
@@ -399,7 +383,7 @@ Stand: 04.10.2026 10:04 Uhr (priority), 297 aktuelle Treffer in XL/XXL
 | [Maillot Nike Football PSG Paris Saint-Germain Home VERRATTI 2022/23 - XL](https://www.lineupvintageshop.com/product-page/maillot-nike-football-psg-paris-saint-germain-home-verratti-2022-23) | XL | Used | 145.0 EUR | Lineup Vintage | 01.10. |
 | [ITALY VERRATTI 2022-2023 ORIGINAL PLAYER JERSEY Size XL](https://tiffozifutbol.com/products/italy-veratti-2022-2023-original-player-jersey-size-xl) | XL | 9/10 | 99.95 EUR | Tiffozi Futbol | 01.10. |
 
-## Vidal (Arturo) (9)
+## Vidal (Arturo) (6)
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
@@ -407,13 +391,10 @@ Stand: 04.10.2026 10:04 Uhr (priority), 297 aktuelle Treffer in XL/XXL
 | [2020/21 Chile Home Football Shirt (XL) Nike #8 Vidal](https://casualfootballshirts.co.uk/products/2020-21-chile-home-football-shirt-xl-nike-8-vidal) | XL | Excellent | 60.00 GBP | Casual Football Shirts | 01.10. |
 | [2015-16 BAYERN MUNCHEN *VIDAL* SHIRT XXL](https://classic-shirts.com/product-eng-308923-2015-16-BAYERN-MUNCHEN-VIDAL-SHIRT-XXL.html) | XXL | 8/10 | £69.99 | Classic-Shirts | 01.10. |
 | [2017-18 BAYERN MUNCHEN *VIDAL* SHIRT XL](https://classic-shirts.com/product-eng-328557-2017-18-BAYERN-MUNCHEN-VIDAL-SHIRT-XL.html) | XL | 8/10 | £79.99 | Classic-Shirts | 01.10. |
-| [2020/21 Chile Home Football Shirt (XL) Nike #8 Vidal](https://www.footballfinery.co.uk/products/2020-21-chile-home-football-shirt-xl-nike-8-vidal-ff302017) | XL | Excellent | 72.95 EUR | Football Finery | 01.10. |
 | [Bayern München 15/16 Arturo Vidal](https://www.kitts.de/l/6aa05f71-df22-4392-b915-ebdcbbdf0a2d) | XL | Excellent | 86.31 EUR | kitts.de | 01.10. |
 | [2016-17 Bayern Munich Home Shirt Vidal #23 (LS)](https://www.legacyfootballshirts.com/products/bayern-munich-home-shirt-2016-17-vidal-23-longsleeve-a0641) | XL | Very Good | 84.99 EUR | Legacy Football Shirts | 01.10. |
-| [2012/13 - Juventus - Vidal #23 (XL)](https://www.vintagefootballarea.com/products/2012-13-juventus-vidal-23-xl-1) | XL | Very Good | 74.99 EUR | Vintage Football Area | 01.10. |
-| [2013/14 - Juventus - Vidal #23 (XL)](https://www.vintagefootballarea.com/products/2013-14-juventus-vidal-23-xl-2) | XL | Very Good | 39.99 EUR | Vintage Football Area | 01.10. |
 
-## Zé Roberto (12)
+## Zé Roberto (11)
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
@@ -421,7 +402,6 @@ Stand: 04.10.2026 10:04 Uhr (priority), 297 aktuelle Treffer in XL/XXL
 | [2002/03 Bayern Munich European Football Shirt (XL) Adidas #11 Ze Roberto (BNWTs)](https://casualfootballshirts.co.uk/products/2002-03-bayern-munich-european-football-shirt-xl-adidas-11-ze-roberto-bnwts) | XL | BNWT | 125.00 GBP | Casual Football Shirts | 01.10. |
 | [2008-09 BAYERN MUNCHEN *ZE ROBERTO* SHIRT XL](https://classic-shirts.com/product-eng-238203-2008-09-BAYERN-MUNCHEN-ZE-ROBERTO-SHIRT-XL.html) | XL | 8/10 | £49.99 | Classic-Shirts | 01.10. |
 | [2005-06 BAYERN MUNCHEN *ZE ROBERTO* SHIRT XXL](https://classic-shirts.com/product-eng-245707-2005-06-BAYERN-MUNCHEN-ZE-ROBERTO-SHIRT-XXL.html) | XXL | 9/10 | £79.99 | Classic-Shirts | 01.10. |
-| [2005-06 BAYERN MUNCHEN *ZE ROBERTO* SHIRT XL](https://classic-shirts.com/product-eng-249718-2005-06-BAYERN-MUNCHEN-ZE-ROBERTO-SHIRT-XL.html) | XL | 8/10 | £49.99 | Classic-Shirts | 01.10. |
 | [2005-06 BAYERN MUNCHEN *ZE ROBERTO* SHIRT XXL](https://classic-shirts.com/product-eng-259469-2005-06-BAYERN-MUNCHEN-ZE-ROBERTO-SHIRT-XXL.html) | XXL | 9/10 | £74.99 | Classic-Shirts | 01.10. |
 | [2002-03 BAYERN MUNCHEN *ZE ROBERTO* SHIRT XXL](https://classic-shirts.com/product-eng-261859-2002-03-BAYERN-MUNCHEN-ZE-ROBERTO-SHIRT-XXL.html) | XXL | 8/10 | £72.99 | Classic-Shirts | 01.10. |
 | [2005-06 BAYERN MUNCHEN *ZE ROBERTO* SHIRT XL](https://classic-shirts.com/product-eng-288853-2005-06-BAYERN-MUNCHEN-ZE-ROBERTO-SHIRT-XL.html) | XL | 9/10 | £74.99 | Classic-Shirts | 01.10. |
