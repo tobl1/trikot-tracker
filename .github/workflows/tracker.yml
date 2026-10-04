@@ -29,6 +29,10 @@ jobs:
     timeout-minutes: 180
     steps:
       - uses: actions/checkout@v6
+        with:
+          # Immer den NEUESTEN Stand von main holen, nicht den beim Auslösen. Sonst rechnet ein Run,
+          # der hinter einem anderen gewartet hat, mit veralteten Daten (Konflikt, doppelte Pushes)
+          ref: main
 
       - uses: actions/setup-python@v6
         with:

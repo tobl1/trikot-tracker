@@ -55,7 +55,7 @@ FX_API = "https://api.frankfurter.dev/v1/latest"
 FYJ_MARKETPLACES = ("ebay.", "depop.", "vinted.", "etsy.")   # über FYJ nicht übernehmen
 RECHECK_DAYS = 3             # FYJ-Treffer so oft auf der Shop-Seite nachprüfen (verkauft?)
 CHECK_VERSION = 2            # erhöhen, wenn die Seitenprüfung mehr auswertet: dann wird alles neu geprüft
-ENRICH_BUDGET = {"full": 150, "priority": 25, "drop": 25}   # max. Seitenprüfungen pro Lauf
+ENRICH_BUDGET = {"full": 400, "priority": 25, "drop": 25}   # max. Seitenprüfungen pro Lauf
 NOTE_LEN = 160               # Länge der Zustandsnotiz
 FALLBACK_SKIP_HOURS = {"full": 20, "priority": 4}   # GitHub-Zeitplan überspringt, wenn schon gelaufen
 RUN_HISTORY = 120            # so viele Läufe für den Eingangsverlauf im Dashboard merken
@@ -104,10 +104,12 @@ ANY_SIZE_RX = re.compile(r"(?<![a-z0-9])(xxs|xs|s|m|l|xl|xxl|2xl|3xl|xxxl|small|
 # Sternchen-Wörter wie "*WINFIELD*" (classic-shirts) sind Beflockungen, außer diese Zusätze
 STAR_RX = re.compile(r"\*([^*]{2,40})\*")
 STAR_TAGS = re.compile(r"(?i)^(bnwt|bnib|bnwot|bnip|w/ ?tags|with tags|mint|new|rare|signed|autographed|player issue|"
-                       r"match worn|match issue|sample|prototype|ls|l/s|long ?sleeve|basic|retro|vintage)$")
+                       r"match worn|match issue|sample|prototype|ls|l/s|long ?sleeve|basic|retro|vintage|university|"
+                       r"academy|academie|training|staff)$")
 
 # Rückennummer im Titel: "#10", "# 10", "No. 10", "Nr 10", "Number 10"
-FLOCK_NUM_RX = re.compile(r"#\s?\d{1,2}(?!\d)|(?<![a-z0-9])(no|nr|num|number)\.?\s?\d{1,2}(?![\d/])")
+FLOCK_NUM_RX = re.compile(r"#\s?\d{1,2}(?!\d)|(?<![a-z0-9])(no|nr|num|number)\.?\s?\d{1,2}(?![\d/])"
+                          r"|(?<![a-z0-9])n\s\d{1,2}(?![\d/])")   # "N°7" wird normalisiert zu "n 7"
 
 VARIANT_WORDS = {
     "home": ["home", "heim", "heimtrikot", "local", "thuis", "domicile", "casa", "1st"],
@@ -1519,20 +1521,32 @@ def apply_flags(seen, status_store, ts):
     if token and repo:
         api = f"https://api.github.com/repos/{repo}/issues"
         hdr = {"Authorization": f"Bearer {token}", "Accept": "application/vnd.github+json"}
-        try:
-            issues = requests.get(api, params={"labels": "flag", "state": "open", "per_page": 100},
-                                  headers=hdr, timeout=TIMEOUT).json()
-        except (requests.RequestException, ValueError):
-            issues = []
-        for iss in issues if isinstance(issues, list) else []:
+        # Alle Meldungen lesen, auch geschlossene: so geht nichts verloren, falls ein Run nach dem
+        # Schließen nicht speichern konnte (passiert am 04.10.2026)
+        issues = []
+        for page in range(1, 6):
+            try:
+                batch = requests.get(api, params={"labels": "flag", "state": "all", "per_page": 100, "page": page},
+                                     headers=hdr, timeout=TIMEOUT).json()
+            except (requests.RequestException, ValueError):
+                break
+            if not isinstance(batch, list) or not batch:
+                break
+            issues += batch
+            if len(batch) < 100:
+                break
+        for iss in issues:
             if (iss.get("user") or {}).get("login") != owner:
                 continue
             f = parse_flag(iss.get("body"))
             if not f:
                 continue
-            flags[f["id"]] = {"grund": f["grund"].lower(), "kommentar": f.get("kommentar", ""),
-                              "zeit": ts, "issue": iss.get("number"), "titel": (iss.get("title") or "")[:120]}
-            new += 1
+            if f["id"] not in flags:
+                flags[f["id"]] = {"grund": f["grund"].lower(), "kommentar": f.get("kommentar", ""),
+                                  "zeit": ts, "issue": iss.get("number"), "titel": (iss.get("title") or "")[:120]}
+                new += 1
+            if iss.get("state") != "open":
+                continue
             e = seen.get(f["id"])
             msg = (f"Übernommen: Treffer ist ab sofort ausgeblendet ({f['grund']})." if e else
                    "Übernommen, der Treffer war schon nicht mehr in der Liste.")

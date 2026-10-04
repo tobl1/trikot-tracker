@@ -136,7 +136,7 @@ shops:
   - {name: Din Fodboldtrøje, url: "https://dinfodboldtroje.com", schnellcheck: nein}
   - {name: Pardon My Kicks, url: "https://pardonmykicks.se", schnellcheck: nein}
 # Frankreich, Spanien, Italien
-  - {name: The Football Market, url: "https://thefootballmarket.com", schnellcheck: nein}
+  - {name: The Football Market, url: "https://thefootballmarket.com", plattform: aus, hinweis: "Nutzer 04.10.2026: Zustand durchweg schlecht, Fantasie-Flocks"}
   - {name: La Surface, url: "https://lasurface.shop", schnellcheck: nein}
   - {name: Vintage Football FR, url: "https://www.vintage-football.com", plattform: wix, schnellcheck: nein}
   - {name: Real Vintage Football, url: "https://realvintagefootball.com", schnellcheck: nein}

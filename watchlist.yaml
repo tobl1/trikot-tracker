@@ -31,8 +31,11 @@ produkt_ausschluss: ["shorts", "socks", "sock", "jacket", "track top", "tracksui
                      # Trainingsshirts in anderen Sprachen
                      "treino", "entrenamiento", "entreno", "allenamento", "entrainement",
                      "trening", "trainingsshirt", "trainingstrikot",
+                     "trainingsjacke", "trainingsanzug", "trainingsoberteil", "regenjacke", "allwetterjacke",
+                     "prasentationsjacke", "aufwarmshirt", "giacca", "giubbotto", "felpa", "veste",
+                     "chaqueta", "sudadera", "chandal", "survetement", "kurtka", "bluza",
                      # andere Vereine mit gleichem Namen
-                     "barcelona sc", "barcelona s.c.", "barcelona sporting", "guayaquil"]
+                     "barcelona sc", "barcelona s.c.", "barcelona sporting", "guayaquil", "espanyol"]
 
 # Nachbauten: neu produzierte Trikots, offizielle Neuauflagen, reine Flocksätze
 # (nicht "replica", das heißt in UK einfach Fan-Trikot)
@@ -130,7 +133,7 @@ spieler:
 
   - name: Kroos
     suche: ["kroos"]
-    ausschluss: ["felix kroos"]
+    ausschluss: ["felix kroos", "leverkusen", "bayer 04"]      # Nutzer: Kroos niemals Leverkusen
 
   - name: Rodri
     suche: ["rodri"]

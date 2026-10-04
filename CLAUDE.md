@@ -194,6 +194,18 @@ auf dem Foto erkennbar sind (z. B. Trainingsshirt ohne Hinweis im Titel), über 
 - `apply_flags()` in jedem Run (auch Drop-Run, der dafür nicht früh abbricht): nur Issues des
   Repo-Inhabers (öffentliches Repo!), speichert in `status.json` → `flags`, kommentiert und schließt
   das Issue. ausverkauft → `verkauft`, sonst → `aussortiert`; gemeldete URLs werden nie wieder aufgenommen
+- `apply_flags()` liest **alle** Flag-Issues (auch geschlossene) und baut `flags` daraus auf. Grund: am
+  04.10.2026 schloss ein Run 12 Issues, konnte dann aber wegen Git-Konflikt nicht speichern
+- Workflow checkt `ref: main` aus: ein wartender Run nutzt sonst den Stand vom Auslösezeitpunkt
+  (Konflikt beim Speichern, mögliche Doppel-Pushes)
+- Meldungen vom 04.10.2026 und Folgen: Trainingsjacken als Wortzusammensetzung ("Trainingsjacke") und
+  italienisch/spanisch/französisch ("giacca", "chaqueta", "veste" …), "Espanyol" ist nicht Barça,
+  Kroos niemals Leverkusen, "N°7" ist eine Rückennummer, "*university*"/"*academy*" kein Spielername,
+  The Football Market deaktiviert (Zustand). Nicht per Text lösbar: VFA-Barça-Trainingsshirts, die der
+  Shop "Maillot" nennt (nur über Meldungen)
+- Casual Football Shirts, Football Finery und Football Shirt Kingdom teilen ihren Bestand (gleiche
+  Bilddateien mit Kennung "ff30…"). Dashboard fasst gleiche Titel (ab 25 Zeichen) und Größe auch
+  shopübergreifend zusammen ("auch bei …")
 - **Für Claude:** gemeldete Fehltreffer regelmäßig mit `gh issue list --label flag --state all` lesen
   und daraus Matching-Regeln ableiten (mit Testfall), statt nur einzeln auszublenden
 

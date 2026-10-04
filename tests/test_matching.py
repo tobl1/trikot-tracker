@@ -458,3 +458,16 @@ def test_wix_text_v3():
 def test_flock_erkennung_nur_fuer_pflicht():
     # "blanco" (weiß) darf ein unbeflocktes Spanien-Sondertrikot nicht als fremd beflockt aussortieren
     assert {l for l, _ in M.labels("Camiseta España 2010 blanco XL")} == {"Spanien 2010/2011"}
+
+
+@pytest.mark.parametrize("title,expected", [
+    ("FC Barcelona 2011-12 Trainingsjacke (XXL) nike", set()),                     # Meldung #19
+    ("giacca barcellona nike 2011/2012 XL", set()),                                 # Meldung #21
+    ("Espanyol Barcelona 2012-13 Trikot auswärts BNWT - 10/10 - [XL]", set()),      # Meldung #4
+    ("Bayer 04 Leverkusen - Kroos #39 - Trikot 2008–2009 - XL", set()),             # Meldung #5
+    ("Maillot de football retro Equipe d'Espagne N°7 MARAVILLA 2010-2011 XL", set()),   # Meldung #7
+    ("2004/05 - Juventus (XL) *university*", set()),                                # Meldung #6
+    ("2013-14 Bayern Munich Home Shirt Kroos #39 (XL)", {"Kroos"}),
+])
+def test_meldungen_0410(title, expected):
+    assert {l for l, _ in M.labels(title)} == expected

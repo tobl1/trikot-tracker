@@ -298,7 +298,10 @@ summary{cursor:pointer;font-weight:600}
     const price = t.eur != null ? `<b>${eur(t.eur)}</b>${orig}` : `<b>${esc(t.preis || "?")}</b>`;
     const img = t.bild ? `<img loading="lazy" referrerpolicy="no-referrer" src="${esc(t.bild)}" alt="" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph',textContent:'👕'}))">`
                        : '<span class="ph">👕</span>';
-    const dup = !st.dupes && t.dupes && t.dupes.length ? `<div class="dupes">+${t.dupes.length} gleiche im Shop (${t.dupRange})</div>` : "";
+    const same = t.dupes ? t.dupes.filter(d => d.shopName === t.shopName).length : 0;
+    const dup = !st.dupes && t.dupes && t.dupes.length ? `<div class="dupes">` +
+      [same ? `+${same} gleiche im Shop` : "", t.dupShops && t.dupShops.length ? `auch bei ${esc(t.dupShops.join(", "))}` : ""]
+        .filter(Boolean).join(" · ") + ` (${t.dupRange})</div>` : "";
     return `<a class="card${t.hoch ? " hi" : ""}${t.gone ? " gone" : ""}" href="${esc(t.url)}" target="_blank" rel="noopener">
       <div class="img">${img}</div><div class="badges">${badges}</div>
       <button class="fav" data-id="${esc(t.id)}" aria-pressed="${f ? "true" : "false"}" title="Favorit" aria-label="Favorit">${f ? "★" : "☆"}</button>
@@ -366,7 +369,15 @@ summary{cursor:pointer;font-weight:600}
       $("more").hidden = list.length <= shown;
       $("more").textContent = `Mehr anzeigen (${list.length - shown} weitere)`;
     }
-    document.querySelectorAll("#labels .chip").forEach(b => b.setAttribute("aria-pressed", String(st.labels.includes(b.dataset.l))));
+    const keepLabels = st.labels; st.labels = [];
+    const visible = filtered(); st.labels = keepLabels;
+    const counts = {};
+    visible.forEach(t => t.labels.forEach(l => counts[l] = (counts[l] || 0) + 1));
+    document.querySelectorAll("#labels .chip").forEach(b => {
+      b.setAttribute("aria-pressed", String(st.labels.includes(b.dataset.l)));
+      const sm = b.querySelector("small"); if (sm) sm.textContent = counts[b.dataset.l] || 0;
+      b.style.opacity = counts[b.dataset.l] ? "" : ".45";
+    });
   }
 
   function setup(data){
@@ -382,7 +393,10 @@ summary{cursor:pointer;font-weight:600}
     // Gleiche Angebote eines Shops (gleicher Titel, gleiche Größe) zusammenfassen: günstigstes zeigen
     const groups = {};
     all.forEach(t => {
-      const k = `${t.shopName}|${t.titel.toLowerCase().replace(/[^a-z0-9/]+/g, " ").trim()}|${t.groesse}`;
+      // Gleicher Titel und gleiche Größe = gleiches Angebot, bei langen Titeln auch über Shops hinweg
+      // (manche Shops teilen ihren Bestand, z. B. Casual Football Shirts und Football Finery)
+      const nt = t.titel.toLowerCase().replace(/[^a-z0-9/]+/g, " ").trim();
+      const k = (nt.length >= 25 ? "" : t.shopName) + `|${nt}|${t.groesse}`;
       (groups[k] = groups[k] || []).push(t);
     });
     Object.values(groups).filter(g => g.length > 1).forEach(g => {
@@ -391,6 +405,7 @@ summary{cursor:pointer;font-weight:600}
       first.dupes = rest; rest.forEach(t => t.dupOf = first.id);
       const prices = g.map(t => t.eur).filter(v => v != null);
       first.dupRange = prices.length ? `${eur(Math.min(...prices))} bis ${eur(Math.max(...prices))}` : "";
+      first.dupShops = [...new Set(rest.map(t => t.shopName).filter(n => n !== first.shopName))];
     });
     $("stand").textContent = `Stand ${fmtDate(data.stand)} Uhr (${MODE[data.modus] || data.modus})` +
       (data.letzter_gesamtlauf ? ` · letzter Gesamt-Run ${fmtDate(data.letzter_gesamtlauf)}` : "");
