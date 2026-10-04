@@ -15,10 +15,10 @@
 <meta name="theme-color" content="#000000">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600;700&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=Raleway:wght@600;700&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* Design angelehnt an "Crypto Trading Mobile App" (Dribbble): Schwarz, Anthrazit-Karten, Rot als einziger Akzent.
-   Schriften: Titel Raleway, alles andere Syne (Nutzer 05.10.2026) */
+   Schriften: Titel Raleway, Kategorie und Preis in der Kachel Inter, alles andere Syne (Nutzer 05.10.2026) */
 :root{
   --bg:#000; --card:#141414; --card2:#1d1d1d; --line:#2a2a2a; --ink:#fff; --muted:#8b8b8b;
   --accent:#e0352f; --accent-ink:#fff; --accent-deep:#b8231e; --chip:#1d1d1d; --chip-on:#fff; --chip-on-ink:#000;
@@ -99,13 +99,14 @@ select{flex:0 1 auto;max-width:100%;appearance:none;-webkit-appearance:none;padd
 .badge.gone{background:var(--muted);color:var(--bg)}
 .badge.down{background:var(--good);color:#000}
 .body{padding:10px 8px 6px;display:flex;flex-direction:column;gap:5px;flex:1}
-.labels{font-size:12px;font-weight:500;color:var(--accent)}
+.labels{font-family:"Inter",system-ui,sans-serif;font-size:12px;font-weight:600;color:var(--accent);letter-spacing:-.005em}
 .card.th .labels{color:#fff;opacity:.9}
 .title{font-size:14px;font-weight:400;line-height:1.3;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .note{font-size:12px;color:var(--muted);line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .card.th .note,.card.th .shop,.card.th .dupes,.card.th .price small{color:rgba(255,255,255,.78)}
 .foot{margin-top:auto;padding-top:4px;display:flex;justify-content:space-between;align-items:flex-end;gap:8px}
-.price b{font-size:20px;font-weight:500;letter-spacing:-.02em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.price{font-family:"Inter",system-ui,sans-serif}
+.price b{font-size:20px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums;white-space:nowrap}
 .price small{display:block;color:var(--muted);font-size:12px}
 .foot>div:last-child{display:flex;align-items:center;flex-wrap:nowrap;min-width:0;gap:5px}
 .cond{font-size:11px;font-weight:500;color:var(--good);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
