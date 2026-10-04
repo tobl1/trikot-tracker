@@ -26,7 +26,7 @@
   "labels": [
    "Robben"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "69.99 EUR",
   "prios": [
    "normal"
@@ -46,7 +46,7 @@
   "labels": [
    "Robben"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "89.99 EUR",
   "prios": [
    "normal"
@@ -124,7 +124,7 @@
   "labels": [
    "Henry"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "139.99 EUR",
   "prios": [
    "normal"
@@ -136,6 +136,26 @@
   "url": "https://backtothefootball.com/produit/2005-2006-maillot-exterieur-arsenal-henry-14-xl-2/",
   "via": "direkt",
   "zustand": "8/10"
+ },
+ "backtothefootball.com/produit/2006-maillot-domicile-equipe-de-france-zidane-10-xl-2": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://backtothefootball.com/wp-content/uploads/2026/09/FRA484_1.webp",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "159.99 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Back to the Football",
+  "size": "XL",
+  "still": true,
+  "teuer": true,
+  "title": "2006 – maillot domicile équipe de France – Zidane #10 (XL)",
+  "url": "https://backtothefootball.com/produit/2006-maillot-domicile-equipe-de-france-zidane-10-xl-2/",
+  "via": "direkt",
+  "zustand": "9/10"
  },
  "ballerscustomprinting.com/products/barella-23-inter-milan-2021-22-home-shirt": {
   "first": "2026-09-30T22:29:38.239492+00:00",
@@ -242,13 +262,34 @@
   "zustand": "8/10",
   "zustand_notiz": "Zustand: 8/10"
  },
+ "bulishirts.com/product-page/dfb-klose-11-2006-2008-xl-1": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://static.wixstatic.com/media/f9ec63_e128f1e93d2e43d596c416f1a3e6960e~mv2.jpg",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "179.0 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Bulishirts",
+  "size": "XL",
+  "still": true,
+  "teuer": true,
+  "title": "DFB - Klose #11 - Trikot 2006–2008 - XL",
+  "url": "https://www.bulishirts.com/product-page/dfb-klose-11-2006-2008-xl-1",
+  "via": "direkt",
+  "zustand": "8.5/10",
+  "zustand_notiz": "Zustand: 8,5/10"
+ },
  "bulishirts.com/product-page/dfb-kroos-18-2010-2012-xxl": {
   "first": "2026-10-04T04:38:13.554139+00:00",
   "image": "https://static.wixstatic.com/media/f9ec63_8f0d09f202174514b95bc48183920291~mv2.jpg",
   "labels": [
    "Kroos"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "129.0 EUR",
   "prios": [
    "normal"
@@ -263,13 +304,55 @@
   "zustand": "9/10",
   "zustand_notiz": "Zustand: 9/10"
  },
+ "bulishirts.com/product-page/dfb-odonkor-22-2006-2008-xl": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://static.wixstatic.com/media/f9ec63_b40b138feda24d2ca1c30c3e3d8ee92d~mv2.jpg",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "159.0 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Bulishirts",
+  "size": "XL",
+  "still": true,
+  "teuer": true,
+  "title": "DFB - Odonkor #22 - Trikot 2006–2008 - XL",
+  "url": "https://www.bulishirts.com/product-page/dfb-odonkor-22-2006-2008-xl",
+  "via": "direkt",
+  "zustand": "9/10",
+  "zustand_notiz": "Zustand: 9/10"
+ },
+ "bulishirts.com/product-page/dfb-schweinsteiger-7-2006-2008-xl-1": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://static.wixstatic.com/media/f9ec63_38f7302e63394e738273ef503fef8e0f~mv2.jpg",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "179.0 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Bulishirts",
+  "size": "XL",
+  "still": true,
+  "teuer": true,
+  "title": "DFB - Schweinsteiger #7 - Trikot 2006–2008 - XL",
+  "url": "https://www.bulishirts.com/product-page/dfb-schweinsteiger-7-2006-2008-xl-1",
+  "via": "direkt",
+  "zustand": "8.5/10",
+  "zustand_notiz": "Zustand: 8,5/10"
+ },
  "bulishirts.com/product-page/fc-bayern-münchen-ribery-7-trikot-2007-2008-xl": {
   "first": "2026-10-04T04:38:13.554139+00:00",
   "image": "https://static.wixstatic.com/media/f9ec63_027616b762e24706817ff3717f3dea59~mv2.jpg",
   "labels": [
    "Ribéry"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "89.0 EUR",
   "prios": [
    "normal"
@@ -290,7 +373,7 @@
   "labels": [
    "Ribéry"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "129.0 EUR",
   "prios": [
    "normal"
@@ -5532,7 +5615,7 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "65.00 EUR",
   "prios": [
    "hoch"
@@ -5998,7 +6081,7 @@
   "labels": [
    "Alonso (Xabi)"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "2100.00 MXN",
   "prios": [
    "normal"
@@ -6221,6 +6304,27 @@
   "url": "https://first11shirts.com/products/manchester-united-third-shirt-2002-3-v-nistelrooy-10-xl",
   "via": "direkt",
   "zustand": "Very Good"
+ },
+ "firststreet.store/products/2006-08-croatia-nike-home-shirt-modric-14-8-10-xl": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://cdn.shopify.com/s/files/1/0848/9009/1818/files/879FEA2C-1838-4D6F-85C8-BD22F47DAB54.jpg?v=1787025157",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "113.95 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "First Street",
+  "size": "EXTRA LARGE",
+  "still": true,
+  "teuer": false,
+  "title": "2006-08 Croatia Home Shirt MODRIC #14 - 8/10 - (XL)",
+  "url": "https://firststreet.store/products/2006-08-croatia-nike-home-shirt-modric-14-8-10-xl",
+  "via": "direkt",
+  "zustand": "8/10",
+  "zustand_notiz": "Condition: 8/10 (Great)"
  },
  "firststreet.store/products/2006-08-netherlands-nike-away-shirt-v-nistelrooy-9-7-10-xl": {
   "first": "2026-09-30T22:29:38.239492+00:00",
@@ -6727,6 +6831,48 @@
   "via": "direkt",
   "weg": "2026-10-01T11:45:23.511439+00:00"
  },
+ "footballtrikotsberlin.com/products/klose-dfb-deutschland-heimtrikot-2006-xl": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://cdn.shopify.com/s/files/1/0909/1779/8228/files/B9ACF775-E8A8-48AF-B31B-E5DF3E69453A.jpg?v=1781082582",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "119.90 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Football Trikots Berlin",
+  "size": "XL",
+  "still": true,
+  "teuer": false,
+  "title": "Klose, DFB, Deutschland Heimtrikot 2006 (XL)",
+  "url": "https://footballtrikotsberlin.com/products/klose-dfb-deutschland-heimtrikot-2006-xl",
+  "via": "direkt",
+  "zustand": "8/10",
+  "zustand_notiz": "Zustand : 8/10 Bemerkungen : minimale Beschmutzung auf dem Ärmel Mannschaft : Deutsche Nationalmannschaft Jahr : 2006 Spieler : Miroslav Klose Produktcode : …"
+ },
+ "footballtrikotsberlin.com/products/zidane-frankreich-heimtrikot-2006-xl": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://cdn.shopify.com/s/files/1/0909/1779/8228/files/706E82A3-01A4-4A34-BD81-B20706D6F79B.jpg?v=1787176415",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "149.90 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Football Trikots Berlin",
+  "size": "XL",
+  "still": true,
+  "teuer": false,
+  "title": "Zidane, Frankreich Heimtrikot 2006 (XL)",
+  "url": "https://footballtrikotsberlin.com/products/zidane-frankreich-heimtrikot-2006-xl",
+  "via": "direkt",
+  "zustand": "9/10",
+  "zustand_notiz": "Zustand : 9/10 Mannschaft : Französische Nationalmannschaft Jahr : 2006 Spieler : Zinedine Zidane Produktcode : 740126 Bei Fragen zu Größen und Zustand der …"
+ },
  "foreversoccerjerseys.com/products/iniesta-spain-2010-world-cup-final-soccer-away-jersey-xl-sku-p47896": {
   "first": "2026-09-30T22:29:38.239492+00:00",
   "image": "https://cdn.shopify.com/s/files/1/1492/9114/files/20260825_160043.jpg?v=1787885049",
@@ -6788,7 +6934,7 @@
   "labels": [
    "Kroos"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "586.00 USD",
   "prios": [
    "normal"
@@ -6800,6 +6946,26 @@
   "url": "https://foreversoccerjerseys.com/products/kroos-real-madrid-2021-2022-uefa-final-player-issue-long-sleeve-soccer-jersey-xl-sku-gr3995",
   "via": "direkt",
   "zustand": "9.5/10"
+ },
+ "foreversoccerjerseys.com/products/messi-argentina-2006-world-cup-player-issue-soccer-jersey-bnwt-xl-sku-069527": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://cdn.shopify.com/s/files/1/1492/9114/files/20260716_125303.jpg?v=1784229351",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "849.99 USD",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Forever Soccer Jerseys",
+  "size": "XL",
+  "still": true,
+  "teuer": true,
+  "title": "Messi Argentina 2006 World Cup PLAYER ISSUE Soccer Jersey BNWT XL SKU# 069527",
+  "url": "https://foreversoccerjerseys.com/products/messi-argentina-2006-world-cup-player-issue-soccer-jersey-bnwt-xl-sku-069527",
+  "via": "direkt",
+  "zustand": "BNWT"
  },
  "foreversoccerjerseys.com/products/messi-barcelona-2011-2012-away-soccer-jersey-xl-sku-419880-010": {
   "first": "2026-09-30T22:29:38.239492+00:00",
@@ -6882,7 +7048,7 @@
   "labels": [
    "Verratti"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "299.99 USD",
   "prios": [
    "normal"
@@ -6894,6 +7060,25 @@
   "url": "https://www.foreversoccerjerseys.com/products/verratti-psg-paris-saint-germain-2016-2017-player-issue-soccer-jersey-bnwt-xl-sku-776916-102",
   "via": "direkt",
   "zustand": "BNWT"
+ },
+ "fshoppen.dk/products/david-beckham-england-2006-hjemmebane-troje-xl-🏴-4": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://cdn.shopify.com/s/files/1/0780/0304/4683/files/david-beckham-england-2006-hjemmebane-troeje-xl-fodboldshoppen-dk-2864291.jpg?v=1786762759",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "122.95 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Fodbold Shoppen",
+  "size": "XL",
+  "still": true,
+  "teuer": false,
+  "title": "David Beckham - England 2006 hjemmebane trøje XL 🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+  "url": "https://fshoppen.dk/products/david-beckham-england-2006-hjemmebane-troje-xl-🏴-4",
+  "via": "direkt"
  },
  "fshoppen.dk/products/david-villa-spanien-2014-udebane-troje-xl": {
   "first": "2026-09-30T22:29:38.239492+00:00",
@@ -6957,7 +7142,7 @@
   "labels": [
    "Torres (Fernando)"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "169.95 EUR",
   "prios": [
    "normal"
@@ -7076,13 +7261,32 @@
   "url": "https://futmaniacos.com/products/camiseta-barcelona-2012-2013-visitante-1",
   "via": "direkt"
  },
+ "galacticsoccerkits.com/product-page/argentina-2006-home-messi-2xl": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://static.wixstatic.com/media/eca31e_c0147213a5f34867914179e0619d8f26~mv2.jpeg",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "174.99 USD",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Galactic Soccer Kits",
+  "size": "2XL",
+  "still": true,
+  "teuer": true,
+  "title": "Argentina 2006 home Messi (2XL)",
+  "url": "https://www.galacticsoccerkits.com/product-page/argentina-2006-home-messi-2xl",
+  "via": "direkt"
+ },
  "galacticsoccerkits.com/product-page/bayern-munich-2013-14-away-robben-xxl": {
   "first": "2026-10-04T04:38:13.554139+00:00",
   "image": "https://static.wixstatic.com/media/eca31e_3b9df81f61384dc49597a49410bcccfb~mv2.jpeg",
   "labels": [
    "Robben"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "119.99 USD",
   "prios": [
    "normal"
@@ -7101,7 +7305,7 @@
   "labels": [
    "Barella"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "129.99 USD",
   "prios": [
    "normal"
@@ -7181,7 +7385,7 @@
   "labels": [
    "Nike Total 90 (2004-06)"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "169.90 EUR",
   "prios": [
    "normal"
@@ -7219,7 +7423,7 @@
   "labels": [
    "Nike Total 90 (2004-06)"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "199.90 EUR",
   "prios": [
    "normal"
@@ -7259,7 +7463,7 @@
   "labels": [
    "Cavani"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "189.90 EUR",
   "prios": [
    "normal"
@@ -7332,6 +7536,25 @@
   "via": "direkt",
   "zustand": "10/10"
  },
+ "greensportvintage.com/products/maglia-calcio-vintage-shirt-england-owen-umbro-world-cup-2006-umbro-xl": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://cdn.shopify.com/s/files/1/0611/7412/0680/files/69bec5ea6decff236cf343b1.png?v=1774110454",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "119.90 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Green Sport Vintage",
+  "size": "XL",
+  "still": true,
+  "teuer": false,
+  "title": "maglia calcio vintage shirt England OWEN Umbro World Cup 2006 UMBRO XL",
+  "url": "https://greensportvintage.com/products/maglia-calcio-vintage-shirt-england-owen-umbro-world-cup-2006-umbro-xl",
+  "via": "direkt"
+ },
  "greensportvintage.com/products/maglia-henry-arsenal-vintage-nike-2002-2003-invicibles-o2-xl-highbury-premier": {
   "first": "2026-10-01T14:14:58.073674+00:00",
   "image": "https://cdn.shopify.com/s/files/1/0611/7412/0680/products/65bbcd4c6f8d79f9eea9b678.png?v=1706806994",
@@ -7369,13 +7592,32 @@
   "url": "https://greensportvintage.com/products/match-issue-vintage-juventus-ibrahimovic-nike-shirt-2004-2005-jersey-sky-xl",
   "via": "direkt"
  },
+ "greensportvintage.com/products/portugal-nike-2006-world-cup-deco-20-maglia-home-jersey-football-xl": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://cdn.shopify.com/s/files/1/0611/7412/0680/files/6a8d945a1011f86f1532b6aa.png?v=1787663715",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "199.90 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Green Sport Vintage",
+  "size": "XL",
+  "still": true,
+  "teuer": true,
+  "title": "Portugal Nike 2006 World Cup Deco #20 Maglia Home Jersey Football XL",
+  "url": "https://greensportvintage.com/products/portugal-nike-2006-world-cup-deco-20-maglia-home-jersey-football-xl",
+  "via": "direkt"
+ },
  "iconicjersey.com/products/original-ajax-1999-00-home-f11436": {
   "first": "2026-10-01T14:14:58.073674+00:00",
   "image": "https://cdn.shopify.com/s/files/1/0708/7200/6930/files/660-Photoroom-20260917_210327_13.jpg?v=1790243306",
   "labels": [
    "Van der Vaart"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "122.95 EUR",
   "prios": [
    "normal"
@@ -7414,7 +7656,7 @@
   "labels": [
    "Robben"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "94.95 EUR",
   "prios": [
    "normal"
@@ -7467,13 +7709,55 @@
   "via": "fyj",
   "weg": "2026-10-01T11:45:23.511439+00:00"
  },
+ "infinityfootballshirts.com/products/ivory-coast-away-shirt-2006-07-xl-toure-yaya-19-bnwt": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://cdn.shopify.com/s/files/1/0789/5764/2074/files/CFA0C8BF-B81C-4192-8CF0-4184CCC92404.jpg?v=1755770619",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "156.95 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Infinity Football Shirts",
+  "size": "XL",
+  "still": true,
+  "teuer": true,
+  "title": "Ivory Coast Away Shirt 2006/07 (XL) Toure Yaya 19 BNWT",
+  "url": "https://infinityfootballshirts.com/products/ivory-coast-away-shirt-2006-07-xl-toure-yaya-19-bnwt",
+  "via": "direkt",
+  "zustand": "BNWT",
+  "zustand_notiz": "Condition: BNWT. Measurements: pit to pit 60cm approx. collar to hem 78cm approx. Ivory Coast Away Shirt 2006/07 featuring Yaya Toure. Stunning shirt featuring …"
+ },
+ "infinityfootballshirts.com/products/netherlands-home-shirt-2006-08-xl-robben-11": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://cdn.shopify.com/s/files/1/0789/5764/2074/files/8CE67A35-A28B-4AE5-8645-9E8E7E0201B8.png?v=1745242700",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "84.95 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Infinity Football Shirts",
+  "size": "XL",
+  "still": true,
+  "teuer": false,
+  "title": "Netherlands Home Shirt 2006/08 (XL) Robben 11",
+  "url": "https://infinityfootballshirts.com/products/netherlands-home-shirt-2006-08-xl-robben-11",
+  "via": "direkt",
+  "zustand": "Good",
+  "zustand_notiz": "Condition: Good, as seen on photos. Measurements: pit to pit 59cm approx. collar to hem 77cm approx. Netherlands Home Shirt 2006/08 featuring Arjen Robben. …"
+ },
  "infinityfootballshirts.com/products/south-korea-home-shirt-2004-06-ls-xl-j-s-park-21": {
   "first": "2026-10-04T04:38:13.554139+00:00",
   "image": "https://cdn.shopify.com/s/files/1/0789/5764/2074/files/53AAFCCB-D159-4139-834C-C19D1FA82FCE.jpg?v=1769512234",
   "labels": [
    "Nike Total 90 (2004-06)"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "240.95 EUR",
   "prios": [
    "normal"
@@ -7488,13 +7772,32 @@
   "zustand": "Great",
   "zustand_notiz": "Condition: Great. Believed to be player spec. As seen on photos. Measurements: pit to pit 58cm approx. collar to hem 76cm approx. South Korea Home Shirt …"
  },
+ "jersely.com/products/argentinien-argentina-2006-heimtrikot-lionel-messi-grosse-xl": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://cdn.shopify.com/s/files/1/0934/7874/8489/files/IMG_7334_9d2f9207-d880-4a1b-ba39-e10dc84b9810.jpg?v=1788097587",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "154.99 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Jersely",
+  "size": "XL",
+  "still": true,
+  "teuer": true,
+  "title": "🇦🇷 Argentinien (Argentina) 2006 Heimtrikot – Lionel Messi – Größe XL",
+  "url": "https://jersely.com/products/argentinien-argentina-2006-heimtrikot-lionel-messi-grosse-xl",
+  "via": "direkt"
+ },
  "jersely.com/products/arsenal-1999-2000-heimtrikot-thierry-henry-14-dreamcast-nike-xxl": {
   "first": "2026-10-01T14:14:58.073674+00:00",
   "image": "https://cdn.shopify.com/s/files/1/0934/7874/8489/files/IMG_7375_2719b667-efec-45fc-88b4-d85f28104603.jpg?v=1788100095",
   "labels": [
    "Henry"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "194.99 EUR",
   "prios": [
    "normal"
@@ -7512,7 +7815,7 @@
   "labels": [
    "Henry"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "159.99 EUR",
   "prios": [
    "normal"
@@ -7550,7 +7853,7 @@
   "labels": [
    "Henry"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "164.99 EUR",
   "prios": [
    "normal"
@@ -7569,7 +7872,7 @@
   "labels": [
    "Henry"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "239.99 EUR",
   "prios": [
    "normal"
@@ -7588,7 +7891,7 @@
    "Henry",
    "Nike Total 90 (2004-06)"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "299.99 EUR",
   "prios": [
    "normal"
@@ -7627,7 +7930,7 @@
   "labels": [
    "Nike Total 90 (2004-06)"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "169.99 EUR",
   "prios": [
    "normal"
@@ -7638,6 +7941,44 @@
   "teuer": true,
   "title": "🇧🇷 Brasilien 2004 Heimtrikot – Ronaldinho #10 – Größe XL",
   "url": "https://jersely.com/products/brasilien-2004-heimtrikot-ronaldinho-10-grosse-xl-1",
+  "via": "direkt"
+ },
+ "jersely.com/products/brasilien-wm-2006-heimtrikot-nike-ronaldinho-10-xxl": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://cdn.shopify.com/s/files/1/0934/7874/8489/files/IMG_1063_c4a082a0-f543-44c9-a06d-ef25e3638bd4.jpg?v=1790532490",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "139.99 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Jersely",
+  "size": "XXL",
+  "still": true,
+  "teuer": false,
+  "title": "Brasilien WM 2006 Heimtrikot – Nike – RONALDINHO #10 (XXL)",
+  "url": "https://jersely.com/products/brasilien-wm-2006-heimtrikot-nike-ronaldinho-10-xxl",
+  "via": "direkt"
+ },
+ "jersely.com/products/deutschland-dfb-2006-wm-heimtrikot-adidas-xl-klose-13": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://cdn.shopify.com/s/files/1/0934/7874/8489/files/IMG_8380_4090a3a5-9899-416d-a432-4bb40e77e07a.jpg?v=1788887911",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "109.99 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Jersely",
+  "size": "XL",
+  "still": true,
+  "teuer": false,
+  "title": "Deutschland DFB 2006 WM Heimtrikot – Adidas (XL) – Klose #11",
+  "url": "https://jersely.com/products/deutschland-dfb-2006-wm-heimtrikot-adidas-xl-klose-13",
   "via": "direkt"
  },
  "jersely.com/products/fc-barcelona-2010-11-auswartstrikot-langarm-messi-10-xxl": {
@@ -7684,7 +8025,7 @@
   "labels": [
    "Alonso (Xabi)"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "149.99 EUR",
   "prios": [
    "normal"
@@ -7743,7 +8084,7 @@
   "labels": [
    "Nike Total 90 (2004-06)"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "169.99 EUR",
   "prios": [
    "normal"
@@ -7756,13 +8097,34 @@
   "url": "https://jersely.com/products/portugal-2004-heimtrikot-rui-costa-10-xl",
   "via": "direkt"
  },
+ "jerseyshermanos.com/products/adidas-argentinien-messi-trikot-weiss-blau-grosse-xl-2006": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://cdn.shopify.com/s/files/1/0879/0038/9715/files/61EEAD17-0FDA-4CC9-A3E3-2C3C5C832B99.png?v=1786957264",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "109.00 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Jerseys Hermanos",
+  "size": "XL",
+  "still": true,
+  "teuer": false,
+  "title": "Adidas Argentinien Messi Trikot weiß blau Größe XL 2006",
+  "url": "https://jerseyshermanos.com/products/adidas-argentinien-messi-trikot-weiss-blau-grosse-xl-2006",
+  "via": "direkt",
+  "zustand": "9/10",
+  "zustand_notiz": "Zustand : 9/10 Alle Trikots werden auf ihre Authentizität geprüft und dementsprechend sind alle Trikots die zum Verkauf stehen, 100% Original! Beste Grüße Der …"
+ },
  "jerseyshermanos.com/products/nike-arsenal-fc-henry-trikot-rot-grosse-xl-1999-2000": {
   "first": "2026-09-30T22:29:38.239492+00:00",
   "image": "https://cdn.shopify.com/s/files/1/0879/0038/9715/files/F7810692-78E7-4466-B1F3-CBCFCDB17ACC.png?v=1786992388",
   "labels": [
    "Henry"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "199.00 EUR",
   "prios": [
    "normal"
@@ -7888,6 +8250,69 @@
   "zustand": "Very Good",
   "zustand_notiz": "CONDITION - Very Good, minor damage on the B of robben"
  },
+ "kickoffvintage.com/products/england-2006-beckham-away-shirt-xl-umbro-eng-00125": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://cdn.shopify.com/s/files/1/0775/8839/8420/files/DSC05509.jpg?v=1790421797",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "119.99 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Kickoff Vintage",
+  "size": "X-LARGE",
+  "still": true,
+  "teuer": false,
+  "title": "ENGLAND 2006 BECKHAM AWAY SHIRT (XL) UMBRO",
+  "url": "https://kickoffvintage.com/products/england-2006-beckham-away-shirt-xl-umbro-eng-00125",
+  "via": "direkt",
+  "zustand": "Excellent",
+  "zustand_notiz": "CONDITION - Excellent"
+ },
+ "kickoffvintage.com/products/england-2006-beckham-home-shirt-xxl-umbro-eng-00123": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://cdn.shopify.com/s/files/1/0775/8839/8420/files/DSC05511.jpg?v=1790421863",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "99.99 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Kickoff Vintage",
+  "size": "XX-LARGE",
+  "still": true,
+  "teuer": false,
+  "title": "ENGLAND 2006 BECKHAM HOME SHIRT (XXL) UMBRO",
+  "url": "https://kickoffvintage.com/products/england-2006-beckham-home-shirt-xxl-umbro-eng-00123",
+  "via": "direkt",
+  "zustand": "Excellent",
+  "zustand_notiz": "CONDITION - Excellent"
+ },
+ "kickoffvintage.com/products/england-2006-rooney-home-xxl-umbro-eng-00133": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://cdn.shopify.com/s/files/1/0775/8839/8420/files/DSC05513.jpg?v=1790792653",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "109.99 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Kickoff Vintage",
+  "size": "XX-LARGE",
+  "still": true,
+  "teuer": false,
+  "title": "ENGLAND 2006 ROONEY HOME (XXL) UMBRO",
+  "url": "https://kickoffvintage.com/products/england-2006-rooney-home-xxl-umbro-eng-00133",
+  "via": "direkt",
+  "zustand": "Excellent",
+  "zustand_notiz": "CONDITION - Excellent"
+ },
  "kickoffvintage.com/products/germany-2010-kroos-home-shirt-xl-adidas-ger-00152": {
   "first": "2026-09-30T22:29:38.239492+00:00",
   "image": "https://cdn.shopify.com/s/files/1/0775/8839/8420/files/DSC03184.jpg?v=1787222542",
@@ -7967,6 +8392,27 @@
   "url": "https://kickoffvintage.com/products/spain-2014-iniesta-home-shirt-xl-adidas-cft-00074",
   "via": "direkt",
   "weg": "2026-10-01T11:45:23.511439+00:00"
+ },
+ "kitlaunchfc.com/products/england-2006-away-long-sleeve-beckham-7-xl": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://cdn.shopify.com/s/files/1/0467/2880/6562/files/628263F1-34E5-4DF2-8D7A-4A9B8A31CB95.jpg?v=1790694140",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "160.00 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Kit Launch",
+  "size": "XL",
+  "still": true,
+  "teuer": true,
+  "title": "England 2006 Away Long Sleeve - Beckham 7 (XL)",
+  "url": "https://kitlaunchfc.com/products/england-2006-away-long-sleeve-beckham-7-xl",
+  "via": "direkt",
+  "zustand": "9/10",
+  "zustand_notiz": "Condition: 9/10 Excellent Manufacturer: Umbro"
  },
  "kitts.de/l/6932ad8c-b679-4da5-a4e7-89b6e4b3a1af": {
   "first": "2026-09-30T22:29:38.239492+00:00",
@@ -8477,6 +8923,25 @@
   "url": "https://le7sorelle.it/products/giacca-barcellona-nike-2011-2012",
   "via": "direkt"
  },
+ "le7sorelle.it/products/maglia-away-argentina-adidas-messi-19-2006-xl-52668": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://cdn.shopify.com/s/files/1/0898/3144/0719/files/MAGLIAAWAYARGENTINAADIDAS2006MESSI19XL_2.jpg?v=1790949319",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "229.00 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Le 7 Sorelle",
+  "size": "XL",
+  "still": true,
+  "teuer": true,
+  "title": "Maglia Away Argentina Adidas Messi 19 2006 XL",
+  "url": "https://le7sorelle.it/products/maglia-away-argentina-adidas-messi-19-2006-xl-52668",
+  "via": "direkt"
+ },
  "le7sorelle.it/products/maglia-away-croazia-nike-euro-2004-under-21-lucic-5": {
   "first": "2026-10-04T04:38:13.554139+00:00",
   "image": "https://cdn.shopify.com/s/files/1/0898/3144/0719/files/nike-maglia-away-croazia-nike-euro-2004-under-21-lucic-5-maawcrni-lu5-0406-home.jpg?v=1763129095",
@@ -8600,7 +9065,7 @@
   "labels": [
    "Kroos"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "120.0 EUR",
   "prios": [
    "normal"
@@ -8612,6 +9077,64 @@
   "title": "Maillot Adidas Football Allemagne Home Rétro KROOS 2018/19 - L, XL",
   "url": "https://www.lineupvintageshop.com/product-page/maillot-adidas-football-allemagne-home-rétro-kroos-2018-19",
   "via": "direkt"
+ },
+ "lineupvintageshop.com/product-page/maillot-adidas-football-allemagne-home-vintage-klose-2006-07": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://static.wixstatic.com/media/b80b26_af826e011cb449e7a83f761b7c24ed6d~mv2.jpg",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "145.0 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Lineup Vintage",
+  "size": "XL",
+  "still": true,
+  "teuer": false,
+  "title": "Maillot Adidas Football Allemagne Home Vintage KLOSE 2006/07 - XL",
+  "url": "https://www.lineupvintageshop.com/product-page/maillot-adidas-football-allemagne-home-vintage-klose-2006-07",
+  "via": "direkt"
+ },
+ "lineupvintageshop.com/product-page/maillot-adidas-football-allemagne-vintage-ballack-2006-07-s": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://static.wixstatic.com/media/b80b26_027acf62038a41db99936dc096ae59fc~mv2.jpg",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "135.0 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Lineup Vintage",
+  "size": "XL",
+  "still": true,
+  "teuer": false,
+  "title": "Maillot Adidas Football Allemagne Home Vintage BALLACK 2006/07 - XL",
+  "url": "https://www.lineupvintageshop.com/product-page/maillot-adidas-football-allemagne-vintage-ballack-2006-07-s",
+  "via": "direkt"
+ },
+ "lineupvintageshop.com/product-page/maillot-adidas-football-argentine-away-vintage-messi-2006-07": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://static.wixstatic.com/media/b80b26_d7f7f5c78ae140109db59c34c83c29d8~mv2.jpg",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "280.0 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Lineup Vintage",
+  "size": "XL",
+  "still": true,
+  "teuer": true,
+  "title": "Maillot Adidas Football Argentine Away Vintage MESSI 2006/07 - XL",
+  "url": "https://www.lineupvintageshop.com/product-page/maillot-adidas-football-argentine-away-vintage-messi-2006-07",
+  "via": "direkt",
+  "zustand_notiz": "Condition : Neuf avec étiquette \"All products are checked by our team to offer you a selection of authentic, unique, and high-quality products.\" \"Tous les …"
  },
  "lineupvintageshop.com/product-page/maillot-adidas-football-espagne-away-r%c3%a9tro-alonso-2011-12": {
   "first": "2026-09-30T22:29:38.239492+00:00",
@@ -8641,7 +9164,7 @@
   "labels": [
    "Alonso (Xabi)"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "155.0 EUR",
   "prios": [
    "normal"
@@ -8654,6 +9177,25 @@
   "url": "https://www.lineupvintageshop.com/product-page/maillot-adidas-football-espagne-away-rétro-alonso-2011-12",
   "via": "direkt"
  },
+ "lineupvintageshop.com/product-page/maillot-adidas-football-espagne-away-vintage-f-torres-2006-07": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://static.wixstatic.com/media/b80b26_e9da25e0011f4634aba30a4d57c79691~mv2.jpg",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "170.0 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Lineup Vintage",
+  "size": "XL",
+  "still": true,
+  "teuer": true,
+  "title": "Maillot Adidas Football Espagne Away Vintage TORRES 2006/07 - XL",
+  "url": "https://www.lineupvintageshop.com/product-page/maillot-adidas-football-espagne-away-vintage-f-torres-2006-07",
+  "via": "direkt"
+ },
  "lineupvintageshop.com/product-page/maillot-adidas-football-espagne-home-vintage-alonso-2004-05": {
   "first": "2026-09-30T22:29:38.239492+00:00",
   "geprueft": "2026-10-02T19:06:54.841007+00:00",
@@ -8661,7 +9203,7 @@
   "labels": [
    "Alonso (Xabi)"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "145.0 EUR",
   "prios": [
    "normal"
@@ -8675,6 +9217,44 @@
   "via": "direkt",
   "zustand": "Used"
  },
+ "lineupvintageshop.com/product-page/maillot-adidas-football-espagne-home-vintage-torres-2006-07": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://static.wixstatic.com/media/b80b26_2db0e779a18c420298f05d78f29cf450~mv2.jpg",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "160.0 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Lineup Vintage",
+  "size": "XL",
+  "still": true,
+  "teuer": true,
+  "title": "Maillot Adidas Football Espagne Home Vintage TORRES 2006/07 - XL",
+  "url": "https://www.lineupvintageshop.com/product-page/maillot-adidas-football-espagne-home-vintage-torres-2006-07",
+  "via": "direkt"
+ },
+ "lineupvintageshop.com/product-page/maillot-adidas-football-espagne-vintage-sergio-ramos-2006-07-xl": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://static.wixstatic.com/media/b80b26_5db8d5dacbdb443f8cb423e7f5a55846~mv2.jpg",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "160.0 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Lineup Vintage",
+  "size": "XL",
+  "still": true,
+  "teuer": true,
+  "title": "Maillot Adidas Football Espagne Vintage SERGIO RAMOS 2006/07 - L",
+  "url": "https://www.lineupvintageshop.com/product-page/maillot-adidas-football-espagne-vintage-sergio-ramos-2006-07-xl",
+  "via": "direkt"
+ },
  "lineupvintageshop.com/product-page/maillot-adidas-football-fff-equipe-de-france-away-vintage-benzema-2008-09-m": {
   "first": "2026-09-30T22:29:38.239492+00:00",
   "geprueft": "2026-10-02T19:06:54.841007+00:00",
@@ -8682,7 +9262,7 @@
   "labels": [
    "Benzema"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "130.0 EUR",
   "prios": [
    "normal"
@@ -8696,13 +9276,51 @@
   "via": "direkt",
   "zustand": "Used"
  },
+ "lineupvintageshop.com/product-page/maillot-adidas-football-fff-equipe-de-france-home-vintage-zidane-2006-07-m-xl": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://static.wixstatic.com/media/b80b26_9bafac58348f49789ba9c052c723fe58~mv2.jpg",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "170.0 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Lineup Vintage",
+  "size": "XL",
+  "still": true,
+  "teuer": true,
+  "title": "Maillot Adidas Football Equipe de France Home Vintage ZIDANE 2006/07 - XL",
+  "url": "https://www.lineupvintageshop.com/product-page/maillot-adidas-football-fff-equipe-de-france-home-vintage-zidane-2006-07-m-xl",
+  "via": "direkt"
+ },
+ "lineupvintageshop.com/product-page/maillot-adidas-football-japon-vintage-nakata-2006-07-l": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://static.wixstatic.com/media/b80b26_53aeabf52b6442ce9a68c97d8e7ad669~mv2.jpg",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "170.0 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Lineup Vintage",
+  "size": "XL",
+  "still": true,
+  "teuer": true,
+  "title": "Maillot Adidas Football Japon Home Vintage NAKATA 2006/07 - XL",
+  "url": "https://www.lineupvintageshop.com/product-page/maillot-adidas-football-japon-vintage-nakata-2006-07-l",
+  "via": "direkt"
+ },
  "lineupvintageshop.com/product-page/maillot-adidas-football-liverpool-fc-away-vintage-torres-2009-10-1": {
   "first": "2026-10-04T04:38:13.554139+00:00",
   "image": "https://static.wixstatic.com/media/b80b26_d067686d36044acebbeeb315899fb8b0~mv2.jpg",
   "labels": [
    "Torres (Fernando)"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "170.0 EUR",
   "prios": [
    "normal"
@@ -8721,7 +9339,7 @@
   "labels": [
    "Benzema"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "140.0 EUR",
   "prios": [
    "normal"
@@ -8763,7 +9381,7 @@
   "labels": [
    "Kroos"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "140.0 EUR",
   "prios": [
    "normal"
@@ -8804,7 +9422,7 @@
   "labels": [
    "Verratti"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "155.0 EUR",
   "prios": [
    "normal"
@@ -8823,7 +9441,7 @@
   "labels": [
    "Henry"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "160.0 EUR",
   "prios": [
    "normal"
@@ -8843,7 +9461,7 @@
   "labels": [
    "Torres (Fernando)"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "320.0 EUR",
   "prios": [
    "normal"
@@ -8862,7 +9480,7 @@
   "labels": [
    "Torres (Fernando)"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "155.0 EUR",
   "prios": [
    "normal"
@@ -8875,6 +9493,25 @@
   "url": "https://www.lineupvintageshop.com/product-page/maillot-nike-football-atlético-madrid-third-rétro-f-torres-2017-18",
   "via": "direkt",
   "zustand_notiz": "Condition : Neuf avec étiquette \"All products are checked by our team to offer you a selection of authentic, unique, and high-quality products.\" \"Tous les …"
+ },
+ "lineupvintageshop.com/product-page/maillot-nike-football-brésil-vintage-ronaldo-2006-07-m": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://static.wixstatic.com/media/b80b26_444175a0d9554606b819f28a51f35d10~mv2.jpg",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "160.0 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Lineup Vintage",
+  "size": "XXL",
+  "still": true,
+  "teuer": true,
+  "title": "Maillot Nike Football Brésil Away Vintage RONALDO 2006/07 - XXL",
+  "url": "https://www.lineupvintageshop.com/product-page/maillot-nike-football-brésil-vintage-ronaldo-2006-07-m",
+  "via": "direkt"
  },
  "lineupvintageshop.com/product-page/maillot-nike-football-fc-barcelone-away-r%c3%a9tro-messi-2012-13": {
   "first": "2026-09-30T22:29:38.239492+00:00",
@@ -8954,7 +9591,7 @@
   "labels": [
    "Nike Total 90 (2004-06)"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "245.0 EUR",
   "prios": [
    "normal"
@@ -8973,7 +9610,7 @@
   "labels": [
    "Nike Total 90 (2004-06)"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "210.0 EUR",
   "prios": [
    "normal"
@@ -9032,7 +9669,7 @@
   "labels": [
    "Benzema"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "140.0 EUR",
   "prios": [
    "normal"
@@ -9051,7 +9688,7 @@
   "labels": [
    "Ribéry"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "140.0 EUR",
   "prios": [
    "normal"
@@ -9070,7 +9707,7 @@
   "labels": [
    "Nike Total 90 (2004-06)"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "255.0 EUR",
   "prios": [
    "normal"
@@ -9083,6 +9720,25 @@
   "url": "https://www.lineupvintageshop.com/product-page/maillot-nike-football-juventus-fc-home-vintage-cannavaro",
   "via": "direkt",
   "zustand_notiz": "Condition : Neuf avec étiquette \"All products are controlled by our team to offer you a qualitative and unique selection\". \"Tous les produits sont contrôlés …"
+ },
+ "lineupvintageshop.com/product-page/maillot-nike-football-mexique-home-vintage-r-marquez-2006-07": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://static.wixstatic.com/media/b80b26_36b504bdc1e948a8aae86d0651a5d2e4~mv2.jpg",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "165.0 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Lineup Vintage",
+  "size": "XL",
+  "still": true,
+  "teuer": true,
+  "title": "Maillot Nike Football Mexique Home Vintage R.MARQUEZ 2006/07 - XL",
+  "url": "https://www.lineupvintageshop.com/product-page/maillot-nike-football-mexique-home-vintage-r-marquez-2006-07",
+  "via": "direkt"
  },
  "lineupvintageshop.com/product-page/maillot-nike-football-paris-saint-germain-home-r%c3%a9tro-cavani-2019-20": {
   "first": "2026-09-30T22:29:38.239492+00:00",
@@ -9132,7 +9788,7 @@
   "labels": [
    "Verratti"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "135.0 EUR",
   "prios": [
    "normal"
@@ -9145,13 +9801,32 @@
   "url": "https://www.lineupvintageshop.com/product-page/maillot-nike-football-paris-saint-germain-home-rétro-verratti-2015-16-2",
   "via": "direkt"
  },
+ "lineupvintageshop.com/product-page/maillot-nike-football-pays-bas-home-vintage-sneijder-2006-07-xl": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://static.wixstatic.com/media/b80b26_8e1572b4c7ea4c319eaee582d284957d~mv2.jpg",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "145.0 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Lineup Vintage",
+  "size": "XL",
+  "still": true,
+  "teuer": false,
+  "title": "Maillot Nike Football Pays-Bas Home Vintage SNEIJDER 2006/07 - M, L, XL",
+  "url": "https://www.lineupvintageshop.com/product-page/maillot-nike-football-pays-bas-home-vintage-sneijder-2006-07-xl",
+  "via": "direkt"
+ },
  "lineupvintageshop.com/product-page/maillot-nike-football-portugal-vintage-ronaldo-2004-06-l": {
   "first": "2026-10-04T04:38:13.554139+00:00",
   "image": "https://static.wixstatic.com/media/b80b26_2e1682e96f7d4cbcb6c3ae7ac21d1bce~mv2.jpg",
   "labels": [
    "Nike Total 90 (2004-06)"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "190.0 EUR",
   "prios": [
    "normal"
@@ -9171,7 +9846,7 @@
   "labels": [
    "Verratti"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "145.0 EUR",
   "prios": [
    "normal"
@@ -9237,7 +9912,7 @@
   "labels": [
    "Verratti"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "180.0 EUR",
   "prios": [
    "normal"
@@ -9258,7 +9933,7 @@
   "labels": [
    "Verratti"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "155.0 EUR",
   "prios": [
    "normal"
@@ -9277,7 +9952,7 @@
   "labels": [
    "Nike Total 90 (2004-06)"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "210.0 EUR",
   "prios": [
    "normal"
@@ -9288,6 +9963,101 @@
   "teuer": true,
   "title": "Maillot Nike Football PSV Eindhoven Home Vintage J.S. PARK 2004/05 - XXL",
   "url": "https://www.lineupvintageshop.com/product-page/maillot-nike-football-psv-eindhoven-home-vintage-j-s-park-2004-05",
+  "via": "direkt"
+ },
+ "lineupvintageshop.com/product-page/maillot-umbro-football-angleterre-away-vintage-gerrard-2006-07": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://static.wixstatic.com/media/b80b26_77c4b2d50ac146c7bc9457223abd198e~mv2.jpg",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "125.0 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Lineup Vintage",
+  "size": "XL",
+  "still": true,
+  "teuer": false,
+  "title": "Maillot Umbro Football Angleterre Away Vintage GERRARD 2006/07 - Xl",
+  "url": "https://www.lineupvintageshop.com/product-page/maillot-umbro-football-angleterre-away-vintage-gerrard-2006-07",
+  "via": "direkt"
+ },
+ "lineupvintageshop.com/product-page/maillot-umbro-football-angleterre-away-vintage-lampard-2006-07": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://static.wixstatic.com/media/b80b26_69d1a0ba69f74303ba7ceff30ac773f5~mv2.jpg",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "125.0 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Lineup Vintage",
+  "size": "XL",
+  "still": true,
+  "teuer": false,
+  "title": "Maillot Umbro Football Angleterre Away Vintage LAMPARD 2006/07 - L,XL",
+  "url": "https://www.lineupvintageshop.com/product-page/maillot-umbro-football-angleterre-away-vintage-lampard-2006-07",
+  "via": "direkt"
+ },
+ "lineupvintageshop.com/product-page/maillot-umbro-football-angleterre-away-vintage-owen-2006-07": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://static.wixstatic.com/media/b80b26_62faae9a2d904fe4965f26ff70e28022~mv2.jpg",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "135.0 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Lineup Vintage",
+  "size": "XXL",
+  "still": true,
+  "teuer": false,
+  "title": "Maillot Umbro Football Angleterre Away Vintage OWEN 2006/07 - XXL",
+  "url": "https://www.lineupvintageshop.com/product-page/maillot-umbro-football-angleterre-away-vintage-owen-2006-07",
+  "via": "direkt"
+ },
+ "lineupvintageshop.com/product-page/maillot-umbro-football-angleterre-home-vintage-rooney-2005-07-l": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://static.wixstatic.com/media/b80b26_b5a0f76a2afc4a2f95e1d7301ec15998~mv2.jpg",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "125.0 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Lineup Vintage",
+  "size": "XL",
+  "still": true,
+  "teuer": false,
+  "title": "Maillot Umbro Football Angleterre Home Vintage ROONEY 2005/07 - XL",
+  "url": "https://www.lineupvintageshop.com/product-page/maillot-umbro-football-angleterre-home-vintage-rooney-2005-07-l",
+  "via": "direkt"
+ },
+ "lineupvintageshop.com/product-page/maillot-umbro-football-angleterre-vintage-beckham-2005-07-s": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://static.wixstatic.com/media/b80b26_392969b5379545fbb44a46b9e9698554~mv2.jpg",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "135.0 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Lineup Vintage",
+  "size": "XL",
+  "still": true,
+  "teuer": false,
+  "title": "Maillot Umbro football Angleterre Vintage BECKHAM 2005/07 - XL",
+  "url": "https://www.lineupvintageshop.com/product-page/maillot-umbro-football-angleterre-vintage-beckham-2005-07-s",
   "via": "direkt"
  },
  "nanosfootballjerseys.com/products/deutschland-dfb-heim-trikot-2016-17-kroos-xl": {
@@ -9315,7 +10085,7 @@
   "labels": [
    "Henry"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "134.95 EUR",
   "prios": [
    "normal"
@@ -9351,7 +10121,7 @@
   "labels": [
    "Frenkie de Jong"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "99.95 EUR",
   "prios": [
    "normal"
@@ -9361,6 +10131,44 @@
   "teuer": false,
   "title": "FC Barcelona 2019-20 Away De Jong #21 Shirt XXL",
   "url": "https://nostalgicfootballshirts.com/products/barcelona-2019-20-away-de-jong-21-bnwt-shirt-xxl",
+  "via": "direkt"
+ },
+ "nostalgicfootballshirts.com/products/germany-2005-07-home-ballack-13-shirt-xl": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://cdn.shopify.com/s/files/1/0886/2456/2507/files/Germany-2005-2007-Home-Ballack-13-Shirt-XL-088339-nostalgic-football-shirts.jpg?v=1783409075",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "84.95 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Nostalgic Football Shirts",
+  "size": "XL",
+  "still": true,
+  "teuer": false,
+  "title": "Germany 2005-07 Home Ballack #13 Shirt XL",
+  "url": "https://nostalgicfootballshirts.com/products/germany-2005-07-home-ballack-13-shirt-xl",
+  "via": "direkt"
+ },
+ "nostalgicfootballshirts.com/products/italy-2006-away-materazzi-23-shirt-xl": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://cdn.shopify.com/s/files/1/0886/2456/2507/files/Italy-2006-Away-Materazzi-23-Shirt-XL-733627-nostalgic-football-shirts.jpg?v=1787661490",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "119.95 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Nostalgic Football Shirts",
+  "size": "XL",
+  "still": true,
+  "teuer": false,
+  "title": "Italy 2006 Away Materazzi #23 Shirt XL",
+  "url": "https://nostalgicfootballshirts.com/products/italy-2006-away-materazzi-23-shirt-xl",
   "via": "direkt"
  },
  "offsideboys.com/products/2004-05-inter-milan-away-size-xl-recoba": {
@@ -9389,7 +10197,7 @@
   "labels": [
    "Kroos"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "95.95 EUR",
   "prios": [
    "normal"
@@ -9409,7 +10217,7 @@
   "labels": [
    "Kimmich"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "73.95 EUR",
   "prios": [
    "normal"
@@ -9449,7 +10257,7 @@
   "labels": [
    "Nike Total 90 (2004-06)"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "229.00 EUR",
   "prios": [
    "normal"
@@ -9460,6 +10268,44 @@
   "teuer": true,
   "title": "BRASILE 2004 - RONALDO #9 - HOME JERSEY",
   "url": "https://onemoretimeshop.it/products/brasile-2004-home-ronaldo-9",
+  "via": "direkt"
+ },
+ "onemoretimeshop.it/products/brasile-2006-home-ronaldo-9": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://cdn.shopify.com/s/files/1/0827/7360/6741/files/BRASILE2006-RONALDO_9-HOMEJERSEY_6_83c369c9-6f0b-40a7-8f18-edd011ee8438.jpg?v=1790075784",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "229.00 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "One More Time",
+  "size": "XL",
+  "still": true,
+  "teuer": true,
+  "title": "BRASILE 2006 - RONALDO #9 - HOME JERSEY (XL)",
+  "url": "https://onemoretimeshop.it/products/brasile-2006-home-ronaldo-9",
+  "via": "direkt"
+ },
+ "onemoretimeshop.it/products/brasile-2006-ronaldo-away": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://cdn.shopify.com/s/files/1/0827/7360/6741/files/BRASILE2006-RONALDO_9-AWAYJERSEY_3.jpg?v=1787779000",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "229.00 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "One More Time",
+  "size": "XL",
+  "still": true,
+  "teuer": true,
+  "title": "BRASILE 2006 - RONALDO #9 - AWAY JERSEY",
+  "url": "https://onemoretimeshop.it/products/brasile-2006-ronaldo-away",
   "via": "direkt"
  },
  "onemoretimeshop.it/products/palermo-2007-08-cavani-away": {
@@ -9488,7 +10334,7 @@
   "labels": [
    "Perišić"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "126.0 USD",
   "prios": [
    "normal"
@@ -9509,7 +10355,7 @@
   "labels": [
    "Benzema"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "108.0 USD",
   "prios": [
    "normal"
@@ -9523,13 +10369,53 @@
   "via": "direkt",
   "zustand": "Used"
  },
+ "original11vs11.com/product-page/adriano-brazil-2006-away-jersey-xl": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://static.wixstatic.com/media/15fa55_513dc1cd79b8449aa2444cd74d8882e4~mv2.jpeg",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "153.0 USD",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Original 11vs11",
+  "size": "XL",
+  "still": true,
+  "teuer": false,
+  "title": "Brazil 2006/2007 Away Adriano #7 Soccer Jersey (XL)",
+  "url": "https://www.original11vs11.com/product-page/adriano-brazil-2006-away-jersey-xl",
+  "via": "direkt",
+  "zustand": "Used"
+ },
+ "original11vs11.com/product-page/beckham-england-2006-home-jersey-xl": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://static.wixstatic.com/media/15fa55_55236150e4b6424187a42ba3184cafc0~mv2.jpeg",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "110.0 USD",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Original 11vs11",
+  "size": "XL",
+  "still": true,
+  "teuer": false,
+  "title": "England 2006/2007 Home David Beckham #7 Soccer Jersey (XL)",
+  "url": "https://www.original11vs11.com/product-page/beckham-england-2006-home-jersey-xl",
+  "via": "direkt",
+  "zustand": "Used"
+ },
  "original11vs11.com/product-page/brazil-2004-away-ronaldinho-jersey-xxl": {
   "first": "2026-10-04T04:38:13.554139+00:00",
   "image": "https://static.wixstatic.com/media/15fa55_90e197f0d9484cdf843d8e13b268fc8c~mv2.jpeg",
   "labels": [
    "Nike Total 90 (2004-06)"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "225.0 USD",
   "prios": [
    "normal"
@@ -9543,13 +10429,113 @@
   "via": "direkt",
   "zustand": "Used"
  },
+ "original11vs11.com/product-page/czech-republic-2006-2007-2008-home-nedved-11-soccer-jersey-xl": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://static.wixstatic.com/media/15fa55_7af1e7dc51e84b99be3f172b68b77966~mv2.png",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "144.0 USD",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Original 11vs11",
+  "size": "XL",
+  "still": true,
+  "teuer": false,
+  "title": "Czech Republic 2006/2007/2008 Home Nedved #11 Soccer Jersey (XL)",
+  "url": "https://www.original11vs11.com/product-page/czech-republic-2006-2007-2008-home-nedved-11-soccer-jersey-xl",
+  "via": "direkt",
+  "zustand": "Used"
+ },
+ "original11vs11.com/product-page/czech-republic-2006-2007-2008-home-nedved-11-soccer-jersey-xxl": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://static.wixstatic.com/media/15fa55_7b8cefbf535f4d5d89af9ba67f813b3d~mv2.png",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "144.0 USD",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Original 11vs11",
+  "size": "XXL",
+  "still": true,
+  "teuer": false,
+  "title": "Czech Republic 2006/2007/2008 Home Nedved #11 Soccer Jersey (XXL)",
+  "url": "https://www.original11vs11.com/product-page/czech-republic-2006-2007-2008-home-nedved-11-soccer-jersey-xxl",
+  "via": "direkt",
+  "zustand": "Used"
+ },
+ "original11vs11.com/product-page/frei-switzerland-2006-third-jersey-xl": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://static.wixstatic.com/media/15fa55_081e4817464b4ca1af59fae66f010c85~mv2.jpeg",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "180.0 USD",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Original 11vs11",
+  "size": "XL",
+  "still": true,
+  "teuer": true,
+  "title": "Switzerland 2006/2007 Third Frei #9 Long Sleeve Soccer Jersey (XL)",
+  "url": "https://www.original11vs11.com/product-page/frei-switzerland-2006-third-jersey-xl",
+  "via": "direkt",
+  "zustand": "New"
+ },
+ "original11vs11.com/product-page/germany-2006-2007-2008-away-klose-11-soccer-jersey-xl": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://static.wixstatic.com/media/15fa55_d2e8bd9d1a584aa0b2bf50e32c836638~mv2.png",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "117.0 USD",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Original 11vs11",
+  "size": "XL",
+  "still": true,
+  "teuer": false,
+  "title": "Germany 2006/2007/2008 Away Klose #11 Soccer Jersey (XL)",
+  "url": "https://www.original11vs11.com/product-page/germany-2006-2007-2008-away-klose-11-soccer-jersey-xl",
+  "via": "direkt",
+  "zustand": "Used"
+ },
+ "original11vs11.com/product-page/gerrard-england-2006-home-jersey-xl": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://static.wixstatic.com/media/15fa55_5c668b19b8bb459b86851eb4c1b84f8f~mv2.jpeg",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "117.0 USD",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Original 11vs11",
+  "size": "XL",
+  "still": true,
+  "teuer": false,
+  "title": "England 2006/2008 Home  Gerrard #4 Soccer Jersey (XL)",
+  "url": "https://www.original11vs11.com/product-page/gerrard-england-2006-home-jersey-xl",
+  "via": "direkt",
+  "zustand": "Used"
+ },
  "original11vs11.com/product-page/kroos-germany-2010-home-jersey-xl": {
   "first": "2026-10-04T04:38:13.554139+00:00",
   "image": "https://static.wixstatic.com/media/15fa55_23c8aa4f4ee34350b3ba7d54723f1298~mv2.jpeg",
   "labels": [
    "Kroos"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "108.0 USD",
   "prios": [
    "normal"
@@ -9581,6 +10567,46 @@
   "via": "fyj",
   "weg": "2026-10-01T11:45:23.511439+00:00"
  },
+ "original11vs11.com/product-page/nedved-czech-republic-2006-home-jersey": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://static.wixstatic.com/media/15fa55_e0316af7c5ca49eba0f889af02729f81~mv2.png",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "144.0 USD",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Original 11vs11",
+  "size": "XL",
+  "still": true,
+  "teuer": false,
+  "title": "czech republic 2006/2008 Home Nedved #11 SoccerJersey (XL)",
+  "url": "https://www.original11vs11.com/product-page/nedved-czech-republic-2006-home-jersey",
+  "via": "direkt",
+  "zustand": "Used"
+ },
+ "original11vs11.com/product-page/netherland-2006-2007-home-v-persie-17-soccer-jersey-xl": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://static.wixstatic.com/media/15fa55_f7c8c845bc1c4c5191f327be96950bc2~mv2.png",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "110.0 USD",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Original 11vs11",
+  "size": "XL",
+  "still": true,
+  "teuer": false,
+  "title": "Netherlands 2006/2007 Home V. Persie #17 Soccer Jersey (XL)",
+  "url": "https://www.original11vs11.com/product-page/netherland-2006-2007-home-v-persie-17-soccer-jersey-xl",
+  "via": "direkt",
+  "zustand": "Used"
+ },
  "original11vs11.com/product-page/netherlands-2004-home-ruud-van-nistelrooy-jersey-xl": {
   "first": "2026-09-30T22:29:38.239492+00:00",
   "geprueft": "2026-10-02T19:06:54.841007+00:00",
@@ -9589,7 +10615,7 @@
    "Nike Total 90 (2004-06)",
    "Van Nistelrooy"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "144.0 USD",
   "prios": [
    "normal"
@@ -9600,6 +10626,106 @@
   "teuer": false,
   "title": "Netherlands 2004/2005 Home Ruud Van Nistelrooy Soccer Jersey (XL)",
   "url": "https://www.original11vs11.com/product-page/netherlands-2004-home-ruud-van-nistelrooy-jersey-xl",
+  "via": "direkt",
+  "zustand": "Used"
+ },
+ "original11vs11.com/product-page/netherlands-2006-home-sneijder-jersey-xl": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://static.wixstatic.com/media/15fa55_a4289d47b7eb43ca8857b8c5aef5a978~mv2.jpeg",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "117.0 USD",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Original 11vs11",
+  "size": "XL",
+  "still": true,
+  "teuer": false,
+  "title": "Netherlands 2006/2007 Home Sneijder #20 Soccer Jersey (XL)",
+  "url": "https://www.original11vs11.com/product-page/netherlands-2006-home-sneijder-jersey-xl",
+  "via": "direkt",
+  "zustand": "Used"
+ },
+ "original11vs11.com/product-page/totti-italy-2006-away-jersey": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://static.wixstatic.com/media/15fa55_9153b86719f84cf3b50d841679e009de~mv2.jpeg",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "180.0 USD",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Original 11vs11",
+  "size": "XL",
+  "still": true,
+  "teuer": true,
+  "title": "Italy 2006/2007 Away Totti #10 Soccer Jersey (XL)",
+  "url": "https://www.original11vs11.com/product-page/totti-italy-2006-away-jersey",
+  "via": "direkt",
+  "zustand": "Used"
+ },
+ "original11vs11.com/product-page/totti-italy-2006-away-jersey-xl": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://static.wixstatic.com/media/15fa55_d32c4a42e0f1406ba31308a71a4aaf0e~mv2.jpeg",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "180.0 USD",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Original 11vs11",
+  "size": "XL",
+  "still": true,
+  "teuer": true,
+  "title": "Italy 2006/2007 Away Totti #10 Soccer Jersey (XL)",
+  "url": "https://www.original11vs11.com/product-page/totti-italy-2006-away-jersey-xl",
+  "via": "direkt",
+  "zustand": "Used"
+ },
+ "original11vs11.com/product-page/totti-italy-2006-long-sleeve-jersey-xl": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://static.wixstatic.com/media/15fa55_dc66d537807d4418be0399548c0d0af4~mv2.jpeg",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "153.0 USD",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Original 11vs11",
+  "size": "XL",
+  "still": true,
+  "teuer": false,
+  "title": "Italy 2006/2007 Home Totti #10 Long Sleeve Soccer Jersey (XL)",
+  "url": "https://www.original11vs11.com/product-page/totti-italy-2006-long-sleeve-jersey-xl",
+  "via": "direkt",
+  "zustand": "Used"
+ },
+ "original11vs11.com/product-page/zidane-france-2006-home-jersey-xxl": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://static.wixstatic.com/media/15fa55_95a7de612d254bc7b5e2140e6bf70640~mv2.jpeg",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "270.0 USD",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Original 11vs11",
+  "size": "XXL",
+  "still": true,
+  "teuer": true,
+  "title": "France 2006/2007 Home Zidane #10 Soccer Jersey (XXL)",
+  "url": "https://www.original11vs11.com/product-page/zidane-france-2006-home-jersey-xxl",
   "via": "direkt",
   "zustand": "Used"
  },
@@ -9645,6 +10771,27 @@
   "zustand": "8.5/10",
   "zustand_notiz": "condition: 8.5/10 Disclaimer: Items may be modified with aftermarket prints and patches. Please contact us regarding specific pieces."
  },
+ "pardonmykicks.se/products/umbro-england-2006-away-football-shirt-beckham-18": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://cdn.shopify.com/s/files/1/0367/8922/3483/files/Umbro-England2006AwayFootballShirt_BECKHAM_back_302eea44-b4e6-49d9-8196-4b1c028c2174.png?v=1790174163",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "90.95 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Pardon My Kicks",
+  "size": "XXL",
+  "still": true,
+  "teuer": false,
+  "title": "Umbro - England 2006 Away Football Shirt 'BECKHAM'",
+  "url": "https://pardonmykicks.se/products/umbro-england-2006-away-football-shirt-beckham-18",
+  "via": "direkt",
+  "zustand": "8.5/10",
+  "zustand_notiz": "condition: 8.5/10"
+ },
  "phillysoccerjerseys.com/products/manchester-united-home-2021-22-cavani-xl": {
   "first": "2026-09-30T22:29:38.239492+00:00",
   "geprueft": "2026-10-01T14:14:58.073674+00:00",
@@ -9652,7 +10799,7 @@
   "labels": [
    "Cavani"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "150.00 EUR",
   "prios": [
    "normal"
@@ -9672,7 +10819,7 @@
   "labels": [
    "Barella"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "165.0 USD",
   "prios": [
    "normal"
@@ -9686,6 +10833,27 @@
   "via": "direkt",
   "zustand": "Used",
   "zustand_notiz": "USED: Excell Pit to Pit: 20” Length: 30”"
+ },
+ "rareandretrosports.com/product-page/rc-3": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://static.wixstatic.com/media/9af841_71597473e810418eb02bc34129f6d455~mv2.jpg",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "88.0 USD",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Rare and Retro",
+  "size": "XL",
+  "still": true,
+  "teuer": false,
+  "title": "Umbro England 2006 Away Jersey - Beckham #7 - XL - USED: Very Good",
+  "url": "https://www.rareandretrosports.com/product-page/rc-3",
+  "via": "direkt",
+  "zustand": "Very Good",
+  "zustand_notiz": "USED: Very Good Pit to Pit: 22.5 inches Length: 29 inches"
  },
  "retrofootballshirts.com/products/fc-barcelona-football-jersey-624524": {
   "first": "2026-09-30T22:29:38.239492+00:00",
@@ -9713,7 +10881,7 @@
   "labels": [
    "Henry"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "279.00 EUR",
   "prios": [
    "normal"
@@ -9732,7 +10900,7 @@
    "Nike Total 90 (2004-06)",
    "Van Nistelrooy"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "159.00 EUR",
   "prios": [
    "normal"
@@ -9745,13 +10913,52 @@
   "via": "direkt",
   "zustand": "Very Good"
  },
+ "retroriginalfootball.com/products/original-holland-home-jersey-2006-2008-11-robben-xl-6782": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://cdn.shopify.com/s/files/1/0585/1312/9648/files/PXL_20260607_191942436_62c2282b-bbde-47da-a845-db15048108dc.webp?v=1781032091",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "109.00 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "RetrOriginalFootball",
+  "size": "XL",
+  "still": true,
+  "teuer": false,
+  "title": "Original Holland Home Jersey 2006-2008 #11 Robben - XL",
+  "url": "https://retroriginalfootball.com/products/original-holland-home-jersey-2006-2008-11-robben-xl-6782",
+  "via": "direkt"
+ },
+ "retroriginalfootball.com/products/original-holland-home-jersey-2006-2008-7-kuyt-xl-6815": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://cdn.shopify.com/s/files/1/0585/1312/9648/files/PXL_20260607_183157502.webp?v=1781032551",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "109.00 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "RetrOriginalFootball",
+  "size": "XL",
+  "still": true,
+  "teuer": false,
+  "title": "Original Holland Home Jersey 2006-2008 #7 Kuyt - XL",
+  "url": "https://retroriginalfootball.com/products/original-holland-home-jersey-2006-2008-7-kuyt-xl-6815",
+  "via": "direkt"
+ },
  "retroriginalfootball.com/products/original-holland-home-jersey-2006-2008-9-van-nistelrooy-xl-6788": {
   "first": "2026-09-30T22:29:38.239492+00:00",
   "image": "https://cdn.shopify.com/s/files/1/0585/1312/9648/files/PXL_20260607_182944682.webp?v=1781031196",
   "labels": [
-   "Van Nistelrooy"
+   "Van Nistelrooy",
+   "WM 2006"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "109.00 EUR",
   "prios": [
    "normal"
@@ -9770,7 +10977,7 @@
   "labels": [
    "Kroos"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "119.00 CHF",
   "prios": [
    "normal"
@@ -10024,7 +11231,7 @@
   "labels": [
    "Henry"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "249.95 EUR",
   "prios": [
    "normal"
@@ -10043,7 +11250,7 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-04T08:04:36.346679+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "59.95 EUR",
   "prios": [
    "hoch"
@@ -10082,7 +11289,7 @@
   "labels": [
    "Nike Total 90 (2004-06)"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "79.95 EUR",
   "prios": [
    "normal"
@@ -10102,7 +11309,7 @@
   "labels": [
    "Nike Total 90 (2004-06)"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "99.95 EUR",
   "prios": [
    "normal"
@@ -10135,6 +11342,46 @@
   "via": "direkt",
   "zustand_notiz": "Zustand: Sehr Gut ( Unsere Zustandsskala ) Es handelt sich um ein gebrauchtes Trikot. Eventuelle Mängel sind oben beschrieben und auf den Fotos zu sehen. Der …"
  },
+ "senseofgoal.com/products/spanien-2006-08-reyes-heim-trikot-xl-adidas": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://cdn.shopify.com/s/files/1/0759/8093/1415/files/DSC02151-Photoroom.jpg?v=1788906640",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "114.95 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Sense of Goal",
+  "size": "XL",
+  "still": true,
+  "teuer": false,
+  "title": "Spanien 2006-08 \"Reyes\" Heim Trikot (XL) adidas",
+  "url": "https://www.senseofgoal.com/products/spanien-2006-08-reyes-heim-trikot-xl-adidas",
+  "via": "direkt",
+  "zustand_notiz": "Zustand: Sehr Gut ( Unsere Zustandsskala ) Es handelt sich um ein gebrauchtes Trikot. Eventuelle Mängel sind oben beschrieben und auf den Fotos zu sehen. Der …"
+ },
+ "senseofgoal.com/products/spanien-2006-08-sergio-ramos-heim-trikot-xl-adidas": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://cdn.shopify.com/s/files/1/0759/8093/1415/files/DSC02384-Photoroom.jpg?v=1789043646",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "89.95 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Sense of Goal",
+  "size": "XL",
+  "still": true,
+  "teuer": false,
+  "title": "Spanien 2006-08 \"Sergio Ramos\" Heim Trikot (XL) adidas",
+  "url": "https://www.senseofgoal.com/products/spanien-2006-08-sergio-ramos-heim-trikot-xl-adidas",
+  "via": "direkt",
+  "zustand_notiz": "Zustand: Sehr Gut ( Unsere Zustandsskala ) Es handelt sich um ein gebrauchtes Trikot. Eventuelle Mängel sind oben beschrieben und auf den Fotos zu sehen. Der …"
+ },
  "shirtsociete.com": {
   "first": "2026-10-04T04:38:13.554139+00:00",
   "geprueft": "2026-10-04T04:38:13.554139+00:00",
@@ -10157,6 +11404,26 @@
   "via": "fyj",
   "zustand": "Very Good"
  },
+ "specialfootballshirts.com/products/czech-republic-2006-away-football-shirt-xl-15-baros": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://cdn.shopify.com/s/files/1/0418/8494/2495/files/CzechRepublic2006AwayFootballShirtXL_15Baros.png?v=1718655034",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "125.00 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Special Football Shirts",
+  "size": "XL",
+  "still": true,
+  "teuer": false,
+  "title": "Czech Republic 2006 Away Football Shirt XL #15 Baros",
+  "url": "https://specialfootballshirts.com/products/czech-republic-2006-away-football-shirt-xl-15-baros",
+  "via": "direkt",
+  "zustand": "8.5/10"
+ },
  "specialfootballshirts.com/products/real-madrid-2012-2013-home-football-shirt-9-benzema-xl": {
   "first": "2026-09-30T22:29:38.239492+00:00",
   "geprueft": "2026-10-01T14:14:58.073674+00:00",
@@ -10164,7 +11431,7 @@
   "labels": [
    "Benzema"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "99.00 EUR",
   "prios": [
    "normal"
@@ -10223,7 +11490,7 @@
   "labels": [
    "Nike Total 90 (2004-06)"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "450.00 MYR",
   "prios": [
    "normal"
@@ -10295,13 +11562,32 @@
   "weg": "2026-10-01T14:14:58.073674+00:00",
   "zustand": "8/10"
  },
+ "the12thmanretro.com/products/england-2006-2008-away-shirt-lampard-8-world-cup-2006-men-s-xl-1": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://cdn.shopify.com/s/files/1/0900/5701/5620/files/10_af87d7d1-6046-4068-b2de-8562aeffd49a.jpg?v=1790865587",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "42.49 GBP",
+  "prios": [
+   "normal"
+  ],
+  "shop": "The 12th Man Retro",
+  "size": "XL",
+  "still": true,
+  "teuer": false,
+  "title": "England 2006/2008 Away Shirt Lampard #8 World Cup 2006 Men’s XL",
+  "url": "https://the12thmanretro.com/products/england-2006-2008-away-shirt-lampard-8-world-cup-2006-men-s-xl-1",
+  "via": "direkt"
+ },
  "the12thmanretro.com/products/original-manchester-united-2004-06-home-shirt-nike-van-nistelrooy-10-xl-2": {
   "first": "2026-10-04T04:38:13.554139+00:00",
   "image": "https://cdn.shopify.com/s/files/1/0900/5701/5620/files/10_00a215d8-4f6a-4d9f-86f6-1945dbc728c5.jpg?v=1790866280",
   "labels": [
    "Van Nistelrooy"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "64.99 GBP",
   "prios": [
    "normal"
@@ -10320,7 +11606,7 @@
   "labels": [
    "Benzema"
   ],
-  "last": "2026-10-04T08:04:36.346679+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "110.0 USD",
   "prios": [
    "normal"
@@ -10340,7 +11626,7 @@
   "labels": [
    "Valverde (Fede)"
   ],
-  "last": "2026-10-04T08:04:36.346679+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "100.0 USD",
   "prios": [
    "normal"
@@ -10484,7 +11770,7 @@
   "labels": [
    "Van Nistelrooy"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "131.95 EUR",
   "prios": [
    "normal"
@@ -10541,7 +11827,7 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-04T08:04:36.346679+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "151.95 EUR",
   "prios": [
    "hoch"
@@ -10561,7 +11847,7 @@
   "labels": [
    "Ribéry"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "69.95 EUR",
   "prios": [
    "normal"
@@ -10582,7 +11868,7 @@
    "Nike Total 90 (2004-06)",
    "Van Nistelrooy"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "99.95 EUR",
   "prios": [
    "normal"
@@ -10795,6 +12081,46 @@
   "via": "direkt",
   "zustand": "8/10"
  },
+ "thesoccerarchive.com/products/england-2006-08-away-shirt-gerrard-4-7-10": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://cdn.shopify.com/s/files/1/0709/3508/5343/files/MGERRARD_99ba0da0-2fde-4aad-9669-4d9dac686522.jpg?v=1748006872",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "75.00 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "The Soccer Archive",
+  "size": "XL",
+  "still": true,
+  "teuer": false,
+  "title": "ENGLAND 2006-08 AWAY SHIRT - GERRARD 4 - 7/10",
+  "url": "https://thesoccerarchive.com/products/england-2006-08-away-shirt-gerrard-4-7-10",
+  "via": "direkt",
+  "zustand": "7/10"
+ },
+ "thesoccerarchive.com/products/england-2006-08-away-shirt-gerrard-4-8-10": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://cdn.shopify.com/s/files/1/0709/3508/5343/files/MGERRARD_2b23739e-c355-4db2-aaaf-4412082da707.jpg?v=1744812838",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "85.00 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "The Soccer Archive",
+  "size": "XL",
+  "still": true,
+  "teuer": false,
+  "title": "ENGLAND 2006-08 AWAY SHIRT - GERRARD 4 - 8/10",
+  "url": "https://thesoccerarchive.com/products/england-2006-08-away-shirt-gerrard-4-8-10",
+  "via": "direkt",
+  "zustand": "8/10"
+ },
  "thesoccerarchive.com/products/germany-2020-22-away-shirt-kroos-8-8-10": {
   "first": "2026-09-30T22:29:38.239492+00:00",
   "image": "https://cdn.shopify.com/s/files/1/0709/3508/5343/files/57_de1e757f-c9ce-4658-9618-6aeb116d558d.png?v=1757078368",
@@ -10858,7 +12184,7 @@
   "labels": [
    "Henry"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "202.95 EUR",
   "prios": [
    "normal"
@@ -10878,7 +12204,7 @@
   "labels": [
    "Torres (Fernando)"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "157.95 EUR",
   "prios": [
    "normal"
@@ -10898,7 +12224,7 @@
   "labels": [
    "Ribéry"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "166.95 EUR",
   "prios": [
    "normal"
@@ -10918,7 +12244,7 @@
   "labels": [
    "Kroos"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "148.95 EUR",
   "prios": [
    "normal"
@@ -10938,7 +12264,7 @@
   "labels": [
    "Kroos"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "117.95 EUR",
   "prios": [
    "normal"
@@ -10999,7 +12325,7 @@
   "labels": [
    "Alonso (Xabi)"
   ],
-  "last": "2026-10-04T08:04:36.346679+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "126.95 EUR",
   "prios": [
    "normal"
@@ -11019,7 +12345,7 @@
   "labels": [
    "Nike Total 90 (2004-06)"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "148.95 EUR",
   "prios": [
    "normal"
@@ -11116,7 +12442,7 @@
   "labels": [
    "Forlán"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "180.95 EUR",
   "prios": [
    "normal"
@@ -11806,7 +13132,7 @@
   "labels": [
    "Henry"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "120.95 EUR",
   "prios": [
    "normal"
@@ -12104,7 +13430,7 @@
   "labels": [
    "Torres (Fernando)"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "169.00 EUR",
   "prios": [
    "normal"
@@ -12217,6 +13543,25 @@
   "via": "direkt",
   "zustand_notiz": "Zustand: 10/1 0 Alle unsere Trikots sind mehrfach geprüft und zu 100% original! Über 2000 weitere geile vintage Trikots in unserem Shop zu finden."
  },
+ "vicefootballstore.com/products/2006-08-england-away-shirt-umbro-beckham-l": {
+  "first": "2026-10-04T12:56:56.150677+00:00",
+  "image": "https://cdn.shopify.com/s/files/1/0494/6113/3465/files/1_0fee3202-0d57-4344-bb0c-cf4f71b39376.png?v=1786003203",
+  "labels": [
+   "WM 2006"
+  ],
+  "last": "2026-10-04T12:56:56.150677+00:00",
+  "price": "78.02 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Vice Football Store",
+  "size": "XL",
+  "still": true,
+  "teuer": false,
+  "title": "2006/08 England Away Shirt Umbro Beckham (XL)",
+  "url": "https://vicefootballstore.com/products/2006-08-england-away-shirt-umbro-beckham-l",
+  "via": "direkt"
+ },
  "vicefootballstore.com/products/2007-08-bayern-munich-home-shirt-adidas-ribery-xl": {
   "first": "2026-09-30T22:29:38.239492+00:00",
   "image": "https://cdn.shopify.com/s/files/1/0494/6113/3465/files/DSCF1198.jpg?v=1773100056",
@@ -12242,7 +13587,7 @@
   "labels": [
    "Torres (Fernando)"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "119.99 GBP",
   "prios": [
    "normal"
@@ -12263,7 +13608,7 @@
   "labels": [
    "Torres (Fernando)"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "89.99 GBP",
   "prios": [
    "normal"
@@ -12283,7 +13628,7 @@
   "labels": [
    "Nike Total 90 (2004-06)"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "129.99 GBP",
   "prios": [
    "normal"
@@ -12304,7 +13649,7 @@
   "labels": [
    "Thiago"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "75.95 EUR",
   "prios": [
    "hoch"
@@ -13428,7 +14773,7 @@
   "labels": [
    "Barça 2010-2013"
   ],
-  "last": "2026-10-04T08:04:36.346679+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "157.95 EUR",
   "prios": [
    "hoch"
@@ -13791,7 +15136,7 @@
   "labels": [
    "Rodri"
   ],
-  "last": "2026-10-04T04:38:13.554139+00:00",
+  "last": "2026-10-04T12:56:56.150677+00:00",
   "price": "2499.00 DKK",
   "prios": [
    "normal"

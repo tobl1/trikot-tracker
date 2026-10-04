@@ -1,4 +1,14 @@
 {
+ "Football Legends Kits|Shopsystem nicht automatisch erkannt": {
+  "anzahl": 1,
+  "erst": "2026-10-04T12:56:56.150677+00:00",
+  "letzt": "2026-10-04T12:56:56.150677+00:00",
+  "meldung": "Shopsystem nicht automatisch erkannt",
+  "modi": [
+   "drop"
+  ],
+  "quelle": "Football Legends Kits"
+ },
  "Workflow|Run abgebrochen (drop), Details: https://github.com/tobl1/trikot-tracker/actions/runs/37191020286": {
   "anzahl": 1,
   "erst": "2026-10-04T09:05:34.754489+00:00",

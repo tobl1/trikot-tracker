@@ -1,6 +1,6 @@
 # Trikot-Tracker
 
-Stand: 04.10.2026 14:20 Uhr (drop), 275 aktuelle Treffer in XL/XXL
+Stand: 04.10.2026 14:57 Uhr (drop), 318 aktuelle Treffer in XL/XXL
 
 ## Thiago (3)
 
@@ -390,6 +390,55 @@ Stand: 04.10.2026 14:20 Uhr (drop), 275 aktuelle Treffer in XL/XXL
 | [2017-18 BAYERN MUNCHEN *VIDAL* SHIRT XL](https://classic-shirts.com/product-eng-328557-2017-18-BAYERN-MUNCHEN-VIDAL-SHIRT-XL.html) | XL | 8/10 | £79.99 | Classic-Shirts | 01.10. |
 | [Bayern München 15/16 Arturo Vidal](https://www.kitts.de/l/6aa05f71-df22-4392-b915-ebdcbbdf0a2d) | XL | Excellent | 86.31 EUR | kitts.de | 01.10. |
 | [2016-17 Bayern Munich Home Shirt Vidal #23 (LS)](https://www.legacyfootballshirts.com/products/bayern-munich-home-shirt-2016-17-vidal-23-longsleeve-a0641) | XL | Very Good | 84.99 EUR | Legacy Football Shirts | 01.10. |
+
+## WM 2006 (44)
+
+| Trikot | Größe | Zustand | Preis | Shop | seit |
+|---|---|---|---|---|---|
+| [ENGLAND 2006-08 AWAY SHIRT - GERRARD 4 - 8/10](https://thesoccerarchive.com/products/england-2006-08-away-shirt-gerrard-4-8-10) | XL | 8/10 | 85.00 EUR | The Soccer Archive | 04.10. |
+| [ENGLAND 2006-08 AWAY SHIRT - GERRARD 4 - 7/10](https://thesoccerarchive.com/products/england-2006-08-away-shirt-gerrard-4-7-10) | XL | 7/10 | 75.00 EUR | The Soccer Archive | 04.10. |
+| [Original Holland Home Jersey 2006-2008 #7 Kuyt - XL](https://retroriginalfootball.com/products/original-holland-home-jersey-2006-2008-7-kuyt-xl-6815) | XL |  | 109.00 EUR | RetrOriginalFootball | 04.10. |
+| [Original Holland Home Jersey 2006-2008 #11 Robben - XL](https://retroriginalfootball.com/products/original-holland-home-jersey-2006-2008-11-robben-xl-6782) | XL |  | 109.00 EUR | RetrOriginalFootball | 04.10. |
+| [Italy 2006 Away Materazzi #23 Shirt XL](https://nostalgicfootballshirts.com/products/italy-2006-away-materazzi-23-shirt-xl) | XL |  | 119.95 EUR | Nostalgic Football Shirts | 04.10. |
+| [Germany 2005-07 Home Ballack #13 Shirt XL](https://nostalgicfootballshirts.com/products/germany-2005-07-home-ballack-13-shirt-xl) | XL |  | 84.95 EUR | Nostalgic Football Shirts | 04.10. |
+| [David Beckham - England 2006 hjemmebane trøje XL 🏴󠁧󠁢󠁥󠁮󠁧󠁿](https://fshoppen.dk/products/david-beckham-england-2006-hjemmebane-troje-xl-🏴-4) | XL |  | 122.95 EUR | Fodbold Shoppen | 04.10. |
+| [Spanien 2006-08 "Reyes" Heim Trikot (XL) adidas](https://www.senseofgoal.com/products/spanien-2006-08-reyes-heim-trikot-xl-adidas) | XL |  | 114.95 EUR | Sense of Goal | 04.10. |
+| [Spanien 2006-08 "Sergio Ramos" Heim Trikot (XL) adidas](https://www.senseofgoal.com/products/spanien-2006-08-sergio-ramos-heim-trikot-xl-adidas) | XL |  | 89.95 EUR | Sense of Goal | 04.10. |
+| [ENGLAND 2006 BECKHAM AWAY SHIRT (XL) UMBRO](https://kickoffvintage.com/products/england-2006-beckham-away-shirt-xl-umbro-eng-00125) | X-LARGE | Excellent | 119.99 EUR | Kickoff Vintage | 04.10. |
+| [ENGLAND 2006 BECKHAM HOME SHIRT (XXL) UMBRO](https://kickoffvintage.com/products/england-2006-beckham-home-shirt-xxl-umbro-eng-00123) | XX-LARGE | Excellent | 99.99 EUR | Kickoff Vintage | 04.10. |
+| [ENGLAND 2006 ROONEY HOME (XXL) UMBRO](https://kickoffvintage.com/products/england-2006-rooney-home-xxl-umbro-eng-00133) | XX-LARGE | Excellent | 109.99 EUR | Kickoff Vintage | 04.10. |
+| [Adidas Argentinien Messi Trikot weiß blau Größe XL 2006](https://jerseyshermanos.com/products/adidas-argentinien-messi-trikot-weiss-blau-grosse-xl-2006) | XL | 9/10 | 109.00 EUR | Jerseys Hermanos | 04.10. |
+| [maglia calcio vintage shirt England OWEN Umbro World Cup 2006 UMBRO XL](https://greensportvintage.com/products/maglia-calcio-vintage-shirt-england-owen-umbro-world-cup-2006-umbro-xl) | XL |  | 119.90 EUR | Green Sport Vintage | 04.10. |
+| [Brasilien WM 2006 Heimtrikot – Nike – RONALDINHO #10 (XXL)](https://jersely.com/products/brasilien-wm-2006-heimtrikot-nike-ronaldinho-10-xxl) | XXL |  | 139.99 EUR | Jersely | 04.10. |
+| [Deutschland DFB 2006 WM Heimtrikot – Adidas (XL) – Klose #11](https://jersely.com/products/deutschland-dfb-2006-wm-heimtrikot-adidas-xl-klose-13) | XL |  | 109.99 EUR | Jersely | 04.10. |
+| [2006-08 Croatia Home Shirt MODRIC #14 - 8/10 - (XL)](https://firststreet.store/products/2006-08-croatia-nike-home-shirt-modric-14-8-10-xl) | EXTRA LARGE | 8/10 | 113.95 EUR | First Street | 04.10. |
+| [Czech Republic 2006 Away Football Shirt XL #15 Baros](https://specialfootballshirts.com/products/czech-republic-2006-away-football-shirt-xl-15-baros) | XL | 8.5/10 | 125.00 EUR | Special Football Shirts | 04.10. |
+| [2006/08 England Away Shirt Umbro Beckham (XL)](https://vicefootballstore.com/products/2006-08-england-away-shirt-umbro-beckham-l) | XL |  | 78.02 EUR | Vice Football Store | 04.10. |
+| [Zidane, Frankreich Heimtrikot 2006 (XL)](https://footballtrikotsberlin.com/products/zidane-frankreich-heimtrikot-2006-xl) | XL | 9/10 | 149.90 EUR | Football Trikots Berlin | 04.10. |
+| [Klose, DFB, Deutschland Heimtrikot 2006 (XL)](https://footballtrikotsberlin.com/products/klose-dfb-deutschland-heimtrikot-2006-xl) | XL | 8/10 | 119.90 EUR | Football Trikots Berlin | 04.10. |
+| [Netherlands 2006/2007 Home Sneijder #20 Soccer Jersey (XL)](https://www.original11vs11.com/product-page/netherlands-2006-home-sneijder-jersey-xl) | XL | Used | 117.0 USD | Original 11vs11 | 04.10. |
+| [England 2006/2008 Home  Gerrard #4 Soccer Jersey (XL)](https://www.original11vs11.com/product-page/gerrard-england-2006-home-jersey-xl) | XL | Used | 117.0 USD | Original 11vs11 | 04.10. |
+| [England 2006/2007 Home David Beckham #7 Soccer Jersey (XL)](https://www.original11vs11.com/product-page/beckham-england-2006-home-jersey-xl) | XL | Used | 110.0 USD | Original 11vs11 | 04.10. |
+| [Brazil 2006/2007 Away Adriano #7 Soccer Jersey (XL)](https://www.original11vs11.com/product-page/adriano-brazil-2006-away-jersey-xl) | XL | Used | 153.0 USD | Original 11vs11 | 04.10. |
+| [Italy 2006/2007 Home Totti #10 Long Sleeve Soccer Jersey (XL)](https://www.original11vs11.com/product-page/totti-italy-2006-long-sleeve-jersey-xl) | XL | Used | 153.0 USD | Original 11vs11 | 04.10. |
+| [czech republic 2006/2008 Home Nedved #11 SoccerJersey (XL)](https://www.original11vs11.com/product-page/nedved-czech-republic-2006-home-jersey) | XL | Used | 144.0 USD | Original 11vs11 | 04.10. |
+| [Germany 2006/2007/2008 Away Klose #11 Soccer Jersey (XL)](https://www.original11vs11.com/product-page/germany-2006-2007-2008-away-klose-11-soccer-jersey-xl) | XL | Used | 117.0 USD | Original 11vs11 | 04.10. |
+| [Netherlands 2006/2007 Home V. Persie #17 Soccer Jersey (XL)](https://www.original11vs11.com/product-page/netherland-2006-2007-home-v-persie-17-soccer-jersey-xl) | XL | Used | 110.0 USD | Original 11vs11 | 04.10. |
+| [Czech Republic 2006/2007/2008 Home Nedved #11 Soccer Jersey (XXL)](https://www.original11vs11.com/product-page/czech-republic-2006-2007-2008-home-nedved-11-soccer-jersey-xxl) | XXL | Used | 144.0 USD | Original 11vs11 | 04.10. |
+| [Czech Republic 2006/2007/2008 Home Nedved #11 Soccer Jersey (XL)](https://www.original11vs11.com/product-page/czech-republic-2006-2007-2008-home-nedved-11-soccer-jersey-xl) | XL | Used | 144.0 USD | Original 11vs11 | 04.10. |
+| [Maillot Adidas Football Allemagne Home Vintage KLOSE 2006/07 - XL](https://www.lineupvintageshop.com/product-page/maillot-adidas-football-allemagne-home-vintage-klose-2006-07) | XL |  | 145.0 EUR | Lineup Vintage | 04.10. |
+| [Maillot Nike Football Pays-Bas Home Vintage SNEIJDER 2006/07 - M, L, XL](https://www.lineupvintageshop.com/product-page/maillot-nike-football-pays-bas-home-vintage-sneijder-2006-07-xl) | XL |  | 145.0 EUR | Lineup Vintage | 04.10. |
+| [Maillot Umbro Football Angleterre Away Vintage GERRARD 2006/07 - Xl](https://www.lineupvintageshop.com/product-page/maillot-umbro-football-angleterre-away-vintage-gerrard-2006-07) | XL |  | 125.0 EUR | Lineup Vintage | 04.10. |
+| [Maillot Umbro Football Angleterre Away Vintage OWEN 2006/07 - XXL](https://www.lineupvintageshop.com/product-page/maillot-umbro-football-angleterre-away-vintage-owen-2006-07) | XXL |  | 135.0 EUR | Lineup Vintage | 04.10. |
+| [Maillot Umbro Football Angleterre Away Vintage LAMPARD 2006/07 - L,XL](https://www.lineupvintageshop.com/product-page/maillot-umbro-football-angleterre-away-vintage-lampard-2006-07) | XL |  | 125.0 EUR | Lineup Vintage | 04.10. |
+| [Maillot Umbro Football Angleterre Home Vintage ROONEY 2005/07 - XL](https://www.lineupvintageshop.com/product-page/maillot-umbro-football-angleterre-home-vintage-rooney-2005-07-l) | XL |  | 125.0 EUR | Lineup Vintage | 04.10. |
+| [Maillot Adidas Football Allemagne Home Vintage BALLACK 2006/07 - XL](https://www.lineupvintageshop.com/product-page/maillot-adidas-football-allemagne-vintage-ballack-2006-07-s) | XL |  | 135.0 EUR | Lineup Vintage | 04.10. |
+| [Maillot Umbro football Angleterre Vintage BECKHAM 2005/07 - XL](https://www.lineupvintageshop.com/product-page/maillot-umbro-football-angleterre-vintage-beckham-2005-07-s) | XL |  | 135.0 EUR | Lineup Vintage | 04.10. |
+| [Umbro - England 2006 Away Football Shirt 'BECKHAM'](https://pardonmykicks.se/products/umbro-england-2006-away-football-shirt-beckham-18) | XXL | 8.5/10 | 90.95 EUR | Pardon My Kicks | 04.10. |
+| [Netherlands Home Shirt 2006/08 (XL) Robben 11](https://infinityfootballshirts.com/products/netherlands-home-shirt-2006-08-xl-robben-11) | XL | Good | 84.95 EUR | Infinity Football Shirts | 04.10. |
+| [England 2006/2008 Away Shirt Lampard #8 World Cup 2006 Men’s XL](https://the12thmanretro.com/products/england-2006-2008-away-shirt-lampard-8-world-cup-2006-men-s-xl-1) | XL |  | 42.49 GBP | The 12th Man Retro | 04.10. |
+| [Umbro England 2006 Away Jersey - Beckham #7 - XL - USED: Very Good](https://www.rareandretrosports.com/product-page/rc-3) | XL | Very Good | 88.0 USD | Rare and Retro | 04.10. |
+| [Original Holland Home Jersey 2006-2008 #9 Van Nistelrooy - XL](https://retroriginalfootball.com/products/original-holland-home-jersey-2006-2008-9-van-nistelrooy-xl-6788) | XL | Very Good | 109.00 EUR | RetrOriginalFootball | 01.10. |
 
 ## Zé Roberto (11)
 
