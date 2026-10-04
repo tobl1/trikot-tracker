@@ -42,7 +42,7 @@ Einzeltrikots zum Nachbeflocken dazukommen, das sagt der Nutzer gesondert an.
 
 | Datei | Zweck |
 |---|---|
-| `tracker.py` | gesamtes Programm (Abfrage, Matching, Push, Bericht), bewusst eine Datei |
+| `tracker.py` + `trikot/` | Einstieg `tracker.py`, Code seit 05.10.2026 im Paket `trikot/` (vorher eine Datei mit 2.200 Zeilen): `basis` (Konstanten, Text), `speicher` (Pfade, Laden/Speichern), `abgleich` (Matcher), `netz` (HTTP), `quellen/` (shopify, woo, wix, suchseiten = CFS/IdoSell/html/PrestaShop/SmartWeb, fyj, `run_shop`), `zustand`, `pruefung`, `preise`, `rhythmus`, `melden`, `issues`, `berichte`, `lauf` (main). `tracker.py` stellt alle Namen weiter unter `tracker.*` bereit (Tests); Tests, die etwas umbiegen, müssen das echte Modul treffen (z. B. `trikot.speicher.ERROR_LOG`) |
 | `watchlist.yaml` | Spieler mit Suchbegriffen, Ausschlüssen, Vereinsfilter; Sondertrikots; Größen; Produktausschlüsse |
 | `shops.yaml` | direkt abgefragte Shops mit `plattform` (auto, cfs, idosell, smartweb, prestashop, fyj, aus), optional `schnellcheck: nein` |
 | `.github/workflows/tracker.yml` | **Hauptauslöser cron-job.org** (seit 04.10.2026, `workflow_dispatch`): Gesamt-Run 5:30, Schnell-Run 9:45/15:45/21:45, Drop-Run `5-59/15 9-23` (deutsche Zeit, bewusst versetzt zu :45). GitHub-Zeitpläne nur Rückfall mit `--rueckfall` (überspringt, wenn Gesamt-Run < 20 h bzw. Schnell-Run < 5,5 h her): `30 5`, `15 9,15,21` UTC. Am 04.10.2026 startete ein Rückfall-Schnell-Run 4 h verspätet, lief trotz 4-h-Sperre, 63 Min. mit vielen 429 und verdrängte drei Drop-Runs (deshalb 5,5 h und spätere Zeiten, auch im Winter nach den cron-job.org-Runs). **GitHub-Concurrency hält nur einen wartenden Run**, ein weiterer Start verdrängt ihn (`cancelled`). Deshalb Startzeiten entzerrt und kein Drop-Rückfall |
@@ -145,6 +145,8 @@ TREFFER.md, also vorher sichern oder nicht committen). `--only "Name"` testet ei
   nicht, Nutzer 02.10.2026). Dashboard rechnet selbst nach
 - Shopify: gibt es Größen-Varianten, zählen nur **verfügbare** XL/XXL-Varianten; sonst Größe aus
   Titel oder Größen-Tag
+- Vertragstests der Anbindungen: `tests/test_quellen.py` (FakeHttp mit Beispieldaten je Plattform, ohne Netz)
+- Paketversionen fest in `requirements.txt` (pytest im Workflow ebenfalls fest)
 - Testfälle: `tests/test_matching.py` (pytest, `python -m pytest tests/`), vor jeder Änderung an
   Matching, Zustand oder Rhythmus erweitern und laufen lassen. Wichtige Fälle: Thiago Silva ≠ Thiago,
   Ferran ≠ Fernando Torres, Marcos ≠ Xabi Alonso, Wiesn 2023 grün = nein, 1860 Wiesn = nein,

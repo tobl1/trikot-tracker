@@ -8,6 +8,9 @@ import yaml
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 import tracker  # noqa: E402
+import trikot.issues  # noqa: E402
+import trikot.quellen  # noqa: E402
+import trikot.speicher  # noqa: E402
 
 M = tracker.Matcher(yaml.safe_load((ROOT / "watchlist.yaml").read_text(encoding="utf-8")))
 
@@ -474,8 +477,8 @@ def test_meldungen_0410(title, expected):
 
 
 def test_log_problems(tmp_path, monkeypatch):
-    monkeypatch.setattr(tracker, "ERROR_LOG", tmp_path / "log.json")
-    monkeypatch.setattr(tracker, "ERROR_REPORT", tmp_path / "FEHLER.md")
+    monkeypatch.setattr(trikot.speicher, "ERROR_LOG", tmp_path / "log.json")
+    monkeypatch.setattr(trikot.speicher, "ERROR_REPORT", tmp_path / "FEHLER.md")
     t1 = tracker.now().isoformat()
     tracker.log_problems([("Oh Calcio", "keine Produkte erhalten")], "full", t1)
     tracker.log_problems([("Oh Calcio", "keine Produkte erhalten"), ("FYJ", "HTTP 500")], "priority", t1)
@@ -507,7 +510,7 @@ def test_wm2006(title, yes):
 
 def test_check_alarms(monkeypatch):
     issues = [{"number": 7, "body": "grund: alarm\nid: shop.de/products/x\n", "user": {"login": "me"}}]
-    monkeypatch.setattr(tracker, "owner_issues", lambda label, state="open": (issues, ("api", {})))
+    monkeypatch.setattr(trikot.issues, "owner_issues", lambda label, state="open": (issues, ("api", {})))
     posted = []
     monkeypatch.setattr(tracker.requests, "post", lambda *a, **k: posted.append(a))
     monkeypatch.setattr(tracker.requests, "patch", lambda *a, **k: posted.append(a))
@@ -526,11 +529,11 @@ def test_check_alarms(monkeypatch):
 def test_add_shops_from_issues(tmp_path, monkeypatch):
     f = tmp_path / "shops.yaml"
     f.write_text("shops:\n  - {name: A, url: \"https://a.com\"}\n\n# Marktplätze (eBay, Depop)\n")
-    monkeypatch.setattr(tracker, "SHOPS_FILE", f)
+    monkeypatch.setattr(trikot.speicher, "SHOPS_FILE", f)
     issues = [{"number": 3, "body": "Shop aufnehmen\n\nurl: https://www.new-shop.co.uk\nplattform: shopify\n"},
               {"number": 4, "body": "url: https://wixy.com\nplattform: wix\n"},
               {"number": 5, "body": "url: https://a.com\nplattform: shopify\n"}]          # schon drin
-    monkeypatch.setattr(tracker, "owner_issues", lambda label, state="open": (issues, ("api", {})))
+    monkeypatch.setattr(trikot.issues, "owner_issues", lambda label, state="open": (issues, ("api", {})))
     monkeypatch.setattr(tracker.requests, "post", lambda *a, **k: None)
     monkeypatch.setattr(tracker.requests, "patch", lambda *a, **k: None)
     assert tracker.add_shops_from_issues() == 2
@@ -541,11 +544,11 @@ def test_add_shops_from_issues(tmp_path, monkeypatch):
 
 
 def test_fundgrube(tmp_path, monkeypatch):
-    monkeypatch.setattr(tracker, "FUNDGRUBE_REPORT", tmp_path / "FUNDGRUBE.md")
-    monkeypatch.setattr(tracker, "detect_platform", lambda base: "shopify" if "good" in base else "unbekannt")
+    monkeypatch.setattr(trikot.speicher, "FUNDGRUBE_REPORT", tmp_path / "FUNDGRUBE.md")
+    monkeypatch.setattr(trikot.quellen, "detect_platform", lambda base: "shopify" if "good" in base else "unbekannt")
     tracker.FYJ_DOMAIN_STATS.clear()
     tracker.FYJ_DOMAIN_STATS.update({"good.com": [20, 1], "remake.com": [10, 5]})
-    monkeypatch.setattr(tracker, "detect_platform", lambda base: "shopify" if ("good" in base or "remake" in base) else "unbekannt")
+    monkeypatch.setattr(trikot.quellen, "detect_platform", lambda base: "shopify" if ("good" in base or "remake" in base) else "unbekannt")
     st = {"fyj_shops": {"good.com": {"treffer": 9, "seit": "t"}, "remake.com": {"treffer": 4, "seit": "t"},
                         "known.com": {"treffer": 7, "seit": "t"}, "ebay.de": {"treffer": 3, "seit": "t"},
                         "odd.net": {"treffer": 2, "seit": "t"}}}

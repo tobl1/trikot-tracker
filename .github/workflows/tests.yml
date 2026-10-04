@@ -3,7 +3,7 @@ name: Tests
 # Prüft bei jeder Änderung an Programm, Suchliste oder Shops die Testfälle (schnell, ca. 30 Sekunden)
 on:
   push:
-    paths: ["tracker.py", "watchlist.yaml", "shops.yaml", "tests/**", "requirements.txt"]
+    paths: ["tracker.py", "trikot/**", "watchlist.yaml", "shops.yaml", "tests/**", "requirements.txt"]
   workflow_dispatch:
 
 jobs:
