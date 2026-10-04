@@ -529,7 +529,9 @@ def test_check_alarms(monkeypatch):
 def test_add_shops_from_issues(tmp_path, monkeypatch):
     f = tmp_path / "shops.yaml"
     f.write_text("shops:\n  - {name: A, url: \"https://a.com\"}\n\n# Marktplätze (eBay, Depop)\n")
+    extra = tmp_path / "shops_fundgrube.yaml"
     monkeypatch.setattr(trikot.speicher, "SHOPS_FILE", f)
+    monkeypatch.setattr(trikot.speicher, "SHOPS_EXTRA_FILE", extra)
     issues = [{"number": 3, "body": "Shop aufnehmen\n\nurl: https://www.new-shop.co.uk\nplattform: shopify\n"},
               {"number": 4, "body": "url: https://wixy.com\nplattform: wix\n"},
               {"number": 5, "body": "url: https://a.com\nplattform: shopify\n"}]          # schon drin
@@ -537,10 +539,13 @@ def test_add_shops_from_issues(tmp_path, monkeypatch):
     monkeypatch.setattr(tracker.requests, "post", lambda *a, **k: None)
     monkeypatch.setattr(tracker.requests, "patch", lambda *a, **k: None)
     assert tracker.add_shops_from_issues() == 2
-    cfg = yaml.safe_load(f.read_text())
-    names = {s["name"]: s for s in cfg["shops"]}
-    assert names["New Shop"]["url"] == "https://www.new-shop.co.uk" and names["New Shop"]["schnellcheck"] == "nein"
-    assert names["Wixy"]["plattform"] == "wix" and len(cfg["shops"]) == 3
+    assert "new-shop" not in f.read_text()                       # shops.yaml (Code) bleibt unverändert
+    added = {s["name"]: s for s in yaml.safe_load(extra.read_text())}
+    assert added["New Shop"]["url"] == "https://www.new-shop.co.uk" and added["New Shop"]["schnellcheck"] == "nein"
+    assert added["Wixy"]["plattform"] == "wix" and added["Wixy"]["quelle"] == "Fundgrube, Issue #4"
+    shops = trikot.speicher.load_shops()["shops"]                 # zusammengeführt, ohne Dubletten
+    assert [s["name"] for s in shops] == ["A", "New Shop", "Wixy"]
+    assert tracker.add_shops_from_issues() == 0                   # zweiter Run: nichts doppelt
 
 
 def test_fundgrube(tmp_path, monkeypatch):

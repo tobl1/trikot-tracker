@@ -1,0 +1,44 @@
+name: Dashboard veröffentlichen
+
+# Baut die Seite aus docs/ (Code-Zweig main) und treffer.json (Daten-Zweig) und veröffentlicht sie auf GitHub Pages.
+# Läuft nach jedem Tracker-Run mit neuen Daten (aufgerufen aus tracker.yml) und bei Änderungen am Dashboard
+on:
+  workflow_call:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["docs/**"]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  seite:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    concurrency:
+      group: dashboard
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+      - uses: actions/checkout@v6
+        with:
+          ref: daten
+          path: daten
+      - name: Seite zusammenstellen
+        run: |
+          mkdir -p _site
+          cp -r docs/. _site/
+          cp daten/treffer.json _site/treffer.json
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+      - id: deploy
+        uses: actions/deploy-pages@v5

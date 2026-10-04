@@ -4,6 +4,7 @@ import os
 import re
 
 import requests
+import yaml
 
 from . import speicher
 from .basis import TIMEOUT, domain
@@ -138,23 +139,26 @@ def check_alarms(seen, status_store, ts, rates, mode, notify):
 
 
 def add_shops_from_issues():
-    """Issues mit Label "shop" (aus dem Fundgrube-Knopf): Shop in shops.yaml eintragen, Issue schließen"""
+    """Issues mit Label "shop" (aus dem Fundgrube-Knopf): Shop in die Datei shops_fundgrube.yaml auf dem
+    Daten-Zweig eintragen (nicht in shops.yaml, die bleibt Code) und Issue schließen"""
     issues, api = owner_issues("shop")
     if api is None or not issues:
         return 0
-    text = speicher.SHOPS_FILE.read_text(encoding="utf-8")
+    known = {domain(s["url"]) for s in speicher.load_shops().get("shops") or []}
+    extra = speicher.load_extra_shops()
     added = 0
     for iss in issues:
         f = dict(re.findall(r"(?im)^(url|plattform)\s*:\s*(\S+)", iss.get("body") or ""))
         url, plat = f.get("url", ""), f.get("plattform", "auto").lower()
         if not url.startswith("http"):
             continue
-        if domain(url) not in text:
-            name = domain(url).split(".")[0].replace("-", " ").title()
-            extra = ", plattform: wix" if plat == "wix" else ""
-            line = f'  - {{name: {name}, url: "{url.rstrip("/")}"{extra}, schnellcheck: nein}}   # Fundgrube, Issue #{iss["number"]}'
-            marker = "# Marktplätze (eBay, Depop)"
-            text = text.replace(marker, f"{line}\n\n{marker}", 1) if marker in text else text.rstrip() + "\n" + line + "\n"
+        if domain(url) not in known:
+            shop = {"name": domain(url).split(".")[0].replace("-", " ").title(), "url": url.rstrip("/"),
+                    "schnellcheck": "nein", "quelle": f"Fundgrube, Issue #{iss['number']}"}
+            if plat == "wix":
+                shop["plattform"] = "wix"
+            extra.append(shop)
+            known.add(domain(url))
             added += 1
         try:
             requests.post(f"{api[0]}/{iss['number']}/comments", headers=api[1], timeout=TIMEOUT,
@@ -163,5 +167,5 @@ def add_shops_from_issues():
         except requests.RequestException:
             pass
     if added:
-        speicher.save_text(speicher.SHOPS_FILE, text)
+        speicher.save_text(speicher.SHOPS_EXTRA_FILE, yaml.safe_dump(extra, allow_unicode=True, sort_keys=False))
     return added

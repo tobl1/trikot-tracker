@@ -1,2 +1,7 @@
 __pycache__/
 *.pyc
+*.tmp
+# Daten-Zweig, lokal als Unterordner ausgecheckt: git worktree add daten daten
+daten/
+# lokale Vorschau des Dashboards: cp daten/treffer.json docs/
+docs/treffer.json

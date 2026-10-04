@@ -77,6 +77,10 @@ def main():
             sys.exit("Test-Push wurde von ntfy nicht angenommen")
         return
     if args.mode == "senden":
+        if args.dry_run:   # Probelauf: nur zeigen, was im Postausgang liegt
+            for e in speicher.load_json(speicher.OUTBOX_FILE, []):
+                print(f"[POSTAUSGANG p{e.get('prio')}] {e.get('title')}")
+            return
         sent, left, dropped = send_outbox(topic)
         print(f"Postausgang: {sent} verschickt, {left} offen, {dropped} verworfen (älter als {OUTBOX_MAX_HOURS} Std.)")
         problems = ([("ntfy", f"{left} Push(es) nicht zugestellt, der nächste Run versucht es erneut")] if left else []) + \
@@ -90,7 +94,7 @@ def main():
         n_added = add_shops_from_issues()
         if n_added:
             print(f"{n_added} Shop(s) aus der Fundgrube aufgenommen")
-    shops_cfg = yaml.safe_load(speicher.SHOPS_FILE.read_text(encoding="utf-8"))
+    shops_cfg = speicher.load_shops()   # shops.yaml plus per Fundgrube aufgenommene Shops
     matcher = Matcher(watch)
     speicher.STATE_DIR.mkdir(parents=True, exist_ok=True)
     try:   # beschädigte Daten: abbrechen statt still neu anfangen (Fehler-Log + Workflow-Fehlschlag)
@@ -317,7 +321,7 @@ def main():
     if os.environ.get("DASHBOARD_URL"):
         report_url = os.environ["DASHBOARD_URL"].rstrip("/") + "/#eingaenge"
     else:
-        report_url = f"https://github.com/{repo}/blob/main/TREFFER.md" if repo else None
+        report_url = f"https://github.com/{repo}/blob/daten/TREFFER.md" if repo else None
     if first_run:
         # Erstlauf: genau EINE Nachricht, alles andere steht in TREFFER.md
         cur = [e for e in seen.values() if e["last"] == ts]
@@ -360,7 +364,7 @@ def main():
                  "\nIm Dashboard unter Fundgrube auf \"Aufnehmen\" tippen.", 2, fg_url, None, ["mag"], args.dry_run)
 
     # Preisalarme für Favoriten
-    if not args.only:
+    if not args.only and not args.dry_run:   # Probelauf: keine Alarm-Issues schließen
         check_alarms(seen, status_store, ts, rates, args.mode,
                      lambda title, msg, prio, url: push(topic, title, msg, prio, url, None, ["bell"], args.dry_run))
 

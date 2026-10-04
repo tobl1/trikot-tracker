@@ -14,6 +14,14 @@ on:
         type: choice
         options: [full, priority, drop, droptest, test]
         default: full
+      zweig:
+        description: "Daten-Zweig (nur zum Testen ändern, z. B. daten-test)"
+        type: string
+        default: daten
+      stumm:
+        description: "Probelauf: keine Pushes, keine Issues schließen, kein Dashboard"
+        type: boolean
+        default: false
 
 concurrency:
   group: trikot-tracker
@@ -23,16 +31,30 @@ permissions:
   contents: write
   issues: write          # Meldungen aus dem Dashboard lesen und nach Übernahme schließen
 
+env:
+  ZWEIG: ${{ inputs.zweig || 'daten' }}
+  TRIKOT_DATEN: ${{ github.workspace }}/daten
+
 jobs:
   run:
     runs-on: ubuntu-24.04
     timeout-minutes: 180
+    outputs:
+      geaendert: ${{ steps.speichern.outputs.geaendert }}
     steps:
       - uses: actions/checkout@v6
         with:
-          # Immer den NEUESTEN Stand von main holen, nicht den beim Auslösen. Sonst rechnet ein Run,
-          # der hinter einem anderen gewartet hat, mit veralteten Daten (Konflikt, doppelte Pushes)
-          ref: main
+          # Immer den NEUESTEN Stand des Zweigs holen, nicht den beim Auslösen. Sonst rechnet ein Run,
+          # der hinter einem anderen gewartet hat, mit veraltetem Code
+          ref: ${{ github.ref_name }}
+
+      - name: Daten-Zweig holen
+        # Zustand, Berichte und Dashboard-Daten liegen auf einem eigenen Zweig: Code-Änderungen auf main und
+        # die Ergebnisse der Runs kommen sich so nie in die Quere
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ env.ZWEIG }}
+          path: daten
 
       - uses: actions/setup-python@v6
         with:
@@ -57,46 +79,86 @@ jobs:
           fi
 
       - name: Tracker ausführen
-        # Start über den GitHub-Zeitplan = Rückfall: läuft nur, wenn cron-job.org den Run nicht schon erledigt hat
         run: |
-          if [ "${{ steps.mode.outputs.mode }}" = "droptest" ]; then
-            python tracker.py --mode drop --alle
-          else
-            python tracker.py --mode ${{ steps.mode.outputs.mode }} ${{ github.event_name == 'schedule' && '--rueckfall' || '' }}
-          fi
+          MODE="${{ steps.mode.outputs.mode }}"
+          ARGS="--mode $MODE"
+          if [ "$MODE" = "droptest" ]; then ARGS="--mode drop --alle"; fi
+          # Start über den GitHub-Zeitplan = Rückfall: läuft nur, wenn cron-job.org den Run nicht schon erledigt hat
+          if [ "${{ github.event_name }}" = "schedule" ]; then ARGS="$ARGS --rueckfall"; fi
+          if [ "${{ inputs.stumm }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
+          python tracker.py $ARGS
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DASHBOARD_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
 
       - name: Ergebnisse speichern
+        id: speichern
         if: steps.mode.outputs.mode != 'test'
+        working-directory: daten
+        env:
+          MODE: ${{ steps.mode.outputs.mode }}
         run: |
           git config user.name "trikot-tracker"
           git config user.email "trikot-tracker@users.noreply.github.com"
-          git add state TREFFER.md shops.yaml docs/treffer.json
-          for f in FEHLER.md FUNDGRUBE.md; do if [ -f "$f" ]; then git add "$f"; fi; done   # entstehen erst bei Bedarf
+          git add -A
+          if git diff --cached --quiet; then echo "geaendert=nein" >> "$GITHUB_OUTPUT"; exit 0; fi
+          STAMP="$(date -u +'%Y-%m-%d %H:%M') UTC"
+          if [ "$MODE" = "full" ]; then
+            # Einmal am Tag zusammenfassen: der Daten-Zweig besteht dann nur aus einem Commit, das Repo bleibt klein
+            git checkout -q --orphan neu
+            git commit -q -m "Daten nach dem Gesamt-Run $STAMP"
+            git branch -q -M "$ZWEIG"
+            git push -q -f origin "$ZWEIG"
+          else
+            git commit -q -m "Run $MODE $STAMP"
+            git push -q origin "HEAD:$ZWEIG"
+          fi
+          echo "geaendert=ja" >> "$GITHUB_OUTPUT"
+
+      - name: Pushes senden
+        # Erst jetzt, nachdem gespeichert ist: scheitert das Speichern, geht nichts raus (keine doppelten Pushes)
+        if: steps.mode.outputs.mode != 'test' && inputs.stumm != true
+        run: python tracker.py --mode senden
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+
+      - name: Versand speichern
+        if: steps.mode.outputs.mode != 'test' && inputs.stumm != true
+        working-directory: daten
+        run: |
+          git add -A
           if ! git diff --cached --quiet; then
-            git commit -m "Tracker-Lauf $(date -u +'%Y-%m-%d %H:%M') UTC"
-            git pull --rebase --autostash
-            git push
+            git commit -q -m "Pushes versendet"
+            git push -q origin "HEAD:$ZWEIG"
           fi
 
       - name: Fehlschlag ins Fehler-Log
         if: failure()
+        env:
+          MODE: ${{ steps.mode.outputs.mode }}
         run: |
+          cd daten
           git config user.name "trikot-tracker"
           git config user.email "trikot-tracker@users.noreply.github.com"
           # halbfertige Ergebnisse des abgebrochenen Runs verwerfen, neuesten Stand holen
-          git reset -q --hard HEAD && git clean -qfd -- state docs FEHLER.md TREFFER.md
-          git pull -q --rebase || true
+          git fetch -q origin "$ZWEIG" && git reset -q --hard "origin/$ZWEIG" && git clean -qfd
+          cd ..
           python - <<'PY'
           import os, tracker
           run = f"{os.environ['GITHUB_SERVER_URL']}/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{os.environ['GITHUB_RUN_ID']}"
           tracker.log_problems([("Workflow", f"Run abgebrochen ({os.environ.get('MODE') or '?'}), Details: {run}")],
                                os.environ.get("MODE") or "?", tracker.now().isoformat())
           PY
+          cd daten
           git add state/fehlerlog.json FEHLER.md
-          git commit -q -m "Fehler-Log: Run abgebrochen" && git push -q || true
-        env:
-          MODE: ${{ steps.mode.outputs.mode }}
+          git commit -q -m "Fehler-Log: Run abgebrochen" && git push -q origin "HEAD:$ZWEIG" || true
+
+  dashboard:
+    needs: run
+    if: needs.run.outputs.geaendert == 'ja' && (inputs.zweig || 'daten') == 'daten' && inputs.stumm != true
+    uses: ./.github/workflows/dashboard.yml
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
