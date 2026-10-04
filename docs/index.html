@@ -464,7 +464,9 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     list.forEach(t => (byRun[t.erst] = byRun[t.erst] || []).push(t));
     const info = Object.fromEntries(runs.map(r => [r.zeit, r]));
     const week = Date.now() - 7 * 864e5;
-    const keys = [...new Set([...Object.keys(byRun), ...runs.filter(r => new Date(r.zeit) > week).map(r => r.zeit)])]
+    // leere Runs nur für Gesamt- und Schnell-Runs zeigen (Radar und Drops laufen tagsüber alle 15 bis 30 Min.)
+    const keys = [...new Set([...Object.keys(byRun), ...runs.filter(r => new Date(r.zeit) > week &&
+      (r.modus === "full" || r.modus === "priority")).map(r => r.zeit)])]
       .sort().reverse();
     const html = keys.slice(0, groupsShown).map(k => {
       const items = byRun[k] || [], r = info[k];
