@@ -1,0 +1,56 @@
+name: Diagnose (temporär)
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: diagnose
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  diag:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: CFS-Suche "thiago" komplett
+        run: |
+          python - <<'PY'
+          import time, tracker
+          from bs4 import BeautifulSoup
+          http = tracker.Http()
+          for base in ["https://www.classicfootballshirts.co.uk", "https://www.classicfootballshirts.com"]:
+              total, hits, found = 0, [], None
+              for page in range(1, 31):
+                  txt = http.get(f"{base}/catalogsearch/result/", {"q": "thiago", "p": page}, want="text")
+                  if not txt:
+                      print(base, "Seite", page, "leer/Fehler"); break
+                  soup = BeautifulSoup(txt, "html.parser")
+                  els = soup.select(".product-item")
+                  titles = [((e.find("img") or {}).get("alt") or "") for e in els]
+                  hrefs = [(e.select_one('a[href$=".html"]') or {}).get("href", "") for e in els]
+                  amount = soup.select_one(".toolbar-amount")
+                  if page == 1:
+                      print(base, "Trefferzahl laut Seite:", amount.get_text(" ", strip=True) if amount else "?", "| Kacheln pro Seite:", len(els))
+                  new = [t for t, h in zip(titles, hrefs) if h not in [x[1] for x in hits]]
+                  if not new:
+                      print(base, "Seite", page, "keine neuen Kacheln, Ende"); break
+                  for t, h in zip(titles, hrefs):
+                      hits.append((t, h, page))
+                      if "liva20633347" in h:
+                          found = page
+                  time.sleep(2)
+              alc = [h for h in hits if "thiago" in h[0].lower() and "silva" not in h[0].lower() and "motta" not in h[0].lower()]
+              xl = [h for h in alc if "(XL)" in h[0] or "(XXL)" in h[0] or "(2XL)" in h[0]]
+              print(base, "Kacheln gesamt:", len(hits), "| davon Thiago (ohne Silva/Motta):", len(alc), "| in XL/XXL:", len(xl), "| Liverpool-Away-Trikot auf Seite:", found)
+              for t, h, p in xl:
+                  print("   S.", p, "|", t, "|", h)
+          PY
