@@ -10,9 +10,9 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "full = alles, priority = Schnellcheck, drop = nur fällige Drops, test = nur Test-Push"
+        description: "full = alles, priority = Schnellcheck, drop = nur fällige Drops, droptest = Drop-Run für alle Shops, test = nur Test-Push"
         type: choice
-        options: [full, priority, drop, test]
+        options: [full, priority, drop, droptest, test]
         default: full
 
 concurrency:
@@ -58,7 +58,12 @@ jobs:
 
       - name: Tracker ausführen
         # Start über den GitHub-Zeitplan = Rückfall: läuft nur, wenn cron-job.org den Run nicht schon erledigt hat
-        run: python tracker.py --mode ${{ steps.mode.outputs.mode }} ${{ github.event_name == 'schedule' && '--rueckfall' || '' }}
+        run: |
+          if [ "${{ steps.mode.outputs.mode }}" = "droptest" ]; then
+            python tracker.py --mode drop --alle
+          else
+            python tracker.py --mode ${{ steps.mode.outputs.mode }} ${{ github.event_name == 'schedule' && '--rueckfall' || '' }}
+          fi
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

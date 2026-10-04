@@ -1845,6 +1845,8 @@ def main():
     ap.add_argument("--mode", choices=["full", "priority", "drop", "test"], default="full")
     ap.add_argument("--dry-run", action="store_true", help="nichts senden, nur ausgeben")
     ap.add_argument("--only", help="nur Shops, deren Name diesen Text enthält (zum Testen)")
+    ap.add_argument("--alle", action="store_true",
+                    help="nur mit --mode drop: Testdrop, alle Shops gelten als fällig (nur Shopify, Woo, Wix)")
     ap.add_argument("--rueckfall", action="store_true",
                     help="Start über den GitHub-Zeitplan: nur laufen, wenn cron-job.org den Run nicht schon erledigt hat")
     args = ap.parse_args()
@@ -1892,8 +1894,12 @@ def main():
         print(f"{new_flags} Meldung(en) aus dem Dashboard übernommen")
     if args.mode == "drop":
         # nur Shops, deren Drop gerade läuft; sonst sofort ohne jede Änderung beenden (außer es gab Meldungen)
-        due = {s["name"]: drop_due(s, status_store, now()) for s in shops
-               if (s.get("plattform") or "auto").lower() not in ("aus", "fyj")}
+        if args.alle:
+            # Testdrop: alle Shops mit leichtem Drop-Abruf (neueste Artikel), keine Such-Shops (CFS, IdoSell, html …)
+            due = {s["name"]: "Testdrop" for s in shops if (s.get("plattform") or "auto").lower() in ("auto", "wix")}
+        else:
+            due = {s["name"]: drop_due(s, status_store, now()) for s in shops
+                   if (s.get("plattform") or "auto").lower() not in ("aus", "fyj")}
         shops = [s for s in shops if due.get(s["name"])]
         if not shops and not new_flags:
             print("Drop-Run: kein Drop fällig")
@@ -2172,6 +2178,12 @@ def main():
     for s in statuses:
         if s["fehler"]:
             print(f"  - {s['name']}: {s['fehler']}")
+    if args.mode == "drop" and args.alle:
+        bad = [s["name"] for s in statuses if s["fehler"]]
+        push(topic, "🧪 Testdrop fertig",
+             f"{ok}/{len(statuses)} Shops ok, {len(new_entries)} neue Treffer"
+             + (f". Probleme: {', '.join(bad[:8])}" + (" …" if len(bad) > 8 else "") if bad else ""),
+             2, click=report_url, tags=["test_tube"], dry=args.dry_run)
 
 
 if __name__ == "__main__":
