@@ -1,4 +1,5 @@
 {
+ "alarme": {},
  "counts": {
   "089 Kits": 233,
   "1Klopp Shop": 265,
@@ -198,6 +199,7 @@
   "https://xn--retrotrjer-6cb.dk": "DKK"
  },
  "drop_checks": {
+  "Full Time Fits": "2026-10-04T10:50:49.824446+00:00",
   "Philly Soccer Jerseys": "2026-10-02T22:31:25.080957+00:00",
   "The Kitman 97": "2026-10-03T15:07:55.644740+00:00",
   "To The Jersey": "2026-10-03T15:07:55.644740+00:00"
@@ -581,12 +583,18 @@
    "neu": 0,
    "still": 0,
    "zeit": "2026-10-04T08:35:35.944594+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-04T10:50:49.824446+00:00"
   }
  ],
  "last_full": "2026-10-04T04:38:13.554139+00:00",
  "last_run": {
   "mode": "drop",
-  "time": "2026-10-04T08:35:35.944594+00:00"
+  "time": "2026-10-04T10:50:49.824446+00:00"
  },
  "platforms": {
   "https://1kloppshop.com": "shopify",
