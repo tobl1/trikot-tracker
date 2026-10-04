@@ -75,6 +75,10 @@ Niemals das Thema oder andere Secrets in Code, Logs oder Commits schreiben.
   Schübe am selben Wochentag). Fenster 180 Min. ab Drop-Beginn, je Shop höchstens alle 25 Min.
   Shopify: nur die ersten products.json-Seiten (neueste zuerst), Woo: neueste 100. Ist nichts
   fällig, endet der Run sofort ohne Schreiben. Quellen ohne bisherigen Gesamt-Run werden still übernommen
+- `droptest` (nur Workflow-Auswahl, intern `--mode drop --alle`, seit 04.10.2026): Drop-Run für alle
+  Shopify-, Woo- und Wix-Shops auf einmal, endet mit Push "🧪 Testdrop fertig" (Shops ok, neue Treffer,
+  Probleme). Such-Shops (CFS, IdoSell, html …) bewusst nicht, die wären zu teuer. Erster Test: 102/103
+  ok in ca. 8 Min., nur Football Legends Kits nicht erkannt (sperrt GitHub-IPs, FYJ deckt ab)
 - `test`: nur Test-Push
 - Sprachgebrauch gegenüber dem Nutzer: "Run" statt "Lauf" (Gesamt-Run, Schnell-Run, Drop-Run)
 
