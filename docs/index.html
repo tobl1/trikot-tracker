@@ -2,10 +2,16 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="robots" content="noindex">
 <title>Trikot-Tracker</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚽</text></svg>">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Trikots">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#0f1720">
 <style>
 :root{
@@ -26,54 +32,66 @@
   --new:#3ecf8e; --warn:#f0a35e; --err:#ff7b72; --shadow:none;
 }
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  overflow-x:hidden;touch-action:pan-x pan-y;-webkit-tap-highlight-color:transparent}
+button,select,input,label,a{touch-action:manipulation}
 a{color:inherit}
-.wrap{max-width:1180px;margin:0 auto;padding:0 16px 48px}
-header{padding:22px 0 10px;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px}
-h1{font-size:22px;margin:0;letter-spacing:-.01em}
-.meta{color:var(--muted);font-size:13px}
-.stats{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 14px}
-.stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 12px;min-width:92px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-right)) 48px max(16px,env(safe-area-inset-left))}
+.appbar{position:sticky;top:0;z-index:12;margin:0 -16px;padding:calc(10px + env(safe-area-inset-top)) 16px 10px;
+  display:flex;align-items:center;gap:12px;
+  background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(16px) saturate(160%);
+  -webkit-backdrop-filter:blur(16px) saturate(160%);border-bottom:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
+.logo{width:38px;height:38px;border-radius:10px;flex:0 0 auto;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.brand{min-width:0}
+h1{font-size:19px;margin:0;letter-spacing:-.02em;line-height:1.2}
+.meta{color:var(--muted);font-size:12px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stats{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 12px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:9px 13px;min-width:92px}
 .stat b{display:block;font-size:20px;font-variant-numeric:tabular-nums}
 .stat span{color:var(--muted);font-size:12px}
-.controls{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0 8px;border-bottom:1px solid var(--line);margin-bottom:14px}
+.controls{padding:10px 0 10px;border-bottom:1px solid var(--line);margin-bottom:14px}
+.fbtn{display:none;font:inherit;font-size:14px;font-weight:600;border:1px solid var(--line);background:var(--card);color:var(--ink);
+  border-radius:12px;padding:0 14px;min-height:42px;cursor:pointer;white-space:nowrap}
+.fbtn b{display:inline-block;min-width:18px;margin-left:6px;padding:0 5px;border-radius:9px;background:var(--accent);color:var(--accent-ink);font-size:12px}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .row+.row{margin-top:8px}
-input[type=search],select{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:9px;padding:8px 10px;min-height:38px}
+input[type=search],select{font:inherit;font-size:16px;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px 12px;min-height:42px}
+input[type=search]:focus,select:focus{outline:2px solid color-mix(in srgb,var(--accent) 55%,transparent);outline-offset:0}
 input[type=search]{flex:1 1 200px;min-width:0}
 select{flex:0 1 auto;max-width:100%}
 .chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;-webkit-overflow-scrolling:touch}
 .chips::-webkit-scrollbar{display:none}
-.chip{flex:0 0 auto;font:inherit;font-size:13px;border:1px solid transparent;background:var(--chip);color:var(--ink);border-radius:999px;padding:6px 11px;cursor:pointer;white-space:nowrap}
+.chip{flex:0 0 auto;font:inherit;font-size:13px;border:1px solid transparent;background:var(--chip);color:var(--ink);border-radius:999px;padding:7px 12px;cursor:pointer;white-space:nowrap;transition:background .15s,color .15s}
 .chip[aria-pressed="true"]{background:var(--chip-on);color:var(--chip-on-ink)}
 .chip.hi{border-color:var(--accent)}
 .chip small{opacity:.65;margin-left:3px}
 .toggle{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);cursor:pointer;user-select:none}
 .toggle input{accent-color:var(--accent);width:16px;height:16px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;text-decoration:none;position:relative}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;text-decoration:none;position:relative;transition:transform .15s,border-color .15s}
+.card:active{transform:scale(.985)}
 .card:hover{border-color:var(--muted)}
 .card.hi{border-color:var(--accent)}
 .img{aspect-ratio:1/1;background:var(--chip);display:flex;align-items:center;justify-content:center;overflow:hidden}
 .img img{width:100%;height:100%;object-fit:cover;display:block}
 .img .ph{font-size:40px;opacity:.35}
-.badges{position:absolute;top:8px;left:8px;display:flex;gap:4px;flex-wrap:wrap}
-.badge{font-size:11px;font-weight:700;letter-spacing:.03em;padding:3px 7px;border-radius:6px;background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.18)}
+.badges{position:absolute;top:8px;left:8px;right:84px;display:flex;gap:4px;flex-wrap:wrap;pointer-events:none}
+.badge{font-size:10.5px;font-weight:700;letter-spacing:.04em;padding:3px 7px;border-radius:7px;background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.18)}
 .badge.new{background:var(--new);color:#fff}
 .badge.hi{background:var(--accent);color:var(--accent-ink)}
 .cond{font-size:12px;font-weight:700;color:var(--new);margin-right:4px}
 .note{font-size:12px;color:var(--muted);line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .body{padding:10px 12px 12px;display:flex;flex-direction:column;gap:6px;flex:1}
 .labels{font-size:12px;font-weight:600;color:var(--accent)}
-.title{font-size:14px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.title{font-size:14px;font-weight:500;line-height:1.3;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .foot{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;gap:8px}
 .price b{font-size:17px;font-variant-numeric:tabular-nums}
 .price small{display:block;color:var(--muted);font-size:12px}
 .size{font-weight:700;font-size:13px;border:1.5px solid var(--ink);border-radius:6px;padding:1px 6px}
 .shop{font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .empty{padding:40px 0;text-align:center;color:var(--muted)}
-details{margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+details{margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 14px}
 summary{cursor:pointer;font-weight:600}
 .src{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
 .src th,.src td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
@@ -89,10 +107,12 @@ summary{cursor:pointer;font-weight:600}
 .err{color:var(--err);padding:30px 0}
 .more[hidden]{display:none}
 .tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin:4px 0 0}
-.tabs button{font:inherit;font-weight:600;background:none;border:0;border-bottom:2px solid transparent;color:var(--muted);padding:8px 12px;cursor:pointer}
+.tabs button{font:inherit;font-weight:600;background:none;border:0;border-bottom:2px solid transparent;color:var(--muted);padding:8px 12px;cursor:pointer;display:flex;align-items:center;gap:6px}
 .tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
-.seg{display:inline-flex;background:var(--chip);border-radius:9px;padding:3px;gap:2px;flex:0 0 auto}
-.seg button{font:inherit;font-size:13px;border:0;background:none;color:var(--muted);padding:6px 10px;border-radius:7px;cursor:pointer;white-space:nowrap}
+.tabs .ic{font-size:15px;line-height:1}
+.tabs small{font-weight:600;color:var(--muted)}
+.seg{display:inline-flex;background:var(--chip);border-radius:12px;padding:3px;gap:2px;flex:0 0 auto}
+.seg button{font:inherit;font-size:13px;border:0;background:none;color:var(--muted);padding:7px 11px;border-radius:9px;cursor:pointer;white-space:nowrap}
 .seg button[aria-pressed="true"]{background:var(--card);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.12)}
 .flag{position:absolute;top:6px;right:6px;width:32px;height:32px;border-radius:50%;border:0;cursor:pointer;
   background:var(--card);color:var(--muted);font-size:15px;box-shadow:0 1px 3px rgba(0,0,0,.2);opacity:.85}
@@ -124,11 +144,27 @@ summary{cursor:pointer;font-weight:600}
 .silent{margin-top:10px;background:none;border:0;padding:0}
 .silent summary{font-size:13px;font-weight:400;color:var(--muted)}
 .silent .grid{margin-top:10px}
+@media (min-width:721px){
+  .controls{position:sticky;top:calc(59px + env(safe-area-inset-top));z-index:5;background:var(--bg)}
+}
+@media (max-width:720px){
+  body{padding-bottom:calc(76px + env(safe-area-inset-bottom))}
+  .tabs{position:fixed;left:0;right:0;bottom:0;z-index:15;margin:0;gap:0;justify-content:space-around;border-bottom:0;
+    border-top:1px solid color-mix(in srgb,var(--line) 80%,transparent);padding:6px 8px calc(6px + env(safe-area-inset-bottom));
+    background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%)}
+  .tabs button{flex:1 1 0;flex-direction:column;gap:2px;font-size:11px;padding:4px 2px;border:0;border-radius:12px}
+  .tabs button[aria-selected="true"]{color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent)}
+  .tabs .ic{font-size:20px}
+  .tabs small{display:none}
+  .fbtn{display:inline-flex;align-items:center}
+  .filters{display:none}
+  .filters.open{display:flex}
+  .chips{-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent);padding-right:24px}
+}
 @media (max-width:520px){
-  .controls{position:static}
   .seg{width:100%;justify-content:space-between}
-  .seg button{flex:1 1 0;padding:6px 4px}
-  .row.chips{flex-wrap:nowrap;margin-right:-16px;padding-right:16px}
+  .seg button{flex:1 1 0;padding:7px 4px}
+  .row.chips{flex-wrap:nowrap}
   .row select{flex:1 1 40%;min-width:0}
   .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
   .body{padding:8px 9px 10px}
@@ -142,27 +178,28 @@ summary{cursor:pointer;font-weight:600}
 </head>
 <body>
 <div class="wrap">
-  <header>
-    <h1>⚽ Trikot-Tracker</h1>
-    <span class="meta" id="stand">lädt …</span>
+  <header class="appbar">
+    <img class="logo" src="icon.svg" alt="">
+    <div class="brand"><h1>Trikot-Tracker</h1><span class="meta" id="stand">lädt …</span></div>
   </header>
   <div class="stats" id="stats"></div>
   <nav class="tabs" id="tabs">
-    <button data-view="all" aria-selected="true">Alle Treffer</button>
-    <button data-view="feed" aria-selected="false">Neu pro Run</button>
-    <button data-view="favs" aria-selected="false" id="favtab">Favoriten</button>
+    <button data-view="all" aria-selected="true"><span class="ic">⚽</span><span>Alle Treffer</span></button>
+    <button data-view="feed" aria-selected="false"><span class="ic">✨</span><span>Neu pro Run</span></button>
+    <button data-view="favs" aria-selected="false" id="favtab"><span class="ic">★</span><span>Favoriten <small id="favcount"></small></span></button>
   </nav>
 
   <div class="controls">
     <div class="row">
       <input type="search" id="q" placeholder="Suchen: Verein, Saison, Shop …" autocomplete="off">
+      <button class="fbtn" id="filterbtn" aria-expanded="false" aria-controls="filters">Filter</button>
       <div class="seg" id="sort" role="group" aria-label="Sortierung">
         <button data-s="prio">Wichtig</button><button data-s="new">Neueste</button>
         <button data-s="pasc">Preis ↑</button><button data-s="pdesc">Preis ↓</button>
       </div>
     </div>
     <div class="row chips" id="labels"></div>
-    <div class="row">
+    <div class="row filters" id="filters">
       <select id="shop" aria-label="Shop"><option value="">Alle Shops</option></select>
       <select id="size" aria-label="Größe">
         <option value="">XL + XXL</option><option value="XL">nur XL</option><option value="XXL">nur XXL</option>
@@ -344,7 +381,9 @@ summary{cursor:pointer;font-weight:600}
     const list = filtered();
     const feed = st.view === "feed", favView = st.view === "favs";
     $("grid").hidden = feed || favView; $("feed").hidden = !feed; $("favs").hidden = !favView;
-    $("favtab").textContent = `Favoriten (${Object.keys(favs).length})`;
+    $("favcount").textContent = Object.keys(favs).length ? `(${Object.keys(favs).length})` : "";
+    const nf = (st.shop ? 1 : 0) + (st.size ? 1 : 0) + (st.onlynew ? 1 : 0) + (st.expensive ? 1 : 0) + (st.dupes ? 1 : 0);
+    $("filterbtn").innerHTML = "Filter" + (nf ? `<b>${nf}</b>` : "");
     if (favView) {
       const byId = Object.fromEntries(all.map(t => [t.id, t]));
       const list = Object.values(favs).sort((a, b) => b.added.localeCompare(a.added))
@@ -491,6 +530,12 @@ summary{cursor:pointer;font-weight:600}
   $("flagcancel").addEventListener("click", () => { $("flagsheet").hidden = true; });
   $("flagsheet").addEventListener("click", e => { if (e.target.id === "flagsheet") $("flagsheet").hidden = true; });
   $("flaggo").addEventListener("click", sendFlag);
+  $("filterbtn").addEventListener("click", () => {
+    const open = $("filters").classList.toggle("open");
+    $("filterbtn").setAttribute("aria-expanded", String(open));
+  });
+  // iOS: Zoomen per Zwei-Finger-Geste verhindern (Safari ignoriert user-scalable=no)
+  ["gesturestart", "gesturechange"].forEach(ev => document.addEventListener(ev, e => e.preventDefault(), {passive: false}));
   $("more").addEventListener("click", () => { if (st.view === "feed") groupsShown += 12; else shown += PAGE; render(); });
 
   fetch("treffer.json", {cache: "no-store"})

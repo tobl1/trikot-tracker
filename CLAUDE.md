@@ -36,6 +36,7 @@ Einzeltrikots zum Nachbeflocken dazukommen, das sagt der Nutzer gesondert an.
 | `state/status.json` | erkannte Plattformen, erfolgreich abgefragte Quellen, Produktanzahlen, letzter Lauf |
 | `TREFFER.md` | automatisch erzeugte Übersicht als Markdown, Quellen-Status immer vom letzten Gesamtlauf |
 | `docs/index.html` | Dashboard (GitHub Pages, Branch `main`, Ordner `/docs`), statisch, lädt `treffer.json`. Ansichten "Alle Treffer" und "Eingänge nach Lauf" (`#eingaenge`, gruppiert nach `first` = Zeitstempel des Laufs, Läufe aus `status.json` → `laeufe`; still übernommene Treffer, also Erstlauf oder neue Quelle, eingeklappt). Pushes verlinken auf `#eingaenge` |
+| Dashboard als Web-App | `manifest.webmanifest`, `icon.svg` + `icon-180/192/512.png` (Trikot mit 6), Start vom Homebildschirm im Vollbild. Kein Zoom (viewport, `touch-action`, iOS `gesturestart`), kein seitliches Scrollen, Eingaben 16 px (sonst zoomt iOS beim Tippen). Am Handy: Navigationsleiste unten, seltene Filter hinter "Filter"-Knopf |
 | Dashboard-Extras | Favoriten (Stern, nur lokal im Browser, mit Datenkopie, "nicht mehr gelistet" und "Preis ↓"), gleiche Angebote eines Shops (gleicher Titel und Größe) zusammengefasst auf das günstigste ("+N gleiche im Shop"); Classic-Shirts hat oft mehrere Exemplare desselben Trikots |
 | `docs/treffer.json` | aktuelle Treffer inkl. EUR-Preis plus Quellen-Status, wird vom Workflow committet |
 
