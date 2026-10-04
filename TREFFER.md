@@ -1,6 +1,6 @@
 # Trikot-Tracker
 
-Stand: 04.10.2026 10:15 Uhr (drop), 278 aktuelle Treffer in XL/XXL
+Stand: 04.10.2026 10:35 Uhr (drop), 275 aktuelle Treffer in XL/XXL
 
 ## Thiago (3)
 
@@ -10,12 +10,11 @@ Stand: 04.10.2026 10:15 Uhr (drop), 278 aktuelle Treffer in XL/XXL
 | [2013-14 BAYERN MUNCHEN *THIAGO* SHIRT XL](https://classic-shirts.com/product-eng-321702-2013-14-BAYERN-MUNCHEN-THIAGO-SHIRT-XL.html) | XL | 8/10 | £54.99 | Classic-Shirts | 01.10. |
 | [2019/20 - Bayern Munich - Thiago #6 (2XL)](https://www.vintagefootballarea.com/products/2019-20-bayern-munich-thiago-6-2xl-1) | XXL | Very Good | 79.99 EUR | Vintage Football Area | 01.10. |
 
-## Barça 2010-2013 (18)
+## Barça 2010-2013 (16)
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
 | [Barcelona 2012/2013 Visitante (2XL)](https://futmaniacos.com/products/camiseta-barcelona-2012-2013-visitante-1) | 2XL |  | 55.95 EUR | Futmaniacos | 04.10. |
-| [Espanyol Barcelona 2012-13 Trikot heim - 9/10 - [XXL]](https://retroshirts.ch/products/fussballtrikot-espanyolbarcelona-2012-13-heim-puma-xxl-100736) | XXL | 9/10 | 79.00 CHF | Retroshirts CH | 04.10. |
 | [2012-13 FC BARCELONA SHIRT XXL](https://classic-shirts.com/product-eng-272150-2012-13-FC-BARCELONA-SHIRT-XXL.html) | XXL | 9/10 | £69.99 | Classic-Shirts | 01.10. |
 | [2011-12 BARCELONA HOME FOOTBALL *BNWT* Nike - XL](https://buysellfootballshirts.co.uk/products/2011-2012-barcelona-home-football-shirt-new-sizes) | XL | BNWT | 84.95 EUR | Buy Sell Football Shirts | 01.10. |
 | [2012-13 BARCELONA HOME FOOTBALL SHIRT *BNWT* Nike - XL](https://buysellfootballshirts.co.uk/products/2012-2013-barcelona-home-football-shirt-new-xl) | XL | BNWT | 108.95 EUR | Buy Sell Football Shirts | 01.10. |
@@ -29,7 +28,6 @@ Stand: 04.10.2026 10:15 Uhr (drop), 278 aktuelle Treffer in XL/XXL
 | [Barcelona 2012-13 Auswärts Trikot (XL) nike](https://www.senseofgoal.com/products/barcelona-2012-13-auswarts-trikot-xl-nike-2) | XL |  | 59.95 EUR | Sense of Goal | 01.10. |
 | [FC Barcelona - 2012-13 - Auswärts - XL - Nike](https://tothejersey.com/en/products/fcbarcelona-2012-13-auswarts-xl-nike-n5980) | XL | 9/10 | 90.95 EUR | To The Jersey | 01.10. |
 | [Trikot - FC Barcelona - 2012/2013 - XL - Heim](https://trikotparadies.shop/products/trikot-heim-kopie-599) | XL | 9/10 | 49.00 EUR | Trikotparadies | 01.10. |
-| [2010/11 - Barcelone (XL)](https://www.vintagefootballarea.com/products/2010-11-barcelone-xl-16) | XL | Very Good | 34.99 EUR | Vintage Football Area | 01.10. |
 | [2012/13 - Barcelone (XL)](https://www.vintagefootballarea.com/products/2012-13-barcelone-xl-37) | XL | Very Good | 49.99 EUR | Vintage Football Area | 01.10. |
 | [2012/13 - Barcelone (XL)](https://www.vintagefootballarea.com/products/2012-13-barcelone-xl-59) | XL | Very Good | 49.99 EUR | Vintage Football Area | 01.10. |
 
@@ -245,11 +243,10 @@ Stand: 04.10.2026 10:15 Uhr (drop), 278 aktuelle Treffer in XL/XXL
 | [Koszulka piłkarska Borussia Dortmund 2011/12 Home 44 Perisic [XXL]](https://footballthrift.shop/borussia-dortmund-2011-12-home-44-perisic-xxl/) | XXL |  | 90.00 USD | Football Thrift Shop | 01.10. |
 | [Club Brugge KV 2010/2011 Away Perisic #44 Player of The Year Soccer Jersey (XXL)](https://www.original11vs11.com/product-page/222-131) | XXL | Used | 126.0 USD | Original 11vs11 | 01.10. |
 
-## Ribéry (43)
+## Ribéry (42)
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
-| [2007-08 FC Bayern München Third Trikot XL Ribery](https://www.089kits.de/product-page/2007-08-fc-bayern-münchen-third-trikot-xl-ribery) | XL | 6/10 | 14.99 EUR | 089 Kits | 04.10. |
 | [FC Bayern München - Ribery #7 - Trikot 2010–2011 - XL](https://www.bulishirts.com/product-page/fc-bayern-münchen-ribery-7-trikot-2007-2008-xl) | XL | 9/10 | 89.0 EUR | Bulishirts | 04.10. |
 | [Frankreich - Ribery #22 - Trikot 2008–2009 - XL](https://www.bulishirts.com/product-page/frankreich-ribery-22-trikot-2008-2009-xl) | XL | 9/10 | 129.0 EUR | Bulishirts | 04.10. |
 | [Maillot Nike Football FFF Equipe de France Away Vintage RIBERY 2012/13 - L & XL](https://www.lineupvintageshop.com/product-page/maillot-nike-football-fff-equipe-de-france-away-rétro-ribery-2012-13) | XL |  | 140.0 EUR | Lineup Vintage | 04.10. |

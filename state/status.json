@@ -203,6 +203,13 @@
   "To The Jersey": "2026-10-03T15:07:55.644740+00:00"
  },
  "flags": {
+  "089kits.de/product-page/2007-08-fc-bayern-münchen-third-trikot-xl-ribery": {
+   "grund": "unpassend",
+   "issue": 23,
+   "kommentar": "Bodenloser Zustand",
+   "titel": "Flag: unpassend · 2007-08 FC Bayern München Third Trikot XL Ribery",
+   "zeit": "2026-10-04T08:35:31.231483+00:00"
+  },
   "bulishirts.com/product-page/bayer-04-leverkusen-kroos-39-2008-2009-xl": {
    "grund": "unpassend",
    "issue": 5,
@@ -266,6 +273,13 @@
    "titel": "Flag: unpassend · Espanyol Barcelona 2012-13 Trikot auswärts BNWT - 10/10 - [XL]",
    "zeit": "2026-10-04T07:45:41.743467+00:00"
   },
+  "retroshirts.ch/products/fussballtrikot-espanyolbarcelona-2012-13-heim-puma-xxl-100736": {
+   "grund": "unpassend",
+   "issue": 24,
+   "kommentar": "Espanyol statt FC Barcelona",
+   "titel": "Flag: unpassend · Espanyol Barcelona 2012-13 Trikot heim - 9/10 - [XXL]",
+   "zeit": "2026-10-04T08:35:31.231483+00:00"
+  },
   "senseofgoal.com/products/fc-barcelona-2011-12-trainingsjacke-xxl-nike": {
    "grund": "unpassend",
    "issue": 19,
@@ -314,6 +328,13 @@
    "kommentar": "Shirt",
    "titel": "Flag: unpassend · 2010/11 - Barcelone (XL)",
    "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "vintagefootballarea.com/products/2010-11-barcelone-xl-16": {
+   "grund": "unpassend",
+   "issue": 22,
+   "kommentar": "Shirt",
+   "titel": "Flag: unpassend · 2010/11 - Barcelone (XL)",
+   "zeit": "2026-10-04T08:35:31.231483+00:00"
   },
   "vintagefootballarea.com/products/2011-12-barcelone-xl-22": {
    "grund": "unpassend",
@@ -554,12 +575,18 @@
    "neu": 0,
    "still": 0,
    "zeit": "2026-10-04T08:15:32.545492+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-04T08:35:35.944594+00:00"
   }
  ],
  "last_full": "2026-10-04T04:38:13.554139+00:00",
  "last_run": {
   "mode": "drop",
-  "time": "2026-10-04T08:15:32.545492+00:00"
+  "time": "2026-10-04T08:35:35.944594+00:00"
  },
  "platforms": {
   "https://1kloppshop.com": "shopify",
