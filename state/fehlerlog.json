@@ -9,6 +9,16 @@
   ],
   "quelle": "Football Legends Kits"
  },
+ "RB-Jerseys|ConnectionError: HTTPSConnectionPool(host='www.rb-jerseys.com', port=443): Max retries exceeded with url: /wp-json/wc/store/v1/products?p": {
+  "anzahl": 1,
+  "erst": "2026-10-04T14:04:46.327261+00:00",
+  "letzt": "2026-10-04T14:04:46.327261+00:00",
+  "meldung": "ConnectionError: HTTPSConnectionPool(host='www.rb-jerseys.com', port=443): Max retries exceeded with url: /wp-json/wc/store/v1/products?p",
+  "modi": [
+   "priority"
+  ],
+  "quelle": "RB-Jerseys"
+ },
  "Workflow|Run abgebrochen (drop), Details: https://github.com/tobl1/trikot-tracker/actions/runs/37191020286": {
   "anzahl": 1,
   "erst": "2026-10-04T09:05:34.754489+00:00",

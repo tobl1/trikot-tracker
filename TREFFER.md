@@ -1,6 +1,6 @@
 # Trikot-Tracker
 
-Stand: 04.10.2026 15:35 Uhr (drop), 318 aktuelle Treffer in XL/XXL
+Stand: 04.10.2026 16:04 Uhr (priority), 318 aktuelle Treffer in XL/XXL
 
 ## Thiago (3)
 
