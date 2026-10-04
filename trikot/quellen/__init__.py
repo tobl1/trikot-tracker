@@ -2,10 +2,10 @@
 
 import time
 
-from ..basis import SHOPIFY_PAGE_CAP
+from ..basis import RADAR_LIMIT, SHOPIFY_PAGE_CAP
 from ..netz import Http, SHOPIFY_GATE
 from ..rhythmus import rhythm
-from .shopify import shopify_currency, shopify_full, shopify_recent, shopify_search
+from .shopify import shopify_currency, shopify_full, shopify_newest, shopify_recent, shopify_search
 from .suchseiten import cfs_run, html_run, idosell_run, prestashop_run, smartweb_run
 from .wix import WIX_STORES_APP, wix_run
 from .woo import woo_endpoint, woo_recent, woo_run
@@ -75,10 +75,13 @@ def run_shop(shop, mode, matcher, platforms, currencies):
         status["plattform"] = plat.split(":")[0]
         if plat == "shopify":
             cur = shop.get("waehrung") or currencies.get(base, "")
-            if not shop.get("waehrung"):   # jedes Mal, die Währung hängt vom Markt (Land) ab
+            # jedes Mal, die Währung hängt vom Markt (Land) ab; beim Radar reicht die gemerkte (halbe Last)
+            if not shop.get("waehrung") and not (mode == "radar" and cur):
                 cur = shopify_currency(http, base) or cur
                 currencies[base] = cur
-            if mode == "drop":
+            if mode == "radar":
+                items, n = shopify_newest(http, name, base, cur, shop.get("_seit"))
+            elif mode == "drop":
                 items, n = shopify_recent(http, name, base, cur)
             elif mode == "full":
                 stamps = []
@@ -97,8 +100,8 @@ def run_shop(shop, mode, matcher, platforms, currencies):
                     status["info"] = f"Katalog bei {n} gekappt, ältere Artikel per Suche"
             else:
                 items, n = shopify_search(http, name, base, matcher.queries(True), matcher, cur, pages=1)
-        elif plat.startswith("woo:") and mode == "drop":
-            items, n = woo_recent(http, name, plat[4:])
+        elif plat.startswith("woo:") and mode in ("drop", "radar"):
+            items, n = woo_recent(http, name, plat[4:], per_page=RADAR_LIMIT if mode == "radar" else 100)
         elif plat.startswith("woo:"):
             ep = plat[4:]
             items, n = woo_run(http, name, ep, None if mode == "full" else matcher.queries(True))

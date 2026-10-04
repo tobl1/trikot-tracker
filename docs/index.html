@@ -48,6 +48,11 @@ h1{font-family:"Raleway",system-ui,sans-serif;font-size:22px;font-weight:700;let
 .appbar .sp{flex:1}
 .upd{font-size:11px;color:var(--muted);text-align:right;line-height:1.35;white-space:nowrap}
 .upd b{display:block;color:var(--ink);font-weight:600;font-size:12px}
+/* Lebenszeichen: Hinweis, wenn Runs ausbleiben (statt Alarm-Push) */
+.warn{margin:0 0 12px;padding:10px 14px;border-radius:var(--r-sm);border:1px solid color-mix(in srgb,var(--warn) 60%,transparent);
+  background:color-mix(in srgb,var(--warn) 12%,transparent);color:var(--ink);font-size:13px;line-height:1.4}
+.warn[hidden]{display:none}
+.warn b{color:var(--warn)}
 
 /* Bedienung */
 .controls{padding:0 0 12px;margin-bottom:6px}
@@ -236,6 +241,7 @@ details[open] summary::after{content:"−"}
     <span class="sp"></span>
     <div class="upd" id="stand">lädt …</div>
   </header>
+  <div class="warn" id="warn" hidden></div>
   <nav class="tabs" id="tabs">
     <button data-view="all" aria-selected="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/></svg><span>Alle</span></button>
     <button data-view="feed" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 16.5 5-5 4 4 8-8"/><path d="M15 7.5h5.5V13"/></svg><span>Neu pro Run</span></button>
@@ -327,7 +333,7 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
   let all = [], shown = PAGE, runs = [], groupsShown = 12;
   const st = Object.assign({q:"", sort:"prio", labels:[], shop:"", size:"", onlynew:false, expensive:false, dupes:false, view:"all"},
                            store.get("filter") || {});
-  const MODE = {full: "Gesamt-Run", priority: "Schnell-Run", drop: "Drop-Run"};
+  const MODE = {full: "Gesamt-Run", priority: "Schnell-Run", drop: "Drop-Run", radar: "Radar"};
   if (location.hash === "#eingaenge") st.view = "feed";
   else if (location.hash === "#favoriten") st.view = "favs";
   else if (location.hash === "#alle") st.view = "all";
@@ -552,6 +558,16 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
       first.dupShops = [...new Set(rest.map(t => t.shopName).filter(n => n !== first.shopName))];
     });
     $("stand").innerHTML = `<b>Stand ${esc(fmtDate(data.stand))}</b>${esc(MODE[data.modus] || data.modus || "")}`;
+    // Lebenszeichen: tagsüber läuft das Radar etwa alle 30 Min., nachts ist bis zum Gesamt-Run um 5:30 Ruhe
+    const hAgo = iso => iso ? (Date.now() - new Date(iso)) / 36e5 : Infinity;
+    const hourNow = new Date().getHours() + new Date().getMinutes() / 60;
+    const day = hourNow >= 9.75 && hourNow <= 23.75;
+    const warns = [];
+    if (hAgo(data.stand) > (day ? 1.5 : 8)) warns.push(`<b>Letzter Run vor ${Math.round(hAgo(data.stand))} Std.</b> ` +
+      (day ? "Tagsüber kommt normalerweise alle 30 Min. einer." : "Nachts sollte spätestens der Gesamt-Run um 5:30 kommen."));
+    if (hAgo(data.letzter_gesamtlauf) > 26) warns.push(`<b>Gesamt-Run seit ${Math.round(hAgo(data.letzter_gesamtlauf))} Std. nicht gelaufen.</b>`);
+    $("warn").innerHTML = warns.join("<br>") + (warns.length ? " Da hakt etwas, sag Claude kurz Bescheid." : "");
+    $("warn").hidden = !warns.length;
     const shops = [...new Set(all.map(t => t.shopName))];
 
     const counts = {};

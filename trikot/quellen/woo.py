@@ -28,8 +28,9 @@ def woo_to_item(shop, p):
     return item("direkt", shop, p.get("permalink") or "", title, size_text, price.strip(), img, desc=desc)
 
 
-def woo_recent(http, shop, endpoint):
-    data = http.get(endpoint, {"per_page": 100, "orderby": "date", "order": "desc"})
+def woo_recent(http, shop, endpoint, per_page=100):
+    """Neueste Artikel (Drop-Run: 100, Neuheiten-Radar: weniger)"""
+    data = http.get(endpoint, {"per_page": per_page, "orderby": "date", "order": "desc"})
     data = data if isinstance(data, list) else []
     return [it for it in (woo_to_item(shop, p) for p in data) if it], len(data)
 

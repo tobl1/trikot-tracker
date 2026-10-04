@@ -14,7 +14,7 @@ from . import speicher
 from .abgleich import Matcher
 from .basis import (
     EINBRUCH_ANTEIL, EINBRUCH_MIN, EINBRUCH_RUNS, ENRICH_BUDGET, FALLBACK_SKIP_HOURS, MAX_PUSH_HIGH,
-    MAX_WORKERS, ROOT, RUN_HISTORY, SIZE_RX, canon_url, domain, is_high, norm, now, short_size,
+    CRON_TOKEN_ABLAUF, MAX_WORKERS, RADAR_MIN, ROOT, RUN_HISTORY, SIZE_RX, canon_url, domain, is_high, norm, now, short_size,
 )
 from .berichte import fundgrube, log_problems, write_dashboard, write_report
 from .issues import add_shops_from_issues, apply_flags, check_alarms
@@ -38,6 +38,42 @@ def recently_done(status_store, mode):
     if mode == "full" and status_store.get("last_full"):
         times.append(status_store["last_full"])
     return any(now() - dt.datetime.fromisoformat(t) < dt.timedelta(hours=limit) for t in times)
+
+
+def token_reminder(today):
+    """Erinnerung ins Fehler-Log, wenn der Startschlüssel von cron-job.org bald abläuft (ohne ihn keine Runs mehr)"""
+    end = dt.date.fromisoformat(CRON_TOKEN_ABLAUF)
+    days = (end - today).days
+    if days > 30:
+        return []
+    when = f"läuft am {end:%d.%m.%Y} ab" if days >= 0 else f"ist seit {end:%d.%m.%Y} abgelaufen"
+    return [("cron-job.org", f"GitHub-Schlüssel für die Run-Starts {when}: neuen anlegen, bei cron-job.org eintragen, "
+                             "CRON_TOKEN_ABLAUF in trikot/basis.py anpassen")]
+
+
+def radar_due(status_store, t):
+    """Neuheiten-Radar fällig? Höchstens alle RADAR_MIN Minuten (cron-job.org startet alle 15 Min.)"""
+    last = status_store.get("radar_zeit")
+    return not last or t - dt.datetime.fromisoformat(last) >= dt.timedelta(minutes=RADAR_MIN)
+
+
+def radar_shops(shops, platforms):
+    """Shops fürs Radar: automatisch erkannte Shopify- und WooCommerce-Shops (ein kleiner Abruf je Shop).
+    Nicht: Wix (ganzer Katalog), Such-Shops (CFS, IdoSell, eigene Systeme), deaktivierte und gesperrte"""
+    out = []
+    for s in shops:
+        if (s.get("plattform") or "auto").lower() != "auto" or str(s.get("sperren", "")).lower() in ("ja", "true", "yes"):
+            continue
+        plat = platforms.get(s["url"].rstrip("/"), "")
+        if plat == "shopify" or plat.startswith("woo:"):
+            out.append(s)
+    return out
+
+
+def radar_job(shop, radar_checks):
+    """Shop-Eintrag fürs Radar: mit Zeitpunkt der letzten Radar-Prüfung (zum Weiterblättern bei vielen Neuen)"""
+    last = radar_checks.get(shop["name"])
+    return dict(shop, _seit=dt.datetime.fromisoformat(last) if last else None)
 
 
 def stock_collapse(collapse, name, n_now, n_prev):
@@ -124,20 +160,29 @@ def main():
     new_flags = apply_flags(seen, status_store, now().isoformat()) if not args.dry_run else 0
     if new_flags:
         print(f"{new_flags} Meldung(en) aus dem Dashboard übernommen")
+    shop_modes = {}   # Drop-Run: je Shop "drop" (fälliger Drop, gründlich) oder "radar" (nur neueste Artikel)
+    t_start = now()
     if args.mode == "drop":
-        # nur Shops, deren Drop gerade läuft; sonst sofort ohne jede Änderung beenden (außer es gab Meldungen)
+        # nur Shops, deren Drop gerade läuft, plus alle RADAR_MIN Minuten das Neuheiten-Radar über alle Shopify- und
+        # WooCommerce-Shops; ist nichts fällig, sofort ohne jede Änderung beenden (außer es gab Meldungen)
         if args.alle:
             # Testdrop: alle Shops mit leichtem Drop-Abruf (neueste Artikel), keine Such-Shops (CFS, IdoSell, html …)
             due = {s["name"]: "Testdrop" for s in shops if (s.get("plattform") or "auto").lower() in ("auto", "wix")}
         else:
-            due = {s["name"]: drop_due(s, status_store, now()) for s in shops
+            due = {s["name"]: drop_due(s, status_store, t_start) for s in shops
                    if (s.get("plattform") or "auto").lower() not in ("aus", "fyj")}
+            if radar_due(status_store, t_start):
+                for s in radar_shops(shops, platforms):
+                    if not due.get(s["name"]):
+                        due[s["name"]], shop_modes[s["name"]] = "Radar", "radar"
         shops = [s for s in shops if due.get(s["name"])]
         if not shops and not new_flags:
-            print("Drop-Run: kein Drop fällig")
+            print("Drop-Run: kein Drop fällig, Radar nicht dran")
             return
-        if shops:
-            print("Drop-Run:", ", ".join(f"{s['name']} {due[s['name']]}" for s in shops))
+        drops = [f"{s['name']} {due[s['name']]}" for s in shops if shop_modes.get(s["name"]) != "radar"]
+        n_radar = sum(1 for m in shop_modes.values() if m == "radar")
+        print("Drop-Run:", ", ".join(drops) or "keine Drops", f"| Radar: {n_radar} Shops" if n_radar else "")
+    radar_checks = status_store.setdefault("radar_checks", {})
     # Shops, die direkt abgefragt werden: deren FYJ-Daten ignorieren (direkt ist aktueller und genauer)
     # Ausnahme: Shops, die im letzten Gesamt-Run nicht funktioniert haben, deckt FYJ wieder ab
     failed = {q["name"] for q in (status_store.get("quellen") or {}).get("liste", []) if q.get("fehler")}
@@ -157,7 +202,8 @@ def main():
     lock = threading.Lock()
     results, statuses, fyj_status = [], [], None
     with cf.ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
-        futs = {ex.submit(run_shop, s, args.mode, matcher, platforms, currencies): s for s in shops}
+        futs = {ex.submit(run_shop, radar_job(s, radar_checks) if shop_modes.get(s["name"]) == "radar" else s,
+                          shop_modes.get(s["name"], args.mode), matcher, platforms, currencies): s for s in shops}
         fyj_fut = None
         if use_fyj:
             def fyj_job():
@@ -312,7 +358,8 @@ def main():
             e["teuer"] = too_expensive(e)
     new_entries = [e for e in new_entries if not e.get("verkauft") and not e.get("teuer") and not e.get("aussortiert")]
     laeufe = status_store.setdefault("laeufe", [])
-    laeufe.append({"zeit": ts, "modus": args.mode, "neu": len(new_entries),
+    radar_ran = "radar" in shop_modes.values()
+    laeufe.append({"zeit": ts, "modus": "radar" if radar_ran else args.mode, "neu": len(new_entries),
                    "still": sum(1 for e in seen.values() if e["first"] == ts and e.get("still"))})
     del laeufe[:-RUN_HISTORY]
 
@@ -390,7 +437,14 @@ def main():
     elif "known_labels" not in status_store:
         status_store["known_labels"] = sorted(known_labels)
     if args.mode == "drop":
-        status_store.setdefault("drop_checks", {}).update({s["name"]: ts for s in shops})
+        status_store.setdefault("drop_checks", {}).update(
+            {s["name"]: ts for s in shops if shop_modes.get(s["name"]) != "radar"})
+        if radar_ran:
+            # Startzeit merken, nicht Endzeit: was während des Runs dazukam, sieht das nächste Radar
+            status_store["radar_zeit"] = t_start.isoformat()
+            for st in statuses:
+                if shop_modes.get(st["name"]) == "radar" and not st["fehler"]:
+                    radar_checks[st["name"]] = t_start.isoformat()
     status_store["sources_ok"] = sorted(sources_ok)
     status_store["last_run"] = {"mode": args.mode, "time": ts}
     run_sources = ([fyj_status] if fyj_status else []) + sorted(statuses, key=lambda s: (not s["fehler"], s["name"]))
@@ -407,6 +461,8 @@ def main():
     write_dashboard(seen, status_store, args.mode, ts, watch, shops_cfg.get("shops") or [])
     problems = [(s["name"], s["fehler"]) for s in run_sources
                 if s.get("fehler") and not str(s["fehler"]).startswith("deaktiviert")]
+    if args.mode == "full":
+        problems += token_reminder(now().date())
     log_problems(problems, args.mode, ts)
 
     ok = sum(1 for s in statuses if not s["fehler"])

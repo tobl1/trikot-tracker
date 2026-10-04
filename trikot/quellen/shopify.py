@@ -3,7 +3,7 @@
 import datetime as dt
 import re
 
-from ..basis import ANY_SIZE_RX, SHOPIFY_PAGE_CAP, SIZE_RX, norm, now
+from ..basis import ANY_SIZE_RX, RADAR_LIMIT, SHOPIFY_PAGE_CAP, SIZE_RX, norm, now
 from .gemeinsam import item
 
 
@@ -93,6 +93,29 @@ def shopify_recent(http, shop, base, currency="", days=3, max_pages=3):
             except (TypeError, ValueError):
                 pass
         if old or len(prods) < 250:
+            break
+    return items, n
+
+
+def shopify_newest(http, shop, base, currency="", since=None, limit=RADAR_LIMIT, max_pages=3):
+    """Neuheiten-Radar: nur die neuesten Artikel (products.json liefert die neuesten zuerst), kleine Seiten.
+    Weiterblättern nur, wenn die ganze Seite neuer ist als die letzte Radar-Prüfung (dann kam mehr dazu)"""
+    items, n = [], 0
+    for page in range(1, max_pages + 1):
+        data = http.get(f"{base}/products.json", {"limit": limit, "page": page})
+        prods = (data or {}).get("products") or []
+        n += len(prods)
+        oldest = None
+        for p in prods:
+            it = shopify_to_item(shop, base, p, currency=currency)
+            if it:
+                items.append(it)
+            try:
+                d = dt.datetime.fromisoformat(str(p.get("published_at") or p.get("created_at")))
+                oldest = d if oldest is None or d < oldest else oldest
+            except ValueError:
+                pass
+        if len(prods) < limit or since is None or oldest is None or oldest <= since:
             break
     return items, n
 

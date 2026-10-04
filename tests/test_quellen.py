@@ -339,3 +339,60 @@ def test_probelauf_schreibt_nichts_in_den_postausgang(capsys):
     trikot.melden.POSTAUSGANG.clear()
     trikot.melden.push("thema", "Titel", "Text", dry=True)
     assert not trikot.melden.POSTAUSGANG and "[PUSH p3] Titel" in capsys.readouterr().out
+
+
+# ---------------------------------------------------------------------------
+# Neuheiten-Radar
+# ---------------------------------------------------------------------------
+import datetime as _dt  # noqa: E402
+
+from trikot.lauf import radar_due, radar_job, radar_shops  # noqa: E402
+
+
+def test_radar_kleine_seiten_weiterblaettern_nur_wenn_alles_neu():
+    t = tracker.now()
+    neu = lambda i: shopify_prod(f"Shirt {i}", f"h{i}", [var("XL")], published=(t - _dt.timedelta(minutes=i)).isoformat())
+    page1 = [neu(i) for i in range(40)]                           # alle 40 neuer als die letzte Prüfung
+    page2 = [neu(i) for i in range(40, 80)]
+    http = FakeHttp([("/products.json", lambda p: {"products": page1 if p["page"] == 1 else page2})])
+    items, n = tracker.shopify_newest(http, "Shop", "https://s.com", "EUR", since=t - _dt.timedelta(minutes=50))
+    assert n == 80 and len(http.calls) == 2 and all(c[1]["limit"] == 40 for c in http.calls)
+    http = FakeHttp([("/products.json", lambda p: {"products": page1})])
+    tracker.shopify_newest(http, "Shop", "https://s.com", "EUR", since=t - _dt.timedelta(minutes=10))
+    assert len(http.calls) == 1                                   # Seite reicht schon bis zur letzten Prüfung
+
+
+def test_radar_faellig_und_auswahl():
+    t = tracker.now()
+    assert radar_due({}, t)
+    assert not radar_due({"radar_zeit": (t - _dt.timedelta(minutes=10)).isoformat()}, t)
+    assert radar_due({"radar_zeit": (t - _dt.timedelta(minutes=30)).isoformat()}, t)
+    shops = [{"name": "A", "url": "https://a.com"}, {"name": "B", "url": "https://b.com/"},
+             {"name": "C", "url": "https://c.com", "plattform": "wix"}, {"name": "D", "url": "https://d.com", "sperren": "ja"},
+             {"name": "E", "url": "https://e.com"}, {"name": "F", "url": "https://f.com", "plattform": "cfs"}]
+    platforms = {"https://a.com": "shopify", "https://b.com": "woo:https://b.com/wp-json/wc/store/v1/products",
+                 "https://d.com": "shopify", "https://e.com": "unbekannt"}
+    assert [s["name"] for s in radar_shops(shops, platforms)] == ["A", "B"]
+    job = radar_job({"name": "A", "url": "https://a.com"}, {"A": t.isoformat()})
+    assert job["_seit"] == t and radar_job({"name": "X", "url": "x"}, {})["_seit"] is None
+
+
+def test_run_shop_radar_spart_waehrungsabfrage(monkeypatch):
+    http = FakeHttp([("/products.json", {"products": [shopify_prod("2019/20 Bayern Munich Thiago #6 (XL)", "t", [var("Default Title")])]})])
+    shop = {"name": "VFA", "url": "https://vfa.com", "_seit": None}
+    items, st = run_shop_mit_modus(monkeypatch, http, shop, "radar", {"https://vfa.com": "shopify"}, {"https://vfa.com": "EUR"})
+    assert len(items) == 1 and items[0]["price"] == "79.99 EUR" and st["fehler"] == ""
+    assert not any("cart.js" in u for u, _ in http.calls)        # gemerkte Währung genügt
+
+
+def run_shop_mit_modus(monkeypatch, http, shop, mode, platforms, currencies):
+    monkeypatch.setattr(trikot.quellen, "Http", lambda *a, **k: http)
+    return trikot.quellen.run_shop(shop, mode, M, platforms, currencies)
+
+
+def test_token_erinnerung():
+    from trikot.lauf import token_reminder
+    end = _dt.date.fromisoformat(tracker.CRON_TOKEN_ABLAUF)
+    assert token_reminder(end - _dt.timedelta(days=60)) == []
+    assert "läuft am" in token_reminder(end - _dt.timedelta(days=10))[0][1]
+    assert "abgelaufen" in token_reminder(end + _dt.timedelta(days=1))[0][1]
