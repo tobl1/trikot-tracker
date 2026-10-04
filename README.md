@@ -3,57 +3,51 @@
 Sucht automatisch Vintage-Trikots deiner Lieblingsspieler und Wunsch-Trikots in XL/XXL
 und schickt neue Treffer per ntfy-Push aufs Handy.
 
-- **Gesamtlauf** nachts gegen 5:30 Uhr: rund 46 Shops direkt plus ~125 Shops über FindYourJersey
-- **Schnellcheck** 3x täglich (ca. 9:45, 15:45, 21:45 Uhr): Thiago und die Sondertrikots in den direkt angebundenen Shops
+- **Gesamt-Run** nachts gegen 5:30 Uhr: rund 120 Shops direkt plus Lückenfüller über FindYourJersey
+- **Neuheiten-Radar** tagsüber etwa alle 30 Minuten: die neuesten Artikel aller Shopify- und WooCommerce-Shops
+- **Schnell-Run** 3x täglich (ca. 9:45, 15:45, 21:45 Uhr): Thiago und die Sondertrikots über die Shop-Suchen
 - **Drop-Run**: prüft Shops kurz nach ihrem Drop (feste Zeiten aus `shops.yaml` und automatisch erkannte)
 - **Dashboard** mit Bildern, Filtern und Preisen in Euro: https://tobl1.github.io/trikot-tracker/
-- **Übersicht** als Liste: [TREFFER.md](TREFFER.md) (beides wird bei jedem Lauf aktualisiert)
+- **Übersicht** als Liste: [TREFFER.md auf dem Daten-Zweig](https://github.com/tobl1/trikot-tracker/blob/daten/TREFFER.md)
 
-## Dateien
+## Aufbau
 
-| Datei | Zweck |
+| Wo | Was |
 |---|---|
 | `watchlist.yaml` | Spieler, Sondertrikots, Größen, Ausschlüsse |
 | `shops.yaml` | direkt abgefragte Shops |
-| `tracker.py` | das Programm |
-| `.github/workflows/tracker.yml` | Zeitsteuerung |
-| `docs/index.html` | Dashboard-Seite |
-| `TREFFER.md`, `state/`, `docs/treffer.json` | entstehen automatisch, nicht bearbeiten |
+| `tracker.py`, `trikot/` | das Programm (Einstieg und Module) |
+| `tests/` | automatische Tests, laufen vor jedem Run |
+| `.github/workflows/` | Runs (`tracker.yml`), Dashboard veröffentlichen (`dashboard.yml`), Tests (`tests.yml`) |
+| `docs/` | Dashboard-Seite |
+| Zweig **`daten`** | alles, was die Runs schreiben: Zustand, `treffer.json`, `TREFFER.md`, `FEHLER.md`, `FUNDGRUBE.md` |
 
-## Einrichtung
+Code und Daten liegen getrennt: Änderungen am Programm (Zweig `main`) und die Ergebnisse der Runs
+(Zweig `daten`) kommen sich so nie in die Quere. Der Daten-Zweig wird einmal am Tag zu einem einzigen
+Commit zusammengefasst, damit das Repository klein bleibt.
 
-1. Im Repository auf **Add file → Upload files**, diese Dateien hineinziehen:
-   `tracker.py`, `watchlist.yaml`, `shops.yaml`, `requirements.txt`, `README.md`,
-   dann **Commit changes**
-2. **Add file → Create new file**, als Dateinamen exakt `.github/workflows/tracker.yml`
-   eintippen (die Schrägstriche legen die Ordner an), den Inhalt der Datei `tracker.yml`
-   hineinkopieren, **Commit changes**
-3. Reiter **Actions** öffnen. Falls GitHub fragt, Workflows aktivieren
-4. Links **Trikot-Tracker** wählen, rechts **Run workflow**, Modus `test`.
-   Nach ca. 1 Minute sollte ein Test-Push auf dem Handy ankommen
-5. Nochmal **Run workflow**, diesmal Modus `full`. Das ist der Erstlauf: Du bekommst die
-   aktuell verfügbaren Thiago- und Sondertrikot-Treffer plus eine Zusammenfassung.
-   Alle Treffer stehen danach in `TREFFER.md`
+## Ablauf eines Runs
 
-Ab dann läuft alles automatisch.
+1. Tests laufen, schlagen sie fehl, startet der Run gar nicht erst
+2. Shops abfragen, Treffer prüfen, alles im Daten-Zweig speichern
+3. **Erst danach** gehen die Pushes raus (Postausgang): scheitert das Speichern, kommt nichts doppelt
+4. Dashboard wird neu veröffentlicht
 
 ## Anpassen
 
-Dateien direkt auf GitHub bearbeiten (Datei öffnen, Stift-Symbol, speichern).
-Änderungen gelten ab dem nächsten Lauf.
-
 - **Spieler hinzufügen:** in `watchlist.yaml` einen Block nach Vorbild der anderen ergänzen
-- **Shop hinzufügen:** in `shops.yaml` eine Zeile ergänzen, das Shopsystem wird automatisch erkannt
+- **Shop hinzufügen:** in `shops.yaml` eine Zeile ergänzen, das Shopsystem wird automatisch erkannt.
+  Oder im Dashboard unter "Fundgrube" auf "Aufnehmen" tippen
 - **Shop pausieren:** `plattform: aus` dazuschreiben
 
 ## Gut zu wissen
 
-- Die Uhrzeiten von GitHub sind nicht minutengenau, Verzögerungen von 10 bis 30 Minuten sind normal
-- Nach jedem Gesamtlauf zeigt `TREFFER.md` unten den **Quellen-Status**. Shops mit Hinweis
-  "nicht automatisch erkannt" brauchen eine Sonderanbindung (sofern sie nicht über FYJ laufen)
+- Gestartet werden die Runs von cron-job.org (minutengenau). GitHubs eigene Zeitpläne kamen teils Stunden
+  zu spät und dienen nur als Rückfall
+- Probleme der Runs stehen in `FEHLER.md` auf dem Daten-Zweig. Bleiben Runs aus, zeigt das Dashboard
+  oben einen Hinweis
 - Wird ein Shop zum ersten Mal erfolgreich abgefragt, kommt dessen Bestand ohne Einzel-Pushes
   in die Übersicht, damit es keine Flut an Nachrichten gibt
-- Treffer, die 36 Stunden nicht mehr gesehen wurden (verkauft), verschwinden aus der Übersicht
-- Das Repository ist öffentlich, damit das Dashboard über GitHub Pages läuft. Dadurch sind
-  Actions-Minuten unbegrenzt. Das ntfy-Thema liegt als Secret und bleibt geheim
-- Die Abfragen sind bewusst gedrosselt (Shopify sperrt sonst die IP), ein Gesamtlauf dauert daher länger
+- Das Repository ist öffentlich, damit das Dashboard über GitHub Pages läuft. Das ntfy-Thema liegt als
+  Secret und bleibt geheim
+- Die Abfragen sind bewusst gedrosselt (Shopify sperrt sonst die IP), ein Gesamt-Run dauert daher länger

@@ -14,15 +14,18 @@ Aufbau, getroffene Entscheidungen und offene Punkte. Bitte bei größeren Änder
 
 ## Bei jeder neuen Anfrage zuerst (Wunsch des Nutzers, 05.10.2026)
 
-1. `git pull`, dann **`FEHLER.md`** lesen (Fehler-Log der Runs, zusammengefasst je Quelle und Meldung,
-   30 Tage) und neue oder gehäufte Probleme kurz analysieren und ansprechen. Der Nutzer will keine
-   Alarm-Pushes, sondern dass Claude das Log selbst prüft
+1. `git pull` und `git -C daten pull` (Daten-Zweig, lokal als Unterordner `daten/` eingehängt; fehlt er:
+   `git fetch origin daten && git worktree add --track -b daten daten origin/daten`), dann **`daten/FEHLER.md`**
+   lesen (Fehler-Log der Runs, zusammengefasst je Quelle und Meldung, 30 Tage) und neue oder gehäufte Probleme
+   kurz analysieren und ansprechen. Der Nutzer will keine Alarm-Pushes, sondern dass Claude das Log selbst prüft
+   (das Dashboard zeigt nur einen Hinweis, wenn Runs ausbleiben)
 2. `gh issue list --label flag --state all` auf neue Meldungen prüfen, Muster in Regeln übersetzen
-3. `FUNDGRUBE.md` überfliegen: Die Fundgrube läuft seit 05.10.2026 **automatisch** wöchentlich im
+3. `daten/FUNDGRUBE.md` überfliegen: Die Fundgrube läuft seit 05.10.2026 **automatisch** wöchentlich im
    Gesamt-Run (`fundgrube()`): FYJ-only-Shops mit Treffern, System erkannt (`detect_platform`), Anteil
    FYJ-Nachbauten (`FYJ_DOMAIN_STATS`), Empfehlung bei bekanntem System und < 15 % Nachbauten, eine Push
    pro Woche. Nutzer tippt im Dashboard (Bereich Fundgrube) auf "Aufnehmen" → Issue Label `shop` →
-   `add_shops_from_issues()` trägt den Shop im nächsten Gesamt-Run in shops.yaml ein (schnellcheck: nein)
+   `add_shops_from_issues()` trägt den Shop im nächsten Gesamt-Run in `daten/shops_fundgrube.yaml` ein (schnellcheck:
+   nein; `speicher.load_shops()` führt sie mit shops.yaml zusammen)
    und schließt das Issue. Bewusst nur über FYJ: Einträge mit `plattform: aus` (z. B. footballshirtvintage.fr).
    Ganz gesperrt (auch nicht über FYJ): `sperren: ja` (The Football Market)
 
@@ -46,16 +49,16 @@ Einzeltrikots zum Nachbeflocken dazukommen, das sagt der Nutzer gesondert an.
 | `watchlist.yaml` | Spieler mit Suchbegriffen, Ausschlüssen, Vereinsfilter; Sondertrikots; Größen; Produktausschlüsse |
 | `shops.yaml` | direkt abgefragte Shops mit `plattform` (auto, cfs, idosell, smartweb, prestashop, fyj, aus), optional `schnellcheck: nein` |
 | `.github/workflows/tracker.yml` | **Hauptauslöser cron-job.org** (seit 04.10.2026, `workflow_dispatch`): Gesamt-Run 5:30, Schnell-Run 9:45/15:45/21:45, Drop-Run `5-59/15 9-23` (deutsche Zeit, bewusst versetzt zu :45). GitHub-Zeitpläne nur Rückfall mit `--rueckfall` (überspringt, wenn Gesamt-Run < 20 h bzw. Schnell-Run < 5,5 h her): `30 5`, `15 9,15,21` UTC. Am 04.10.2026 startete ein Rückfall-Schnell-Run 4 h verspätet, lief trotz 4-h-Sperre, 63 Min. mit vielen 429 und verdrängte drei Drop-Runs (deshalb 5,5 h und spätere Zeiten, auch im Winter nach den cron-job.org-Runs). **GitHub-Concurrency hält nur einen wartenden Run**, ein weiterer Start verdrängt ihn (`cancelled`). Deshalb Startzeiten entzerrt und kein Drop-Rückfall |
-| `state/seen.json` | bekannte Treffer (Schlüssel = kanonische URL), wird vom Workflow committet |
-| `state/status.json` | erkannte Plattformen, erfolgreich abgefragte Quellen, Produktanzahlen, letzter Lauf |
-| `FEHLER.md`, `state/fehlerlog.json` | Fehler-Log: Quellen mit Fehlern je Run, abgebrochene Runs (Workflow-Schritt "Fehlschlag ins Fehler-Log"), zusammengefasst, 30 Tage |
+| Zweig **`daten`** (seit 05.10.2026) | alles, was Runs schreiben, getrennt vom Code: `state/seen.json` (bekannte Treffer, Schlüssel = kanonische URL), `state/status.json` (Plattformen, Quellen, Läufe, Flags, Alarme, Radar), `state/fehlerlog.json` + `FEHLER.md`, `state/postausgang.json`, `treffer.json` (Dashboard), `TREFFER.md`, `FUNDGRUBE.md`, `shops_fundgrube.yaml`. Im Workflow und lokal als Unterordner `daten/` ausgecheckt (`TRIKOT_DATEN` überschreibt den Pfad). Der Gesamt-Run fasst den Zweig täglich zu **einem** Commit zusammen (orphan + force push), die anderen Runs committen normal. Grund: Rebase-Konflikt am 04.10.2026 (Run-Ergebnis verloren) und wachsende Repo-Größe |
+| Ablauf `tracker.yml` | Code-Zweig (`ref: github.ref_name`) + Daten-Zweig holen, Tests, Run, **Ergebnisse speichern**, dann **Pushes senden** (`--mode senden`, Postausgang) und **Versand speichern**, danach Job `dashboard` (ruft `dashboard.yml`). Eingaben zum Testen: `zweig` (z. B. `daten-test`) und `stumm` (Probelauf: `--dry-run`, keine Pushes, keine Issues schließen, kein Dashboard). Test eines Umbaus: `gh workflow run tracker.yml --ref <zweig> -f mode=full -f zweig=daten-test -f stumm=true` |
+| `.github/workflows/dashboard.yml` | GitHub Pages über Actions (seit 05.10.2026, vorher main/docs): `docs/` von main + `treffer.json` vom Daten-Zweig. Läuft nach Runs mit neuen Daten und bei Push auf `docs/**` |
 | `.github/workflows/tests.yml` | Tests bei jedem Push auf Programm, Suchliste, Shops; der Tracker-Workflow testet zusätzlich vor jedem Run und bricht bei Fehlern ab |
-| `TREFFER.md` | automatisch erzeugte Übersicht als Markdown, Quellen-Status immer vom letzten Gesamtlauf |
+| `daten/TREFFER.md` | automatisch erzeugte Übersicht als Markdown, Quellen-Status immer vom letzten Gesamtlauf |
 | `docs/index.html` | Dashboard (GitHub Pages, Branch `main`, Ordner `/docs`), statisch, lädt `treffer.json`. Ansichten "Alle Treffer" und "Eingänge nach Lauf" (`#eingaenge`, gruppiert nach `first` = Zeitstempel des Laufs, Läufe aus `status.json` → `laeufe`; still übernommene Treffer, also Erstlauf oder neue Quelle, eingeklappt). Pushes verlinken auf `#eingaenge` |
 | Dashboard-Design (05.10.2026) | angelehnt an Dribbble "Crypto Trading Mobile App": Schwarz, Anthrazit-Karten (Radius 22), Rot `#e0352f` als einziger Akzent, Thiago-Kacheln komplett rot. Nutzerwünsche: Titel "Trikot Tracker" in **Raleway** neben dem Logo, Kategorie und Preis in der Kachel in **Inter** in der Kopfzeile, rechts "Stand" + Run-Art; Grundschrift **Syne**; keine große rote Statistik und keine Icon-Knöpfe oben; Filter-Knopf neben der Suche (Handy); Kategorien ohne roten Punkt (wirkte wie "Neues"); Tipp auf Alle/Neu pro Run/Favoriten scrollt nach oben. Untere Leiste bewusst schlicht, aktiver Eintrag weiß mit rotem Punkt |
 | Dashboard als Web-App | `manifest.webmanifest`, `icon.svg` + `icon-180/192/512.png` (Trikot mit 6), Start vom Homebildschirm im Vollbild. Kein Zoom (viewport, `touch-action`, iOS `gesturestart`), kein seitliches Scrollen, Eingaben 16 px (sonst zoomt iOS beim Tippen). Am Handy: Navigationsleiste unten, seltene Filter hinter "Filter"-Knopf |
 | Dashboard-Extras | "Juckt nicht" (05.10.2026): im Melde-Sheet zuerst "Einfach ausblenden", nur lokal (localStorage `tt:hidden`), ohne Issue, mit Rückgängig-Toast; zurückholen über "N ausgeblendet" in den Filtern. Alter in der Kachel kurz: 5h, 3d, 1m (31 bis 60 Tage). Größe immer XL/XXL. Favoriten (Stern, nur lokal im Browser, mit Datenkopie, "nicht mehr gelistet" und "Preis ↓"), gleiche Angebote eines Shops (gleicher Titel und Größe) zusammengefasst auf das günstigste ("+N gleiche im Shop"); Classic-Shirts hat oft mehrere Exemplare desselben Trikots |
-| `docs/treffer.json` | aktuelle Treffer inkl. EUR-Preis plus Quellen-Status, wird vom Workflow committet |
+| `daten/treffer.json` | aktuelle Treffer inkl. EUR-Preis plus Quellen-Status (Dashboard-Daten). Lokale Vorschau: nach `docs/` kopieren (dort ignoriert) |
 
 Laufzeitumgebung: GitHub Actions, öffentliches Repo, Python 3.12,
 `ubuntu-24.04`, `actions/checkout@v6`, `actions/setup-python@v6`. Gesamt-Run mit 77 Shops ca. 50 bis 60 Min.
@@ -80,11 +83,20 @@ Niemals das Thema oder andere Secrets in Code, Logs oder Commits schreiben.
   Shopify-, Woo- und Wix-Shops auf einmal, endet mit Push "🧪 Testdrop fertig" (Shops ok, neue Treffer,
   Probleme). Such-Shops (CFS, IdoSell, html …) bewusst nicht, die wären zu teuer. Erster Test: 102/103
   ok in ca. 8 Min., nur Football Legends Kits nicht erkannt (sperrt GitHub-IPs, FYJ deckt ab)
-- `test`: nur Test-Push
+- **Neuheiten-Radar** (seit 05.10.2026, Teil des Drop-Runs): alle `RADAR_MIN` (25) Minuten die neuesten
+  `RADAR_LIMIT` (40) Artikel aller automatisch erkannten Shopify- und WooCommerce-Shops (`radar_shops`, nicht Wix,
+  Such-Shops, gesperrte), Shopify per `shopify_newest` (weiterblättern nur, wenn die ganze Seite neuer ist als die
+  letzte Prüfung, `radar_checks`), gemerkte Währung statt `/cart.js`. Lauf heißt im Verlauf "radar". Last: ca. 90
+  kleine Abrufe pro Radar, knapp 30 pro Shop und Tag. Ersetzt nicht die Drops (fällige Drops weiter gründlich)
+- `senden`: nur im Workflow nach dem Speichern, verschickt den Postausgang (`state/postausgang.json`); nicht
+  zugestellte bleiben für den nächsten Run, ältere als 12 Std. werden verworfen (beides im Fehler-Log)
+- `test`: nur Test-Push (direkt, ohne Postausgang)
 - Sprachgebrauch gegenüber dem Nutzer: "Run" statt "Lauf" (Gesamt-Run, Schnell-Run, Drop-Run)
 
-Lokal testen: `python tracker.py --mode full --dry-run` (sendet nichts, schreibt aber state und
-TREFFER.md, also vorher sichern oder nicht committen). `--only "Name"` testet einzelne Shops.
+Lokal testen: `TRIKOT_DATEN=/tmp/kopie python tracker.py --mode full --dry-run --only "Name"` mit einer Kopie von
+`daten/` (Probeläufe schreiben Zustand!). `--dry-run` sendet nichts, schließt keine Issues, prüft keine Preisalarme.
+Lokal sperrt Shopify die eigene IP schnell (429), CFS und eBay blocken lokal (403): solche Prüfungen über einen
+temporären Workflow aus GitHub heraus (Beispiel 05.10.2026: CFS-Suche "thiago" komplett durchgesehen).
 
 ## Matching-Regeln (wichtig, vom Nutzer so festgelegt)
 
@@ -261,6 +273,13 @@ auf dem Foto erkennbar sind (z. B. Trainingsshirt ohne Hinweis im Titel), über 
 
 ## Benachrichtigungslogik
 
+- **Postausgang** (seit 05.10.2026): `push()` sammelt nur, `save_outbox()` schreibt am Ende des Runs, verschickt wird
+  erst nach dem Speichern im Workflow (`--mode senden`). Das ntfy-Thema steht nie in Dateien. Beschädigte
+  `seen.json`/`status.json` brechen den Run ab (`DatenFehler`), statt still einen Erstlauf zu machen
+- **Ehrliche Quellenwerte**: `Http.codes` zählt Antworten außer 200; 403/401 ohne Produkte = "gesperrt", sonst
+  "keine Produkte erhalten (HTTP …)" bzw. Hinweis in `info`. **Bestandseinbruch** (Gesamt-Run, unter 50 % des
+  letzten Bestands ab 100 Produkten) zählt als Fehler (Treffer bleiben, FYJ springt ein), nach 3 Gesamt-Runs in
+  Folge gilt der kleinere Bestand als echt (`stock_collapse`, `status.json` → `einbruch`)
 - Erstlauf (leeres seen.json): genau **eine** Zusammenfassung
 - Neue Quelle oder Bestandssprung (>30 % und >200 Produkte mehr als beim letzten Gesamtlauf):
   Treffer still übernehmen, keine Pushes
@@ -357,7 +376,14 @@ Größe steht im Titel ("… - XL"); Felder `Stock`/`Online` wirken unzuverläss
 Produktseite (`.product-variants .radio-label`); Cloudflare-Challenge-Skript auf der Seite,
 eventuell werden GitHub-IPs geblockt. **Noch nicht live getestet.**
 
-## Architektur-Review 05.10.2026 (Vorschlag an den Nutzer, Umsetzung noch offen)
+## Architektur-Review 05.10.2026
+
+**Umgesetzt am 05.10.2026 (Nutzer: "fang gern an"):** Stufe 1 komplett (Module, feste Paketversionen, Vertragstests,
+sicheres Speichern, Postausgang, ehrliche Quellenwerte, Bestandseinbruch, Daten-Zweig, Pages über Actions,
+Lebenszeichen im Dashboard, Token-Erinnerung) und das Neuheiten-Radar aus Stufe 2. **Noch offen:** Kollektionen statt
+Suche bei gekappten Katalogen, Prüfen vor dem Push für alle Quellen + "warum Treffer"/Sicherheit, Vereinsfilter mit
+Tags/Kategorie, Artikelcodes der Thiago-Sondertrikots; Stufe 3 (eBay will der Nutzer erst besprechen, Vinted und
+Kleinanzeigen deckt er selbst über App-Suchaufträge ab, Web Push statt ntfy, Ein-Tipp-Aktionen)
 
 Befunde (geprüft, nicht geschätzt):
 - 04.10.2026: 69 Runs, 63 sauber, 2 Abbrüche beim Speichern (git-add-Fehler, behoben; Rebase-Konflikt
