@@ -355,6 +355,34 @@ Größe steht im Titel ("… - XL"); Felder `Stock`/`Online` wirken unzuverläss
 Produktseite (`.product-variants .radio-label`); Cloudflare-Challenge-Skript auf der Seite,
 eventuell werden GitHub-IPs geblockt. **Noch nicht live getestet.**
 
+## Architektur-Review 05.10.2026 (Vorschlag an den Nutzer, Umsetzung noch offen)
+
+Befunde (geprüft, nicht geschätzt):
+- 04.10.2026: 69 Runs, 63 sauber, 2 Abbrüche beim Speichern (git-add-Fehler, behoben; Rebase-Konflikt
+  "could not apply ... Tracker-Lauf", Run 37187015515), 4 verdrängt (verspäteter Rückfall-Run, behoben)
+- Pushes gehen vor dem Speichern raus (main: push() vor SEEN_FILE.write_text, Commit erst im Workflow) →
+  scheitert das Speichern, ist der Run verloren und Pushes können doppelt kommen. `load_json` wertet kaputtes
+  JSON still als leer (→ Erstlauf). `Http.get` liefert bei 403/404 nur None (Sperre sieht aus wie "leer")
+- Thiago-Abgleich: FYJ kennt in 128 Shops 41 Thiago-Artikel (alle Größen), davon 3 in Herren-XL/XXL, alle 3
+  bei uns (2 Kindergrößen korrekt raus). CFS-Suche "thiago" (per Diagnose-Run aus GitHub, lokal 403): nur 5
+  Artikel, keiner in XL/XXL. Matchworn (bcbootsuk.com, Shopify) = Spielergrößen (Thiago LFC: M), für XL egal
+- Von 128 FYJ-Händlern fehlen direkt 23 (Druckereien, Dubletten, Kleinstshops), laufen über FYJ/Fundgrube
+- eBay-Suchseiten liefern 403 (nicht umgehen). Offizielle Browse API: kostenlos, 5.000 Abrufe/Tag
+- VFA-Kollektionen (`/collections.json`): Barça 6.847, Bayern 3.572, Liverpool 1.580, Spanien 1.577 Artikel,
+  also vollständig abrufbar statt Suche bei gekapptem Katalog (VFA braucht im Gesamt-Run über 1 Std.)
+- `GITHUB_TOKEN` darf `workflow_dispatch` auslösen (Doku), trotzdem bleibt eine externe Uhr sinnvoll
+  (GitHub-Zeitpläne bis über 6 Std. verspätet). GitHub-Nutzungsbedingungen: Actions für Softwareprojekte,
+  geringe Last wird toleriert → keine Dauer-Runner, Last niedrig halten
+- Drelife: offizielle Barça-Second-Hand-Plattform (angekündigt 04/2026), noch kein Shop gefunden, beobachten
+
+Vorgeschlagener Plan: Stufe 1 Fundament (Daten-Branch, erst speichern dann pushen, ehrliche Quellenwerte inkl.
+403/Bestandseinbruch, Vertragstests für Anbindungen, feste Paketversionen, Lebenszeichen im Dashboard,
+Token-Ablauf-Erinnerung cron-job.org ca. 04.10.2027, Module). Stufe 2 Neuheiten-Radar (alle 30 Min. neueste
+Artikel aller Shopify-/Woo-Shops über die bestehenden cron-job.org-Starts), Kollektionen statt Suche,
+Prüfen vor dem Push + "warum Treffer"/Sicherheit, Vereinsfilter mit Tags/Kategorie. Stufe 3 eBay Browse API
+(Nutzer legt Entwicklerkonto an), Web Push aus der Dashboard-App statt ntfy (erst parallel), Ein-Tipp-Aktionen
+per GitHub-Schlüssel nur auf dem Handy; cron-job.org bleibt. Vinted/Kleinanzeigen/Depop: nur App-Suchaufträge
+
 ## Offene Punkte (Priorität von oben nach unten)
 
 1. ~~Quellen-Status prüfen~~ erledigt mit dem Gesamtlauf am 01.10.2026 10:27 Uhr (ca. 22 Min. mit
