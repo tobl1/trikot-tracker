@@ -1,130 +1,194 @@
 {
  "counts": {
+  "089 Kits": 233,
   "1Klopp Shop": 265,
   "3kots": 552,
+  "Arsij Store": 2900,
   "Back to the Football": 4386,
+  "Belgian Football Classics": 2513,
+  "Bulishirts": 849,
   "Buy Sell Football Shirts": 1384,
   "Calcio Vintage": 336,
   "Casual Football Shirts": 16453,
-  "Classic Football Shirts": 1533,
+  "Classic Football Shirts": 1869,
   "Classic Pitchwear": 140,
-  "Classic-Shirts": 1222,
+  "Classic-Shirts": 1303,
   "Classic11": 5665,
   "Cult Football": 927,
   "Cult Kits": 21451,
+  "Din Fodboldtrøje": 277,
   "Es de Época": 522,
   "Euromex Sports": 3559,
-  "FindYourJersey": 3777,
+  "FTBL HVN": 764,
+  "FindYourJersey": 8990,
   "First 11 Shirts": 6458,
-  "First Class Football Shirts": 182,
+  "First Class Football Shirts": 193,
   "First Street": 935,
   "Fodbold Shoppen": 640,
+  "Football Finds": 214,
   "Football Finery": 6374,
   "Football Second Hand": 1414,
   "Football Shirt Collective": 3722,
   "Football Shirt Kingdom": 6113,
   "Football Shirt Union": 66,
   "Football Thrift Shop": 1771,
+  "Football Trikots Berlin": 547,
   "FootballShirts.com": 482,
   "Forever Soccer Jerseys": 1588,
+  "Full Time Fits": 662,
+  "Futmaniacos": 349,
+  "Galactic Soccer Kits": 147,
   "Golaço Kits": 4197,
   "Granny's Football Store": 1173,
   "Green Sport Vintage": 1556,
   "Iconic Jersey": 894,
+  "Infinity Football Shirts": 160,
   "Jersely": 2567,
   "Jerseys Hermanos": 79,
   "Kick It Vintage": 353,
+  "Kick and Rush": 1362,
   "Kickoff Vintage": 2692,
+  "Kit Collector": 1246,
   "Kit Launch": 636,
+  "La Surface": 172,
   "Le 7 Sorelle": 12315,
   "Legacy Football Shirts": 742,
+  "Lineup Vintage": 2177,
+  "Lockerhaus": 183,
+  "Maglie Calcio Vintage": 6000,
+  "Modeziege": 165,
   "Nanos Football Jerseys": 581,
   "Nostalgic Football Shirts": 1260,
   "Offside Boys": 1209,
   "Oh Calcio": 229,
   "One More Time": 190,
+  "Original 11vs11": 1350,
+  "Original Football Shop": 94,
+  "Pardon My Kicks": 874,
   "Philly Soccer Jerseys": 198,
   "RB-Jerseys": 607,
+  "Rare and Retro": 9036,
   "ReShirt": 5,
+  "Real Vintage Football": 1941,
   "RetrOriginalFootball": 891,
   "Retro Football Shirts": 313,
+  "Retro Screamers": 804,
+  "Retroshirts CH": 8725,
   "Retrotrøjer": 611,
-  "STA Jerseys": 631,
+  "SG Vintage Jerseys": 119,
+  "STA Jerseys": 626,
   "Saturdays Football": 25000,
   "Sense of Goal": 475,
   "Special Football Shirts": 82,
+  "Squadra Football": 178,
+  "Sunday Football Shirts": 1810,
   "Swiat Koszulek Pilkarskich": 111,
   "TSPN Calcio": 1334,
   "That Vintage Football Shirt": 176,
+  "The 12th Man Retro": 1370,
+  "The Football Boutique": 608,
+  "The Football Market": 12252,
   "The Football Room": 867,
   "The Football Temple": 2248,
-  "The Kit Dealer": 621,
+  "The Footballshirt Vault": 81,
+  "The Kit Dealer": 620,
   "The Kitman 97": 1420,
   "The Soccer Archive": 4056,
   "The Third Kit": 1294,
+  "Throwback Jerseys NZ": 107,
   "Tiffozi Futbol": 620,
   "To The Jersey": 6084,
   "Trikotparadies": 3512,
+  "Trikotstoff": 1102,
   "Vice Football Store": 583,
+  "Vintage Authentic Retro": 175,
   "Vintage Football Area": 25000,
+  "Vintage Football FR": 222,
   "Vintage Football Jerseys": 572,
   "Vintage Football Shirts": 25000,
-  "Vintage Historic Sports": 1013
+  "Vintage Historic Sports": 1013,
+  "Vintage Sports Clothing": 2281
  },
  "currencies": {
   "https://1kloppshop.com": "EUR",
+  "https://belgianfootballclassics.com": "EUR",
   "https://buysellfootballshirts.co.uk": "EUR",
   "https://calciovintage.com": "EUR",
   "https://casualfootballshirts.co.uk": "GBP",
   "https://classic11.com": "EUR",
   "https://classicpitchwear.com": "EUR",
   "https://cultfootball.co.uk": "EUR",
+  "https://dinfodboldtroje.com": "DKK",
   "https://esdeepoca.com": "MXN",
   "https://euromexsports.com": "USD",
   "https://first11shirts.com": "EUR",
   "https://firststreet.store": "EUR",
+  "https://footballfinds.co.uk": "EUR",
   "https://footballfinery.co.uk": "EUR",
   "https://footballshirtcollective.com": "EUR",
   "https://footballshirtkingdom.com": "EUR",
   "https://footballshirts.com": "USD",
   "https://footballshirtunion.com": "EUR",
+  "https://footballtrikotsberlin.com": "EUR",
   "https://foreversoccerjerseys.com": "USD",
   "https://fshoppen.dk": "EUR",
+  "https://ftblhvn.com": "EUR",
+  "https://fulltimefits.com": "EUR",
+  "https://futmaniacos.com": "EUR",
   "https://golacokits.com": "EUR",
   "https://grannysfootballstore.com": "GBP",
   "https://greensportvintage.com": "EUR",
   "https://houseoffootballshirts.com": "EUR",
   "https://iconicjersey.com": "EUR",
+  "https://infinityfootballshirts.com": "EUR",
   "https://jersely.com": "EUR",
   "https://jerseyshermanos.com": "EUR",
   "https://kickitvintage.de": "EUR",
   "https://kickoffvintage.com": "EUR",
+  "https://kitcollector.club": "EUR",
   "https://kitlaunchfc.com": "EUR",
+  "https://lasurface.shop": "EUR",
   "https://le7sorelle.it": "EUR",
   "https://legacyfootballshirts.com": "EUR",
+  "https://lockerhaus.store": "IDR",
+  "https://modeziege.net": "EUR",
   "https://nanosfootballjerseys.com": "EUR",
   "https://nostalgicfootballshirts.com": "EUR",
   "https://offsideboys.com": "EUR",
   "https://ohcalcio.com": "EUR",
   "https://onemoretimeshop.it": "EUR",
+  "https://originalfootball.shop": "EUR",
+  "https://pardonmykicks.se": "EUR",
   "https://phillysoccerjerseys.com": "EUR",
+  "https://realvintagefootball.com": "EUR",
   "https://retrofootballshirts.com": "EUR",
   "https://retroriginalfootball.com": "EUR",
+  "https://retroscreamers.com": "EUR",
+  "https://retroshirts.ch": "CHF",
   "https://saturdaysfootball.com": "USD",
+  "https://sg-vintage-jerseys.de": "EUR",
   "https://specialfootballshirts.com": "EUR",
+  "https://squadrafootball.com": "EUR",
   "https://stajerseys.com": "USD",
+  "https://sundayfootballshirts.com": "MYR",
   "https://thatvintagefootballshirt.com": "EUR",
+  "https://the12thmanretro.com": "GBP",
+  "https://thefootballmarket.com": "EUR",
   "https://thefootballroom-mty.com": "EUR",
+  "https://thefootballshirtvault.com": "EUR",
   "https://thefootballtemple.com": "EUR",
   "https://thekitman97.com": "EUR",
   "https://thesoccerarchive.com": "EUR",
   "https://tiffozifutbol.com": "EUR",
   "https://tothejersey.com": "EUR",
   "https://trikotparadies.shop": "EUR",
+  "https://trikotstoff.de": "EUR",
   "https://tspncalcio.com": "EUR",
   "https://vicefootballstore.com": "EUR",
   "https://vintage-football-jerseys.co.uk": "GBP",
+  "https://vintageauthenticretro.com": "EUR",
   "https://vintagehistoricsports.fr": "EUR",
+  "https://vintagesportsclothing.com": "EUR",
   "https://www.cultkits.com": "EUR",
   "https://www.firstclassfootballshirts.com": "EUR",
   "https://www.senseofgoal.com": "EUR",
@@ -138,41 +202,26 @@
   "The Kitman 97": "2026-10-03T15:07:55.644740+00:00",
   "To The Jersey": "2026-10-03T15:07:55.644740+00:00"
  },
+ "flags": {},
  "fyj_shops": {
-  "arsijstore.com": {
-   "seit": "2026-10-01T14:14:58.073674+00:00",
-   "treffer": 1
-  },
   "ballerscustomprinting.com": {
    "seit": "2026-10-01T14:14:58.073674+00:00",
    "treffer": 2
   },
-  "bulishirts.com": {
-   "seit": "2026-10-01T14:14:58.073674+00:00",
-   "treffer": 1
-  },
   "footballshirtvintage.fr": {
    "seit": "2026-10-01T14:14:58.073674+00:00",
-   "treffer": 2
+   "treffer": 6
   },
   "full90prints.com": {
    "seit": "2026-10-01T14:14:58.073674+00:00",
-   "treffer": 3
+   "treffer": 4
   },
   "kitts.de": {
    "seit": "2026-10-01T14:14:58.073674+00:00",
-   "treffer": 16
+   "treffer": 17
   },
-  "lineupvintageshop.com": {
-   "seit": "2026-10-01T14:14:58.073674+00:00",
-   "treffer": 10
-  },
-  "original11vs11.com": {
-   "seit": "2026-10-01T14:14:58.073674+00:00",
-   "treffer": 3
-  },
-  "rareandretrosports.com": {
-   "seit": "2026-10-01T14:14:58.073674+00:00",
+  "shirtsociete.com": {
+   "seit": "2026-10-04T04:38:13.554139+00:00",
    "treffer": 1
   },
   "thehoffclassics.com": {
@@ -185,11 +234,11 @@
   },
   "topbinzfootballshirts.co.uk": {
    "seit": "2026-10-01T14:14:58.073674+00:00",
-   "treffer": 9
+   "treffer": 26
   },
   "wavememorabilia.com": {
    "seit": "2026-10-01T14:14:58.073674+00:00",
-   "treffer": 1
+   "treffer": 2
   }
  },
  "known_labels": [
@@ -209,6 +258,7 @@
   "Liverpool Away 2021/22",
   "Liverpool Third 2022/23",
   "Marcos Llorente",
+  "Nike Total 90 (2004-06)",
   "Olić",
   "Perišić",
   "Ribéry",
@@ -338,17 +388,24 @@
    "neu": 2,
    "still": 0,
    "zeit": "2026-10-03T23:06:34.624842+00:00"
+  },
+  {
+   "modus": "full",
+   "neu": 3,
+   "still": 146,
+   "zeit": "2026-10-04T04:38:13.554139+00:00"
   }
  ],
- "last_full": "2026-10-03T23:06:34.624842+00:00",
+ "last_full": "2026-10-04T04:38:13.554139+00:00",
  "last_run": {
   "mode": "full",
-  "time": "2026-10-03T23:06:34.624842+00:00"
+  "time": "2026-10-04T04:38:13.554139+00:00"
  },
  "platforms": {
   "https://1kloppshop.com": "shopify",
   "https://3kots.com": "woo:https://3kots.com/wp-json/wc/store/v1/products",
   "https://backtothefootball.com": "woo:https://backtothefootball.com/wp-json/wc/store/v1/products",
+  "https://belgianfootballclassics.com": "shopify",
   "https://buysellfootballshirts.co.uk": "shopify",
   "https://calciovintage.com": "shopify",
   "https://casualfootballshirts.co.uk": "shopify",
@@ -357,47 +414,72 @@
   "https://classicpitchwear.com": "shopify",
   "https://classicshirts-fc.com": "unbekannt",
   "https://cultfootball.co.uk": "shopify",
+  "https://dinfodboldtroje.com": "shopify",
   "https://esdeepoca.com": "shopify",
   "https://euromexsports.com": "shopify",
   "https://first11shirts.com": "shopify",
   "https://firststreet.store": "shopify",
+  "https://footballfinds.co.uk": "shopify",
   "https://footballfinery.co.uk": "shopify",
+  "https://footballlegendskits.com": "unbekannt",
   "https://footballsecondhand.com": "woo:https://footballsecondhand.com/wp-json/wc/store/v1/products",
   "https://footballshirtcollective.com": "shopify",
   "https://footballshirtkingdom.com": "shopify",
   "https://footballshirts.com": "shopify",
   "https://footballshirtunion.com": "shopify",
   "https://footballthrift.shop": "woo:https://footballthrift.shop/wp-json/wc/store/v1/products",
+  "https://footballtrikotsberlin.com": "shopify",
   "https://foreversoccerjerseys.com": "shopify",
   "https://fshoppen.dk": "shopify",
+  "https://ftblhvn.com": "shopify",
+  "https://fulltimefits.com": "shopify",
+  "https://futmaniacos.com": "shopify",
   "https://golacokits.com": "shopify",
   "https://grannysfootballstore.com": "shopify",
   "https://greensportvintage.com": "shopify",
   "https://houseoffootballshirts.com": "shopify",
   "https://iconicjersey.com": "shopify",
+  "https://infinityfootballshirts.com": "shopify",
   "https://jersely.com": "shopify",
   "https://jerseyshermanos.com": "shopify",
+  "https://kickandrushshop.nl": "woo:https://kickandrushshop.nl/wp-json/wc/store/v1/products",
   "https://kickitvintage.de": "shopify",
   "https://kickoffvintage.com": "shopify",
+  "https://kitcollector.club": "shopify",
   "https://kitfever.com": "unbekannt",
   "https://kitlaunchfc.com": "shopify",
+  "https://lasurface.shop": "shopify",
   "https://le7sorelle.it": "shopify",
   "https://legacyfootballshirts.com": "shopify",
+  "https://lockerhaus.store": "shopify",
+  "https://magliecalciovintage.it": "woo:https://magliecalciovintage.it/wp-json/wc/store/v1/products",
+  "https://modeziege.net": "shopify",
   "https://nanosfootballjerseys.com": "shopify",
   "https://nostalgicfootballshirts.com": "shopify",
   "https://offsideboys.com": "shopify",
   "https://ohcalcio.com": "shopify",
   "https://onemoretimeshop.it": "shopify",
+  "https://originalfootball.shop": "shopify",
+  "https://pardonmykicks.se": "shopify",
   "https://phillysoccerjerseys.com": "shopify",
+  "https://realvintagefootball.com": "shopify",
   "https://reshirt.dk": "unbekannt",
   "https://retrofootballshirts.com": "shopify",
   "https://retroriginalfootball.com": "shopify",
+  "https://retroscreamers.com": "shopify",
+  "https://retroshirts.ch": "shopify",
   "https://saturdaysfootball.com": "shopify",
+  "https://sg-vintage-jerseys.de": "shopify",
   "https://specialfootballshirts.com": "shopify",
+  "https://squadrafootball.com": "shopify",
   "https://stajerseys.com": "shopify",
+  "https://sundayfootballshirts.com": "shopify",
   "https://swiatkoszulekpilkarskich.pl": "unbekannt",
   "https://thatvintagefootballshirt.com": "shopify",
+  "https://the12thmanretro.com": "shopify",
+  "https://thefootballmarket.com": "shopify",
   "https://thefootballroom-mty.com": "shopify",
+  "https://thefootballshirtvault.com": "shopify",
   "https://thefootballtemple.com": "shopify",
   "https://thekitman97.com": "shopify",
   "https://thesoccerarchive.com": "shopify",
@@ -405,10 +487,14 @@
   "https://tiffozifutbol.com": "shopify",
   "https://tothejersey.com": "shopify",
   "https://trikotparadies.shop": "shopify",
+  "https://trikotstoff.de": "shopify",
   "https://tspncalcio.com": "shopify",
   "https://vicefootballstore.com": "shopify",
   "https://vintage-football-jerseys.co.uk": "shopify",
+  "https://vintageauthenticretro.com": "shopify",
   "https://vintagehistoricsports.fr": "shopify",
+  "https://vintagesportsclothing.com": "shopify",
+  "https://www.arsijstore.com": "woo:https://www.arsijstore.com/wp-json/wc/store/v1/products",
   "https://www.cultkits.com": "shopify",
   "https://www.firstclassfootballshirts.com": "shopify",
   "https://www.rb-jerseys.com": "woo:https://www.rb-jerseys.com/wp-json/wc/store/v1/products",
@@ -428,12 +514,12 @@
  "quellen": {
   "liste": [
    {
-    "anfragen": 79,
+    "anfragen": 124,
     "fehler": "",
     "name": "FindYourJersey",
     "plattform": "fyj",
-    "produkte": 3777,
-    "sekunden": 156.2
+    "produkte": 8990,
+    "sekunden": 246.2
    },
    {
     "anfragen": 0,
@@ -445,6 +531,15 @@
     "sekunden": 0.0
    },
    {
+    "anfragen": 3,
+    "fehler": "Shopsystem nicht automatisch erkannt",
+    "info": "",
+    "name": "Football Legends Kits",
+    "plattform": "unbekannt",
+    "produkte": 0,
+    "sekunden": 41.0
+   },
+   {
     "anfragen": 0,
     "fehler": "deaktiviert (nur noch Laden in Den Haag, kein Online-Sortiment (01.10.2026))",
     "info": "",
@@ -454,7 +549,7 @@
     "sekunden": 0.0
    },
    {
-    "anfragen": 55,
+    "anfragen": 77,
     "fehler": "keine Produkte erhalten",
     "info": "nur Suche (products.json gesperrt)",
     "name": "Oh Calcio",
@@ -468,16 +563,7 @@
      "text": "seit 30 Tagen nichts Neues (0 in 90 Tagen)",
      "typ": "ruhig"
     },
-    "sekunden": 617.9
-   },
-   {
-    "anfragen": 0,
-    "fehler": "deaktiviert (Wix, noch keine Anbindung)",
-    "info": "",
-    "name": "The Football Boutique",
-    "plattform": "aus",
-    "produkte": 0,
-    "sekunden": 0.0
+    "sekunden": 1145.8
    },
    {
     "anfragen": 4,
@@ -486,16 +572,16 @@
     "name": "The Third Kit",
     "plattform": "woo",
     "produkte": 0,
-    "sekunden": 43.5
+    "sekunden": 43.7
    },
    {
-    "anfragen": 0,
-    "fehler": "deaktiviert (Wix, Drop jeden Freitag 20 Uhr NZ-Zeit)",
+    "anfragen": 6,
+    "fehler": "",
     "info": "",
-    "name": "Throwback Jerseys NZ",
-    "plattform": "aus",
-    "produkte": 0,
-    "sekunden": 0.0
+    "name": "089 Kits",
+    "plattform": "wix",
+    "produkte": 233,
+    "sekunden": 10.2
    },
    {
     "anfragen": 4,
@@ -512,7 +598,7 @@
      "text": "seit 30 Tagen nichts Neues (0 in 90 Tagen)",
      "typ": "ruhig"
     },
-    "sekunden": 59.2
+    "sekunden": 55.3
    },
    {
     "anfragen": 8,
@@ -521,7 +607,16 @@
     "name": "3kots",
     "plattform": "woo",
     "produkte": 552,
-    "sekunden": 51.8
+    "sekunden": 55.3
+   },
+   {
+    "anfragen": 32,
+    "fehler": "",
+    "info": "",
+    "name": "Arsij Store",
+    "plattform": "woo",
+    "produkte": 2900,
+    "sekunden": 103.3
    },
    {
     "anfragen": 46,
@@ -530,7 +625,50 @@
     "name": "Back to the Football",
     "plattform": "woo",
     "produkte": 4386,
-    "sekunden": 118.8
+    "sekunden": 116.5
+   },
+   {
+    "anfragen": 13,
+    "fehler": "",
+    "info": "",
+    "name": "Belgian Football Classics",
+    "plattform": "shopify",
+    "produkte": 2513,
+    "rhythmus": {
+     "abstand_tage": 7.0,
+     "anteil": 0.89,
+     "letzte": "2026-10-02T08:51:59+02:00",
+     "letzter_schub": "2026-10-02T08:29:31+02:00",
+     "minute": 29,
+     "neu_30": 88,
+     "neu_7": 21,
+     "schuebe": 9,
+     "tage_30": 6,
+     "termine": [
+      {
+       "anzahl": 8,
+       "minute": 29,
+       "streuung_min": 102,
+       "tag": "Fr",
+       "uhrzeit": 9,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 7 Tage: Fr gegen 09:29 (±102 Min., 8x); 9 Schübe in 90 Tagen, zuletzt 02.10. 08:29",
+     "typ": "drops",
+     "uhrzeit": 9,
+     "wochentag": "Fr"
+    },
+    "sekunden": 205.6
+   },
+   {
+    "anfragen": 67,
+    "fehler": "",
+    "info": "",
+    "name": "Bulishirts",
+    "plattform": "wix",
+    "produkte": 849,
+    "sekunden": 132.2
    },
    {
     "anfragen": 8,
@@ -547,7 +685,7 @@
      "text": "laufend: an 8 von 30 Tagen neue Artikel, 4 in 7 Tagen, 19 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 127.9
+    "sekunden": 128.5
    },
    {
     "anfragen": 4,
@@ -564,7 +702,7 @@
      "text": "unregelmäßig: an 1 von 30 Tagen neue Artikel, 1 in 30 Tagen, zuletzt 07.09.",
      "typ": "unregelmäßig"
     },
-    "sekunden": 52.6
+    "sekunden": 52.5
    },
    {
     "anfragen": 68,
@@ -581,16 +719,16 @@
      "text": "laufend: an 9 von 30 Tagen neue Artikel, 115 in 7 Tagen, 781 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 1087.9
+    "sekunden": 1074.1
    },
    {
-    "anfragen": 130,
+    "anfragen": 178,
     "fehler": "",
     "info": "",
     "name": "Classic Football Shirts",
     "plattform": "cfs",
-    "produkte": 1533,
-    "sekunden": 261.0
+    "produkte": 1869,
+    "sekunden": 357.3
    },
    {
     "anfragen": 3,
@@ -610,13 +748,13 @@
     "sekunden": 48.8
    },
    {
-    "anfragen": 66,
+    "anfragen": 111,
     "fehler": "",
     "info": "",
     "name": "Classic-Shirts",
     "plattform": "idosell",
-    "produkte": 1222,
-    "sekunden": 169.2
+    "produkte": 1303,
+    "sekunden": 386.5
    },
    {
     "anfragen": 25,
@@ -633,7 +771,7 @@
      "text": "laufend: an 20 von 30 Tagen neue Artikel, 33 in 7 Tagen, 196 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 340.4
+    "sekunden": 334.9
    },
    {
     "anfragen": 0,
@@ -693,7 +831,24 @@
      "text": "laufend: an 27 von 30 Tagen neue Artikel, 110 in 7 Tagen, 608 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 1258.8
+    "sekunden": 1184.7
+   },
+   {
+    "anfragen": 4,
+    "fehler": "",
+    "info": "",
+    "name": "Din Fodboldtrøje",
+    "plattform": "shopify",
+    "produkte": 277,
+    "rhythmus": {
+     "letzte": "2026-09-30T19:05:09+02:00",
+     "neu_30": 21,
+     "neu_7": 7,
+     "tage_30": 5,
+     "text": "unregelmäßig: an 5 von 30 Tagen neue Artikel, 21 in 30 Tagen, zuletzt 30.09.",
+     "typ": "unregelmäßig"
+    },
+    "sekunden": 61.4
    },
    {
     "anfragen": 5,
@@ -727,7 +882,41 @@
      "text": "laufend: an 11 von 30 Tagen neue Artikel, 20 in 7 Tagen, 38 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 271.4
+    "sekunden": 272.0
+   },
+   {
+    "anfragen": 6,
+    "fehler": "",
+    "info": "",
+    "name": "FTBL HVN",
+    "plattform": "shopify",
+    "produkte": 764,
+    "rhythmus": {
+     "abstand_tage": 8.0,
+     "anteil": 0.44,
+     "letzte": "2026-09-20T14:13:54-04:00",
+     "letzter_schub": "2026-09-20T14:13:43-04:00",
+     "minute": 55,
+     "neu_30": 11,
+     "neu_7": 0,
+     "schuebe": 9,
+     "tage_30": 1,
+     "termine": [
+      {
+       "anzahl": 4,
+       "minute": 55,
+       "streuung_min": 2,
+       "tag": "Do",
+       "uhrzeit": 17,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 8 Tage: Do gegen 17:55 (±2 Min., 4x); 9 Schübe in 90 Tagen, zuletzt 20.09. 20:13",
+     "typ": "drops",
+     "uhrzeit": 17,
+     "wochentag": "Do"
+    },
+    "sekunden": 86.3
    },
    {
     "anfragen": 28,
@@ -761,7 +950,7 @@
      "uhrzeit": 18,
      "wochentag": "Do"
     },
-    "sekunden": 299.0
+    "sekunden": 406.4
    },
    {
     "anfragen": 3,
@@ -769,15 +958,15 @@
     "info": "",
     "name": "First Class Football Shirts",
     "plattform": "shopify",
-    "produkte": 182,
+    "produkte": 193,
     "rhythmus": {
      "abstand_tage": 7.7,
      "anteil": 0.0,
-     "letzte": "2026-10-03T23:13:20+01:00",
+     "letzte": "2026-10-03T23:53:22+01:00",
      "letzter_schub": "2026-10-03T22:16:11+01:00",
      "minute": 0,
-     "neu_30": 68,
-     "neu_7": 15,
+     "neu_30": 79,
+     "neu_7": 26,
      "schuebe": 6,
      "tage_30": 7,
      "termine": [],
@@ -786,7 +975,7 @@
      "uhrzeit": 23,
      "wochentag": "Sa"
     },
-    "sekunden": 35.1
+    "sekunden": 35.0
    },
    {
     "anfragen": 6,
@@ -820,7 +1009,7 @@
      "uhrzeit": 10,
      "wochentag": "Do"
     },
-    "sekunden": 96.9
+    "sekunden": 96.1
    },
    {
     "anfragen": 5,
@@ -854,7 +1043,24 @@
      "uhrzeit": 15,
      "wochentag": "Fr"
     },
-    "sekunden": 65.2
+    "sekunden": 58.6
+   },
+   {
+    "anfragen": 3,
+    "fehler": "",
+    "info": "",
+    "name": "Football Finds",
+    "plattform": "shopify",
+    "produkte": 214,
+    "rhythmus": {
+     "letzte": "2026-09-21T12:12:21+01:00",
+     "neu_30": 1,
+     "neu_7": 0,
+     "tage_30": 1,
+     "text": "unregelmäßig: an 1 von 30 Tagen neue Artikel, 1 in 30 Tagen, zuletzt 21.09.",
+     "typ": "unregelmäßig"
+    },
+    "sekunden": 38.9
    },
    {
     "anfragen": 28,
@@ -896,7 +1102,7 @@
      "uhrzeit": 10,
      "wochentag": "Di"
     },
-    "sekunden": 447.8
+    "sekunden": 444.9
    },
    {
     "anfragen": 17,
@@ -905,7 +1111,7 @@
     "name": "Football Second Hand",
     "plattform": "woo",
     "produkte": 1414,
-    "sekunden": 58.6
+    "sekunden": 54.2
    },
    {
     "anfragen": 17,
@@ -939,7 +1145,7 @@
      "uhrzeit": 13,
      "wochentag": "Fr"
     },
-    "sekunden": 272.5
+    "sekunden": 272.3
    },
    {
     "anfragen": 27,
@@ -956,7 +1162,7 @@
      "text": "laufend: an 8 von 30 Tagen neue Artikel, 87 in 7 Tagen, 263 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 376.3
+    "sekunden": 372.3
    },
    {
     "anfragen": 3,
@@ -973,7 +1179,7 @@
      "text": "seit 30 Tagen nichts Neues (0 in 90 Tagen)",
      "typ": "ruhig"
     },
-    "sekunden": 40.3
+    "sekunden": 40.1
    },
    {
     "anfragen": 20,
@@ -982,7 +1188,24 @@
     "name": "Football Thrift Shop",
     "plattform": "woo",
     "produkte": 1771,
-    "sekunden": 60.4
+    "sekunden": 60.8
+   },
+   {
+    "anfragen": 5,
+    "fehler": "",
+    "info": "",
+    "name": "Football Trikots Berlin",
+    "plattform": "shopify",
+    "produkte": 547,
+    "rhythmus": {
+     "letzte": "2026-08-20T22:42:25+02:00",
+     "neu_30": 0,
+     "neu_7": 0,
+     "tage_30": 0,
+     "text": "seit 30 Tagen nichts Neues (37 in 90 Tagen)",
+     "typ": "ruhig"
+    },
+    "sekunden": 65.8
    },
    {
     "anfragen": 4,
@@ -999,7 +1222,7 @@
      "text": "laufend: an 13 von 30 Tagen neue Artikel, 1 in 7 Tagen, 54 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 46.1
+    "sekunden": 46.9
    },
    {
     "anfragen": 9,
@@ -1016,7 +1239,75 @@
      "text": "unregelmäßig: an 3 von 30 Tagen neue Artikel, 14 in 30 Tagen, zuletzt 01.10.",
      "typ": "unregelmäßig"
     },
-    "sekunden": 143.2
+    "sekunden": 143.5
+   },
+   {
+    "anfragen": 5,
+    "fehler": "",
+    "info": "",
+    "name": "Full Time Fits",
+    "plattform": "shopify",
+    "produkte": 662,
+    "rhythmus": {
+     "abstand_tage": 7.0,
+     "anteil": 0.9,
+     "letzte": "2026-10-02T17:44:33+01:00",
+     "letzter_schub": "2026-09-29T11:46:26+01:00",
+     "minute": 0,
+     "neu_30": 93,
+     "neu_7": 21,
+     "schuebe": 10,
+     "tage_30": 10,
+     "termine": [
+      {
+       "anzahl": 9,
+       "minute": 0,
+       "streuung_min": 3,
+       "tag": "So",
+       "uhrzeit": 13,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 7 Tage: So gegen 13:00 (±3 Min., 9x); 10 Schübe in 90 Tagen, zuletzt 29.09. 12:46",
+     "typ": "drops",
+     "uhrzeit": 13,
+     "wochentag": "So"
+    },
+    "sekunden": 69.6
+   },
+   {
+    "anfragen": 4,
+    "fehler": "",
+    "info": "",
+    "name": "Futmaniacos",
+    "plattform": "shopify",
+    "produkte": 349,
+    "rhythmus": {
+     "abstand_tage": 18.0,
+     "anteil": 0.0,
+     "letzte": "2026-10-01T12:42:19+02:00",
+     "letzter_schub": "2026-09-29T16:29:21+02:00",
+     "minute": 0,
+     "neu_30": 346,
+     "neu_7": 327,
+     "schuebe": 2,
+     "tage_30": 8,
+     "termine": [],
+     "text": "Drops etwa alle 18 Tage: kein fester Wochentag; 2 Schübe in 90 Tagen, zuletzt 29.09. 16:29",
+     "typ": "drops",
+     "uhrzeit": 16,
+     "wochentag": "Di"
+    },
+    "sekunden": 63.8
+   },
+   {
+    "anfragen": 3,
+    "fehler": "",
+    "info": "",
+    "name": "Galactic Soccer Kits",
+    "plattform": "wix",
+    "produkte": 147,
+    "sekunden": 4.2
    },
    {
     "anfragen": 19,
@@ -1033,7 +1324,7 @@
      "text": "laufend: an 25 von 30 Tagen neue Artikel, 108 in 7 Tagen, 499 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 303.9
+    "sekunden": 304.0
    },
    {
     "anfragen": 7,
@@ -1050,7 +1341,7 @@
      "text": "unregelmäßig: an 1 von 30 Tagen neue Artikel, 1 in 30 Tagen, zuletzt 26.09.",
      "typ": "unregelmäßig"
     },
-    "sekunden": 96.5
+    "sekunden": 96.4
    },
    {
     "anfragen": 9,
@@ -1092,7 +1383,24 @@
      "uhrzeit": 9,
      "wochentag": "Fr"
     },
-    "sekunden": 96.7
+    "sekunden": 96.1
+   },
+   {
+    "anfragen": 3,
+    "fehler": "",
+    "info": "",
+    "name": "Infinity Football Shirts",
+    "plattform": "shopify",
+    "produkte": 160,
+    "rhythmus": {
+     "letzte": "2026-09-26T12:42:43+01:00",
+     "neu_30": 2,
+     "neu_7": 0,
+     "tage_30": 1,
+     "text": "unregelmäßig: an 1 von 30 Tagen neue Artikel, 2 in 30 Tagen, zuletzt 26.09.",
+     "typ": "unregelmäßig"
+    },
+    "sekunden": 42.1
    },
    {
     "anfragen": 13,
@@ -1126,7 +1434,7 @@
      "uhrzeit": 20,
      "wochentag": "So"
     },
-    "sekunden": 208.4
+    "sekunden": 207.9
    },
    {
     "anfragen": 3,
@@ -1143,7 +1451,7 @@
      "text": "unregelmäßig: an 1 von 30 Tagen neue Artikel, 1 in 30 Tagen, zuletzt 26.09.",
      "typ": "unregelmäßig"
     },
-    "sekunden": 40.9
+    "sekunden": 40.2
    },
    {
     "anfragen": 4,
@@ -1168,7 +1476,16 @@
      "uhrzeit": 18,
      "wochentag": "So"
     },
-    "sekunden": 62.4
+    "sekunden": 56.6
+   },
+   {
+    "anfragen": 16,
+    "fehler": "",
+    "info": "",
+    "name": "Kick and Rush",
+    "plattform": "woo",
+    "produkte": 1362,
+    "sekunden": 58.2
    },
    {
     "anfragen": 13,
@@ -1202,7 +1519,24 @@
      "uhrzeit": 16,
      "wochentag": "Do"
     },
-    "sekunden": 196.4
+    "sekunden": 176.7
+   },
+   {
+    "anfragen": 7,
+    "fehler": "",
+    "info": "",
+    "name": "Kit Collector",
+    "plattform": "shopify",
+    "produkte": 1246,
+    "rhythmus": {
+     "letzte": "2026-10-03T16:38:41-07:00",
+     "neu_30": 25,
+     "neu_7": 15,
+     "tage_30": 5,
+     "text": "unregelmäßig: an 5 von 30 Tagen neue Artikel, 25 in 30 Tagen, zuletzt 04.10.",
+     "typ": "unregelmäßig"
+    },
+    "sekunden": 106.2
    },
    {
     "anfragen": 5,
@@ -1219,7 +1553,24 @@
      "text": "unregelmäßig: an 6 von 30 Tagen neue Artikel, 184 in 30 Tagen, zuletzt 02.10.",
      "typ": "unregelmäßig"
     },
-    "sekunden": 66.8
+    "sekunden": 60.6
+   },
+   {
+    "anfragen": 3,
+    "fehler": "",
+    "info": "",
+    "name": "La Surface",
+    "plattform": "shopify",
+    "produkte": 172,
+    "rhythmus": {
+     "letzte": "2026-08-20T17:54:36+02:00",
+     "neu_30": 0,
+     "neu_7": 0,
+     "tage_30": 0,
+     "text": "seit 30 Tagen nichts Neues (98 in 90 Tagen)",
+     "typ": "ruhig"
+    },
+    "sekunden": 48.1
    },
    {
     "anfragen": 52,
@@ -1236,7 +1587,7 @@
      "text": "laufend: an 8 von 30 Tagen neue Artikel, 107 in 7 Tagen, 190 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 831.9
+    "sekunden": 831.5
    },
    {
     "anfragen": 5,
@@ -1270,7 +1621,59 @@
      "uhrzeit": 19,
      "wochentag": "So"
     },
-    "sekunden": 80.4
+    "sekunden": 80.3
+   },
+   {
+    "anfragen": 23,
+    "fehler": "",
+    "info": "",
+    "name": "Lineup Vintage",
+    "plattform": "wix",
+    "produkte": 2177,
+    "sekunden": 44.3
+   },
+   {
+    "anfragen": 3,
+    "fehler": "",
+    "info": "",
+    "name": "Lockerhaus",
+    "plattform": "shopify",
+    "produkte": 183,
+    "rhythmus": {
+     "letzte": "2026-09-30T12:02:16+07:00",
+     "neu_30": 7,
+     "neu_7": 3,
+     "tage_30": 3,
+     "text": "unregelmäßig: an 3 von 30 Tagen neue Artikel, 7 in 30 Tagen, zuletzt 30.09.",
+     "typ": "unregelmäßig"
+    },
+    "sekunden": 46.7
+   },
+   {
+    "anfragen": 62,
+    "fehler": "",
+    "info": "",
+    "name": "Maglie Calcio Vintage",
+    "plattform": "woo",
+    "produkte": 6000,
+    "sekunden": 254.7
+   },
+   {
+    "anfragen": 3,
+    "fehler": "",
+    "info": "",
+    "name": "Modeziege",
+    "plattform": "shopify",
+    "produkte": 165,
+    "rhythmus": {
+     "letzte": "2026-10-03T13:57:28+02:00",
+     "neu_30": 11,
+     "neu_7": 5,
+     "tage_30": 4,
+     "text": "unregelmäßig: an 4 von 30 Tagen neue Artikel, 11 in 30 Tagen, zuletzt 03.10.",
+     "typ": "unregelmäßig"
+    },
+    "sekunden": 42.8
    },
    {
     "anfragen": 5,
@@ -1304,7 +1707,7 @@
      "uhrzeit": 19,
      "wochentag": "Mo"
     },
-    "sekunden": 75.7
+    "sekunden": 69.9
    },
    {
     "anfragen": 8,
@@ -1338,7 +1741,7 @@
      "uhrzeit": 11,
      "wochentag": "Sa"
     },
-    "sekunden": 115.8
+    "sekunden": 111.5
    },
    {
     "anfragen": 7,
@@ -1372,7 +1775,7 @@
      "uhrzeit": 17,
      "wochentag": "Di"
     },
-    "sekunden": 112.6
+    "sekunden": 112.1
    },
    {
     "anfragen": 3,
@@ -1390,6 +1793,49 @@
      "typ": "unregelmäßig"
     },
     "sekunden": 48.8
+   },
+   {
+    "anfragen": 15,
+    "fehler": "",
+    "info": "",
+    "name": "Original 11vs11",
+    "plattform": "wix",
+    "produkte": 1350,
+    "sekunden": 28.1
+   },
+   {
+    "anfragen": 3,
+    "fehler": "",
+    "info": "",
+    "name": "Original Football Shop",
+    "plattform": "shopify",
+    "produkte": 94,
+    "rhythmus": {
+     "letzte": "2026-10-02T14:01:01+02:00",
+     "neu_30": 27,
+     "neu_7": 27,
+     "tage_30": 1,
+     "text": "unregelmäßig: an 1 von 30 Tagen neue Artikel, 27 in 30 Tagen, zuletzt 02.10.",
+     "typ": "unregelmäßig"
+    },
+    "sekunden": 39.9
+   },
+   {
+    "anfragen": 6,
+    "fehler": "",
+    "info": "",
+    "name": "Pardon My Kicks",
+    "plattform": "shopify",
+    "produkte": 874,
+    "rhythmus": {
+     "letzte": "2026-10-01T20:00:15+02:00",
+     "neu_30": 88,
+     "neu_7": 20,
+     "tage_30": 5,
+     "text": "unregelmäßig: an 5 von 30 Tagen neue Artikel, 88 in 30 Tagen, zuletzt 01.10.",
+     "typ": "unregelmäßig"
+    },
+    "sekunden": 96.4
    },
    {
     "anfragen": 3,
@@ -1423,7 +1869,7 @@
      "uhrzeit": 22,
      "wochentag": "Fr"
     },
-    "sekunden": 48.8
+    "sekunden": 47.7
    },
    {
     "anfragen": 9,
@@ -1432,16 +1878,50 @@
     "name": "RB-Jerseys",
     "plattform": "woo",
     "produkte": 607,
-    "sekunden": 32.5
+    "sekunden": 32.4
    },
    {
-    "anfragen": 49,
+    "anfragen": 92,
+    "fehler": "",
+    "info": "",
+    "name": "Rare and Retro",
+    "plattform": "wix",
+    "produkte": 9036,
+    "sekunden": 182.2
+   },
+   {
+    "anfragen": 71,
     "fehler": "",
     "info": "",
     "name": "ReShirt",
     "plattform": "smartweb",
     "produkte": 5,
-    "sekunden": 96.2
+    "sekunden": 140.2
+   },
+   {
+    "anfragen": 10,
+    "fehler": "",
+    "info": "",
+    "name": "Real Vintage Football",
+    "plattform": "shopify",
+    "produkte": 1941,
+    "rhythmus": {
+     "abstand_tage": 22.0,
+     "anteil": 0.0,
+     "letzte": "2026-09-10T09:08:19+02:00",
+     "letzter_schub": "2026-09-09T18:24:31+02:00",
+     "minute": 0,
+     "neu_30": 17,
+     "neu_7": 0,
+     "schuebe": 4,
+     "tage_30": 2,
+     "termine": [],
+     "text": "Drops etwa alle 22 Tage: kein fester Wochentag; 4 Schübe in 90 Tagen, zuletzt 09.09. 18:24",
+     "typ": "drops",
+     "uhrzeit": 18,
+     "wochentag": "Mi"
+    },
+    "sekunden": 156.7
    },
    {
     "anfragen": 6,
@@ -1466,7 +1946,7 @@
      "uhrzeit": 18,
      "wochentag": "So"
     },
-    "sekunden": 83.7
+    "sekunden": 82.3
    },
    {
     "anfragen": 0,
@@ -1493,6 +1973,57 @@
      "typ": "unregelmäßig"
     },
     "sekunden": 63.5
+   },
+   {
+    "anfragen": 6,
+    "fehler": "",
+    "info": "",
+    "name": "Retro Screamers",
+    "plattform": "shopify",
+    "produkte": 804,
+    "rhythmus": {
+     "letzte": "2026-09-29T19:00:14-04:00",
+     "neu_30": 141,
+     "neu_7": 21,
+     "tage_30": 12,
+     "text": "laufend: an 12 von 30 Tagen neue Artikel, 21 in 7 Tagen, 141 in 30 Tagen",
+     "typ": "laufend"
+    },
+    "sekunden": 88.7
+   },
+   {
+    "anfragen": 37,
+    "fehler": "",
+    "info": "",
+    "name": "Retroshirts CH",
+    "plattform": "shopify",
+    "produkte": 8725,
+    "rhythmus": {
+     "abstand_tage": 7.0,
+     "anteil": 1.0,
+     "letzte": "2026-10-02T12:30:34+02:00",
+     "letzter_schub": "2026-10-02T12:30:03+02:00",
+     "minute": 30,
+     "neu_30": 305,
+     "neu_7": 64,
+     "schuebe": 13,
+     "tage_30": 7,
+     "termine": [
+      {
+       "anzahl": 13,
+       "minute": 30,
+       "streuung_min": 0,
+       "tag": "Fr",
+       "uhrzeit": 12,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 7 Tage: Fr gegen 12:30 (±0 Min., 13x); 13 Schübe in 90 Tagen, zuletzt 02.10. 12:30",
+     "typ": "drops",
+     "uhrzeit": 12,
+     "wochentag": "Fr"
+    },
+    "sekunden": 553.6
    },
    {
     "anfragen": 5,
@@ -1537,24 +2068,49 @@
     "sekunden": 80.1
    },
    {
+    "anfragen": 3,
+    "fehler": "",
+    "info": "",
+    "name": "SG Vintage Jerseys",
+    "plattform": "shopify",
+    "produkte": 119,
+    "rhythmus": {
+     "abstand_tage": 41.0,
+     "anteil": 0.0,
+     "letzte": "2026-10-03T18:00:14+02:00",
+     "letzter_schub": "2026-10-03T18:00:03+02:00",
+     "minute": 0,
+     "neu_30": 36,
+     "neu_7": 35,
+     "schuebe": 3,
+     "tage_30": 3,
+     "termine": [],
+     "text": "Drops etwa alle 41 Tage: kein fester Wochentag; 3 Schübe in 90 Tagen, zuletzt 03.10. 18:00",
+     "typ": "drops",
+     "uhrzeit": 18,
+     "wochentag": "Sa"
+    },
+    "sekunden": 42.3
+   },
+   {
     "anfragen": 5,
     "fehler": "",
     "info": "",
     "name": "STA Jerseys",
     "plattform": "shopify",
-    "produkte": 631,
+    "produkte": 626,
     "rhythmus": {
      "letzte": "2026-10-02T16:45:15-07:00",
-     "neu_30": 160,
-     "neu_7": 73,
-     "tage_30": 21,
-     "text": "laufend: an 21 von 30 Tagen neue Artikel, 73 in 7 Tagen, 160 in 30 Tagen",
+     "neu_30": 158,
+     "neu_7": 61,
+     "tage_30": 20,
+     "text": "laufend: an 20 von 30 Tagen neue Artikel, 61 in 7 Tagen, 158 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 79.8
+    "sekunden": 80.0
    },
    {
-    "anfragen": 158,
+    "anfragen": 180,
     "fehler": "",
     "info": "Katalog bei 25000 gekappt, ältere Artikel per Suche",
     "name": "Saturdays Football",
@@ -1568,7 +2124,7 @@
      "text": "laufend: an 15 von 30 Tagen neue Artikel, 14 in 7 Tagen, 169 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 2263.4
+    "sekunden": 2643.5
    },
    {
     "anfragen": 4,
@@ -1593,7 +2149,7 @@
      "uhrzeit": 16,
      "wochentag": "Do"
     },
-    "sekunden": 49.3
+    "sekunden": 49.4
    },
    {
     "anfragen": 3,
@@ -1610,16 +2166,67 @@
      "text": "seit 30 Tagen nichts Neues (0 in 90 Tagen)",
      "typ": "ruhig"
     },
-    "sekunden": 46.4
+    "sekunden": 47.7
    },
    {
-    "anfragen": 56,
+    "anfragen": 3,
+    "fehler": "",
+    "info": "",
+    "name": "Squadra Football",
+    "plattform": "shopify",
+    "produkte": 178,
+    "rhythmus": {
+     "letzte": "2026-09-09T15:39:20+01:00",
+     "neu_30": 15,
+     "neu_7": 0,
+     "tage_30": 1,
+     "text": "unregelmäßig: an 1 von 30 Tagen neue Artikel, 15 in 30 Tagen, zuletzt 09.09.",
+     "typ": "unregelmäßig"
+    },
+    "sekunden": 42.4
+   },
+   {
+    "anfragen": 10,
+    "fehler": "",
+    "info": "",
+    "name": "Sunday Football Shirts",
+    "plattform": "shopify",
+    "produkte": 1810,
+    "rhythmus": {
+     "abstand_tage": 7.0,
+     "anteil": 0.89,
+     "letzte": "2026-09-26T10:59:39+08:00",
+     "letzter_schub": "2026-09-26T10:59:24+08:00",
+     "minute": 59,
+     "neu_30": 97,
+     "neu_7": 0,
+     "schuebe": 9,
+     "tage_30": 4,
+     "termine": [
+      {
+       "anzahl": 8,
+       "minute": 59,
+       "streuung_min": 0,
+       "tag": "Sa",
+       "uhrzeit": 4,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 7 Tage: Sa gegen 04:59 (±0 Min., 8x); 9 Schübe in 90 Tagen, zuletzt 26.09. 04:59",
+     "typ": "drops",
+     "uhrzeit": 4,
+     "wochentag": "Sa"
+    },
+    "sekunden": 111.7
+   },
+   {
+    "anfragen": 78,
     "fehler": "",
     "info": "",
     "name": "Swiat Koszulek Pilkarskich",
     "plattform": "prestashop",
     "produkte": 111,
-    "sekunden": 111.4
+    "sekunden": 155.4
    },
    {
     "anfragen": 8,
@@ -1636,7 +2243,7 @@
      "text": "unregelmäßig: an 6 von 30 Tagen neue Artikel, 13 in 30 Tagen, zuletzt 03.10.",
      "typ": "unregelmäßig"
     },
-    "sekunden": 111.6
+    "sekunden": 111.5
    },
    {
     "anfragen": 3,
@@ -1653,7 +2260,50 @@
      "text": "seit 30 Tagen nichts Neues (1 in 90 Tagen)",
      "typ": "ruhig"
     },
-    "sekunden": 48.2
+    "sekunden": 48.4
+   },
+   {
+    "anfragen": 8,
+    "fehler": "",
+    "info": "",
+    "name": "The 12th Man Retro",
+    "plattform": "shopify",
+    "produkte": 1370,
+    "rhythmus": {
+     "letzte": "2026-10-01T16:33:23+01:00",
+     "neu_30": 1040,
+     "neu_7": 1040,
+     "tage_30": 1,
+     "text": "unregelmäßig: an 1 von 30 Tagen neue Artikel, 1040 in 30 Tagen, zuletzt 01.10.",
+     "typ": "unregelmäßig"
+    },
+    "sekunden": 108.8
+   },
+   {
+    "anfragen": 8,
+    "fehler": "",
+    "info": "",
+    "name": "The Football Boutique",
+    "plattform": "wix",
+    "produkte": 608,
+    "sekunden": 14.2
+   },
+   {
+    "anfragen": 52,
+    "fehler": "",
+    "info": "",
+    "name": "The Football Market",
+    "plattform": "shopify",
+    "produkte": 12252,
+    "rhythmus": {
+     "letzte": "",
+     "neu_30": 0,
+     "neu_7": 0,
+     "tage_30": 0,
+     "text": "seit 30 Tagen nichts Neues (0 in 90 Tagen)",
+     "typ": "ruhig"
+    },
+    "sekunden": 655.4
    },
    {
     "anfragen": 6,
@@ -1668,10 +2318,10 @@
      "letzte": "2026-10-02T16:19:07-06:00",
      "letzter_schub": "2026-10-02T16:17:25-06:00",
      "minute": 19,
-     "neu_30": 191,
+     "neu_30": 160,
      "neu_7": 62,
      "schuebe": 13,
-     "tage_30": 10,
+     "tage_30": 9,
      "termine": [
       {
        "anzahl": 6,
@@ -1695,7 +2345,7 @@
      "uhrzeit": 3,
      "wochentag": "Fr"
     },
-    "sekunden": 95.7
+    "sekunden": 95.6
    },
    {
     "anfragen": 11,
@@ -1729,7 +2379,24 @@
      "uhrzeit": 13,
      "wochentag": "Sa"
     },
-    "sekunden": 176.1
+    "sekunden": 161.7
+   },
+   {
+    "anfragen": 3,
+    "fehler": "",
+    "info": "",
+    "name": "The Footballshirt Vault",
+    "plattform": "shopify",
+    "produkte": 81,
+    "rhythmus": {
+     "letzte": "2026-09-17T00:10:29+02:00",
+     "neu_30": 19,
+     "neu_7": 0,
+     "tage_30": 2,
+     "text": "unregelmäßig: an 2 von 30 Tagen neue Artikel, 19 in 30 Tagen, zuletzt 17.09.",
+     "typ": "unregelmäßig"
+    },
+    "sekunden": 42.0
    },
    {
     "anfragen": 0,
@@ -1746,7 +2413,7 @@
     "info": "",
     "name": "The Kit Dealer",
     "plattform": "shopify",
-    "produkte": 621,
+    "produkte": 620,
     "rhythmus": {
      "abstand_tage": 12.9,
      "anteil": 0.0,
@@ -1763,7 +2430,7 @@
      "uhrzeit": 15,
      "wochentag": "Sa"
     },
-    "sekunden": 50.9
+    "sekunden": 48.4
    },
    {
     "anfragen": 8,
@@ -1797,7 +2464,7 @@
      "uhrzeit": 16,
      "wochentag": "Sa"
     },
-    "sekunden": 128.6
+    "sekunden": 128.7
    },
    {
     "anfragen": 19,
@@ -1814,7 +2481,16 @@
      "text": "laufend: an 21 von 30 Tagen neue Artikel, 96 in 7 Tagen, 279 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 265.9
+    "sekunden": 261.8
+   },
+   {
+    "anfragen": 3,
+    "fehler": "",
+    "info": "",
+    "name": "Throwback Jerseys NZ",
+    "plattform": "wix",
+    "produkte": 107,
+    "sekunden": 4.1
    },
    {
     "anfragen": 5,
@@ -1848,7 +2524,7 @@
      "uhrzeit": 3,
      "wochentag": "Di"
     },
-    "sekunden": 65.2
+    "sekunden": 63.0
    },
    {
     "anfragen": 27,
@@ -1890,7 +2566,7 @@
      "uhrzeit": 15,
      "wochentag": "Sa"
     },
-    "sekunden": 431.3
+    "sekunden": 431.7
    },
    {
     "anfragen": 0,
@@ -1933,7 +2609,41 @@
      "uhrzeit": 19,
      "wochentag": "Fr"
     },
-    "sekunden": 272.3
+    "sekunden": 251.8
+   },
+   {
+    "anfragen": 7,
+    "fehler": "",
+    "info": "",
+    "name": "Trikotstoff",
+    "plattform": "shopify",
+    "produkte": 1102,
+    "rhythmus": {
+     "abstand_tage": 28.1,
+     "anteil": 1.0,
+     "letzte": "2026-10-02T14:44:26+02:00",
+     "letzter_schub": "2026-10-02T14:39:23+02:00",
+     "minute": 38,
+     "neu_30": 324,
+     "neu_7": 197,
+     "schuebe": 3,
+     "tage_30": 6,
+     "termine": [
+      {
+       "anzahl": 3,
+       "minute": 38,
+       "streuung_min": 100,
+       "tag": "Fr",
+       "uhrzeit": 13,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 28 Tage: Fr gegen 13:38 (±100 Min., 3x); 3 Schübe in 90 Tagen, zuletzt 02.10. 14:39",
+     "typ": "drops",
+     "uhrzeit": 13,
+     "wochentag": "Fr"
+    },
+    "sekunden": 95.8
    },
    {
     "anfragen": 5,
@@ -1958,10 +2668,27 @@
      "uhrzeit": 15,
      "wochentag": "Mo"
     },
-    "sekunden": 80.4
+    "sekunden": 80.1
    },
    {
-    "anfragen": 395,
+    "anfragen": 3,
+    "fehler": "",
+    "info": "",
+    "name": "Vintage Authentic Retro",
+    "plattform": "shopify",
+    "produkte": 175,
+    "rhythmus": {
+     "letzte": "2026-09-30T19:04:49+10:00",
+     "neu_30": 11,
+     "neu_7": 6,
+     "tage_30": 2,
+     "text": "unregelmäßig: an 2 von 30 Tagen neue Artikel, 11 in 30 Tagen, zuletzt 30.09.",
+     "typ": "unregelmäßig"
+    },
+    "sekunden": 41.6
+   },
+   {
+    "anfragen": 562,
     "fehler": "",
     "info": "Katalog bei 25000 gekappt, ältere Artikel per Suche",
     "name": "Vintage Football Area",
@@ -1975,7 +2702,16 @@
      "text": "laufend: an 25 von 30 Tagen neue Artikel, 1061 in 7 Tagen, 2445 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 2708.4
+    "sekunden": 3694.3
+   },
+   {
+    "anfragen": 6,
+    "fehler": "",
+    "info": "",
+    "name": "Vintage Football FR",
+    "plattform": "wix",
+    "produkte": 222,
+    "sekunden": 10.2
    },
    {
     "anfragen": 5,
@@ -1992,10 +2728,10 @@
      "text": "unregelmäßig: an 3 von 30 Tagen neue Artikel, 16 in 30 Tagen, zuletzt 27.09.",
      "typ": "unregelmäßig"
     },
-    "sekunden": 67.8
+    "sekunden": 72.0
    },
    {
-    "anfragen": 231,
+    "anfragen": 279,
     "fehler": "",
     "info": "Katalog bei 25000 gekappt, ältere Artikel per Suche",
     "name": "Vintage Football Shirts",
@@ -2009,7 +2745,7 @@
      "text": "laufend: an 21 von 30 Tagen neue Artikel, 214 in 7 Tagen, 895 in 30 Tagen",
      "typ": "laufend"
     },
-    "sekunden": 2670.9
+    "sekunden": 3410.6
    },
    {
     "anfragen": 7,
@@ -2034,7 +2770,24 @@
      "uhrzeit": 18,
      "wochentag": "Mi"
     },
-    "sekunden": 111.0
+    "sekunden": 111.4
+   },
+   {
+    "anfragen": 12,
+    "fehler": "",
+    "info": "",
+    "name": "Vintage Sports Clothing",
+    "plattform": "shopify",
+    "produkte": 2281,
+    "rhythmus": {
+     "letzte": "",
+     "neu_30": 0,
+     "neu_7": 0,
+     "tage_30": 0,
+     "text": "seit 30 Tagen nichts Neues (0 in 90 Tagen)",
+     "typ": "ruhig"
+    },
+    "sekunden": 173.4
    },
    {
     "anfragen": 0,
@@ -2046,12 +2799,16 @@
     "sekunden": 0.0
    }
   ],
-  "zeit": "2026-10-03T23:06:34.624842+00:00"
+  "zeit": "2026-10-04T04:38:13.554139+00:00"
  },
  "sources_ok": [
+  "089 Kits",
   "1Klopp Shop",
   "3kots",
+  "Arsij Store",
   "Back to the Football",
+  "Belgian Football Classics",
+  "Bulishirts",
   "Buy Sell Football Shirts",
   "Calcio Vintage",
   "Casual Football Shirts",
@@ -2061,63 +2818,97 @@
   "Classic11",
   "Cult Football",
   "Cult Kits",
+  "Din Fodboldtrøje",
   "Es de Época",
   "Euromex Sports",
+  "FTBL HVN",
   "FindYourJersey",
   "First 11 Shirts",
   "First Class Football Shirts",
   "First Street",
   "Fodbold Shoppen",
+  "Football Finds",
   "Football Finery",
   "Football Second Hand",
   "Football Shirt Collective",
   "Football Shirt Kingdom",
   "Football Shirt Union",
   "Football Thrift Shop",
+  "Football Trikots Berlin",
   "FootballShirts.com",
   "Forever Soccer Jerseys",
+  "Full Time Fits",
+  "Futmaniacos",
+  "Galactic Soccer Kits",
   "Golaço Kits",
   "Granny's Football Store",
   "Green Sport Vintage",
   "Iconic Jersey",
+  "Infinity Football Shirts",
   "Jersely",
   "Jerseys Hermanos",
   "Kick It Vintage",
+  "Kick and Rush",
   "Kickoff Vintage",
+  "Kit Collector",
   "Kit Launch",
+  "La Surface",
   "Le 7 Sorelle",
   "Legacy Football Shirts",
+  "Lineup Vintage",
+  "Lockerhaus",
+  "Maglie Calcio Vintage",
+  "Modeziege",
   "Nanos Football Jerseys",
   "Nostalgic Football Shirts",
   "Offside Boys",
   "Oh Calcio",
   "One More Time",
+  "Original 11vs11",
+  "Original Football Shop",
+  "Pardon My Kicks",
   "Philly Soccer Jerseys",
   "RB-Jerseys",
+  "Rare and Retro",
   "ReShirt",
+  "Real Vintage Football",
   "RetrOriginalFootball",
   "Retro Football Shirts",
+  "Retro Screamers",
+  "Retroshirts CH",
   "Retrotrøjer",
+  "SG Vintage Jerseys",
   "STA Jerseys",
   "Saturdays Football",
   "Sense of Goal",
   "Special Football Shirts",
+  "Squadra Football",
+  "Sunday Football Shirts",
   "Swiat Koszulek Pilkarskich",
   "TSPN Calcio",
   "That Vintage Football Shirt",
+  "The 12th Man Retro",
+  "The Football Boutique",
+  "The Football Market",
   "The Football Room",
   "The Football Temple",
+  "The Footballshirt Vault",
   "The Kit Dealer",
   "The Kitman 97",
   "The Soccer Archive",
   "The Third Kit",
+  "Throwback Jerseys NZ",
   "Tiffozi Futbol",
   "To The Jersey",
   "Trikotparadies",
+  "Trikotstoff",
   "Vice Football Store",
+  "Vintage Authentic Retro",
   "Vintage Football Area",
+  "Vintage Football FR",
   "Vintage Football Jerseys",
   "Vintage Football Shirts",
-  "Vintage Historic Sports"
+  "Vintage Historic Sports",
+  "Vintage Sports Clothing"
  ]
 }
