@@ -39,6 +39,11 @@ DASHBOARD_FILE = ROOT / "docs" / "treffer.json"
 ERROR_LOG = STATE_DIR / "fehlerlog.json"
 ERROR_REPORT = ROOT / "FEHLER.md"
 ERROR_KEEP_DAYS = 30
+FUNDGRUBE_REPORT = ROOT / "FUNDGRUBE.md"
+SHOPS_FILE = ROOT / "shops.yaml"
+FUNDGRUBE_DAYS = 7            # so oft (Tage) die Fundgrube im Gesamt-Run auswerten
+FUNDGRUBE_MAX = 15            # höchstens so viele Kandidaten prüfen
+FUNDGRUBE_MAX_REISSUE = 15    # ab so viel Prozent Nachbauten (laut FYJ) nicht empfehlen
 
 TZ = ZoneInfo("Europe/Berlin")
 BUY_COUNTRY = "DE"       # Preise/Währung so, wie ein Käufer in Deutschland sie sieht
@@ -678,6 +683,9 @@ def domain(url):
     return host[4:] if host.startswith("www.") else host
 
 
+FYJ_DOMAIN_STATS = {}
+
+
 def fyj_run(http, matcher, priority, skip_domains=()):
     """FYJ nur als Lückenfüller: keine Marktplätze, keine Shops, die direkt abgefragt werden"""
     # FYJ-Suche mit einzelnen, markanten Wörtern (z. B. "vaart" statt "van der vaart"),
@@ -707,6 +715,9 @@ def fyj_run(http, matcher, priority, skip_domains=()):
                     dom = domain(r.get("sourceUrl") or "")
                     if not dom or dom in skip_domains or any(m in dom for m in FYJ_MARKETPLACES):
                         continue
+                    st = FYJ_DOMAIN_STATS.setdefault(dom, [0, 0])   # Zeilen, davon Nachbauten (Fundgrube)
+                    st[0] += 1
+                    st[1] += int(reissue)
                     extra = " ".join(str(x) for x in (r.get("player"), r.get("team")) if x)
                     price = f"{r.get('currentValue') or ''} {r.get('currency') or ''}".strip()
                     items.append(item("fyj", r.get("sourceType") or "FYJ", r.get("sourceUrl") or "",
@@ -1518,6 +1529,7 @@ def write_dashboard(seen, status_store, mode, ts, watch_cfg, shops):
     quellen = status_store.get("quellen") or {}
     data = {"stand": ts, "modus": mode, "letzter_gesamtlauf": status_store.get("last_full", ""),
             "fyj_shops": status_store.get("fyj_shops") or {},
+            "fundgrube": status_store.get("fundgrube") or {},
             "laeufe": status_store.get("laeufe") or [],
             "drops": drop_calendar(shops, status_store),
             "preisgrenze": (watch_cfg.get("preisgrenze") or {}),
@@ -1723,6 +1735,93 @@ def check_alarms(seen, status_store, ts, rates, mode, notify):
             del alarms[k]
 
 
+def detect_platform(base):
+    """Shopsystem eines Kandidaten erkennen (je eine Anfrage): shopify, woo, wix oder unbekannt"""
+    http = Http(SHOPIFY_GATE)
+    data = http.get(f"{base}/products.json", {"limit": 1})
+    if isinstance(data, dict) and "products" in data:
+        return "shopify"
+    http.gate = None
+    if woo_endpoint(http, base):
+        return "woo"
+    tokens = http.get(f"{base}/_api/v1/access-tokens")
+    if ((tokens or {}).get("apps") or {}).get(WIX_STORES_APP):
+        return "wix"
+    return "unbekannt"
+
+
+def fundgrube(status_store, shops, ts, force=False):
+    """Wöchentlich: Shops, die nur über FYJ Treffer liefern, prüfen (System, Nachbau-Anteil) und als
+    Kandidaten für die direkte Anbindung merken. Gibt die Kandidaten zurück, wenn neu berechnet"""
+    last = (status_store.get("fundgrube") or {}).get("zeit")
+    if not force and last and now() - dt.datetime.fromisoformat(last) < dt.timedelta(days=FUNDGRUBE_DAYS):
+        return None
+    known = {domain(s["url"]) for s in shops}
+    known |= {d[4:] if d.startswith("www.") else d for d in known}
+    found = sorted((status_store.get("fyj_shops") or {}).items(), key=lambda kv: -kv[1]["treffer"])
+    cands = []
+    for dom, info in found:
+        if dom in known or any(m in dom for m in FYJ_MARKETPLACES) or len(cands) >= FUNDGRUBE_MAX:
+            continue
+        plat = "unbekannt"
+        for base in (f"https://{dom}", f"https://www.{dom}"):
+            try:
+                plat = detect_platform(base)
+            except requests.RequestException:
+                plat = "unbekannt"
+            if plat != "unbekannt":
+                break
+        rows, reissue = FYJ_DOMAIN_STATS.get(dom, [0, 0])
+        share = round(100 * reissue / rows) if rows else None
+        cands.append({"domain": dom, "url": base if plat != "unbekannt" else f"https://{dom}",
+                      "treffer": info["treffer"], "seit": info.get("seit", ts), "plattform": plat,
+                      "nachbau_prozent": share,
+                      "empfohlen": plat != "unbekannt" and (share or 0) < FUNDGRUBE_MAX_REISSUE})
+    status_store["fundgrube"] = {"zeit": ts, "kandidaten": cands}
+    fmt = lambda t: dt.datetime.fromisoformat(t).astimezone(TZ).strftime("%d.%m.%Y")
+    lines = ["# Fundgrube", "", f"Shops, die nur über FindYourJersey Treffer liefern. Stand {fmt(ts)}, "
+             "wird wöchentlich im Gesamt-Run aktualisiert. Aufnehmen über das Dashboard (Knopf \"Aufnehmen\").", "",
+             "| Shop | Treffer | System | Nachbauten laut FYJ | Empfehlung |", "|---|---|---|---|---|"]
+    for c in cands:
+        lines.append(f"| [{c['domain']}]({c['url']}) | {c['treffer']} | {c['plattform']} | "
+                     f"{'?' if c['nachbau_prozent'] is None else str(c['nachbau_prozent']) + ' %'} | "
+                     f"{'anbindbar' if c['empfohlen'] else 'eher nicht' if c['plattform'] != 'unbekannt' else 'System unklar'} |")
+    if not cands:
+        lines.append("| | | | | keine Kandidaten |")
+    FUNDGRUBE_REPORT.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return cands
+
+
+def add_shops_from_issues():
+    """Issues mit Label "shop" (aus dem Fundgrube-Knopf): Shop in shops.yaml eintragen, Issue schließen"""
+    issues, api = owner_issues("shop")
+    if api is None or not issues:
+        return 0
+    text = SHOPS_FILE.read_text(encoding="utf-8")
+    added = 0
+    for iss in issues:
+        f = dict(re.findall(r"(?im)^(url|plattform)\s*:\s*(\S+)", iss.get("body") or ""))
+        url, plat = f.get("url", ""), f.get("plattform", "auto").lower()
+        if not url.startswith("http"):
+            continue
+        if domain(url) not in text:
+            name = domain(url).split(".")[0].replace("-", " ").title()
+            extra = ", plattform: wix" if plat == "wix" else ""
+            line = f'  - {{name: {name}, url: "{url.rstrip("/")}"{extra}, schnellcheck: nein}}   # Fundgrube, Issue #{iss["number"]}'
+            marker = "# Marktplätze (eBay, Depop)"
+            text = text.replace(marker, f"{line}\n\n{marker}", 1) if marker in text else text.rstrip() + "\n" + line + "\n"
+            added += 1
+        try:
+            requests.post(f"{api[0]}/{iss['number']}/comments", headers=api[1], timeout=TIMEOUT,
+                          json={"body": "Aufgenommen, der Shop läuft ab dem nächsten Gesamt-Run direkt (nur nachts)."})
+            requests.patch(f"{api[0]}/{iss['number']}", headers=api[1], timeout=TIMEOUT, json={"state": "closed"})
+        except requests.RequestException:
+            pass
+    if added:
+        SHOPS_FILE.write_text(text, encoding="utf-8")
+    return added
+
+
 def recently_done(status_store, mode):
     """Hat ein Run dieses Modus kürzlich stattgefunden? (Sperre für die GitHub-Rückfall-Zeitpläne)"""
     limit = FALLBACK_SKIP_HOURS.get(mode)
@@ -1761,7 +1860,11 @@ def main():
         return
 
     watch = yaml.safe_load((ROOT / "watchlist.yaml").read_text(encoding="utf-8"))
-    shops_cfg = yaml.safe_load((ROOT / "shops.yaml").read_text(encoding="utf-8"))
+    if args.mode == "full" and not args.only and not args.dry_run:
+        n_added = add_shops_from_issues()
+        if n_added:
+            print(f"{n_added} Shop(s) aus der Fundgrube aufgenommen")
+    shops_cfg = yaml.safe_load(SHOPS_FILE.read_text(encoding="utf-8"))
     matcher = Matcher(watch)
     STATE_DIR.mkdir(exist_ok=True)
     seen = load_json(SEEN_FILE, {})
@@ -1802,6 +1905,9 @@ def main():
     failed = {q["name"] for q in (status_store.get("quellen") or {}).get("liste", []) if q.get("fehler")}
     direct_domains = {domain(s["url"]) for s in shops_cfg.get("shops") or []
                       if (s.get("plattform") or "auto").lower() not in ("fyj", "aus") and s["name"] not in failed}
+    # Gesperrte Shops (sperren: ja) auch bei FYJ ignorieren, z. B. wegen durchweg schlechtem Zustand
+    direct_domains |= {domain(s["url"]) for s in shops_cfg.get("shops") or []
+                       if str(s.get("sperren", "")).lower() in ("ja", "true", "yes")}
     use_fyj = (str(shops_cfg.get("fyj", "an")).lower() in ("an", "true", "ja", "on") and not args.only
                and args.mode != "drop")
 
@@ -2002,6 +2108,16 @@ def main():
                            for e in bundle[:20]) +
                  (f"\n… und {len(bundle) - 20} weitere" if len(bundle) > 20 else ""),
                  3, report_url, None, ["soccer"], args.dry_run)
+
+    # Fundgrube wöchentlich (nach der Auswertung der FYJ-Treffer in diesem Gesamt-Run)
+    if args.mode == "full" and not args.only and fyj_status and not fyj_status.get("fehler"):
+        cands = fundgrube(status_store, shops_cfg.get("shops") or [], ts)
+        good = [c for c in cands or [] if c["empfohlen"]]
+        if good:
+            fg_url = (os.environ.get("DASHBOARD_URL") or "").rstrip("/") + "/#fundgrube" if os.environ.get("DASHBOARD_URL") else report_url
+            push(topic, f"🔎 Fundgrube: {len(good)} Shop-Kandidat{'en' if len(good) != 1 else ''} zum Aufnehmen",
+                 "\n".join(f"• {c['domain']}: {c['treffer']} Treffer · {c['plattform']}" for c in good[:10]) +
+                 "\nIm Dashboard unter Fundgrube auf \"Aufnehmen\" tippen.", 2, fg_url, None, ["mag"], args.dry_run)
 
     # Preisalarme für Favoriten
     if not args.only:

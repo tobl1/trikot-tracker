@@ -521,3 +521,36 @@ def test_check_alarms(monkeypatch):
     seen["shop.de/products/x"]["verkauft"] = "t"
     tracker.check_alarms(seen, st, "t", {"EUR": 1.0}, "full", note)       # verkauft -> Push, Issue zu
     assert len(pushes) == 2 and posted and st["alarme"] == {}
+
+
+def test_add_shops_from_issues(tmp_path, monkeypatch):
+    f = tmp_path / "shops.yaml"
+    f.write_text("shops:\n  - {name: A, url: \"https://a.com\"}\n\n# Marktplätze (eBay, Depop)\n")
+    monkeypatch.setattr(tracker, "SHOPS_FILE", f)
+    issues = [{"number": 3, "body": "Shop aufnehmen\n\nurl: https://www.new-shop.co.uk\nplattform: shopify\n"},
+              {"number": 4, "body": "url: https://wixy.com\nplattform: wix\n"},
+              {"number": 5, "body": "url: https://a.com\nplattform: shopify\n"}]          # schon drin
+    monkeypatch.setattr(tracker, "owner_issues", lambda label, state="open": (issues, ("api", {})))
+    monkeypatch.setattr(tracker.requests, "post", lambda *a, **k: None)
+    monkeypatch.setattr(tracker.requests, "patch", lambda *a, **k: None)
+    assert tracker.add_shops_from_issues() == 2
+    cfg = yaml.safe_load(f.read_text())
+    names = {s["name"]: s for s in cfg["shops"]}
+    assert names["New Shop"]["url"] == "https://www.new-shop.co.uk" and names["New Shop"]["schnellcheck"] == "nein"
+    assert names["Wixy"]["plattform"] == "wix" and len(cfg["shops"]) == 3
+
+
+def test_fundgrube(tmp_path, monkeypatch):
+    monkeypatch.setattr(tracker, "FUNDGRUBE_REPORT", tmp_path / "FUNDGRUBE.md")
+    monkeypatch.setattr(tracker, "detect_platform", lambda base: "shopify" if "good" in base else "unbekannt")
+    tracker.FYJ_DOMAIN_STATS.clear()
+    tracker.FYJ_DOMAIN_STATS.update({"good.com": [20, 1], "remake.com": [10, 5]})
+    monkeypatch.setattr(tracker, "detect_platform", lambda base: "shopify" if ("good" in base or "remake" in base) else "unbekannt")
+    st = {"fyj_shops": {"good.com": {"treffer": 9, "seit": "t"}, "remake.com": {"treffer": 4, "seit": "t"},
+                        "known.com": {"treffer": 7, "seit": "t"}, "ebay.de": {"treffer": 3, "seit": "t"},
+                        "odd.net": {"treffer": 2, "seit": "t"}}}
+    cands = tracker.fundgrube(st, [{"url": "https://www.known.com"}], tracker.now().isoformat())
+    by = {c["domain"]: c for c in cands}
+    assert set(by) == {"good.com", "remake.com", "odd.net"}            # bekannte und Marktplätze raus
+    assert by["good.com"]["empfohlen"] and not by["remake.com"]["empfohlen"] and not by["odd.net"]["empfohlen"]
+    assert tracker.fundgrube(st, [], tracker.now().isoformat()) is None   # erst nach einer Woche wieder

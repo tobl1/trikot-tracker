@@ -69,7 +69,8 @@ jobs:
         run: |
           git config user.name "trikot-tracker"
           git config user.email "trikot-tracker@users.noreply.github.com"
-          git add state TREFFER.md FEHLER.md docs/treffer.json
+          git add state TREFFER.md shops.yaml docs/treffer.json
+          for f in FEHLER.md FUNDGRUBE.md; do if [ -f "$f" ]; then git add "$f"; fi; done   # entstehen erst bei Bedarf
           if ! git diff --cached --quiet; then
             git commit -m "Tracker-Lauf $(date -u +'%Y-%m-%d %H:%M') UTC"
             git pull --rebase --autostash

@@ -18,11 +18,13 @@ Aufbau, getroffene Entscheidungen und offene Punkte. Bitte bei größeren Änder
    30 Tage) und neue oder gehäufte Probleme kurz analysieren und ansprechen. Der Nutzer will keine
    Alarm-Pushes, sondern dass Claude das Log selbst prüft
 2. `gh issue list --label flag --state all` auf neue Meldungen prüfen, Muster in Regeln übersetzen
-3. **Einmal pro Woche** (Datum des letzten Checks unten unter "Wöchentliche Fundgrube" eintragen):
-   `docs/treffer.json` → `fyj_shops` auswerten, also Shops, die nur über FYJ Treffer liefern, und
-   dem Nutzer Kandidaten für direkte Anbindung vorschlagen
-
-Wöchentliche Fundgrube, letzter Check: noch keiner
+3. `FUNDGRUBE.md` überfliegen: Die Fundgrube läuft seit 05.10.2026 **automatisch** wöchentlich im
+   Gesamt-Run (`fundgrube()`): FYJ-only-Shops mit Treffern, System erkannt (`detect_platform`), Anteil
+   FYJ-Nachbauten (`FYJ_DOMAIN_STATS`), Empfehlung bei bekanntem System und < 15 % Nachbauten, eine Push
+   pro Woche. Nutzer tippt im Dashboard (Bereich Fundgrube) auf "Aufnehmen" → Issue Label `shop` →
+   `add_shops_from_issues()` trägt den Shop im nächsten Gesamt-Run in shops.yaml ein (schnellcheck: nein)
+   und schließt das Issue. Bewusst nur über FYJ: Einträge mit `plattform: aus` (z. B. footballshirtvintage.fr).
+   Ganz gesperrt (auch nicht über FYJ): `sperren: ja` (The Football Market)
 
 ## Ziel
 

@@ -9,6 +9,7 @@
 #            fyj        = nicht direkt, läuft über FindYourJersey mit
 #            aus        = deaktiviert
 # schnellcheck: nein = nur im nächtlichen Gesamtlauf abfragen
+# sperren: ja        = Shop komplett ignorieren, auch über FindYourJersey
 # min_zustand: 7     = Treffer mit schlechterer Note (z. B. 6/10) ausblenden
 # drop: ["Fr 19:00"] = feste Drop-Zeit (deutsche Zeit, oder mit Zeitzone: "Fr 20:00 Pacific/Auckland",
 #                      oder jeden Tag: "täglich 18:00 Europe/London"),
@@ -136,7 +137,7 @@ shops:
   - {name: Din Fodboldtrøje, url: "https://dinfodboldtroje.com", schnellcheck: nein}
   - {name: Pardon My Kicks, url: "https://pardonmykicks.se", schnellcheck: nein}
 # Frankreich, Spanien, Italien
-  - {name: The Football Market, url: "https://thefootballmarket.com", plattform: aus, hinweis: "Nutzer 04.10.2026: Zustand durchweg schlecht, Fantasie-Flocks"}
+  - {name: The Football Market, url: "https://thefootballmarket.com", plattform: aus, sperren: ja, hinweis: "Nutzer 04.10.2026: Zustand durchweg schlecht, Fantasie-Flocks"}
   - {name: La Surface, url: "https://lasurface.shop", schnellcheck: nein}
   - {name: Vintage Football FR, url: "https://www.vintage-football.com", plattform: wix, schnellcheck: nein}
   - {name: Real Vintage Football, url: "https://realvintagefootball.com", schnellcheck: nein}
@@ -171,6 +172,11 @@ shops:
      suche: "/ricerca.php?search={q}", link: "a[href^='articolo/']"}
 # classicfootballcollectibles.com bewusst nicht: griechische Titel und Adressen, Suche findet englische
 # Namen nicht; läuft über FYJ (dort mit englischen Titeln)
+
+# Bewusst NUR über FYJ (plattform: aus = nicht direkt, FYJ deckt sie weiter ab; tauchen nicht in der Fundgrube auf)
+  - {name: Football Shirt Vintage FR, url: "https://www.footballshirtvintage.fr", plattform: aus, hinweis: "ca. 20 % Nachbauten, FYJ sortiert die aus"}
+  - {name: Kitts, url: "https://www.kitts.de", plattform: aus, hinweis: "Marktplatz (Sharetribe), über FYJ"}
+  - {name: Classic Football Collectibles, url: "https://www.classicfootballcollectibles.com", plattform: aus, hinweis: "griechische Titel, über FYJ"}
 
 # Marktplätze (eBay, Depop) werden nicht abgefragt, dort am besten in der
 # jeweiligen App dem Verkäufer folgen bzw. gespeicherte Suchen anlegen:
