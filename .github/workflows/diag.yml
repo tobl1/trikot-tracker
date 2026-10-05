@@ -1,0 +1,15 @@
+name: Diagnose (temporär)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  diag:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - run: |
+          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0 Safari/537.36"
+          for u in "https://www.topbinzfootballshirts.co.uk/new-in" "https://www.topbinzfootballshirts.co.uk/search/products?keywords=henry"; do
+            curl -s -o /tmp/x -w "$u -> %{http_code} %{size_download}\n" -A "$UA" "$u"; grep -c 'product-box' /tmp/x || true; sleep 11
+          done
