@@ -10,14 +10,14 @@ import time
 
 import yaml
 
-from . import speicher
+from . import speicher, webpush
 from .abgleich import Matcher
 from .basis import (
     EINBRUCH_ANTEIL, EINBRUCH_MIN, EINBRUCH_RUNS, ENRICH_BUDGET, FALLBACK_SKIP_HOURS, MAX_PUSH_HIGH,
     CRON_TOKEN_ABLAUF, MAX_WORKERS, RADAR_MIN, ROOT, RUN_HISTORY, SIZE_RX, canon_url, domain, is_high, norm, now, short_size,
 )
 from .berichte import fundgrube, log_problems, write_dashboard, write_report
-from .issues import add_shops_from_issues, apply_flags, check_alarms
+from .issues import add_shops_from_issues, apply_flags, check_alarms, collect_push_abos
 from .melden import OUTBOX_MAX_HOURS, detail_line, push, push_label, save_outbox, send_now, send_outbox, short
 from .netz import Http
 from .preise import fetch_rates, to_eur
@@ -127,10 +127,14 @@ def main():
             for e in speicher.load_json(speicher.OUTBOX_FILE, []):
                 print(f"[POSTAUSGANG p{e.get('prio')}] {e.get('title')}")
             return
-        sent, left, dropped = send_outbox(topic)
+        status_store = load_json(speicher.STATUS_FILE, {}, strict=True)
+        n_abos = len(status_store.get("push_abos") or {})
+        sent, left, dropped, problems = send_outbox(topic, status_store, webpush.private_key())
+        if len(status_store.get("push_abos") or {}) != n_abos:
+            speicher.save_json(speicher.STATUS_FILE, status_store)   # erloschene Abos ausgetragen
         print(f"Postausgang: {sent} verschickt, {left} offen, {dropped} verworfen (älter als {OUTBOX_MAX_HOURS} Std.)")
-        problems = ([("ntfy", f"{left} Push(es) nicht zugestellt, der nächste Run versucht es erneut")] if left else []) + \
-                   ([("ntfy", f"{dropped} Push(es) verworfen, älter als {OUTBOX_MAX_HOURS} Std.")] if dropped else [])
+        problems += ([("ntfy", f"{left} Push(es) nicht zugestellt, der nächste Run versucht es erneut")] if left else []) + \
+                    ([("ntfy", f"{dropped} Push(es) verworfen, älter als {OUTBOX_MAX_HOURS} Std.")] if dropped else [])
         if problems:
             log_problems(problems, "senden", now().isoformat())
         return
@@ -176,6 +180,11 @@ def main():
     new_flags = apply_flags(seen, status_store, now().isoformat()) if not args.dry_run else 0
     if new_flags:
         print(f"{new_flags} Meldung(en) aus dem Dashboard übernommen")
+    # Push direkt in die App: neue Abos aus den Einstellungen übernehmen und bestätigen
+    for aid in (collect_push_abos(status_store, now().isoformat()) if not args.dry_run else []):
+        push(topic, "✅ Push aus der App ist aktiv", "Ab jetzt kommen neue Treffer auch direkt über die Trikot-Tracker-App.",
+             4, (os.environ.get("DASHBOARD_URL") or "").rstrip("/") + "/#eingaenge" or None, nur_abo=aid)
+        new_flags += 1   # Drop-Run soll dafür nicht vorzeitig enden
     shop_modes = {}   # Drop-Run: je Shop "drop" (fälliger Drop, gründlich) oder "radar" (nur neueste Artikel)
     t_start = now()
     if args.mode == "drop":

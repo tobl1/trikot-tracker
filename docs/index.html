@@ -58,10 +58,10 @@ h1{font-family:"Raleway",system-ui,sans-serif;font-size:22px;font-weight:700;let
 .controls{padding:0 0 12px;margin-bottom:6px}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .row+.row{margin-top:10px}
-input[type=search],select{font:inherit;font-size:16px;color:var(--ink);background:var(--card);border:1px solid var(--line);
+input[type=search],input[type=password],select{font:inherit;font-size:16px;color:var(--ink);background:var(--card);border:1px solid var(--line);
   border-radius:var(--r-sm);padding:9px 14px;min-height:46px;box-shadow:var(--shadow)}
 input[type=search]::placeholder{color:var(--muted)}
-input[type=search]:focus,select:focus{outline:none;border-color:var(--ink)}
+input[type=search]:focus,input[type=password]:focus,select:focus{outline:none;border-color:var(--ink)}
 input[type=search]{flex:1 1 220px;min-width:0}
 select{flex:0 1 auto;max-width:100%;appearance:none;-webkit-appearance:none;padding-right:30px;
   background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);
@@ -154,6 +154,11 @@ details[open] summary::after{content:"−"}
 .fyjnote b{color:var(--ink);font-weight:500}
 .addbtn{font:inherit;font-size:12px;font-weight:600;border:0;border-radius:999px;padding:6px 12px;cursor:pointer;background:var(--accent);color:#fff;white-space:nowrap}
 .addbtn[disabled]{background:var(--card2);color:var(--muted);cursor:default}
+.addbtn.big{font-size:14px;padding:10px 16px;margin:4px 0 6px}
+.sethead{font-size:14px;font-weight:600;margin:16px 0 4px}
+.steps{font-size:13px;color:var(--muted);padding-left:20px;margin:6px 0 10px}
+.steps a{color:var(--ink)}
+#tokinput{flex:1 1 200px}
 
 /* Ansichten: oben als Pillen (Desktop), unten als schlichte Leiste (Handy) */
 .tabs{display:flex;gap:6px;margin:0 0 14px}
@@ -293,6 +298,23 @@ details[open] summary::after{content:"−"}
     <p class="fyjnote" id="fyjshops"></p>
     <div class="tablewrap"><table class="src"><thead><tr><th>Quelle</th><th>System</th><th class="n">Produkte</th><th>Neuzugänge</th><th>Hinweis</th></tr></thead><tbody id="srcbody"></tbody></table></div>
   </details>
+
+  <details id="einstellungen">
+    <summary>Einstellungen</summary>
+    <h4 class="sethead">Push direkt aus der App</h4>
+    <p class="fyjnote" id="pushstate"></p>
+    <button class="addbtn big" id="pushon">Push in dieser App aktivieren</button>
+    <h4 class="sethead">Melden mit einem Tipp</h4>
+    <p class="fyjnote" id="tokstate"></p>
+    <ol class="steps">
+      <li>Auf GitHub einen <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">neuen Schlüssel (Fine-grained token)</a> anlegen, Name z. B. "Trikot-App", Ablauf 1 Jahr</li>
+      <li>Repository access: "Only select repositories" → trikot-tracker</li>
+      <li>Permissions → Repository permissions → Issues: "Read and write" (sonst nichts)</li>
+      <li>Schlüssel kopieren, hier einfügen, speichern. Er bleibt nur auf diesem Gerät</li>
+    </ol>
+    <div class="row"><input type="password" id="tokinput" placeholder="github_pat_…" autocomplete="off" spellcheck="false">
+      <button class="addbtn big" id="toksave">Speichern</button><button class="unhide" id="tokdel">entfernen</button></div>
+  </details>
 </div>
 
 <div class="toast" id="toast" hidden><span id="toasttext"></span><button id="toastundo">Rückgängig</button></div>
@@ -351,15 +373,31 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
   // Favoriten: lokal im Browser, mit Kopie der Daten (bleiben sichtbar, wenn der Artikel verschwindet)
   const favs = store.get("favs") || {};
   const alarms = new Set(store.get("alarms") || []);
-  function setAlarm(t){
+  // Meldungen, Alarme, Shops und Push-Abos landen als GitHub-Issue beim Tracker. Mit Schlüssel (Einstellungen)
+  // direkt über die GitHub-Schnittstelle, sonst über die vorausgefüllte GitHub-Seite ("Submit" tippen)
+  async function createIssue(label, title, body, pageFallback = true){
+    const tok = store.get("token");
+    if (tok) {
+      try {
+        const r = await fetch(`https://api.github.com/repos/${REPO}/issues`, {method: "POST",
+          headers: {Authorization: `Bearer ${tok}`, Accept: "application/vnd.github+json", "Content-Type": "application/json"},
+          body: JSON.stringify({title: title.slice(0, 200), body, labels: [label]})});
+        if (r.ok) return "direkt";
+        if (r.status === 401 || r.status === 403) showToast("Schlüssel ungültig oder abgelaufen, unter Einstellungen neu eintragen", 6000);
+      } catch (e) {}
+    }
+    if (!pageFallback) return "";
+    window.open(`https://github.com/${REPO}/issues/new?labels=${label}&title=${encodeURIComponent(title.slice(0, 200))}` +
+                `&body=${encodeURIComponent('Bitte nur unten auf "Submit new issue" tippen.\n\n' + body)}`, "_blank", "noopener");
+    return "seite";
+  }
+  async function setAlarm(t){
     // Preisalarm = GitHub-Issue mit Label "alarm"; beenden: Issue auf GitHub schließen
     if (alarms.has(t.id)) { window.open(`https://github.com/${REPO}/issues?q=is%3Aissue+is%3Aopen+label%3Aalarm`, "_blank", "noopener"); return; }
-    const body = [`Preisalarm aus dem Dashboard. Bitte nur unten auf "Submit new issue" tippen.`,
-      `Beenden: dieses Issue schließen.`, "", `grund: alarm`, `id: ${t.id}`, "", `url: ${t.url}`, `titel: ${t.titel}`,
-      `preis: ${t.preis} (${t.eur != null ? t.eur.toFixed(2) + " €" : "?"})`].join("\n");
-    window.open(`https://github.com/${REPO}/issues/new?labels=alarm&title=${encodeURIComponent(("Preisalarm: " + t.titel).slice(0, 200))}` +
-                `&body=${encodeURIComponent(body)}`, "_blank", "noopener");
+    const body = [`Preisalarm aus dem Dashboard. Beenden: dieses Issue schließen.`, "", `grund: alarm`, `id: ${t.id}`, "",
+      `url: ${t.url}`, `titel: ${t.titel}`, `preis: ${t.preis} (${t.eur != null ? t.eur.toFixed(2) + " €" : "?"})`].join("\n");
     alarms.add(t.id); store.set("alarms", [...alarms]); render();
+    if (await createIssue("alarm", "Preisalarm: " + t.titel, body) === "direkt") showToast("Preisalarm gesetzt");
   }
   function toggleFav(t){
     if (favs[t.id]) delete favs[t.id];
@@ -377,24 +415,78 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     document.querySelectorAll("#flagreasons .chip").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.r === flagReason)));
     $("flagsheet").hidden = false;
   }
-  let toastTimer = null, lastHidden = null;
+  let toastTimer = null, lastHidden = null, hideTimer = null;
+  function showToast(text, ms = 3000, undo = false){
+    $("toasttext").textContent = text; $("toastundo").hidden = !undo; $("toast").hidden = false;
+    clearTimeout(toastTimer); toastTimer = setTimeout(() => { $("toast").hidden = true; }, ms);
+  }
   function hideItem(){
     const t = flagItem;
     hiddenIds.add(t.id); store.set("hidden", [...hiddenIds]); lastHidden = t.id;
     $("flagsheet").hidden = true; render();
-    $("toasttext").textContent = "Ausgeblendet"; $("toast").hidden = false;
-    clearTimeout(toastTimer); toastTimer = setTimeout(() => { $("toast").hidden = true; }, 5000);
+    showToast("Ausgeblendet", 5000, true);
+    // Mit Schlüssel: nach der Rückgängig-Frist auf allen Geräten ausblenden (kommt auch nie wieder per Push)
+    clearTimeout(hideTimer);
+    if (store.get("token")) hideTimer = setTimeout(() => {
+      createIssue("flag", `Ausgeblendet · ${t.titel}`, [`grund: juckt nicht`, `id: ${t.id}`, "", `url: ${t.url}`].join("\n"), false);
+    }, 5200);
   }
-  function sendFlag(){
+  async function sendFlag(){
     const t = flagItem, note = $("flagnote").value.trim().replace(/\s+/g, " ");
-    const body = [`Gemeldet über das Dashboard. Bitte nur unten auf "Submit new issue" tippen.`, "",
-      `grund: ${flagReason}`, `id: ${t.id}`, `kommentar: ${note}`, "",
-      `url: ${t.url}`, `titel: ${t.titel}`, `shop: ${t.shopName}, preis: ${t.preis}, labels: ${t.labels.join(", ")}`].join("\n");
-    const url = `https://github.com/${REPO}/issues/new?labels=flag&title=${encodeURIComponent(`Flag: ${flagReason} · ${t.titel}`.slice(0, 200))}` +
-                `&body=${encodeURIComponent(body)}`;
-    window.open(url, "_blank", "noopener");
+    const body = [`Gemeldet über das Dashboard.`, "", `grund: ${flagReason}`, `id: ${t.id}`, `kommentar: ${note}`, "",
+      `url: ${t.url}`, `titel: ${t.titel}`, `shop: ${t.shopName}, preis: ${t.preis}, labels: ${t.labels.join(", ")}`,
+      t.warum ? `warum: ${t.warum}` : ""].join("\n");
     flagged.add(t.id); store.set("flagged", [...flagged]);
     $("flagsheet").hidden = true; render();
+    if (await createIssue("flag", `Flag: ${flagReason} · ${t.titel}`, body) === "direkt") showToast("Gemeldet, danke");
+  }
+
+  // Push direkt aus der App: Abo mit dem öffentlichen Schlüssel des Trackers verschlüsseln (ECDH + HKDF + AES-GCM,
+  // Gegenstück in trikot/webpush.py) und als Issue "push" schicken
+  const VAPID_PUBLIC = "BCXT9cNDczzA3flMfkeef2Gr0aBk9UVtdKOYSd6O5MguRtzvdRQ6HbMieWGNFrJUNDznXu31GMbd9xkf4hY--08";
+  const b64u = buf => btoa(String.fromCharCode(...new Uint8Array(buf))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  const unb64u = str => Uint8Array.from(atob(str.replace(/-/g, "+").replace(/_/g, "/") + "===".slice((str.length + 3) % 4)), c => c.charCodeAt(0));
+  async function sealAbo(sub){
+    const enc = new TextEncoder();
+    const server = await crypto.subtle.importKey("raw", unb64u(VAPID_PUBLIC), {name: "ECDH", namedCurve: "P-256"}, false, []);
+    const eph = await crypto.subtle.generateKey({name: "ECDH", namedCurve: "P-256"}, true, ["deriveBits"]);
+    const bits = await crypto.subtle.deriveBits({name: "ECDH", public: server}, eph.privateKey, 256);
+    const hk = await crypto.subtle.importKey("raw", bits, "HKDF", false, ["deriveKey"]);
+    const key = await crypto.subtle.deriveKey({name: "HKDF", hash: "SHA-256", salt: enc.encode("trikot-tracker-1"),
+      info: enc.encode("trikot-push-abo")}, hk, {name: "AES-GCM", length: 256}, false, ["encrypt"]);
+    const iv = crypto.getRandomValues(new Uint8Array(12));
+    const data = await crypto.subtle.encrypt({name: "AES-GCM", iv}, key, enc.encode(JSON.stringify(sub)));
+    return `v1.${b64u(await crypto.subtle.exportKey("raw", eph.publicKey))}.${b64u(iv)}.${b64u(data)}`;
+  }
+  function settingsState(){
+    const tok = store.get("token");
+    $("tokstate").textContent = tok ? "Aktiv: Melden, Ausblenden, Preisalarm und Aufnehmen gehen direkt raus, ohne GitHub-Seite. " +
+      "\"Juckt nicht\" gilt dann auf allen Geräten." : "Noch kein Schlüssel: Melden öffnet die GitHub-Seite, \"Juckt nicht\" gilt nur auf diesem Gerät.";
+    $("tokdel").hidden = !tok;
+    const abo = store.get("pushabo"), perm = "Notification" in window ? Notification.permission : "";
+    const standalone = matchMedia("(display-mode: standalone)").matches || navigator.standalone;
+    $("pushstate").textContent = !("PushManager" in window) ? "Geht nur in der App vom Homebildschirm (iPhone ab iOS 16.4)."
+      : !standalone ? "Bitte die App vom Homebildschirm öffnen, im Browser-Tab erlaubt das iPhone keine Pushes."
+      : abo && perm === "granted" ? `Aktiviert am ${fmtDate(abo.seit)}. Die Bestätigungs-Push kommt mit dem nächsten Run (tagsüber max. 30 Min.).`
+      : perm === "denied" ? "Mitteilungen sind abgelehnt: iPhone-Einstellungen > Mitteilungen > Trikots erlauben, dann hier aktivieren."
+      : "Pushes kommen dann direkt von dieser App, zusätzlich zu ntfy, bis ntfy abgeschaltet wird.";
+    $("pushon").textContent = abo && perm === "granted" ? "Erneut aktivieren" : "Push in dieser App aktivieren";
+  }
+  async function enablePush(){
+    try {
+      if (!("serviceWorker" in navigator) || !("PushManager" in window)) return settingsState();
+      if (await Notification.requestPermission() !== "granted") return settingsState();
+      const reg = await navigator.serviceWorker.register("sw.js");
+      await navigator.serviceWorker.ready;
+      let sub = await reg.pushManager.getSubscription();
+      if (!sub) sub = await reg.pushManager.subscribe({userVisibleOnly: true, applicationServerKey: unb64u(VAPID_PUBLIC)});
+      const how = await createIssue("push", "Push für die App aktivieren", `abo: ${await sealAbo(sub.toJSON())}`);
+      store.set("pushabo", {seit: new Date().toISOString()});
+      settingsState();
+      showToast(how === "direkt" ? "Push aktiviert, Bestätigung folgt" : "Auf der GitHub-Seite noch \"Submit\" tippen", 5000);
+    } catch (e) {
+      $("pushstate").textContent = "Aktivieren hat nicht geklappt: " + e.message;
+    }
   }
 
   function filtered(){
@@ -673,7 +765,21 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
   });
   $("flagcancel").addEventListener("click", () => { $("flagsheet").hidden = true; });
   $("hidego").addEventListener("click", hideItem);
+  $("pushon").addEventListener("click", enablePush);
+  $("toksave").addEventListener("click", async () => {
+    const tok = $("tokinput").value.trim();
+    if (!tok) return;
+    try {   // Schlüssel prüfen: darf er Issues in diesem Repo lesen?
+      const r = await fetch(`https://api.github.com/repos/${REPO}/issues?per_page=1`, {headers: {Authorization: `Bearer ${tok}`}});
+      if (!r.ok) return showToast(`Schlüssel passt nicht (HTTP ${r.status}), Rechte prüfen`, 6000);
+    } catch (e) { return showToast("Keine Verbindung zu GitHub", 5000); }
+    store.set("token", tok); $("tokinput").value = ""; settingsState(); showToast("Gespeichert, Melden geht jetzt mit einem Tipp");
+  });
+  $("tokdel").addEventListener("click", () => { store.set("token", null); settingsState(); });
+  if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
+  settingsState();
   $("toastundo").addEventListener("click", () => {
+    clearTimeout(hideTimer);   // Ausblenden noch nicht verschickt: einfach zurücknehmen
     if (lastHidden) { hiddenIds.delete(lastHidden); store.set("hidden", [...hiddenIds]); lastHidden = null; }
     $("toast").hidden = true; render();
   });
@@ -685,10 +791,8 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
   $("flaggo").addEventListener("click", sendFlag);
   $("fgbody").addEventListener("click", e => {
     const b = e.target.closest(".addbtn"); if (!b || b.disabled) return;
-    const body = [`Shop aus der Fundgrube aufnehmen. Bitte nur unten auf "Submit new issue" tippen.`, "",
-                  `url: ${b.dataset.url}`, `plattform: ${b.dataset.plat}`].join("\n");
-    window.open(`https://github.com/${REPO}/issues/new?labels=shop&title=${encodeURIComponent("Shop aufnehmen: " + b.dataset.url)}` +
-                `&body=${encodeURIComponent(body)}`, "_blank", "noopener");
+    const body = [`Shop aus der Fundgrube aufnehmen.`, "", `url: ${b.dataset.url}`, `plattform: ${b.dataset.plat}`].join("\n");
+    createIssue("shop", "Shop aufnehmen: " + b.dataset.url, body).then(how => { if (how === "direkt") showToast("Wird im nächsten Gesamt-Run aufgenommen"); });
     const asked = new Set(store.get("shopadds") || []); asked.add(b.dataset.url); store.set("shopadds", [...asked]);
     b.disabled = true; b.textContent = "angefragt";
   });

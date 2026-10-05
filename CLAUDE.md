@@ -266,6 +266,24 @@ auf dem Foto erkennbar sind (z. B. Trainingsshirt ohne Hinweis im Titel), über 
 - **Für Claude:** gemeldete Fehltreffer regelmäßig mit `gh issue list --label flag --state all` lesen
   und daraus Matching-Regeln ableiten (mit Testfall), statt nur einzeln auszublenden
 
+## Stufe 3 (05.10.2026): Push aus der App, Melden mit einem Tipp
+
+- **Push direkt aus der Dashboard-App** (Web Push, iPhone ab iOS 16.4, nur App vom Homebildschirm): `docs/sw.js`
+  zeigt Pushes an. Einstellungen → "Push aktivieren": App abonniert mit dem öffentlichen VAPID-Schlüssel
+  (`VAPID_PUBLIC` in docs/index.html), verschlüsselt das Abo (ECDH + HKDF + AES-GCM, Salt "trikot-tracker-1") und
+  schickt es als Issue Label `push`. `issues.collect_push_abos()` legt das verschlüsselte Abo in `status.json` →
+  `push_abos` (öffentlich, aber nur mit dem Secret lesbar) und schickt eine Bestätigung nur an dieses Abo
+  (`nur_abo`). Versand in `--mode senden` (`melden.send_outbox`): ntfy UND App; 404/410 = Abo erloschen, wird
+  ausgetragen. Eigene Umsetzung `trikot/webpush.py` (RFC 8291/8292, nur `cryptography` + `http_ece`, kein pywebpush
+  wegen aiohttp & Co.). Geheimer Schlüssel nur im Secret `VAPID_PRIVATE_KEY` (nie ausgeben, nur im Schritt
+  "Pushes senden"). ntfy läuft parallel weiter, bis der Nutzer sagt, dass es weg kann
+- **Melden mit einem Tipp**: fein-granularer GitHub-Schlüssel nur für Issues dieses Repos, legt der Nutzer selbst an
+  und trägt ihn in der App ein (localStorage `tt:token`, bleibt auf dem Gerät). Dann legen Melden, Preisalarm,
+  "Aufnehmen" und Push-Abo die Issues direkt über die GitHub-Schnittstelle an (`createIssue`), sonst wie bisher
+  über die vorausgefüllte GitHub-Seite. **"Juckt nicht"** wird mit Schlüssel nach der Rückgängig-Frist als Flag
+  `grund: juckt nicht` verschickt → auf allen Geräten ausgeblendet, nie wieder Push. **Beim Ableiten von Regeln
+  aus Flags `juckt nicht` ignorieren** (keine Fehlermeldung, nur Geschmack)
+
 ## Preisalarm für Favoriten
 
 - Glocke in der Favoriten-Ansicht → GitHub-Issue mit Label `alarm` (`grund: alarm`, `id:`). `check_alarms()`
@@ -449,7 +467,8 @@ per GitHub-Schlüssel nur auf dem Handy; cron-job.org bleibt. Vinted/Kleinanzeig
    Rhythmus-Daten ansehen und mit dem Nutzer abstimmen. Für Woo/CFS/FYJ gibt es keine
    Zeitstempel, dort müsste man neue Produkt-IDs selbst mitzählen
 8. Backlog: Social-Media-Accounts der Shops auf Drop-Ankündigungen beobachten (Nutzer: eher später)
-9. Backlog: eBay als Kanal bewerten (viele Treffer veraltet, Kindergrößen als "Young XL")
+9. **Backlog (Nutzer 05.10.2026): eBay** über die offizielle Browse API (kostenlos, 5.000 Abrufe/Tag, Nutzer bräuchte
+   ein eBay-Entwicklerkonto). Eine eigene "bequeme" Lösung später finden. eBay-Suchseiten blocken (403), nicht umgehen
 
 ## Bekannte Rahmenbedingungen
 

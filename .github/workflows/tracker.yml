@@ -122,6 +122,7 @@ jobs:
         run: python tracker.py --mode senden
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}   # Push direkt an die Dashboard-App
 
       - name: Versand speichern
         if: steps.mode.outputs.mode != 'test' && inputs.stumm != true

@@ -1,5 +1,6 @@
 """GitHub-Issues aus dem Dashboard: Meldungen, Preisalarme, Shop aufnehmen"""
 
+import hashlib
 import os
 import re
 
@@ -70,6 +71,8 @@ def apply_flags(seen, status_store, ts):
             continue
         if f["grund"].startswith("ausverkauft"):
             e.setdefault("verkauft", f["zeit"])
+        elif f["grund"] == "juckt nicht":   # im Dashboard ausgeblendet: auf allen Geräten weg, keine Regel-Meldung
+            e["aussortiert"] = "Ausgeblendet (juckt nicht)"
         else:
             e["aussortiert"] = f"Gemeldet: {f['grund']}" + (f" ({f['kommentar']})" if f.get("kommentar") else "")
     return new
@@ -169,3 +172,31 @@ def add_shops_from_issues():
     if added:
         speicher.save_text(speicher.SHOPS_EXTRA_FILE, yaml.safe_dump(extra, allow_unicode=True, sort_keys=False))
     return added
+
+
+ABO_RX = re.compile(r"(?im)^abo\s*:\s*(v1\.[A-Za-z0-9_\-.]+)\s*$")
+
+
+def collect_push_abos(status_store, ts):
+    """Issues mit Label "push" (aus der App, Einstellungen): verschlüsseltes Abo merken, Issue schließen.
+    Gibt die IDs der neuen Abos zurück (die bekommen eine Bestätigungs-Push)"""
+    issues, api = owner_issues("push")
+    if api is None or not issues:
+        return []
+    abos = status_store.setdefault("push_abos", {})
+    new = []
+    for iss in issues:
+        m = ABO_RX.search(iss.get("body") or "")
+        if m:
+            aid = hashlib.sha256(m.group(1).encode()).hexdigest()[:16]
+            if aid not in abos:
+                abos[aid] = {"blob": m.group(1), "seit": ts, "issue": iss["number"]}
+                new.append(aid)
+        try:
+            requests.post(f"{api[0]}/{iss['number']}/comments", headers=api[1], timeout=TIMEOUT,
+                          json={"body": "Push für die App ist eingerichtet, die Bestätigung kommt gleich nach diesem Run."
+                                if m else "Kein gültiges Abo gefunden, bitte in der App erneut aktivieren."})
+            requests.patch(f"{api[0]}/{iss['number']}", headers=api[1], timeout=TIMEOUT, json={"state": "closed"})
+        except requests.RequestException:
+            pass
+    return new

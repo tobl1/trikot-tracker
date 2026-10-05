@@ -327,12 +327,12 @@ def test_postausgang(tmp_path, monkeypatch):
     assert "thema" not in json.dumps(saved)                                     # ntfy-Thema nie in Dateien
     sent = []
     monkeypatch.setattr(trikot.melden, "send_now", lambda topic, e: sent.append(e["title"]) or e["prio"] == 5)
-    assert trikot.melden.send_outbox("thema") == (1, 1, 0)                      # einer klappt, einer bleibt
+    assert trikot.melden.send_outbox("thema") == (1, 1, 0, [])                  # einer klappt, einer bleibt
     left = json.loads((tmp_path / "postausgang.json").read_text(encoding="utf-8"))
     assert [e["title"] for e in left] == ["⚽ 2 neue Treffer"]
     left[0]["zeit"] = "2020-01-01T00:00:00+00:00"                               # zu alt: verwerfen
     (tmp_path / "postausgang.json").write_text(json.dumps(left), encoding="utf-8")
-    assert trikot.melden.send_outbox("thema") == (0, 0, 1)
+    assert trikot.melden.send_outbox("thema") == (0, 0, 1, [])
 
 
 def test_probelauf_schreibt_nichts_in_den_postausgang(capsys):
@@ -594,3 +594,27 @@ def test_flock_aus_beschreibung_im_abgleich():
     assert {l for l, _ in M.labels(text)} >= {"HSV 1990-2016"}
     sonder = "FC Barcelona Heimtrikot 2011/12 - XL " + desc_flock("Flock: Xavi #6 + La Liga Badge Zustand: Sehr gut")
     assert M.labels(sonder) == []          # fremder Flock: kein Thiago-Sondertrikot
+
+
+
+def test_postausgang_an_die_app(tmp_path, monkeypatch):
+    from cryptography.hazmat.primitives.asymmetric import ec
+    from trikot import webpush
+    monkeypatch.setattr(trikot.speicher, "OUTBOX_FILE", tmp_path / "postausgang.json")
+    key = ec.generate_private_key(ec.SECP256R1())
+    sub = lambda n: {"endpoint": f"https://web.push.apple.com/{n}", "keys": {"p256dh": "x", "auth": "y"}}
+    st = {"push_abos": {"a": {"blob": webpush.seal_abo(sub("iphone"), webpush.public_key_b64(key)), "seit": "1"},
+                        "b": {"blob": webpush.seal_abo(sub("alt"), webpush.public_key_b64(key)), "seit": "2"}}}
+    trikot.melden.POSTAUSGANG.clear()
+    trikot.melden.push("thema", "🔥 Thiago", "Bayern 15/16", 5, "https://x")
+    trikot.melden.push("thema", "✅ Push aus der App ist aktiv", "…", 4, nur_abo="a")
+    trikot.melden.save_outbox()
+    calls, ntfy = [], []
+    monkeypatch.setattr(trikot.melden.webpush, "send", lambda s, msg, k: calls.append((s["endpoint"], msg["title"])) or (410 if "alt" in s["endpoint"] else 201))
+    monkeypatch.setattr(trikot.melden, "send_now", lambda topic, e: ntfy.append(e["title"]) or True)
+    sent, left, dropped, problems = trikot.melden.send_outbox("thema", st, key)
+    assert sent == 2 and left == 0
+    assert ntfy == ["🔥 Thiago"]                                                   # Bestätigung nur an die App
+    assert ("https://web.push.apple.com/iphone", "✅ Push aus der App ist aktiv") in calls
+    assert not any(t == "✅ Push aus der App ist aktiv" and "alt" in u for u, t in calls)
+    assert "b" not in st["push_abos"] and problems[0][0] == "App-Push"           # erloschenes Abo ausgetragen
