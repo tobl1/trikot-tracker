@@ -520,3 +520,35 @@ def test_woo_kontext_aus_kategorien():
     p["categories"] = [{"name": "FC Bayern München"}]
     it = tracker.woo_to_item("RB", p)
     assert {l for l, _ in M.labels(it["match_text"], ctx=it["ctx"])} == {"Thiago"}
+
+
+# ---------------------------------------------------------------------------
+# Gekappte Kataloge: Thiago-Vereine über Kollektionen
+# ---------------------------------------------------------------------------
+def test_kollektionen_der_thiago_vereine():
+    terms = M.high_team_terms()
+    assert {"bayern", "liverpool", "barcelone", "espagne"} <= set(terms)
+    cols = [{"handle": "fc-barcelone-tous-les-maillots", "title": "FC Barcelone", "products_count": 6844},
+            {"handle": "bayern-munichtouslesmaillots", "title": "Bayern Munich", "products_count": 3572},
+            {"handle": "france-tous-les-maillots", "title": "France", "products_count": 23341},
+            {"handle": "juventus-tous-les-maillots", "title": "Juventus", "products_count": 4449},
+            {"handle": "espagne", "title": "Espagne", "products_count": 1577}]
+    http = FakeHttp([("/collections.json", {"collections": cols})])
+    assert tracker.shopify_collections(http, "https://vfa.com", terms) == [
+        "fc-barcelone-tous-les-maillots", "bayern-munichtouslesmaillots", "espagne"]
+
+
+def test_gekappter_katalog_liest_kollektionen(monkeypatch):
+    big = [shopify_prod(f"Shirt {i}", f"h{i}", [var("XL")]) for i in range(250)]
+    old = shopify_prod("2009/10 - Barcelone (XL)", "2009-10-barcelone-xl-3", [var("Default Title")])
+
+    def products(p):
+        return {"products": big}
+    http = FakeHttp([("/collections.json", {"collections": [{"handle": "fc-barcelone", "title": "FC Barcelone",
+                                                            "products_count": 1}]}),
+                     ("/collections/fc-barcelone/products.json", lambda p: {"products": [old] if p["page"] == 1 else []}),
+                     ("/products.json", products), ("/cart.js", {"currency": "EUR"}), ("/search", "")])
+    items, st = run_shop_mit_modus(monkeypatch, http, {"name": "VFA", "url": "https://vfa.com"}, "full",
+                                   {"https://vfa.com": "shopify"}, {})
+    assert any(it["title"] == "2009/10 - Barcelone (XL)" for it in items)
+    assert st["info"].startswith("Katalog bei 25000 gekappt, ältere Artikel per Kollektionen (1)")

@@ -5,7 +5,9 @@ import time
 from ..basis import RADAR_LIMIT, SHOPIFY_PAGE_CAP
 from ..netz import Http, SHOPIFY_GATE
 from ..rhythmus import rhythm
-from .shopify import shopify_currency, shopify_full, shopify_newest, shopify_recent, shopify_search
+from .shopify import (
+    shopify_collections, shopify_currency, shopify_full, shopify_newest, shopify_recent, shopify_search,
+)
 from .suchseiten import cfs_run, html_run, idosell_run, prestashop_run, smartweb_run
 from .wix import WIX_STORES_APP, wix_run
 from .woo import woo_endpoint, woo_recent, woo_run
@@ -93,11 +95,19 @@ def run_shop(shop, mode, matcher, platforms, currencies):
                     items, n = shopify_search(http, name, base, matcher.queries(), matcher, cur)
                     status["info"] = "nur Suche (products.json gesperrt)"
                 elif n >= SHOPIFY_PAGE_CAP * 250 and not http.limited:
-                    # Shopify liefert max. 100 Seiten (neueste zuerst), ältere Artikel nur per Suche
+                    # Shopify liefert max. 100 Seiten (neueste zuerst). Ältere Artikel: für Thiago und seine
+                    # Sondertrikots vollständig über die Kollektionen der Vereine (Barça, Bayern, Liverpool, Spanien),
+                    # alles andere über die Shop-Suche
                     known_urls = {it["url"] for it in items}
+                    handles = shopify_collections(http, base, matcher.high_team_terms())
+                    for h in handles:
+                        more, _ = shopify_full(http, name, base, f"/collections/{h}/products.json", cur)
+                        items += [it for it in more if it["url"] not in known_urls]
+                        known_urls |= {it["url"] for it in more}
                     extra, _ = shopify_search(http, name, base, matcher.queries(), matcher, cur)
                     items += [it for it in extra if it["url"] not in known_urls]
-                    status["info"] = f"Katalog bei {n} gekappt, ältere Artikel per Suche"
+                    status["info"] = (f"Katalog bei {n} gekappt, ältere Artikel per Kollektionen ({len(handles)}) "
+                                      f"und Suche")
             else:
                 items, n = shopify_search(http, name, base, matcher.queries(True), matcher, cur, pages=1)
         elif plat.startswith("woo:") and mode in ("drop", "radar"):

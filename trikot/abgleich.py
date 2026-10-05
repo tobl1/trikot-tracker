@@ -22,6 +22,7 @@ class Matcher:
                 "suche": any_rx(p.get("suche")),
                 "aus": any_rx(p.get("ausschluss")),
                 "vereine": any_rx(p.get("vereine")),
+                "vereine_terms": p.get("vereine") or [],
             })
         self.nachbau = any_rx(cfg.get("nachbau"))
         self.nachbau_ok = set(cfg.get("nachbau_erlaubt_fuer") or [])
@@ -190,6 +191,18 @@ class Matcher:
                 seen.add(n)
                 out.append(q)
         return out
+
+    def high_team_terms(self):
+        """Vereine/Länder der hoch priorisierten Einträge (Thiago und seine Sondertrikots): für gekappte Kataloge
+        werden die passenden Kollektionen komplett gelesen"""
+        out = []
+        for p in self.players:
+            if p["prio"] == "hoch":
+                out += p["vereine_terms"]
+        for k in self.kits:
+            if k["prio"] == "hoch":
+                out += k["verein_terms"]
+        return list(dict.fromkeys(norm(x) for x in out if norm(x)))
 
     def team_queries(self):
         out = []

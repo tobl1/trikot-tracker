@@ -3,7 +3,7 @@
 import datetime as dt
 import re
 
-from ..basis import ANY_SIZE_RX, RADAR_LIMIT, SHOPIFY_PAGE_CAP, SIZE_RX, norm, now
+from ..basis import ANY_SIZE_RX, RADAR_LIMIT, SHOPIFY_PAGE_CAP, SIZE_RX, any_rx, hit, norm, now
 from .gemeinsam import item
 
 _SIZES = r"(?:xxs|xs|s|m|l|xl|xxl|2xl|3xl|xxxl|x-large|xx-large)"
@@ -129,6 +129,22 @@ def shopify_newest(http, shop, base, currency="", since=None, limit=RADAR_LIMIT,
         if len(prods) < limit or since is None or oldest is None or oldest <= since:
             break
     return items, n
+
+
+def shopify_collections(http, base, terms, max_products=15000):
+    """Handles der Kollektionen, deren Adresse oder Name einen der Begriffe enthält (z. B. VFA
+    "fc-barcelone-tous-les-maillots"). Riesige Sammel-Kollektionen (über max_products) bleiben außen vor"""
+    cols = []
+    for page in range(1, 11):
+        data = http.get(f"{base}/collections.json", {"limit": 250, "page": page})
+        batch = (data or {}).get("collections") or []
+        cols += batch
+        if len(batch) < 250:
+            break
+    rx = any_rx(terms)
+    return [c["handle"] for c in cols if c.get("handle")
+            and hit(rx, norm(c["handle"].replace("-", " ") + " " + (c.get("title") or "")))
+            and (c.get("products_count") or 0) <= max_products]
 
 
 def shopify_search(http, shop, base, queries, matcher, currency="", pages=2):
