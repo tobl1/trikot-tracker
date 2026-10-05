@@ -93,6 +93,8 @@ def detail_line(e):
     """Titel plus Zeile mit Größe, Preis, Zustand und ggf. Zustandsnotiz"""
     parts = [f"Größe {e['size']}", e.get("price", ""), f"Zustand {e['zustand']}" if e.get("zustand") else ""]
     text = e["title"] + "\n" + " · ".join(x for x in parts if x)
+    if e.get("ungeprueft"):
+        text += "\n(Shop-Seite ließ sich nicht prüfen, Angaben aus der Liste)"
     return text + (f"\n{e['zustand_notiz']}" if e.get("zustand_notiz") else "")
 
 

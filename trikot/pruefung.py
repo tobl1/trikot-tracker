@@ -2,6 +2,8 @@
 
 import concurrent.futures as cf
 import datetime as dt
+from collections import Counter
+import threading
 import json
 from urllib.parse import urlparse
 
@@ -42,28 +44,46 @@ def check_page(http, url):
     return {"verfuegbar": ok, "desc": desc, "marke": brand}
 
 
+PUSH_WAIT_HOURS = 24   # so lange wartet ein Treffer höchstens auf eine erfolgreiche Seitenprüfung
+
+
+def needs_check(e):
+    """Treffer, deren Shop-Seite vor dem Push geprüft wird: FYJ-Treffer und Such-Shops (Verfügbarkeit, Hersteller,
+    Beschreibung stehen nur auf der Seite). Shopify, Woo und Wix liefern das direkt; eBay ist so nicht prüfbar"""
+    return bool(e.get("via") == "fyj" or e.get("pruefen")) and "ebay." not in e["url"]
+
+
 def enrich(seen, ts, budget, matcher):
-    """FYJ-Treffer auf der Shop-Seite prüfen: verkauft? Zustand? Neue zuerst, dann die ältesten Prüfungen"""
+    """Treffer auf der Shop-Seite prüfen: verkauft? Hersteller? Zustand? Zurückgehaltene Pushes zuerst, dann neue,
+    dann die ältesten Prüfungen. Gibt (Zahl der Versuche, {Host: Counter(Status)} der gescheiterten) zurück"""
     due = dt.timedelta(days=RECHECK_DAYS)
     cand = [e for e in seen.values()
-            if e["last"] == ts and (e.get("via") == "fyj" or e.get("pruefen")) and not e.get("verkauft")
-            and "ebay." not in e["url"]
-            and (not e.get("geprueft") or e.get("pruef_v") != CHECK_VERSION
+            if needs_check(e) and not e.get("verkauft") and (e["last"] == ts or e.get("push_offen"))
+            and (e.get("push_offen") or not e.get("geprueft") or e.get("pruef_v") != CHECK_VERSION
                  or now() - dt.datetime.fromisoformat(e["geprueft"]) > due)]
-    cand.sort(key=lambda e: (bool(e.get("geprueft")), not is_high(e), e.get("geprueft") or ""))
+    cand.sort(key=lambda e: (not e.get("push_offen"), bool(e.get("geprueft")), not is_high(e), e.get("geprueft") or ""))
     by_host = {}
     for e in cand[:budget]:
         by_host.setdefault(urlparse(e["url"]).netloc, []).append(e)
+    fails, lock = {}, threading.Lock()
 
     def work(entries):
         http = Http(SHOPIFY_GATE if "/products/" in entries[0]["url"] else None)
+        host = urlparse(entries[0]["url"]).netloc
         for e in entries:
             try:
                 res = check_page(http, e["url"])
             except requests.RequestException:
                 res = None
             if res is None:
+                code = http.last_status or "Verbindung"
+                e["pruef_fehler"] = code
+                with lock:
+                    fails.setdefault(host, Counter())[code] += 1
+                if code == 404:
+                    e["verkauft"] = ts   # Produktseite weg: Artikel nicht mehr da
                 continue
+            e.pop("pruef_fehler", None)
             e["geprueft"], e["pruef_v"] = ts, CHECK_VERSION
             if res["verfuegbar"] is False:
                 e["verkauft"] = ts
@@ -79,4 +99,34 @@ def enrich(seen, ts, budget, matcher):
 
     with cf.ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
         list(ex.map(work, by_host.values()))
-    return min(len(cand), budget)
+    return min(len(cand), budget), fails
+
+
+def hold_unchecked(new_entries, seen, ts):
+    """Prüfen vor dem Push: neue Treffer, deren Seite noch nicht geprüft werden konnte, zurückhalten (push_offen,
+    nächster Run prüft sie zuerst); zurückgehaltene, die inzwischen geprüft sind, freigeben. Gesperrte Seiten
+    (401/403) sind nicht prüfbar: sofort pushen, markiert. Nach PUSH_WAIT_HOURS ohne Prüfung ebenso.
+    Gibt die Treffer zurück, die jetzt gepusht werden"""
+    out = []
+    for e in new_entries:
+        if needs_check(e) and e.get("geprueft") != ts and e.get("pruef_fehler") not in (401, 403):
+            e["push_offen"] = ts
+        else:
+            if needs_check(e) and e.get("geprueft") != ts:
+                e["ungeprueft"] = True
+            out.append(e)
+    for e in seen.values():
+        held = e.get("push_offen")
+        if not held or held == ts:
+            continue
+        if e.get("verkauft") or e.get("aussortiert") or e.get("teuer"):
+            e.pop("push_offen")                         # hat sich erledigt, keine Push
+        elif e.get("geprueft") and e["geprueft"] >= held:
+            e.pop("push_offen")
+            out.append(e)
+        elif e.get("pruef_fehler") in (401, 403) or \
+                now() - dt.datetime.fromisoformat(held) > dt.timedelta(hours=PUSH_WAIT_HOURS):
+            e.pop("push_offen")
+            e["ungeprueft"] = True
+            out.append(e)
+    return out

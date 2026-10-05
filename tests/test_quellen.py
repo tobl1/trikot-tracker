@@ -443,3 +443,58 @@ def test_drittes_trikot_ist_third():
     assert {l for l, _ in M.labels("Liverpool FC drittes Trikot 2022/23 - XL")} == {"Liverpool Third 2022/23"}
     assert {l for l, _ in M.labels("Liverpool FC Heimtrikot 2022/23 - XL")} == set()
     assert {l for l, _ in M.labels("Chamarra Brasil 94 2006")} == set()
+
+
+# ---------------------------------------------------------------------------
+# Prüfen vor dem Push
+# ---------------------------------------------------------------------------
+import trikot.pruefung  # noqa: E402
+from trikot.pruefung import hold_unchecked  # noqa: E402
+
+
+def entry(url, **kw):
+    e = {"url": url, "title": "2009-10 BARCELONA SHIRT XL", "labels": ["Barça 2008-2013"], "prios": ["hoch"],
+         "last": "T", "shop": "Classic-Shirts", "pruefen": True}
+    e.update(kw)
+    return e
+
+
+def test_ungepruefte_treffer_warten_auf_die_seitenpruefung():
+    ts = tracker.now().isoformat()
+    a = entry("https://classic-shirts.com/a")                                  # Prüfung gescheitert (z. B. 429)
+    b = entry("https://classic-shirts.com/b", geprueft=ts)                     # geprüft: sofort pushen
+    c = entry("https://topbinz.co.uk/c", pruef_fehler=403)                     # gesperrt: nicht prüfbar, pushen
+    d = entry("https://vfa.com/products/d", pruefen=False)                     # Shopify direkt: keine Prüfung nötig
+    out = hold_unchecked([a, b, c, d], {}, ts)
+    assert out == [b, c, d] and a["push_offen"] == ts and c["ungeprueft"] and "ungeprueft" not in b
+
+
+def test_zurueckgehaltene_werden_spaeter_freigegeben_oder_verworfen():
+    t0 = (tracker.now() - _dt.timedelta(hours=2)).isoformat()
+    ts = tracker.now().isoformat()
+    ok = entry("https://x/ok", push_offen=t0, geprueft=ts)
+    weg = entry("https://x/weg", push_offen=t0, geprueft=ts, aussortiert="Hersteller Official")
+    noch = entry("https://x/noch", push_offen=t0)
+    alt = entry("https://x/alt", push_offen=(tracker.now() - _dt.timedelta(hours=30)).isoformat())
+    seen = {e["url"]: e for e in (ok, weg, noch, alt)}
+    out = hold_unchecked([], seen, ts)
+    assert out == [ok, alt] and alt["ungeprueft"]
+    assert "push_offen" not in weg and noch["push_offen"] == t0
+
+
+def test_seitenpruefung_zaehlt_fehler_und_sortiert_aus(monkeypatch):
+    ts = tracker.now().isoformat()
+    official = """<script type="application/ld+json">{"@type": "Product", "description": "CONDITION: 8/10",
+    "brand": {"name": "Official"}, "offers": [{"availability": "InStock"}]}</script>"""
+
+    class H(FakeHttp):
+        def get(self, url, params=None, want="json"):
+            self.last_status = {"ok": 200, "voll": 429, "weg": 404}[url.rsplit("/", 1)[1]]
+            return official if self.last_status == 200 else None
+    monkeypatch.setattr(trikot.pruefung, "Http", lambda *a, **k: H([]))
+    seen = {k: entry(f"https://classic-shirts.com/{k}", last=ts) for k in ("ok", "voll", "weg")}
+    n, fails = trikot.pruefung.enrich(seen, ts, 10, M)
+    assert n == 3 and seen["ok"]["aussortiert"] == "Hersteller Official" and seen["ok"]["geprueft"] == ts
+    assert seen["voll"]["pruef_fehler"] == 429 and "geprueft" not in seen["voll"]
+    assert seen["weg"]["verkauft"] == ts
+    assert dict(fails["classic-shirts.com"]) == {429: 1, 404: 1}

@@ -21,7 +21,7 @@ from .issues import add_shops_from_issues, apply_flags, check_alarms
 from .melden import OUTBOX_MAX_HOURS, detail_line, push, push_label, save_outbox, send_now, send_outbox, short
 from .netz import Http
 from .preise import fetch_rates, to_eur
-from .pruefung import enrich
+from .pruefung import enrich, hold_unchecked
 from .quellen import run_shop
 from .quellen.fyj import fyj_run
 from .rhythmus import drop_due
@@ -368,11 +368,13 @@ def main():
                 e.pop("weg", None)
 
     # FYJ-Treffer auf der Shop-Seite prüfen (verkauft? Zustand?), neue zuerst, vor den Pushes
-    checked = enrich(seen, ts, ENRICH_BUDGET.get(args.mode, 0), matcher)
+    checked, check_fails = enrich(seen, ts, ENRICH_BUDGET.get(args.mode, 0), matcher)
     for e in seen.values():
         if e["last"] == ts:
             e["teuer"] = too_expensive(e)
     new_entries = [e for e in new_entries if not e.get("verkauft") and not e.get("teuer") and not e.get("aussortiert")]
+    # Prüfen vor dem Push: Ungeprüftes zurückhalten, inzwischen Geprüftes nachliefern
+    new_entries = hold_unchecked(new_entries, seen, ts)
     laeufe = status_store.setdefault("laeufe", [])
     radar_ran = "radar" in shop_modes.values()
     laeufe.append({"zeit": ts, "modus": "radar" if radar_ran else args.mode, "neu": len(new_entries),
@@ -479,6 +481,9 @@ def main():
                 if s.get("fehler") and not str(s["fehler"]).startswith("deaktiviert")]
     if args.mode == "full":
         problems += token_reminder(now().date())
+    for host, codes in check_fails.items():
+        problems.append(("Seitenprüfung", f"{host}: {sum(codes.values())} Seite(n) nicht prüfbar "
+                                          f"({', '.join(f'{c} ×{n}' for c, n in codes.most_common())})"))
     log_problems(problems, args.mode, ts)
 
     ok = sum(1 for s in statuses if not s["fehler"])
