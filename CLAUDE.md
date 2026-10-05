@@ -75,7 +75,7 @@ Ohne aktives App-Abo kommt keine Push: Fehler-Log "App-Push", Dashboard-Hinweis 
 
 - `full`: alle Shops komplett plus FindYourJersey; erkennt Plattformen neu
 - `priority`: nur Einträge mit `prioritaet: hoch` (Thiago + Sondertrikots) über Shop-Suchen,
-  nutzt die in `status.json` gemerkten Plattformen
+  nutzt die in `status.json` gemerkten Plattformen. **Seit 05.10.2026 ohne Shopify** (die Shopify-Suche dauerte 70 Min. mit 429 und blockierte das Radar; Neues findet das Radar, Älteres der Gesamt-Run): nur noch Such-Shops (CFS, Classic-Shirts, html, PrestaShop, SmartWeb), Woo und Wix
 - `drop`: nur Shops, deren Drop gerade fällig ist (`drop_due`): feste Zeiten aus shops.yaml
   (`drop: ["Fr 19:00"]`, deutsche Zeit) plus gemessene aus dem Rhythmus (typ "drops", mind. 50 % der
   Schübe am selben Wochentag). Fenster 180 Min. ab Drop-Beginn, je Shop höchstens alle 25 Min.

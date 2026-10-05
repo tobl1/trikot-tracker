@@ -327,18 +327,19 @@ details[open] summary::after{content:"−"}
     <p class="what" id="flagwhat"></p>
     <p class="hint" id="flagwhy" style="margin:-6px 0 14px"></p>
     <button class="hidebtn" id="hidego">Einfach ausblenden</button>
-    <p class="hint" style="margin:6px 0 14px">Nur hier auf diesem Gerät, ohne Meldung. Zurückholen unter "Filter".</p>
+    <p class="hint" style="margin:6px 0 14px">Ohne Meldung. Mit Schlüssel auf allen Geräten, sonst nur hier.</p>
     <h3 class="small">Oder melden, damit ich die Regeln anpasse</h3>
-    <div class="reasons" id="flagreasons">
-      <button class="chip" data-r="unpassend" aria-pressed="true">Unpassend</button>
-      <button class="chip" data-r="ausverkauft" aria-pressed="false">Ausverkauft</button>
-      <button class="chip" data-r="falsche groesse" aria-pressed="false">Falsche Größe</button>
-      <button class="chip" data-r="kein original" aria-pressed="false">Kein Original</button>
-      <button class="chip" data-r="sonstiges" aria-pressed="false">Sonstiges</button>
-    </div>
     <textarea id="flagnote" placeholder="Kommentar (optional), z. B. &quot;ist ein Trainingsshirt&quot;"></textarea>
-    <div class="actions"><button id="flagcancel">Abbrechen</button><button class="go" id="flaggo">Auf GitHub melden</button></div>
-    <p class="hint">Öffnet ein vorausgefülltes GitHub-Issue, dort nur noch auf "Submit" tippen. Der nächste Run blendet den Treffer dauerhaft aus.</p>
+    <p class="hint" style="margin:8px 0 6px">Grund antippen, fertig:</p>
+    <div class="reasons" id="flagreasons">
+      <button class="chip" data-r="unpassend">Unpassend</button>
+      <button class="chip" data-r="ausverkauft">Ausverkauft</button>
+      <button class="chip" data-r="falsche groesse">Falsche Größe</button>
+      <button class="chip" data-r="kein original">Kein Original</button>
+      <button class="chip" data-r="sonstiges">Sonstiges</button>
+    </div>
+    <div class="actions"><button id="flagcancel">Abbrechen</button></div>
+    <p class="hint" id="flaghint"></p>
   </div>
 </div>
 
@@ -414,7 +415,8 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     // Warum wurde das gefunden? Hilft beim Melden (und mir beim Ableiten von Regeln)
     $("flagwhy").textContent = [t.warum ? `Warum Treffer: ${t.warum}` : "", t.pruefen ? `Achtung: ${t.pruefen}` : ""]
       .filter(Boolean).join(" · ");
-    document.querySelectorAll("#flagreasons .chip").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.r === flagReason)));
+    $("flaghint").textContent = store.get("token") ? "Geht direkt raus. Der nächste Run blendet den Treffer dauerhaft aus."
+      : "Ohne Schlüssel (Einstellungen) öffnet sich die GitHub-Seite, dort \"Submit\" tippen.";
     $("flagsheet").hidden = false;
   }
   let toastTimer = null, lastHidden = null, hideTimer = null;
@@ -763,8 +765,8 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
   }, true);
   $("flagreasons").addEventListener("click", e => {
     const b = e.target.closest(".chip"); if (!b) return;
-    flagReason = b.dataset.r;
-    document.querySelectorAll("#flagreasons .chip").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+    flagReason = b.dataset.r;   // Grund antippen = gleich melden
+    sendFlag();
   });
   $("flagcancel").addEventListener("click", () => { $("flagsheet").hidden = true; });
   $("hidego").addEventListener("click", hideItem);
@@ -791,7 +793,6 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     hiddenIds.clear(); store.set("hidden", []); render();
   });
   $("flagsheet").addEventListener("click", e => { if (e.target.id === "flagsheet") $("flagsheet").hidden = true; });
-  $("flaggo").addEventListener("click", sendFlag);
   $("fgbody").addEventListener("click", e => {
     const b = e.target.closest(".addbtn"); if (!b || b.disabled) return;
     const body = [`Shop aus der Fundgrube aufnehmen.`, "", `url: ${b.dataset.url}`, `plattform: ${b.dataset.plat}`].join("\n");

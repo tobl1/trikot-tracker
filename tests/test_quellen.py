@@ -620,3 +620,11 @@ def test_postausgang_an_die_app(tmp_path, monkeypatch):
     assert ("https://web.push.apple.com/iphone", "✅ Push aus der App ist aktiv") in calls
     assert not any(t == "✅ Push aus der App ist aktiv" and "alt" in u for u, t in calls)
     assert "b" not in st["push_abos"] and problems[0][0] == "App-Push"           # erloschenes Abo ausgetragen
+
+
+def test_schnellrun_ueberspringt_shopify(monkeypatch):
+    http = FakeHttp([])
+    items, st = run_shop_mit_modus(monkeypatch, http, {"name": "VFA", "url": "https://vfa.com"}, "priority",
+                                   {"https://vfa.com": "shopify"}, {})
+    assert items == [] and st["fehler"] == "" and http.calls == []          # keine einzige Anfrage
+    assert "Radar" in st["info"]

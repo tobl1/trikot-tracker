@@ -75,6 +75,12 @@ def run_shop(shop, mode, matcher, platforms, currencies):
             if plat != "shopify":
                 http.gate = None
         status["plattform"] = plat.split(":")[0]
+        if plat == "shopify" and mode == "priority":
+            # Seit dem Neuheiten-Radar (alle 30 Min.) überflüssig und teuer: die Shopify-Suche nach allen Thiago- und
+            # Sondertrikot-Begriffen dauerte 70 Min. mit Drosselung (429) und blockierte das Radar (05.10.2026).
+            # Neues findet das Radar, Älteres der Gesamt-Run; der Schnell-Run fragt nur noch Such-Shops ab
+            status["info"] = "Schnell-Run: Shopify-Shops laufen über das Radar"
+            return [], status
         if plat == "shopify":
             cur = shop.get("waehrung") or currencies.get(base, "")
             # jedes Mal, die Währung hängt vom Markt (Land) ab; beim Radar reicht die gemerkte (halbe Last)
