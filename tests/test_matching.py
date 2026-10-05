@@ -633,3 +633,9 @@ def test_wiesn_2013(title, expected):
 ])
 def test_probelauf_fehltreffer(title, expected):
     assert {l for l, _ in M.labels(title)} - {"WM 2006"} == expected
+
+
+def test_artikelcodes_thiago_sondertrikots():
+    assert {l for l, _ in M.labels("FC BARCELONA SHIRT XL", desc="Code: 419877-486")} == {"Barça 2008-2013"}
+    assert {l for l, _ in M.labels("SPAIN SHIRT XL", desc="Product code P47902")} == {"Spanien 2010/2011"}
+    assert M.labels("FC BARCELONA SHIRT MESSI #10 XL", desc="Code: 419877-486") == []      # fremder Flock

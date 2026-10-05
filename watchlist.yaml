@@ -257,6 +257,7 @@ sondertrikots:
     saisons: ["2008/09", "2009/10", "2010/11", "2011/12", "2012/13"]
     varianten: alle
     suchanfragen: ["barcelona 2008", "barcelona 2009", "barcelona 2010", "barcelona 2011", "barcelona 2012"]
+    codes: ["419877-486", "478323-410"]   # Nike Heim 11/12 und 12/13 (belegt aus Angeboten, 05.10.2026)
 
   # Zwei Einträge, ein Label: das grüne Wiesn-Trikot 2021/22 und das Oktoberfest-Trikot 2013/14 (Thiagos erste
   # Bayern-Saison, Nutzer 05.10.2026). Das 21/22-Trikot ist extrem selten (FYJ: in keiner Größe vorhanden)
@@ -305,6 +306,7 @@ sondertrikots:
     jahre: ["2010", "2011"]
     varianten: [home, away]
     suchanfragen: ["spain 2010", "spain 2011"]
+    codes: ["P47902"]                     # adidas Heim 2010/11 (belegt aus Angeboten, 05.10.2026)
 
   - name: "Spanien 2014"
     prioritaet: hoch
