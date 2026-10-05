@@ -396,3 +396,20 @@ def test_token_erinnerung():
     assert token_reminder(end - _dt.timedelta(days=60)) == []
     assert "läuft am" in token_reminder(end - _dt.timedelta(days=10))[0][1]
     assert "abgelaufen" in token_reminder(end + _dt.timedelta(days=1))[0][1]
+
+
+def test_shop_mit_passwortseite(monkeypatch):
+    http = FakeHttp([])
+    http.codes[401] = 1
+    _, st = run_shop_mit(monkeypatch, http, {"name": "Kick It", "url": "https://k.de", "plattform": "cfs"})
+    assert st["fehler"].startswith("geschlossen (Passwortseite")
+
+
+def test_thiago_immer_mit_push():
+    from trikot.lauf import stays_silent
+    thiago, hsv = {"labels": ["Thiago"]}, {"labels": ["HSV 1990-2016"]}
+    assert not stays_silent(thiago, False, True, set())              # neue Quelle: Thiago trotzdem einzeln
+    assert stays_silent(hsv, False, True, set())                      # andere: still, Sammelnachricht
+    assert stays_silent(hsv, False, False, {"HSV 1990-2016"})        # neue Kategorie: still
+    assert not stays_silent(hsv, False, False, set())
+    assert stays_silent(thiago, True, False, set())                   # Erstlauf: alles still

@@ -4,7 +4,7 @@ import re
 
 from .basis import (
     FLOCK_NUM_RX, SIZE_RX, STAR_RX, STAR_TAGS, VARIANT_RX, any_rx, canon_url, hit, norm, plain, season_rxs,
-    year_rx,
+    word_rx, year_rx,
 )
 
 
@@ -34,6 +34,7 @@ class Matcher:
         self.flock_ok = any_rx(ff.get("erlaubt"))
         self.flock_names = any_rx(ff.get("namen"))
         self.flock_extra = any_rx(cfg.get("flock_erkennung"))
+        self.brands = {norm(b): word_rx(b) for b in cfg.get("marken") or [] if norm(b)}
         self.kits = []
         for k in cfg.get("sondertrikots") or []:
             var = k.get("varianten", "alle")
@@ -57,6 +58,7 @@ class Matcher:
                 "codes": any_rx(k.get("codes")),
                 "flock_namen": any_rx(k.get("flock_namen")),   # zusätzliche Flock-Namen nur für diesen Eintrag
                 "aus": any_rx(k.get("ausschluss")),
+                "marke": norm(k.get("marke") or ""),   # z. B. "nike": Titel mit anderem Ausrüster zählt nicht
             })
 
     def excluded(self, text):
@@ -150,6 +152,8 @@ class Matcher:
                     out.append((k["name"], k["prio"]))
                 continue
             if not hit(k["verein"], t) or hit(k["aus"], t):
+                continue
+            if k["marke"] and any(rx.search(t) for b, rx in self.brands.items() if b != k["marke"]):
                 continue
             if (k["saisons"] or k["jahre"]) and not (hit(k["saisons"], t) or hit(k["jahre"], t)):
                 continue

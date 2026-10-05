@@ -620,3 +620,16 @@ def test_wiesn_schreibweisen(title):
 ])
 def test_wiesn_2013(title, expected):
     assert ("Bayern Wiesn-Trikot" in {l for l, _ in M.labels(title)}) == expected
+
+
+@pytest.mark.parametrize("title,expected", [
+    ("2008-09 Barcelona Nike Sweat Top - 10/10 - (XXL)", set()),            # Probelauf 05.10.2026
+    ("2009-10 Barcelona Nike Hooded Top - 7/10 - (XL)", set()),
+    ("Pantaloncino Barcellona Nike 2008/2009 XL", set()),
+    ("maglia calcio italia TOTTI Euro 2004 Portugal Jersey home XXL Puma shirt", set()),
+    ("Portugal 2004 Home Shirt Figo #7 XL Nike", {"Nike Total 90 (2004-06)"}),
+    ("Brasile 2004 - Ronaldo - Home XL", {"Nike Total 90 (2004-06)"}),           # ohne Marke im Titel: ok
+    ("2009-10 Barcelona Away Shirt (XL)", {"Barça 2008-2013"}),
+])
+def test_probelauf_fehltreffer(title, expected):
+    assert {l for l, _ in M.labels(title)} - {"WM 2006"} == expected

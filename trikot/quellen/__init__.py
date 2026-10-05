@@ -134,9 +134,13 @@ def codes_text(http):
 
 
 def blocked_text(http):
-    """Text, wenn der Shop uns gesperrt hat (403/401), sonst leer"""
-    code = 403 if http.codes.get(403) else 401 if http.codes.get(401) else None
-    return f"gesperrt (HTTP {code}), blockt vermutlich Server-Adressen" if code else ""
+    """Text, wenn der Shop nicht zugänglich ist, sonst leer. 401 = Shopify-Passwortseite (Shop geschlossen,
+    oft vor einem Drop; so bei Kick It Vintage und Oh Calcio am 05.10.2026), 403 = Sperre für Server-Adressen"""
+    if http.codes.get(403):
+        return "gesperrt (HTTP 403), blockt vermutlich Server-Adressen"
+    if http.codes.get(401):
+        return "geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop"
+    return ""
 
 
 def detect_platform(base):

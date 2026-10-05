@@ -34,8 +34,15 @@ produkt_ausschluss: ["shorts", "socks", "sock", "jacket", "track top", "tracksui
                      "trainingsjacke", "trainingsanzug", "trainingsoberteil", "regenjacke", "allwetterjacke",
                      "prasentationsjacke", "aufwarmshirt", "giacca", "giubbotto", "felpa", "veste",
                      "chaqueta", "sudadera", "chandal", "survetement", "kurtka", "bluza",
+                     # Pullis und Hosen (Probelauf 05.10.2026: "Sweat Top", "Hooded Top", "Pantaloncino" = Shorts)
+                     "sweat", "sweat top", "hooded", "pantaloncino", "pantaloncini", "pantalon", "pantalones", "pantaloni",
                      # andere Vereine mit gleichem Namen
                      "barcelona sc", "barcelona s.c.", "barcelona sporting", "guayaquil", "espanyol"]
+
+# Ausrüster: Sondertrikots mit "marke" zählen nicht, wenn im Titel ein ANDERER Ausrüster steht
+# (Probelauf 05.10.2026: "Puma Italia TOTTI Euro 2004 Portugal" galt als Nike-T90-Trikot Portugal)
+marken: ["nike", "adidas", "puma", "umbro", "kappa", "diadora", "lotto", "le coq sportif", "reebok", "hummel",
+         "joma", "errea", "macron", "uhlsport", "jako", "erima", "asics", "mizuno", "fila", "admiral", "new balance"]
 
 # Nachbauten: neu produzierte Trikots, offizielle Neuauflagen, reine Flocksätze
 # (nicht "replica", das heißt in UK einfach Fan-Trikot)
@@ -313,6 +320,7 @@ sondertrikots:
   # über "nachbau" (reissue/remake) bzw. FYJ-isReissue raus.
   # -------------------------------------------------------------------
   - name: "Nike Total 90 (2004-06)"
+    marke: nike
     prioritaet: normal
     verein: ["brazil", "brasil", "brasilien", "bresil", "brazilie", "brasile"]
     saisons: ["2004/05", "2005/06", "2004/06"]
@@ -323,6 +331,7 @@ sondertrikots:
     suchanfragen: ["brazil 2004", "brazil 2005"]
 
   - name: "Nike Total 90 (2004-06)"
+    marke: nike
     prioritaet: normal
     verein: ["netherlands", "holland", "niederlande", "nederland", "pays-bas", "olanda", "holanda"]
     saisons: ["2004/05", "2005/06", "2004/06"]
@@ -333,6 +342,7 @@ sondertrikots:
     suchanfragen: ["holland 2004", "netherlands 2004", "holland 2005"]
 
   - name: "Nike Total 90 (2004-06)"
+    marke: nike
     prioritaet: normal
     verein: ["portugal", "portogallo"]
     saisons: ["2004/05", "2005/06", "2004/06"]
@@ -343,6 +353,7 @@ sondertrikots:
     suchanfragen: ["portugal 2004", "portugal 2005"]
 
   - name: "Nike Total 90 (2004-06)"
+    marke: nike
     prioritaet: normal
     verein: ["inter", "internazionale"]
     saisons: ["2004/05"]
@@ -351,6 +362,7 @@ sondertrikots:
     suchanfragen: ["inter 2004"]
 
   - name: "Nike Total 90 (2004-06)"
+    marke: nike
     prioritaet: normal
     verein: ["juventus", "juve"]
     saisons: ["2004/05"]
@@ -359,6 +371,7 @@ sondertrikots:
     suchanfragen: ["juventus 2004"]
 
   - name: "Nike Total 90 (2004-06)"
+    marke: nike
     prioritaet: normal
     verein: ["south korea", "korea", "sudkorea", "suedkorea", "coree du sud", "corea del sur", "corea do sul"]
     saisons: ["2004/05", "2005/06", "2004/06"]
@@ -369,6 +382,7 @@ sondertrikots:
     suchanfragen: ["korea 2004", "korea 2005"]
 
   - name: "Nike Total 90 (2004-06)"
+    marke: nike
     prioritaet: normal
     verein: ["mexico", "mexiko", "mexique", "messico"]
     saisons: ["2004/05", "2005/06", "2004/06"]
@@ -379,6 +393,7 @@ sondertrikots:
     suchanfragen: ["mexico 2004", "mexico 2005"]
 
   - name: "Nike Total 90 (2004-06)"
+    marke: nike
     prioritaet: normal
     verein: ["croatia", "kroatien", "hrvatska", "kroatie", "croatie", "croazia", "croacia", "chorwacja"]
     saisons: ["2004/05", "2005/06", "2004/06"]
@@ -389,6 +404,7 @@ sondertrikots:
     suchanfragen: ["croatia 2004", "croatia 2005"]
 
   - name: "Nike Total 90 (2004-06)"
+    marke: nike
     prioritaet: normal
     verein: ["barcelona", "barca", "barcelone", "barcellona"]
     saisons: ["2004/05"]
@@ -397,6 +413,7 @@ sondertrikots:
     suchanfragen: ["barcelona 2004"]
 
   - name: "Nike Total 90 (2004-06)"
+    marke: nike
     prioritaet: normal
     verein: ["arsenal"]
     saisons: ["2004/05", "2004/06"]
@@ -405,6 +422,7 @@ sondertrikots:
     suchanfragen: ["arsenal 2004"]
 
   - name: "Nike Total 90 (2004-06)"
+    marke: nike
     prioritaet: normal
     verein: ["porto", "fc porto"]
     saisons: ["2004/05"]
@@ -414,6 +432,7 @@ sondertrikots:
     suchanfragen: ["porto 2004"]
 
   - name: "Nike Total 90 (2004-06)"
+    marke: nike
     prioritaet: normal
     verein: ["australia", "australien", "australie", "socceroos"]
     saisons: ["2004/05", "2005/06", "2004/06"]
@@ -424,6 +443,7 @@ sondertrikots:
     suchanfragen: ["australia 2004", "australia 2005"]
 
   - name: "Nike Total 90 (2004-06)"
+    marke: nike
     prioritaet: normal
     verein: ["valencia", "valence"]
     saisons: ["2004/05"]
@@ -432,6 +452,7 @@ sondertrikots:
     suchanfragen: ["valencia 2004"]
 
   - name: "Nike Total 90 (2004-06)"
+    marke: nike
     prioritaet: normal
     verein: ["psv", "psv eindhoven"]
     saisons: ["2004/05"]

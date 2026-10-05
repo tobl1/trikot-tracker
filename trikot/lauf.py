@@ -40,6 +40,16 @@ def recently_done(status_store, mode):
     return any(now() - dt.datetime.fromisoformat(t) < dt.timedelta(hours=limit) for t in times)
 
 
+def stays_silent(entry, first_run, fresh_source, new_labels):
+    """Neuer Treffer ohne Einzel-Push? Erstlauf, neue Quelle oder neue Kategorie werden still übernommen (eine
+    Sammelnachricht statt Push-Flut). Ausnahme Thiago (Priorität 1): immer eigene Push, außer im Erstlauf"""
+    if first_run:
+        return True
+    if any(l.startswith("Thiago") for l in entry["labels"]):
+        return False
+    return bool(fresh_source or (new_labels and set(entry["labels"]) <= new_labels))
+
+
 def token_reminder(today):
     """Erinnerung ins Fehler-Log, wenn der Startschlüssel von cron-job.org bald abläuft (ohne ihn keine Runs mehr)"""
     end = dt.date.fromisoformat(CRON_TOKEN_ABLAUF)
@@ -325,7 +335,7 @@ def main():
             elif it.get("fyj_reissue") or matcher.reissue(it["match_text"]):
                 entry["reissue"] = True
             seen[key] = entry
-            if first_run or fresh_source or (new_labels and set(entry["labels"]) <= new_labels):
+            if stays_silent(entry, first_run, fresh_source, new_labels):
                 entry["still"] = True   # ohne Push übernommen (Erstlauf, neue Quelle oder neue Kategorie)
             else:
                 new_entries.append(entry)
