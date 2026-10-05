@@ -413,3 +413,33 @@ def test_thiago_immer_mit_push():
     assert stays_silent(hsv, False, False, {"HSV 1990-2016"})        # neue Kategorie: still
     assert not stays_silent(hsv, False, False, set())
     assert stays_silent(thiago, True, False, set())                   # Erstlauf: alles still
+
+
+# Meldungen vom 05.10.2026 (VFA: Hose, Trainingsshirt, falsches Größen-Schlagwort; trikotcult "drittes Trikot")
+def test_vfa_produktart_short_ist_hose():
+    assert M.type_excluded("Short") and M.type_excluded("Shorts") and not M.type_excluded("Maillot")
+
+
+def test_beschreibung_training_und_hose():
+    from trikot.zustand import desc_excluded
+    assert desc_excluded("Etat : Excellent Taille : XL Le maillot en détail : Maillot d'entrainement porté par les Blaugrana",
+                         "2009/10 - Barcelone (XL)") == "Beschreibung: Trainingsshirt"
+    assert desc_excluded("Etat : Neuf Le short en détail : Short en excellent état", "2008/09 - Barcelone (XL)") == "Beschreibung: Hose"
+    assert desc_excluded("Etat : Excellent Le maillot en détail : Maillot domicile porté par Messi", "2009/10 - Barcelone (XL)") == ""
+
+
+def test_groesse_im_titel_schlaegt_schlagwort():
+    p = shopify_prod("2009/10 - Barcelone (L)", "b", [var("Default Title")], tags=["Taille XL"])
+    assert not passt(tracker.shopify_to_item("VFA", "https://vfa.com", p))
+    p = shopify_prod("2009/10 - Barcelone (XL)", "b", [var("Default Title")], tags=["Taille XL"])
+    assert passt(tracker.shopify_to_item("VFA", "https://vfa.com", p))
+    p = shopify_prod("Real Madrid drittes Trikot 2012/13 - M", "r", [var("Default Title")], tags=["XL"])
+    assert tracker.shopify_to_item("Trikotcult", "https://t.de", p)["size_text"] == "Real Madrid drittes Trikot 2012/13 - M"
+    p = shopify_prod("FC Barcelona Heimtrikot 2009/10", "f", [var("Default Title")], tags=["XL"])   # ohne Größe im Titel
+    assert passt(tracker.shopify_to_item("Trikotcult", "https://t.de", p))
+
+
+def test_drittes_trikot_ist_third():
+    assert {l for l, _ in M.labels("Liverpool FC drittes Trikot 2022/23 - XL")} == {"Liverpool Third 2022/23"}
+    assert {l for l, _ in M.labels("Liverpool FC Heimtrikot 2022/23 - XL")} == set()
+    assert {l for l, _ in M.labels("Chamarra Brasil 94 2006")} == set()

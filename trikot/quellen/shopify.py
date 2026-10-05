@@ -6,6 +6,10 @@ import re
 from ..basis import ANY_SIZE_RX, RADAR_LIMIT, SHOPIFY_PAGE_CAP, SIZE_RX, norm, now
 from .gemeinsam import item
 
+_SIZES = r"(?:xxs|xs|s|m|l|xl|xxl|2xl|3xl|xxxl|x-large|xx-large)"
+TITLE_SIZE_RX = re.compile(rf"(?i)\(\s*{_SIZES}(?:\s+\w+)?\s*\)|(?:size|taille|talla|taglia|gr[oö](?:ß|ss)e)\s*[:\-]?\s*{_SIZES}\b"
+                           rf"|\s[-–]\s*{_SIZES}\s*$")
+
 
 def shopify_currency(http, base):
     """products.json enthält keine Währung, /cart.js schon"""
@@ -39,6 +43,10 @@ def shopify_to_item(shop, base, p, cents=False, currency=""):
         # Größe steckt in den Varianten: nur verfügbare XL/XXL-Varianten zählen
         size_vals = [x for v in avail for x in opts(v) if SIZE_RX.search(norm(x))]
         size_text = " ".join(size_vals) or "__keine__"
+    elif TITLE_SIZE_RX.search(title):
+        # Größe steht ausdrücklich im Titel ("(L)", "- XL", "Size M"): sie gilt, nicht die Schlagwörter
+        # (VFA "2009/10 - Barcelone (L)" hatte fälschlich das Schlagwort "Taille XL", Meldung 05.10.2026)
+        size_text = title
     else:
         # Einzelstück: Größe steht im Titel oder in einem Größen-Tag
         tags = p.get("tags") or []

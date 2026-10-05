@@ -103,7 +103,7 @@ FLOCK_NUM_RX = re.compile(r"#\s?\d{1,2}(?!\d)|(?<![a-z0-9])(no|nr|num|number)\.?
 VARIANT_WORDS = {
     "home": ["home", "heim", "heimtrikot", "local", "thuis", "domicile", "casa", "1st"],
     "away": ["away", "auswarts", "auswartstrikot", "visitante", "uit", "exterieur", "trasferta", "2nd"],
-    "third": ["third", "3rd", "ausweich", "ausweichtrikot", "tercera", "troisieme", "terza", "derde"],
+    "third": ["third", "3rd", "ausweich", "ausweichtrikot", "drittes", "dritte", "tercera", "troisieme", "terza", "derde"],
 }
 VARIANT_RX = {k: any_rx(v) for k, v in VARIANT_WORDS.items()}
 

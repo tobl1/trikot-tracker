@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 
 from .basis import CHECK_VERSION, MAX_WORKERS, RECHECK_DAYS, hit, is_high, norm, now, plain
 from .netz import Http, SHOPIFY_GATE
-from .zustand import SOLD_RX, condition_info, desc_not_jersey, ld_products
+from .zustand import SOLD_RX, condition_info, desc_excluded, ld_products
 
 
 def check_page(http, url):
@@ -69,8 +69,8 @@ def enrich(seen, ts, budget, matcher):
                 e["verkauft"] = ts
             if res["marke"] and hit(matcher.brand_ex, norm(res["marke"])):
                 e["aussortiert"] = f"Hersteller {res['marke']}"
-            elif desc_not_jersey(res["desc"], e["title"]):
-                e["aussortiert"] = "Beschreibung: kein Trikot (T-Shirt/Jacke)"
+            elif desc_excluded(res["desc"], e["title"]):
+                e["aussortiert"] = desc_excluded(res["desc"], e["title"])
             grade, note = condition_info(e["title"], res["desc"])
             if grade:
                 e["zustand"] = grade

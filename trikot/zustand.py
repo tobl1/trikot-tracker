@@ -17,6 +17,30 @@ DESC_JERSEY_RX = re.compile(r"(?<![a-z])(maillot|jersey|trikot|camiseta|camisola
 TITLE_JERSEY_RX = re.compile(r"(?<![a-z-])(shirt|jersey|maillot|trikot|camiseta|maglia|koszulka)(?![a-z])")
 
 
+# Beschreibung verrät Training oder Hose, obwohl der Titel nichts sagt (VFA: "2009/10 - Barcelone (XL)" mit
+# "Maillot d'entrainement porté par …" bzw. "Le short en détail"; Meldungen vom 05.10.2026)
+DESC_TRAINING_RX = re.compile(r"(?<![a-z])(maillot d entrainement|maillot entrainement|maillot d entrainements|"
+                              r"training shirt|training top|training jersey|trainingsshirt|trainingstrikot|"
+                              r"camiseta de entrenamiento|camiseta entrenamiento|maglia da allenamento|"
+                              r"maglia allenamento|koszulka treningowa)(?![a-z])")
+DESC_SHORTS_RX = re.compile(r"(?<![a-z])(le short en detail|short domicile|short exterieur|short en excellent|"
+                            r"pantalon corto|pantalones cortos|pantaloncino|pantaloncini)(?![a-z])")
+
+
+def desc_excluded(desc, title=""):
+    """Grund, warum die Beschreibung den Artikel ausschließt (Training, Hose, kein Trikot), sonst "" """
+    t = norm(plain(desc))
+    if not t:
+        return ""
+    if DESC_TRAINING_RX.search(t):
+        return "Beschreibung: Trainingsshirt"
+    if DESC_SHORTS_RX.search(t):
+        return "Beschreibung: Hose"
+    if desc_not_jersey(desc, title):
+        return "Beschreibung: kein Trikot (T-Shirt/Jacke)"
+    return ""
+
+
 def desc_not_jersey(desc, title=""):
     """Beschreibung spricht von T-Shirt/Jacke und nirgends von einem Trikot (z. B. VFA "Le t-shirt en détail").
     Nennt schon der Titel ein Trikot, hat er Vorrang (Beschreibungen erwähnen z. B. Trainer "Kenny Jackett")"""

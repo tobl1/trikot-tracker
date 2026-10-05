@@ -67,7 +67,8 @@ class Matcher:
     def type_excluded(self, typ):
         """Produktart des Shops ("Tracktop", "Reissue", "Nameset" ...)"""
         t = norm(typ)
-        return hit(self.exclude, t) or hit(self.nachbau, t)
+        # "Short" als Produktart ist eine Hose (VFA), im Titel wäre "short" zu riskant ("Short Sleeve")
+        return t in ("short", "shorts", "pantalon", "pantalones") or hit(self.exclude, t) or hit(self.nachbau, t)
 
     def reissue(self, text):
         """Nachbau/Neuauflage (z. B. Nikes T90-Reissues von 2025), ohne Repro-Flock-Muster"""

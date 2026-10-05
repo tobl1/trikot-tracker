@@ -33,7 +33,7 @@ produkt_ausschluss: ["shorts", "socks", "sock", "jacket", "track top", "tracksui
                      "trening", "trainingsshirt", "trainingstrikot",
                      "trainingsjacke", "trainingsanzug", "trainingsoberteil", "regenjacke", "allwetterjacke",
                      "prasentationsjacke", "aufwarmshirt", "giacca", "giubbotto", "felpa", "veste",
-                     "chaqueta", "sudadera", "chandal", "survetement", "kurtka", "bluza",
+                     "chaqueta", "chamarra", "sudadera", "chandal", "survetement", "kurtka", "bluza",
                      # Pullis und Hosen (Probelauf 05.10.2026: "Sweat Top", "Hooded Top", "Pantaloncino" = Shorts)
                      "sweat", "sweat top", "hooded", "pantaloncino", "pantaloncini", "pantalon", "pantalones", "pantaloni",
                      # andere Vereine mit gleichem Namen

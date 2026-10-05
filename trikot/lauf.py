@@ -26,7 +26,7 @@ from .quellen import run_shop
 from .quellen.fyj import fyj_run
 from .rhythmus import drop_due
 from .speicher import load_json
-from .zustand import below_min, condition_info, desc_not_jersey
+from .zustand import below_min, condition_info, desc_excluded
 
 
 def recently_done(status_store, mode):
@@ -162,6 +162,12 @@ def main():
             if "(Reissue)" not in v["title"] and k not in matcher.url_ex
             and not below_min(v.get("zustand", ""), min_grade.get(v["shop"]))}
     first_run = not seen
+    # Treffer gesperrter Shops (sperren: ja, z. B. Originaltrikot) sofort ausblenden, nicht erst nach 36 Std.
+    blocked = {domain(s["url"]): s["name"] for s in shops_cfg.get("shops") or []
+               if str(s.get("sperren", "")).lower() in ("ja", "true", "yes")}
+    for e in seen.values():
+        if domain(e["url"]) in blocked or e["shop"] in blocked.values():
+            e.setdefault("aussortiert", f"Shop gesperrt ({blocked.get(domain(e['url'])) or e['shop']})")
 
     shops = shops_cfg.get("shops") or []
     if args.only:
@@ -279,8 +285,8 @@ def main():
                 continue
             if it["url"] and (canon_url(it["url"]) in matcher.url_ex or canon_url(it["url"]) in flagged):
                 continue
-            if it.get("desc") and it.get("source") == "direkt" and desc_not_jersey(it["desc"], it["title"]) \
-                    and it.get("desc") != it.get("title"):
+            if it.get("desc") and it.get("source") == "direkt" and it.get("desc") != it.get("title") \
+                    and desc_excluded(it["desc"], it["title"]):
                 continue
             if it.get("desc") and it.get("source") == "direkt" and matcher.repro_flock(it["desc"]):
                 it["fyj_reissue"] = it["desc_repro"] = True   # wie FYJ-Reissue: nur Thiago/erlaubte Kategorien
