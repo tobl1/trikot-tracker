@@ -319,25 +319,29 @@ def test_speichern_ohne_zwischendatei(tmp_path):
 def test_postausgang(tmp_path, monkeypatch):
     monkeypatch.setattr(trikot.speicher, "OUTBOX_FILE", tmp_path / "postausgang.json")
     trikot.melden.POSTAUSGANG.clear()
-    trikot.melden.push("thema", "🔥 Thiago · Shop", "Text", 5, "https://x", "https://img", ["fire"])
-    trikot.melden.push("thema", "⚽ 2 neue Treffer", "Text", 3)
+    trikot.melden.push("🔥 Thiago · Shop", "Text", 5, "https://x", "https://img", ["fire"])
+    trikot.melden.push("⚽ 2 neue Treffer", "Text", 3)
     assert trikot.melden.save_outbox() == 2 and not trikot.melden.POSTAUSGANG
     saved = json.loads((tmp_path / "postausgang.json").read_text(encoding="utf-8"))
     assert [e["title"] for e in saved] == ["🔥 Thiago · Shop", "⚽ 2 neue Treffer"]
-    assert "thema" not in json.dumps(saved)                                     # ntfy-Thema nie in Dateien
-    sent = []
-    monkeypatch.setattr(trikot.melden, "send_now", lambda topic, e: sent.append(e["title"]) or e["prio"] == 5)
-    assert trikot.melden.send_outbox("thema") == (1, 1, 0, [])                  # einer klappt, einer bleibt
+    from cryptography.hazmat.primitives.asymmetric import ec
+    from trikot import webpush
+    key = ec.generate_private_key(ec.SECP256R1())
+    st = {"push_abos": {"a": {"blob": webpush.seal_abo({"endpoint": "https://web.push.apple.com/x", "keys": {"p256dh": "x", "auth": "y"}},
+                                                       webpush.public_key_b64(key)), "seit": "1"}}}
+    monkeypatch.setattr(trikot.melden.webpush, "send", lambda s, msg, k: 201 if msg["title"].startswith("🔥") else 500)
+    sent, left, dropped, problems = trikot.melden.send_outbox(st, key)
+    assert (sent, left, dropped) == (1, 1, 0)                                    # einer klappt, einer bleibt
     left = json.loads((tmp_path / "postausgang.json").read_text(encoding="utf-8"))
     assert [e["title"] for e in left] == ["⚽ 2 neue Treffer"]
     left[0]["zeit"] = "2020-01-01T00:00:00+00:00"                               # zu alt: verwerfen
     (tmp_path / "postausgang.json").write_text(json.dumps(left), encoding="utf-8")
-    assert trikot.melden.send_outbox("thema") == (0, 0, 1, [])
+    assert trikot.melden.send_outbox(st, key)[:3] == (0, 0, 1)
 
 
 def test_probelauf_schreibt_nichts_in_den_postausgang(capsys):
     trikot.melden.POSTAUSGANG.clear()
-    trikot.melden.push("thema", "Titel", "Text", dry=True)
+    trikot.melden.push("Titel", "Text", dry=True)
     assert not trikot.melden.POSTAUSGANG and "[PUSH p3] Titel" in capsys.readouterr().out
 
 
@@ -606,15 +610,13 @@ def test_postausgang_an_die_app(tmp_path, monkeypatch):
     st = {"push_abos": {"a": {"blob": webpush.seal_abo(sub("iphone"), webpush.public_key_b64(key)), "seit": "1"},
                         "b": {"blob": webpush.seal_abo(sub("alt"), webpush.public_key_b64(key)), "seit": "2"}}}
     trikot.melden.POSTAUSGANG.clear()
-    trikot.melden.push("thema", "🔥 Thiago", "Bayern 15/16", 5, "https://x")
-    trikot.melden.push("thema", "✅ Push aus der App ist aktiv", "…", 4, nur_abo="a")
+    trikot.melden.push("🔥 Thiago", "Bayern 15/16", 5, "https://x")
+    trikot.melden.push("✅ Push aus der App ist aktiv", "…", 4, nur_abo="a")
     trikot.melden.save_outbox()
-    calls, ntfy = [], []
+    calls = []
     monkeypatch.setattr(trikot.melden.webpush, "send", lambda s, msg, k: calls.append((s["endpoint"], msg["title"])) or (410 if "alt" in s["endpoint"] else 201))
-    monkeypatch.setattr(trikot.melden, "send_now", lambda topic, e: ntfy.append(e["title"]) or True)
-    sent, left, dropped, problems = trikot.melden.send_outbox("thema", st, key)
+    sent, left, dropped, problems = trikot.melden.send_outbox(st, key)
     assert sent == 2 and left == 0
-    assert ntfy == ["🔥 Thiago"]                                                   # Bestätigung nur an die App
     assert ("https://web.push.apple.com/iphone", "✅ Push aus der App ist aktiv") in calls
     assert not any(t == "✅ Push aus der App ist aktiv" and "alt" in u for u, t in calls)
     assert "b" not in st["push_abos"] and problems[0][0] == "App-Push"           # erloschenes Abo ausgetragen

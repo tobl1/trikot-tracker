@@ -15,10 +15,10 @@
 <meta name="theme-color" content="#000000">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=UnifrakturCook:wght@700&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* Design angelehnt an "Crypto Trading Mobile App" (Dribbble): Schwarz, Anthrazit-Karten, Rot als einziger Akzent.
-   Schriften: Titel UnifrakturCook (Ersatz für "Citadel of Blackrose", die nur privat frei ist), Kategorie und Preis in der Kachel Inter, alles andere Syne (Nutzer 05.10.2026) */
+   Schriften: Titel Evantic als Grafik (titel.png), Kategorie und Preis in der Kachel Inter, alles andere Syne (Nutzer 05.10.2026) */
 :root{
   --bg:#000; --card:#141414; --card2:#1d1d1d; --line:#2a2a2a; --ink:#fff; --muted:#8b8b8b;
   --accent:#e0352f; --accent-ink:#fff; --accent-deep:#b8231e; --chip:#1d1d1d; --chip-on:#fff; --chip-on-ink:#000;
@@ -44,7 +44,9 @@ svg{display:block}
   display:flex;align-items:center;gap:10px;background:color-mix(in srgb,var(--bg) 78%,transparent);
   backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%)}
 .logo{width:40px;height:40px;border-radius:50%;flex:0 0 auto;object-fit:cover}
-h1{font-family:"UnifrakturCook",serif;font-size:23px;font-weight:700;letter-spacing:0;line-height:1.1;margin:0;white-space:nowrap}
+h1{margin:0;line-height:0;min-width:0}
+/* Titel als Grafik: Schrift Evantic (Demo, nur privat frei), deshalb nicht als Schriftdatei veröffentlicht */
+h1 .titel{height:22px;width:auto;max-width:100%;display:block}
 .appbar .sp{flex:1}
 .upd{font-size:11px;color:var(--muted);text-align:right;line-height:1.35;white-space:nowrap}
 .upd b{display:block;color:var(--ink);font-weight:600;font-size:12px}
@@ -243,7 +245,7 @@ details[open] summary::after{content:"−"}
 <div class="wrap">
   <header class="appbar">
     <img class="logo" src="icon-180.png" alt="">
-    <h1>Tobias Trikot Tracker</h1>
+    <h1><img class="titel" src="titel.png" alt="Tobias Trikot Tracker"></h1>
     <span class="sp"></span>
     <div class="upd" id="stand">lädt …</div>
   </header>
@@ -469,7 +471,7 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
       : !standalone ? "Bitte die App vom Homebildschirm öffnen, im Browser-Tab erlaubt das iPhone keine Pushes."
       : abo && perm === "granted" ? `Aktiviert am ${fmtDate(abo.seit)}. Die Bestätigungs-Push kommt mit dem nächsten Run (tagsüber max. 30 Min.).`
       : perm === "denied" ? "Mitteilungen sind abgelehnt: iPhone-Einstellungen > Mitteilungen > Trikots erlauben, dann hier aktivieren."
-      : "Pushes kommen dann direkt von dieser App, zusätzlich zu ntfy, bis ntfy abgeschaltet wird.";
+      : "Pushes kommen direkt von dieser App.";
     $("pushon").textContent = abo && perm === "granted" ? "Erneut aktivieren" : "Push in dieser App aktivieren";
   }
   async function enablePush(){
@@ -666,6 +668,7 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     if (hAgo(data.stand) > (day ? 1.5 : 8)) warns.push(`<b>Letzter Run vor ${Math.round(hAgo(data.stand))} Std.</b> ` +
       (day ? "Tagsüber kommt normalerweise alle 30 Min. einer." : "Nachts sollte spätestens der Gesamt-Run um 5:30 kommen."));
     if (hAgo(data.letzter_gesamtlauf) > 26) warns.push(`<b>Gesamt-Run seit ${Math.round(hAgo(data.letzter_gesamtlauf))} Std. nicht gelaufen.</b>`);
+    if (data.push_abos === 0) warns.push(`<b>Kein Push-Abo aktiv,</b> neue Treffer kommen gerade nicht aufs Handy. Unten unter Einstellungen "Push aktivieren".`);
     $("warn").innerHTML = warns.join("<br>") + (warns.length ? " Da hakt etwas, sag Claude kurz Bescheid." : "");
     $("warn").hidden = !warns.length;
     const shops = [...new Set(all.map(t => t.shopName))];

@@ -1,7 +1,7 @@
 # Tobias Trikot Tracker (TTT)
 
 Sucht automatisch Vintage-Trikots deiner Lieblingsspieler und Wunsch-Trikots in XL/XXL
-und schickt neue Treffer per ntfy-Push aufs Handy.
+und schickt neue Treffer als Push direkt aus der Dashboard-App aufs Handy.
 
 - **Gesamt-Run** nachts gegen 5:30 Uhr: rund 120 Shops direkt plus Lückenfüller über FindYourJersey
 - **Neuheiten-Radar** tagsüber etwa alle 30 Minuten: die neuesten Artikel aller Shopify- und WooCommerce-Shops
@@ -48,6 +48,6 @@ Commit zusammengefasst, damit das Repository klein bleibt.
   oben einen Hinweis
 - Wird ein Shop zum ersten Mal erfolgreich abgefragt, kommt dessen Bestand ohne Einzel-Pushes
   in die Übersicht, damit es keine Flut an Nachrichten gibt
-- Das Repository ist öffentlich, damit das Dashboard über GitHub Pages läuft. Das ntfy-Thema liegt als
-  Secret und bleibt geheim
+- Das Repository ist öffentlich, damit das Dashboard über GitHub Pages läuft. Der Schlüssel für die Pushes
+  liegt als Secret und bleibt geheim, das Push-Abo ist verschlüsselt
 - Die Abfragen sind bewusst gedrosselt (Shopify sperrt sonst die IP), ein Gesamt-Run dauert daher länger

@@ -59,6 +59,7 @@ def write_dashboard(seen, status_store, mode, ts, watch_cfg, shops):
             "drops": drop_calendar(shops, status_store),
             "preisgrenze": (watch_cfg.get("preisgrenze") or {}),
             "kurse_datum": kurse.get("datum", ""), "treffer": items,
+            "push_abos": len(status_store.get("push_abos") or {}),   # 0: Dashboard warnt (keine Pushes)
             "quellen": quellen.get("liste", []), "quellen_stand": quellen.get("zeit", "")}
     speicher.DASHBOARD_FILE.parent.mkdir(exist_ok=True)
     speicher.save_json(speicher.DASHBOARD_FILE, data, compact=True)

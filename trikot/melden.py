@@ -1,4 +1,4 @@
-"""Benachrichtigungen (ntfy) und Textbausteine dafür"""
+"""Benachrichtigungen (Push direkt an die Dashboard-App, seit 05.10.2026 ohne ntfy) und Textbausteine dafür"""
 
 import datetime as dt
 import os
@@ -18,36 +18,16 @@ OUTBOX_MAX_HOURS = 12   # ältere, nie verschickte Pushes verwerfen statt veralt
 POSTAUSGANG = []
 
 
-def push(topic, title, message, prio=3, click=None, image=None, tags=None, dry=False, nur_abo=None):
-    """Push vormerken (Probelauf: nur anzeigen). Das ntfy-Thema wird nie gespeichert.
-    nur_abo: nur an dieses App-Abo (z. B. Bestätigung nach dem Aktivieren), nicht an ntfy"""
+def push(title, message, prio=3, click=None, image=None, tags=None, dry=False, nur_abo=None):
+    """Push vormerken (Probelauf: nur anzeigen). nur_abo: nur an dieses App-Abo (z. B. Bestätigung)"""
     entry = {"id": uuid.uuid4().hex, "zeit": now().isoformat(), "title": title[:250], "message": message[:3500],
              "prio": prio, "click": click or "", "image": image or "", "tags": tags or []}
     if nur_abo:
         entry["nur_abo"] = nur_abo
-    if dry or not topic:
+    if dry:
         print(f"[PUSH p{prio}] {title}\n    {message}\n    {click or ''}")
         return
     POSTAUSGANG.append(entry)
-
-
-def send_now(topic, entry):
-    """Einen Push an ntfy schicken; True, wenn ntfy ihn angenommen hat"""
-    payload = {"topic": topic, "title": entry["title"], "message": entry["message"],
-               "priority": entry.get("prio", 3), "tags": entry.get("tags") or []}
-    if entry.get("click"):
-        payload["click"] = entry["click"]
-    if str(entry.get("image") or "").startswith("http"):
-        payload["attach"] = entry["image"]
-    server = os.environ.get("NTFY_SERVER", "https://ntfy.sh").rstrip("/")
-    for attempt in range(3):
-        try:
-            r = requests.post(server, json=payload, timeout=20)
-            if r.status_code == 200:
-                return True
-        except requests.RequestException as e:
-            print("Push fehlgeschlagen:", e, file=sys.stderr)
-    return False
 
 
 def save_outbox():
@@ -72,15 +52,17 @@ def app_abos(status_store, key):
     return out
 
 
-def send_outbox(topic, status_store=None, key=None):
-    """Postausgang abarbeiten: an ntfy und an die App-Abos verschicken, Verschicktes austragen, Fehlgeschlagenes
-    für den nächsten Run behalten, zu Altes verwerfen. Erloschene App-Abos (404/410) werden ausgetragen.
+def send_outbox(status_store=None, key=None):
+    """Postausgang abarbeiten: an die App-Abos verschicken, Verschicktes austragen, Fehlgeschlagenes für den nächsten
+    Run behalten, zu Altes verwerfen. Erloschene App-Abos (404/410) werden ausgetragen.
     Gibt (verschickt, offen, verworfen, Probleme) zurück"""
     pending = speicher.load_json(speicher.OUTBOX_FILE, [])
     if not pending:
         return 0, 0, 0, []
     abos = app_abos(status_store or {}, key)
     keep, sent, dropped, problems = [], 0, 0, []
+    if not abos:
+        problems.append(("App-Push", "kein aktives Abo (oder Schlüssel fehlt): im Dashboard unter Einstellungen Push aktivieren"))
     for e in pending:
         try:
             age = now() - dt.datetime.fromisoformat(e["zeit"])
@@ -91,19 +73,18 @@ def send_outbox(topic, status_store=None, key=None):
             continue
         targets = {k: v for k, v in abos.items() if not e.get("nur_abo") or k == e["nur_abo"]}
         msg = {"title": e["title"], "body": e["message"], "url": e.get("click") or ""}
-        app_ok = False
+        ok = False
         for aid, sub in targets.items():
             code = webpush.send(sub, msg, key)
-            app_ok = app_ok or code in (200, 201, 202)
+            ok = ok or code in (200, 201, 202)
             if code in (404, 410):   # Abo erloschen (z. B. App neu installiert): austragen
                 (status_store.get("push_abos") or {}).pop(aid, None)
                 abos.pop(aid, None)
                 problems.append(("App-Push", "Abo erloschen und ausgetragen, in der App unter Einstellungen neu aktivieren"))
             elif code not in (200, 201, 202):
                 problems.append(("App-Push", f"Push nicht angenommen (HTTP {code or 'Verbindung'})"))
-        ntfy_ok = (not topic or e.get("nur_abo")) or send_now(topic, e)
-        if ntfy_ok or app_ok:
-            sent += 1
+        if ok or (e.get("nur_abo") and e["nur_abo"] not in abos):
+            sent += ok
         else:
             keep.append(e)
     speicher.save_json(speicher.OUTBOX_FILE, keep)

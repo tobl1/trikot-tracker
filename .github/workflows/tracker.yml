@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "full = alles, priority = Schnellcheck, drop = nur fällige Drops, droptest = Drop-Run für alle Shops, test = nur Test-Push"
+        description: "full = alles, priority = Schnellcheck, drop = nur fällige Drops, droptest = Drop-Run für alle Shops, test = nur Test-Push an die App"
         type: choice
         options: [full, priority, drop, droptest, test]
         default: full
@@ -88,13 +88,11 @@ jobs:
           if [ "${{ inputs.stumm }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
           python tracker.py $ARGS
         env:
-          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DASHBOARD_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
 
       - name: Ergebnisse speichern
         id: speichern
-        if: steps.mode.outputs.mode != 'test'
         working-directory: daten
         env:
           MODE: ${{ steps.mode.outputs.mode }}
@@ -118,14 +116,13 @@ jobs:
 
       - name: Pushes senden
         # Erst jetzt, nachdem gespeichert ist: scheitert das Speichern, geht nichts raus (keine doppelten Pushes)
-        if: steps.mode.outputs.mode != 'test' && inputs.stumm != true
+        if: inputs.stumm != true
         run: python tracker.py --mode senden
         env:
-          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
           VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}   # Push direkt an die Dashboard-App
 
       - name: Versand speichern
-        if: steps.mode.outputs.mode != 'test' && inputs.stumm != true
+        if: inputs.stumm != true
         working-directory: daten
         run: |
           git add -A

@@ -55,7 +55,8 @@ Einzeltrikots zum Nachbeflocken dazukommen, das sagt der Nutzer gesondert an.
 | `.github/workflows/tests.yml` | Tests bei jedem Push auf Programm, Suchliste, Shops; der Tracker-Workflow testet zusätzlich vor jedem Run und bricht bei Fehlern ab |
 | `daten/TREFFER.md` | automatisch erzeugte Übersicht als Markdown, Quellen-Status immer vom letzten Gesamtlauf |
 | `docs/index.html` | Dashboard (GitHub Pages, Branch `main`, Ordner `/docs`), statisch, lädt `treffer.json`. Ansichten "Alle Treffer" und "Eingänge nach Lauf" (`#eingaenge`, gruppiert nach `first` = Zeitstempel des Laufs, Läufe aus `status.json` → `laeufe`; still übernommene Treffer, also Erstlauf oder neue Quelle, eingeklappt). Pushes verlinken auf `#eingaenge` |
-| Dashboard-Design (05.10.2026) | angelehnt an Dribbble "Crypto Trading Mobile App": Schwarz, Anthrazit-Karten (Radius 22), Rot `#e0352f` als einziger Akzent, Thiago-Kacheln komplett rot. Name seit 05.10.2026 **"Tobias Trikot Tracker"**, kurz **TTT** (Homebildschirm, Manifest), Icon vom Nutzer (Spieler im Bayern-Trikot, Ecken mit Hintergrund/Rasen gefüllt). Titel in **UnifrakturCook** (Wunsch war "Citadel of Blackrose", die ist nur privat frei und müsste öffentlich mitveröffentlicht werden; Alternativen: Grenze Gotisch, UnifrakturMaguntia, Pirata One, New Rocker, Texturina), Titel 20 px tiefer wegen iPhone-Statusleiste. Nutzerwünsche davor: Titel neben dem Logo, Kategorie und Preis in der Kachel in **Inter** in der Kopfzeile, rechts "Stand" + Run-Art; Grundschrift **Syne**; keine große rote Statistik und keine Icon-Knöpfe oben; Filter-Knopf neben der Suche (Handy); Kategorien ohne roten Punkt (wirkte wie "Neues"); Tipp auf Alle/Neu pro Run/Favoriten scrollt nach oben. Untere Leiste bewusst schlicht, aktiver Eintrag weiß mit rotem Punkt |
+| Dashboard-Design (05.10.2026) | angelehnt an Dribbble "Crypto Trading Mobile App": Schwarz, Anthrazit-Karten (Radius 22), Rot `#e0352f` als einziger Akzent, Thiago-Kacheln komplett rot. Titel als Grafik `docs/titel.png` in der Schrift **Evantic** (Datei vom Nutzer, Demo nur privat frei, deshalb nur
+als Bild veröffentlicht, nicht als Schriftdatei; neu erzeugen mit PIL aus der TTF des Nutzers). Name seit 05.10.2026 **"Tobias Trikot Tracker"**, kurz **TTT** (Homebildschirm, Manifest), Icon vom Nutzer (Spieler im Bayern-Trikot, Ecken mit Hintergrund/Rasen gefüllt). Titel in **UnifrakturCook** (Wunsch war "Citadel of Blackrose", die ist nur privat frei und müsste öffentlich mitveröffentlicht werden; Alternativen: Grenze Gotisch, UnifrakturMaguntia, Pirata One, New Rocker, Texturina), Titel 20 px tiefer wegen iPhone-Statusleiste. Nutzerwünsche davor: Titel neben dem Logo, Kategorie und Preis in der Kachel in **Inter** in der Kopfzeile, rechts "Stand" + Run-Art; Grundschrift **Syne**; keine große rote Statistik und keine Icon-Knöpfe oben; Filter-Knopf neben der Suche (Handy); Kategorien ohne roten Punkt (wirkte wie "Neues"); Tipp auf Alle/Neu pro Run/Favoriten scrollt nach oben. Untere Leiste bewusst schlicht, aktiver Eintrag weiß mit rotem Punkt |
 | Dashboard als Web-App | `manifest.webmanifest`, `icon.svg` + `icon-180/192/512.png` (Trikot mit 6), Start vom Homebildschirm im Vollbild. Kein Zoom (viewport, `touch-action`, iOS `gesturestart`), kein seitliches Scrollen, Eingaben 16 px (sonst zoomt iOS beim Tippen). Am Handy: Navigationsleiste unten, seltene Filter hinter "Filter"-Knopf |
 | Dashboard-Extras | "Juckt nicht" (05.10.2026): im Melde-Sheet zuerst "Einfach ausblenden", nur lokal (localStorage `tt:hidden`), ohne Issue, mit Rückgängig-Toast; zurückholen über "N ausgeblendet" in den Filtern. Alter in der Kachel kurz: 5h, 3d, 1m (31 bis 60 Tage). Größe immer XL/XXL. Favoriten (Stern, nur lokal im Browser, mit Datenkopie, "nicht mehr gelistet" und "Preis ↓"), gleiche Angebote eines Shops (gleicher Titel und Größe) zusammengefasst auf das günstigste ("+N gleiche im Shop"); Classic-Shirts hat oft mehrere Exemplare desselben Trikots |
 | `daten/treffer.json` | aktuelle Treffer inkl. EUR-Preis plus Quellen-Status (Dashboard-Daten). Lokale Vorschau: nach `docs/` kopieren (dort ignoriert) |
@@ -65,9 +66,10 @@ Laufzeitumgebung: GitHub Actions, öffentliches Repo, Python 3.12,
 (bewusst gedrosselt), Timeout 180 Min.
 Öffentliches Repo (seit 01.10.2026), dadurch unbegrenzte Actions-Minuten.
 
-Benachrichtigung: **ntfy** (ntfy.sh, iPhone-App), Thema im Secret `NTFY_TOPIC`. Veröffentlicht per
-JSON-POST an den Server-Root. Telegram wurde verworfen (kostenpflichtige Verifizierung).
-Niemals das Thema oder andere Secrets in Code, Logs oder Commits schreiben.
+Benachrichtigung: seit 05.10.2026 **nur noch Push direkt an die Dashboard-App** (Web Push, siehe Stufe 3).
+ntfy ist auf Wunsch des Nutzers abgeschaltet (Code, Workflow und Secret `NTFY_TOPIC` entfernt). Telegram wurde
+früher verworfen (kostenpflichtige Verifizierung). Niemals Secrets (`VAPID_PRIVATE_KEY`) in Code, Logs oder Commits.
+Ohne aktives App-Abo kommt keine Push: Fehler-Log "App-Push", Dashboard-Hinweis "Kein Push-Abo aktiv".
 
 ## Modi
 
@@ -90,7 +92,7 @@ Niemals das Thema oder andere Secrets in Code, Logs oder Commits schreiben.
   kleine Abrufe pro Radar, knapp 30 pro Shop und Tag. Ersetzt nicht die Drops (fällige Drops weiter gründlich)
 - `senden`: nur im Workflow nach dem Speichern, verschickt den Postausgang (`state/postausgang.json`); nicht
   zugestellte bleiben für den nächsten Run, ältere als 12 Std. werden verworfen (beides im Fehler-Log)
-- `test`: nur Test-Push (direkt, ohne Postausgang)
+- `test`: nur Test-Push an alle App-Abos (über den Postausgang, verschickt im Schritt danach)
 - Sprachgebrauch gegenüber dem Nutzer: "Run" statt "Lauf" (Gesamt-Run, Schnell-Run, Drop-Run)
 
 Lokal testen: `TRIKOT_DATEN=/tmp/kopie python tracker.py --mode full --dry-run --only "Name"` mit einer Kopie von
@@ -276,7 +278,7 @@ auf dem Foto erkennbar sind (z. B. Trainingsshirt ohne Hinweis im Titel), über 
   (`nur_abo`). Versand in `--mode senden` (`melden.send_outbox`): ntfy UND App; 404/410 = Abo erloschen, wird
   ausgetragen. Eigene Umsetzung `trikot/webpush.py` (RFC 8291/8292, nur `cryptography` + `http_ece`, kein pywebpush
   wegen aiohttp & Co.). Geheimer Schlüssel nur im Secret `VAPID_PRIVATE_KEY` (nie ausgeben, nur im Schritt
-  "Pushes senden"). ntfy läuft parallel weiter, bis der Nutzer sagt, dass es weg kann
+  "Pushes senden"). ntfy wurde am 05.10.2026 abgeschaltet, nachdem die App-Push ankam
 - **Melden mit einem Tipp**: fein-granularer GitHub-Schlüssel nur für Issues dieses Repos, legt der Nutzer selbst an
   und trägt ihn in der App ein (localStorage `tt:token`, bleibt auf dem Gerät). Dann legen Melden, Preisalarm,
   "Aufnehmen" und Push-Abo die Issues direkt über die GitHub-Schnittstelle an (`createIssue`), sonst wie bisher

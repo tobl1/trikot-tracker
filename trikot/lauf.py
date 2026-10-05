@@ -18,7 +18,7 @@ from .basis import (
 )
 from .berichte import fundgrube, log_problems, write_dashboard, write_report
 from .issues import add_shops_from_issues, apply_flags, check_alarms, collect_push_abos
-from .melden import OUTBOX_MAX_HOURS, detail_line, push, push_label, save_outbox, send_now, send_outbox, short
+from .melden import OUTBOX_MAX_HOURS, detail_line, push, push_label, save_outbox, send_outbox, short
 from .netz import Http
 from .preise import fetch_rates, to_eur
 from .pruefung import enrich, hold_unchecked
@@ -110,17 +110,9 @@ def main():
                     help="Start über den GitHub-Zeitplan: nur laufen, wenn cron-job.org den Run nicht schon erledigt hat")
     args = ap.parse_args()
 
-    topic = os.environ.get("NTFY_TOPIC", "").strip()
-    if not topic and not args.dry_run:
-        sys.exit("NTFY_TOPIC fehlt (GitHub Secret anlegen) oder --dry-run verwenden.")
-
-    if args.mode == "test":
-        entry = {"title": "✅ Trikot-Tracker verbunden", "message": "Wenn du das liest, funktionieren die Benachrichtigungen.",
-                 "prio": 4, "tags": ["white_check_mark"]}
-        if args.dry_run:
-            print(f"[PUSH p4] {entry['title']}\n    {entry['message']}")
-        elif not send_now(topic, entry):
-            sys.exit("Test-Push wurde von ntfy nicht angenommen")
+    if args.mode == "test":   # Test-Push an alle App-Abos, über den Postausgang (verschickt im Schritt danach)
+        push("✅ TTT verbunden", "Wenn du das liest, funktionieren die Pushes aus der App.", 4, dry=args.dry_run)
+        save_outbox()
         return
     if args.mode == "senden":
         if args.dry_run:   # Probelauf: nur zeigen, was im Postausgang liegt
@@ -129,12 +121,12 @@ def main():
             return
         status_store = load_json(speicher.STATUS_FILE, {}, strict=True)
         n_abos = len(status_store.get("push_abos") or {})
-        sent, left, dropped, problems = send_outbox(topic, status_store, webpush.private_key())
+        sent, left, dropped, problems = send_outbox(status_store, webpush.private_key())
         if len(status_store.get("push_abos") or {}) != n_abos:
             speicher.save_json(speicher.STATUS_FILE, status_store)   # erloschene Abos ausgetragen
         print(f"Postausgang: {sent} verschickt, {left} offen, {dropped} verworfen (älter als {OUTBOX_MAX_HOURS} Std.)")
-        problems += ([("ntfy", f"{left} Push(es) nicht zugestellt, der nächste Run versucht es erneut")] if left else []) + \
-                    ([("ntfy", f"{dropped} Push(es) verworfen, älter als {OUTBOX_MAX_HOURS} Std.")] if dropped else [])
+        problems += ([("App-Push", f"{left} Push(es) nicht zugestellt, der nächste Run versucht es erneut")] if left else []) + \
+                    ([("App-Push", f"{dropped} Push(es) verworfen, älter als {OUTBOX_MAX_HOURS} Std.")] if dropped else [])
         if problems:
             log_problems(problems, "senden", now().isoformat())
         return
@@ -182,7 +174,7 @@ def main():
         print(f"{new_flags} Meldung(en) aus dem Dashboard übernommen")
     # Push direkt in die App: neue Abos aus den Einstellungen übernehmen und bestätigen
     for aid in (collect_push_abos(status_store, now().isoformat()) if not args.dry_run else []):
-        push(topic, "✅ Push aus der App ist aktiv", "Ab jetzt kommen neue Treffer auch direkt über die TTT-App.",
+        push("✅ Push aus der App ist aktiv", "Ab jetzt kommen neue Treffer direkt über die TTT-App.",
              4, (os.environ.get("DASHBOARD_URL") or "").rstrip("/") + "/#eingaenge" or None, nur_abo=aid)
         new_flags += 1   # Drop-Run soll dafür nicht vorzeitig enden
     shop_modes = {}   # Drop-Run: je Shop "drop" (fälliger Drop, gründlich) oder "radar" (nur neueste Artikel)
@@ -412,7 +404,7 @@ def main():
         high = [e for e in cur if is_high(e)]
         lines = [f"• {push_label(e)}: {short(e)}" for e in high[:12]]
         more = f"\n… und {len(high) - 12} weitere" if len(high) > 12 else ""
-        push(topic, f"🚀 Tracker gestartet: {len(cur)} Treffer",
+        push(f"🚀 Tracker gestartet: {len(cur)} Treffer",
              f"Davon {len(high)} Thiago/Sondertrikots:\n" + "\n".join(lines) + more +
              "\nAb jetzt kommen nur noch neue Trikots.",
              3, report_url, None, ["rocket"], args.dry_run)
@@ -421,17 +413,17 @@ def main():
         normal = sorted([e for e in new_entries if not is_high(e)], key=lambda e: e["title"])
         # Thiago & Sondertrikots einzeln (max. MAX_PUSH_HIGH), Rest gebündelt
         for e in high[:MAX_PUSH_HIGH]:
-            push(topic, f"🔥 {push_label(e)} · {e['shop']}",
+            push(f"🔥 {push_label(e)} · {e['shop']}",
                  detail_line(e),
                  5, e["url"], e["image"], ["fire"], args.dry_run)
         bundle = high[MAX_PUSH_HIGH:] + normal
         if len(bundle) == 1:
             e = bundle[0]
-            push(topic, f"⚽ {push_label(e)} · {e['shop']}",
+            push(f"⚽ {push_label(e)} · {e['shop']}",
                  detail_line(e),
                  3, e["url"], e["image"], ["soccer"], args.dry_run)
         elif bundle:
-            push(topic, f"⚽ {len(bundle)} neue Treffer",
+            push(f"⚽ {len(bundle)} neue Treffer",
                  "\n".join(f"• {push_label(e)}: {short(e, shop=True)}"
                            for e in bundle[:20]) +
                  (f"\n… und {len(bundle) - 20} weitere" if len(bundle) > 20 else ""),
@@ -443,14 +435,14 @@ def main():
         good = [c for c in cands or [] if c["empfohlen"]]
         if good:
             fg_url = (os.environ.get("DASHBOARD_URL") or "").rstrip("/") + "/#fundgrube" if os.environ.get("DASHBOARD_URL") else report_url
-            push(topic, f"🔎 Fundgrube: {len(good)} Shop-Kandidat{'en' if len(good) != 1 else ''} zum Aufnehmen",
+            push(f"🔎 Fundgrube: {len(good)} Shop-Kandidat{'en' if len(good) != 1 else ''} zum Aufnehmen",
                  "\n".join(f"• {c['domain']}: {c['treffer']} Treffer · {c['plattform']}" for c in good[:10]) +
                  "\nIm Dashboard unter Fundgrube auf \"Aufnehmen\" tippen.", 2, fg_url, None, ["mag"], args.dry_run)
 
     # Preisalarme für Favoriten
     if not args.only and not args.dry_run:   # Probelauf: keine Alarm-Issues schließen
         check_alarms(seen, status_store, ts, rates, args.mode,
-                     lambda title, msg, prio, url: push(topic, title, msg, prio, url, None, ["bell"], args.dry_run))
+                     lambda title, msg, prio, url: push(title, msg, prio, url, None, ["bell"], args.dry_run))
 
     # Still übernommene Treffer (neue Shops, neue Kategorien): EINE Sammelnachricht statt Push-Flut
     silent = [e for e in seen.values() if e["first"] == ts and e.get("still")
@@ -458,7 +450,7 @@ def main():
     if silent and not first_run:
         silent.sort(key=lambda e: (not is_high(e), e["labels"], e["title"]))
         srcs = sorted({e["shop"] for e in silent})
-        push(topic, f"🆕 {len(silent)} Treffer aus neuen Shops/Kategorien",
+        push(f"🆕 {len(silent)} Treffer aus neuen Shops/Kategorien",
              f"Aus {len(srcs)} Quellen: {', '.join(srcs[:8])}{' …' if len(srcs) > 8 else ''}\n" +
              "\n".join(f"• {push_label(e)}: {short(e, shop=True)}" for e in silent[:15]) +
              (f"\n… und {len(silent) - 15} weitere" if len(silent) > 15 else ""),
@@ -514,7 +506,7 @@ def main():
             print(f"  - {s['name']}: {s['fehler']}")
     if args.mode == "drop" and args.alle:
         bad = [s["name"] for s in statuses if s["fehler"]]
-        push(topic, "🧪 Testdrop fertig",
+        push("🧪 Testdrop fertig",
              f"{ok}/{len(statuses)} Shops ok, {len(new_entries)} neue Treffer"
              + (f". Probleme: {', '.join(bad[:8])}" + (" …" if len(bad) > 8 else "") if bad else ""),
              2, click=report_url, tags=["test_tube"], dry=args.dry_run)
