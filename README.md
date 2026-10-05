@@ -1,4 +1,4 @@
-# Tobias Trikot Tracker (TTT)
+# Tobis Trikot Tracker (TTT)
 
 Sucht automatisch Vintage-Trikots deiner Lieblingsspieler und Wunsch-Trikots in XL/XXL
 und schickt neue Treffer als Push direkt aus der Dashboard-App aufs Handy.

@@ -1,4 +1,4 @@
-// Service Worker der App (Tobias Trikot Tracker, TTT): zeigt Pushes an und öffnet beim Antippen den passenden Link.
+// Service Worker der App (Tobis Trikot Tracker, TTT): zeigt Pushes an und öffnet beim Antippen den passenden Link.
 // Bewusst ohne Zwischenspeicher (Cache), damit Änderungen am Dashboard sofort ankommen.
 self.addEventListener("install", () => self.skipWaiting());
 self.addEventListener("activate", e => e.waitUntil(self.clients.claim()));
