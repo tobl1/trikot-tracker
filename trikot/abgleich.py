@@ -8,6 +8,16 @@ from .basis import (
 )
 
 
+
+def found(rxs, text):
+    """Erster Treffer einer Regex-Liste im Text (für Begründungen), sonst """""
+    for r in rxs:
+        m = r.search(text or "")
+        if m:
+            return m.group(0).strip()
+    return ""
+
+
 class Matcher:
     def __init__(self, cfg):
         g = cfg.get("groessen") or {}
@@ -114,7 +124,7 @@ class Matcher:
             return False
         return "home" in allowed   # ohne Angabe ist es meist das Heimtrikot
 
-    def labels(self, text, fyj_reissue=False, desc="", ctx=""):
+    def labels(self, text, fyj_reissue=False, desc="", ctx="", why=None):
         """Gibt [(label, prio)] zurück, ohne Größenprüfung. Nachbauten nur als Repro-Flock für repro_labels.
         desc (Beschreibung) wird nur für Artikelcodes der Sondertrikots herangezogen"""
         t = norm(text)
@@ -122,7 +132,7 @@ class Matcher:
             return []
         starred = [x.strip() for x in STAR_RX.findall(str(text)) if not STAR_TAGS.match(x.strip())]
         star = any(not hit(self.flock_ok, norm(x)) for x in starred)
-        out = self._labels(t, norm(plain(desc)) if desc else "", star, norm(ctx) if ctx else "")
+        out = self._labels(t, norm(plain(desc)) if desc else "", star, norm(ctx) if ctx else "", why)
         if hit(self.nachbau, t) or fyj_reissue:
             allowed = set(self.nachbau_ok)
             if hit(self.repro_muster, t) or fyj_reissue:
@@ -140,9 +150,10 @@ class Matcher:
                 return True
         return False
 
-    def _labels(self, t, d="", star=False, c=""):
+    def _labels(self, t, d="", star=False, c="", why=None):
         """c: Kontext des Shops (Schlagwörter, Produktart, Produktadresse). Zählt nur für den Vereinsfilter der
-        Spieler ("Thiago #6 Away Shirt" mit Schlagwort "Liverpool"), nie für Spielernamen oder Sondertrikots"""
+        Spieler ("Thiago #6 Away Shirt" mit Schlagwort "Liverpool"), nie für Spielernamen oder Sondertrikots.
+        why: dict, bekommt je Label eine kurze Begründung ("warum Treffer", fürs Dashboard)"""
         out = []
         for p in self.players:
             if not hit(p["suche"], t) or hit(p["aus"], t):
@@ -150,10 +161,16 @@ class Matcher:
             if p["vereine"] and not (hit(p["vereine"], t) or (c and hit(p["vereine"], c))):
                 continue
             out.append((p["name"], p["prio"]))
+            if why is not None:
+                club = found(p["vereine"], t)
+                why[p["name"]] = f"Name „{found(p['suche'], t)}“" + (
+                    f", Team „{club}“" if club else f", Team laut Shop „{found(p['vereine'], c)}“" if p["vereine"] else "")
         for k in self.kits:
             if k["codes"] and hit(k["codes"], f"{t} {d}"):     # Artikelcode eindeutig, Variante egal
                 if k["fremdflock_egal"] or not self.foreign_flock(t, star):
                     out.append((k["name"], k["prio"]))
+                    if why is not None:
+                        why[k["name"]] = f"Artikelcode {found(k['codes'], f'{t} {d}').upper()}"
                 continue
             if not hit(k["verein"], t) or hit(k["aus"], t):
                 continue
@@ -172,6 +189,21 @@ class Matcher:
                 if not ok:
                     continue
             out.append((k["name"], k["prio"]))
+            if why is not None:
+                parts = [f"Team „{found(k['verein'], t)}“"]
+                when = found(k["saisons"], t) or found(k["jahre"], t)
+                if when:
+                    parts.append(f"Saison „{when}“")
+                var = next((w for v in VARIANT_RX.values() for w in [found(v, t)] if w), "")
+                parts.append(f"Variante „{var}“" if var else "ohne Variante (Heim angenommen)" if "alle" not in k["varianten"]
+                             else "Variante egal")
+                if k["flock_pflicht"]:
+                    parts.append("mit Flock")
+                elif hit(self.flock_ok, t):
+                    parts.append("Thiago-Flock")
+                elif not k["fremdflock_egal"]:
+                    parts.append("ohne fremden Flock")
+                why[k["name"]] = ", ".join(parts)
         return out
 
     def queries(self, only_high=False):

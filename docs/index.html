@@ -101,6 +101,7 @@ select{flex:0 1 auto;max-width:100%;appearance:none;-webkit-appearance:none;padd
 .badge.hi{background:var(--accent);color:#fff}
 .card.th .badge.hi{background:#000}
 .badge.re{background:#5b47b0;color:#fff}
+.badge.chk{background:var(--warn);color:#000}
 .badge.gone{background:var(--muted);color:var(--bg)}
 .badge.down{background:var(--good);color:#000}
 .body{padding:10px 8px 6px;display:flex;flex-direction:column;gap:5px;flex:1}
@@ -300,6 +301,7 @@ details[open] summary::after{content:"−"}
   <div class="box" role="dialog" aria-labelledby="flagtitle">
     <h3 id="flagtitle">Juckt nicht?</h3>
     <p class="what" id="flagwhat"></p>
+    <p class="hint" id="flagwhy" style="margin:-6px 0 14px"></p>
     <button class="hidebtn" id="hidego">Einfach ausblenden</button>
     <p class="hint" style="margin:6px 0 14px">Nur hier auf diesem Gerät, ohne Meldung. Zurückholen unter "Filter".</p>
     <h3 class="small">Oder melden, damit ich die Regeln anpasse</h3>
@@ -369,6 +371,9 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
   function openFlag(t){
     flagItem = t; flagReason = "unpassend"; $("flagnote").value = "";
     $("flagwhat").textContent = `${t.titel} · ${t.shopName}`;
+    // Warum wurde das gefunden? Hilft beim Melden (und mir beim Ableiten von Regeln)
+    $("flagwhy").textContent = [t.warum ? `Warum Treffer: ${t.warum}` : "", t.pruefen ? `Achtung: ${t.pruefen}` : ""]
+      .filter(Boolean).join(" · ");
     document.querySelectorAll("#flagreasons .chip").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.r === flagReason)));
     $("flagsheet").hidden = false;
   }
@@ -434,7 +439,8 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
                     down && `<span class="badge down">PREIS ↓ von ${eur(f.eur)}</span>`,
                     t.neu && !t.gone && '<span class="badge new">NEU</span>', t.thiago && t.gone && '<span class="badge hi">THIAGO</span>',
                     t.repro && '<span class="badge re" title="Original-Trikot, Name und Nummer nachgedruckt">REPRO-FLOCK</span>',
-                    t.reissue && '<span class="badge re" title="Neuauflage, z. B. Nikes T90-Reissue von 2025, kein Original von damals">NEUAUFLAGE</span>']
+                    t.reissue && '<span class="badge re" title="Neuauflage, z. B. Nikes T90-Reissue von 2025, kein Original von damals">NEUAUFLAGE</span>',
+                    t.pruefen && !t.gone && `<span class="badge chk" title="${esc(t.pruefen)}">PRÜFEN</span>`]
       .filter(Boolean).join("");
     const cond = t.zustand ? `<span class="cond">${esc(t.zustand)}</span>` : "";
     const note = t.notiz ? `<div class="note" title="${esc(t.notiz)}">${esc(t.notiz)}</div>` : "";

@@ -290,7 +290,8 @@ def main():
                 continue
             if it.get("desc") and it.get("source") == "direkt" and matcher.repro_flock(it["desc"]):
                 it["fyj_reissue"] = it["desc_repro"] = True   # wie FYJ-Reissue: nur Thiago/erlaubte Kategorien
-            labs = matcher.labels(it["match_text"], it.get("fyj_reissue", False), it.get("desc", ""), it.get("ctx", ""))
+            why = {}
+            labs = matcher.labels(it["match_text"], it.get("fyj_reissue", False), it.get("desc", ""), it.get("ctx", ""), why)
             if not labs or not matcher.size_ok(it["size_text"], norm(it["match_text"])):
                 continue
             if not it["url"]:
@@ -305,9 +306,12 @@ def main():
                 # Labels pro Lauf neu berechnen (sonst bleiben alte Regeln ewig hängen),
                 # innerhalb eines Laufs aus mehreren Quellen zusammenführen
                 if entry["last"] != ts:
-                    entry["labels"], entry["prios"] = [], []
+                    entry["labels"], entry["prios"], entry["warum"] = [], [], {}
                 entry["last"] = ts
                 entry.pop("weg", None)
+                entry["warum"] = {**why, **(entry.get("warum") or {})}
+                if it.get("size_src"):
+                    entry["groesse_quelle"] = it["size_src"]
                 entry["labels"] = sorted(set(entry["labels"]) | {l for l, _ in labs})
                 entry["prios"] = sorted(set(entry["prios"]) | {p for _, p in labs})
                 if it["source"] == "direkt":      # direkte Daten sind aktueller als FYJ
@@ -328,7 +332,9 @@ def main():
                      "price": it["price"], "image": it["image"],
                      "size": short_size(size.group(0)) if size else "",
                      "labels": sorted({l for l, _ in labs}), "prios": sorted({p for _, p in labs}),
-                     "first": ts, "last": ts, "via": it["source"]}
+                     "first": ts, "last": ts, "via": it["source"], "warum": why}
+            if it.get("size_src"):
+                entry["groesse_quelle"] = it["size_src"]
             if grade:
                 entry["zustand"] = grade
             if note:

@@ -43,10 +43,12 @@ def shopify_to_item(shop, base, p, cents=False, currency=""):
         # Größe steckt in den Varianten: nur verfügbare XL/XXL-Varianten zählen
         size_vals = [x for v in avail for x in opts(v) if SIZE_RX.search(norm(x))]
         size_text = " ".join(size_vals) or "__keine__"
+        size_src = "auswahl"
     elif TITLE_SIZE_RX.search(title):
         # Größe steht ausdrücklich im Titel ("(L)", "- XL", "Size M"): sie gilt, nicht die Schlagwörter
         # (VFA "2009/10 - Barcelone (L)" hatte fälschlich das Schlagwort "Taille XL", Meldung 05.10.2026)
         size_text = title
+        size_src = "titel"
     else:
         # Einzelstück: Größe steht im Titel oder in einem Größen-Tag
         tags = p.get("tags") or []
@@ -54,6 +56,7 @@ def shopify_to_item(shop, base, p, cents=False, currency=""):
             tags = tags.split(",")
         size_tags = [t for t in tags if SIZE_RX.search(norm(t)) and len(norm(t)) <= 20]
         size_text = title + " " + " ".join(size_tags)
+        size_src = "titel" if SIZE_RX.search(norm(title)) else "schlagwort"
     price = avail[0].get("price")
     if price is not None and cents:
         price = f"{int(price) / 100:.2f}"
@@ -64,7 +67,7 @@ def shopify_to_item(shop, base, p, cents=False, currency=""):
     tags = tags.split(",") if isinstance(tags, str) else tags
     ctx = " ".join([*tags, p.get("product_type") or p.get("type") or "", handle.replace("-", " ")])
     return item("direkt", shop, url, title, size_text, price, img, desc=desc,
-                typ=p.get("product_type") or p.get("type") or "", ctx=ctx)
+                typ=p.get("product_type") or p.get("type") or "", ctx=ctx, size_src=size_src)
 
 
 def shopify_full(http, shop, base, path="/products.json", currency="", stamps=None):

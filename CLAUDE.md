@@ -254,6 +254,7 @@ auf dem Foto erkennbar sind (z. B. Trainingsshirt ohne Hinweis im Titel), über 
   04.10.2026 schloss ein Run 12 Issues, konnte dann aber wegen Git-Konflikt nicht speichern
 - Workflow checkt `ref: main` aus: ein wartender Run nutzt sonst den Stand vom Auslösezeitpunkt
   (Konflikt beim Speichern, mögliche Doppel-Pushes)
+- Meldungen vom 05.10.2026: VFA-Hose (Produktart "Short" → `type_excluded`), VFA-Trainingsshirt ("Maillot d'entrainement" in der Beschreibung → `zustand.desc_excluded`), VFA "(L)" mit falschem Schlagwort "Taille XL" (ausdrückliche Größe im Titel schlägt Schlagwort, `TITLE_SIZE_RX`), "Chamarra" = Jacke, Originaltrikot ganz raus (`sperren: ja`, Treffer gesperrter Shops werden sofort ausgeblendet), Classic-Shirts "Producer: Official" (Seite war nie geprüft, siehe Prüfen vor dem Push). Neu: trikotcult.de (Shopify), "drittes Trikot" = third
 - Meldungen vom 04.10.2026 und Folgen: Trainingsjacken als Wortzusammensetzung ("Trainingsjacke") und
   italienisch/spanisch/französisch ("giacca", "chaqueta", "veste" …), "Espanyol" ist nicht Barça,
   Kroos niemals Leverkusen, "N°7" ist eine Rückennummer, "*university*"/"*academy*" kein Spielername,
@@ -377,6 +378,8 @@ Produktseite (`.product-variants .radio-label`); Cloudflare-Challenge-Skript auf
 eventuell werden GitHub-IPs geblockt. **Noch nicht live getestet.**
 
 ## Architektur-Review 05.10.2026
+
+**Stufe 2 umgesetzt am 05.10.2026 (Nutzer: "weiter mit Stufe 2"):** Prüfen vor dem Push (`pruefung.needs_check`, `hold_unchecked`: FYJ- und Such-Shop-Treffer warten auf eine erfolgreiche Seitenprüfung, `push_offen`, max. 24 Std., 401/403 sofort mit Hinweis, 404 = verkauft, gescheiterte Prüfungen je Host ins Fehler-Log; Anlass: 46 von 62 Prüfungen im Gesamt-Run still gescheitert, darunter Classic-Shirts "Producer: Official"), Vereinsfilter der Spieler mit Shop-Kontext (`ctx`: Schlagwörter, Produktart, Handle, Woo-Kategorien), gekappte Kataloge zusätzlich über die Kollektionen der Thiago-Vereine (`shopify_collections`, `high_team_terms`; ganz auf Kollektionen umstellen lohnt nicht: VFA hätte 80.000 Artikel in passenden Kollektionen), "warum Treffer" (`Matcher.labels(..., why=)`, `warum` je Label in seen.json, im Dashboard im Fähnchen-Fenster) und Markierung PRÜFEN (`berichte.doubt`: Größe nur aus Schlagwort, Seite ungeprüft). Offen: Artikelcodes der Thiago-Sondertrikots.
 
 **Umgesetzt am 05.10.2026 (Nutzer: "fang gern an"):** Stufe 1 komplett (Module, feste Paketversionen, Vertragstests,
 sicheres Speichern, Postausgang, ehrliche Quellenwerte, Bestandseinbruch, Daten-Zweig, Pages über Actions,

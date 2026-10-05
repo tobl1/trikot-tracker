@@ -552,3 +552,22 @@ def test_gekappter_katalog_liest_kollektionen(monkeypatch):
                                    {"https://vfa.com": "shopify"}, {})
     assert any(it["title"] == "2009/10 - Barcelone (XL)" for it in items)
     assert st["info"].startswith("Katalog bei 25000 gekappt, ältere Artikel per Kollektionen (1)")
+
+
+# ---------------------------------------------------------------------------
+# Warum Treffer, wackelige Angaben
+# ---------------------------------------------------------------------------
+def test_begruendung_und_groessenquelle():
+    why = {}
+    M.labels("2009/10 - Barcelone (XL)", why=why)
+    assert why["Barça 2008-2013"] == "Team „barcelone“, Saison „2009/10“, Variante egal, ohne fremden Flock"
+    why = {}
+    M.labels("Thiago #6 Away Shirt XL", ctx="liverpool", why=why)
+    assert why["Thiago"] == "Name „thiago“, Team laut Shop „liverpool“"
+    p = shopify_prod("2012-13 Barcelona Home Shirt", "b", [var("Default Title")], tags=["XL"])
+    assert tracker.shopify_to_item("S", "https://s.com", p)["size_src"] == "schlagwort"
+    p = shopify_prod("2012-13 Barcelona Home Shirt (XL)", "b", [var("Default Title")])
+    assert tracker.shopify_to_item("S", "https://s.com", p)["size_src"] == "titel"
+    from trikot.berichte import doubt
+    assert doubt({"groesse_quelle": "schlagwort"}).startswith("Größe nur aus einem Schlagwort")
+    assert doubt({"push_offen": "t"}) == "Shop-Seite wird noch geprüft" and doubt({}) == ""

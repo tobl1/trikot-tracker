@@ -24,6 +24,17 @@ def current_entries(seen):
             and not (e.get("verkauft") or e.get("weg") or e.get("aussortiert"))}
 
 
+def doubt(e):
+    """Hinweis, wenn Angaben eines Treffers wackelig sind (Dashboard-Markierung "prüfen"), sonst """""
+    if e.get("push_offen"):
+        return "Shop-Seite wird noch geprüft"
+    if e.get("ungeprueft"):
+        return "Shop-Seite ließ sich nicht prüfen"
+    if e.get("groesse_quelle") == "schlagwort":
+        return "Größe nur aus einem Schlagwort des Shops, nicht aus Titel oder Auswahl"
+    return ""
+
+
 def write_dashboard(seen, status_store, mode, ts, watch_cfg, shops):
     """docs/treffer.json für das Dashboard auf GitHub Pages"""
     kurse = status_store.get("kurse") or {}
@@ -37,6 +48,8 @@ def write_dashboard(seen, status_store, mode, ts, watch_cfg, shops):
             "zustand": e.get("zustand", ""), "notiz": e.get("zustand_notiz", ""), "bild": e.get("image", ""),
             "erst": e["first"], "zuletzt": e["last"], "via": e.get("via", ""),
             "still": bool(e.get("still")), "teuer": bool(e.get("teuer")), "repro": bool(e.get("repro")), "reissue": bool(e.get("reissue")),
+            "warum": "; ".join(f"{l}: {r}" for l, r in (e.get("warum") or {}).items() if l in e["labels"]),
+            "pruefen": doubt(e),
         })
     quellen = status_store.get("quellen") or {}
     data = {"stand": ts, "modus": mode, "letzter_gesamtlauf": status_store.get("last_full", ""),
