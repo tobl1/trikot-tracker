@@ -113,7 +113,7 @@ class Matcher:
             return False
         return "home" in allowed   # ohne Angabe ist es meist das Heimtrikot
 
-    def labels(self, text, fyj_reissue=False, desc=""):
+    def labels(self, text, fyj_reissue=False, desc="", ctx=""):
         """Gibt [(label, prio)] zurück, ohne Größenprüfung. Nachbauten nur als Repro-Flock für repro_labels.
         desc (Beschreibung) wird nur für Artikelcodes der Sondertrikots herangezogen"""
         t = norm(text)
@@ -121,7 +121,7 @@ class Matcher:
             return []
         starred = [x.strip() for x in STAR_RX.findall(str(text)) if not STAR_TAGS.match(x.strip())]
         star = any(not hit(self.flock_ok, norm(x)) for x in starred)
-        out = self._labels(t, norm(plain(desc)) if desc else "", star)
+        out = self._labels(t, norm(plain(desc)) if desc else "", star, norm(ctx) if ctx else "")
         if hit(self.nachbau, t) or fyj_reissue:
             allowed = set(self.nachbau_ok)
             if hit(self.repro_muster, t) or fyj_reissue:
@@ -139,12 +139,14 @@ class Matcher:
                 return True
         return False
 
-    def _labels(self, t, d="", star=False):
+    def _labels(self, t, d="", star=False, c=""):
+        """c: Kontext des Shops (Schlagwörter, Produktart, Produktadresse). Zählt nur für den Vereinsfilter der
+        Spieler ("Thiago #6 Away Shirt" mit Schlagwort "Liverpool"), nie für Spielernamen oder Sondertrikots"""
         out = []
         for p in self.players:
             if not hit(p["suche"], t) or hit(p["aus"], t):
                 continue
-            if p["vereine"] and not hit(p["vereine"], t):
+            if p["vereine"] and not (hit(p["vereine"], t) or (c and hit(p["vereine"], c))):
                 continue
             out.append((p["name"], p["prio"]))
         for k in self.kits:

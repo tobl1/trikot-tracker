@@ -25,7 +25,9 @@ def woo_to_item(shop, p):
     imgs = p.get("images") or []
     img = imgs[0].get("src", "") if imgs else ""
     desc = (p.get("short_description") or "") + " " + (p.get("description") or "")
-    return item("direkt", shop, p.get("permalink") or "", title, size_text, price.strip(), img, desc=desc)
+    ctx = " ".join([c.get("name", "") for c in p.get("categories") or []] + [t.get("name", "") for t in p.get("tags") or []]
+                   + [str(p.get("slug") or "").replace("-", " ")])
+    return item("direkt", shop, p.get("permalink") or "", title, size_text, price.strip(), img, desc=desc, ctx=ctx)
 
 
 def woo_recent(http, shop, endpoint, per_page=100):

@@ -60,8 +60,11 @@ def shopify_to_item(shop, base, p, cents=False, currency=""):
     price = f"{price} {currency}".strip() if price not in (None, "") else ""
     desc = p.get("body_html") or p.get("description") or ""
     # Produktart ("Tracktop", "Reissue", "Goal Keeper" ...) nur für Ausschlüsse, nicht fürs Matching
+    tags = p.get("tags") or []
+    tags = tags.split(",") if isinstance(tags, str) else tags
+    ctx = " ".join([*tags, p.get("product_type") or p.get("type") or "", handle.replace("-", " ")])
     return item("direkt", shop, url, title, size_text, price, img, desc=desc,
-                typ=p.get("product_type") or p.get("type") or "")
+                typ=p.get("product_type") or p.get("type") or "", ctx=ctx)
 
 
 def shopify_full(http, shop, base, path="/products.json", currency="", stamps=None):

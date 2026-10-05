@@ -290,7 +290,7 @@ def main():
                 continue
             if it.get("desc") and it.get("source") == "direkt" and matcher.repro_flock(it["desc"]):
                 it["fyj_reissue"] = it["desc_repro"] = True   # wie FYJ-Reissue: nur Thiago/erlaubte Kategorien
-            labs = matcher.labels(it["match_text"], it.get("fyj_reissue", False), it.get("desc", ""))
+            labs = matcher.labels(it["match_text"], it.get("fyj_reissue", False), it.get("desc", ""), it.get("ctx", ""))
             if not labs or not matcher.size_ok(it["size_text"], norm(it["match_text"])):
                 continue
             if not it["url"]:

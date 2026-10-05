@@ -498,3 +498,25 @@ def test_seitenpruefung_zaehlt_fehler_und_sortiert_aus(monkeypatch):
     assert seen["voll"]["pruef_fehler"] == 429 and "geprueft" not in seen["voll"]
     assert seen["weg"]["verkauft"] == ts
     assert dict(fails["classic-shirts.com"]) == {429: 1, 404: 1}
+
+
+# ---------------------------------------------------------------------------
+# Vereinsfilter mit Kontext (Schlagwörter, Produktart, Produktadresse)
+# ---------------------------------------------------------------------------
+def test_vereinsfilter_nutzt_schlagwoerter():
+    p = shopify_prod("Thiago #6 Away Shirt XL", "away-shirt-thiago-6", [var("Default Title")], tags=["Liverpool", "Premier League"])
+    it = tracker.shopify_to_item("Shop", "https://s.com", p)
+    assert {l for l, _ in M.labels(it["match_text"], ctx=it["ctx"])} == {"Thiago"}
+    assert M.labels(it["match_text"]) == []                                  # ohne Kontext: Verein fehlt
+    p = shopify_prod("Thiago #6 Away Shirt XL", "away-shirt-thiago-6", [var("Default Title")], tags=["PSG"])
+    it = tracker.shopify_to_item("Shop", "https://s.com", p)
+    assert M.labels(it["match_text"], ctx=it["ctx"]) == []                   # anderer Verein: weiter nein
+    # Kontext ersetzt nie den Spielernamen und gilt nicht für Sondertrikots
+    assert M.labels("Away Shirt 2021/22 XL", ctx="liverpool thiago") == []
+
+
+def test_woo_kontext_aus_kategorien():
+    p = woo_prod("Thiago Alcantara #6 Shirt", ["XL"])
+    p["categories"] = [{"name": "FC Bayern München"}]
+    it = tracker.woo_to_item("RB", p)
+    assert {l for l, _ in M.labels(it["match_text"], ctx=it["ctx"])} == {"Thiago"}
