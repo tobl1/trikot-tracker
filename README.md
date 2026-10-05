@@ -1,4 +1,4 @@
-# Trikot-Tracker
+# Tobias Trikot Tracker (TTT)
 
 Sucht automatisch Vintage-Trikots deiner Lieblingsspieler und Wunsch-Trikots in XL/XXL
 und schickt neue Treffer per ntfy-Push aufs Handy.

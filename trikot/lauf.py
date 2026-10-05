@@ -182,7 +182,7 @@ def main():
         print(f"{new_flags} Meldung(en) aus dem Dashboard übernommen")
     # Push direkt in die App: neue Abos aus den Einstellungen übernehmen und bestätigen
     for aid in (collect_push_abos(status_store, now().isoformat()) if not args.dry_run else []):
-        push(topic, "✅ Push aus der App ist aktiv", "Ab jetzt kommen neue Treffer auch direkt über die Trikot-Tracker-App.",
+        push(topic, "✅ Push aus der App ist aktiv", "Ab jetzt kommen neue Treffer auch direkt über die TTT-App.",
              4, (os.environ.get("DASHBOARD_URL") or "").rstrip("/") + "/#eingaenge" or None, nur_abo=aid)
         new_flags += 1   # Drop-Run soll dafür nicht vorzeitig enden
     shop_modes = {}   # Drop-Run: je Shop "drop" (fälliger Drop, gründlich) oder "radar" (nur neueste Artikel)

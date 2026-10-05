@@ -1,12 +1,12 @@
-// Service Worker der Trikot-Tracker-App: zeigt Pushes an und öffnet beim Antippen den passenden Link.
+// Service Worker der App (Tobias Trikot Tracker, TTT): zeigt Pushes an und öffnet beim Antippen den passenden Link.
 // Bewusst ohne Zwischenspeicher (Cache), damit Änderungen am Dashboard sofort ankommen.
 self.addEventListener("install", () => self.skipWaiting());
 self.addEventListener("activate", e => e.waitUntil(self.clients.claim()));
 
 self.addEventListener("push", e => {
   let d = {};
-  try { d = e.data ? e.data.json() : {}; } catch (err) { d = {title: "Trikot-Tracker", body: e.data ? e.data.text() : ""}; }
-  e.waitUntil(self.registration.showNotification(d.title || "Trikot-Tracker", {
+  try { d = e.data ? e.data.json() : {}; } catch (err) { d = {title: "TTT", body: e.data ? e.data.text() : ""}; }
+  e.waitUntil(self.registration.showNotification(d.title || "TTT", {
     body: d.body || "",
     icon: "icon-192.png",
     badge: "icon-192.png",
