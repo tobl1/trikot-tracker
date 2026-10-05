@@ -26,7 +26,7 @@ from .quellen import run_shop
 from .quellen.fyj import fyj_run
 from .rhythmus import drop_due
 from .speicher import load_json
-from .zustand import below_min, condition_info, desc_excluded
+from .zustand import below_min, condition_info, desc_excluded, desc_flock
 
 
 def recently_done(status_store, mode):
@@ -290,6 +290,10 @@ def main():
                 continue
             if it.get("desc") and it.get("source") == "direkt" and matcher.repro_flock(it["desc"]):
                 it["fyj_reissue"] = it["desc_repro"] = True   # wie FYJ-Reissue: nur Thiago/erlaubte Kategorien
+            if it.get("desc") and it.get("source") == "direkt":
+                flock = desc_flock(it["desc"])   # Flock steht manchmal nur in der Beschreibung
+                if flock and norm(flock) not in norm(it["match_text"]):
+                    it["match_text"] = f"{it['match_text']} {flock}"
             why = {}
             labs = matcher.labels(it["match_text"], it.get("fyj_reissue", False), it.get("desc", ""), it.get("ctx", ""), why)
             if not labs or not matcher.size_ok(it["size_text"], norm(it["match_text"])):

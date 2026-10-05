@@ -27,6 +27,24 @@ DESC_SHORTS_RX = re.compile(r"(?<![a-z])(le short en detail|short domicile|short
                             r"pantalon corto|pantalones cortos|pantaloncino|pantaloncini)(?![a-z])")
 
 
+# Ausdrückliche Flock-Angabe in der Beschreibung (trikotcult.de: Titel "Real Madrid Heimtrikot 2023/24 - XL",
+# Beschreibung "Flock: Toni Kroos #8 + La Liga Badge Zustand: Sehr gut"). Nur mit Stichwort, keine Spielerlisten
+# wie VFA "Joueurs : Henry, Touré, Iniesta" (das sind die Spieler der Saison, nicht der Flock)
+DESC_FLOCK_RX = re.compile(r"(?i)(?<![a-z])(?:flock|beflockung|flocage|flocking|name\s*(?:&|and|und)\s*(?:number|nummer))"
+                           r"\s*:?\s*(.{2,60}?)(?=\s*(?:\+|&|zustand|condition|[eé]tat|gr[oö](?:ß|ss)e|size|artikelnummer|"
+                           r"hinweis|info|ma[sß]e|$))")
+NO_FLOCK_RX = re.compile(r"(?i)^(ohne|kein|keiner|keine|none|no|nein|sans|sin|-)\b")
+
+
+def desc_flock(desc):
+    """Flock-Text aus der Beschreibung ("Toni Kroos #8") oder """""
+    m = DESC_FLOCK_RX.search(plain(desc))
+    if not m:
+        return ""
+    txt = m.group(1).strip(" :-,")
+    return "" if NO_FLOCK_RX.match(txt) or re.fullmatch(r"(?i)[\w ]*badges?", txt) else txt
+
+
 def desc_excluded(desc, title=""):
     """Grund, warum die Beschreibung den Artikel ausschließt (Training, Hose, kein Trikot), sonst "" """
     t = norm(plain(desc))

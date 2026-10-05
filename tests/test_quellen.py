@@ -571,3 +571,26 @@ def test_begruendung_und_groessenquelle():
     from trikot.berichte import doubt
     assert doubt({"groesse_quelle": "schlagwort"}).startswith("Größe nur aus einem Schlagwort")
     assert doubt({"push_offen": "t"}) == "Shop-Seite wird noch geprüft" and doubt({}) == ""
+
+
+# Flock nur in der Beschreibung (trikotcult.de, 05.10.2026)
+@pytest.mark.parametrize("desc,flock", [
+    ("Heimtrikot Real Madrid aus der Saison 2023/24 in der Größe XL. Flock: Toni Kroos #8 + La Liga Badge Zustand: Sehr gut", "Toni Kroos #8"),
+    ("Auswärtstrikot Hamburger SV aus der Saison 2008/09 in der Größe XL. Flock: Ruud van Nistelrooy #22 + Bundesliga Batch", "Ruud van Nistelrooy #22"),
+    ("Heimtrikot Juventus Turin aus der Saison 2011/12 in der Größe L. Flock Arturo Vidal #22 Zustand: Sehr gut", "Arturo Vidal #22"),
+    ("Atletico Madrid Heimtrikot. Flock: La Liga Badge Zustand: Sehr gut", ""),
+    ("Flock: ohne Zustand: gut", ""),
+    ("Etat : Excellent Joueurs : Henry, Touré, Iniesta, Abidal", ""),
+])
+def test_flock_aus_beschreibung(desc, flock):
+    from trikot.zustand import desc_flock
+    assert desc_flock(desc) == flock
+
+
+def test_flock_aus_beschreibung_im_abgleich():
+    from trikot.zustand import desc_flock
+    title = "Hamburger SV Auswärtstrikot 2008/09 - XL"
+    text = title + " " + desc_flock("Flock: Ruud van Nistelrooy #22 + Bundesliga Batch")
+    assert {l for l, _ in M.labels(text)} >= {"HSV 1990-2016"}
+    sonder = "FC Barcelona Heimtrikot 2011/12 - XL " + desc_flock("Flock: Xavi #6 + La Liga Badge Zustand: Sehr gut")
+    assert M.labels(sonder) == []          # fremder Flock: kein Thiago-Sondertrikot
