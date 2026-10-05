@@ -275,7 +275,7 @@ auf dem Foto erkennbar sind (z. B. Trainingsshirt ohne Hinweis im Titel), über 
   (`VAPID_PUBLIC` in docs/index.html), verschlüsselt das Abo (ECDH + HKDF + AES-GCM, Salt "trikot-tracker-1") und
   schickt es als Issue Label `push`. `issues.collect_push_abos()` legt das verschlüsselte Abo in `status.json` →
   `push_abos` (öffentlich, aber nur mit dem Secret lesbar) und schickt eine Bestätigung nur an dieses Abo
-  (`nur_abo`). Versand in `--mode senden` (`melden.send_outbox`): ntfy UND App; 404/410 = Abo erloschen, wird
+  (`nur_abo`). Versand in `--mode senden` (`melden.send_outbox`): nur noch an die App (bis 05.10.2026 zusätzlich ntfy); 404/410 = Abo erloschen, wird
   ausgetragen. Eigene Umsetzung `trikot/webpush.py` (RFC 8291/8292, nur `cryptography` + `http_ece`, kein pywebpush
   wegen aiohttp & Co.). Geheimer Schlüssel nur im Secret `VAPID_PRIVATE_KEY` (nie ausgeben, nur im Schritt
   "Pushes senden"). ntfy wurde am 05.10.2026 abgeschaltet, nachdem die App-Push ankam
