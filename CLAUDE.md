@@ -286,6 +286,11 @@ auf dem Foto erkennbar sind (z. B. Trainingsshirt ohne Hinweis im Titel), über 
   `grund: juckt nicht` verschickt → auf allen Geräten ausgeblendet, nie wieder Push. **Beim Ableiten von Regeln
   aus Flags `juckt nicht` ignorieren** (keine Fehlermeldung, nur Geschmack)
 
+## Shop wieder offen, Preissenkungen (05.10.2026)
+
+- **Shop wieder offen**: Shops mit Shopify-Passwortseite (HTTP 401, oft vor einem Drop) merkt sich `status.json` → `geschlossen` (`lauf.reopened`); ins Fehler-Log nur beim ersten Mal. Liefert der Shop wieder Artikel (Radar prüft Shopify-Shops alle 30 Min.), kommt eine Push "🔓 … ist wieder offen". Anlass: Kick It Vintage, Oh Calcio
+- **Preissenkungen bei allen Treffern** (`lauf.price_drop`, nur direkte Quellen, gleiche Währung, mind. 5 % und 1 Einheit): `preis_runter` am Treffer, Dashboard-Badge "PREIS ↓ x %", Push nur bei Thiago/Sondertrikots (hoch). Favoriten-Preisalarm (unten) bleibt zusätzlich
+
 ## Preisalarm für Favoriten
 
 - Glocke in der Favoriten-Ansicht → GitHub-Issue mit Label `alarm` (`grund: alarm`, `id:`). `check_alarms()`
@@ -483,8 +488,7 @@ per GitHub-Schlüssel nur auf dem Handy; cron-job.org bleibt. Vinted/Kleinanzeig
   für Rechenzentrums-IPs. Allgemein: Shops mit Fehler im letzten Gesamt-Run deckt FYJ wieder ab
 - footballcat.eu (Drop Sa 16 Uhr laut Nutzer): JS-Bot-Schutz ("challenge_passed"-Cookie), wird
   **bewusst nicht umgangen**, nicht bei FYJ. Nur per Instagram/Newsletter verfolgbar
-- Topbinz blockt alle automatischen Abrufe (HTTP 403 schon auf der Startseite), bleibt über FYJ;
-  laut Nutzer Drop Fr 19 Uhr. first11shirts.com laut Nutzer ebenfalls Fr 19 Uhr (feste Drop-Zeit),
+- **Topbinz seit 05.10.2026 direkt** (vorher 403): ShopWired, `plattform: html` mit Suche, Neuheiten-Seite `/new-in` (Radar und Drop-Run lesen nur diese), `pause: 10` (robots.txt Crawl-delay 10), `schnellcheck: nein` (Schnell-Run dauerte 14 Min.). Drop Fr 19 Uhr laut Nutzer. first11shirts.com laut Nutzer ebenfalls Fr 19 Uhr (feste Drop-Zeit),
   letzte Neuzugänge aber Do 01.10. gegen 21 Uhr, Rhythmus beobachten
 - Geplante Workflows werden nach 60 Tagen ohne Repo-Aktivität deaktiviert; die Commits des
   Trackers zählen als Aktivität

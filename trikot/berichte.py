@@ -50,6 +50,7 @@ def write_dashboard(seen, status_store, mode, ts, watch_cfg, shops):
             "still": bool(e.get("still")), "teuer": bool(e.get("teuer")), "repro": bool(e.get("repro")), "reissue": bool(e.get("reissue")),
             "warum": "; ".join(f"{l}: {r}" for l, r in (e.get("warum") or {}).items() if l in e["labels"]),
             "pruefen": doubt(e),
+            "preis_runter": (e.get("preis_runter") or {}).get("prozent", 0),
         })
     quellen = status_store.get("quellen") or {}
     data = {"stand": ts, "modus": mode, "letzter_gesamtlauf": status_store.get("last_full", ""),

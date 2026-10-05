@@ -32,7 +32,8 @@ SHOPIFY_GATE = RateGate(SHOPIFY_INTERVAL)
 
 
 class Http:
-    def __init__(self, gate=None):
+    def __init__(self, gate=None, delay=None):
+        self.delay = delay or DELAY   # Pause zwischen zwei Anfragen; je Shop überschreibbar (shops.yaml "pause")
         self.s = requests.Session()
         self.s.headers.update({"User-Agent": UA, "Accept-Language": "en,de;q=0.8"})
         # Shopify Markets: ohne das Cookie bekäme der GitHub-Server (USA) US-Preise in USD
@@ -47,7 +48,7 @@ class Http:
     def post(self, url, json=None, headers=None):
         """POST mit derselben Pause und Wiederholung bei Drosselung wie get(); liefert JSON oder None"""
         for attempt in range(3):
-            wait = DELAY - (time.time() - self.last)
+            wait = self.delay - (time.time() - self.last)
             if wait > 0:
                 time.sleep(wait)
             self.last = time.time()
@@ -77,7 +78,7 @@ class Http:
     def get(self, url, params=None, want="json"):
         attempts = 5 if self.gate else 3
         for attempt in range(attempts):
-            wait = DELAY - (time.time() - self.last)
+            wait = self.delay - (time.time() - self.last)
             if wait > 0:
                 time.sleep(wait)
             if self.gate:

@@ -16,7 +16,7 @@ from .woo import woo_endpoint, woo_recent, woo_run
 def run_shop(shop, mode, matcher, platforms, currencies):
     name, base = shop["name"], shop["url"].rstrip("/")
     plat = (shop.get("plattform") or "auto").lower()
-    http = Http()
+    http = Http(delay=float(shop["pause"]) if shop.get("pause") else None)   # z. B. robots.txt Crawl-delay
     t0 = time.time()
     status = {"name": name, "plattform": plat, "produkte": 0, "fehler": "", "info": ""}
     try:
@@ -37,7 +37,8 @@ def run_shop(shop, mode, matcher, platforms, currencies):
             status.update(produkte=n)
             return items, status
         if plat == "html":
-            items, n = html_run(http, name, base, matcher.queries(only_high=(mode == "priority")), matcher, shop)
+            items, n = html_run(http, name, base, matcher.queries(only_high=(mode == "priority")), matcher, shop,
+                                newest=mode in ("drop", "radar"))
             status.update(produkte=n)
             return items, status
         if plat == "wix":

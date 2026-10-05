@@ -121,14 +121,16 @@ def idosell_run(http, shop, base, queries, matcher, max_pages=6):
     return items, n
 
 
-def html_run(http, shop, base, queries, matcher, cfg):
-    """Allgemeine Anbindung über Such-Ergebnisseiten (z. B. Gambio, eigene Shopsysteme), konfiguriert
+def html_run(http, shop, base, queries, matcher, cfg, newest=False):
+    """Allgemeine Anbindung über Such-Ergebnisseiten (z. B. Gambio, ShopWired, eigene Shopsysteme), konfiguriert
     in shops.yaml: suche (URL mit {q}), link (CSS-Selektor der Produktlinks), optional groessen (CSS
-    der Größen-Auswahl auf der Produktseite). Produktseiten werden nur für passende Titel geladen"""
+    der Größen-Auswahl auf der Produktseite) und neu (Seite mit den neuesten Artikeln: Drop-Run und Radar lesen
+    dann nur diese eine Seite statt aller Suchen). Produktseiten werden nur für passende Titel geladen"""
     from urllib.parse import quote_plus
     items, n, urls = [], 0, set()
-    for q in queries:
-        txt = http.get(base + cfg["suche"].format(q=quote_plus(q)), want="text")
+    pages = [cfg["neu"]] if newest and cfg.get("neu") else [cfg["suche"].format(q=quote_plus(q)) for q in queries]
+    for path in pages:
+        txt = http.get(base + path, want="text")
         if not txt:
             continue
         links = BeautifulSoup(txt, "html.parser").select(cfg["link"])

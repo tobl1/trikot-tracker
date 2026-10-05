@@ -628,3 +628,48 @@ def test_schnellrun_ueberspringt_shopify(monkeypatch):
                                    {"https://vfa.com": "shopify"}, {})
     assert items == [] and st["fehler"] == "" and http.calls == []          # keine einzige Anfrage
     assert "Radar" in st["info"]
+
+
+# Topbinz (ShopWired): Neuheiten-Seite im Radar, 10 Sek. Pause laut robots.txt
+TB_TILE = """<article class="item-box product-box" data-product-id="1"><h3 class="product-box-title item-box-title">
+<a href="https://www.topbinzfootballshirts.co.uk/bayern-munich-thiago-6-2015-16-home-shirt-xl">Bayern Munich Thiago #6 2015/16 Home Shirt - XL</a></h3>
+<span class="price">£95.00</span></article>"""
+TB_PAGE = """<script type="application/ld+json">{"@type": "Product", "offers": {"price": "95.00", "priceCurrency": "GBP",
+"availability": "https://schema.org/InStock"}, "image": "https://cdn.ecommercedns.uk/x.jpg"}</script>"""
+TB = {"name": "Topbinz", "url": "https://www.topbinzfootballshirts.co.uk", "plattform": "html", "pause": 10,
+      "suche": "/search/products?keywords={q}", "link": "article.product-box h3 a", "neu": "/new-in"}
+
+
+def test_topbinz_radar_liest_nur_neuheiten(monkeypatch):
+    made = []
+
+    def fake(*a, **k):
+        h = FakeHttp([("/new-in", TB_TILE), ("thiago-6-2015-16", TB_PAGE)])
+        made.append(k.get("delay"))
+        return h
+    monkeypatch.setattr(trikot.quellen, "Http", fake)
+    items, st = trikot.quellen.run_shop(TB, "radar", M, {}, {})
+    assert made == [10.0] and len(items) == 1 and items[0]["price"] == "95.00 GBP" and passt(items[0])
+    from trikot.lauf import radar_shops
+    assert [s["name"] for s in radar_shops([TB], {})] == ["Topbinz"]
+
+
+def test_preissenkung_in_originalwaehrung():
+    from trikot.lauf import price_drop
+    assert price_drop("£100.00", "£80.00") == 20
+    assert price_drop("100.00 EUR", "97.00 EUR") == 0          # unter 5 %
+    assert price_drop("£100.00", "120.00 EUR") == 0            # andere Währung: nicht vergleichen
+    assert price_drop("79.99 EUR", "89.99 EUR") == 0           # teurer
+    assert price_drop("", "50 EUR") == 0
+
+
+def test_shop_wieder_offen():
+    from trikot.lauf import reopened
+    closed = {}
+    zu = {"name": "Kick It Vintage", "fehler": "geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop", "produkte": 0}
+    assert reopened(closed, [zu], "t1") == [] and closed == {"Kick It Vintage": "t1"}
+    assert reopened(closed, [zu], "t2") == [] and closed == {"Kick It Vintage": "t1"}      # bleibt beim ersten Mal
+    schnell = {"name": "Kick It Vintage", "fehler": "", "produkte": 0}                       # z. B. Schnell-Run ohne Shopify
+    assert reopened(closed, [schnell], "t3") == []
+    offen = {"name": "Kick It Vintage", "fehler": "", "produkte": 40}
+    assert reopened(closed, [offen], "t4") == [("Kick It Vintage", "t1")] and closed == {}

@@ -533,6 +533,7 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     const down = f && !t.gone && f.eur != null && t.eur != null && t.eur < f.eur - 0.5;
     const badges = [t.gone && '<span class="badge gone">NICHT MEHR GELISTET</span>',
                     down && `<span class="badge down">PREIS ↓ von ${eur(f.eur)}</span>`,
+                    !down && t.preis_runter && !t.gone && `<span class="badge down" title="Preis gesenkt">PREIS ↓ ${t.preis_runter} %</span>`,
                     t.neu && !t.gone && '<span class="badge new">NEU</span>', t.thiago && t.gone && '<span class="badge hi">THIAGO</span>',
                     t.repro && '<span class="badge re" title="Original-Trikot, Name und Nummer nachgedruckt">REPRO-FLOCK</span>',
                     t.reissue && '<span class="badge re" title="Neuauflage, z. B. Nikes T90-Reissue von 2025, kein Original von damals">NEUAUFLAGE</span>',

@@ -37,7 +37,10 @@ shops:
   - {name: Granny's Football Store, url: "https://grannysfootballstore.com"}
   - {name: TSPN Calcio, url: "https://tspncalcio.com"}
   - {name: The Third Kit, url: "https://thethirdkit.co.uk"}
-  - {name: Topbinz, url: "https://www.topbinzfootballshirts.co.uk", plattform: fyj, hinweis: "blockt Abrufe (403), Drop Fr 19 Uhr laut Nutzer"}
+  # Topbinz (ShopWired): bis 05.10.2026 403, jetzt wieder erreichbar (auch aus GitHub). robots.txt verlangt
+  # 10 Sek. Pause (Crawl-delay), Drop Fr 19 Uhr laut Nutzer. Drop-Run und Radar lesen nur die Neuheiten-Seite
+  - {name: Topbinz, url: "https://www.topbinzfootballshirts.co.uk", plattform: html, pause: 10, drop: ["Fr 19:00"], schnellcheck: nein,
+     suche: "/search/products?keywords={q}", link: "article.product-box h3 a", neu: "/new-in"}
   - {name: Football Shirt Union, url: "https://footballshirtunion.com"}
   - {name: Saturdays Football, url: "https://saturdaysfootball.com"}
   - {name: The Football Boutique, url: "https://www.thefootballboutique.com", plattform: wix}

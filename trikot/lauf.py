@@ -14,13 +14,13 @@ from . import speicher, webpush
 from .abgleich import Matcher
 from .basis import (
     EINBRUCH_ANTEIL, EINBRUCH_MIN, EINBRUCH_RUNS, ENRICH_BUDGET, FALLBACK_SKIP_HOURS, MAX_PUSH_HIGH,
-    CRON_TOKEN_ABLAUF, MAX_WORKERS, RADAR_MIN, ROOT, RUN_HISTORY, SIZE_RX, canon_url, domain, is_high, norm, now, short_size,
+    CRON_TOKEN_ABLAUF, MAX_WORKERS, TZ, RADAR_MIN, ROOT, RUN_HISTORY, SIZE_RX, canon_url, domain, is_high, norm, now, short_size,
 )
 from .berichte import fundgrube, log_problems, write_dashboard, write_report
 from .issues import add_shops_from_issues, apply_flags, check_alarms, collect_push_abos
 from .melden import OUTBOX_MAX_HOURS, detail_line, push, push_label, save_outbox, send_outbox, short
 from .netz import Http
-from .preise import fetch_rates, to_eur
+from .preise import fetch_rates, parse_price, to_eur
 from .pruefung import enrich, hold_unchecked
 from .quellen import run_shop
 from .quellen.fyj import fyj_run
@@ -72,7 +72,12 @@ def radar_shops(shops, platforms):
     Nicht: Wix (ganzer Katalog), Such-Shops (CFS, IdoSell, eigene Systeme), deaktivierte und gesperrte"""
     out = []
     for s in shops:
-        if (s.get("plattform") or "auto").lower() != "auto" or str(s.get("sperren", "")).lower() in ("ja", "true", "yes"):
+        if str(s.get("sperren", "")).lower() in ("ja", "true", "yes"):
+            continue
+        if (s.get("plattform") or "").lower() == "html" and s.get("neu"):
+            out.append(s)   # eigene Shopsysteme mit Neuheiten-Seite: eine Seite pro Radar
+            continue
+        if (s.get("plattform") or "auto").lower() != "auto":
             continue
         plat = platforms.get(s["url"].rstrip("/"), "")
         if plat == "shopify" or plat.startswith("woo:"):
@@ -84,6 +89,27 @@ def radar_job(shop, radar_checks):
     """Shop-Eintrag fürs Radar: mit Zeitpunkt der letzten Radar-Prüfung (zum Weiterblättern bei vielen Neuen)"""
     last = radar_checks.get(shop["name"])
     return dict(shop, _seit=dt.datetime.fromisoformat(last) if last else None)
+
+
+def reopened(closed, statuses, ts):
+    """Geschlossene Shops (Passwortseite) merken; zurück kommen die, die wieder Artikel liefern: [(Name, seit)]"""
+    out = []
+    for st in statuses:
+        if str(st.get("fehler", "")).startswith("geschlossen (Passwortseite"):
+            closed.setdefault(st["name"], ts)
+        elif st["name"] in closed and not st.get("fehler") and st.get("produkte", 0) > 0:
+            out.append((st["name"], closed.pop(st["name"])))
+    return out
+
+
+def price_drop(old, new, min_share=0.05):
+    """Preissenkung in Prozent (ganzzahlig), wenn der Preis in derselben Währung um mind. min_share fällt, sonst 0.
+    Bewusst ohne Euro-Umrechnung: Kursschwankungen wären sonst Preissenkungen"""
+    a, ca = parse_price(old)
+    b, cb = parse_price(new)
+    if not a or not b or (ca and cb and ca != cb) or b >= a * (1 - min_share) or a - b < 1:
+        return 0
+    return round(100 * (a - b) / a)
 
 
 def stock_collapse(collapse, name, n_now, n_prev):
@@ -261,7 +287,7 @@ def main():
     def too_expensive(e):
         eur = to_eur(e.get("price"), rates)
         return bool(max_eur and eur and eur > max_eur and not no_limit & set(e["labels"]))
-    new_entries = []
+    new_entries, price_drops = [], []
     counts = status_store.setdefault("counts", {})
     collapse = status_store.setdefault("einbruch", {})
     for src_name, its, st in results:
@@ -320,6 +346,11 @@ def main():
                 entry["labels"] = sorted(set(entry["labels"]) | {l for l, _ in labs})
                 entry["prios"] = sorted(set(entry["prios"]) | {p for _, p in labs})
                 if it["source"] == "direkt":      # direkte Daten sind aktueller als FYJ
+                    drop = price_drop(entry.get("price"), it["price"])
+                    if drop:
+                        entry["preis_runter"] = {"von": entry["price"], "prozent": drop, "zeit": ts}
+                        if is_high(entry) and not entry.get("teuer"):
+                            price_drops.append(entry)
                     entry.update(price=it["price"] or entry.get("price", ""), shop=it["shop"], via="direkt")
                     if it.get("pruefen"):
                         entry["pruefen"] = True
@@ -429,6 +460,22 @@ def main():
                  (f"\n… und {len(bundle) - 20} weitere" if len(bundle) > 20 else ""),
                  3, report_url, None, ["soccer"], args.dry_run)
 
+    # Preissenkungen bei Thiago und Sondertrikots (alle anderen: nur Markierung im Dashboard)
+    for e in price_drops[:MAX_PUSH_HIGH]:
+        if not (e.get("verkauft") or e.get("aussortiert") or e.get("weg")):
+            push(f"📉 Preis gesenkt · {e['shop']}", f"{push_label(e)}: {e['title']}\n{e['preis_runter']['von']} → {e['price']} "
+                 f"(−{e['preis_runter']['prozent']} %)", 4, e["url"], e.get("image"), ["chart_with_downwards_trend"], args.dry_run)
+
+    # Shop wieder offen: Shops mit Passwortseite (oft kurz vor einem Drop) melden sich, sobald sie wieder liefern
+    closed = status_store.setdefault("geschlossen", {})
+    closed_before = set(closed)
+    urls = {s["name"]: s["url"] for s in shops_cfg.get("shops") or []}
+    for name, since in reopened(closed, statuses, ts):
+        since = dt.datetime.fromisoformat(since).astimezone(TZ)
+        push(f"🔓 {name} ist wieder offen", f"War seit {since:%d.%m. %H:%M} mit Passwort geschlossen, oft kommt "
+             "danach ein Drop. Neue Treffer meldet der Tracker wie gewohnt.", 4, urls.get(name), None,
+             ["unlock"], args.dry_run)
+
     # Fundgrube wöchentlich (nach der Auswertung der FYJ-Treffer in diesem Gesamt-Run)
     if args.mode == "full" and not args.only and fyj_status and not fyj_status.get("fehler"):
         cands = fundgrube(status_store, shops_cfg.get("shops") or [], ts)
@@ -488,8 +535,10 @@ def main():
     else:
         write_report(seen, run_sources, "", args.mode)
     write_dashboard(seen, status_store, args.mode, ts, watch, shops_cfg.get("shops") or [])
+    # geschlossene Shops nur beim ersten Mal ins Fehler-Log (danach wartet der Tracker still auf die Öffnung)
     problems = [(s["name"], s["fehler"]) for s in run_sources
-                if s.get("fehler") and not str(s["fehler"]).startswith("deaktiviert")]
+                if s.get("fehler") and not str(s["fehler"]).startswith("deaktiviert")
+                and not (str(s["fehler"]).startswith("geschlossen (Passwortseite") and s["name"] in closed_before)]
     if args.mode == "full":
         problems += token_reminder(now().date())
     for host, codes in check_fails.items():
