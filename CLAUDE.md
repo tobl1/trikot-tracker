@@ -502,7 +502,7 @@ per GitHub-Schlüssel nur auf dem Handy; cron-job.org bleibt. Vinted/Kleinanzeig
   githubstatus.com prüfen
 - footballcat.eu (Drop Sa 16 Uhr laut Nutzer): JS-Bot-Schutz ("challenge_passed"-Cookie), wird
   **bewusst nicht umgangen**, nicht bei FYJ. Nur per Instagram/Newsletter verfolgbar
-- **Topbinz seit 05.10.2026 direkt** (vorher 403): ShopWired, `plattform: html` mit Suche, Neuheiten-Seite `/new-in` (Radar und Drop-Run lesen nur diese), `pause: 10` (robots.txt Crawl-delay 10), `schnellcheck: nein` (Schnell-Run dauerte 14 Min.). Drop Fr 19 Uhr laut Nutzer. first11shirts.com laut Nutzer ebenfalls Fr 19 Uhr (feste Drop-Zeit),
+- **Topbinz seit 05.10.2026 direkt** (vorher 403): ShopWired, `plattform: html` mit Suche, Zustand aus "Condition rating - GOOD" (seit 06.10.2026), Neuheiten-Seite `/new-in` (Radar und Drop-Run lesen nur diese), `pause: 10` (robots.txt Crawl-delay 10), `schnellcheck: nein` (Schnell-Run dauerte 14 Min.). Drop Fr 19 Uhr laut Nutzer. first11shirts.com laut Nutzer ebenfalls Fr 19 Uhr (feste Drop-Zeit),
   letzte Neuzugänge aber Do 01.10. gegen 21 Uhr, Rhythmus beobachten
 - Geplante Workflows werden nach 60 Tagen ohne Repo-Aktivität deaktiviert; die Commits des
   Trackers zählen als Aktivität

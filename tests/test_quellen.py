@@ -705,3 +705,11 @@ def test_seitenpruefung_zeitlimit(monkeypatch):
     seen = {str(i): entry(f"https://x.com/{i}", last=ts) for i in range(4)}
     n, fails = trikot.pruefung.enrich(seen, ts, 50, M, deadline=1)
     assert n == 0 and fails["x.com"]["übersprungen (Zeitlimit)"] == 4
+
+
+def test_topbinz_zustand():
+    from trikot.zustand import condition_info
+    desc = ('Size - XL&nbsp;*Measured flat: pit to pit x top of collar to hem.60x74 Condition rating - GOODGreat colour '
+            'and fabric feel. Nameset has some wear and a large stain to the front.Sponsor - Brand - PUMASKU: 4962')
+    grade, note = condition_info("Italy Gattuso #4 2006/07 Away Shirt - XL", desc)
+    assert grade == "Good" and note.startswith("Condition rating - GOOD Great colour") and "stain" in note

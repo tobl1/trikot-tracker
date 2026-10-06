@@ -7,9 +7,9 @@ from .basis import NOTE_LEN, norm, plain
 
 SCORE_RX = re.compile(r"(?<![\d/.,])(10|[1-9](?:[.,]5)?)\s*/\s*10(?![\d/])")   # 8/10, nicht 2009/10
 NEW_TAG_RX = re.compile(r"(?<![a-z])(bnwt|bnwot|bnib|deadstock|brand new with tags|new with tags)(?![a-z])", re.I)
-COND_KEY_RX = re.compile(r"(?i)(?<![a-z])(condition|zustand|stan|staat van het shirt|staat|estado|stato|used)\s*[:\-]")
+COND_KEY_RX = re.compile(r"(?i)(?<![a-z])(condition(?: rating)?|zustand|stan|staat van het shirt|staat|estado|stato|used)\s*[:\-]")
 SOLD_RX = re.compile(r"(?i)outofstock|soldout|discontinued")
-COND_WORD_RX = re.compile(r"(?i)^(?:condition|zustand|stan|staat van het shirt|staat|estado|stato|used)\s*[:\-]\s*(mint|excellent|very good|good|fair|poor|"
+COND_WORD_RX = re.compile(r"(?i)^(?:condition(?: rating)?|zustand|stan|staat van het shirt|staat|estado|stato|used)\s*[:\-]\s*(mint|excellent|very good|good|fair|poor|"
                           r"used|new|like new|as new|perfect|great|average)(?![a-z])")
 DESC_OTHER_RX = re.compile(r"(?<![a-z])(t-shirt|t shirt|tee-shirt|tee shirt|jacket|veste|track top|tracktop)(?![a-z])")
 DESC_JERSEY_RX = re.compile(r"(?<![a-z])(maillot|jersey|trikot|camiseta|camisola|maglia|koszulka|shirt home|"
@@ -85,7 +85,8 @@ def below_min(grade, minimum):
 
 def condition_info(title, desc, fallback=""):
     """('8/10' | 'BNWT' | FYJ-Angabe wie 'Very Good' | '', Notiz ab 'Condition:' oder '')"""
-    text = plain(desc)
+    # Topbinz (06.10.2026): "Condition rating - GOODGreat colour …", im JSON-LD fehlt der Abstand nach dem Großwort
+    text = re.sub(r"([A-Z]{2,})([A-Z][a-z])", r"\1 \2", plain(desc))
     m = SCORE_RX.search(title) or SCORE_RX.search(text)
     if m:
         grade = m.group(1).replace(",", ".") + "/10"
