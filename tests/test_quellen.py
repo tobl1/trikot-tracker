@@ -434,6 +434,7 @@ def test_beschreibung_training_und_hose():
     # 06.10.2026: Torwarttrikot nur in der Beschreibung
     assert desc_excluded("Le maillot en détail : Maillot gardien possédant un design original. Joueurs : Víctor Valdés",
                          "2012/13 - Barcelone (XL)") == "Beschreibung: Torwarttrikot"
+    assert not M.labels("2012-13 Barcelona Nike Reversible Padded Bench Coat - 8/10 - (XL)")
     assert desc_excluded("Home shirt. Our goalkeeper Valdés kept 20 clean sheets", "Barcelona 2010/11 Home XL") == ""
 
 
@@ -520,6 +521,8 @@ def test_vereinsfilter_nutzt_schlagwoerter():
     p = shopify_prod("Thiago #6 Away Shirt XL", "away-shirt-thiago-6", [var("Default Title")], tags=["PSG"])
     it = tracker.shopify_to_item("Shop", "https://s.com", p)
     assert M.labels(it["match_text"], ctx=it["ctx"]) == []                   # anderer Verein: weiter nein
+    # Titel nennt anderen Verein: Kontext zählt nicht (Henry nur Arsenal, Shop-Schlagwort "Arsenal")
+    assert M.labels("Henry Barcelona TREBLE SEASON 2008 2009 Away Soccer Jersey Shirt XL", ctx="arsenal barcelona") == []
     # Kontext ersetzt nie den Spielernamen und gilt nicht für Sondertrikots
     assert M.labels("Away Shirt 2021/22 XL", ctx="liverpool thiago") == []
 

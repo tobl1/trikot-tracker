@@ -34,6 +34,10 @@ class Matcher:
                 "vereine": any_rx(p.get("vereine")),
                 "vereine_terms": p.get("vereine") or [],
             })
+        # alle bekannten Vereine/Teams: nennt der Titel einen davon, zählt der Shop-Kontext nicht (06.10.2026: "Henry
+        # Barcelona TREBLE SEASON 2008 2009 Away" mit Schlagwort "Arsenal" kam als Henry-Treffer)
+        self.all_clubs = any_rx(sorted({c for p in cfg.get("spieler") or [] for c in p.get("vereine") or []} |
+                                       {c for k in cfg.get("sondertrikots") or [] for c in k.get("verein") or []}))
         self.nachbau = any_rx(cfg.get("nachbau"))
         self.nachbau_ok = set(cfg.get("nachbau_erlaubt_fuer") or [])
         rf = cfg.get("repro_flock") or {}
@@ -152,13 +156,14 @@ class Matcher:
 
     def _labels(self, t, d="", star=False, c="", why=None):
         """c: Kontext des Shops (Schlagwörter, Produktart, Produktadresse). Zählt nur für den Vereinsfilter der
-        Spieler ("Thiago #6 Away Shirt" mit Schlagwort "Liverpool"), nie für Spielernamen oder Sondertrikots.
+        Spieler ("Thiago #6 Away Shirt" mit Schlagwort "Liverpool"), nie für Spielernamen oder Sondertrikots, und nur,
+        wenn der Titel selbst keinen bekannten Verein nennt.
         why: dict, bekommt je Label eine kurze Begründung ("warum Treffer", fürs Dashboard)"""
         out = []
         for p in self.players:
             if not hit(p["suche"], t) or hit(p["aus"], t):
                 continue
-            if p["vereine"] and not (hit(p["vereine"], t) or (c and hit(p["vereine"], c))):
+            if p["vereine"] and not (hit(p["vereine"], t) or (c and not hit(self.all_clubs, t) and hit(p["vereine"], c))):
                 continue
             out.append((p["name"], p["prio"]))
             if why is not None:

@@ -36,6 +36,9 @@ produkt_ausschluss: ["shorts", "socks", "sock", "jacket", "track top", "tracksui
                      "chaqueta", "chamarra", "sudadera", "chandal", "survetement", "kurtka", "bluza",
                      # Pullis und Hosen (Probelauf 05.10.2026: "Sweat Top", "Hooded Top", "Pantaloncino" = Shorts)
                      "sweat", "sweat top", "hooded", "pantaloncino", "pantaloncini", "pantalon", "pantalones", "pantaloni",
+                     # Mäntel und Jacken (06.10.2026: CFS "2012-13 Barcelona Nike Reversible Padded Bench Coat" als Barça-Treffer)
+                     "coat", "bench coat", "anorak", "parka", "windbreaker", "rain jacket", "gilet", "manteau",
+                     "mantel", "cappotto", "abrigo", "drill top",
                      # andere Vereine mit gleichem Namen
                      "barcelona sc", "barcelona s.c.", "barcelona sporting", "guayaquil", "espanyol"]
 

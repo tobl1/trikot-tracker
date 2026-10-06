@@ -160,6 +160,9 @@ temporären Workflow aus GitHub heraus (Beispiel 05.10.2026: CFS-Suche "thiago" 
   25 s = 100 Min., Gesamt-Run lief 176 von 180 Min. (bei Timeout wäre der ganze Run verloren). Gesamt-Run sonst ca.
   70 Min. für die Shops (Shopify-Bremse: VFA 65, Vintage Football Shirts 57, Saturdays 44 Min., Topbinz 38 Min.)
 - Torwarttrikot nur in der Beschreibung ("Maillot gardien", VFA) → `desc_excluded` (06.10.2026)
+- 06.10.2026 außerdem: Mäntel/Jacken ("coat", "bench coat", "anorak", "parka" …) in `produkt_ausschluss` (CFS Barça
+  "Reversible Padded Bench Coat" kam als Sondertrikot-Push); Shop-Kontext im Vereinsfilter zählt nur, wenn der Titel
+  keinen bekannten Verein nennt (`Matcher.all_clubs`; "Henry Barcelona … Away" mit Schlagwort "Arsenal")
 - Nach Regeländerungen verschwinden schon angezeigte Fehltreffer erst mit dem nächsten Gesamt-Run (`weg`), Meldungen
   in der Zwischenzeit sind also oft schon erledigt (z. B. #35/#36 vom 05.10.2026 abends)
 - **Preisgrenze** (`preisgrenze` in watchlist.yaml): über 150 € kein Push, im Dashboard standardmäßig
