@@ -1,9 +1,8 @@
 name: Dashboard veröffentlichen
 
 # Baut die Seite aus docs/ (Code-Zweig main) und treffer.json (Daten-Zweig) und veröffentlicht sie auf GitHub Pages.
-# Läuft nach jedem Tracker-Run mit neuen Daten (aufgerufen aus tracker.yml) und bei Änderungen am Dashboard
+# Läuft nach jedem Tracker-Run mit neuen Daten (angestoßen per workflow_dispatch aus tracker.yml) und bei Änderungen am Dashboard
 on:
-  workflow_call:
   workflow_dispatch:
   push:
     branches: [main]

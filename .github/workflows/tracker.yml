@@ -30,6 +30,7 @@ concurrency:
 permissions:
   contents: write
   issues: write          # Meldungen aus dem Dashboard lesen und nach Übernahme schließen
+  actions: write         # Dashboard-Workflow anstoßen
 
 env:
   ZWEIG: ${{ inputs.zweig || 'daten' }}
@@ -131,6 +132,15 @@ jobs:
             git push -q origin "HEAD:$ZWEIG"
           fi
 
+      - name: Dashboard anstoßen
+        # Eigener Workflow statt Job hier drin: am 06.10.2026 hing der Pages-Job über eine Stunde im Status "waiting"
+        # und blockierte damit alle folgenden Runs (Concurrency). So ist der Run sofort fertig
+        if: steps.speichern.outputs.geaendert == 'ja' && env.ZWEIG == 'daten' && inputs.stumm != true
+        continue-on-error: true   # Dashboard ist Beiwerk, der Run bleibt gültig
+        run: gh workflow run dashboard.yml --ref main
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Fehlschlag ins Fehler-Log
         if: failure()
         env:
@@ -151,12 +161,3 @@ jobs:
           cd daten
           git add state/fehlerlog.json FEHLER.md
           git commit -q -m "Fehler-Log: Run abgebrochen" && git push -q origin "HEAD:$ZWEIG" || true
-
-  dashboard:
-    needs: run
-    if: needs.run.outputs.geaendert == 'ja' && (inputs.zweig || 'daten') == 'daten' && inputs.stumm != true
-    uses: ./.github/workflows/dashboard.yml
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
