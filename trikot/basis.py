@@ -32,6 +32,11 @@ FYJ_MARKETPLACES = ("ebay.", "depop.", "vinted.", "etsy.")   # über FYJ nicht �
 RECHECK_DAYS = 3             # FYJ-Treffer so oft auf der Shop-Seite nachprüfen (verkauft?)
 CHECK_VERSION = 2            # erhöhen, wenn die Seitenprüfung mehr auswertet: dann wird alles neu geprüft
 ENRICH_BUDGET = {"full": 400, "priority": 25, "drop": 25}   # max. Seitenprüfungen pro Lauf
+# Zeitlimit für Seitenprüfungen, Minuten ab Start des Runs: danach startet keine Prüfung mehr. Grund: am 06.10.2026
+# war Classic-Shirts nicht erreichbar, 75 Seiten x 3 Versuche x 25 s Timeout = 100 Min., der Gesamt-Run lief 176 von
+# 180 Min. (bei Timeout wäre der ganze Run verloren)
+ENRICH_DEADLINE_MIN = {"full": 140, "priority": 45, "drop": 10}
+HOST_FAIL_LIMIT = 3          # so viele gescheiterte Seitenprüfungen in Folge, dann ist der Shop für diesen Run raus
 NOTE_LEN = 160               # Länge der Zustandsnotiz
 FALLBACK_SKIP_HOURS = {"full": 20, "priority": 5.5}   # GitHub-Zeitplan überspringt, wenn schon gelaufen (Schnell-Runs alle 6 h)
 RUN_HISTORY = 400            # so viele Läufe merken (Eingangsverlauf; mit Radar ca. 30 Runs am Tag)

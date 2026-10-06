@@ -26,6 +26,12 @@ DESC_TRAINING_RX = re.compile(r"(?<![a-z])(maillot d entrainement|maillot entrai
 DESC_SHORTS_RX = re.compile(r"(?<![a-z])(le short en detail|short domicile|short exterieur|short en excellent|"
                             r"pantalon corto|pantalones cortos|pantaloncino|pantaloncini)(?![a-z])")
 
+# Torwarttrikot nur in der Beschreibung (VFA "2012/13 - Barcelone (XL)": "Maillot gardien possédant un design …").
+# Nur feste Wendungen, "goalkeeper" allein kommt auch in Vereinsgeschichten vor
+DESC_KEEPER_RX = re.compile(r"(?<![a-z])(maillot gardien|maillot de gardien|goalkeeper shirt|goalkeeper jersey|"
+                            r"goalkeeper top|gk shirt|keeper shirt|torwarttrikot|torwart trikot|camiseta de portero|"
+                            r"camiseta portero|maglia da portiere|maglia portiere)(?![a-z])")
+
 
 # Ausdrückliche Flock-Angabe in der Beschreibung (trikotcult.de: Titel "Real Madrid Heimtrikot 2023/24 - XL",
 # Beschreibung "Flock: Toni Kroos #8 + La Liga Badge Zustand: Sehr gut"). Nur mit Stichwort, keine Spielerlisten
@@ -54,6 +60,8 @@ def desc_excluded(desc, title=""):
         return "Beschreibung: Trainingsshirt"
     if DESC_SHORTS_RX.search(t):
         return "Beschreibung: Hose"
+    if DESC_KEEPER_RX.search(t):
+        return "Beschreibung: Torwarttrikot"
     if desc_not_jersey(desc, title):
         return "Beschreibung: kein Trikot (T-Shirt/Jacke)"
     return ""

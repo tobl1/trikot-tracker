@@ -13,7 +13,7 @@ import yaml
 from . import speicher, webpush
 from .abgleich import Matcher
 from .basis import (
-    EINBRUCH_ANTEIL, EINBRUCH_MIN, EINBRUCH_RUNS, ENRICH_BUDGET, FALLBACK_SKIP_HOURS, MAX_PUSH_HIGH,
+    EINBRUCH_ANTEIL, EINBRUCH_MIN, EINBRUCH_RUNS, ENRICH_BUDGET, ENRICH_DEADLINE_MIN, FALLBACK_SKIP_HOURS, MAX_PUSH_HIGH,
     CRON_TOKEN_ABLAUF, MAX_WORKERS, TZ, RADAR_MIN, ROOT, RUN_HISTORY, SIZE_RX, canon_url, domain, is_high, norm, now, short_size,
 )
 from .berichte import fundgrube, log_problems, write_dashboard, write_report
@@ -135,6 +135,7 @@ def main():
     ap.add_argument("--rueckfall", action="store_true",
                     help="Start über den GitHub-Zeitplan: nur laufen, wenn cron-job.org den Run nicht schon erledigt hat")
     args = ap.parse_args()
+    started = time.time()
 
     if args.mode == "test":   # Test-Push an alle App-Abos, über den Postausgang (verschickt im Schritt danach)
         push("✅ TTT verbunden", "Wenn du das liest, funktionieren die Pushes aus der App.", 4, dry=args.dry_run)
@@ -410,7 +411,8 @@ def main():
                 e.pop("weg", None)
 
     # FYJ-Treffer auf der Shop-Seite prüfen (verkauft? Zustand?), neue zuerst, vor den Pushes
-    checked, check_fails = enrich(seen, ts, ENRICH_BUDGET.get(args.mode, 0), matcher)
+    checked, check_fails = enrich(seen, ts, ENRICH_BUDGET.get(args.mode, 0), matcher,
+                                  deadline=started + 60 * ENRICH_DEADLINE_MIN.get(args.mode, 10))
     for e in seen.values():
         if e["last"] == ts:
             e["teuer"] = too_expensive(e)

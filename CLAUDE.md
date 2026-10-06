@@ -154,6 +154,14 @@ temporären Workflow aus GitHub heraus (Beispiel 05.10.2026: CFS-Suche "thiago" 
   Nicht per Text erkennbar: z. B. Nike-Trainingsshirt "2010-11 BARCELONA SHIRT XL" (classic-shirts),
   nur per `ausschluss_urls` (Bilderkennung verworfen, soll kostenlos bleiben)
 - `CHECK_VERSION`: erhöhen, wenn die Seitenprüfung mehr auswertet, dann wird alles neu geprüft
+- **Seitenprüfung gebremst** (06.10.2026): nach `HOST_FAIL_LIMIT` (3) Fehlschlägen in Folge ist ein Shop für den Run
+  raus, nach `ENRICH_DEADLINE_MIN` (Gesamt-Run 140 Min. ab Start) startet keine Prüfung mehr, der Rest kommt im
+  nächsten Run (Fehler-Log "übersprungen"). Anlass: Classic-Shirts nachts nicht erreichbar, 75 Seiten x 3 Versuche x
+  25 s = 100 Min., Gesamt-Run lief 176 von 180 Min. (bei Timeout wäre der ganze Run verloren). Gesamt-Run sonst ca.
+  70 Min. für die Shops (Shopify-Bremse: VFA 65, Vintage Football Shirts 57, Saturdays 44 Min., Topbinz 38 Min.)
+- Torwarttrikot nur in der Beschreibung ("Maillot gardien", VFA) → `desc_excluded` (06.10.2026)
+- Nach Regeländerungen verschwinden schon angezeigte Fehltreffer erst mit dem nächsten Gesamt-Run (`weg`), Meldungen
+  in der Zwischenzeit sind also oft schon erledigt (z. B. #35/#36 vom 05.10.2026 abends)
 - **Preisgrenze** (`preisgrenze` in watchlist.yaml): über 150 € kein Push, im Dashboard standardmäßig
   ausgeblendet (Schalter "auch über 150 €"); Ausnahme nur Label "Thiago" (Sondertrikots ausdrücklich
   nicht, Nutzer 02.10.2026). Dashboard rechnet selbst nach
@@ -486,6 +494,9 @@ per GitHub-Schlüssel nur auf dem Handy; cron-job.org bleibt. Vinted/Kleinanzeig
   Erinnerung). Einrichtung macht der Nutzer selbst (Token nie in Chat, Code oder Logs)
 - The Third Kit liefert seit 02.10.2026 aus GitHub heraus nichts mehr (lokal ok), vermutlich Sperre
   für Rechenzentrums-IPs. Allgemein: Shops mit Fehler im letzten Gesamt-Run deckt FYJ wieder ab
+- GitHub-Störung bei Actions am 05.10.2026 21:11 bis 0:49 Uhr: Jobs bekamen keinen Rechner, wurden nach 15 Min.
+  abgebrochen (Runs "failure"/"cancelled" ohne Schritte, deshalb nicht im Fehler-Log). Bei solchen Ausfällen zuerst
+  githubstatus.com prüfen
 - footballcat.eu (Drop Sa 16 Uhr laut Nutzer): JS-Bot-Schutz ("challenge_passed"-Cookie), wird
   **bewusst nicht umgangen**, nicht bei FYJ. Nur per Instagram/Newsletter verfolgbar
 - **Topbinz seit 05.10.2026 direkt** (vorher 403): ShopWired, `plattform: html` mit Suche, Neuheiten-Seite `/new-in` (Radar und Drop-Run lesen nur diese), `pause: 10` (robots.txt Crawl-delay 10), `schnellcheck: nein` (Schnell-Run dauerte 14 Min.). Drop Fr 19 Uhr laut Nutzer. first11shirts.com laut Nutzer ebenfalls Fr 19 Uhr (feste Drop-Zeit),

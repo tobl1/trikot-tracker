@@ -5,12 +5,13 @@ import datetime as dt
 from collections import Counter
 import threading
 import json
+import time
 from urllib.parse import urlparse
 
 import requests
 from bs4 import BeautifulSoup
 
-from .basis import CHECK_VERSION, MAX_WORKERS, RECHECK_DAYS, hit, is_high, norm, now, plain
+from .basis import CHECK_VERSION, HOST_FAIL_LIMIT, MAX_WORKERS, RECHECK_DAYS, hit, is_high, norm, now, plain
 from .netz import Http, SHOPIFY_GATE
 from .zustand import SOLD_RX, condition_info, desc_excluded, ld_products
 
@@ -53,9 +54,11 @@ def needs_check(e):
     return bool(e.get("via") == "fyj" or e.get("pruefen")) and "ebay." not in e["url"]
 
 
-def enrich(seen, ts, budget, matcher):
+def enrich(seen, ts, budget, matcher, deadline=None):
     """Treffer auf der Shop-Seite prüfen: verkauft? Hersteller? Zustand? Zurückgehaltene Pushes zuerst, dann neue,
-    dann die ältesten Prüfungen. Gibt (Zahl der Versuche, {Host: Counter(Status)} der gescheiterten) zurück"""
+    dann die ältesten Prüfungen. Nach HOST_FAIL_LIMIT Fehlschlägen in Folge ist ein Shop für diesen Run raus, nach
+    deadline (time.time()) startet keine Prüfung mehr; der Rest kommt im nächsten Run dran.
+    Gibt (Zahl der Versuche, {Host: Counter(Status)} der gescheiterten und übersprungenen) zurück"""
     due = dt.timedelta(days=RECHECK_DAYS)
     cand = [e for e in seen.values()
             if needs_check(e) and not e.get("verkauft") and (e["last"] == ts or e.get("push_offen"))
@@ -65,12 +68,21 @@ def enrich(seen, ts, budget, matcher):
     by_host = {}
     for e in cand[:budget]:
         by_host.setdefault(urlparse(e["url"]).netloc, []).append(e)
-    fails, lock = {}, threading.Lock()
+    fails, tried, lock = {}, Counter(), threading.Lock()
 
     def work(entries):
         http = Http(SHOPIFY_GATE if "/products/" in entries[0]["url"] else None)
         host = urlparse(entries[0]["url"]).netloc
-        for e in entries:
+        streak = 0
+        for i, e in enumerate(entries):
+            stop = ("übersprungen (Shop nicht erreichbar)" if streak >= HOST_FAIL_LIMIT
+                    else "übersprungen (Zeitlimit)" if deadline and time.time() > deadline else None)
+            if stop:
+                with lock:
+                    fails.setdefault(host, Counter())[stop] += len(entries) - i
+                return
+            with lock:
+                tried[host] += 1
             try:
                 res = check_page(http, e["url"])
             except requests.RequestException:
@@ -82,7 +94,10 @@ def enrich(seen, ts, budget, matcher):
                     fails.setdefault(host, Counter())[code] += 1
                 if code == 404:
                     e["verkauft"] = ts   # Produktseite weg: Artikel nicht mehr da
+                else:
+                    streak += 1
                 continue
+            streak = 0
             e.pop("pruef_fehler", None)
             e["geprueft"], e["pruef_v"] = ts, CHECK_VERSION
             if res["verfuegbar"] is False:
@@ -99,7 +114,7 @@ def enrich(seen, ts, budget, matcher):
 
     with cf.ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
         list(ex.map(work, by_host.values()))
-    return min(len(cand), budget), fails
+    return sum(tried.values()), fails
 
 
 def hold_unchecked(new_entries, seen, ts):

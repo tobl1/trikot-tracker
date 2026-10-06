@@ -24,6 +24,7 @@ class FakeHttp:
         self.count = self.limited = 0
         self.codes = Counter()
         self.gate = None
+        self.last_status = None
         self.s = type("S", (), {"headers": {}})()
 
     def _answer(self, url, params):
@@ -430,6 +431,10 @@ def test_beschreibung_training_und_hose():
                          "2009/10 - Barcelone (XL)") == "Beschreibung: Trainingsshirt"
     assert desc_excluded("Etat : Neuf Le short en détail : Short en excellent état", "2008/09 - Barcelone (XL)") == "Beschreibung: Hose"
     assert desc_excluded("Etat : Excellent Le maillot en détail : Maillot domicile porté par Messi", "2009/10 - Barcelone (XL)") == ""
+    # 06.10.2026: Torwarttrikot nur in der Beschreibung
+    assert desc_excluded("Le maillot en détail : Maillot gardien possédant un design original. Joueurs : Víctor Valdés",
+                         "2012/13 - Barcelone (XL)") == "Beschreibung: Torwarttrikot"
+    assert desc_excluded("Home shirt. Our goalkeeper Valdés kept 20 clean sheets", "Barcelona 2010/11 Home XL") == ""
 
 
 def test_groesse_im_titel_schlaegt_schlagwort():
@@ -673,3 +678,27 @@ def test_shop_wieder_offen():
     assert reopened(closed, [schnell], "t3") == []
     offen = {"name": "Kick It Vintage", "fehler": "", "produkte": 40}
     assert reopened(closed, [offen], "t4") == [("Kick It Vintage", "t1")] and closed == {}
+
+
+def test_seitenpruefung_gibt_nicht_erreichbaren_shop_auf(monkeypatch):
+    # 06.10.2026: Classic-Shirts nicht erreichbar, 75 Seiten x 3 Versuche x 25 s kosteten 100 Min.
+    ts = tracker.now().isoformat()
+    calls = []
+
+    class H(FakeHttp):
+        def get(self, url, params=None, want="json"):
+            calls.append(url)
+            raise tracker.requests.ConnectionError("weg")
+    monkeypatch.setattr(trikot.pruefung, "Http", lambda *a, **k: H([]))
+    seen = {str(i): entry(f"https://classic-shirts.com/{i}", last=ts) for i in range(10)}
+    n, fails = trikot.pruefung.enrich(seen, ts, 50, M)
+    assert n == len(calls) == trikot.basis.HOST_FAIL_LIMIT
+    assert fails["classic-shirts.com"]["übersprungen (Shop nicht erreichbar)"] == 10 - trikot.basis.HOST_FAIL_LIMIT
+
+
+def test_seitenpruefung_zeitlimit(monkeypatch):
+    ts = tracker.now().isoformat()
+    monkeypatch.setattr(trikot.pruefung, "Http", lambda *a, **k: FakeHttp([]))
+    seen = {str(i): entry(f"https://x.com/{i}", last=ts) for i in range(4)}
+    n, fails = trikot.pruefung.enrich(seen, ts, 50, M, deadline=1)
+    assert n == 0 and fails["x.com"]["übersprungen (Zeitlimit)"] == 4
