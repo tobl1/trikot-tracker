@@ -501,7 +501,16 @@ per GitHub-Schlüssel nur auf dem Handy; cron-job.org bleibt. Vinted/Kleinanzeig
    Rhythmus-Daten ansehen und mit dem Nutzer abstimmen. Für Woo/CFS/FYJ gibt es keine
    Zeitstempel, dort müsste man neue Produkt-IDs selbst mitzählen
 8. Backlog: Social-Media-Accounts der Shops auf Drop-Ankündigungen beobachten (Nutzer: eher später)
-9. **Backlog (Nutzer 05.10.2026): eBay** über die offizielle Browse API (kostenlos, 5.000 Abrufe/Tag, Nutzer bräuchte
+9. **eBay-Plan (08.10.2026, wartet auf Entwicklerkonto des Nutzers)**: Browse API `item_summary/search` (Application
+   Token per client credentials, Secrets `EBAY_CLIENT_ID`/`EBAY_CLIENT_SECRET`), zwei Suchen je Begriff: EBAY_DE mit
+   `buyingOptions:{FIXED_PRICE},itemLocationRegion:EUROPEAN_UNION,deliveryCountry:DE` und EBAY_GB mit
+   `itemLocationCountry:GB,deliveryCountry:DE` (UK markiert, Zoll/MwSt. geschätzt: bis 150 € eBay-MwSt. + 3 € Pauschalzoll
+   seit 01.07.2026, darüber 12 % Zoll + 19 % EUSt.). Auktionen raus (auch mit Sofort-Kaufen-Option). `sort=newlyListed`
+   im Radar, nachts komplett; vor dem Push `getItem` (getItems ist Limited Release). Weg = nicht mehr in der Komplettsuche
+   bzw. getItem 404/nicht verfügbar. Keine Verkäufernamen speichern (Opt-out der Account-Deletion-Benachrichtigung).
+   Unklar: ob search/getItem ohne Partner-Freigabe in Produktion laufen (Methoden-Doku: nur getItems Limited Release,
+   Buy-Requirements-Seite: Partner-Antrag). Erst mit echten Schlüsseln testen. Budget ca. 3.000 von 5.000 Abrufen/Tag
+10. **Backlog (Nutzer 05.10.2026): eBay** über die offizielle Browse API (kostenlos, 5.000 Abrufe/Tag, Nutzer bräuchte
    ein eBay-Entwicklerkonto). Eine eigene "bequeme" Lösung später finden. eBay-Suchseiten blocken (403), nicht umgehen
 
 ## Bekannte Rahmenbedingungen
