@@ -737,3 +737,12 @@ def test_woo_liest_mehr_als_6000_artikel():
             return [woo_prod(f"Shirt {page}-{i}", ["M"]) for i in range(100)] if page <= 65 else []
     items, n = trikot.quellen.woo.woo_run(H([]), "MCV", "https://x/wp-json/wc/store/v1/products")
     assert n == 6500 and max(pages) == 66
+
+
+def test_woo_groesse_im_titel_schlaegt_merkmal():
+    p = woo_prod("Netherlands 2004 Home v.NISTLEROOY 10 Large 8/10", ["XL"])
+    assert tracker.woo_to_item("Trikottrader", p)["size_text"] == "Netherlands 2004 Home v.NISTLEROOY 10 Large 8/10"
+    p = woo_prod("Germany 2006 Away BALLACK 13 XL 9/10", ["XL"])
+    assert passt(tracker.woo_to_item("Trikottrader", p))
+    p = woo_prod("FC Bayern München 2009/10 Third RIBÉRY 7", ["XL"])          # ohne Größe im Titel: Merkmal zählt
+    assert passt(tracker.woo_to_item("Trikottrader", p))

@@ -1,9 +1,15 @@
 """WooCommerce Store API"""
 
 import html
+import re
 
 from ..basis import norm
 from .gemeinsam import SIZE_ATTR_RX, item
+from .shopify import TITLE_SIZE_RX
+
+# Größe am Titelende, optional mit Note (Trikottrader: "Netherlands 2004 Home v.NISTLEROOY 10 Large 8/10")
+END_SIZE_RX = re.compile(r"(?i)(?<![\w/])(xs|s|m|l|xl|xxl|2xl|3xl|xxxl|small|medium|large|x-large|xx-large)"
+                         r"\s*(?:\d+(?:[.,]\d)?\s*/\s*10)?\s*$")
 
 
 def woo_to_item(shop, p):
@@ -16,6 +22,9 @@ def woo_to_item(shop, p):
             has_size_attr = True
             size_terms += [t.get("name", "") for t in a.get("terms") or []]
     size_text = " ".join(size_terms) if has_size_attr and size_terms else title
+    if TITLE_SIZE_RX.search(title) or END_SIZE_RX.search(title):
+        # ausdrückliche Größe im Titel schlägt das Größen-Merkmal (Trikottrader: Titel "Large", Merkmal "XL")
+        size_text = title
     pr = p.get("prices") or {}
     price = pr.get("price")
     try:

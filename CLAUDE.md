@@ -337,6 +337,14 @@ in shops.yaml, alle `schnellcheck: nein`), damit 115 Shops. Bewusst nicht: origi
 wavememorabilia, classicfootballcollectibles, fancyfootballshirts, kitmenapparel, theshirttemple
 (Mehraufwand/unklar), 44trikots (passwortgeschützt), Marktplätze und Nachbau-Shops
 
+**Recherche 08.10.2026** (Nutzer: renommierte Shops aus Europa mit sicheren Originalen): neu Secondhalf (NL),
+TrikotTrader (Bayern, Woo), Shorty Football Shirts, Vintage Kit Co (UK), Football & Vintage Amsterdam (Woo), dazu
+Your Vintage Football Kit (DK, Nutzer 07.10.). Verworfen: lebonmaillot (Mystery-Boxen), vintagefootball.shop ("retro kit",
+wirkt nach Nachbauten), Vintage Football Club IT und TOFFS (offizielle Nachbauten), 3retro (Nachbauten), A Store Like 94
+(Bootlegs), retrofootball.eu (Magento, auch Neuauflagen), vintagefootballstore.com (Cloudflare-Challenge),
+forzashirts.com (blockt Skripte, 406). Woo: ausdrückliche Größe im Titel (auch "Large 8/10" am Ende, `END_SIZE_RX`)
+schlägt das Größen-Merkmal (TrikotTrader: Titel "Large", Merkmal "XL")
+
 **Strategie (entschieden 01.10.2026): direkt zuerst, FYJ nur als Lückenfüller und Fundgrube.**
 FYJ-Daten sind oft tagelang alt, teils fehlerhaft, Zustand nur grob. Deshalb: 31 Shopify-Shops,
 die vorher nur über FYJ kamen, direkt (`schnellcheck: nein`, nur nachts), classic-shirts.com per

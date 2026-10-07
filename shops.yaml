@@ -173,6 +173,18 @@ shops:
 # Größe im Titel ("… - Str. XL", "Str.XL"), Preise in EUR
   - {name: Your Vintage Football Kit, url: "https://yourvintagefootballkit.com"}
 
+# Recherche 08.10.2026 (Nutzer: "renommierte Shops aus Europa, sicher Originale"), vorab mit unseren Filtern getestet
+# Secondhalf (NL, "trusted reseller of original vintage football shirts", ValuedShops-geprüft): 6 Treffer, u. a. Barça Away 12/13 XL
+  - {name: Secondhalf, url: "https://secondhalfstore.com", schnellcheck: nein}
+# TrikotTrader (Seefeld, Bayern): beflockte Trikots mit Größe und Note im Titel ("… KROOS 8 XL 9/10"), 6 Treffer
+  - {name: TrikotTrader, url: "https://www.trikottrader.com", schnellcheck: nein}
+# Shorty Football Shirts: "Original" in jedem Titel, viele Bundesliga-Trikots, 1 Treffer
+  - {name: Shorty Football Shirts, url: "https://shortyfootballshirts.com", schnellcheck: nein}
+# Vintage Kit Co (UK, "All items are authentic", 80er bis 00er), klein, derzeit ohne Treffer
+  - {name: Vintage Kit Co, url: "https://vintagekitco.com", schnellcheck: nein}
+# Football & Vintage Amsterdam (KVK-registriert, viel Match worn/issued), derzeit ohne Treffer
+  - {name: Football & Vintage Amsterdam, url: "https://footballandvintageamsterdam.com", schnellcheck: nein}
+
 # Eigene Shopsysteme über die Such-Ergebnisseite (plattform: html), seit 05.10.2026
   # Originaltrikot: Nutzer 05.10.2026 "ganzen Shop entfernen, wirkt unseriös" (B-Ware, Angaben wie "Herren S, M, L, XL, XXL")
   - {name: Originaltrikot, url: "https://www.originaltrikot.de", plattform: aus, sperren: ja,
