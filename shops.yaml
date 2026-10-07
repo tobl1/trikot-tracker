@@ -169,6 +169,9 @@ shops:
 
 # Vom Nutzer genannt (05.10.2026): deutscher Vintage-Shop, Shopify, Größe am Titelende ("… 2012/13 - XL")
   - {name: Trikotcult, url: "https://www.trikotcult.de"}
+# Vom Nutzer genannt (07.10.2026): dänischer Vintage-Shop, Shopify, ca. 280 Artikel (Original Vintage, Player Issue),
+# Größe im Titel ("… - Str. XL", "Str.XL"), Preise in EUR
+  - {name: Your Vintage Football Kit, url: "https://yourvintagefootballkit.com"}
 
 # Eigene Shopsysteme über die Such-Ergebnisseite (plattform: html), seit 05.10.2026
   # Originaltrikot: Nutzer 05.10.2026 "ganzen Shop entfernen, wirkt unseriös" (B-Ware, Angaben wie "Herren S, M, L, XL, XXL")
