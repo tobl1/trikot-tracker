@@ -136,7 +136,7 @@ spieler:
   - name: Juninho (Pernambucano)
     suche: ["juninho"]
     ausschluss: ["paulista"]
-    vereine: ["lyon", "vasco", "brazil", "brasil", "brazilie", "bresil", "brasile", "al-gharafa"]
+    vereine: ["lyon"]      # Nutzer 08.10.2026: nur Lyon (nicht Vasco, Brasilien, Al-Gharafa)
 
   - name: Benzema
     suche: ["benzema"]
@@ -158,8 +158,7 @@ spieler:
   - name: Vidal (Arturo)
     suche: ["arturo vidal", "vidal"]
     ausschluss: ["aleix vidal"]
-    vereine: ["leverkusen", "juventus", "bayern", "munich", "munchen", "barcelona",
-              "barca", "barcelone", "barcellona", "inter", "chile"]
+    vereine: ["juventus", "bayern", "munich", "munchen", "inter", "chile"]   # Nutzer 08.10.2026: nicht Barça, nicht Leverkusen
 
   - name: Kimmich
     suche: ["kimmich"]

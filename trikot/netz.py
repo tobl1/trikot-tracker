@@ -92,7 +92,7 @@ class Http:
                 self.last_status = "Verbindung"
                 if attempt == attempts - 1:
                     raise
-                time.sleep(3)
+                time.sleep(3 + 7 * attempt)   # 3 s, 10 s, …: kurze Aussetzer der Shops überbrücken
                 continue
             if r.status_code == 429:
                 if attempt == attempts - 1:

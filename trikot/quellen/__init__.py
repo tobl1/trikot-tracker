@@ -69,6 +69,8 @@ def run_shop(shop, mode, matcher, platforms, currencies):
                 else:
                     ep = woo_endpoint(http, base)
                     detected = ("woo:" + ep) if ep else "unbekannt"
+                    if ep:
+                        http.codes.pop(404, None)   # 404 der Shopify-Probe ist bei Woo-Shops normal
                 if detected == "unbekannt" and known and known != "unbekannt":
                     detected = known   # vermutlich nur ein Aussetzer, bekannte Plattform behalten
                 known = platforms[base] = detected

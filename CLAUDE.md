@@ -159,6 +159,8 @@ temporären Workflow aus GitHub heraus (Beispiel 05.10.2026: CFS-Suche "thiago" 
   nächsten Run (Fehler-Log "übersprungen"). Anlass: Classic-Shirts nachts nicht erreichbar, 75 Seiten x 3 Versuche x
   25 s = 100 Min., Gesamt-Run lief 176 von 180 Min. (bei Timeout wäre der ganze Run verloren). Gesamt-Run sonst ca.
   70 Min. für die Shops (Shopify-Bremse: VFA 65, Vintage Football Shirts 57, Saturdays 44 Min., Topbinz 38 Min.)
+- "Manufacturer: In-House"/"NA" in der Beschreibung = kein Original (Golaço Kits, Meldung #39, 08.10.2026)
+- Nutzer 08.10.2026: Juninho nur Lyon, Vidal nicht Barça und nicht Leverkusen
 - Torwarttrikot nur in der Beschreibung ("Maillot gardien", VFA) → `desc_excluded` (06.10.2026)
 - 06.10.2026 außerdem: Mäntel/Jacken ("coat", "bench coat", "anorak", "parka" …) in `produkt_ausschluss` (CFS Barça
   "Reversible Padded Bench Coat" kam als Sondertrikot-Push); Shop-Kontext im Vereinsfilter zählt nur, wenn der Titel
@@ -497,6 +499,13 @@ per GitHub-Schlüssel nur auf dem Handy; cron-job.org bleibt. Vinted/Kleinanzeig
   Erinnerung). Einrichtung macht der Nutzer selbst (Token nie in Chat, Code oder Logs)
 - The Third Kit liefert seit 02.10.2026 aus GitHub heraus nichts mehr (lokal ok), vermutlich Sperre
   für Rechenzentrums-IPs. Allgemein: Shops mit Fehler im letzten Gesamt-Run deckt FYJ wieder ab
+- **Stabilität (08.10.2026)**: `git push` im Workflow mit 5 Versuchen (`.github/pushen.sh` über `BASH_ENV`; am
+  07.10.2026 scheiterten zwei Runs an "Internal Server Error" von GitHub beim Push). Netzaussetzer (Timeout,
+  Verbindung) in Drop-/Radar-Runs erst ins Fehler-Log, wenn derselbe Shop auch im Run davor ausfiel
+  (`lauf.net_error`, `status.json` → `netzfehler`), Wiederholung nach 3 und 10 s. Woo bis 300 Seiten
+  (`WOO_PAGE_CAP`, vorher 60: Maglie Calcio Vintage hat 6.458 Artikel). 404 der Shopify-Probe bei Woo-Shops
+  nicht mehr als Auffälligkeit. Concurrency je Daten-Zweig (`trikot-tracker-daten`), Probeläufe auf `daten-test`
+  laufen parallel
 - GitHub-Störung bei Actions am 05.10.2026 21:11 bis 0:49 Uhr: Jobs bekamen keinen Rechner, wurden nach 15 Min.
   abgebrochen (Runs "failure"/"cancelled" ohne Schritte, deshalb nicht im Fehler-Log). Bei solchen Ausfällen zuerst
   githubstatus.com prüfen

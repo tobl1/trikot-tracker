@@ -91,6 +91,14 @@ def radar_job(shop, radar_checks):
     return dict(shop, _seit=dt.datetime.fromisoformat(last) if last else None)
 
 
+NET_ERRORS = ("ConnectionError", "ConnectTimeout", "ReadTimeout", "Timeout", "SSLError", "ChunkedEncodingError")
+
+
+def net_error(fehler):
+    """Fehler eines Shops ist ein reiner Netzaussetzer (keine Sperre, kein Datenfehler)"""
+    return str(fehler or "").split(":")[0] in NET_ERRORS
+
+
 def reopened(closed, statuses, ts):
     """Geschlossene Shops (Passwortseite) merken; zurück kommen die, die wieder Artikel liefern: [(Name, seit)]"""
     out = []
@@ -530,6 +538,14 @@ def main():
         status_store["last_full"] = ts
         # Quellen-Status des Gesamtlaufs merken, damit ihn der Schnellcheck nicht überschreibt
         status_store["quellen"] = {"zeit": ts, "liste": run_sources}
+    # Einzelne Netzaussetzer (Timeout, Verbindung) in Drop-/Radar-Runs erst melden, wenn derselbe Shop auch im
+    # Run davor ausfiel: RB-Jerseys, 3kots, Football Second Hand hatten vereinzelte Aussetzer, die beim nächsten Run
+    # wieder weg waren (Fehler-Log bis 07.10.2026). Im Gesamt-Run zählt jeder Fehler
+    quiet = set()
+    if args.mode != "full":
+        net_now = {s["name"] for s in run_sources if net_error(s.get("fehler"))}
+        quiet = net_now - set(status_store.get("netzfehler") or [])
+        status_store["netzfehler"] = sorted(net_now)
     speicher.save_json(speicher.STATUS_FILE, status_store)
     full_src = status_store.get("quellen") or {}
     if full_src:
@@ -539,7 +555,7 @@ def main():
     write_dashboard(seen, status_store, args.mode, ts, watch, shops_cfg.get("shops") or [])
     # geschlossene Shops nur beim ersten Mal ins Fehler-Log (danach wartet der Tracker still auf die Öffnung)
     problems = [(s["name"], s["fehler"]) for s in run_sources
-                if s.get("fehler") and not str(s["fehler"]).startswith("deaktiviert")
+                if s.get("fehler") and not str(s["fehler"]).startswith("deaktiviert") and s["name"] not in quiet
                 and not (str(s["fehler"]).startswith("geschlossen (Passwortseite") and s["name"] in closed_before)]
     if args.mode == "full":
         problems += token_reminder(now().date())

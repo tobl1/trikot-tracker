@@ -45,11 +45,14 @@ def woo_endpoint(http, base):
     return None
 
 
+WOO_PAGE_CAP = 300   # 30.000 Artikel; bis 08.10.2026 waren es 60 Seiten, Maglie Calcio Vintage hat 6.458
+
+
 def woo_run(http, shop, endpoint, queries=None):
     items, n = [], 0
     runs = [{"search": q} for q in queries] if queries else [{}]
     for extra in runs:
-        for page in range(1, 61):
+        for page in range(1, WOO_PAGE_CAP + 1):
             data = http.get(endpoint, {"per_page": 100, "page": page, **extra})
             if not isinstance(data, list) or not data:
                 break

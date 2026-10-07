@@ -434,6 +434,9 @@ def test_beschreibung_training_und_hose():
     # 06.10.2026: Torwarttrikot nur in der Beschreibung
     assert desc_excluded("Le maillot en détail : Maillot gardien possédant un design original. Joueurs : Víctor Valdés",
                          "2012/13 - Barcelone (XL)") == "Beschreibung: Torwarttrikot"
+    assert desc_excluded("Spain National Team 2010 World Cup Away Fan Kit Official Product Size: XL Condition: Excellent "
+                         "Manufacturer: In-House Color: Blue", "Spain 2010 World Cup - Fan Kit").startswith("Beschreibung: kein Original")
+    assert desc_excluded("Size: XL Condition: Excellent Manufacturer: Adidas Color: Red", "Spain 2010 Home") == ""
     assert not M.labels("2012-13 Barcelona Nike Reversible Padded Bench Coat - 8/10 - (XL)")
     assert desc_excluded("Home shirt. Our goalkeeper Valdés kept 20 clean sheets", "Barcelona 2010/11 Home XL") == ""
 
@@ -713,3 +716,24 @@ def test_topbinz_zustand():
             'and fabric feel. Nameset has some wear and a large stain to the front.Sponsor - Brand - PUMASKU: 4962')
     grade, note = condition_info("Italy Gattuso #4 2006/07 Away Shirt - XL", desc)
     assert grade == "Good" and note.startswith("Condition rating - GOOD Great colour") and "stain" in note
+
+
+def test_netzaussetzer_erkannt():
+    from trikot.lauf import net_error
+    assert net_error("ConnectionError: HTTPSConnectionPool(host='www.rb-jerseys.com', port=443): Max retries")
+    assert net_error("ConnectTimeout: HTTPSConnectionPool(host='3kots.com')")
+    assert not net_error("gesperrt (HTTP 403), blockt vermutlich Server-Adressen")
+    assert not net_error("unvollständig, 4x gedrosselt (HTTP 429)") and not net_error(None)
+
+
+def test_woo_liest_mehr_als_6000_artikel():
+    pages = {}
+
+    class H(FakeHttp):
+        def get(self, url, params=None, want="json"):
+            self.count += 1
+            page = (params or {}).get("page", 1)
+            pages[page] = True
+            return [woo_prod(f"Shirt {page}-{i}", ["M"]) for i in range(100)] if page <= 65 else []
+    items, n = trikot.quellen.woo.woo_run(H([]), "MCV", "https://x/wp-json/wc/store/v1/products")
+    assert n == 6500 and max(pages) == 66

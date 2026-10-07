@@ -24,7 +24,8 @@ on:
         default: false
 
 concurrency:
-  group: trikot-tracker
+  # eigene Warteschlange je Daten-Zweig: Probeläufe auf daten-test blockieren die echten Runs nicht
+  group: trikot-tracker-${{ inputs.zweig || 'daten' }}
   cancel-in-progress: false
 
 permissions:
@@ -35,6 +36,9 @@ permissions:
 env:
   ZWEIG: ${{ inputs.zweig || 'daten' }}
   TRIKOT_DATEN: ${{ github.workspace }}/daten
+  # stellt "pushen" bereit: git push mit bis zu 5 Versuchen. Am 07.10.2026 scheiterten zwei Runs an einem einmaligen
+  # "Internal Server Error" von GitHub beim Push, das Run-Ergebnis war verloren
+  BASH_ENV: ${{ github.workspace }}/.github/pushen.sh
 
 jobs:
   run:
@@ -108,10 +112,10 @@ jobs:
             git checkout -q --orphan neu
             git commit -q -m "Daten nach dem Gesamt-Run $STAMP"
             git branch -q -M "$ZWEIG"
-            git push -q -f origin "$ZWEIG"
+            pushen -f origin "$ZWEIG"
           else
             git commit -q -m "Run $MODE $STAMP"
-            git push -q origin "HEAD:$ZWEIG"
+            pushen origin "HEAD:$ZWEIG"
           fi
           echo "geaendert=ja" >> "$GITHUB_OUTPUT"
 
@@ -129,7 +133,7 @@ jobs:
           git add -A
           if ! git diff --cached --quiet; then
             git commit -q -m "Pushes versendet"
-            git push -q origin "HEAD:$ZWEIG"
+            pushen origin "HEAD:$ZWEIG"
           fi
 
       - name: Dashboard anstoßen
@@ -160,4 +164,4 @@ jobs:
           PY
           cd daten
           git add state/fehlerlog.json FEHLER.md
-          git commit -q -m "Fehler-Log: Run abgebrochen" && git push -q origin "HEAD:$ZWEIG" || true
+          git commit -q -m "Fehler-Log: Run abgebrochen" && pushen origin "HEAD:$ZWEIG" || true

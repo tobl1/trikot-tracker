@@ -32,6 +32,10 @@ DESC_KEEPER_RX = re.compile(r"(?<![a-z])(maillot gardien|maillot de gardien|goal
                             r"goalkeeper top|gk shirt|keeper shirt|torwarttrikot|torwart trikot|camiseta de portero|"
                             r"camiseta portero|maglia da portiere|maglia portiere)(?![a-z])")
 
+# Kein Original laut Herstellerangabe (Golaço Kits: "Manufacturer: In-House" bei "Spain 2010 World Cup - Fan Kit",
+# "Manufacturer: NA" bei Fanartikeln; Meldung #39 vom 07.10.2026)
+DESC_NOT_ORIGINAL_RX = re.compile(r"(?<![a-z])manufacturer\s*:?\s*(in-house|in house|na|n/a)(?![a-z])")
+
 
 # Ausdrückliche Flock-Angabe in der Beschreibung (trikotcult.de: Titel "Real Madrid Heimtrikot 2023/24 - XL",
 # Beschreibung "Flock: Toni Kroos #8 + La Liga Badge Zustand: Sehr gut"). Nur mit Stichwort, keine Spielerlisten
@@ -62,6 +66,8 @@ def desc_excluded(desc, title=""):
         return "Beschreibung: Hose"
     if DESC_KEEPER_RX.search(t):
         return "Beschreibung: Torwarttrikot"
+    if DESC_NOT_ORIGINAL_RX.search(t):
+        return "Beschreibung: kein Original (Hersteller In-House)"
     if desc_not_jersey(desc, title):
         return "Beschreibung: kein Trikot (T-Shirt/Jacke)"
     return ""

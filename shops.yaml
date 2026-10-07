@@ -146,7 +146,7 @@ shops:
   - {name: Real Vintage Football, url: "https://realvintagefootball.com", schnellcheck: nein}
   - {name: Futmaniacos, url: "https://futmaniacos.com", schnellcheck: nein}
   - {name: Arsij Store, url: "https://www.arsijstore.com", schnellcheck: nein}
-  - {name: Maglie Calcio Vintage, url: "https://magliecalciovintage.it", schnellcheck: nein}
+  - {name: Maglie Calcio Vintage, url: "https://www.magliecalciovintage.it", schnellcheck: nein}
 # UK
   - {name: Football Finds, url: "https://footballfinds.co.uk", schnellcheck: nein}
   - {name: The 12th Man Retro, url: "https://the12thmanretro.com", schnellcheck: nein}

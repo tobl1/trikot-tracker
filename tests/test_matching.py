@@ -345,7 +345,12 @@ def test_repro_flock_kennzeichen():
     assert M.repro_flock("Maillot Barcelone 2012-2013 HOME 11 THIAGO flocage reproduction récente XL")
     assert M.repro_flock("2002-04 FC Bayern München Auswärtstrikot Makaay, Repro Flock")
     assert not M.repro_flock("2013-14 Bayern Munich Home Shirt Thiago #6 (XL)")
-    assert {l for l, _ in M.labels("2015-16 Barcelone Home Vidal #22 XL")} == {"Vidal (Arturo)"}
+    assert {l for l, _ in M.labels("2015-16 Juventus Home Vidal #23 XL")} == {"Vidal (Arturo)"}
+    # Nutzer 08.10.2026: Vidal nicht Barça/Leverkusen, Juninho nur Lyon
+    assert M.labels("2015-16 Barcelone Home Vidal #22 XL") == []
+    assert M.labels("2011-12 Leverkusen Home Vidal #23 XL") == []
+    assert M.labels("2011 Vasco da Gama Home Juninho #8 XL") == []
+    assert "Juninho (Pernambucano)" not in {l for l, _ in M.labels("2006 Brazil Home Juninho #19 XL")}   # bleibt WM 2006
 
 
 @pytest.mark.parametrize("desc,other", [
