@@ -184,8 +184,21 @@ shops:
   - {name: Vintage Kit Co, url: "https://vintagekitco.com", schnellcheck: nein}
 # Football & Vintage Amsterdam (KVK-registriert, viel Match worn/issued), derzeit ohne Treffer
   - {name: Football & Vintage Amsterdam, url: "https://footballandvintageamsterdam.com", schnellcheck: nein}
+# The Shirt Collectors (UK): beflockte Trikots, Größe und Zustand im Titel, 6 Treffer (vorher nur über FYJ, Fundgrube)
+  - {name: The Shirt Collectors, url: "https://www.theshirtcollectors.co.uk", schnellcheck: nein}
+# Vintagescore (Moers, NRW, "erster Store für Vintage Fußballtrikots in NRW"): Größe in der Variante, 2 Treffer
+  - {name: Vintagescore, url: "https://vintagescore.de", schnellcheck: nein}
+# Het Shirthuis (NL, "100% originele Voetbalshirts", "Alle artikelen worden gecontroleerd op echtheid"), Note im Titel
+  - {name: Het Shirthuis, url: "https://hetshirthuis.com", schnellcheck: nein}
+# Legit Football Shirts (Stettin, PL, "Tylko oryginały", prüft Etiketten und Herstellercodes), WooCommerce, klein
+  - {name: Legit Football Shirts, url: "https://legitfootballshirts.com", schnellcheck: nein}
+# The Football Idiots (Oslo/Stavanger, "Norway's home for authentic vintage"), beflockte Klassiker mit Note, Preise in NOK
+  - {name: The Football Idiots, url: "https://www.thefootballidiots.com", schnellcheck: nein}
 
 # Eigene Shopsysteme über die Such-Ergebnisseite (plattform: html), seit 05.10.2026
+  # Top Vintage Football Shirts (IT, Storeden, "only originals" aus Sammlungen und Restposten), seit 08.10.2026
+  - {name: Top Vintage Football Shirts, url: "https://www.topvintagefootballshirts.com", plattform: html, schnellcheck: nein,
+     suche: "/shop/search/{q}", link: 'a[href^="/product/"]', neu: "/shop/category/19277411/new-now"}
   # Originaltrikot: Nutzer 05.10.2026 "ganzen Shop entfernen, wirkt unseriös" (B-Ware, Angaben wie "Herren S, M, L, XL, XXL")
   - {name: Originaltrikot, url: "https://www.originaltrikot.de", plattform: aus, sperren: ja,
      hinweis: "vom Nutzer entfernt (wirkt unseriös)", schnellcheck: nein,

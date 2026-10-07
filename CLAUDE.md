@@ -339,7 +339,13 @@ wavememorabilia, classicfootballcollectibles, fancyfootballshirts, kitmenapparel
 
 **Recherche 08.10.2026** (Nutzer: renommierte Shops aus Europa mit sicheren Originalen): neu Secondhalf (NL),
 TrikotTrader (Bayern, Woo), Shorty Football Shirts, Vintage Kit Co (UK), Football & Vintage Amsterdam (Woo), dazu
-Your Vintage Football Kit (DK, Nutzer 07.10.). Verworfen: lebonmaillot (Mystery-Boxen), vintagefootball.shop ("retro kit",
+Your Vintage Football Kit (DK, Nutzer 07.10.). Zweite Runde (Schwerpunkt DE, PL, NL, plus FYJ-Händlerliste
+abgeglichen): The Shirt Collectors (UK), Vintagescore (Moers), Het Shirthuis (NL, .com), Legit Football Shirts (Stettin,
+Woo), The Football Idiots (Oslo, NOK), Top Vintage Football Shirts (IT, Storeden, `plattform: html`). Außerdem verworfen:
+devoetbaltempel.nl (identischer Bestand wie The Football Temple), mercatofootballshirt.com (keine Echtheitsangabe),
+originalfootballshirts.nl (Lovable-App ohne Schnittstelle), retrokoszulka.pl (Next.js, Premium-Matchworn),
+vintage-trikots.de (Repliken), jerseysgala.com (Fake-Verdacht), bettertimesclothing/retromarche/greatesthits (allgemeine
+Vintage-Kleidung), vintsoccer.com und greatestkits.co.uk (nicht erreichbar), subsidesports/casualcouture (Bot-Schutz). Verworfen: lebonmaillot (Mystery-Boxen), vintagefootball.shop ("retro kit",
 wirkt nach Nachbauten), Vintage Football Club IT und TOFFS (offizielle Nachbauten), 3retro (Nachbauten), A Store Like 94
 (Bootlegs), retrofootball.eu (Magento, auch Neuauflagen), vintagefootballstore.com (Cloudflare-Challenge),
 forzashirts.com (blockt Skripte, 406). Woo: ausdrückliche Größe im Titel (auch "Large 8/10" am Ende, `END_SIZE_RX`)
