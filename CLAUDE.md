@@ -508,8 +508,11 @@ per GitHub-Schlüssel nur auf dem Handy; cron-job.org bleibt. Vinted/Kleinanzeig
    seit 01.07.2026, darüber 12 % Zoll + 19 % EUSt.). Auktionen raus (auch mit Sofort-Kaufen-Option). `sort=newlyListed`
    im Radar, nachts komplett; vor dem Push `getItem` (getItems ist Limited Release). Weg = nicht mehr in der Komplettsuche
    bzw. getItem 404/nicht verfügbar. Keine Verkäufernamen speichern (Opt-out der Account-Deletion-Benachrichtigung).
-   Unklar: ob search/getItem ohne Partner-Freigabe in Produktion laufen (Methoden-Doku: nur getItems Limited Release,
-   Buy-Requirements-Seite: Partner-Antrag). Erst mit echten Schlüsseln testen. Budget ca. 3.000 von 5.000 Abrufen/Tag
+   **Test 08.10.2026 (Run 37770484213): Token, search und getItem laufen in Produktion ohne Partner-Antrag.** Befunde:
+   EUROPEAN_UNION liefert nur EU-Standorte (DE, PL, FR, IT, ES …), CONTINENTAL_EUROPE enthält auch GB und UA (nicht
+   nutzen); EBAY_GB mit itemLocationCountry:GB liefert GBP-Preise; "AUCTION+FIXED_PRICE" kommt trotz Filter vor (im Code
+   raus); "thiago trikot" und "thiago shirt" liefern verschiedene Mengen (Begriffe je Sprache nötig); getItem hat
+   estimatedAvailabilities und localizedAspects (Größe), kein itemEndDate bei Festpreis. Budget ca. 3.000 von 5.000 Abrufen/Tag
    **Lizenz (API License Agreement, gelesen 08.10.2026), daraus Pflichten:** angezeigte Angebotsdaten höchstens 6 Std. alt
    (§8.1c, nachts zwischen den Runs beachten), nicht mehr öffentliche Inhalte löschen (§8.1b), Zwischenkopien löschen,
    sobald unnötig (§3.1b), öffentliche Anzeige nicht mit Nicht-eBay-Inhalten mischen (§8.1b), eBay-Inhalte nicht
