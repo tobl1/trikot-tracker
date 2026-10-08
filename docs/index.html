@@ -383,7 +383,11 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
   const REPO = location.hostname.endsWith("github.io")
     ? `${location.hostname.split(".")[0]}/${location.pathname.split("/")[1] || "trikot-tracker"}` : "tobl1/trikot-tracker";
   const flagged = new Set(store.get("flagged") || []);
-  const hiddenIds = new Set(store.get("hidden") || []);   // "juckt nicht": nur lokal ausgeblendet, ohne Meldung
+  const hiddenIds = new Set(store.get("hidden") || []);   // "juckt nicht": ausgeblendet, ohne Meldung
+  // Zeitpunkt je Ausblendung (für den Sync zwischen Geräten); ältere Einträge ohne Zeitpunkt zählen ab jetzt
+  const hiddenAt = store.get("hiddenat") || Object.fromEntries([...hiddenIds].map(id => [id, new Date().toISOString()]));
+  let hiddenReset = store.get("hiddenreset") || "";   // "zurückholen" auf irgendeinem Gerät: alles davor gilt nicht mehr
+  const saveHidden = () => { store.set("hidden", [...hiddenIds]); store.set("hiddenat", hiddenAt); store.set("hiddenreset", hiddenReset); };
   // Favoriten: lokal im Browser, mit Kopie der Daten (bleiben sichtbar, wenn der Artikel verschwindet)
   const favs = store.get("favs") || {};
   const alarms = new Set(store.get("alarms") || []);
@@ -430,7 +434,8 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
   let favIssue = null, favTimer = null, favSyncing = false;
   const canon = o => JSON.stringify(Object.keys(o || {}).sort().map(k => [k, o[k]]));
   async function gh(path, opts = {}){
-    return fetch(`https://api.github.com/repos/${REPO}${path}`, Object.assign({}, opts, {headers: {
+    // cache: no-store, sonst liefert der Browser bis zu 60 s alte Antworten (zwei Geräte legten je ein Sync-Issue an)
+    return fetch(`https://api.github.com/repos/${REPO}${path}`, Object.assign({cache: "no-store"}, opts, {headers: {
       Authorization: `Bearer ${store.get("token")}`, Accept: "application/vnd.github+json", "Content-Type": "application/json"}}));
   }
   function mergeFavs(remote){
@@ -444,6 +449,18 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
       if (ms(favRemoved[id]) > ms(favs[id].added)) { delete favs[id]; changed = true; }
     const cut = Date.now() - 90 * 864e5;   // alte Löschvermerke vergessen
     for (const [id, ts] of Object.entries(favRemoved)) if (ms(ts) < cut) delete favRemoved[id];
+    // Ausgeblendet: Vereinigung, außer was vor dem letzten "zurückholen" (auf irgendeinem Gerät) lag
+    if (ms(remote.hiddenReset) > ms(hiddenReset)) hiddenReset = remote.hiddenReset;
+    for (const [id, ts] of Object.entries(remote.hidden || {})) if (!hiddenAt[id] && ms(ts) > ms(hiddenReset)) hiddenAt[id] = ts;
+    for (const [id, ts] of Object.entries(hiddenAt)) if (ms(ts) <= ms(hiddenReset)) delete hiddenAt[id];
+    const hidNow = Object.keys(hiddenAt);
+    if (hidNow.length !== hiddenIds.size || hidNow.some(id => !hiddenIds.has(id))) {
+      hiddenIds.clear(); hidNow.forEach(id => hiddenIds.add(id)); changed = true;
+    }
+    saveHidden();
+    // Gemeldet: Vereinigung (Meldungen nimmt man nicht zurück)
+    for (const id of remote.flagged || []) if (!flagged.has(id)) { flagged.add(id); changed = true; }
+    store.set("flagged", [...flagged]);
     return changed;
   }
   async function syncFavs(changedHere = false){
@@ -451,16 +468,23 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     favSyncing = true;
     try {
       const owner = REPO.split("/")[0];
-      const r = await gh(`/issues?labels=favoriten&state=all&creator=${owner}&per_page=5`);
-      favIssue = r.ok ? ((await r.json())[0] || null) : favIssue;
-      let remote = {favs: {}, removed: {}};
-      const m = favIssue && (favIssue.body || "").match(/```json\n([\s\S]*?)\n```/);
-      if (m) try { remote = JSON.parse(m[1]); } catch (e) {}
-      if (mergeFavs(remote)) { store.set("favs", favs); render(); }
+      const r = await gh(`/issues?labels=favoriten&state=all&creator=${owner}&per_page=20&sort=created&direction=asc`);
+      const issues = r.ok ? await r.json() : (favIssue ? [favIssue] : []);
+      favIssue = issues[0] || null;
+      const parse = i => { const m = (i.body || "").match(/```json\n([\s\S]*?)\n```/); try { return m ? JSON.parse(m[1]) : {}; } catch (e) { return {}; } };
+      let changed = false;
+      for (const i of issues) changed = mergeFavs(parse(i)) || changed;   // mehrere Sync-Issues: alle zusammenführen
+      const remote = favIssue ? parse(favIssue) : {};
+      if (changed) { store.set("favs", favs); render(); }
       store.set("favremoved", favRemoved);
-      if (changedHere || canon(remote.favs) !== canon(favs) || canon(remote.removed) !== canon(favRemoved)) {
-        const body = "Favoriten-Sync der App (iPhone, Mac …), bitte nicht von Hand ändern.\n\n```json\n" +
-          JSON.stringify({favs, removed: favRemoved}) + "\n```";
+      const mine = {favs, removed: favRemoved, hidden: hiddenAt, hiddenReset, flagged: [...flagged].sort()};
+      for (const extra of issues.slice(1))   // überzählige Sync-Issues stilllegen (Label weg, Verweis auf das erste)
+        await gh(`/issues/${extra.number}`, {method: "PATCH", body: JSON.stringify({labels: [], body: `Zusammengeführt in #${favIssue.number}.`})});
+      if (changedHere || issues.length > 1 || canon(remote.favs) !== canon(favs) || canon(remote.removed) !== canon(favRemoved) ||
+          canon(remote.hidden) !== canon(hiddenAt) || (remote.hiddenReset || "") !== hiddenReset ||
+          JSON.stringify(remote.flagged || []) !== JSON.stringify(mine.flagged)) {
+        const body = "Sync der App zwischen Geräten (Favoriten, Ausgeblendetes, Gemeldetes), bitte nicht von Hand ändern.\n\n```json\n" +
+          JSON.stringify(mine) + "\n```";
         if (favIssue) await gh(`/issues/${favIssue.number}`, {method: "PATCH", body: JSON.stringify({body})});
         else {
           const c = await gh("/issues", {method: "POST", body: JSON.stringify({title: "Favoriten (Sync)", body, labels: ["favoriten"]})});
@@ -488,7 +512,8 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
   }
   function hideItem(){
     const t = flagItem;
-    hiddenIds.add(t.id); store.set("hidden", [...hiddenIds]); lastHidden = t.id;
+    hiddenIds.add(t.id); hiddenAt[t.id] = new Date().toISOString(); saveHidden(); lastHidden = t.id;
+    clearTimeout(favTimer); favTimer = setTimeout(() => syncFavs(true), 6000);   // nach der Rückgängig-Frist
     $("flagsheet").hidden = true; render();
     showToast("Ausgeblendet", 5000, true);
     // Mit Schlüssel: nach der Rückgängig-Frist auf allen Geräten ausblenden (kommt auch nie wieder per Push)
@@ -508,6 +533,7 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
          `url: ${t.url}`, `titel: ${t.titel}`, `shop: ${t.shopName}, preis: ${t.preis}, labels: ${t.labels.join(", ")}`,
          t.warum ? `warum: ${t.warum}` : ""].join("\n");
     flagged.add(t.id); store.set("flagged", [...flagged]);
+    clearTimeout(favTimer); favTimer = setTimeout(() => syncFavs(true), 1500);
     $("flagsheet").hidden = true; render();
     if (await createIssue("flag", `Flag: ${flagReason} · ${t.ebay ? "eBay-Angebot" : t.titel}`, body) === "direkt") showToast("Gemeldet, danke");
   }
@@ -970,12 +996,13 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
   settingsState();
   $("toastundo").addEventListener("click", () => {
     clearTimeout(hideTimer);   // Ausblenden noch nicht verschickt: einfach zurücknehmen
-    if (lastHidden) { hiddenIds.delete(lastHidden); store.set("hidden", [...hiddenIds]); lastHidden = null; }
+    if (lastHidden) { hiddenIds.delete(lastHidden); delete hiddenAt[lastHidden]; saveHidden(); lastHidden = null; }
     $("toast").hidden = true; render();
   });
   $("unhide").addEventListener("click", () => {
     if (!confirm(`${hiddenIds.size} ausgeblendete Treffer wieder anzeigen?`)) return;
-    hiddenIds.clear(); store.set("hidden", []); render();
+    hiddenIds.clear(); Object.keys(hiddenAt).forEach(k => delete hiddenAt[k]); hiddenReset = new Date().toISOString();
+    saveHidden(); render(); syncFavs(true);
   });
   $("flagsheet").addEventListener("click", e => { if (e.target.id === "flagsheet") $("flagsheet").hidden = true; });
   $("fgbody").addEventListener("click", e => {
