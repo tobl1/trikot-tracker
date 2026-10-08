@@ -1,0 +1,85 @@
+name: eBay-Test (temporär)
+
+# Klärt Bauentscheidungen für die eBay-Anbindung. Gibt bewusst nur Statuscodes, Mengen und Kategorie-Kennungen aus:
+# Action-Logs sind öffentlich, eBay-Angebotsinhalte dürfen nicht veröffentlicht werden (API License Agreement §9.7, §17)
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install requests==2.34.2
+      - name: Browse API testen
+        env:
+          EBAY_CLIENT_ID: ${{ secrets.EBAY_CLIENT_ID }}
+          EBAY_CLIENT_SECRET: ${{ secrets.EBAY_CLIENT_SECRET }}
+        run: |
+          python - <<'PY'
+          import collections, os, re, requests
+          r = requests.post("https://api.ebay.com/identity/v1/oauth2/token", timeout=30,
+                            auth=(os.environ["EBAY_CLIENT_ID"], os.environ["EBAY_CLIENT_SECRET"]),
+                            data={"grant_type": "client_credentials", "scope": "https://api.ebay.com/oauth/api_scope"})
+          print("Token: HTTP", r.status_code)
+          tok = r.json()["access_token"]
+          H = {"Authorization": f"Bearer {tok}", "X-EBAY-C-ENDUSERCTX": "contextualLocation=country=DE,zip=80331"}
+          BASE = "buyingOptions:{FIXED_PRICE},deliveryCountry:DE"
+          MARKETS = {"EU": ("EBAY_DE", BASE + ",itemLocationRegion:EUROPEAN_UNION"),
+                     "UK": ("EBAY_GB", BASE + ",itemLocationCountry:GB"),
+                     "UA": ("EBAY_DE", BASE + ",itemLocationCountry:UA")}
+
+          def search(where, q, cat=None, limit=200):
+              m, flt = MARKETS[where]
+              p = {"q": q, "filter": flt, "limit": limit}
+              if cat:
+                  p["category_ids"] = cat
+              r = requests.get("https://api.ebay.com/buy/browse/v1/item_summary/search",
+                               headers={**H, "X-EBAY-C-MARKETPLACE-ID": m}, params=p, timeout=30)
+              d = r.json() if r.ok else {}
+              if not r.ok:
+                  print("  FEHLER", where, q, r.status_code, r.text[:200])
+              return d.get("total", 0), d.get("itemSummaries") or [], d
+
+          print("\n1) Oder-Suche")
+          a, ia, _ = search("EU", "thiago"); b, ib, _ = search("EU", "verratti")
+          c, ic, _ = search("EU", "(thiago, verratti)")
+          print(f"  thiago {a}, verratti {b}, '(thiago, verratti)' {c}, Schnittmenge IDs mit Einzelsuchen:",
+                len({i['itemId'] for i in ic} & ({i['itemId'] for i in ia} | {i['itemId'] for i in ib})))
+          d, _, _ = search("EU", "thiago verratti")
+          print(f"  'thiago verratti' (UND) {d}")
+
+          print("\n2) Mengen je Begriff (EU / UK / UA)")
+          for q in ["thiago", "alcantara", "henry", "torres", "alonso", "kroos", "benzema", "hamburg", "hsv",
+                    "barcelona 2012", "spain 2010", "spanien 2010", "world cup 2006", "wm 2006", "bayern oktoberfest"]:
+              print(f"  {q:20}", [search(w, q, limit=1)[0] for w in ("EU", "UK", "UA")])
+
+          print("\n3) Kategorien der Treffer für 'thiago' (Kennung: Anzahl)")
+          _, it, _ = search("EU", "thiago")
+          cats = collections.Counter(c for i in it for c in (i.get("categories") and [i["categories"][0].get("categoryId")] or []))
+          print("  ", dict(cats.most_common(12)))
+          r = requests.get("https://api.ebay.com/commerce/taxonomy/v1/category_tree/77/get_category_suggestions",
+                           headers={**H, "X-EBAY-C-MARKETPLACE-ID": "EBAY_DE"}, params={"q": "fussball trikot"}, timeout=30)
+          print("  Taxonomie DE: HTTP", r.status_code)
+          for s in (r.json().get("categorySuggestions") or [])[:10] if r.ok else []:
+              anc = " > ".join(a["categoryName"] for a in reversed(s.get("categoryTreeNodeAncestors", [])))
+              print("   ", s["category"]["categoryId"], anc, ">", s["category"]["categoryName"])
+          r = requests.get("https://api.ebay.com/commerce/taxonomy/v1/category_tree/3/get_category_suggestions",
+                           headers={**H, "X-EBAY-C-MARKETPLACE-ID": "EBAY_GB"}, params={"q": "football shirt"}, timeout=30)
+          print("  Taxonomie UK: HTTP", r.status_code)
+          for s in (r.json().get("categorySuggestions") or [])[:8] if r.ok else []:
+              anc = " > ".join(a["categoryName"] for a in reversed(s.get("categoryTreeNodeAncestors", [])))
+              print("   ", s["category"]["categoryId"], anc, ">", s["category"]["categoryName"])
+
+          print("\n4) Größe im Titel bei 'thiago' (EU): mit XL/XXL-Angabe, mit anderer Größe, ohne Größe")
+          xl = sum(bool(re.search(r"(?i)\b(xxl|xl|2xl|x-large)\b", i["title"])) for i in it)
+          oth = sum(bool(re.search(r"(?i)\b(xs|s|m|l|small|medium|large|3xl|xxxl)\b", i["title"])) for i in it) - 0
+          print(f"   {xl} / {oth} / {len(it) - xl - oth} von {len(it)}")
+          print("\n5) Felder in der Trefferliste:", sorted(it[0].keys()) if it else "-")
+          PY
