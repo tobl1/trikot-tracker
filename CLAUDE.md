@@ -512,6 +512,11 @@ per GitHub-Schlüssel nur auf dem Handy; cron-job.org bleibt. Vinted/Kleinanzeig
    zeigt nur Treffer, die vor höchstens 6 Std. bestätigt wurden. Pushes: Thiago/Sondertrikots einzeln mit eBay-Link, Rest
    gebündelt (#ebay). UK/Ukraine mit geschätztem Endpreis (`landed`), Preisgrenze auf Endpreis plus Versand.
    Abrufe pro Tag in `status.json` → `ebay.abrufe` (Grenze 4.500). In Logs nie eBay-Inhalte ausgeben, nur Zahlen.
+   Melden/Ausblenden im eBay-Reiter: Issue ohne Titel, Link, Preis (öffentlich!), nur `id: ebay:<Hash>`, Grund, Kommentar,
+   Labels; `ebay.run` löscht den Eintrag und sperrt Titel+Preis gegen Neueinstellen (`gemeldet`). Neues Gerät:
+   `rewrite_app` schreibt die App-Daten sofort. App lädt eBay-Daten beim Öffnen neu (spätestens nach 2 Min., im
+   Wartezustand nach 15 s), "Schlüssel erneut schicken" nutzt den vorhandenen Schlüssel. `#ebay` hat eine Mindesthöhe
+   (iPhone verschob die untere Leiste, wenn die Seite kürzer als der Bildschirm wurde)
    Vorher, der Plan: Browse API `item_summary/search` (Application
    Token per client credentials, Secrets `EBAY_CLIENT_ID`/`EBAY_CLIENT_SECRET`), zwei Suchen je Begriff: EBAY_DE mit
    `buyingOptions:{FIXED_PRICE},itemLocationRegion:EUROPEAN_UNION,deliveryCountry:DE` und EBAY_GB mit

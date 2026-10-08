@@ -59,7 +59,8 @@ def apply_flags(seen, status_store, ts):
                 continue
             e = seen.get(f["id"])
             msg = (f"Übernommen: Treffer ist ab sofort ausgeblendet ({f['grund']})." if e else
-                   "Übernommen, der Treffer war schon nicht mehr in der Liste.")
+                   f"Übernommen: Das eBay-Angebot fliegt beim nächsten eBay-Run raus ({f['grund']})."
+                   if f["id"].startswith("ebay:") else "Übernommen, der Treffer war schon nicht mehr in der Liste.")
             try:
                 requests.post(f"{api}/{iss['number']}/comments", json={"body": msg}, headers=hdr, timeout=TIMEOUT)
                 requests.patch(f"{api}/{iss['number']}", json={"state": "closed"}, headers=hdr, timeout=TIMEOUT)

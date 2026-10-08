@@ -315,6 +315,12 @@ def run(mode, status_store, matcher, watch, rates, ts, notify, client=None, dry=
     first = state is None   # erster Lauf oder Schlüssel geändert: Bestand still übernehmen
     state = state or {"treffer": {}, "groessen": {}, "gepusht": {}, "beendet": {}}
     hits, sizes = state["treffer"], state["groessen"]
+    # In der App gemeldet oder ausgeblendet ("id: ebay:<Hash>"): Eintrag löschen, auch neu eingestellt nie wieder
+    gemeldet = state.setdefault("gemeldet", {})
+    flagged = {k[5:] for k in (status_store.get("flags") or {}) if k.startswith("ebay:")}
+    for iid in [i for i in hits if id_key(i) in flagged]:
+        gemeldet[relist_key(hits[iid]["title"], hits[iid]["price"])] = ts
+        del hits[iid]
     pg = watch.get("preisgrenze") or {}
     max_eur, no_limit = float(pg.get("max_eur") or 0), set(pg.get("ausnahmen") or [])
     problems, new_entries = [], []
@@ -348,6 +354,8 @@ def run(mode, status_store, matcher, watch, rates, ts, notify, client=None, dry=
     # 2) Abgleich: Labels aus dem Titel, Größe aus dem Titel oder dem Merkmal (Einzelabruf, gemerkt)
     lookups = SIZE_LOOKUPS.get(mode, 60)
     for iid, it in found.items():
+        if id_key(iid) in flagged or relist_key(it["title"], it["price"]) in gemeldet:
+            continue
         why = {}
         labs = matcher.labels(it["title"], why=why)
         if not labs:
@@ -451,6 +459,17 @@ def _price_line(e):
     if e.get("endpreis") is not None:
         p += f" (mit Zoll ≈ {e['endpreis']:.0f} €)"
     return p
+
+
+def rewrite_app(status_store, ts):
+    """App-Daten neu schreiben, ohne eBay abzufragen (z. B. sofort nach dem Freischalten eines Geräts)"""
+    cid, secret = secrets()
+    blob = speicher.load_json(state_path(), None) if cid else None
+    state = open_state(blob, secret) if blob else None
+    if state is not None:
+        write_app(status_store, state.get("treffer") or {}, (status_store.get("ebay") or {}).get("radar") or ts)
+        return True
+    return False
 
 
 def app_entry(e):

@@ -163,3 +163,28 @@ def test_faellig():
         assert ebay.due(status, "priority", tracker.now())["suche"] is None
     finally:
         del os.environ["EBAY_CLIENT_ID"], os.environ["EBAY_CLIENT_SECRET"]
+
+
+def test_gemeldet_und_neu_eingestellt(monkeypatch, tmp_path):
+    setup(monkeypatch, tmp_path)
+    status = {}
+    run(status, FakeEbay({("EU", "(thiago, alcantara)"): [summ(*THIAGO)]}))
+    status["flags"] = {"ebay:" + ebay.id_key("v1|111|0"): {"grund": "kein original"}}
+    run(status, FakeEbay({("EU", "(thiago, alcantara)"): [summ(*THIAGO)]}))
+    state = ebay.open_state(trikot.speicher.load_json(ebay.state_path(), None), "geheim")
+    assert state["treffer"] == {}
+    pushes, _, _ = run(status, FakeEbay({("EU", "(thiago, alcantara)"): [summ("v1|999|0", THIAGO[1])]}))   # neu eingestellt
+    state = ebay.open_state(trikot.speicher.load_json(ebay.state_path(), None), "geheim")
+    assert state["treffer"] == {} and pushes == []
+
+
+def test_neues_geraet_bekommt_daten_sofort(monkeypatch, tmp_path):
+    setup(monkeypatch, tmp_path)
+    status = {}
+    run(status, FakeEbay({("EU", "(thiago, alcantara)"): [summ(*THIAGO)]}))
+    priv = ec.generate_private_key(ec.SECP256R1())
+    pub = ebay.b64u(priv.public_key().public_bytes(serialization.Encoding.X962, serialization.PublicFormat.UncompressedPoint))
+    ebay.collect_devices(status, "2026-10-08T12:00:00+00:00", lambda label: ([{"number": 1, "body": f"ebay-key: {pub}"}], None))
+    assert ebay.rewrite_app(status, "2026-10-08T12:00:00+00:00")
+    app = trikot.speicher.load_json(ebay.app_path(), None)
+    assert len(ebay.open_for_device(priv, app["fuer"][ebay.device_id(pub)])["treffer"]) == 1

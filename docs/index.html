@@ -112,6 +112,7 @@ select{flex:0 1 auto;max-width:100%;appearance:none;-webkit-appearance:none;padd
 .ebintro{background:var(--card);border-radius:22px;padding:20px;margin:0 0 14px}
 .ebintro h2{font-size:18px;margin:0 0 8px}
 .ebintro p{font-size:14px;color:var(--muted);margin:0 0 12px;line-height:1.5}
+#ebay{min-height:calc(100vh - 120px)}   /* iPhone: wird die Seite kürzer als der Bildschirm, rutscht die untere Leiste hoch */
 .price small.eb{display:block;font-size:11px;color:var(--muted);font-weight:500}
 .body{padding:10px 8px 6px;display:flex;flex-direction:column;gap:5px;flex:1}
 .labels{font-family:"Inter",system-ui,sans-serif;font-size:12px;font-weight:600;color:var(--accent);letter-spacing:-.005em}
@@ -442,17 +443,22 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     // Mit Schlüssel: nach der Rückgängig-Frist auf allen Geräten ausblenden (kommt auch nie wieder per Push)
     clearTimeout(hideTimer);
     if (store.get("token")) hideTimer = setTimeout(() => {
-      createIssue("flag", `Ausgeblendet · ${t.titel}`, [`grund: juckt nicht`, `id: ${t.id}`, "", `url: ${t.url}`].join("\n"), false);
+      createIssue("flag", t.ebay ? "Ausgeblendet · eBay-Angebot" : `Ausgeblendet · ${t.titel}`,
+        [`grund: juckt nicht`, `id: ${t.id}`].concat(t.ebay ? [] : ["", `url: ${t.url}`]).join("\n"), false);
     }, 5200);
   }
   async function sendFlag(){
     const t = flagItem, note = $("flagnote").value.trim().replace(/\s+/g, " ");
-    const body = [`Gemeldet über das Dashboard.`, "", `grund: ${flagReason}`, `id: ${t.id}`, `kommentar: ${note}`, "",
-      `url: ${t.url}`, `titel: ${t.titel}`, `shop: ${t.shopName}, preis: ${t.preis}, labels: ${t.labels.join(", ")}`,
-      t.warum ? `warum: ${t.warum}` : ""].join("\n");
+    // eBay: Issues sind öffentlich, deshalb ohne Titel, Link und Preis (eBay-Inhalte dürfen nicht veröffentlicht werden)
+    const body = t.ebay
+      ? [`Gemeldet über das Dashboard (eBay).`, "", `grund: ${flagReason}`, `id: ${t.id}`, `kommentar: ${note}`, "",
+         `labels: ${t.labels.join(", ")}`, t.warum ? `warum: ${t.warum}` : ""].join("\n")
+      : [`Gemeldet über das Dashboard.`, "", `grund: ${flagReason}`, `id: ${t.id}`, `kommentar: ${note}`, "",
+         `url: ${t.url}`, `titel: ${t.titel}`, `shop: ${t.shopName}, preis: ${t.preis}, labels: ${t.labels.join(", ")}`,
+         t.warum ? `warum: ${t.warum}` : ""].join("\n");
     flagged.add(t.id); store.set("flagged", [...flagged]);
     $("flagsheet").hidden = true; render();
-    if (await createIssue("flag", `Flag: ${flagReason} · ${t.titel}`, body) === "direkt") showToast("Gemeldet, danke");
+    if (await createIssue("flag", `Flag: ${flagReason} · ${t.ebay ? "eBay-Angebot" : t.titel}`, body) === "direkt") showToast("Gemeldet, danke");
   }
 
   // Push direkt aus der App: Abo mit dem öffentlichen Schlüssel des Trackers verschlüsseln (ECDH + HKDF + AES-GCM,
@@ -507,15 +513,21 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
   // dürfen nicht öffentlich stehen (API License Agreement), das Dashboard ist aber öffentlich. "Freischalten" erzeugt
   // hier ein Schlüsselpaar, der öffentliche Teil geht als Issue "ebay" an den Tracker (Gegenstück trikot/ebay.py)
   const EB_SALT = "ttt-ebay-1", EB_INFO = "ttt-ebay-dashboard";
-  let ebayData = null, ebayErr = "", ebayLoading = false;
+  let ebayData = null, ebayErr = "", ebayLoading = false, ebayAt = 0;
   const hexOf = buf => [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, "0")).join("");
   async function enableEbay(){
     try {
-      const kp = await crypto.subtle.generateKey({name: "ECDH", namedCurve: "P-256"}, true, ["deriveBits"]);
-      const pub = b64u(await crypto.subtle.exportKey("raw", kp.publicKey));
-      const jwk = await crypto.subtle.exportKey("jwk", kp.privateKey);
-      const kid = hexOf(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(pub))).slice(0, 16);
-      store.set("ebaykey", {jwk, pub, kid, seit: new Date().toISOString()});
+      // vorhandenen Schlüssel erneut schicken statt einen neuen zu erzeugen (sonst passt der alte nicht mehr)
+      let k = store.get("ebaykey");
+      if (!k) {
+        const kp = await crypto.subtle.generateKey({name: "ECDH", namedCurve: "P-256"}, true, ["deriveBits"]);
+        const pub = b64u(await crypto.subtle.exportKey("raw", kp.publicKey));
+        const jwk = await crypto.subtle.exportKey("jwk", kp.privateKey);
+        const kid = hexOf(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(pub))).slice(0, 16);
+        k = {jwk, pub, kid, seit: new Date().toISOString()};
+        store.set("ebaykey", k);
+      }
+      const pub = k.pub;
       ebayData = null; ebayErr = "";
       const how = await createIssue("ebay", "eBay für die App freischalten", `ebay-key: ${pub}`);
       showToast(how === "direkt" ? "Freischaltung läuft, die Angebote kommen mit dem nächsten Run" : "Auf der GitHub-Seite noch \"Submit\" tippen", 5000);
@@ -524,6 +536,7 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
   }
   async function loadEbay(){
     const k = store.get("ebaykey"); if (!k) return;
+    ebayAt = Date.now(); ebayErr = "";
     try {
       const r = await fetch("ebay.json", {cache: "no-store"});
       if (r.status === 404) { ebayData = {wartet: true}; return; }
@@ -554,6 +567,7 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
                        : '<span class="ph">👕</span>';
     return `<a class="card${t.thiago ? " th" : t.hoch ? " hi" : ""}" href="${esc(t.url)}" target="_blank" rel="noopener">
       <div class="img">${img}</div><div class="badges">${badges}</div>
+      <button class="flag" data-eb="${esc(t.id)}" title="Angebot melden oder ausblenden" aria-label="Ausblenden oder melden">${IC.flag}</button>
       <div class="body"><div class="labels" title="${esc(t.warum || "")}">${esc(t.labels.join(" · "))}</div>
       <div class="title">${esc(t.titel)}</div>
       <div class="foot"><div class="price">${price}</div><div>${t.zustand ? `<span class="cond">${esc(t.zustand)}</span>` : ""}` +
@@ -571,20 +585,24 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
       $("ebayon").addEventListener("click", enableEbay);
       return;
     }
-    if (ebayErr) { box.innerHTML = `<div class="err">${esc(ebayErr)}</div>`; return; }
-    if (!ebayData) {
-      box.innerHTML = '<div class="empty">eBay lädt …</div>';
-      if (!ebayLoading) { ebayLoading = true; loadEbay().then(() => { ebayLoading = false; if (st.view === "ebay") renderEbay(); }); }
-      return;
+    const stale = Date.now() - ebayAt > (ebayData && ebayData.wartet || ebayErr ? 15e3 : 120e3);
+    if (stale && !ebayLoading) {
+      ebayLoading = true;
+      loadEbay().then(() => { ebayLoading = false; if (st.view === "ebay") renderEbay(); });
     }
+    if (ebayErr) { box.innerHTML = `<div class="err">${esc(ebayErr)}</div>`; return; }
+    if (!ebayData) { box.innerHTML = '<div class="empty">eBay lädt …</div>'; return; }
     if (ebayData.wartet) {
       box.innerHTML = `<div class="ebintro"><h2>Freischaltung läuft</h2><p>Der nächste Run übernimmt den Schlüssel dieses Geräts ` +
-        `(tagsüber max. 30 Min.), danach erscheinen hier die Angebote.</p><button class="addbtn big" id="ebayon">Erneut freischalten</button></div>`;
+        `(tagsüber max. 30 Min.), danach erscheinen hier die Angebote. Die Seite schaut beim Öffnen selbst nach.</p>` +
+        `<button class="addbtn big" id="ebayon">Schlüssel erneut schicken</button></div>`;
       $("ebayon").addEventListener("click", enableEbay);
       return;
     }
     const maxH = ebayData.zeigen_h || 6;
-    const items = (ebayData.treffer || []).map(t => Object.assign(t, {neu: isNew(t), thiago: t.labels.some(l => l.startsWith("Thiago"))}));
+    const items = (ebayData.treffer || []).map(t => Object.assign(t, {id: t.id.startsWith("ebay:") ? t.id : "ebay:" + t.id,
+      ebay: true, shopName: "eBay", neu: isNew(t), thiago: t.labels.some(l => l.startsWith("Thiago"))}))
+      .filter(t => !flagged.has(t.id) && !hiddenIds.has(t.id));
     // eBay-Regel: angezeigte Angebote höchstens 6 Std. alt. Länger nicht bestätigte bleiben verborgen, bis der nächste Run sie prüft
     const fresh = items.filter(t => (Date.now() - new Date(t.bestaetigt)) / 36e5 <= maxH);
     const list = fresh.sort((a, b) => (a.teuer - b.teuer) || (b.thiago - a.thiago) || (b.hoch - a.hoch) || b.erst.localeCompare(a.erst));
@@ -871,7 +889,8 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     }
     const b = e.target.closest(".flag"); if (!b) return;
     e.preventDefault(); e.stopPropagation();
-    const t = all.find(x => x.id === b.dataset.id); if (t) openFlag(t);
+    const t = b.dataset.eb ? ((ebayData || {}).treffer || []).find(x => x.id === b.dataset.eb) : all.find(x => x.id === b.dataset.id);
+    if (t) openFlag(t);
   }, true);
   $("flagreasons").addEventListener("click", e => {
     const b = e.target.closest(".chip"); if (!b) return;

@@ -215,8 +215,10 @@ def main():
              4, (os.environ.get("DASHBOARD_URL") or "").rstrip("/") + "/#eingaenge" or None, nur_abo=aid)
         new_flags += 1   # Drop-Run soll dafür nicht vorzeitig enden
     # eBay (eigener Bereich): Geräteschlüssel aus der App übernehmen
+    ebay_devices = 0
     if ebay.secrets()[0] and not args.dry_run and not args.only:
-        new_flags += ebay.collect_devices(status_store, now().isoformat(), owner_issues)
+        ebay_devices = ebay.collect_devices(status_store, now().isoformat(), owner_issues)
+        new_flags += ebay_devices
     shop_modes = {}   # Drop-Run: je Shop "drop" (fälliger Drop, gründlich) oder "radar" (nur neueste Artikel)
     t_start = now()
     ebay_todo = ebay.due(status_store, args.mode, t_start) if not args.only else {"suche": None, "bestaetigen": False}
@@ -530,6 +532,8 @@ def main():
                 print(summary)
         except Exception as e:
             ebay_problems = [("eBay", f"{type(e).__name__}: {str(e)[:150]}")]
+    elif ebay_devices and not args.dry_run:
+        ebay.rewrite_app(status_store, ts)   # neues Gerät freigeschaltet: Angebote sofort, nicht erst beim nächsten eBay-Run
 
     # Aufräumen: Einträge, die 60 Tage nicht mehr gesehen wurden, vergessen
     old = now() - dt.timedelta(days=60)
