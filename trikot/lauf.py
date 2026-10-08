@@ -20,7 +20,7 @@ from .berichte import fundgrube, log_problems, write_dashboard, write_report
 from .issues import add_shops_from_issues, apply_flags, check_alarms, collect_push_abos, owner_issues
 from .melden import OUTBOX_MAX_HOURS, detail_line, push, push_label, save_outbox, send_outbox, short
 from .netz import Http
-from .preise import fetch_rates, parse_price, to_eur
+from .preise import fetch_rates, parse_price, price_limit, to_eur
 from .pruefung import enrich, hold_unchecked
 from .quellen import run_shop
 from .quellen.fyj import fyj_run
@@ -298,12 +298,11 @@ def main():
     ts = now().isoformat()
     rates = fetch_rates(status_store)["rates"]
     pg = watch.get("preisgrenze") or {}
-    max_eur = float(pg.get("max_eur") or 0)
-    no_limit = set(pg.get("ausnahmen") or [])
 
     def too_expensive(e):
         eur = to_eur(e.get("price"), rates)
-        return bool(max_eur and eur and eur > max_eur and not no_limit & set(e["labels"]))
+        limit = price_limit(e["labels"], pg)
+        return bool(limit and eur and eur > limit)
     new_entries, price_drops = [], []
     counts = status_store.setdefault("counts", {})
     collapse = status_store.setdefault("einbruch", {})

@@ -168,8 +168,11 @@ temporären Workflow aus GitHub heraus (Beispiel 05.10.2026: CFS-Suche "thiago" 
 - Nach Regeländerungen verschwinden schon angezeigte Fehltreffer erst mit dem nächsten Gesamt-Run (`weg`), Meldungen
   in der Zwischenzeit sind also oft schon erledigt (z. B. #35/#36 vom 05.10.2026 abends)
 - **Preisgrenze** (`preisgrenze` in watchlist.yaml): über 150 € kein Push, im Dashboard standardmäßig
-  ausgeblendet (Schalter "auch über 150 €"); Ausnahme nur Label "Thiago" (Sondertrikots ausdrücklich
-  nicht, Nutzer 02.10.2026). Dashboard rechnet selbst nach
+  ausgeblendet (Schalter "auch über 150 €"). Ausnahmen mit eigener Grenze (`ausnahmen: {Label: Euro}`, 0 = ohne):
+  Thiago bis 199 € (Nutzer 08.10.2026, vorher ohne Grenze; Sondertrikots ausdrücklich nicht, Nutzer 02.10.2026).
+  `preise.price_limit`, Dashboard rechnet mit `limitFor` nach, eBay auf Endpreis plus Versand
+- **England grundsätzlich raus** (Nutzer 08.10.2026, `produkt_ausschluss`: england, anglia, inglaterra …), betraf
+  vor allem WM 2006 (41 Treffer). eBay bewertet gespeicherte Treffer bei jedem Run neu
 - Shopify: gibt es Größen-Varianten, zählen nur **verfügbare** XL/XXL-Varianten; sonst Größe aus
   Titel oder Größen-Tag
 - Vertragstests der Anbindungen: `tests/test_quellen.py` (FakeHttp mit Beispieldaten je Plattform, ohne Netz)

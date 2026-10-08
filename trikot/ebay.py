@@ -27,7 +27,7 @@ from cryptography.hazmat.primitives.kdf.hkdf import HKDF
 
 from . import speicher
 from .basis import ANY_SIZE_RX, SIZE_RX, TIMEOUT, is_high, norm, now, short_size
-from .preise import to_eur
+from .preise import price_limit, to_eur
 
 API = "https://api.ebay.com"
 SCOPE = "https://api.ebay.com/oauth/api_scope"
@@ -310,6 +310,7 @@ def run(mode, status_store, matcher, watch, rates, ts, notify, client=None, dry=
     if used.get(day, 0) >= EBAY_DAY_LIMIT:
         return "eBay: Tageslimit erreicht", [("eBay", f"Tageslimit von {EBAY_DAY_LIMIT} Abrufen erreicht, Pause bis morgen")]
 
+    pg = watch.get("preisgrenze") or {}
     blob = speicher.load_json(state_path(), None)
     state = open_state(blob, secret) if blob else None
     first = state is None   # erster Lauf oder Schlüssel geändert: Bestand still übernehmen
@@ -321,8 +322,17 @@ def run(mode, status_store, matcher, watch, rates, ts, notify, client=None, dry=
     for iid in [i for i in hits if id_key(i) in flagged]:
         gemeldet[relist_key(hits[iid]["title"], hits[iid]["price"])] = ts
         del hits[iid]
-    pg = watch.get("preisgrenze") or {}
-    max_eur, no_limit = float(pg.get("max_eur") or 0), set(pg.get("ausnahmen") or [])
+    # Regeln können sich ändern (z. B. England raus, Preisgrenzen): gespeicherte Treffer jedes Mal neu bewerten
+    for iid in list(hits):
+        e = hits[iid]
+        labs = matcher.labels(e["title"])
+        if not labs:
+            del hits[iid]
+            continue
+        e["labels"], e["prios"] = sorted({l for l, _ in labs}), sorted({p for _, p in labs})
+        total = (e["endpreis"] if e.get("endpreis") is not None else e.get("eur") or 0) + (e.get("versand_eur") or 0)
+        lim = price_limit(e["labels"], pg)
+        e["teuer"] = bool(lim and total > lim)
     problems, new_entries = [], []
 
     # 1) Suchen
@@ -388,7 +398,7 @@ def run(mode, status_store, matcher, watch, rates, ts, notify, client=None, dry=
             state["gepusht"][key] = ts
         entry.update(it, labels=labels, prios=sorted({p for _, p in labs}), warum=why, last=ts,
                      size=short_size(size.group(0)) if size else "", eur=eur, versand_eur=ship, endpreis=end,
-                     teuer=bool(max_eur and total > max_eur and not no_limit & set(labels)))
+                     teuer=bool(price_limit(labels, pg) and total > price_limit(labels, pg)))
 
     # 3) Bestätigen bzw. löschen: Gesamt-Run alles, was die vollständige Suche nicht mehr lieferte; sonst, was älter als
     # EBAY_REFRESH_H ist. Beendet, verkauft oder ohne Sofortkauf -> Eintrag löschen (Lizenz §8.1b)

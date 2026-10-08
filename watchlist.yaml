@@ -15,13 +15,16 @@ groessen:
                   "infantil", "bambino", "dames", "childs", "child's", "ans", "jongens", "kinderen"]
 
 # Preisgrenze in Euro: teurere Treffer gibt es nicht als Push und sie sind im Dashboard
-# standardmäßig ausgeblendet. Ausnahmen = Labels, für die keine Grenze gilt
+# standardmäßig ausgeblendet. Ausnahmen = Labels mit eigener Grenze (0 = ohne Grenze).
+# Thiago seit 08.10.2026 bis 199 € (Nutzer: "darüber wird es absurd"), vorher ohne Grenze
 preisgrenze:
   max_eur: 150
-  ausnahmen: ["Thiago"]
+  ausnahmen: {"Thiago": 199}
 
 # Produkte, die keine Trikots sind oder nicht gewünscht sind
-produkt_ausschluss: ["shorts", "socks", "sock", "jacket", "track top", "tracksuit",
+produkt_ausschluss: [# England grundsätzlich nicht (Nutzer 08.10.2026, betraf vor allem WM 2006)
+                     "england", "anglia", "inglaterra", "angleterre", "inghilterra", "engeland",
+                     "shorts", "socks", "sock", "jacket", "track top", "tracksuit",
                      "hoodie", "sweatshirt", "sweater", "pants", "trousers", "scarf", "bag",
                      "cap", "hat", "programme", "ball", "boots", "poster", "sticker", "mug",
                      "keyring", "towel", "pennant", "framed", "cushion", "goalkeeper",

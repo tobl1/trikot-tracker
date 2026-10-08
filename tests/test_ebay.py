@@ -15,7 +15,7 @@ from trikot import ebay  # noqa: E402
 
 WATCH = yaml.safe_load((Path(__file__).resolve().parent.parent / "watchlist.yaml").read_text(encoding="utf-8"))
 M = tracker.Matcher(WATCH)
-RATES = {"GBP": 0.85}   # 1 EUR = 0,85 GBP
+RATES = {"EUR": 1.0, "GBP": 0.85}   # 1 EUR = 0,85 GBP
 
 
 def summ(iid, title, price="49.99", cur="EUR", country="DE", opts=("FIXED_PRICE",), score=50, pct="99.5"):
@@ -188,3 +188,14 @@ def test_neues_geraet_bekommt_daten_sofort(monkeypatch, tmp_path):
     assert ebay.rewrite_app(status, "2026-10-08T12:00:00+00:00")
     app = trikot.speicher.load_json(ebay.app_path(), None)
     assert len(ebay.open_for_device(priv, app["fuer"][ebay.device_id(pub)])["treffer"]) == 1
+
+
+def test_gespeicherte_treffer_nach_regelaenderung(monkeypatch, tmp_path):
+    setup(monkeypatch, tmp_path)
+    status = {}
+    run(status, FakeEbay({("EU", "(thiago, alcantara)"): [summ(*THIAGO, price="180.00")]}))
+    state = ebay.open_state(trikot.speicher.load_json(ebay.state_path(), None), "geheim")
+    assert state["treffer"]["v1|111|0"]["teuer"] is False          # 180 + 5 Versand < 199
+    run(status, FakeEbay({("EU", "(thiago, alcantara)"): [summ(*THIAGO, price="199.00")]}))
+    state = ebay.open_state(trikot.speicher.load_json(ebay.state_path(), None), "geheim")
+    assert state["treffer"]["v1|111|0"]["teuer"] is True           # 199 + 5 Versand > 199

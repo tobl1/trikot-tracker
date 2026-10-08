@@ -764,10 +764,15 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
 
   function setup(data){
     runs = data.laeufe || [];
-    const pg = data.preisgrenze || {}, limit = pg.max_eur || 0, exc = pg.ausnahmen || [];
+    const pg = data.preisgrenze || {}, limit = pg.max_eur || 0;
+    // eigene Grenze je Label (z. B. Thiago 199 €, 0 = ohne Grenze), Gegenstück preise.price_limit
+    const exc = Array.isArray(pg.ausnahmen) ? Object.fromEntries(pg.ausnahmen.map(l => [l, 0])) : (pg.ausnahmen || {});
+    const limitFor = labels => { const own = labels.filter(l => l in exc).map(l => +exc[l] || 0);
+      return !own.length ? limit : own.includes(0) ? 0 : Math.max(limit, ...own); };
     $("explabel").textContent = limit ? `auch über ${limit} €` : "auch teurere";
     all = data.treffer.map(t => {
-      t.teuer = !!(limit && t.eur != null && t.eur > limit && !t.labels.some(l => exc.includes(l)));
+      const lim = limitFor(t.labels);
+      t.teuer = !!(lim && t.eur != null && t.eur > lim);
       const shopName = /^[a-z0-9.-]+\.[a-z]{2,}$/i.test(t.shop) || t.shop === "FYJ" ? (host(t.url) || t.shop) : t.shop;
       return Object.assign(t, {shopName, neu: isNew(t), thiago: t.labels.some(l => l.startsWith("Thiago")),
         hay: (t.titel + " " + t.labels.join(" ") + " " + shopName + " " + (t.notiz || "")).toLowerCase()});

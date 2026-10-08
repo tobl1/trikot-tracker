@@ -46,6 +46,19 @@ def fetch_rates(status_store):
     return status_store.get("kurse") or {"datum": "", "rates": {"EUR": 1.0}}
 
 
+def price_limit(labels, pg):
+    """Preisgrenze für einen Treffer: eigene Grenze eines Labels aus preisgrenze.ausnahmen (0 = ohne Grenze),
+    sonst max_eur. Ältere Form: Liste von Labels ohne Grenze"""
+    base = float(pg.get("max_eur") or 0)
+    exc = pg.get("ausnahmen") or {}
+    if isinstance(exc, list):
+        exc = {label: 0 for label in exc}
+    own = [float(v or 0) for label, v in exc.items() if label in labels]
+    if not own:
+        return base
+    return 0 if 0 in own else max(own + [base])
+
+
 def to_eur(price, rates):
     amount, cur = parse_price(price)
     rate = rates.get(cur)

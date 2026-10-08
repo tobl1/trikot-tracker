@@ -501,7 +501,7 @@ WM06 = "WM 2006"
     ("Italy 2006 World Cup Home Shirt Totti 10 XL", True),
     ("2006-08 Argentina Home Shirt Riquelme #10 (XXL)", True),
     ("Maillot Equipe de France 2006 Domicile ZIDANE XL", True),
-    ("2006-07 England Home Shirt Gerrard #8 (XL)", True),
+    ("2006-07 England Home Shirt Gerrard #8 (XL)", False),   # England seit 08.10.2026 grundsätzlich raus
     ("Germany 2006 Home Shirt (XL)", False),                        # nur beflockt
     ("Netherlands 2004/2005/2006 Home Shirt Van Nistelrooy XL", False),   # T90-Vorgänger
     ("New England Revolution 2006 Home Shirt Twellman #20 XL", False),
@@ -644,3 +644,18 @@ def test_artikelcodes_thiago_sondertrikots():
     assert {l for l, _ in M.labels("FC BARCELONA SHIRT XL", desc="Code: 419877-486")} == {"Barça 2008-2013"}
     assert {l for l, _ in M.labels("SPAIN SHIRT XL", desc="Product code P47902")} == {"Spanien 2010/2011"}
     assert M.labels("FC BARCELONA SHIRT MESSI #10 XL", desc="Code: 419877-486") == []      # fremder Flock
+
+
+def test_preisgrenze_je_label():
+    from trikot.preise import price_limit
+    pg = {"max_eur": 150, "ausnahmen": {"Thiago": 199}}
+    assert price_limit(["WM 2006"], pg) == 150 and price_limit(["Thiago"], pg) == 199
+    assert price_limit(["Thiago", "Barça 2008-2013"], pg) == 199
+    assert price_limit(["Thiago"], {"max_eur": 150, "ausnahmen": ["Thiago"]}) == 0   # alte Form: ohne Grenze
+
+
+def test_england_raus():
+    # Nutzer 08.10.2026: England grundsätzlich nicht (betraf vor allem WM 2006)
+    assert M.labels("2006/07 England Away Football Shirt Gerrard #4 (XL)") == []
+    assert M.labels("Koszulka piłkarska Anglia 2006/08 Away 4 Gerrard [XL]") == []
+    assert M.labels("Germany 2006 Away BALLACK 13 XL 9/10") != []
