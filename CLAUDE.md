@@ -510,6 +510,14 @@ per GitHub-Schlüssel nur auf dem Handy; cron-job.org bleibt. Vinted/Kleinanzeig
    bzw. getItem 404/nicht verfügbar. Keine Verkäufernamen speichern (Opt-out der Account-Deletion-Benachrichtigung).
    Unklar: ob search/getItem ohne Partner-Freigabe in Produktion laufen (Methoden-Doku: nur getItems Limited Release,
    Buy-Requirements-Seite: Partner-Antrag). Erst mit echten Schlüsseln testen. Budget ca. 3.000 von 5.000 Abrufen/Tag
+   **Lizenz (API License Agreement, gelesen 08.10.2026), daraus Pflichten:** angezeigte Angebotsdaten höchstens 6 Std. alt
+   (§8.1c, nachts zwischen den Runs beachten), nicht mehr öffentliche Inhalte löschen (§8.1b), Zwischenkopien löschen,
+   sobald unnötig (§3.1b), öffentliche Anzeige nicht mit Nicht-eBay-Inhalten mischen (§8.1b), eBay-Inhalte nicht
+   verbreiten/veröffentlichen (§9.7, §17 vertraulich), keine Statistiken daraus (§8.1d), keine Nutzer-IDs speichern (§8.2.1),
+   kein KI-Training (§9.10), keine öffentlichen Aussagen über das Developer Program (§18), Schlüssel geheim (§3.2).
+   Plan deshalb: eBay-Daten nie im Klartext im öffentlichen Repo (verschlüsselt, Schlüssel nur als Secret und auf dem
+   Handy des Nutzers), eigener eBay-Bereich in der App, Anzeige nur bis 6 Std. nach letzter Bestätigung, beendete
+   Angebote löschen (nur Hash der Artikelnummer gegen Doppel-Pushes)
 10. **Backlog (Nutzer 05.10.2026): eBay** über die offizielle Browse API (kostenlos, 5.000 Abrufe/Tag, Nutzer bräuchte
    ein eBay-Entwicklerkonto). Eine eigene "bequeme" Lösung später finden. eBay-Suchseiten blocken (403), nicht umgehen
 
