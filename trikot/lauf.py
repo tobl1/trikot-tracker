@@ -434,7 +434,9 @@ def main():
             was = e.get("teuer")
             e["teuer"] = too_expensive(e)
             # war über der Preisgrenze (also unsichtbar), jetzt darunter: wie ein neuer Treffer melden
-            if was and not e["teuer"] and e not in new_entries and not (e.get("verkauft") or e.get("aussortiert")):
+            # nur einmal je Treffer (Wechselkurse lassen Preise um die Grenze pendeln)
+            if was and not e["teuer"] and e not in new_entries and not e.get("unter_grenze") \
+                    and not (e.get("verkauft") or e.get("aussortiert")):
                 e["unter_grenze"] = ts
                 cheaper.append(e)
     new_entries += cheaper
