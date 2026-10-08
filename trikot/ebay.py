@@ -435,8 +435,14 @@ def run(mode, status_store, matcher, watch, rates, ts, notify, client=None, dry=
         write_app(status_store, hits, ts)
     if client.errors:
         problems.append(("eBay", "; ".join(sorted(set(client.errors)))[:300]))
+    from collections import Counter
+    per_label = Counter(l for e in hits.values() for l in e.get("labels", []))
+    per_where = Counter(e.get("wo") for e in hits.values())
+    # nur Zahlen ins Log (öffentlich), keine eBay-Inhalte
     summary = (f"eBay: {todo['suche'] or 'nur bestätigen'}, {len(found)} Angebote geprüft, {len(hits)} Treffer, "
-               f"{len(new_entries)} neu, {client.calls} Abrufe (heute {used[day]})")
+               f"{len(new_entries)} neu, {client.calls} Abrufe (heute {used[day]})\n  je Kategorie: "
+               + ", ".join(f"{k} {v}" for k, v in per_label.most_common()) + "\n  je Standort: "
+               + ", ".join(f"{k} {v}" for k, v in per_where.most_common()))
     return summary, problems
 
 
