@@ -169,6 +169,10 @@ shops:
   - {name: Legit Football Shirts, url: "https://legitfootballshirts.com", schnellcheck: nein, radar: nein}   # Radar ergab 403 (08.10.2026), nachts ok
 # The Football Idiots (Oslo/Stavanger, "Norway's home for authentic vintage"), beflockte Klassiker mit Note, Preise in NOK
   - {name: The Football Idiots, url: "https://www.thefootballidiots.com", schnellcheck: nein}
+# Pure Football Shirts (FR laut meta.json, vom Nutzer genannt 08.10.2026): beflockt, Größe im Titel, "100% authentique",
+# prüft Etiketten und Produktcodes ("Pas de contrefaçons, pas de rééditions modernes"), 5 Treffer bei Aufnahme.
+# Hatte ein Thiago Bayern Third 2015/16 in XL (ausverkauft)
+  - {name: Pure Football Shirts, url: "https://purefootballshirts.com", schnellcheck: nein}
 
 # Eigene Shopsysteme über die Such-Ergebnisseite (plattform: html), seit 05.10.2026
   # Top Vintage Football Shirts (IT, Storeden, "only originals" aus Sammlungen und Restposten), seit 08.10.2026
