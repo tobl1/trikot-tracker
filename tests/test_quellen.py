@@ -233,7 +233,8 @@ def test_fyj_filtert_marktplaetze_direkte_shops_und_zaehlt_nachbauten(monkeypatc
     rows = [fyj_row("2013-14 Bayern Thiago #6 Shirt XL", "https://www.kitshop.com/a"),
             fyj_row("2013-14 Bayern Thiago #6 Shirt XL (Reissue)", "https://www.kitshop.com/b", reissue="true"),
             fyj_row("Thiago Bayern Trikot", "https://www.ebay.de/itm/1"),
-            fyj_row("Thiago Bayern Trikot", "https://vfa.com/products/x")]
+            fyj_row("Thiago Bayern Trikot", "https://vfa.com/products/x"),
+            dict(fyj_row("2013-14 Bayern Thiago #6 Shirt XL", "https://brechodofutebol.com/p"), currency="BRL")]   # nicht Europa
     tracker.FYJ_DOMAIN_STATS.clear()
     http = FakeHttp([("findyourjersey", lambda p: rows if p.get("page") == 1 and p.get("search") == "thiago" else [])])
     m = tracker.Matcher({"spieler": [{"name": "Thiago", "suche": ["thiago"], "prioritaet": "hoch"}]})

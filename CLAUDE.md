@@ -340,6 +340,16 @@ in shops.yaml, alle `schnellcheck: nein`), damit 115 Shops. Bewusst nicht: origi
 wavememorabilia, classicfootballcollectibles, fancyfootballshirts, kitmenapparel, theshirttemple
 (Mehraufwand/unklar), 44trikots (passwortgeschützt), Marktplätze und Nachbau-Shops
 
+**Nur Europa (Nutzer 08.10.2026: "alles aus US bzw. non-Europe kann weg"):** 25 Shops außerhalb Europas gesperrt
+(Abschnitt am Ende von shops.yaml, `sperren: ja`): Land per Shopify `/meta.json` (country), bei Wix über die Shop-Währung.
+US: Golaço (auch viele Eigenprodukte "In-House"), Saturdays Football, Forever Soccer, Philly, Euromex, Football Shirt
+Union, Kit Collector, Retro Screamers, STA, Tiffozi, The Football Boutique, Rare and Retro, Galactic, Original 11vs11;
+AU: First Street, Iconic Jersey, The Kit Dealer, Vintage Authentic Retro; CA: FTBL HVN, Offside Boys; MX: Es de Época,
+The Football Room; MY: Sunday Football Shirts; ID: Lockerhaus; NZ: Throwback Jerseys. FYJ: nur Zeilen mit europäischer
+Währung (`FYJ_EUROPE_CURRENCIES`), damit fallen z. B. brechodofutebol.com (BRL) und US-Shops weg. Bulishirts ist deutsch,
+Football Legends Kits portugiesisch. Neue Shops vor der Aufnahme mit `/meta.json` prüfen. Achtung: Shopify zeigt mit dem
+Cookie localization=DE auch bei US-Shops Euro, die Währung allein sagt dort nichts
+
 **Recherche 08.10.2026** (Nutzer: renommierte Shops aus Europa mit sicheren Originalen): neu Secondhalf (NL),
 TrikotTrader (Bayern, Woo), Shorty Football Shirts, Vintage Kit Co (UK), Football & Vintage Amsterdam (Woo), dazu
 Your Vintage Football Kit (DK, Nutzer 07.10.). Zweite Runde (Schwerpunkt DE, PL, NL, plus FYJ-Händlerliste

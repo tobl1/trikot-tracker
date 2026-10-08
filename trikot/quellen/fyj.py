@@ -1,6 +1,6 @@
 """FindYourJersey als Lückenfüller (Shops ohne direkte Anbindung)"""
 
-from ..basis import FYJ_API, FYJ_MARKETPLACES, FYJ_SIZES, domain, norm
+from ..basis import FYJ_API, FYJ_EUROPE_CURRENCIES, FYJ_MARKETPLACES, FYJ_SIZES, domain, norm
 from .gemeinsam import item
 
 
@@ -35,6 +35,9 @@ def fyj_run(http, matcher, priority, skip_domains=()):
                     reissue = str(r.get("isReissue")).lower() == "true"   # kommt als Text "false"/"true"
                     dom = domain(r.get("sourceUrl") or "")
                     if not dom or dom in skip_domains or any(m in dom for m in FYJ_MARKETPLACES):
+                        continue
+                    # nur Shops aus Europa (Nutzer 08.10.2026): Preise in außereuropäischer Währung = Shop außerhalb
+                    if (r.get("currency") or "EUR").upper() not in FYJ_EUROPE_CURRENCIES:
                         continue
                     st = FYJ_DOMAIN_STATS.setdefault(dom, [0, 0])   # Zeilen, davon Nachbauten (Fundgrube)
                     st[0] += 1

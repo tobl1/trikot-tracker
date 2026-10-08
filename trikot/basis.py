@@ -29,6 +29,7 @@ FYJ_API = "https://www.findyourjersey.org/api/jerseys"
 FYJ_SIZES = ["XL", "XXL"]
 FX_API = "https://api.frankfurter.dev/v1/latest"
 FYJ_MARKETPLACES = ("ebay.", "depop.", "vinted.", "etsy.")   # über FYJ nicht übernehmen
+FYJ_EUROPE_CURRENCIES = {"EUR", "GBP", "DKK", "SEK", "NOK", "PLN", "CHF", "CZK", "HUF", "RON", "BGN", "ISK"}   # sonst Shop außerhalb Europas
 RECHECK_DAYS = 3             # FYJ-Treffer so oft auf der Shop-Seite nachprüfen (verkauft?)
 CHECK_VERSION = 2            # erhöhen, wenn die Seitenprüfung mehr auswertet: dann wird alles neu geprüft
 ENRICH_BUDGET = {"full": 400, "priority": 25, "drop": 25}   # max. Seitenprüfungen pro Lauf

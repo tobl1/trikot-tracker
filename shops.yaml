@@ -41,9 +41,6 @@ shops:
   # 10 Sek. Pause (Crawl-delay), Drop Fr 19 Uhr laut Nutzer. Drop-Run und Radar lesen nur die Neuheiten-Seite
   - {name: Topbinz, url: "https://www.topbinzfootballshirts.co.uk", plattform: html, pause: 10, drop: ["Fr 19:00"], schnellcheck: nein,
      suche: "/search/products?keywords={q}", link: "article.product-box h3 a", neu: "/new-in"}
-  - {name: Football Shirt Union, url: "https://footballshirtunion.com"}
-  - {name: Saturdays Football, url: "https://saturdaysfootball.com"}
-  - {name: The Football Boutique, url: "https://www.thefootballboutique.com", plattform: wix}
   - {name: The Soccer Archive, url: "https://thesoccerarchive.com"}
   - {name: We Love Football Shirts, url: "https://www.welovefootballshirts.com", plattform: fyj}
   - {name: RetrOriginalFootball, url: "https://retroriginalfootball.com"}
@@ -60,11 +57,8 @@ shops:
   - {name: Football Thrift Shop, url: "https://footballthrift.shop"}
   - {name: Swiat Koszulek Pilkarskich, url: "https://swiatkoszulekpilkarskich.pl", plattform: prestashop}
   - {name: Classic-Shirts, url: "https://classic-shirts.com", plattform: idosell}
-  - {name: The Kit Dealer, url: "https://www.thekitdealer.com"}
-  - {name: Throwback Jerseys NZ, url: "https://www.throwbackjerseysnz.com", plattform: wix, drop: ["Fr 20:00 Pacific/Auckland"]}
   - {name: FootballShirts.com, url: "https://footballshirts.com"}
   - {name: Sense of Goal, url: "https://www.senseofgoal.com"}
-  - {name: Tiffozi Futbol, url: "https://tiffozifutbol.com"}
   - {name: Kickoff Vintage, url: "https://kickoffvintage.com"}
   - {name: Jerseys Hermanos, url: "https://jerseyshermanos.com"}
   - {name: Nanos Football Jerseys, url: "https://nanosfootballjerseys.com"}
@@ -87,28 +81,18 @@ shops:
   - {name: The Kitman 97, url: "https://thekitman97.com", schnellcheck: nein}
   - {name: To The Jersey, url: "https://tothejersey.com", schnellcheck: nein}
   - {name: Buy Sell Football Shirts, url: "https://buysellfootballshirts.co.uk", schnellcheck: nein}
-  - {name: Iconic Jersey, url: "https://iconicjersey.com", schnellcheck: nein}
   - {name: Le 7 Sorelle, url: "https://le7sorelle.it", schnellcheck: nein}
-  - {name: STA Jerseys, url: "https://stajerseys.com", schnellcheck: nein}
   - {name: Vintage Historic Sports, url: "https://vintagehistoricsports.fr", schnellcheck: nein}
   - {name: Retrotrøjer, url: "https://xn--retrotrjer-6cb.dk", schnellcheck: nein}
   - {name: Classic Pitchwear, url: "https://classicpitchwear.com", schnellcheck: nein}
   - {name: Cult Football, url: "https://cultfootball.co.uk", schnellcheck: nein}
-  - {name: Es de Época, url: "https://esdeepoca.com", schnellcheck: nein}
-  - {name: Euromex Sports, url: "https://euromexsports.com", schnellcheck: nein}
-  - {name: First Street, url: "https://firststreet.store", schnellcheck: nein}
   - {name: Football Shirt Collective, url: "https://footballshirtcollective.com", schnellcheck: nein}
-  - {name: Forever Soccer Jerseys, url: "https://foreversoccerjerseys.com", schnellcheck: nein}
-  - {name: Golaço Kits, url: "https://golacokits.com", schnellcheck: nein}
   - {name: Legacy Football Shirts, url: "https://legacyfootballshirts.com", schnellcheck: nein}
-  - {name: Offside Boys, url: "https://offsideboys.com", schnellcheck: nein}
   - {name: Oh Calcio, url: "https://ohcalcio.com", schnellcheck: nein}
   - {name: One More Time, url: "https://onemoretimeshop.it", schnellcheck: nein}
-  - {name: Philly Soccer Jerseys, url: "https://phillysoccerjerseys.com", schnellcheck: nein}
   - {name: Retro Football Shirts, url: "https://retrofootballshirts.com", schnellcheck: nein}
   - {name: Special Football Shirts, url: "https://specialfootballshirts.com", schnellcheck: nein}
   - {name: That Vintage Football Shirt, url: "https://thatvintagefootballshirt.com", schnellcheck: nein}
-  - {name: The Football Room, url: "https://thefootballroom-mty.com", schnellcheck: nein}
   - {name: Vice Football Store, url: "https://vicefootballstore.com", schnellcheck: nein}
   - {name: Vintage Football Jerseys, url: "https://vintage-football-jerseys.co.uk", schnellcheck: nein}
 
@@ -117,8 +101,6 @@ shops:
 
 # Wix-Shops (seit 04.10.2026 direkt über die öffentliche Shop-Schnittstelle), große nur nachts
   - {name: Lineup Vintage, url: "https://www.lineupvintageshop.com", plattform: wix, schnellcheck: nein}
-  - {name: Original 11vs11, url: "https://www.original11vs11.com", plattform: wix, schnellcheck: nein}
-  - {name: Rare and Retro, url: "https://www.rareandretrosports.com", plattform: wix, schnellcheck: nein}
 # Bulishirts (Wix, neuer Katalog V3) läuft seit 05.10.2026 direkt, siehe unten.
 # kitts.de ist ein Marktplatz (Sharetribe, viele private Verkäufer), bleibt bewusst über FYJ.
 
@@ -157,14 +139,7 @@ shops:
   - {name: Vintage Sports Clothing, url: "https://vintagesportsclothing.com", schnellcheck: nein}
   - {name: Modeziege, url: "https://modeziege.net", schnellcheck: nein}
   - {name: Football Legends Kits, url: "https://footballlegendskits.com", schnellcheck: nein}
-# Außerhalb Europas
-  - {name: Vintage Authentic Retro, url: "https://vintageauthenticretro.com", schnellcheck: nein}
-  - {name: FTBL HVN, url: "https://ftblhvn.com", schnellcheck: nein}
-  - {name: Kit Collector, url: "https://kitcollector.club", schnellcheck: nein}
-  - {name: Retro Screamers, url: "https://retroscreamers.com", schnellcheck: nein}
-  - {name: Galactic Soccer Kits, url: "https://www.galacticsoccerkits.com", plattform: wix, schnellcheck: nein}
-  - {name: Sunday Football Shirts, url: "https://sundayfootballshirts.com", schnellcheck: nein}
-  - {name: Lockerhaus, url: "https://lockerhaus.store", schnellcheck: nein}
+# Weitere (Bulishirts ist ein deutscher Shop, stand früher unter "Außerhalb Europas")
   - {name: Bulishirts, url: "https://www.bulishirts.com", plattform: wix, schnellcheck: nein}
 
 # Vom Nutzer genannt (05.10.2026): deutscher Vintage-Shop, Shopify, Größe am Titelende ("… 2012/13 - XL")
@@ -218,3 +193,33 @@ shops:
 # jeweiligen App dem Verkäufer folgen bzw. gespeicherte Suchen anlegen:
 #   Corner Flag Vintage (Depop), Classic Soccer Shop UK (eBay),
 #   Sporting Nostalgia (eBay), The Football House (eBay AU)
+
+# ---------------------------------------------------------------------
+# Außerhalb Europas: gesperrt (Nutzer 08.10.2026: "alles aus US bzw. non-Europe kann weg", Zoll und Einfuhrsteuer).
+# Land laut Shopify /meta.json bzw. Shop-Währung (Wix). Auch über FYJ ignoriert, Treffer sofort ausgeblendet
+# ---------------------------------------------------------------------
+  - {name: First Street, url: "https://firststreet.store", plattform: aus, sperren: ja, hinweis: "außerhalb Europas (AU)"}
+  - {name: Iconic Jersey, url: "https://iconicjersey.com", plattform: aus, sperren: ja, hinweis: "außerhalb Europas (AU)"}
+  - {name: The Kit Dealer, url: "https://www.thekitdealer.com", plattform: aus, sperren: ja, hinweis: "außerhalb Europas (AU)"}
+  - {name: Vintage Authentic Retro, url: "https://vintageauthenticretro.com", plattform: aus, sperren: ja, hinweis: "außerhalb Europas (AU)"}
+  - {name: FTBL HVN, url: "https://ftblhvn.com", plattform: aus, sperren: ja, hinweis: "außerhalb Europas (CA)"}
+  - {name: Offside Boys, url: "https://offsideboys.com", plattform: aus, sperren: ja, hinweis: "außerhalb Europas (CA)"}
+  - {name: Lockerhaus, url: "https://lockerhaus.store", plattform: aus, sperren: ja, hinweis: "außerhalb Europas (ID)"}
+  - {name: Es de Época, url: "https://esdeepoca.com", plattform: aus, sperren: ja, hinweis: "außerhalb Europas (MX)"}
+  - {name: The Football Room, url: "https://thefootballroom-mty.com", plattform: aus, sperren: ja, hinweis: "außerhalb Europas (MX)"}
+  - {name: Sunday Football Shirts, url: "https://sundayfootballshirts.com", plattform: aus, sperren: ja, hinweis: "außerhalb Europas (MY)"}
+  - {name: Throwback Jerseys NZ, url: "https://www.throwbackjerseysnz.com", plattform: aus, sperren: ja, hinweis: "außerhalb Europas (NZ)"}
+  - {name: Euromex Sports, url: "https://euromexsports.com", plattform: aus, sperren: ja, hinweis: "außerhalb Europas (US)"}
+  - {name: Football Shirt Union, url: "https://footballshirtunion.com", plattform: aus, sperren: ja, hinweis: "außerhalb Europas (US)"}
+  - {name: Forever Soccer Jerseys, url: "https://foreversoccerjerseys.com", plattform: aus, sperren: ja, hinweis: "außerhalb Europas (US)"}
+  - {name: Galactic Soccer Kits, url: "https://www.galacticsoccerkits.com", plattform: aus, sperren: ja, hinweis: "außerhalb Europas (US)"}
+  - {name: Golaço Kits, url: "https://golacokits.com", plattform: aus, sperren: ja, hinweis: "außerhalb Europas (US)"}
+  - {name: Kit Collector, url: "https://kitcollector.club", plattform: aus, sperren: ja, hinweis: "außerhalb Europas (US)"}
+  - {name: Original 11vs11, url: "https://www.original11vs11.com", plattform: aus, sperren: ja, hinweis: "außerhalb Europas (US)"}
+  - {name: Philly Soccer Jerseys, url: "https://phillysoccerjerseys.com", plattform: aus, sperren: ja, hinweis: "außerhalb Europas (US)"}
+  - {name: Rare and Retro, url: "https://www.rareandretrosports.com", plattform: aus, sperren: ja, hinweis: "außerhalb Europas (US)"}
+  - {name: Retro Screamers, url: "https://retroscreamers.com", plattform: aus, sperren: ja, hinweis: "außerhalb Europas (US)"}
+  - {name: STA Jerseys, url: "https://stajerseys.com", plattform: aus, sperren: ja, hinweis: "außerhalb Europas (US)"}
+  - {name: Saturdays Football, url: "https://saturdaysfootball.com", plattform: aus, sperren: ja, hinweis: "außerhalb Europas (US)"}
+  - {name: The Football Boutique, url: "https://www.thefootballboutique.com", plattform: aus, sperren: ja, hinweis: "außerhalb Europas (US)"}
+  - {name: Tiffozi Futbol, url: "https://tiffozifutbol.com", plattform: aus, sperren: ja, hinweis: "außerhalb Europas (US)"}
