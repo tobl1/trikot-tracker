@@ -281,7 +281,6 @@ details[open] summary::after{content:"−"}
         <option value="">XL + XXL</option><option value="XL">nur XL</option><option value="XXL">nur XXL</option>
       </select>
       <label class="toggle"><input type="checkbox" id="onlynew"> nur neu (48 h)</label>
-      <label class="toggle"><input type="checkbox" id="expensive"> <span id="explabel">auch teurere</span></label>
       <label class="toggle"><input type="checkbox" id="dupes"> gleiche Angebote einzeln</label>
       <button class="unhide" id="unhide" hidden></button>
     </div>
@@ -698,7 +697,7 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
       (!st.shop || t.shopName === st.shop) &&
       (!st.size || shortSize(t.groesse) === st.size) &&
       (!st.onlynew || t.neu) &&
-      (st.expensive || !t.teuer) &&
+      !t.teuer &&
       !flagged.has(t.id) && !hiddenIds.has(t.id) &&
       (st.dupes || st.view !== "all" || !t.dupOf) &&
       words.every(w => t.hay.includes(w)));
@@ -801,7 +800,7 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
       return;
     }
     $("favcount").textContent = Object.keys(favs).length ? `(${Object.keys(favs).length})` : "";
-    const nf = (st.shop ? 1 : 0) + (st.size ? 1 : 0) + (st.onlynew ? 1 : 0) + (st.expensive ? 1 : 0) + (st.dupes ? 1 : 0);
+    const nf = (st.shop ? 1 : 0) + (st.size ? 1 : 0) + (st.onlynew ? 1 : 0) + (st.dupes ? 1 : 0);
     $("filterdot").textContent = nf || "";
     const nHidden = all.filter(t => hiddenIds.has(t.id)).length;
     $("unhide").hidden = !nHidden; $("unhide").textContent = `${nHidden} ausgeblendet · zurückholen`;
@@ -847,7 +846,6 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     const exc = Array.isArray(pg.ausnahmen) ? Object.fromEntries(pg.ausnahmen.map(l => [l, 0])) : (pg.ausnahmen || {});
     const limitFor = labels => { const own = labels.filter(l => l in exc).map(l => +exc[l] || 0);
       return !own.length ? limit : own.includes(0) ? 0 : Math.max(limit, ...own); };
-    $("explabel").textContent = limit ? `auch über ${limit} €` : "auch teurere";
     all = data.treffer.map(t => {
       const lim = limitFor(t.labels);
       t.teuer = !!(lim && t.eur != null && t.eur > lim);
@@ -936,14 +934,14 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     }).join("");
 
     $("q").value = st.q; $("shop").value = st.shop; $("size").value = st.size;
-    $("onlynew").checked = st.onlynew; $("expensive").checked = st.expensive; $("dupes").checked = st.dupes;
+    $("onlynew").checked = st.onlynew; $("dupes").checked = st.dupes;
     render();
   }
 
   const reset = () => { shown = PAGE; groupsShown = 12; render(); };
   $("q").addEventListener("input", e => { st.q = e.target.value; reset(); });
   ["shop", "size"].forEach(id => $(id).addEventListener("change", e => { st[id] = e.target.value; reset(); }));
-  ["onlynew", "expensive", "dupes"].forEach(id => $(id).addEventListener("change", e => { st[id] = e.target.checked; reset(); }));
+  ["onlynew", "dupes"].forEach(id => $(id).addEventListener("change", e => { st[id] = e.target.checked; reset(); }));
   $("sort").addEventListener("click", e => { const b = e.target.closest("button"); if (b) { st.sort = b.dataset.s; reset(); } });
   $("tabs").addEventListener("click", e => {
     const b = e.target.closest("button"); if (!b) return;

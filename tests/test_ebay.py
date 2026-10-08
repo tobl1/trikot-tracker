@@ -131,9 +131,8 @@ def test_falsche_groesse_teuer_und_uk(monkeypatch, tmp_path):
                                                country="GB")]}
     pushes, _, _ = run(status, FakeEbay(res))
     state = ebay.open_state(trikot.speicher.load_json(ebay.state_path(), None), "geheim")
-    assert set(state["treffer"]) == {"v1|2|0"}                 # L fliegt raus
-    e = state["treffer"]["v1|2|0"]
-    assert e["endpreis"] > 150 and e["teuer"] and pushes == []  # 120 £ = 141 €, mit Zoll über der Grenze
+    # L fliegt raus, Henry aus UK: 120 £ = 141 €, mit Zoll und Versand über 150 € -> gar nicht erst aufgenommen
+    assert state["treffer"] == {} and pushes == []
 
 
 def test_app_daten_je_geraet(monkeypatch, tmp_path):
@@ -195,10 +194,10 @@ def test_gespeicherte_treffer_nach_regelaenderung(monkeypatch, tmp_path):
     status = {}
     run(status, FakeEbay({("EU", "(thiago, alcantara)"): [summ(*THIAGO, price="180.00")]}))
     state = ebay.open_state(trikot.speicher.load_json(ebay.state_path(), None), "geheim")
-    assert state["treffer"]["v1|111|0"]["teuer"] is False          # 180 + 5 Versand < 199
+    assert "v1|111|0" in state["treffer"]                          # 180 + 5 Versand <= 200
     run(status, FakeEbay({("EU", "(thiago, alcantara)"): [summ(*THIAGO, price="199.00")]}))
     state = ebay.open_state(trikot.speicher.load_json(ebay.state_path(), None), "geheim")
-    assert state["treffer"]["v1|111|0"]["teuer"] is True           # 199 + 5 Versand > 199
+    assert state["treffer"] == {}                                  # 199 + 5 Versand > 200: konsequent raus
 
 
 def test_fake_verdacht_und_versand():

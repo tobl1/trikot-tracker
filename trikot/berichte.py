@@ -41,6 +41,8 @@ def write_dashboard(seen, status_store, mode, ts, watch_cfg, shops):
     rates = kurse.get("rates") or {"EUR": 1.0}
     items = []
     for key, e in current_entries(seen).items():
+        if e.get("teuer"):
+            continue   # über der Preisgrenze: konsequent raus (Nutzer 09.10.2026)
         items.append({
             "id": key, "titel": e["title"], "url": e["url"], "shop": e["shop"],
             "preis": e.get("price", ""), "eur": to_eur(e.get("price"), rates),

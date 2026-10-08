@@ -16,10 +16,12 @@ groessen:
 
 # Preisgrenze in Euro: teurere Treffer gibt es nicht als Push und sie sind im Dashboard
 # standardmäßig ausgeblendet. Ausnahmen = Labels mit eigener Grenze (0 = ohne Grenze).
-# Thiago seit 08.10.2026 bis 199 € (Nutzer: "darüber wird es absurd"), vorher ohne Grenze
+# Thiago bis 200 € (Nutzer 09.10.2026: auch Matchworn/Player Issue, "200 ist echt maximal"), vorher 199 bzw. ohne.
+# Seit 09.10.2026 fliegt alles darüber konsequent raus (nicht mehr im Dashboard, kein Push); fällt der Preis später
+# unter die Grenze, kommt der Treffer als Push
 preisgrenze:
   max_eur: 150
-  ausnahmen: {"Thiago": 199}
+  ausnahmen: {"Thiago": 200}
 
 # Produkte, die keine Trikots sind oder nicht gewünscht sind
 produkt_ausschluss: [# England grundsätzlich nicht (Nutzer 08.10.2026, betraf vor allem WM 2006)

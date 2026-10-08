@@ -428,9 +428,16 @@ def main():
     # FYJ-Treffer auf der Shop-Seite prüfen (verkauft? Zustand?), neue zuerst, vor den Pushes
     checked, check_fails = enrich(seen, ts, ENRICH_BUDGET.get(args.mode, 0), matcher,
                                   deadline=started + 60 * ENRICH_DEADLINE_MIN.get(args.mode, 10))
+    cheaper = []
     for e in seen.values():
         if e["last"] == ts:
+            was = e.get("teuer")
             e["teuer"] = too_expensive(e)
+            # war über der Preisgrenze (also unsichtbar), jetzt darunter: wie ein neuer Treffer melden
+            if was and not e["teuer"] and e not in new_entries and not (e.get("verkauft") or e.get("aussortiert")):
+                e["unter_grenze"] = ts
+                cheaper.append(e)
+    new_entries += cheaper
     new_entries = [e for e in new_entries if not e.get("verkauft") and not e.get("teuer") and not e.get("aussortiert")]
     # Prüfen vor dem Push: Ungeprüftes zurückhalten, inzwischen Geprüftes nachliefern
     new_entries = hold_unchecked(new_entries, seen, ts)
@@ -461,13 +468,13 @@ def main():
         normal = sorted([e for e in new_entries if not is_high(e)], key=lambda e: e["title"])
         # Thiago & Sondertrikots einzeln (max. MAX_PUSH_HIGH), Rest gebündelt
         for e in high[:MAX_PUSH_HIGH]:
-            push(f"🔥 {push_label(e)} · {e['shop']}",
+            push(f"{'📉 Jetzt unter der Preisgrenze: ' if e.get('unter_grenze') == ts else '🔥 '}{push_label(e)} · {e['shop']}",
                  detail_line(e),
                  5, e["url"], e["image"], ["fire"], args.dry_run)
         bundle = high[MAX_PUSH_HIGH:] + normal
         if len(bundle) == 1:
             e = bundle[0]
-            push(f"⚽ {push_label(e)} · {e['shop']}",
+            push(f"{'📉 Jetzt unter der Preisgrenze: ' if e.get('unter_grenze') == ts else '⚽ '}{push_label(e)} · {e['shop']}",
                  detail_line(e),
                  3, e["url"], e["image"], ["soccer"], args.dry_run)
         elif bundle:

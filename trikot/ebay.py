@@ -357,7 +357,10 @@ def run(mode, status_store, matcher, watch, rates, ts, notify, client=None, dry=
         e["labels"], e["prios"] = sorted({l for l, _ in labs}), sorted({p for _, p in labs})
         total = (e["endpreis"] if e.get("endpreis") is not None else e.get("eur") or 0) + (e.get("versand_eur") or 0)
         lim = price_limit(e["labels"], pg)
-        e["teuer"] = bool(lim and total > lim)
+        if lim and total > lim:
+            del hits[iid]   # Preis gestiegen oder Grenze gesenkt: raus
+            continue
+        e["teuer"] = False
     problems, new_entries = [], []
 
     # 1) Suchen
@@ -412,6 +415,10 @@ def run(mode, status_store, matcher, watch, rates, ts, notify, client=None, dry=
         end = landed(eur, it["land"])
         total = (end if end is not None else eur or 0) + (ship or 0)
         labels = sorted({l for l, _ in labs})
+        lim = price_limit(labels, pg)
+        if lim and total > lim:
+            hits.pop(iid, None)   # über der Preisgrenze: gar nicht erst aufnehmen (wird es billiger, kommt es als neu)
+            continue
         thiago = any(l.startswith("Thiago") for l in labels)
         suspect = fake_suspect(it, eur)
         if suspect and not thiago:

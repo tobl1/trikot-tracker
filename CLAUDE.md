@@ -170,7 +170,10 @@ temporären Workflow aus GitHub heraus (Beispiel 05.10.2026: CFS-Suche "thiago" 
   in der Zwischenzeit sind also oft schon erledigt (z. B. #35/#36 vom 05.10.2026 abends)
 - **Preisgrenze** (`preisgrenze` in watchlist.yaml): über 150 € kein Push, im Dashboard standardmäßig
   ausgeblendet (Schalter "auch über 150 €"). Ausnahmen mit eigener Grenze (`ausnahmen: {Label: Euro}`, 0 = ohne):
-  Thiago bis 199 € (Nutzer 08.10.2026, vorher ohne Grenze; Sondertrikots ausdrücklich nicht, Nutzer 02.10.2026).
+  Thiago bis 200 € (Nutzer 09.10.2026, auch Matchworn/Player Issue; vorher 199, davor ohne Grenze; Sondertrikots
+  ausdrücklich nicht, Nutzer 02.10.2026). **Seit 09.10.2026 hart:** über der Grenze nicht mehr im Dashboard (Export
+  überspringt `teuer`, Schalter "auch über 150 €" entfernt), keine Push, bei eBay gar nicht erst gespeichert. Fällt der
+  Preis unter die Grenze, kommt der Treffer als Push "📉 Jetzt unter der Preisgrenze" (`unter_grenze`).
   `preise.price_limit`, Dashboard rechnet mit `limitFor` nach, eBay auf Endpreis plus Versand
 - **England grundsätzlich raus** (Nutzer 08.10.2026, `produkt_ausschluss`: england, anglia, inglaterra …), betraf
   vor allem WM 2006 (41 Treffer). eBay bewertet gespeicherte Treffer bei jedem Run neu

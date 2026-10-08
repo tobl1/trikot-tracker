@@ -651,6 +651,8 @@ def test_preisgrenze_je_label():
     pg = {"max_eur": 150, "ausnahmen": {"Thiago": 199}}
     assert price_limit(["WM 2006"], pg) == 150 and price_limit(["Thiago"], pg) == 199
     assert price_limit(["Thiago", "Barça 2008-2013"], pg) == 199
+    real = yaml.safe_load(open(Path(__file__).resolve().parent.parent / "watchlist.yaml", encoding="utf-8"))["preisgrenze"]
+    assert price_limit(["Thiago"], real) == 200 and price_limit(["Henry"], real) == 150   # Nutzer 09.10.2026
     assert price_limit(["Thiago"], {"max_eur": 150, "ausnahmen": ["Thiago"]}) == 0   # alte Form: ohne Grenze
 
 
