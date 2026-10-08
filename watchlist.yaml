@@ -512,7 +512,10 @@ sondertrikots:
     varianten: alle
     fremdflock: pflicht
     ausschluss: ["victoria", "pauli", "altona", "concordia", "harley", "freezers", "towers", "devils",
-                 "sea devils", "barmbek", "eintracht norderstedt"]
+                 "sea devils", "barmbek", "eintracht norderstedt",
+                 # andere Hamburger Vereine (eBay-Meldung 08.10.2026: "VfL Hamburg ist nicht HSV")
+                 "vfl hamburg", "vfl 93", "teutonia", "condor", "eimsbuttel", "eimsbutteler", "uhlenhorst", "bergedorf",
+                 "wandsbek", "harburg", "rahlstedt", "hamm united", "dassendorf", "buxtehude"]
     # Flock ohne Rückennummer erkennen ("Trikot - Hamburger SV - Tony Yeboah - 1999/2000"), nur für diesen Eintrag
     flock_namen: ["yeboah", "barbarez", "mahdavikia", "romeo", "lauth", "kompany", "boateng", "de jong",
                   "van buyten", "trochowski", "jarolim", "petric", "guerrero", "westermann", "rafael",

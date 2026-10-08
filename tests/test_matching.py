@@ -659,3 +659,8 @@ def test_england_raus():
     assert M.labels("2006/07 England Away Football Shirt Gerrard #4 (XL)") == []
     assert M.labels("Koszulka piłkarska Anglia 2006/08 Away 4 Gerrard [XL]") == []
     assert M.labels("Germany 2006 Away BALLACK 13 XL 9/10") != []
+
+
+def test_andere_hamburger_vereine():
+    assert M.labels("VfL Hamburg 93 Trikot 1996 #10 Müller XL") == []
+    assert M.labels("Hamburger SV 1996/97 Home Yeboah #9 XL") != []
