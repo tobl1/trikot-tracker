@@ -94,6 +94,8 @@ jobs:
           python tracker.py $ARGS
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EBAY_CLIENT_ID: ${{ secrets.EBAY_CLIENT_ID }}           # eBay (offizielle Schnittstelle), nie ausgeben
+          EBAY_CLIENT_SECRET: ${{ secrets.EBAY_CLIENT_SECRET }}   # auch Schlüssel für den verschlüsselten eBay-Zustand
           DASHBOARD_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
 
       - name: Ergebnisse speichern

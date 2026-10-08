@@ -501,7 +501,18 @@ per GitHub-Schlüssel nur auf dem Handy; cron-job.org bleibt. Vinted/Kleinanzeig
    Rhythmus-Daten ansehen und mit dem Nutzer abstimmen. Für Woo/CFS/FYJ gibt es keine
    Zeitstempel, dort müsste man neue Produkt-IDs selbst mitzählen
 8. Backlog: Social-Media-Accounts der Shops auf Drop-Ankündigungen beobachten (Nutzer: eher später)
-9. **eBay-Plan (08.10.2026, wartet auf Entwicklerkonto des Nutzers)**: Browse API `item_summary/search` (Application
+9. **eBay gebaut (08.10.2026)**, `trikot/ebay.py`, eigener Bereich (Reiter "eBay" in der App, `#ebay`), Tests
+   `tests/test_ebay.py`. Nutzer: Standorte EU, UK und Ukraine, Auktionen mit Sofort-Kaufen erlaubt (Kennzeichen), nur XL/XXL.
+   Suchen als Oder-Gruppen in `watchlist.yaml` → `ebay.suchen` (Kategorie DE 179288 "Fußball-Trikots", UK 53597 "Football
+   Shirts"), Verkäufer ab 10 Bewertungen und 97 %. Größe aus Titel oder Merkmal "Größe/Size" (Einzelabruf, gemerkt).
+   Radar alle 30 Min. im Drop-Run (neueste je Gruppe und Standort, ca. 24 Abrufe), Gesamt-Run komplett (bis 20 Seiten).
+   Treffer älter als 4 Std. werden einzeln bestätigt, beendete gelöscht. Zustand `state/ebay.json` verschlüsselt (Schlüssel
+   aus `EBAY_CLIENT_SECRET`, neuer Secret = Neustart mit stiller Übernahme), App-Daten `ebay.json` je Gerät verschlüsselt
+   (Geräteschlüssel per Issue Label `ebay`, `status.json` → `ebay.geraete`), Dashboard-Workflow kopiert sie mit. Die App
+   zeigt nur Treffer, die vor höchstens 6 Std. bestätigt wurden. Pushes: Thiago/Sondertrikots einzeln mit eBay-Link, Rest
+   gebündelt (#ebay). UK/Ukraine mit geschätztem Endpreis (`landed`), Preisgrenze auf Endpreis plus Versand.
+   Abrufe pro Tag in `status.json` → `ebay.abrufe` (Grenze 4.500). In Logs nie eBay-Inhalte ausgeben, nur Zahlen.
+   Vorher, der Plan: Browse API `item_summary/search` (Application
    Token per client credentials, Secrets `EBAY_CLIENT_ID`/`EBAY_CLIENT_SECRET`), zwei Suchen je Begriff: EBAY_DE mit
    `buyingOptions:{FIXED_PRICE},itemLocationRegion:EUROPEAN_UNION,deliveryCountry:DE` und EBAY_GB mit
    `itemLocationCountry:GB,deliveryCountry:DE` (UK markiert, Zoll/MwSt. geschätzt: bis 150 € eBay-MwSt. + 3 € Pauschalzoll

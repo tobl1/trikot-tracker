@@ -36,6 +36,8 @@ jobs:
           mkdir -p _site
           cp -r docs/. _site/
           cp daten/treffer.json _site/treffer.json
+          # eBay: je Gerät verschlüsselt (eBay-Inhalte dürfen nicht öffentlich lesbar sein)
+          if [ -f daten/ebay.json ]; then cp daten/ebay.json _site/ebay.json; fi
       - uses: actions/upload-pages-artifact@v5
         with:
           path: _site

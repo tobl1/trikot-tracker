@@ -10,14 +10,14 @@ import time
 
 import yaml
 
-from . import speicher, webpush
+from . import ebay, speicher, webpush
 from .abgleich import Matcher
 from .basis import (
     EINBRUCH_ANTEIL, EINBRUCH_MIN, EINBRUCH_RUNS, ENRICH_BUDGET, ENRICH_DEADLINE_MIN, FALLBACK_SKIP_HOURS, MAX_PUSH_HIGH,
     CRON_TOKEN_ABLAUF, MAX_WORKERS, TZ, RADAR_MIN, ROOT, RUN_HISTORY, SIZE_RX, canon_url, domain, is_high, norm, now, short_size,
 )
 from .berichte import fundgrube, log_problems, write_dashboard, write_report
-from .issues import add_shops_from_issues, apply_flags, check_alarms, collect_push_abos
+from .issues import add_shops_from_issues, apply_flags, check_alarms, collect_push_abos, owner_issues
 from .melden import OUTBOX_MAX_HOURS, detail_line, push, push_label, save_outbox, send_outbox, short
 from .netz import Http
 from .preise import fetch_rates, parse_price, to_eur
@@ -214,8 +214,12 @@ def main():
         push("✅ Push aus der App ist aktiv", "Ab jetzt kommen neue Treffer direkt über die TTT-App.",
              4, (os.environ.get("DASHBOARD_URL") or "").rstrip("/") + "/#eingaenge" or None, nur_abo=aid)
         new_flags += 1   # Drop-Run soll dafür nicht vorzeitig enden
+    # eBay (eigener Bereich): Geräteschlüssel aus der App übernehmen
+    if ebay.secrets()[0] and not args.dry_run and not args.only:
+        new_flags += ebay.collect_devices(status_store, now().isoformat(), owner_issues)
     shop_modes = {}   # Drop-Run: je Shop "drop" (fälliger Drop, gründlich) oder "radar" (nur neueste Artikel)
     t_start = now()
+    ebay_todo = ebay.due(status_store, args.mode, t_start) if not args.only else {"suche": None, "bestaetigen": False}
     if args.mode == "drop":
         # nur Shops, deren Drop gerade läuft, plus alle RADAR_MIN Minuten das Neuheiten-Radar über alle Shopify- und
         # WooCommerce-Shops; ist nichts fällig, sofort ohne jede Änderung beenden (außer es gab Meldungen)
@@ -230,7 +234,7 @@ def main():
                     if not due.get(s["name"]):
                         due[s["name"]], shop_modes[s["name"]] = "Radar", "radar"
         shops = [s for s in shops if due.get(s["name"])]
-        if not shops and not new_flags:
+        if not shops and not new_flags and not (ebay_todo["suche"] or ebay_todo["bestaetigen"]):
             print("Drop-Run: kein Drop fällig, Radar nicht dran")
             return
         drops = [f"{s['name']} {due[s['name']]}" for s in shops if shop_modes.get(s["name"]) != "radar"]
@@ -515,6 +519,18 @@ def main():
              (f"\n… und {len(silent) - 15} weitere" if len(silent) > 15 else ""),
              3, report_url, None, ["new"], args.dry_run)
 
+    # eBay (eigener Bereich, eigene Pushes, verschlüsselte Daten): Fehler dort stoppen nie den Run der Shops
+    ebay_problems = []
+    if ebay_todo["suche"] or ebay_todo["bestaetigen"]:
+        try:
+            summary, ebay_problems = ebay.run(args.mode, status_store, matcher, watch, rates, ts,
+                                              lambda title, msg, prio, url: push(title, msg, prio, url, None, ["shopping_cart"],
+                                                                                 args.dry_run), dry=args.dry_run)
+            if summary:
+                print(summary)
+        except Exception as e:
+            ebay_problems = [("eBay", f"{type(e).__name__}: {str(e)[:150]}")]
+
     # Aufräumen: Einträge, die 60 Tage nicht mehr gesehen wurden, vergessen
     old = now() - dt.timedelta(days=60)
     seen = {k: v for k, v in seen.items() if dt.datetime.fromisoformat(v["last"]) >= old}
@@ -559,6 +575,7 @@ def main():
     problems = [(s["name"], s["fehler"]) for s in run_sources
                 if s.get("fehler") and not str(s["fehler"]).startswith("deaktiviert") and s["name"] not in quiet
                 and not (str(s["fehler"]).startswith("geschlossen (Passwortseite") and s["name"] in closed_before)]
+    problems += ebay_problems
     if args.mode == "full":
         problems += token_reminder(now().date())
     for host, codes in check_fails.items():

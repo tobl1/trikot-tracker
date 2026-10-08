@@ -7,6 +7,7 @@ und schickt neue Treffer als Push direkt aus der Dashboard-App aufs Handy.
 - **Neuheiten-Radar** tagsüber etwa alle 30 Minuten: die neuesten Artikel aller Shopify- und WooCommerce-Shops
 - **Schnell-Run** 3x täglich (ca. 9:45, 15:45, 21:45 Uhr): Thiago und die Sondertrikots über die Shop-Suchen
 - **Drop-Run**: prüft Shops kurz nach ihrem Drop (feste Zeiten aus `shops.yaml` und automatisch erkannte)
+- **eBay** in einem eigenen Bereich der App: Sofortkauf-Angebote, Daten nur auf freigeschalteten Geräten lesbar
 - **Dashboard** mit Bildern, Filtern und Preisen in Euro: https://tobl1.github.io/trikot-tracker/
 - **Übersicht** als Liste: [TREFFER.md auf dem Daten-Zweig](https://github.com/tobl1/trikot-tracker/blob/daten/TREFFER.md)
 

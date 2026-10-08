@@ -526,3 +526,20 @@ sondertrikots:
                   "papadopoulos", "gotoku sakai", "sakai", "pollersbeck", "mavraj", "santos", "hahn",
                   "ekdal", "cleber", "olic", "dore", "lauth", "furtok", "spork", "bode", "yordanov"]
     suchanfragen: ["hamburger sv", "hsv", "hamburg"]
+
+# eBay (offizielle Browse API, eigener Bereich in der App, seit 08.10.2026). Wenige Oder-Suchen statt einzelner
+# Begriffe, immer in der Trikot-Kategorie (ohne Kategorie liefert "thiago" 5.000 Angebote, meist Sammelkarten).
+# Feinfilter wie bei den Shops über die Spieler und Sondertrikots oben. hoch: im Radar zuerst
+ebay:
+  suchen:
+    - {name: Thiago, q: "(thiago, alcantara)", hoch: ja}
+    - {name: Barça, q: "(barcelona, barca, barça, barcelone, barcellona)", hoch: ja}
+    - {name: Bayern, q: "(bayern, oktoberfest, wiesn)", hoch: ja}
+    - {name: Liverpool, q: "liverpool", hoch: ja}
+    - {name: Spanien, q: "(spanien, spain, espana, españa, espagne, spagna)", hoch: ja}
+    - {name: Spieler, q: "(verratti, perisic, olic, vaart, nistelrooy, nistelrooij, henry, torres, robben, alonso, cavani, forlan, ribery, juninho, benzema, kroos, rodri, valverde, vidal, kimmich, barella, grimaldo, jong, llorente, roberto)"}
+    - {name: HSV, q: "(hsv, hamburg, hamburger)"}
+    - {name: 2004 bis 2006, q: "(2004, 2005, 2006)"}
+  # Verkäufer: mindestens so viele Bewertungen und so viel Prozent positiv (gegen Fälschungen), nur beim Abruf geprüft
+  min_bewertungen: 10
+  min_positiv: 97
