@@ -1,0 +1,68 @@
+name: eBay-Test (temporär)
+
+# Prüft, ob die Browse API mit dem App-Token in Produktion antwortet. Gibt bewusst nur Statuscodes und Zahlen aus:
+# Action-Logs sind öffentlich, eBay-Inhalte dürfen nicht veröffentlicht werden (API License Agreement §9.7, §17)
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install requests==2.34.2
+      - name: Browse API testen
+        env:
+          EBAY_CLIENT_ID: ${{ secrets.EBAY_CLIENT_ID }}
+          EBAY_CLIENT_SECRET: ${{ secrets.EBAY_CLIENT_SECRET }}
+        run: |
+          python - <<'PY'
+          import collections, os, requests
+          cid, sec = os.environ["EBAY_CLIENT_ID"], os.environ["EBAY_CLIENT_SECRET"]
+          print("Secrets vorhanden:", bool(cid), bool(sec))
+          r = requests.post("https://api.ebay.com/identity/v1/oauth2/token", auth=(cid, sec), timeout=30,
+                            data={"grant_type": "client_credentials", "scope": "https://api.ebay.com/oauth/api_scope"})
+          print("Token: HTTP", r.status_code, "gültig (s):", r.json().get("expires_in") if r.ok else r.text[:300])
+          if not r.ok:
+              raise SystemExit(1)
+          tok = r.json()["access_token"]
+          URL = "https://api.ebay.com/buy/browse/v1/item_summary/search"
+
+          def search(market, q, flt):
+              h = {"Authorization": f"Bearer {tok}", "X-EBAY-C-MARKETPLACE-ID": market,
+                   "X-EBAY-C-ENDUSERCTX": "contextualLocation=country=DE,zip=80331"}
+              r = requests.get(URL, headers=h, params={"q": q, "filter": flt, "limit": 200, "sort": "newlyListed"}, timeout=30)
+              d = r.json() if r.headers.get("content-type", "").startswith("application/json") else {}
+              items = d.get("itemSummaries") or []
+              print(f"\n{market} '{q}' [{flt}]: HTTP {r.status_code}, gesamt {d.get('total')}, geliefert {len(items)}")
+              if not r.ok:
+                  print("  Fehler:", [(e.get("errorId"), e.get("message")) for e in d.get("errors", [])] or r.text[:300])
+              opts = collections.Counter("+".join(sorted(i.get("buyingOptions", []))) for i in items)
+              locs = collections.Counter((i.get("itemLocation") or {}).get("country") for i in items)
+              curs = collections.Counter((i.get("price") or {}).get("currency") for i in items)
+              print("  Kaufoptionen:", dict(opts)); print("  Standorte:", dict(locs.most_common(8))); print("  Währungen:", dict(curs))
+              return items
+
+          base = "buyingOptions:{FIXED_PRICE},deliveryCountry:DE"
+          it = search("EBAY_DE", "thiago trikot", base + ",itemLocationRegion:EUROPEAN_UNION")
+          search("EBAY_DE", "thiago shirt", base + ",itemLocationRegion:EUROPEAN_UNION")
+          search("EBAY_DE", "thiago trikot", base + ",itemLocationRegion:CONTINENTAL_EUROPE")
+          search("EBAY_GB", "thiago shirt", base + ",itemLocationCountry:GB")
+          if it:
+              h = {"Authorization": f"Bearer {tok}", "X-EBAY-C-MARKETPLACE-ID": "EBAY_DE"}
+              r = requests.get(f"https://api.ebay.com/buy/browse/v1/item/{it[0]['itemId']}", headers=h, timeout=30)
+              d = r.json() if r.ok else {}
+              print("\ngetItem: HTTP", r.status_code, "| Felder vorhanden:",
+                    {k: k in d for k in ("estimatedAvailabilities", "itemEndDate", "seller", "description", "localizedAspects")})
+              if r.ok:
+                  print("  Verfügbarkeit:", [a.get("estimatedAvailabilityStatus") for a in d.get("estimatedAvailabilities", [])])
+                  print("  Größen-Merkmal vorhanden:", any("röße" in (a.get("name") or "") or "Size" in (a.get("name") or "")
+                                                          for a in d.get("localizedAspects", [])))
+          print("\nRate-Limit-Header:", {k: v for k, v in r.headers.items() if "rate" in k.lower() or "limit" in k.lower()})
+          PY
