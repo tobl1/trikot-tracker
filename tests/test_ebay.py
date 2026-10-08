@@ -103,10 +103,10 @@ def test_ablauf_erstlauf_still_dann_push_groesse_loeschen(monkeypatch, tmp_path)
     # neues Thiago-Angebot ohne Größe im Titel: Größe aus dem Merkmal, Einzel-Push mit eBay-Link
     neu = summ("v1|222|0", "Spanien Trikot 2010 Home Thiago Alcantara", price="60.00")
     second = FakeEbay({("EU", "(thiago, alcantara)"): [summ(*THIAGO), neu]},
-                      {"v1|222|0": (200, {"localizedAspects": [{"name": "Größe", "value": "XL"}]})})
+                      {"v1|222|0": (200, {"localizedAspects": [{"name": "Größe", "value": "XL"}], "buyingOptions": ["FIXED_PRICE"]})})
     pushes, _, _ = run(status, second)
     assert len(pushes) == 1 and pushes[0][3] == "https://www.ebay.de/itm/222" and pushes[0][2] == 5
-    assert "v1|222|0" in second.item_calls
+    assert second.item_calls == ["v1|222|0"]                  # ein Einzelabruf für Größe und Prüfung
 
     # Gesamt-Run, Angebot 111 nicht mehr in der Suche und beendet (404): Eintrag gelöscht, nicht nur markiert
     third = FakeEbay({("EU", "(thiago, alcantara)"): [neu]}, {"v1|111|0": (404, {})})
@@ -199,3 +199,34 @@ def test_gespeicherte_treffer_nach_regelaenderung(monkeypatch, tmp_path):
     run(status, FakeEbay({("EU", "(thiago, alcantara)"): [summ(*THIAGO, price="199.00")]}))
     state = ebay.open_state(trikot.speicher.load_json(ebay.state_path(), None), "geheim")
     assert state["treffer"]["v1|111|0"]["teuer"] is True           # 199 + 5 Versand > 199
+
+
+def test_fake_verdacht_und_versand():
+    old_new = dict(ebay.summary_item(summ("v1|1|0", "Arsenal 2004/05 Home Henry 14 XL"), "EU"), zustand_id="1000")
+    assert ebay.fake_suspect(old_new, 45.0)                       # alt, "neu", billig
+    assert not ebay.fake_suspect(old_new, 180.0)                  # teuer: eher echt (oder über der Grenze)
+    assert not ebay.fake_suspect(dict(old_new, zustand_id="3000"), 45.0)   # gebraucht
+    assert not ebay.fake_suspect(dict(old_new, title="Arsenal 2023/24 Home Saka XL"), 45.0)   # aktuelles Trikot
+    assert ebay.ships_to_de({"shipToLocations": {"regionIncluded": [{"regionName": "Worldwide", "regionId": "WORLDWIDE"}]}})
+    assert not ebay.ships_to_de({"shipToLocations": {"regionIncluded": [{"regionName": "Worldwide"}],
+                                                     "regionExcluded": [{"regionName": "Germany", "regionId": "DE"}]}})
+    assert not ebay.ships_to_de({"shipToLocations": {"regionIncluded": [{"regionName": "Italy", "regionId": "IT"}]}})
+
+
+def test_fake_raus_thiago_markiert_versand_geprueft(monkeypatch, tmp_path):
+    setup(monkeypatch, tmp_path)
+    status = {}
+    run(status, FakeEbay({}))                                     # Erstlauf leer
+    fake = dict(summ("v1|5|0", "Arsenal 2004/05 Home Shirt Henry 14 XL Neu", price="45.00"), conditionId="1000")
+    th = dict(summ("v1|6|0", "Bayern Trikot 2013/14 Thiago #6 XL neu", price="60.00"), conditionId="1000")
+    no_de = summ("v1|7|0", "Bayern Trikot 2014/15 Thiago #6 Gr. XL", price="70.00")
+    res = {("EU", "(thiago, alcantara)"): [th, no_de],
+           ("EU", "(verratti, perisic, olic, vaart, nistelrooy, nistelrooij, henry, torres, robben, alonso, cavani, forlan, "
+                  "ribery, juninho, benzema, kroos, rodri, valverde, vidal, kimmich, barella, grimaldo, jong, llorente, "
+                  "roberto)"): [fake]}
+    details = {"v1|7|0": (200, {"buyingOptions": ["FIXED_PRICE"], "shipToLocations": {
+        "regionIncluded": [{"regionName": "Worldwide"}], "regionExcluded": [{"regionId": "DE", "regionName": "Germany"}]}})}
+    pushes, _, _ = run(status, FakeEbay(res, details))
+    state = ebay.open_state(trikot.speicher.load_json(ebay.state_path(), None), "geheim")
+    assert set(state["treffer"]) == {"v1|6|0"} and state["treffer"]["v1|6|0"]["verdacht"]
+    assert len(pushes) == 1

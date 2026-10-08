@@ -202,7 +202,32 @@ def summary_item(s, where):
             "image": (s.get("image") or {}).get("imageUrl", ""),
             "price": f"{pr.get('value', '')} {pr.get('currency', '')}".strip(), "versand": ship,
             "land": (s.get("itemLocation") or {}).get("country", ""), "zustand": s.get("condition", ""),
-            "auktion": "AUCTION" in opts, "wo": where}
+            "zustand_id": str(s.get("conditionId") or ""), "auktion": "AUCTION" in opts, "wo": where}
+
+
+NEW_CONDITIONS = {"1000", "1500"}   # neu mit / ohne Etikett
+FAKE_MAX_YEAR, FAKE_MAX_EUR = 2016, 120
+
+
+def fake_suspect(it, eur):
+    """Typisches Muster der Fake-Retros auf eBay (Meldungen 08.10.2026: Henry Arsenal 2004, gefälschte Flocks):
+    ein altes Trikot (Saison bis 2016) als "neu" und günstig. Echte Originale mit Etikett aus der Zeit sind selten"""
+    import re
+    m = re.search(r"(?<!\d)(19[7-9]\d|20[0-2]\d)(?!\d)", it.get("title", ""))
+    return bool(it.get("zustand_id") in NEW_CONDITIONS and m and int(m.group(1)) <= FAKE_MAX_YEAR
+                and eur is not None and eur < FAKE_MAX_EUR)
+
+
+def ships_to_de(detail):
+    """Versand nach Deutschland nicht ausgeschlossen (Meldung 08.10.2026: "verschickt nicht nach DE")"""
+    loc = (detail or {}).get("shipToLocations") or {}
+    names = lambda rs: {str(r.get(k) or "").lower() for r in rs or [] for k in ("regionId", "regionName")}
+    excluded = names(loc.get("regionExcluded"))
+    if excluded & {"de", "germany", "deutschland", "europe", "europa", "european union", "europäische union"}:
+        return False
+    included = names(loc.get("regionIncluded"))
+    return not included or bool(included & {"de", "germany", "deutschland", "worldwide", "weltweit", "europe", "europa",
+                                             "european union", "europäische union"})
 
 
 def item_size(detail):
@@ -363,6 +388,7 @@ def run(mode, status_store, matcher, watch, rates, ts, notify, client=None, dry=
 
     # 2) Abgleich: Labels aus dem Titel, Größe aus dem Titel oder dem Merkmal (Einzelabruf, gemerkt)
     lookups = SIZE_LOOKUPS.get(mode, 60)
+    fetched = {}   # Einzelabrufe dieses Runs (Größe), für die Prüfung neuer Treffer wiederverwenden
     for iid, it in found.items():
         if id_key(iid) in flagged or relist_key(it["title"], it["price"]) in gemeldet:
             continue
@@ -375,6 +401,7 @@ def run(mode, status_store, matcher, watch, rates, ts, notify, client=None, dry=
             if iid not in sizes and lookups > 0:
                 lookups -= 1
                 status, detail = client.item(iid, it["wo"])
+                fetched[iid] = (status, detail)
                 sizes[iid] = item_size(detail) if status == 200 else ""
             size_text = sizes.get(iid, "")
         if not matcher.size_ok(size_text, norm(it["title"])):
@@ -385,7 +412,16 @@ def run(mode, status_store, matcher, watch, rates, ts, notify, client=None, dry=
         end = landed(eur, it["land"])
         total = (end if end is not None else eur or 0) + (ship or 0)
         labels = sorted({l for l, _ in labs})
+        thiago = any(l.startswith("Thiago") for l in labels)
+        suspect = fake_suspect(it, eur)
+        if suspect and not thiago:
+            continue   # Fälschungsverdacht: raus (bei Thiago nur markieren, damit kein echtes verloren geht)
         entry = hits.get(iid)
+        if entry is None and not first and id_key(iid) not in state["gepusht"]:
+            # neuer Treffer: vor der Push einzeln prüfen (noch verfügbar, Versand nach Deutschland)
+            status, detail = fetched.get(iid) or client.item(iid, it["wo"])
+            if status == 200 and not (still_available(detail) and ships_to_de(detail)):
+                continue
         if entry is None:
             entry = {"first": ts}
             hits[iid] = entry
@@ -398,7 +434,7 @@ def run(mode, status_store, matcher, watch, rates, ts, notify, client=None, dry=
             state["gepusht"][key] = ts
         entry.update(it, labels=labels, prios=sorted({p for _, p in labs}), warum=why, last=ts,
                      size=short_size(size.group(0)) if size else "", eur=eur, versand_eur=ship, endpreis=end,
-                     teuer=bool(price_limit(labels, pg) and total > price_limit(labels, pg)))
+                     teuer=bool(price_limit(labels, pg) and total > price_limit(labels, pg)), verdacht=suspect)
 
     # 3) Bestätigen bzw. löschen: Gesamt-Run alles, was die vollständige Suche nicht mehr lieferte; sonst, was älter als
     # EBAY_REFRESH_H ist. Beendet, verkauft oder ohne Sofortkauf -> Eintrag löschen (Lizenz §8.1b)
@@ -487,6 +523,7 @@ def app_entry(e):
             "eur": e.get("eur"), "versand": e.get("versand_eur"), "endpreis": e.get("endpreis"), "land": e.get("land", ""),
             "zustand": e.get("zustand", ""), "auktion": e.get("auktion", False), "groesse": e.get("size", ""),
             "labels": e.get("labels", []), "hoch": "hoch" in (e.get("prios") or []), "teuer": e.get("teuer", False),
+            "verdacht": bool(e.get("verdacht")),
             "warum": "; ".join(f"{k}: {v}" for k, v in (e.get("warum") or {}).items()),
             "erst": e["first"], "bestaetigt": e["last"], "still": bool(e.get("still"))}
 

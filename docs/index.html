@@ -635,6 +635,7 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     const badges = [t.neu && '<span class="badge new">NEU</span>',
       t.land && t.land !== "DE" && `<span class="badge eb">${esc(t.land === "GB" ? "UK" : t.land)}</span>`,
       t.auktion && '<span class="badge eb" title="Auktion mit Sofort-Kaufen: die Option verschwindet mit dem ersten Gebot">AUKTION + SOFORT</span>',
+      t.verdacht && '<span class="badge chk" title="Altes Trikot als neu und günstig angeboten: typisch für Fälschungen, genau prüfen">FAKE?</span>',
       t.teuer && '<span class="badge gone">ÜBER GRENZE</span>'].filter(Boolean).join("");
     const extra = [t.versand != null && `<small class="eb">+ ${eur(t.versand)} Versand</small>`,
       t.endpreis != null && `<small class="eb" title="Schätzung: bis 150 € 19 % MwSt. + 3 € Zoll, darüber 12 % Zoll, 19 % EUSt. und Gebühr">mit Zoll ≈ ${eur(t.endpreis)}</small>`]
