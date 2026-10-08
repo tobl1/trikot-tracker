@@ -74,6 +74,8 @@ def radar_shops(shops, platforms):
     for s in shops:
         if str(s.get("sperren", "")).lower() in ("ja", "true", "yes"):
             continue
+        if str(s.get("radar", "ja")).lower() in ("nein", "false", "no", "aus"):
+            continue   # z. B. kleine Shops, die häufige Abrufe aus Rechenzentren blocken (Legit Football Shirts, 403)
         if (s.get("plattform") or "").lower() == "html" and s.get("neu"):
             out.append(s)   # eigene Shopsysteme mit Neuheiten-Seite: eine Seite pro Radar
             continue

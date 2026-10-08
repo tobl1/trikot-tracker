@@ -88,7 +88,7 @@ Ohne aktives App-Abo kommt keine Push: Fehler-Log "App-Push", Dashboard-Hinweis 
 - **Neuheiten-Radar** (seit 05.10.2026, Teil des Drop-Runs): alle `RADAR_MIN` (25) Minuten die neuesten
   `RADAR_LIMIT` (40) Artikel aller automatisch erkannten Shopify- und WooCommerce-Shops (`radar_shops`, nicht Wix,
   Such-Shops, gesperrte), Shopify per `shopify_newest` (weiterblättern nur, wenn die ganze Seite neuer ist als die
-  letzte Prüfung, `radar_checks`), gemerkte Währung statt `/cart.js`. Lauf heißt im Verlauf "radar". Last: ca. 90
+  letzte Prüfung, `radar_checks`), gemerkte Währung statt `/cart.js`. Lauf heißt im Verlauf "radar". Ausnahme per `radar: nein` in shops.yaml (Legit Football Shirts, 403 aus dem Radar). Last: ca. 90
   kleine Abrufe pro Radar, knapp 30 pro Shop und Tag. Ersetzt nicht die Drops (fällige Drops weiter gründlich)
 - `senden`: nur im Workflow nach dem Speichern, verschickt den Postausgang (`state/postausgang.json`); nicht
   zugestellte bleiben für den nächsten Run, ältere als 12 Std. werden verworfen (beides im Fehler-Log)

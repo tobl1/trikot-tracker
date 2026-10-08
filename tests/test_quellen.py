@@ -746,3 +746,10 @@ def test_woo_groesse_im_titel_schlaegt_merkmal():
     assert passt(tracker.woo_to_item("Trikottrader", p))
     p = woo_prod("FC Bayern München 2009/10 Third RIBÉRY 7", ["XL"])          # ohne Größe im Titel: Merkmal zählt
     assert passt(tracker.woo_to_item("Trikottrader", p))
+
+
+def test_radar_nein():
+    from trikot.lauf import radar_shops
+    shops = [{"name": "A", "url": "https://a.com"}, {"name": "B", "url": "https://b.com", "radar": "nein"}]
+    plats = {"https://a.com": "shopify", "https://b.com": "woo:https://b.com/wp-json/wc/store/v1/products"}
+    assert [s["name"] for s in radar_shops(shops, plats)] == ["A"]

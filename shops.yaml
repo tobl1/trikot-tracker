@@ -191,7 +191,7 @@ shops:
 # Het Shirthuis (NL, "100% originele Voetbalshirts", "Alle artikelen worden gecontroleerd op echtheid"), Note im Titel
   - {name: Het Shirthuis, url: "https://hetshirthuis.com", schnellcheck: nein}
 # Legit Football Shirts (Stettin, PL, "Tylko oryginały", prüft Etiketten und Herstellercodes), WooCommerce, klein
-  - {name: Legit Football Shirts, url: "https://legitfootballshirts.com", schnellcheck: nein}
+  - {name: Legit Football Shirts, url: "https://legitfootballshirts.com", schnellcheck: nein, radar: nein}   # Radar ergab 403 (08.10.2026), nachts ok
 # The Football Idiots (Oslo/Stavanger, "Norway's home for authentic vintage"), beflockte Klassiker mit Note, Preise in NOK
   - {name: The Football Idiots, url: "https://www.thefootballidiots.com", schnellcheck: nein}
 
