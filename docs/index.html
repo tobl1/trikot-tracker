@@ -414,10 +414,61 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     if (await createIssue("alarm", "Preisalarm: " + t.titel, body) === "direkt") showToast("Preisalarm gesetzt");
   }
   function toggleFav(t){
-    if (favs[t.id]) delete favs[t.id];
-    else favs[t.id] = {id: t.id, titel: t.titel, url: t.url, bild: t.bild, preis: t.preis, eur: t.eur, shopName: t.shopName,
-                       groesse: t.groesse, labels: t.labels, zustand: t.zustand, notiz: t.notiz, erst: t.erst, added: new Date().toISOString()};
-    store.set("favs", favs); render();
+    const nowIso = new Date().toISOString();
+    if (favs[t.id]) { delete favs[t.id]; favRemoved[t.id] = nowIso; }
+    else { favs[t.id] = {id: t.id, titel: t.titel, url: t.url, bild: t.bild, preis: t.preis, eur: t.eur, shopName: t.shopName,
+                         groesse: t.groesse, labels: t.labels, zustand: t.zustand, notiz: t.notiz, erst: t.erst, added: nowIso};
+           delete favRemoved[t.id]; }
+    store.set("favs", favs); store.set("favremoved", favRemoved); render();
+    clearTimeout(favTimer); favTimer = setTimeout(() => syncFavs(true), 1500);
+  }
+
+  // Favoriten-Sync zwischen Geräten (iPhone, Mac …): ein geschlossenes GitHub-Issue mit Label "favoriten" hält die Liste
+  // als JSON, jedes Gerät mit Schlüssel gleicht beim Öffnen und nach Änderungen ab. Entfernte merken wir mit Zeitpunkt,
+  // sonst holt ein anderes Gerät sie zurück. Nur Shop-Treffer, die stehen ohnehin öffentlich im Dashboard
+  const favRemoved = store.get("favremoved") || {};
+  let favIssue = null, favTimer = null, favSyncing = false;
+  const canon = o => JSON.stringify(Object.keys(o || {}).sort().map(k => [k, o[k]]));
+  async function gh(path, opts = {}){
+    return fetch(`https://api.github.com/repos/${REPO}${path}`, Object.assign({}, opts, {headers: {
+      Authorization: `Bearer ${store.get("token")}`, Accept: "application/vnd.github+json", "Content-Type": "application/json"}}));
+  }
+  function mergeFavs(remote){
+    let changed = false;
+    const ms = iso => iso ? Date.parse(iso) || 0 : 0;
+    for (const [id, ts] of Object.entries(remote.removed || {}))
+      if (ms(ts) > ms(favRemoved[id])) favRemoved[id] = ts;
+    for (const [id, f] of Object.entries(remote.favs || {}))
+      if (!favs[id] && ms(f.added) > ms(favRemoved[id])) { favs[id] = f; changed = true; }
+    for (const id of Object.keys(favs))
+      if (ms(favRemoved[id]) > ms(favs[id].added)) { delete favs[id]; changed = true; }
+    const cut = Date.now() - 90 * 864e5;   // alte Löschvermerke vergessen
+    for (const [id, ts] of Object.entries(favRemoved)) if (ms(ts) < cut) delete favRemoved[id];
+    return changed;
+  }
+  async function syncFavs(changedHere = false){
+    if (!store.get("token") || favSyncing) return;
+    favSyncing = true;
+    try {
+      const owner = REPO.split("/")[0];
+      const r = await gh(`/issues?labels=favoriten&state=all&creator=${owner}&per_page=5`);
+      favIssue = r.ok ? ((await r.json())[0] || null) : favIssue;
+      let remote = {favs: {}, removed: {}};
+      const m = favIssue && (favIssue.body || "").match(/```json\n([\s\S]*?)\n```/);
+      if (m) try { remote = JSON.parse(m[1]); } catch (e) {}
+      if (mergeFavs(remote)) { store.set("favs", favs); render(); }
+      store.set("favremoved", favRemoved);
+      if (changedHere || canon(remote.favs) !== canon(favs) || canon(remote.removed) !== canon(favRemoved)) {
+        const body = "Favoriten-Sync der App (iPhone, Mac …), bitte nicht von Hand ändern.\n\n```json\n" +
+          JSON.stringify({favs, removed: favRemoved}) + "\n```";
+        if (favIssue) await gh(`/issues/${favIssue.number}`, {method: "PATCH", body: JSON.stringify({body})});
+        else {
+          const c = await gh("/issues", {method: "POST", body: JSON.stringify({title: "Favoriten (Sync)", body, labels: ["favoriten"]})});
+          if (c.ok) { favIssue = await c.json(); await gh(`/issues/${favIssue.number}`, {method: "PATCH", body: JSON.stringify({state: "closed"})}); }
+        }
+      }
+    } catch (e) {}
+    favSyncing = false;
   }
   let flagItem = null, flagReason = "unpassend";
   function openFlag(t){
@@ -942,9 +993,11 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
   ["gesturestart", "gesturechange"].forEach(ev => document.addEventListener(ev, e => e.preventDefault(), {passive: false}));
   $("more").addEventListener("click", () => { if (st.view === "feed") groupsShown += 12; else shown += PAGE; render(); });
 
+  document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") syncFavs(); });
   fetch("treffer.json", {cache: "no-store"})
     .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(setup)
+    .then(() => syncFavs())
     .catch(e => { $("grid").innerHTML = `<div class="err">Daten konnten nicht geladen werden (${esc(e.message)}).</div>`; $("stand").textContent = ""; });
 })();
 </script>
