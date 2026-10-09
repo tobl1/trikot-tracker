@@ -282,11 +282,13 @@ details[open] summary::after{content:"−"}
     <div class="row chips" id="labels"></div>
     <div class="row filters" id="filters">
       <select id="shop" aria-label="Shop"><option value="">Alle Shops</option></select>
+      <select id="ebland" aria-label="Standort" hidden><option value="">EU, UK, Ukraine</option><option value="EU">nur EU</option>
+        <option value="GB">nur UK</option><option value="UA">nur Ukraine</option></select>
       <select id="size" aria-label="Größe">
         <option value="">XL + XXL</option><option value="XL">nur XL</option><option value="XXL">nur XXL</option>
       </select>
       <label class="toggle"><input type="checkbox" id="onlynew"> nur neu (48 h)</label>
-      <label class="toggle"><input type="checkbox" id="dupes"> gleiche Angebote einzeln</label>
+      <label class="toggle" id="dupeslabel"><input type="checkbox" id="dupes"> gleiche Angebote einzeln</label>
       <button class="unhide" id="unhide" hidden></button>
     </div>
   </div>
@@ -373,7 +375,7 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
   const host = u => { try { return new URL(u).hostname.replace(/^www\./, ""); } catch(e){ return ""; } };
 
   let all = [], shown = PAGE, runs = [], groupsShown = 12;
-  const st = Object.assign({q:"", sort:"prio", labels:[], shop:"", size:"", onlynew:false, expensive:false, dupes:false, view:"all"},
+  const st = Object.assign({q:"", sort:"prio", labels:[], shop:"", size:"", onlynew:false, expensive:false, dupes:false, view:"all", ebLabels:[], ebLand:""},
                            store.get("filter") || {});
   const MODE = {full: "Gesamt-Run", priority: "Schnell-Run", drop: "Drop-Run", radar: "Radar"};
   if (location.hash === "#eingaenge") st.view = "feed";
@@ -662,6 +664,8 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
   }
   function renderEbay(){
     const box = $("ebay");
+    // Filter nur zeigen, wenn es Angebote gibt (nicht beim Freischalten, Laden oder Warten)
+    $("controls").hidden = !(store.get("ebaykey") && ebayData && !ebayData.wartet && !ebayErr);
     if (!window.crypto || !crypto.subtle) { box.innerHTML = '<div class="err">Dieser Browser kann die eBay-Daten nicht entschlüsseln.</div>'; return; }
     if (!store.get("ebaykey")) {
       box.innerHTML = `<div class="ebintro"><h2>eBay in dieser App</h2><p>Sofortkauf-Angebote aus der EU, UK und der Ukraine, ` +
@@ -691,9 +695,26 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
       .filter(t => !flagged.has(t.id) && !hiddenIds.has(t.id));
     // eBay-Regel: angezeigte Angebote höchstens 6 Std. alt. Länger nicht bestätigte bleiben verborgen, bis der nächste Run sie prüft
     const fresh = items.filter(t => (Date.now() - new Date(t.bestaetigt)) / 36e5 <= maxH);
-    const list = fresh.sort((a, b) => (a.teuer - b.teuer) || (b.thiago - a.thiago) || (b.hoch - a.hoch) || b.erst.localeCompare(a.erst));
+    // Filter und Sortierung wie bei den Shops (Suche, Kategorien, Größe, nur neu) plus Standort statt Shop
+    const words = st.q.trim().toLowerCase().split(/\s+/).filter(Boolean);
+    fresh.forEach(t => {
+      t.hay = (t.titel + " " + t.labels.join(" ") + " " + (t.zustand || "") + " " + (t.land || "")).toLowerCase();
+      const p = t.endpreis != null ? t.endpreis : t.eur;
+      t.gesamt = p == null ? null : p + (t.versand || 0);   // Preis-Sortierung mit Versand und ggf. Zoll
+    });
+    const base = fresh.filter(t => (!st.size || shortSize(t.groesse) === st.size) && (!st.onlynew || t.neu) &&
+      (!st.ebLand || (st.ebLand === "EU" ? !["GB", "UA"].includes(t.land) : t.land === st.ebLand)) &&
+      words.every(w => t.hay.includes(w)));
+    buildChips(fresh, "ebay");
+    st.ebLabels = st.ebLabels.filter(l => fresh.some(t => t.labels.includes(l)));
+    chipState(st.ebLabels, base);
+    const byNew = (a, b) => b.erst.localeCompare(a.erst);
+    const byPrice = dir => (a, b) => (a.gesamt == null) - (b.gesamt == null) || dir * ((a.gesamt ?? 0) - (b.gesamt ?? 0));
+    const cmp = {prio: (a, b) => (b.thiago - a.thiago) || (b.hoch - a.hoch) || (b.neu - a.neu) || byNew(a, b),
+                 new: byNew, pasc: byPrice(1), pdesc: byPrice(-1)}[st.sort] || byNew;
+    const list = base.filter(t => !st.ebLabels.length || t.labels.some(l => st.ebLabels.includes(l))).sort(cmp);
     const old = items.length - fresh.length;
-    box.innerHTML = `<p class="ebhead"><b>${list.length} Angebote</b> · Stand ${esc(fmtDate(ebayData.stand))}` +
+    box.innerHTML = `<p class="ebhead"><b>${list.length}${list.length !== fresh.length ? " von " + fresh.length : ""} Angebote</b> · Stand ${esc(fmtDate(ebayData.stand))}` +
       (old ? ` · ${old} warten auf die nächste Prüfung` : "") +
       `<br>Bei eBay gibt es viele Fälschungen: Fotos, Etiketten und Verkäufer vor dem Kauf genau ansehen. Preise ohne Gewähr, maßgeblich ist eBay.</p>` +
       (list.length ? `<div class="grid">${list.map(ebayCard).join("")}</div>` : '<div class="empty">Gerade keine passenden Angebote.</div>');
@@ -803,6 +824,31 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     return keys.length;
   }
 
+  // Kategorie-Chips: Shops und eBay haben je eigene; neu gebaut nur, wenn sich die Kategorien ändern (sonst springt
+  // die waagerechte Chip-Leiste bei jedem Tipp an den Anfang)
+  let chipsKey = "";
+  function buildChips(items, source){
+    const counts = {};
+    items.forEach(t => t.labels.forEach(l => counts[l] = (counts[l] || 0) + 1));
+    const hi = new Set(items.filter(t => t.hoch).flatMap(t => t.labels));
+    const labels = Object.keys(counts).sort((a, b) =>
+      (b.startsWith("Thiago") - a.startsWith("Thiago")) || (hi.has(b) - hi.has(a)) || a.localeCompare(b, "de"));
+    const key = source + "|" + labels.join("|");
+    if (key === chipsKey) return;
+    chipsKey = key;
+    $("labels").innerHTML = labels.map(l =>
+      `<button class="chip${hi.has(l) ? " hi" : ""}" data-l="${esc(l)}" aria-pressed="false">${esc(l)}<small>${counts[l]}</small></button>`).join("");
+  }
+  function chipState(selected, visible){
+    const counts = {};
+    visible.forEach(t => t.labels.forEach(l => counts[l] = (counts[l] || 0) + 1));
+    document.querySelectorAll("#labels .chip").forEach(b => {
+      b.setAttribute("aria-pressed", String(selected.includes(b.dataset.l)));
+      const sm = b.querySelector("small"); if (sm) sm.textContent = counts[b.dataset.l] || 0;
+      b.style.opacity = counts[b.dataset.l] ? "" : ".45";
+    });
+  }
+
   function renderFocus(){
     const box = $("focus");
     if (!focusId || st.view !== "all") { box.hidden = true; box.innerHTML = ""; return; }
@@ -820,13 +866,18 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     const list = filtered();
     const feed = st.view === "feed", favView = st.view === "favs", ebView = st.view === "ebay";
     $("grid").hidden = feed || favView || ebView; $("feed").hidden = !feed; $("favs").hidden = !favView;
-    $("ebay").hidden = !ebView; $("controls").hidden = ebView;
+    $("ebay").hidden = !ebView; $("controls").hidden = false;
+    $("shop").hidden = ebView; $("ebland").hidden = !ebView; $("dupeslabel").hidden = ebView;
+    document.querySelectorAll("#sort button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.s === st.sort)));
     if (ebView) {
       $("grid").innerHTML = ""; $("feed").innerHTML = ""; $("favs").innerHTML = ""; $("empty").hidden = true; $("more").hidden = true;
+      $("unhide").hidden = true;
+      $("filterdot").textContent = ((st.size ? 1 : 0) + (st.onlynew ? 1 : 0) + (st.ebLand ? 1 : 0)) || "";
       document.querySelectorAll("#tabs button").forEach(b => b.setAttribute("aria-selected", String(b.dataset.view === st.view)));
       renderEbay();
       return;
     }
+    buildChips(all, "shops");
     $("favcount").textContent = Object.keys(favs).length ? `(${Object.keys(favs).length})` : "";
     const nf = (st.shop ? 1 : 0) + (st.size ? 1 : 0) + (st.onlynew ? 1 : 0) + (st.dupes ? 1 : 0);
     $("filterdot").textContent = nf || "";
@@ -858,13 +909,7 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     }
     const keepLabels = st.labels; st.labels = [];
     const visible = filtered(); st.labels = keepLabels;
-    const counts = {};
-    visible.forEach(t => t.labels.forEach(l => counts[l] = (counts[l] || 0) + 1));
-    document.querySelectorAll("#labels .chip").forEach(b => {
-      b.setAttribute("aria-pressed", String(st.labels.includes(b.dataset.l)));
-      const sm = b.querySelector("small"); if (sm) sm.textContent = counts[b.dataset.l] || 0;
-      b.style.opacity = counts[b.dataset.l] ? "" : ".45";
-    });
+    chipState(st.labels, visible);
   }
 
   function setup(data){
@@ -916,12 +961,8 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
 
     const counts = {};
     all.forEach(t => t.labels.forEach(l => counts[l] = (counts[l] || 0) + 1));
-    const hi = new Set(all.filter(t => t.hoch).flatMap(t => t.labels));
-    const labels = Object.keys(counts).sort((a, b) =>
-      (b.startsWith("Thiago") - a.startsWith("Thiago")) || (hi.has(b) - hi.has(a)) || a.localeCompare(b, "de"));
     st.labels = st.labels.filter(l => counts[l]);
-    $("labels").innerHTML = labels.map(l =>
-      `<button class="chip${hi.has(l) ? " hi" : ""}" data-l="${esc(l)}" aria-pressed="false">${esc(l)}<small>${counts[l]}</small></button>`).join("");
+    buildChips(all, "shops");
     $("shop").innerHTML = '<option value="">Alle Shops</option>' +
       shops.sort((a, b) => a.localeCompare(b, "de")).map(s => `<option>${esc(s)}</option>`).join("");
     if (!shops.includes(st.shop)) st.shop = "";
@@ -963,7 +1004,7 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
              `<td class="${cls}">${esc(s.fehler || s.info || "ok")}</td></tr>`;
     }).join("");
 
-    $("q").value = st.q; $("shop").value = st.shop; $("size").value = st.size;
+    $("q").value = st.q; $("shop").value = st.shop; $("size").value = st.size; $("ebland").value = st.ebLand || "";
     $("onlynew").checked = st.onlynew; $("dupes").checked = st.dupes;
     render();
   }
@@ -971,6 +1012,7 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
   const reset = () => { shown = PAGE; groupsShown = 12; render(); };
   $("q").addEventListener("input", e => { st.q = e.target.value; reset(); });
   ["shop", "size"].forEach(id => $(id).addEventListener("change", e => { st[id] = e.target.value; reset(); }));
+  $("ebland").addEventListener("change", e => { st.ebLand = e.target.value; reset(); });
   ["onlynew", "dupes"].forEach(id => $(id).addEventListener("change", e => { st[id] = e.target.checked; reset(); }));
   $("sort").addEventListener("click", e => { const b = e.target.closest("button"); if (b) { st.sort = b.dataset.s; reset(); } });
   $("tabs").addEventListener("click", e => {
@@ -981,8 +1023,8 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
   });
   $("labels").addEventListener("click", e => {
     const b = e.target.closest(".chip"); if (!b) return;
-    const l = b.dataset.l;
-    st.labels = st.labels.includes(l) ? st.labels.filter(x => x !== l) : [...st.labels, l];
+    const l = b.dataset.l, k = st.view === "ebay" ? "ebLabels" : "labels";
+    st[k] = st[k].includes(l) ? st[k].filter(x => x !== l) : [...st[k], l];
     reset();
   });
   document.addEventListener("click", e => {

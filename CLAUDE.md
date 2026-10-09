@@ -545,6 +545,9 @@ per GitHub-Schlüssel nur auf dem Handy; cron-job.org bleibt. Vinted/Kleinanzeig
    `rewrite_app` schreibt die App-Daten sofort. App lädt eBay-Daten beim Öffnen neu (spätestens nach 2 Min., im
    Wartezustand nach 15 s), "Schlüssel erneut schicken" nutzt den vorhandenen Schlüssel. `#ebay` hat eine Mindesthöhe
    (iPhone verschob die untere Leiste, wenn die Seite kürzer als der Bildschirm wurde)
+   Filter und Sortierung im eBay-Reiter (10.10.2026): dieselbe Steuerung wie bei den Shops (Suche, Wichtig/Neueste/
+   Preis, Größe, nur neu), eigene Kategorie-Chips (`st.ebLabels`, `buildChips`/`chipState`), Standort statt Shop
+   (`st.ebLand`: EU, UK, Ukraine), Preis-Sortierung nach Endpreis plus Versand (`gesamt`)
    **Aus Meldungen vom 08.10.2026** (6x Fälschung, v. a. Henry/Arsenal T90 und Fake-Flocks, 2x schlechter Zustand,
    1x "verschickt nicht nach DE"): `fake_suspect` (Saison bis 2016, Zustand neu 1000/1500, unter 120 €) fliegt raus,
    bei Thiago nur Kennzeichen "FAKE?" (`verdacht`); neue Treffer vor der Push per getItem geprüft (`still_available`,
