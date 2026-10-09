@@ -156,7 +156,7 @@ def test_faellig():
     os.environ["EBAY_CLIENT_ID"], os.environ["EBAY_CLIENT_SECRET"] = "id", "geheim"
     try:
         assert ebay.due(status, "drop", tracker.now()) == {"suche": None, "bestaetigen": False}
-        status["ebay"]["bestaetigt"] = {"x": (tracker.now() - _dt.timedelta(hours=5)).isoformat()}
+        status["ebay"]["bestaetigt"] = {"x": (tracker.now() - _dt.timedelta(hours=6)).isoformat()}
         assert ebay.due(status, "drop", tracker.now())["bestaetigen"]
         assert ebay.due(status, "full", tracker.now())["suche"] == "voll"
         # tagsüber: komplette Suche, wenn die letzte über 5 Std. her ist (und das Radar ohnehin dran wäre)
