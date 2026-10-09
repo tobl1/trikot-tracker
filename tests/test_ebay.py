@@ -248,3 +248,41 @@ def test_erste_komplette_suche_still(monkeypatch, tmp_path):
     neu = summ("v1|444|0", "Bayern Trikot 2014/15 Thiago #6 Gr. XL", price="70.00")
     pushes, _, _ = run(status, FakeEbay({("EU", "(thiago, alcantara)"): [summ(*THIAGO), neu]}), mode="full")
     assert len(pushes) == 1                                        # danach wieder normal
+
+
+def test_komplette_suche_auch_unvollstaendig_vermerkt(monkeypatch, tmp_path):
+    # 09.10.2026: "2004 bis 2006" hat mehr Angebote als FULL_PAGES Seiten, die komplette Suche wurde nie vermerkt
+    # und lief bei jedem Drop-Run erneut, bis das Tageslimit gerissen war
+    setup(monkeypatch, tmp_path)
+    monkeypatch.setattr(ebay, "FULL_PAGES", 1)
+
+    class Viel(FakeEbay):
+        def search(self, where, q, newest=False, offset=0):
+            self.calls += 1
+            return 200, {"total": 5000, "itemSummaries": []}
+    status = {}
+    run(status, Viel({}), mode="full")
+    assert status["ebay"].get("voll")
+    assert ebay.due(status, "drop", tracker.now() + _dt.timedelta(minutes=40))["suche"] == "radar"
+
+
+def test_kontingent_knapp_nur_radar(monkeypatch, tmp_path):
+    setup(monkeypatch, tmp_path)
+    calls = []
+
+    class Knapp(FakeEbay):
+        def quota(self):
+            return 300                                             # reicht nicht für eine komplette Suche
+
+        def search(self, where, q, newest=False, offset=0):
+            calls.append(newest)
+            return super().search(where, q, newest, offset)
+    run({}, Knapp({}), mode="full")
+    assert calls and all(calls)                                    # nur Radar (neueste zuerst)
+    calls.clear()
+
+    class Leer(Knapp):
+        def quota(self):
+            return 20
+    _, summary, problems = run({}, Leer({}), mode="full")
+    assert calls == [] and problems and "Pause" in summary

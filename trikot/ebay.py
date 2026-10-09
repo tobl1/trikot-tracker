@@ -47,7 +47,9 @@ EBAY_FULL_H = 5            # komplette Suche tagsüber spätestens alle 5 Std.: 
 EBAY_REFRESH_H = 5.5       # Treffer spätestens so oft einzeln bestätigen, falls die komplette Suche (alle 5 Std.) sie nicht
                            # bestätigt hat (Lizenz: angezeigt höchstens 6 Std. alt)
 EBAY_SHOW_H = 6            # die App zeigt nur Treffer, die vor höchstens so vielen Stunden bestätigt wurden
-EBAY_DAY_LIMIT = 4500      # eBay erlaubt 5.000 Abrufe am Tag
+EBAY_DAY_LIMIT = 4500      # eBay erlaubt 5.000 Abrufe am Tag (Tag nach Pazifik-Zeit, so zählt eBay)
+EBAY_TZ = "America/Los_Angeles"
+NEED = {"voll": 700, "radar": 80}   # so viele Abrufe müssen übrig sein, sonst kleiner suchen bzw. pausieren
 FULL_PAGES = 20            # Gesamt-Run: höchstens 20 x 200 Angebote je Suche und Standort
 SIZE_LOOKUPS = {"full": 300, "drop": 60}   # Einzelabrufe für die Größe pro Run
 REFRESH_LOOKUPS = 80       # Einzelabrufe zum Bestätigen pro Run
@@ -173,6 +175,15 @@ class Ebay:
 
     def item(self, item_id, where):
         return self.get(f"/buy/browse/v1/item/{item_id}", None, WHERE[where]["market"])
+
+    def quota(self):
+        """Verbleibende Browse-Abrufe laut eBay (Analytics-Schnittstelle) oder None, wenn unbekannt"""
+        status, d = self.get("/developer/analytics/v1_beta/rate_limit/", {"api_context": "buy", "api_name": "browse"})
+        if status != 200:
+            return None
+        left = [r.get("remaining") for api in d.get("rateLimits") or [] for res in api.get("resources") or []
+                for r in res.get("rates") or [] if isinstance(r.get("remaining"), int)]
+        return min(left) if left else None
 
 
 # ---------------------------------------------------------------------------------------------------------------
@@ -336,10 +347,21 @@ def run(mode, status_store, matcher, watch, rates, ts, notify, client=None, dry=
         return "", []
     cfg = watch.get("ebay") or {}
     client = client or Ebay(cid, secret)
-    day = ts[:10]
+    from zoneinfo import ZoneInfo
+    day = t_now.astimezone(ZoneInfo(EBAY_TZ)).date().isoformat()   # eBay zählt den Tag nach Pazifik-Zeit
     used = {d: n for d, n in (st.get("abrufe") or {}).items() if d >= (t_now - dt.timedelta(days=7)).date().isoformat()}
-    if used.get(day, 0) >= EBAY_DAY_LIMIT:
-        return "eBay: Tageslimit erreicht", [("eBay", f"Tageslimit von {EBAY_DAY_LIMIT} Abrufen erreicht, Pause bis morgen")]
+    # Abrufe einteilen (09.10.2026 riss das Tageslimit, die App war danach leer): erst eBay fragen, was übrig ist,
+    # sonst die eigene Zählung; reicht es nicht für eine komplette Suche, nur Radar, notfalls Pause
+    quota = getattr(client, "quota", None)
+    left = quota() if quota else None
+    if left is None:
+        left = EBAY_DAY_LIMIT - used.get(day, 0)
+    if todo["suche"] == "voll" and left < NEED["voll"]:
+        todo["suche"] = "radar"
+    if todo["suche"] == "radar" and left < NEED["radar"]:
+        todo["suche"] = None
+    if left <= 30 or (not todo["suche"] and not todo["bestaetigen"]):
+        return "eBay: Tageslimit fast erreicht, Pause", [("eBay", f"nur noch {left} Abrufe übrig, Pause bis zum neuen eBay-Tag")]
 
     pg = watch.get("preisgrenze") or {}
     blob = speicher.load_json(state_path(), None)
@@ -372,31 +394,36 @@ def run(mode, status_store, matcher, watch, rates, ts, notify, client=None, dry=
     problems, new_entries = [], []
 
     # 1) Suchen
-    found, complete = {}, todo["suche"] == "voll"
+    found, complete, done_groups = {}, todo["suche"] == "voll", set()
     if todo["suche"]:
         searches = cfg.get("suchen") or []
         if todo["suche"] == "radar":
             searches = sorted(searches, key=lambda s: str(s.get("hoch", "")).lower() not in ("ja", "true"))
         for s in searches:
+            group_ok = True
             for where in WHERE:
                 pages = FULL_PAGES if todo["suche"] == "voll" else 1
                 for page in range(pages):
                     status, d = client.search(where, s["q"], newest=todo["suche"] == "radar", offset=page * 200)
                     if status != 200:
-                        complete = False
+                        complete = group_ok = False
                         break
                     for summ in d.get("itemSummaries") or []:
                         if seller_ok(summ, cfg):
                             it = summary_item(summ, where)
                             if it and it["id"]:
-                                found[it["id"]] = it
+                                found.setdefault(it["id"], dict(it, gruppe=s["name"]))
                     if (page + 1) * 200 >= int(d.get("total") or 0):
                         break
                 else:
                     if todo["suche"] == "voll":
-                        complete = False   # mehr als FULL_PAGES Seiten: nicht vollständig gesehen
+                        complete = group_ok = False   # mehr als FULL_PAGES Seiten: nicht vollständig gesehen
+            if group_ok:
+                done_groups.add(s["name"])
         st["radar"] = ts
-        if todo["suche"] == "voll" and complete:
+        if todo["suche"] == "voll":
+            # immer vermerken, auch wenn eine Gruppe mehr Angebote hat als wir blättern ("2004 bis 2006"); sonst lief
+            # bei jedem Drop-Run erneut eine komplette Suche (09.10.2026: Tageslimit gerissen)
             st["voll"] = ts
 
     # 2) Abgleich: Labels aus dem Titel, Größe aus dem Titel oder dem Merkmal (Einzelabruf, gemerkt)
@@ -455,13 +482,15 @@ def run(mode, status_store, matcher, watch, rates, ts, notify, client=None, dry=
 
     # 3) Bestätigen bzw. löschen: Gesamt-Run alles, was die vollständige Suche nicht mehr lieferte; sonst, was älter als
     # EBAY_REFRESH_H ist. Beendet, verkauft oder ohne Sofortkauf -> Eintrag löschen (Lizenz §8.1b)
-    budget = REFRESH_LOOKUPS if mode != "full" else 400
+    budget = min(REFRESH_LOOKUPS if mode != "full" else 400, max(0, left - client.calls - 20))
     for iid in list(hits):
         e = hits[iid]
         if e["last"] == ts:
             continue
         old = (t_now - dt.datetime.fromisoformat(e["last"])).total_seconds() > EBAY_REFRESH_H * 3600
-        if not ((complete and todo["suche"] == "voll") or old) or budget <= 0:
+        # komplette Suche: nur Treffer aus vollständig durchsuchten Gruppen prüfen, die diesmal fehlten
+        gone = todo["suche"] == "voll" and e.get("gruppe") in done_groups
+        if not (gone or old) or budget <= 0:
             continue
         budget -= 1
         status, detail = client.item(iid, e["wo"])

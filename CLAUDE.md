@@ -528,7 +528,13 @@ per GitHub-Schlüssel nur auf dem Handy; cron-job.org bleibt. Vinted/Kleinanzeig
    Radar alle 30 Min. im Drop-Run (neueste je Gruppe und Standort, ca. 24 Abrufe), Gesamt-Run komplett (bis 20 Seiten),
    seit 09.10.2026 tagsüber zusätzlich komplett alle 5 Std. (`EBAY_FULL_H`, ca. 500 Abrufe), weil das alle Treffer auf
    einmal bestätigt (Probelauf: 654 Treffer, einzeln wäre fast das Tageslimit weg). Erste komplette Suche übernimmt still
-   (`status.json` → `ebay.voll` fehlt). Einzelbestätigung nur noch nach 5,5 Std. ohne Bestätigung, beendete gelöscht. Zustand `state/ebay.json` verschlüsselt (Schlüssel
+   (`status.json` → `ebay.voll` fehlt). Einzelbestätigung nur noch nach 5,5 Std. ohne Bestätigung, beendete gelöscht.
+   **09.10.2026 Tageslimit gerissen (4.641 Abrufe, App danach leer):** `ebay.voll` wurde nur bei vollständiger Suche
+   gesetzt, "2004 bis 2006" hat aber mehr als 20 Seiten, also lief bei jedem Drop-Run erneut eine komplette Suche.
+   Jetzt: `voll` immer vermerken, Vollständigkeit je Gruppe (`gruppe` am Treffer, `done_groups`; nur deren fehlende
+   Treffer werden einzeln geprüft), Kontingent vor jeder Suche bei eBay abfragen (`Ebay.quota`, Analytics
+   rate_limit, sonst eigene Zählung), Tag nach Pazifik-Zeit (`EBAY_TZ`, so zählt eBay), unter 700 übrig nur Radar,
+   unter 80 Pause, Einzelbestätigungen begrenzt auf das, was übrig ist Zustand `state/ebay.json` verschlüsselt (Schlüssel
    aus `EBAY_CLIENT_SECRET`, neuer Secret = Neustart mit stiller Übernahme), App-Daten `ebay.json` je Gerät verschlüsselt
    (Geräteschlüssel per Issue Label `ebay`, `status.json` → `ebay.geraete`), Dashboard-Workflow kopiert sie mit. Die App
    zeigt nur Treffer, die vor höchstens 6 Std. bestätigt wurden. Pushes: Thiago/Sondertrikots einzeln mit eBay-Link, Rest
