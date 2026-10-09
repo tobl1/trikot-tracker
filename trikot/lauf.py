@@ -96,6 +96,14 @@ def radar_job(shop, radar_checks):
 NET_ERRORS = ("ConnectionError", "ConnectTimeout", "ReadTimeout", "Timeout", "SSLError", "ChunkedEncodingError")
 
 
+def item_link(e):
+    """Push für ein einzelnes Trikot: öffnet die App genau bei diesem Treffer (#treffer=<Schlüssel>), dort geht es
+    weiter zum Shop. Vorher öffnete die Push direkt die Shop-Seite bzw. die App ohne Bezug (Nutzer 09.10.2026)"""
+    from urllib.parse import quote
+    board = (os.environ.get("DASHBOARD_URL") or "").rstrip("/")
+    return f"{board}/#treffer={quote(canon_url(e['url']), safe='')}" if board else e["url"]
+
+
 def net_error(fehler):
     """Fehler eines Shops ist ein reiner Netzaussetzer (keine Sperre, kein Datenfehler)"""
     return str(fehler or "").split(":")[0] in NET_ERRORS
@@ -472,13 +480,13 @@ def main():
         for e in high[:MAX_PUSH_HIGH]:
             push(f"{'📉 Jetzt unter der Preisgrenze: ' if e.get('unter_grenze') == ts else '🔥 '}{push_label(e)} · {e['shop']}",
                  detail_line(e),
-                 5, e["url"], e["image"], ["fire"], args.dry_run)
+                 5, item_link(e), e["image"], ["fire"], args.dry_run)
         bundle = high[MAX_PUSH_HIGH:] + normal
         if len(bundle) == 1:
             e = bundle[0]
             push(f"{'📉 Jetzt unter der Preisgrenze: ' if e.get('unter_grenze') == ts else '⚽ '}{push_label(e)} · {e['shop']}",
                  detail_line(e),
-                 3, e["url"], e["image"], ["soccer"], args.dry_run)
+                 3, item_link(e), e["image"], ["soccer"], args.dry_run)
         elif bundle:
             push(f"⚽ {len(bundle)} neue Treffer",
                  "\n".join(f"• {push_label(e)}: {short(e, shop=True)}"
@@ -490,7 +498,7 @@ def main():
     for e in price_drops[:MAX_PUSH_HIGH]:
         if not (e.get("verkauft") or e.get("aussortiert") or e.get("weg")):
             push(f"📉 Preis gesenkt · {e['shop']}", f"{push_label(e)}: {e['title']}\n{e['preis_runter']['von']} → {e['price']} "
-                 f"(−{e['preis_runter']['prozent']} %)", 4, e["url"], e.get("image"), ["chart_with_downwards_trend"], args.dry_run)
+                 f"(−{e['preis_runter']['prozent']} %)", 4, item_link(e), e.get("image"), ["chart_with_downwards_trend"], args.dry_run)
 
     # Shop wieder offen: Shops mit Passwortseite (oft kurz vor einem Drop) melden sich, sobald sie wieder liefern
     closed = status_store.setdefault("geschlossen", {})

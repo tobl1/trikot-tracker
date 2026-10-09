@@ -666,3 +666,12 @@ def test_england_raus():
 def test_andere_hamburger_vereine():
     assert M.labels("VfL Hamburg 93 Trikot 1996 #10 Müller XL") == []
     assert M.labels("Hamburger SV 1996/97 Home Yeboah #9 XL") != []
+
+
+def test_spanien_ohne_vereine_und_kein_bvb():
+    # eBay-Meldungen 09.10.2026: "Lanzarote Trikot" bei Spanien 2014, "BVB NEIN" bei Perišić
+    assert M.labels("UD Lanzarote Spain Trikot 2014 Home XL") == []
+    assert {l for l, _ in M.labels("Spain 2014 World Cup Home Shirt XL")} == {"Spanien 2014"}
+    assert M.labels("Borussia Dortmund 2015/16 Home Perisic #14 XL") == []
+    assert M.labels("BVB Trikot Perisic 14 XL") == []
+    assert {l for l, _ in M.labels("Inter 2017/18 Home Perisic #44 XL")} == {"Perišić"}

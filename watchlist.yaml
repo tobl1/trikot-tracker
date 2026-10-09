@@ -26,6 +26,8 @@ preisgrenze:
 # Produkte, die keine Trikots sind oder nicht gewünscht sind
 produkt_ausschluss: [# England grundsätzlich nicht (Nutzer 08.10.2026, betraf vor allem WM 2006)
                      "england", "anglia", "inglaterra", "angleterre", "inghilterra", "engeland",
+                     # Dortmund grundsätzlich nicht (eBay-Meldung 09.10.2026 bei Perišić: "BVB NEIN")
+                     "dortmund", "bvb",
                      "shorts", "socks", "sock", "jacket", "track top", "tracksuit",
                      "hoodie", "sweatshirt", "sweater", "pants", "trousers", "scarf", "bag",
                      "cap", "hat", "programme", "ball", "boots", "poster", "sticker", "mug",
@@ -311,6 +313,11 @@ sondertrikots:
     prioritaet: hoch
     verein: ["spain", "spanien", "espana", "spanje", "espagne", "spagna", "espanha", "hiszpania"]
     jahre: ["2010", "2011"]
+    # spanische Vereine und Inseln sind nicht die Nationalmannschaft (eBay-Meldung 09.10.2026: "Lanzarote Trikot")
+    ausschluss: ["lanzarote", "tenerife", "teneriffa", "las palmas", "canarias", "mallorca", "ibiza", "menorca", "betis",
+                 "sevilla", "valencia", "villarreal", "celta", "deportivo", "malaga", "osasuna", "getafe", "levante",
+                 "espanyol", "granada", "almeria", "cadiz", "rayo", "alaves", "eibar", "leganes", "zaragoza", "oviedo",
+                 "gijon", "racing", "numancia", "athletic", "bilbao", "sociedad", "atletico", "real madrid", "barcelona"]
     varianten: [home, away]
     suchanfragen: ["spain 2010", "spain 2011"]
     codes: ["P47902"]                     # adidas Heim 2010/11 (belegt aus Angeboten, 05.10.2026)
@@ -319,6 +326,11 @@ sondertrikots:
     prioritaet: hoch
     verein: ["spain", "spanien", "espana", "spanje", "espagne", "spagna", "espanha", "hiszpania"]
     jahre: ["2014"]
+    # spanische Vereine und Inseln sind nicht die Nationalmannschaft (eBay-Meldung 09.10.2026: "Lanzarote Trikot")
+    ausschluss: ["lanzarote", "tenerife", "teneriffa", "las palmas", "canarias", "mallorca", "ibiza", "menorca", "betis",
+                 "sevilla", "valencia", "villarreal", "celta", "deportivo", "malaga", "osasuna", "getafe", "levante",
+                 "espanyol", "granada", "almeria", "cadiz", "rayo", "alaves", "eibar", "leganes", "zaragoza", "oviedo",
+                 "gijon", "racing", "numancia", "athletic", "bilbao", "sociedad", "atletico", "real madrid", "barcelona"]
     varianten: [home, away]
     suchanfragen: ["spain 2014"]
 

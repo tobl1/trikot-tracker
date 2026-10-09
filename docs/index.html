@@ -107,6 +107,11 @@ select{flex:0 1 auto;max-width:100%;appearance:none;-webkit-appearance:none;padd
 .badge.gone{background:var(--muted);color:var(--bg)}
 .badge.down{background:var(--good);color:#000}
 .badge.eb{background:#0064d2;color:#fff}
+.focus{background:var(--card);border-radius:22px;padding:14px;margin:0 0 14px}
+.focus h2{font-size:15px;font-weight:600;margin:0 0 10px;display:flex;justify-content:space-between;align-items:center}
+.focus h2 button{font:inherit;font-size:13px;background:none;border:0;color:var(--muted);cursor:pointer;text-decoration:underline}
+.focus .grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
+.group h3.ev{font-size:13px;font-weight:600;color:var(--good);margin:12px 0 8px}
 .ebhead{font-size:13px;color:var(--muted);margin:0 0 14px;line-height:1.5}
 .ebhead b{color:var(--ink);font-weight:600}
 .ebintro{background:var(--card);border-radius:22px;padding:20px;margin:0 0 14px}
@@ -286,6 +291,7 @@ details[open] summary::after{content:"−"}
     </div>
   </div>
 
+  <div id="focus" hidden></div>
   <div class="grid" id="grid"></div>
   <div id="feed" hidden></div>
   <div id="favs" hidden></div>
@@ -374,6 +380,9 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
   else if (location.hash === "#favoriten") st.view = "favs";
   else if (location.hash === "#alle") st.view = "all";
   else if (location.hash === "#ebay") st.view = "ebay";
+  // Push zu einem einzelnen Trikot: #treffer=<Schlüssel> zeigt genau dieses oben (Nutzer 09.10.2026)
+  let focusId = location.hash.startsWith("#treffer=") ? decodeURIComponent(location.hash.slice(9)) : "";
+  if (focusId) st.view = "all";
   const fmtRun = iso => new Date(iso).toLocaleString("de-DE", {weekday:"short", day:"2-digit", month:"2-digit", hour:"2-digit", minute:"2-digit"});
 
   function isNew(t){ return (Date.now() - new Date(t.erst)) / 36e5 < NEW_H; }
@@ -696,15 +705,15 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
       (!st.labels.length || t.labels.some(l => st.labels.includes(l))) &&
       (!st.shop || t.shopName === st.shop) &&
       (!st.size || shortSize(t.groesse) === st.size) &&
-      (!st.onlynew || t.neu) &&
+      (!st.onlynew || t.neu || t.evNeu) &&
       !t.teuer &&
       !flagged.has(t.id) && !hiddenIds.has(t.id) &&
       (st.dupes || st.view !== "all" || !t.dupOf) &&
       words.every(w => t.hay.includes(w)));
-    const byNew = (a, b) => b.erst.localeCompare(a.erst);
+    const byNew = (a, b) => (b.akt || b.erst).localeCompare(a.akt || a.erst);   // Preis-Ereignisse zählen wie neu
     const byPrice = dir => (a, b) => (a.eur == null) - (b.eur == null) || dir * ((a.eur ?? 0) - (b.eur ?? 0));
     const cmp = {
-      prio: (a, b) => (b.thiago - a.thiago) || (b.hoch - a.hoch) || (b.neu - a.neu) || byNew(a, b),
+      prio: (a, b) => (b.thiago - a.thiago) || (b.hoch - a.hoch) || ((b.neu || b.evNeu) - (a.neu || a.evNeu)) || byNew(a, b),
       new: byNew, pasc: byPrice(1), pdesc: byPrice(-1)
     }[st.sort] || byNew;
     return out.sort(cmp);
@@ -731,7 +740,9 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     const badges = [t.gone && '<span class="badge gone">NICHT MEHR GELISTET</span>',
                     down && `<span class="badge down">PREIS ↓ von ${eur(f.eur)}</span>`,
                     !down && t.preis_runter && !t.gone && `<span class="badge down" title="Preis gesenkt">PREIS ↓ ${t.preis_runter} %</span>`,
-                    t.neu && !t.gone && '<span class="badge new">NEU</span>', t.thiago && t.gone && '<span class="badge hi">THIAGO</span>',
+                    t.neu && !t.gone && '<span class="badge new">NEU</span>',
+                    !t.neu && t.evNeu && !t.gone && t.unter_grenze && t.unter_grenze === t.ev &&
+                      '<span class="badge down" title="War über der Preisgrenze, jetzt darunter">JETZT IM BUDGET</span>', t.thiago && t.gone && '<span class="badge hi">THIAGO</span>',
                     t.repro && '<span class="badge re" title="Original-Trikot, Name und Nummer nachgedruckt">REPRO-FLOCK</span>',
                     t.reissue && '<span class="badge re" title="Neuauflage, z. B. Nikes T90-Reissue von 2025, kein Original von damals">NEUAUFLAGE</span>',
                     t.pruefen && !t.gone && `<span class="badge chk" title="${esc(t.pruefen)}">PRÜFEN</span>`]
@@ -760,26 +771,31 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
 
   function renderFeed(list){
     // Treffer nach dem Lauf gruppieren, in dem sie zuerst auftauchten (erst = Zeitstempel des Laufs)
-    const byRun = {};
+    const byRun = {}, evRun = {};
     list.forEach(t => (byRun[t.erst] = byRun[t.erst] || []).push(t));
+    // Preis gesenkt / unter die Grenze gefallen: zusätzlich beim Run, in dem das passierte
+    list.forEach(t => { if (t.ev && t.ev !== t.erst) (evRun[t.ev] = evRun[t.ev] || []).push(t); });
     const info = Object.fromEntries(runs.map(r => [r.zeit, r]));
     const week = Date.now() - 7 * 864e5;
     // leere Runs nur für Gesamt- und Schnell-Runs zeigen (Radar und Drops laufen tagsüber alle 15 bis 30 Min.)
-    const keys = [...new Set([...Object.keys(byRun), ...runs.filter(r => new Date(r.zeit) > week &&
+    const keys = [...new Set([...Object.keys(byRun), ...Object.keys(evRun), ...runs.filter(r => new Date(r.zeit) > week &&
       (r.modus === "full" || r.modus === "priority")).map(r => r.zeit)])]
       .sort().reverse();
     const html = keys.slice(0, groupsShown).map(k => {
-      const items = byRun[k] || [], r = info[k];
+      const items = byRun[k] || [], r = info[k], evs = evRun[k] || [];
       const loud = items.filter(t => !t.still), quiet = items.filter(t => t.still);
       const mode = r ? MODE[r.modus] || r.modus : "Run";
-      if (!items.length)
+      const evHtml = evs.length ? `<h3 class="ev">📉 Preis gesenkt oder jetzt im Budget (${evs.length})</h3><div class="grid">${evs.map(card).join("")}</div>` : "";
+      if (!items.length && !evs.length)
         return `<section class="group quiet"><h2>${fmtRun(k)} · ${mode} · keine neuen Treffer</h2></section>`;
+      if (!items.length)
+        return `<section class="group"><h2>${fmtRun(k)} Uhr <small>${mode} · keine neuen Treffer</small></h2>${evHtml}</section>`;
       return `<section class="group"><h2>${fmtRun(k)} Uhr <small>${mode} · ${loud.length} neu` +
         (quiet.length ? `, ${quiet.length} still übernommen` : "") + `</small></h2>` +
         (loud.length ? `<div class="grid">${loud.map(card).join("")}</div>` : "") +
         (quiet.length ? `<details class="silent"${loud.length ? "" : " open"}><summary>${quiet.length} still übernommen ` +
           `(erster Run oder neue Quelle, ohne Push)</summary><div class="grid">${quiet.map(card).join("")}</div></details>` : "") +
-        `</section>`;
+        evHtml + `</section>`;
     }).join("");
     $("feed").innerHTML = html;
     $("more").hidden = keys.length <= groupsShown;
@@ -787,8 +803,20 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     return keys.length;
   }
 
+  function renderFocus(){
+    const box = $("focus");
+    if (!focusId || st.view !== "all") { box.hidden = true; box.innerHTML = ""; return; }
+    const t = all.find(x => x.id === focusId);
+    box.hidden = false;
+    box.innerHTML = `<section class="focus"><h2><span>Aus der Push</span><button id="focusclose">schließen</button></h2>` +
+      (t ? `<div class="grid">${card(t)}</div>` : '<p class="fyjnote">Nicht mehr in der Liste: inzwischen verkauft, gemeldet oder wieder über der Preisgrenze.</p>') +
+      `</section>`;
+    $("focusclose").addEventListener("click", () => { focusId = ""; history.replaceState(null, "", "#alle"); render(); });
+  }
+
   function render(){
     store.set("filter", st);
+    renderFocus();
     const list = filtered();
     const feed = st.view === "feed", favView = st.view === "favs", ebView = st.view === "ebay";
     $("grid").hidden = feed || favView || ebView; $("feed").hidden = !feed; $("favs").hidden = !favView;
@@ -850,7 +878,9 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
       const lim = limitFor(t.labels);
       t.teuer = !!(lim && t.eur != null && t.eur > lim);
       const shopName = /^[a-z0-9.-]+\.[a-z]{2,}$/i.test(t.shop) || t.shop === "FYJ" ? (host(t.url) || t.shop) : t.shop;
-      return Object.assign(t, {shopName, neu: isNew(t), thiago: t.labels.some(l => l.startsWith("Thiago")),
+      const ev = [t.unter_grenze, t.preis_zeit].filter(Boolean).sort().pop() || "";
+      const evNeu = !!ev && (Date.now() - new Date(ev)) / 36e5 < NEW_H;
+      return Object.assign(t, {shopName, ev, evNeu, akt: ev > t.erst ? ev : t.erst, neu: isNew(t), thiago: t.labels.some(l => l.startsWith("Thiago")),
         hay: (t.titel + " " + t.labels.join(" ") + " " + shopName + " " + (t.notiz || "")).toLowerCase()});
     });
     // Gleiche Angebote eines Shops (gleicher Titel, gleiche Größe) zusammenfassen: günstigstes zeigen
@@ -945,7 +975,7 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
   $("sort").addEventListener("click", e => { const b = e.target.closest("button"); if (b) { st.sort = b.dataset.s; reset(); } });
   $("tabs").addEventListener("click", e => {
     const b = e.target.closest("button"); if (!b) return;
-    st.view = b.dataset.view;
+    st.view = b.dataset.view; focusId = "";
     history.replaceState(null, "", {feed: "#eingaenge", favs: "#favoriten", ebay: "#ebay"}[st.view] || "#alle"); reset();
     window.scrollTo({top: 0, behavior: "smooth"});   // nach dem Scrollen immer zurück an den Anfang
   });
@@ -1020,6 +1050,12 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
   $("more").addEventListener("click", () => { if (st.view === "feed") groupsShown += 12; else shown += PAGE; render(); });
 
   document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") syncFavs(); });
+  // App schon offen und die Push ändert nur die Adresse (#treffer=…): Fokus ohne Neuladen setzen
+  window.addEventListener("hashchange", () => {
+    if (!location.hash.startsWith("#treffer=")) return;
+    focusId = decodeURIComponent(location.hash.slice(9)); st.view = "all"; shown = PAGE;
+    render(); window.scrollTo({top: 0});
+  });
   fetch("treffer.json", {cache: "no-store"})
     .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(setup)

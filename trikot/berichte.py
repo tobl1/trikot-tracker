@@ -53,6 +53,8 @@ def write_dashboard(seen, status_store, mode, ts, watch_cfg, shops):
             "warum": "; ".join(f"{l}: {r}" for l, r in (e.get("warum") or {}).items() if l in e["labels"]),
             "pruefen": doubt(e),
             "preis_runter": (e.get("preis_runter") or {}).get("prozent", 0),
+            "preis_zeit": (e.get("preis_runter") or {}).get("zeit", ""),   # Run, in dem der Preis fiel
+            "unter_grenze": e.get("unter_grenze", ""),                      # Run, in dem er unter die Grenze fiel
         })
     quellen = status_store.get("quellen") or {}
     data = {"stand": ts, "modus": mode, "letzter_gesamtlauf": status_store.get("last_full", ""),
