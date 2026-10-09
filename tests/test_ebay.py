@@ -159,6 +159,12 @@ def test_faellig():
         status["ebay"]["bestaetigt"] = {"x": (tracker.now() - _dt.timedelta(hours=5)).isoformat()}
         assert ebay.due(status, "drop", tracker.now())["bestaetigen"]
         assert ebay.due(status, "full", tracker.now())["suche"] == "voll"
+        # tagsüber: komplette Suche, wenn die letzte über 5 Std. her ist (und das Radar ohnehin dran wäre)
+        status["ebay"]["radar"] = (tracker.now() - _dt.timedelta(minutes=40)).isoformat()
+        status["ebay"]["voll"] = (tracker.now() - _dt.timedelta(hours=6)).isoformat()
+        assert ebay.due(status, "drop", tracker.now())["suche"] == "voll"
+        status["ebay"]["voll"] = (tracker.now() - _dt.timedelta(hours=2)).isoformat()
+        assert ebay.due(status, "drop", tracker.now())["suche"] == "radar"
         assert ebay.due(status, "priority", tracker.now())["suche"] is None
     finally:
         del os.environ["EBAY_CLIENT_ID"], os.environ["EBAY_CLIENT_SECRET"]
@@ -229,3 +235,16 @@ def test_fake_raus_thiago_markiert_versand_geprueft(monkeypatch, tmp_path):
     state = ebay.open_state(trikot.speicher.load_json(ebay.state_path(), None), "geheim")
     assert set(state["treffer"]) == {"v1|6|0"} and state["treffer"]["v1|6|0"]["verdacht"]
     assert len(pushes) == 1
+
+
+def test_erste_komplette_suche_still(monkeypatch, tmp_path):
+    setup(monkeypatch, tmp_path)
+    status = {"ebay": {"voll": tracker.now().isoformat()}}       # Zustand wie vor dem 09.10.2026: nur Radar gelaufen
+    run(status, FakeEbay({}), mode="drop")
+    del status["ebay"]["voll"]
+    res = {("EU", "(thiago, alcantara)"): [summ(*THIAGO)]}
+    pushes, _, _ = run(status, FakeEbay(res), mode="full")         # erste komplette Suche: still
+    assert pushes == [] and status["ebay"].get("voll")
+    neu = summ("v1|444|0", "Bayern Trikot 2014/15 Thiago #6 Gr. XL", price="70.00")
+    pushes, _, _ = run(status, FakeEbay({("EU", "(thiago, alcantara)"): [summ(*THIAGO), neu]}), mode="full")
+    assert len(pushes) == 1                                        # danach wieder normal

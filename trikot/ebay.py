@@ -41,7 +41,11 @@ WHERE = {
     "UA": {"market": "EBAY_DE", "cat": "179288", "filter": "itemLocationCountry:UA"},
 }
 EBAY_RADAR_MIN = 30        # Radar: neueste Angebote je Suche und Standort
-EBAY_REFRESH_H = 4         # Treffer spätestens so oft einzeln bestätigen (Lizenz: angezeigt höchstens 6 Std. alt)
+EBAY_FULL_H = 5            # komplette Suche tagsüber spätestens alle 5 Std.: bestätigt alle Treffer auf einmal (ca. 500
+                           # Abrufe), statt Hunderte einzeln (Probelauf 09.10.2026: 654 Treffer, Einzelbestätigung hätte
+                           # fast das Tageslimit gekostet)
+EBAY_REFRESH_H = 5.5       # Treffer spätestens so oft einzeln bestätigen, falls die komplette Suche (alle 5 Std.) sie nicht
+                           # bestätigt hat (Lizenz: angezeigt höchstens 6 Std. alt)
 EBAY_SHOW_H = 6            # die App zeigt nur Treffer, die vor höchstens so vielen Stunden bestätigt wurden
 EBAY_DAY_LIMIT = 4500      # eBay erlaubt 5.000 Abrufe am Tag
 FULL_PAGES = 20            # Gesamt-Run: höchstens 20 x 200 Angebote je Suche und Standort
@@ -282,8 +286,10 @@ def due(status_store, mode, t_now):
         return {"suche": "voll", "bestaetigen": True}
     if mode != "drop":
         return {"suche": None, "bestaetigen": False}
-    last = st.get("radar")
-    radar = not last or (t_now - dt.datetime.fromisoformat(last)).total_seconds() >= (EBAY_RADAR_MIN - 5) * 60
+    age = lambda key: (t_now - dt.datetime.fromisoformat(st[key])).total_seconds() if st.get(key) else 1e9
+    if age("voll") >= EBAY_FULL_H * 3600 and age("radar") >= (EBAY_RADAR_MIN - 5) * 60:
+        return {"suche": "voll", "bestaetigen": True}
+    radar = age("radar") >= (EBAY_RADAR_MIN - 5) * 60
     stale = any((t_now - dt.datetime.fromisoformat(v)).total_seconds() > EBAY_REFRESH_H * 3600
                 for v in (st.get("bestaetigt") or {}).values())
     return {"suche": "radar" if radar else None, "bestaetigen": stale}
@@ -338,7 +344,9 @@ def run(mode, status_store, matcher, watch, rates, ts, notify, client=None, dry=
     pg = watch.get("preisgrenze") or {}
     blob = speicher.load_json(state_path(), None)
     state = open_state(blob, secret) if blob else None
-    first = state is None   # erster Lauf oder Schlüssel geändert: Bestand still übernehmen
+    # erster Lauf, Schlüssel geändert oder erste komplette Suche: Bestand still übernehmen (die komplette Suche findet
+    # viele ältere Angebote, die das Radar nie gesehen hat; Probelauf 09.10.2026: 568 "neue")
+    first = state is None or (todo["suche"] == "voll" and not st.get("voll"))
     state = state or {"treffer": {}, "groessen": {}, "gepusht": {}, "beendet": {}}
     hits, sizes = state["treffer"], state["groessen"]
     # In der App gemeldet oder ausgeblendet ("id: ebay:<Hash>"): Eintrag löschen, auch neu eingestellt nie wieder
@@ -388,6 +396,8 @@ def run(mode, status_store, matcher, watch, rates, ts, notify, client=None, dry=
                     if todo["suche"] == "voll":
                         complete = False   # mehr als FULL_PAGES Seiten: nicht vollständig gesehen
         st["radar"] = ts
+        if todo["suche"] == "voll" and complete:
+            st["voll"] = ts
 
     # 2) Abgleich: Labels aus dem Titel, Größe aus dem Titel oder dem Merkmal (Einzelabruf, gemerkt)
     lookups = SIZE_LOOKUPS.get(mode, 60)

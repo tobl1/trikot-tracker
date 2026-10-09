@@ -522,8 +522,10 @@ per GitHub-Schlüssel nur auf dem Handy; cron-job.org bleibt. Vinted/Kleinanzeig
    `tests/test_ebay.py`. Nutzer: Standorte EU, UK und Ukraine, Auktionen mit Sofort-Kaufen erlaubt (Kennzeichen), nur XL/XXL.
    Suchen als Oder-Gruppen in `watchlist.yaml` → `ebay.suchen` (Kategorie DE 179288 "Fußball-Trikots", UK 53597 "Football
    Shirts"), Verkäufer ab 10 Bewertungen und 97 %. Größe aus Titel oder Merkmal "Größe/Size" (Einzelabruf, gemerkt).
-   Radar alle 30 Min. im Drop-Run (neueste je Gruppe und Standort, ca. 24 Abrufe), Gesamt-Run komplett (bis 20 Seiten).
-   Treffer älter als 4 Std. werden einzeln bestätigt, beendete gelöscht. Zustand `state/ebay.json` verschlüsselt (Schlüssel
+   Radar alle 30 Min. im Drop-Run (neueste je Gruppe und Standort, ca. 24 Abrufe), Gesamt-Run komplett (bis 20 Seiten),
+   seit 09.10.2026 tagsüber zusätzlich komplett alle 5 Std. (`EBAY_FULL_H`, ca. 500 Abrufe), weil das alle Treffer auf
+   einmal bestätigt (Probelauf: 654 Treffer, einzeln wäre fast das Tageslimit weg). Erste komplette Suche übernimmt still
+   (`status.json` → `ebay.voll` fehlt). Einzelbestätigung nur noch nach 5,5 Std. ohne Bestätigung, beendete gelöscht. Zustand `state/ebay.json` verschlüsselt (Schlüssel
    aus `EBAY_CLIENT_SECRET`, neuer Secret = Neustart mit stiller Übernahme), App-Daten `ebay.json` je Gerät verschlüsselt
    (Geräteschlüssel per Issue Label `ebay`, `status.json` → `ebay.geraete`), Dashboard-Workflow kopiert sie mit. Die App
    zeigt nur Treffer, die vor höchstens 6 Std. bestätigt wurden. Pushes: Thiago/Sondertrikots einzeln mit eBay-Link, Rest
