@@ -1,9 +1,10 @@
 # Fehler-Log
 
-Probleme der letzten 30 Tage, zusammengefasst. Stand 10.10. 18:20 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
+Probleme der letzten 30 Tage, zusammengefasst. Stand 10.10. 18:38 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
 
 | zuletzt | seit | Anzahl | Quelle | Meldung | Runs |
 |---|---|---|---|---|---|
+| 10.10. 18:38 | 10.10. 18:38 | 1 | The Kitman 97 | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
 | 10.10. 06:35 | 05.10. 06:46 | 6 | Football Legends Kits | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | full |
 | 09.10. 23:50 | 09.10. 18:38 | 22 | eBay | Tageslimit von 4500 Abrufen erreicht, Pause bis morgen | drop |
 | 09.10. 11:08 | 09.10. 11:08 | 1 | Het Shirthuis | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |

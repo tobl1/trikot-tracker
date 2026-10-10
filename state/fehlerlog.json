@@ -373,6 +373,16 @@
   ],
   "quelle": "The Kit Dealer"
  },
+ "The Kitman 97|geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop": {
+  "anzahl": 1,
+  "erst": "2026-10-10T16:38:01.864284+00:00",
+  "letzt": "2026-10-10T16:38:01.864284+00:00",
+  "meldung": "geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop",
+  "modi": [
+   "drop"
+  ],
+  "quelle": "The Kitman 97"
+ },
  "The Soccer Archive|unvollständig, 10x gedrosselt (HTTP 429)": {
   "anzahl": 1,
   "erst": "2026-10-04T19:11:42.249103+00:00",
