@@ -1,0 +1,5661 @@
+{
+ "alarme": {},
+ "counts": {
+  "089 Kits": 233,
+  "1Klopp Shop": 207,
+  "3kots": 553,
+  "Arsij Store": 2928,
+  "Back to the Football": 4403,
+  "Belgian Football Classics": 2531,
+  "Bulishirts": 861,
+  "Buy Sell Football Shirts": 1388,
+  "Calcio Vintage": 336,
+  "Casual Football Shirts": 16793,
+  "Classic Football Shirts": 2096,
+  "Classic Pitchwear": 138,
+  "Classic-Shirts": 1510,
+  "Classic11": 5705,
+  "Cult Football": 927,
+  "Cult Kits": 21497,
+  "Din Fodboldtrøje": 277,
+  "Es de Época": 528,
+  "Euromex Sports": 3548,
+  "FTBL HVN": 764,
+  "FindYourJersey": 9772,
+  "First 11 Shirts": 6584,
+  "First Class Football Shirts": 196,
+  "First Street": 897,
+  "Fodbold Shoppen": 640,
+  "Football & Vintage Amsterdam": 667,
+  "Football Finds": 214,
+  "Football Finery": 6445,
+  "Football Second Hand": 1429,
+  "Football Shirt Collective": 3723,
+  "Football Shirt Kingdom": 6171,
+  "Football Shirt Union": 66,
+  "Football Thrift Shop": 1785,
+  "Football Trikots Berlin": 540,
+  "FootballShirts.com": 485,
+  "Forever Soccer Jerseys": 1590,
+  "Full Time Fits": 688,
+  "Futmaniacos": 334,
+  "Galactic Soccer Kits": 145,
+  "Golaço Kits": 4236,
+  "Granny's Football Store": 1173,
+  "Green Sport Vintage": 1556,
+  "Het Shirthuis": 232,
+  "Iconic Jersey": 795,
+  "Infinity Football Shirts": 160,
+  "Jersely": 2600,
+  "Jerseys Hermanos": 79,
+  "Kick It Vintage": 358,
+  "Kick and Rush": 1368,
+  "Kickoff Vintage": 2782,
+  "Kit Collector": 1246,
+  "Kit Launch": 662,
+  "La Surface": 172,
+  "Le 7 Sorelle": 12337,
+  "Legacy Football Shirts": 795,
+  "Legit Football Shirts": 163,
+  "Lineup Vintage": 2174,
+  "Lockerhaus": 189,
+  "Maglie Calcio Vintage": 6466,
+  "Modeziege": 182,
+  "Nanos Football Jerseys": 608,
+  "Nostalgic Football Shirts": 1260,
+  "Offside Boys": 1262,
+  "Oh Calcio": 221,
+  "One More Time": 189,
+  "Original 11vs11": 1356,
+  "Original Football Shop": 132,
+  "Originaltrikot": 366,
+  "Pardon My Kicks": 901,
+  "Philly Soccer Jerseys": 198,
+  "Pure Football Shirts": 1485,
+  "RB-Jerseys": 608,
+  "Rare and Retro": 9036,
+  "ReShirt": 8,
+  "Real Vintage Football": 1941,
+  "RetrOriginalFootball": 891,
+  "Retro Football Shirts": 313,
+  "Retro Screamers": 810,
+  "Retroshirts CH": 8786,
+  "Retrotrøjer": 606,
+  "SG Vintage Jerseys": 117,
+  "STA Jerseys": 619,
+  "Saturdays Football": 25000,
+  "Secondhalf": 409,
+  "Sense of Goal": 384,
+  "Shorty Football Shirts": 469,
+  "Special Football Shirts": 82,
+  "Squadra Football": 178,
+  "Sunday Football Shirts": 1810,
+  "Swiat Koszulek Pilkarskich": 131,
+  "TSPN Calcio": 1336,
+  "That Vintage Football Shirt": 176,
+  "The 12th Man Retro": 1270,
+  "The Football Boutique": 635,
+  "The Football Idiots": 373,
+  "The Football Market": 12252,
+  "The Football Room": 857,
+  "The Football Temple": 2248,
+  "The Footballshirt Vault": 81,
+  "The Kit Dealer": 702,
+  "The Kitman 97": 1420,
+  "The Shirt Collectors": 833,
+  "The Soccer Archive": 4101,
+  "The Third Kit": 1294,
+  "Throwback Jerseys NZ": 107,
+  "Tiffozi Futbol": 656,
+  "To The Jersey": 6399,
+  "Top Vintage Football Shirts": 420,
+  "Topbinz": 9548,
+  "TrikotTrader": 561,
+  "Trikotcult": 238,
+  "Trikotparadies": 3631,
+  "Trikotstoff": 1084,
+  "Vice Football Store": 616,
+  "Vintage Authentic Retro": 175,
+  "Vintage Football Area": 25000,
+  "Vintage Football FR": 222,
+  "Vintage Football Jerseys": 572,
+  "Vintage Football Shirts": 25000,
+  "Vintage Historic Sports": 1029,
+  "Vintage Kit Co": 101,
+  "Vintage Sports Clothing": 2281,
+  "Vintagescore": 994,
+  "Wave Memorabilia": 41,
+  "Your Vintage Football Kit": 277
+ },
+ "currencies": {
+  "https://1kloppshop.com": "EUR",
+  "https://belgianfootballclassics.com": "EUR",
+  "https://buysellfootballshirts.co.uk": "EUR",
+  "https://calciovintage.com": "EUR",
+  "https://casualfootballshirts.co.uk": "GBP",
+  "https://classic11.com": "EUR",
+  "https://classicpitchwear.com": "EUR",
+  "https://cultfootball.co.uk": "EUR",
+  "https://dinfodboldtroje.com": "DKK",
+  "https://esdeepoca.com": "MXN",
+  "https://euromexsports.com": "USD",
+  "https://first11shirts.com": "EUR",
+  "https://firststreet.store": "EUR",
+  "https://footballfinds.co.uk": "EUR",
+  "https://footballfinery.co.uk": "EUR",
+  "https://footballshirtcollective.com": "EUR",
+  "https://footballshirtkingdom.com": "EUR",
+  "https://footballshirts.com": "EUR",
+  "https://footballshirtunion.com": "EUR",
+  "https://footballtrikotsberlin.com": "EUR",
+  "https://foreversoccerjerseys.com": "USD",
+  "https://fshoppen.dk": "EUR",
+  "https://ftblhvn.com": "EUR",
+  "https://fulltimefits.com": "EUR",
+  "https://futmaniacos.com": "EUR",
+  "https://golacokits.com": "EUR",
+  "https://grannysfootballstore.com": "GBP",
+  "https://greensportvintage.com": "EUR",
+  "https://hetshirthuis.com": "EUR",
+  "https://houseoffootballshirts.com": "EUR",
+  "https://iconicjersey.com": "AUD",
+  "https://infinityfootballshirts.com": "EUR",
+  "https://jersely.com": "EUR",
+  "https://jerseyshermanos.com": "EUR",
+  "https://kickitvintage.de": "EUR",
+  "https://kickoffvintage.com": "EUR",
+  "https://kitcollector.club": "EUR",
+  "https://kitlaunchfc.com": "EUR",
+  "https://lasurface.shop": "EUR",
+  "https://le7sorelle.it": "EUR",
+  "https://legacyfootballshirts.com": "EUR",
+  "https://lockerhaus.store": "IDR",
+  "https://modeziege.net": "EUR",
+  "https://nanosfootballjerseys.com": "EUR",
+  "https://nostalgicfootballshirts.com": "EUR",
+  "https://offsideboys.com": "EUR",
+  "https://ohcalcio.com": "EUR",
+  "https://onemoretimeshop.it": "EUR",
+  "https://originalfootball.shop": "EUR",
+  "https://pardonmykicks.se": "EUR",
+  "https://phillysoccerjerseys.com": "EUR",
+  "https://purefootballshirts.com": "EUR",
+  "https://realvintagefootball.com": "EUR",
+  "https://retrofootballshirts.com": "EUR",
+  "https://retroriginalfootball.com": "EUR",
+  "https://retroscreamers.com": "EUR",
+  "https://retroshirts.ch": "CHF",
+  "https://saturdaysfootball.com": "USD",
+  "https://secondhalfstore.com": "EUR",
+  "https://sg-vintage-jerseys.de": "EUR",
+  "https://shortyfootballshirts.com": "EUR",
+  "https://specialfootballshirts.com": "EUR",
+  "https://squadrafootball.com": "EUR",
+  "https://stajerseys.com": "USD",
+  "https://sundayfootballshirts.com": "MYR",
+  "https://thatvintagefootballshirt.com": "EUR",
+  "https://the12thmanretro.com": "GBP",
+  "https://thefootballmarket.com": "EUR",
+  "https://thefootballroom-mty.com": "EUR",
+  "https://thefootballshirtvault.com": "EUR",
+  "https://thefootballtemple.com": "EUR",
+  "https://thekitman97.com": "EUR",
+  "https://thesoccerarchive.com": "EUR",
+  "https://tiffozifutbol.com": "EUR",
+  "https://tothejersey.com": "EUR",
+  "https://trikotparadies.shop": "EUR",
+  "https://trikotstoff.de": "EUR",
+  "https://tspncalcio.com": "EUR",
+  "https://vicefootballstore.com": "EUR",
+  "https://vintage-football-jerseys.co.uk": "GBP",
+  "https://vintageauthenticretro.com": "EUR",
+  "https://vintagehistoricsports.fr": "EUR",
+  "https://vintagekitco.com": "GBP",
+  "https://vintagescore.de": "EUR",
+  "https://vintagesportsclothing.com": "EUR",
+  "https://www.cultkits.com": "EUR",
+  "https://www.firstclassfootballshirts.com": "EUR",
+  "https://www.senseofgoal.com": "EUR",
+  "https://www.thefootballidiots.com": "EUR",
+  "https://www.thekitdealer.com": "EUR",
+  "https://www.theshirtcollectors.co.uk": "GBP",
+  "https://www.trikotcult.de": "EUR",
+  "https://www.vintagefootballarea.com": "EUR",
+  "https://www.vintagefootballshirts.com": "EUR",
+  "https://xn--retrotrjer-6cb.dk": "DKK",
+  "https://yourvintagefootballkit.com": "EUR"
+ },
+ "drop_checks": {
+  "089 Kits": "2026-10-04T12:56:56.150677+00:00",
+  "1Klopp Shop": "2026-10-04T12:56:56.150677+00:00",
+  "3kots": "2026-10-04T12:56:56.150677+00:00",
+  "Arsij Store": "2026-10-04T12:56:56.150677+00:00",
+  "Back to the Football": "2026-10-04T12:56:56.150677+00:00",
+  "Belgian Football Classics": "2026-10-09T10:08:03.336918+00:00",
+  "Bulishirts": "2026-10-04T12:56:56.150677+00:00",
+  "Buy Sell Football Shirts": "2026-10-04T12:56:56.150677+00:00",
+  "Calcio Vintage": "2026-10-04T12:56:56.150677+00:00",
+  "Casual Football Shirts": "2026-10-04T12:56:56.150677+00:00",
+  "Classic Pitchwear": "2026-10-04T12:56:56.150677+00:00",
+  "Classic11": "2026-10-04T12:56:56.150677+00:00",
+  "Cult Football": "2026-10-04T12:56:56.150677+00:00",
+  "Cult Kits": "2026-10-09T19:38:07.247057+00:00",
+  "Din Fodboldtrøje": "2026-10-04T12:56:56.150677+00:00",
+  "Es de Época": "2026-10-04T12:56:56.150677+00:00",
+  "Euromex Sports": "2026-10-04T12:56:56.150677+00:00",
+  "FTBL HVN": "2026-10-04T12:56:56.150677+00:00",
+  "First 11 Shirts": "2026-10-09T19:38:07.247057+00:00",
+  "First Class Football Shirts": "2026-10-04T12:56:56.150677+00:00",
+  "First Street": "2026-10-08T11:38:44.131891+00:00",
+  "Fodbold Shoppen": "2026-10-09T16:38:04.248006+00:00",
+  "Football Finds": "2026-10-04T12:56:56.150677+00:00",
+  "Football Finery": "2026-10-09T11:50:55.503930+00:00",
+  "Football Legends Kits": "2026-10-04T12:56:56.150677+00:00",
+  "Football Second Hand": "2026-10-04T12:56:56.150677+00:00",
+  "Football Shirt Collective": "2026-10-04T12:56:56.150677+00:00",
+  "Football Shirt Kingdom": "2026-10-04T12:56:56.150677+00:00",
+  "Football Shirt Union": "2026-10-04T12:56:56.150677+00:00",
+  "Football Thrift Shop": "2026-10-04T12:56:56.150677+00:00",
+  "Football Trikots Berlin": "2026-10-04T12:56:56.150677+00:00",
+  "FootballShirts.com": "2026-10-04T12:56:56.150677+00:00",
+  "Forever Soccer Jerseys": "2026-10-04T12:56:56.150677+00:00",
+  "Full Time Fits": "2026-10-04T13:35:43.126419+00:00",
+  "Futmaniacos": "2026-10-04T12:56:56.150677+00:00",
+  "Galactic Soccer Kits": "2026-10-04T12:56:56.150677+00:00",
+  "Golaço Kits": "2026-10-04T12:56:56.150677+00:00",
+  "Granny's Football Store": "2026-10-04T12:56:56.150677+00:00",
+  "Green Sport Vintage": "2026-10-04T12:56:56.150677+00:00",
+  "Iconic Jersey": "2026-10-04T12:56:56.150677+00:00",
+  "Infinity Football Shirts": "2026-10-04T12:56:56.150677+00:00",
+  "Jersely": "2026-10-04T20:35:40.237550+00:00",
+  "Jerseys Hermanos": "2026-10-04T12:56:56.150677+00:00",
+  "Kick It Vintage": "2026-10-04T12:56:56.150677+00:00",
+  "Kick and Rush": "2026-10-04T12:56:56.150677+00:00",
+  "Kickoff Vintage": "2026-10-08T17:50:47.407279+00:00",
+  "Kit Collector": "2026-10-04T12:56:56.150677+00:00",
+  "Kit Launch": "2026-10-04T12:56:56.150677+00:00",
+  "La Surface": "2026-10-04T12:56:56.150677+00:00",
+  "Le 7 Sorelle": "2026-10-04T12:56:56.150677+00:00",
+  "Legacy Football Shirts": "2026-10-04T12:56:56.150677+00:00",
+  "Lineup Vintage": "2026-10-04T12:56:56.150677+00:00",
+  "Lockerhaus": "2026-10-04T12:56:56.150677+00:00",
+  "Maglie Calcio Vintage": "2026-10-04T12:56:56.150677+00:00",
+  "Modeziege": "2026-10-04T12:56:56.150677+00:00",
+  "Nanos Football Jerseys": "2026-10-05T19:57:26.554524+00:00",
+  "Nostalgic Football Shirts": "2026-10-04T12:56:56.150677+00:00",
+  "Offside Boys": "2026-10-06T18:53:44.325127+00:00",
+  "Oh Calcio": "2026-10-04T12:56:56.150677+00:00",
+  "One More Time": "2026-10-04T12:56:56.150677+00:00",
+  "Original 11vs11": "2026-10-04T12:56:56.150677+00:00",
+  "Original Football Shop": "2026-10-04T12:56:56.150677+00:00",
+  "Pardon My Kicks": "2026-10-04T12:56:56.150677+00:00",
+  "Philly Soccer Jerseys": "2026-10-04T12:56:56.150677+00:00",
+  "RB-Jerseys": "2026-10-04T12:56:56.150677+00:00",
+  "Rare and Retro": "2026-10-04T12:56:56.150677+00:00",
+  "Real Vintage Football": "2026-10-04T12:56:56.150677+00:00",
+  "RetrOriginalFootball": "2026-10-04T12:56:56.150677+00:00",
+  "Retro Football Shirts": "2026-10-04T12:56:56.150677+00:00",
+  "Retro Screamers": "2026-10-04T12:56:56.150677+00:00",
+  "Retroshirts CH": "2026-10-09T13:20:53.385762+00:00",
+  "Retrotrøjer": "2026-10-04T12:56:56.150677+00:00",
+  "SG Vintage Jerseys": "2026-10-04T12:56:56.150677+00:00",
+  "STA Jerseys": "2026-10-04T12:56:56.150677+00:00",
+  "Saturdays Football": "2026-10-04T12:56:56.150677+00:00",
+  "Sense of Goal": "2026-10-04T12:56:56.150677+00:00",
+  "Special Football Shirts": "2026-10-04T12:56:56.150677+00:00",
+  "Squadra Football": "2026-10-04T12:56:56.150677+00:00",
+  "Sunday Football Shirts": "2026-10-04T12:56:56.150677+00:00",
+  "TSPN Calcio": "2026-10-04T12:56:56.150677+00:00",
+  "That Vintage Football Shirt": "2026-10-04T12:56:56.150677+00:00",
+  "The 12th Man Retro": "2026-10-04T12:56:56.150677+00:00",
+  "The Football Boutique": "2026-10-04T12:56:56.150677+00:00",
+  "The Football Room": "2026-10-04T12:56:56.150677+00:00",
+  "The Football Temple": "2026-10-04T12:56:56.150677+00:00",
+  "The Footballshirt Vault": "2026-10-04T12:56:56.150677+00:00",
+  "The Kit Dealer": "2026-10-04T12:56:56.150677+00:00",
+  "The Kitman 97": "2026-10-04T12:56:56.150677+00:00",
+  "The Soccer Archive": "2026-10-04T12:56:56.150677+00:00",
+  "The Third Kit": "2026-10-04T12:56:56.150677+00:00",
+  "Throwback Jerseys NZ": "2026-10-04T12:56:56.150677+00:00",
+  "Tiffozi Futbol": "2026-10-04T12:56:56.150677+00:00",
+  "To The Jersey": "2026-10-09T15:20:44.247779+00:00",
+  "Topbinz": "2026-10-09T19:38:07.247057+00:00",
+  "Trikotparadies": "2026-10-09T19:50:44.223334+00:00",
+  "Trikotstoff": "2026-10-09T14:20:49.778612+00:00",
+  "Vice Football Store": "2026-10-04T12:56:56.150677+00:00",
+  "Vintage Authentic Retro": "2026-10-04T12:56:56.150677+00:00",
+  "Vintage Football Area": "2026-10-04T12:56:56.150677+00:00",
+  "Vintage Football FR": "2026-10-04T12:56:56.150677+00:00",
+  "Vintage Football Jerseys": "2026-10-04T12:56:56.150677+00:00",
+  "Vintage Football Shirts": "2026-10-04T12:56:56.150677+00:00",
+  "Vintage Historic Sports": "2026-10-04T12:56:56.150677+00:00",
+  "Vintage Sports Clothing": "2026-10-04T12:56:56.150677+00:00"
+ },
+ "ebay": {
+  "abrufe": {
+   "2026-10-08": 877,
+   "2026-10-09": 5119
+  },
+  "bestaetigt": {
+   "01b91ccae2a46da8": "2026-10-10T04:35:20.370889+00:00",
+   "042fc4849e7b8326": "2026-10-10T04:35:20.370889+00:00",
+   "0449f78d0aeeffa8": "2026-10-10T04:35:20.370889+00:00",
+   "04fe6f7da686ac66": "2026-10-10T04:35:20.370889+00:00",
+   "05223e5c22b7381b": "2026-10-10T04:35:20.370889+00:00",
+   "054b26a61ef57b29": "2026-10-10T04:35:20.370889+00:00",
+   "06564feaef76d277": "2026-10-10T04:35:20.370889+00:00",
+   "0690254e75e7e28b": "2026-10-10T04:35:20.370889+00:00",
+   "06bf533579360a9c": "2026-10-10T04:35:20.370889+00:00",
+   "0742f279727e4da9": "2026-10-10T04:35:20.370889+00:00",
+   "0769053211a1b0f9": "2026-10-10T04:35:20.370889+00:00",
+   "081076ff20ea5634": "2026-10-10T04:35:20.370889+00:00",
+   "09df038463151740": "2026-10-10T04:35:20.370889+00:00",
+   "0a3646da86f3ce64": "2026-10-10T04:35:20.370889+00:00",
+   "0a7de5c14aaecbf2": "2026-10-10T04:35:20.370889+00:00",
+   "0b21c187e3a25e99": "2026-10-10T04:35:20.370889+00:00",
+   "0ba385b5cede2e03": "2026-10-10T04:35:20.370889+00:00",
+   "0cbbeb8e943823a6": "2026-10-10T04:35:20.370889+00:00",
+   "0cd9b11d410060f6": "2026-10-10T04:35:20.370889+00:00",
+   "0cddc46067d13ddc": "2026-10-10T04:35:20.370889+00:00",
+   "0d3355492af00b7c": "2026-10-10T04:35:20.370889+00:00",
+   "0f5c0c9ce3b08fa5": "2026-10-10T04:35:20.370889+00:00",
+   "11b3fbaa745816c3": "2026-10-10T04:35:20.370889+00:00",
+   "1369be0bc40fb08c": "2026-10-10T04:35:20.370889+00:00",
+   "14a33f5d3e15869d": "2026-10-10T04:35:20.370889+00:00",
+   "14cb7c044fe7606a": "2026-10-10T04:35:20.370889+00:00",
+   "15a0e6d38c462ebf": "2026-10-10T04:35:20.370889+00:00",
+   "163ff51c011cfaee": "2026-10-10T04:35:20.370889+00:00",
+   "164c2cf21f068c55": "2026-10-10T04:35:20.370889+00:00",
+   "16aa7c81ccec71bc": "2026-10-10T04:35:20.370889+00:00",
+   "16f764f875809028": "2026-10-10T04:35:20.370889+00:00",
+   "18cbaae6a3c782c7": "2026-10-10T04:35:20.370889+00:00",
+   "18d358be6427555f": "2026-10-10T04:35:20.370889+00:00",
+   "195fe785813e7cde": "2026-10-10T04:35:20.370889+00:00",
+   "19e16b5676028b30": "2026-10-10T04:35:20.370889+00:00",
+   "1a6134daef251d43": "2026-10-10T04:35:20.370889+00:00",
+   "1aa05dc8400aa618": "2026-10-10T04:35:20.370889+00:00",
+   "1ad72077091316ba": "2026-10-10T04:35:20.370889+00:00",
+   "1b0cf8233a0e1cbf": "2026-10-10T04:35:20.370889+00:00",
+   "1c5abfb33bd33165": "2026-10-10T04:35:20.370889+00:00",
+   "1caf718296524e72": "2026-10-10T04:35:20.370889+00:00",
+   "1cdeeadc3ba481ea": "2026-10-10T04:35:20.370889+00:00",
+   "1ce4ed4faa11fbeb": "2026-10-10T04:35:20.370889+00:00",
+   "1d894eae002a5a96": "2026-10-10T04:35:20.370889+00:00",
+   "1dbff9cff7a06c31": "2026-10-10T04:35:20.370889+00:00",
+   "1e2ebb95ebfc248d": "2026-10-10T04:35:20.370889+00:00",
+   "1ec3339ef79a31b7": "2026-10-10T04:35:20.370889+00:00",
+   "1eee6ce018062c4b": "2026-10-10T04:35:20.370889+00:00",
+   "1fb379a485d86f60": "2026-10-10T04:35:20.370889+00:00",
+   "22a98683e7382834": "2026-10-10T04:35:20.370889+00:00",
+   "232f4359e9d2a239": "2026-10-10T04:35:20.370889+00:00",
+   "238a13d4767e8acc": "2026-10-10T04:35:20.370889+00:00",
+   "23c667f0671971c0": "2026-10-10T04:35:20.370889+00:00",
+   "24005618b6eebe0b": "2026-10-10T04:35:20.370889+00:00",
+   "242c4d2a320ff22e": "2026-10-10T04:35:20.370889+00:00",
+   "24a4cf8706e46393": "2026-10-10T04:35:20.370889+00:00",
+   "2524c4d88ca24570": "2026-10-10T04:35:20.370889+00:00",
+   "25db04f695b363d6": "2026-10-10T04:35:20.370889+00:00",
+   "26b0e79f86114c26": "2026-10-10T04:35:20.370889+00:00",
+   "27557d92b5199018": "2026-10-10T04:35:20.370889+00:00",
+   "27fe4dd791caffaa": "2026-10-10T04:35:20.370889+00:00",
+   "287b630621476ec7": "2026-10-10T04:35:20.370889+00:00",
+   "288de73804784324": "2026-10-10T04:35:20.370889+00:00",
+   "291bd4e991997c0d": "2026-10-10T04:35:20.370889+00:00",
+   "2998edac9776bd04": "2026-10-10T04:35:20.370889+00:00",
+   "29aaa5c34b2dc104": "2026-10-10T04:35:20.370889+00:00",
+   "2b58271ebf5226ed": "2026-10-10T04:35:20.370889+00:00",
+   "2c5f2f9974fd955d": "2026-10-10T04:35:20.370889+00:00",
+   "2e5fd8cd8aa6df51": "2026-10-10T04:35:20.370889+00:00",
+   "2ee8f4002796d142": "2026-10-10T04:35:20.370889+00:00",
+   "2f1ee1ffe198e435": "2026-10-10T04:35:20.370889+00:00",
+   "2fdb08dc6479f13c": "2026-10-10T04:35:20.370889+00:00",
+   "301e801e9bbc8894": "2026-10-10T04:35:20.370889+00:00",
+   "3028d26faba6075a": "2026-10-10T04:35:20.370889+00:00",
+   "30618d5d7629a9ad": "2026-10-10T04:35:20.370889+00:00",
+   "30f3012c378d3375": "2026-10-10T04:35:20.370889+00:00",
+   "30f9c246c2fdd4e6": "2026-10-10T04:35:20.370889+00:00",
+   "31153f9aae1388b5": "2026-10-10T04:35:20.370889+00:00",
+   "3164ffe4eccb8180": "2026-10-10T04:35:20.370889+00:00",
+   "32dc35ae4c57e144": "2026-10-10T04:35:20.370889+00:00",
+   "331c4f1b112204b9": "2026-10-10T04:35:20.370889+00:00",
+   "33421148306869e6": "2026-10-10T04:35:20.370889+00:00",
+   "33de19ac94a72f2c": "2026-10-10T04:35:20.370889+00:00",
+   "3484c6c6f3e91b15": "2026-10-10T04:35:20.370889+00:00",
+   "351c3df6059140e3": "2026-10-10T04:35:20.370889+00:00",
+   "3574c8317dc16689": "2026-10-10T04:35:20.370889+00:00",
+   "35c8b84be72cfb79": "2026-10-10T04:35:20.370889+00:00",
+   "36afa5691ffaf6e4": "2026-10-10T04:35:20.370889+00:00",
+   "36e6043ebc6cd9a0": "2026-10-10T04:35:20.370889+00:00",
+   "388c483bb2204f1a": "2026-10-10T04:35:20.370889+00:00",
+   "38c5b923bfc50473": "2026-10-10T04:35:20.370889+00:00",
+   "38e266ca6129d4c8": "2026-10-10T04:35:20.370889+00:00",
+   "3972c59c50b9241d": "2026-10-10T04:35:20.370889+00:00",
+   "39f2195c95e840be": "2026-10-10T04:35:20.370889+00:00",
+   "3b80e8758bdc58be": "2026-10-10T04:35:20.370889+00:00",
+   "3c438504dbc23907": "2026-10-10T04:35:20.370889+00:00",
+   "3deeacce0b719367": "2026-10-10T04:35:20.370889+00:00",
+   "3f0a76d061b12408": "2026-10-10T04:35:20.370889+00:00",
+   "3f28eb22d9756082": "2026-10-10T04:35:20.370889+00:00",
+   "402f5a1eea2c4e5a": "2026-10-10T04:35:20.370889+00:00",
+   "404331ef36cd682a": "2026-10-10T04:35:20.370889+00:00",
+   "41a7e57101eb2a38": "2026-10-10T04:35:20.370889+00:00",
+   "42642516fc5a950f": "2026-10-10T04:35:20.370889+00:00",
+   "42c1ea903c10f4f3": "2026-10-10T04:35:20.370889+00:00",
+   "4391c8dca8accf1f": "2026-10-10T04:35:20.370889+00:00",
+   "43f0814ed6b46e6d": "2026-10-10T04:35:20.370889+00:00",
+   "44d886ad2f1a4827": "2026-10-10T04:35:20.370889+00:00",
+   "45710b19c4a2ac88": "2026-10-10T04:35:20.370889+00:00",
+   "4644af363406eecf": "2026-10-10T04:35:20.370889+00:00",
+   "466126c00152f3bf": "2026-10-10T04:35:20.370889+00:00",
+   "4767224bf825bf33": "2026-10-10T04:35:20.370889+00:00",
+   "48116ffa8dc4e3b2": "2026-10-10T04:35:20.370889+00:00",
+   "4851e7ab85a7b21e": "2026-10-10T04:35:20.370889+00:00",
+   "49d9f6b6385103ba": "2026-10-10T04:35:20.370889+00:00",
+   "49e90f7298351fd1": "2026-10-10T04:35:20.370889+00:00",
+   "4a05be9ede4b6db4": "2026-10-10T04:35:20.370889+00:00",
+   "4a199b42a216c913": "2026-10-10T04:35:20.370889+00:00",
+   "4ac671e83ee6387a": "2026-10-10T04:35:20.370889+00:00",
+   "4c6ddb26d8293e95": "2026-10-10T04:35:20.370889+00:00",
+   "4ca32bb65a82e882": "2026-10-10T04:35:20.370889+00:00",
+   "4e2359fed0e31ff2": "2026-10-10T04:35:20.370889+00:00",
+   "4e3bcdb238b6e706": "2026-10-10T04:35:20.370889+00:00",
+   "4e94c85e87ab59d0": "2026-10-10T04:35:20.370889+00:00",
+   "4eeb181e3828ec11": "2026-10-10T04:35:20.370889+00:00",
+   "4fa783e281adaf41": "2026-10-10T04:35:20.370889+00:00",
+   "50dae7d51b49fab5": "2026-10-10T04:35:20.370889+00:00",
+   "51795fc725af54e0": "2026-10-10T04:35:20.370889+00:00",
+   "532d914722a51b80": "2026-10-10T04:35:20.370889+00:00",
+   "53576739cf8ae77b": "2026-10-10T04:35:20.370889+00:00",
+   "551937d8160aff62": "2026-10-10T04:35:20.370889+00:00",
+   "5543423f0dec748a": "2026-10-10T04:35:20.370889+00:00",
+   "568948b8450df8cf": "2026-10-10T04:35:20.370889+00:00",
+   "56d4cb00214b64dc": "2026-10-10T04:35:20.370889+00:00",
+   "57ad2eeddd9a38da": "2026-10-10T04:35:20.370889+00:00",
+   "583bf6be05c39418": "2026-10-10T04:35:20.370889+00:00",
+   "5851dc3907d347f1": "2026-10-10T04:35:20.370889+00:00",
+   "59017df86b903292": "2026-10-10T04:35:20.370889+00:00",
+   "5a875fb945c0eadf": "2026-10-10T04:35:20.370889+00:00",
+   "5aec69d0cf7b2e1b": "2026-10-10T04:35:20.370889+00:00",
+   "5b5633c9fa9010d7": "2026-10-10T04:35:20.370889+00:00",
+   "5e74ad120c9a4190": "2026-10-10T04:35:20.370889+00:00",
+   "5eb91e9af09483e3": "2026-10-10T04:35:20.370889+00:00",
+   "603d23396bf16621": "2026-10-10T04:35:20.370889+00:00",
+   "609e0ed6f7f4130e": "2026-10-10T04:35:20.370889+00:00",
+   "625fa26fb54f60ea": "2026-10-10T04:35:20.370889+00:00",
+   "63199293b29aa571": "2026-10-10T04:35:20.370889+00:00",
+   "632000a72295aeda": "2026-10-10T04:35:20.370889+00:00",
+   "637162ee2f8fe4be": "2026-10-10T04:35:20.370889+00:00",
+   "642a5720a933b505": "2026-10-10T04:35:20.370889+00:00",
+   "65b0e64349bcfa1c": "2026-10-10T04:35:20.370889+00:00",
+   "6638c4da3f7f9b0b": "2026-10-10T04:35:20.370889+00:00",
+   "6644b9ef567afbb2": "2026-10-10T04:35:20.370889+00:00",
+   "6681951e8104a043": "2026-10-10T04:35:20.370889+00:00",
+   "674088a3442078ea": "2026-10-10T04:35:20.370889+00:00",
+   "67ee3dd21b10796a": "2026-10-10T04:35:20.370889+00:00",
+   "682294c35d38f739": "2026-10-10T04:35:20.370889+00:00",
+   "68cdd8767c3ba28b": "2026-10-10T04:35:20.370889+00:00",
+   "68f92de9b14fd102": "2026-10-10T04:35:20.370889+00:00",
+   "6b6a16b01684d74e": "2026-10-10T04:35:20.370889+00:00",
+   "6c77cecbb5d3d508": "2026-10-10T04:35:20.370889+00:00",
+   "6ee72d3a4dd3da4a": "2026-10-10T04:35:20.370889+00:00",
+   "6f59db7f62bf1e70": "2026-10-10T04:35:20.370889+00:00",
+   "6f70bc480f763150": "2026-10-10T04:35:20.370889+00:00",
+   "6fc006ae2415fdad": "2026-10-10T04:35:20.370889+00:00",
+   "6fc03108d1e48e6d": "2026-10-10T04:35:20.370889+00:00",
+   "70bf40835210cde8": "2026-10-10T04:35:20.370889+00:00",
+   "710705ddcd2f13fc": "2026-10-10T04:35:20.370889+00:00",
+   "711e10f8d4651a1b": "2026-10-10T04:35:20.370889+00:00",
+   "72bfa43e72f22a60": "2026-10-10T04:35:20.370889+00:00",
+   "72c8e895e6273f60": "2026-10-10T04:35:20.370889+00:00",
+   "733ed5bacdab5a8f": "2026-10-10T04:35:20.370889+00:00",
+   "73bffe9b085d222f": "2026-10-10T04:35:20.370889+00:00",
+   "73e72e94ea50e397": "2026-10-10T04:35:20.370889+00:00",
+   "75048ee71913722d": "2026-10-10T04:35:20.370889+00:00",
+   "76449cb6199e067f": "2026-10-10T04:35:20.370889+00:00",
+   "76a1a5e8b99ab5db": "2026-10-10T04:35:20.370889+00:00",
+   "78373abcdddaab28": "2026-10-10T04:35:20.370889+00:00",
+   "78a9d49614aa1772": "2026-10-10T04:35:20.370889+00:00",
+   "78bcf0fb4b35a428": "2026-10-10T04:35:20.370889+00:00",
+   "78e767eb3dac82e9": "2026-10-10T04:35:20.370889+00:00",
+   "7912d3ee52feb891": "2026-10-10T04:35:20.370889+00:00",
+   "7b05b4cafab83234": "2026-10-10T04:35:20.370889+00:00",
+   "7b09b6b2e8c8c8e1": "2026-10-10T04:35:20.370889+00:00",
+   "7f4e9bf44d3fdaf8": "2026-10-10T04:35:20.370889+00:00",
+   "7f9386bf614ea543": "2026-10-10T04:35:20.370889+00:00",
+   "7ffd531b4af12ac3": "2026-10-10T04:35:20.370889+00:00",
+   "8054081d9777e48d": "2026-10-10T04:35:20.370889+00:00",
+   "809d9b1df299921b": "2026-10-10T04:35:20.370889+00:00",
+   "80c346e21a284b2b": "2026-10-10T04:35:20.370889+00:00",
+   "82f89a2ba612adc2": "2026-10-10T04:35:20.370889+00:00",
+   "832616365d366ffd": "2026-10-10T04:35:20.370889+00:00",
+   "840dba36b0af6106": "2026-10-10T04:35:20.370889+00:00",
+   "8565a407562a0ebb": "2026-10-10T04:35:20.370889+00:00",
+   "88566f456e18a70a": "2026-10-10T04:35:20.370889+00:00",
+   "89ec643fb48bc6bf": "2026-10-10T04:35:20.370889+00:00",
+   "8b619147419770db": "2026-10-10T04:35:20.370889+00:00",
+   "8c760c21c22ef2e9": "2026-10-10T04:35:20.370889+00:00",
+   "8eb047798b6173c7": "2026-10-10T04:35:20.370889+00:00",
+   "8ecf99de58d0b917": "2026-10-10T04:35:20.370889+00:00",
+   "91135f41753f21da": "2026-10-10T04:35:20.370889+00:00",
+   "918128e968f5aaa2": "2026-10-10T04:35:20.370889+00:00",
+   "91c2a038714760f6": "2026-10-10T04:35:20.370889+00:00",
+   "91d99a1e56fa4bc6": "2026-10-10T04:35:20.370889+00:00",
+   "929f05cb230a4c42": "2026-10-10T04:35:20.370889+00:00",
+   "938e05556133b642": "2026-10-10T04:35:20.370889+00:00",
+   "93f4690c1fbe1a75": "2026-10-10T04:35:20.370889+00:00",
+   "961da72fb0e5082f": "2026-10-10T04:35:20.370889+00:00",
+   "96e11005aa869b6e": "2026-10-10T04:35:20.370889+00:00",
+   "977768e1d261ad22": "2026-10-10T04:35:20.370889+00:00",
+   "98f8f5c0c7312e51": "2026-10-10T04:35:20.370889+00:00",
+   "9b219842c0f061fa": "2026-10-10T04:35:20.370889+00:00",
+   "9bcb707c0ca23cd9": "2026-10-10T04:35:20.370889+00:00",
+   "9cf41634c34a537f": "2026-10-10T04:35:20.370889+00:00",
+   "9d4d9d73273a0836": "2026-10-10T04:35:20.370889+00:00",
+   "9d88eb1f8f5239d3": "2026-10-10T04:35:20.370889+00:00",
+   "9de0d5a8ae9fc2d6": "2026-10-10T04:35:20.370889+00:00",
+   "9e142e0ca385deae": "2026-10-10T04:35:20.370889+00:00",
+   "9e3935b43507967a": "2026-10-10T04:35:20.370889+00:00",
+   "9e880efff016c509": "2026-10-10T04:35:20.370889+00:00",
+   "9ec61cf528bf89a9": "2026-10-10T04:35:20.370889+00:00",
+   "a15eaca0f8aca55d": "2026-10-10T04:35:20.370889+00:00",
+   "a1bc426b0a18db04": "2026-10-10T04:35:20.370889+00:00",
+   "a1c1ac2beff22a93": "2026-10-10T04:35:20.370889+00:00",
+   "a27fa69cbfe0b59f": "2026-10-10T04:35:20.370889+00:00",
+   "a2d23f65e88412c9": "2026-10-10T04:35:20.370889+00:00",
+   "a32a58c944d6ae9d": "2026-10-10T04:35:20.370889+00:00",
+   "a62183fdb5d3f945": "2026-10-10T04:35:20.370889+00:00",
+   "a621f51906c9b420": "2026-10-10T04:35:20.370889+00:00",
+   "a66c91ddde9fe6fe": "2026-10-10T04:35:20.370889+00:00",
+   "a6caa7792c1acb74": "2026-10-10T04:35:20.370889+00:00",
+   "a70406f757d350e2": "2026-10-10T04:35:20.370889+00:00",
+   "a75209a551e9c0c6": "2026-10-10T04:35:20.370889+00:00",
+   "a83d499637296aac": "2026-10-10T04:35:20.370889+00:00",
+   "a8e103fa5d761717": "2026-10-10T04:35:20.370889+00:00",
+   "a959f372e99aa5f9": "2026-10-10T04:35:20.370889+00:00",
+   "a9fcc2bef7745875": "2026-10-10T04:35:20.370889+00:00",
+   "ab4fc4f5f2b70c66": "2026-10-10T04:35:20.370889+00:00",
+   "ab8cc04257a369be": "2026-10-10T04:35:20.370889+00:00",
+   "ab957ff51984a6eb": "2026-10-10T04:35:20.370889+00:00",
+   "abd7e1905b867ff5": "2026-10-10T04:35:20.370889+00:00",
+   "aca7ba05977edc12": "2026-10-10T04:35:20.370889+00:00",
+   "b2d7dc953c59f484": "2026-10-10T04:35:20.370889+00:00",
+   "b2e9f32588742a4f": "2026-10-10T04:35:20.370889+00:00",
+   "b3ff4c2012025100": "2026-10-10T04:35:20.370889+00:00",
+   "b6499c834a67f45b": "2026-10-10T04:35:20.370889+00:00",
+   "b6a165efaef7b9f1": "2026-10-10T04:35:20.370889+00:00",
+   "b804652801f42cfb": "2026-10-10T04:35:20.370889+00:00",
+   "bae34fae6781e78c": "2026-10-10T04:35:20.370889+00:00",
+   "bc11ddea44ddd94e": "2026-10-10T04:35:20.370889+00:00",
+   "bd3ea42d949e1afd": "2026-10-10T04:35:20.370889+00:00",
+   "bdb1f5b97879f31b": "2026-10-10T04:35:20.370889+00:00",
+   "be6a5670891d084b": "2026-10-10T04:35:20.370889+00:00",
+   "beba3b9f9e4d819c": "2026-10-10T04:35:20.370889+00:00",
+   "c33bd1950e55a53d": "2026-10-10T04:35:20.370889+00:00",
+   "c3527dcd85032f29": "2026-10-10T04:35:20.370889+00:00",
+   "c3f00d4199a13d87": "2026-10-10T04:35:20.370889+00:00",
+   "c570ae5147aa6da0": "2026-10-10T04:35:20.370889+00:00",
+   "c6ab5b55cf4ef85c": "2026-10-10T04:35:20.370889+00:00",
+   "c7988caa81ec3259": "2026-10-10T04:35:20.370889+00:00",
+   "c88db04d158b4e52": "2026-10-10T04:35:20.370889+00:00",
+   "c8bbc3eb628d5b05": "2026-10-10T04:35:20.370889+00:00",
+   "c9a716cd1432c617": "2026-10-10T04:35:20.370889+00:00",
+   "c9aa823a973e6e68": "2026-10-10T04:35:20.370889+00:00",
+   "cc95f2818b534bab": "2026-10-10T04:35:20.370889+00:00",
+   "cd6d7f2dcd5cfe28": "2026-10-10T04:35:20.370889+00:00",
+   "cde6ecf5dd9b75de": "2026-10-10T04:35:20.370889+00:00",
+   "ce29969d49d66813": "2026-10-10T04:35:20.370889+00:00",
+   "cf2978eae773ec39": "2026-10-10T04:35:20.370889+00:00",
+   "d0115043a36f4e33": "2026-10-10T04:35:20.370889+00:00",
+   "d1e14a7ff8dbbf09": "2026-10-10T04:35:20.370889+00:00",
+   "d34da2817070176c": "2026-10-10T04:35:20.370889+00:00",
+   "d448398989957634": "2026-10-10T04:35:20.370889+00:00",
+   "d448adc3c13d4006": "2026-10-10T04:35:20.370889+00:00",
+   "d477f239ce614e8b": "2026-10-10T04:35:20.370889+00:00",
+   "d48b2c607477bab5": "2026-10-10T04:35:20.370889+00:00",
+   "d57931e5a487821e": "2026-10-10T04:35:20.370889+00:00",
+   "d630d786aba768b4": "2026-10-10T04:35:20.370889+00:00",
+   "d6897f0cd81dc9b5": "2026-10-10T04:35:20.370889+00:00",
+   "d6f5d05f67907939": "2026-10-10T04:35:20.370889+00:00",
+   "d72e9d28738ac506": "2026-10-10T04:35:20.370889+00:00",
+   "d8b0aea7aa3628c2": "2026-10-10T04:35:20.370889+00:00",
+   "d9ea8971fd11c1a8": "2026-10-10T04:35:20.370889+00:00",
+   "d9f6c30b4556ea1c": "2026-10-10T04:35:20.370889+00:00",
+   "dac7cb42af7e947c": "2026-10-10T04:35:20.370889+00:00",
+   "dbfcca0661fac914": "2026-10-10T04:35:20.370889+00:00",
+   "dc2c499860a64a6e": "2026-10-10T04:35:20.370889+00:00",
+   "dd3225df3e0e35e0": "2026-10-10T04:35:20.370889+00:00",
+   "dd711124fd690592": "2026-10-10T04:35:20.370889+00:00",
+   "e11aa526c393ff64": "2026-10-10T04:35:20.370889+00:00",
+   "e1564f2f3bca9c32": "2026-10-10T04:35:20.370889+00:00",
+   "e3ed4724ababc7f6": "2026-10-10T04:35:20.370889+00:00",
+   "e40e82f2f78b0301": "2026-10-10T04:35:20.370889+00:00",
+   "e5264055c3322778": "2026-10-10T04:35:20.370889+00:00",
+   "e58a03ea23a9b62b": "2026-10-10T04:35:20.370889+00:00",
+   "e5a3f634a26b0762": "2026-10-10T04:35:20.370889+00:00",
+   "e64807c87cfbcd20": "2026-10-10T04:35:20.370889+00:00",
+   "e65f20d83e2d2b25": "2026-10-10T04:35:20.370889+00:00",
+   "e7368798e0adaa72": "2026-10-10T04:35:20.370889+00:00",
+   "e7baf7ace6b48e9f": "2026-10-10T04:35:20.370889+00:00",
+   "e9855c1cdcbf2653": "2026-10-10T04:35:20.370889+00:00",
+   "eb05341c8f5e2bc9": "2026-10-10T04:35:20.370889+00:00",
+   "ed853a726cdc9b62": "2026-10-10T04:35:20.370889+00:00",
+   "eda3360f6e2e05cc": "2026-10-10T04:35:20.370889+00:00",
+   "efcca46a918c400d": "2026-10-10T04:35:20.370889+00:00",
+   "eff81a30ac2934ea": "2026-10-10T04:35:20.370889+00:00",
+   "f0d879efff02e8e1": "2026-10-10T04:35:20.370889+00:00",
+   "f104d27e9d718022": "2026-10-10T04:35:20.370889+00:00",
+   "f1cf8ce1c329fa87": "2026-10-10T04:35:20.370889+00:00",
+   "f23bfec9b4fe8edd": "2026-10-10T04:35:20.370889+00:00",
+   "f27b08f66d3d3146": "2026-10-10T04:35:20.370889+00:00",
+   "f2c53d4abb8c58b2": "2026-10-10T04:35:20.370889+00:00",
+   "f48469bd9a7c27b9": "2026-10-10T04:35:20.370889+00:00",
+   "f4a69384b92a0729": "2026-10-10T04:35:20.370889+00:00",
+   "f4c22d725c5263ac": "2026-10-10T04:35:20.370889+00:00",
+   "f5e486b3c23c34d7": "2026-10-10T04:35:20.370889+00:00",
+   "f817468e2ceea4ee": "2026-10-10T04:35:20.370889+00:00",
+   "f829f8613687d387": "2026-10-10T04:35:20.370889+00:00",
+   "f99593230b030a25": "2026-10-10T04:35:20.370889+00:00",
+   "fa81d76575b15009": "2026-10-10T04:35:20.370889+00:00",
+   "fb3c234e72950747": "2026-10-10T04:35:20.370889+00:00",
+   "fbf240671f928452": "2026-10-10T04:35:20.370889+00:00",
+   "fe0102c50efaa036": "2026-10-10T04:35:20.370889+00:00",
+   "fe999598aa2c4ab7": "2026-10-10T04:35:20.370889+00:00"
+  },
+  "geraete": {
+   "635f0dd3260a375b": {
+    "pub": "BLrX9ErTbg6-6ieu0VlP4jMkaflFI6lpaTrx7WICvf9mgglSj1wVwGA6dfCnNEaMYDEu1ak8ngZzTKA2cHiUDnA",
+    "seit": "2026-10-08T14:20:43.895923+00:00"
+   },
+   "7b06a97eb6df8f92": {
+    "pub": "BNRsp6g2yj7OwXgZ6ynECTTQCfhopf-RpOZXZqlYOMZHSJUFyL8kxAMcq1QmzfSiLkJpBYPi7NoBwOS8Q30NR9c",
+    "seit": "2026-10-08T12:50:49.473904+00:00"
+   },
+   "e50aafc2ecad60d3": {
+    "pub": "BDCO9dvEnxXQA6TCSBksq1dasgAkGrEm92QcuZMzO_4zIufhgTTSJZIXGkxzs7TeFA9bSP2U8xTqc528q0LxfGk",
+    "seit": "2026-10-08T13:21:16.212797+00:00"
+   }
+  },
+  "radar": "2026-10-10T04:35:20.370889+00:00",
+  "treffer": 323,
+  "voll": "2026-10-10T04:35:20.370889+00:00"
+ },
+ "einbruch": {},
+ "flags": {
+  "089kits.de/product-page/2007-08-fc-bayern-münchen-third-trikot-xl-ribery": {
+   "grund": "unpassend",
+   "issue": 23,
+   "kommentar": "Bodenloser Zustand",
+   "titel": "Flag: unpassend · 2007-08 FC Bayern München Third Trikot XL Ribery",
+   "zeit": "2026-10-04T08:35:31.231483+00:00"
+  },
+  "bulishirts.com/product-page/bayer-04-leverkusen-kroos-39-2008-2009-xl": {
+   "grund": "unpassend",
+   "issue": 5,
+   "kommentar": "Kroos bitte niemals Leverkusen",
+   "titel": "Flag: unpassend · Bayer 04 Leverkusen - Kroos #39 - Trikot 2008–2009 - XL",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "classic-shirts.com/product-eng-249718-2005-06-bayern-munchen-ze-roberto-shirt-xl.html": {
+   "grund": "unpassend",
+   "issue": 13,
+   "kommentar": "Schlechter nachträglicher Flock. Kannst du nicht wissen aber nimm Raus",
+   "titel": "Flag: unpassend · 2005-06 BAYERN MUNCHEN *ZE ROBERTO* SHIRT XL",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "classic-shirts.com/product-eng-272870-2009-10-fc-barcelona-shirt-xxl.html": {
+   "grund": "unpassend",
+   "issue": 32,
+   "kommentar": "Training Shirt",
+   "titel": "Flag: unpassend · 2009-10 FC BARCELONA SHIRT XXL",
+   "zeit": "2026-10-05T15:35:41.269500+00:00"
+  },
+  "classic-shirts.com/product-eng-284075-2012-13-fc-barcelona-shirt-xxl.html": {
+   "grund": "unpassend",
+   "issue": 20,
+   "kommentar": "Shirt",
+   "titel": "Flag: unpassend · 2012-13 FC BARCELONA SHIRT XXL",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "classic-shirts.com/product-eng-301400-2008-09-france-ribery-shirt-2xl.html": {
+   "grund": "juckt nicht",
+   "issue": 48,
+   "kommentar": "",
+   "titel": "Ausgeblendet · 2008-09 FRANCE *RIBERY* SHIRT 2XL",
+   "zeit": "2026-10-08T03:31:02.423255+00:00"
+  },
+  "classic-shirts.com/product-eng-354467-2004-05-juventus-nedved-shirt-xl.html": {
+   "grund": "unpassend",
+   "issue": 11,
+   "kommentar": "Producer Official wollten wir ausschließen",
+   "titel": "Flag: unpassend · 2004-05 JUVENTUS *NEDVED* SHIRT XL",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "classic-shirts.com/product-eng-367764-2007-09-hamburg-schotte-shirt-xl.html": {
+   "grund": "juckt nicht",
+   "issue": 41,
+   "kommentar": "",
+   "titel": "Ausgeblendet · 2007-09 HAMBURG *SCHOTTE* SHIRT  XL",
+   "zeit": "2026-10-08T03:31:02.423255+00:00"
+  },
+  "classic-shirts.com/product-eng-373944-2009-10-bayern-munchen-robben-shirt-xl.html": {
+   "grund": "juckt nicht",
+   "issue": 45,
+   "kommentar": "",
+   "titel": "Ausgeblendet · 2009-10 BAYERN MUNCHEN *ROBBEN* SHIRT XL",
+   "zeit": "2026-10-08T03:31:02.423255+00:00"
+  },
+  "classic-shirts.com/product-eng-374863-2009-10-barcelona-shirt-xl.html": {
+   "grund": "kein original",
+   "issue": 25,
+   "kommentar": "Producer Official wollten wir bereits 3 Mal entfernen hier",
+   "titel": "Flag: kein original · 2009-10 BARCELONA SHIRT XL",
+   "zeit": "2026-10-05T07:20:54.198289+00:00"
+  },
+  "classic-shirts.com/product-eng-375058-2009-10-bayern-munchen-robben-shirt-xxl.html": {
+   "grund": "juckt nicht",
+   "issue": 44,
+   "kommentar": "",
+   "titel": "Ausgeblendet · 2009-10 BAYERN MUNCHEN *ROBBEN* SHIRT XXL",
+   "zeit": "2026-10-08T03:31:02.423255+00:00"
+  },
+  "classic-shirts.com/product-eng-376829-2004-06-netherlands-v-nistelrooy-shirt-xxl.html": {
+   "grund": "juckt nicht",
+   "issue": 46,
+   "kommentar": "",
+   "titel": "Ausgeblendet · 2004-06 NETHERLANDS *V. NISTELROOY* SHIRT XXL",
+   "zeit": "2026-10-08T03:31:02.423255+00:00"
+  },
+  "classic-shirts.com/product-eng-379732-2011-13-bayern-munchen-ribery-shirt-xl.html": {
+   "grund": "unpassend",
+   "issue": 2,
+   "kommentar": "Laut Bildern sieht es auch wie ein anderer Eintrag von C-S für etwa 10 Euro weniger, auch Ribery",
+   "titel": "Flag: unpassend · 2011-13 BAYERN MUNCHEN *RIBERY* SHIRT XL",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "classic-shirts.com/product-eng-383317-2011-13-bayern-munchen-ribery-shirt-xl.html": {
+   "grund": "juckt nicht",
+   "issue": 42,
+   "kommentar": "",
+   "titel": "Ausgeblendet · 2011-13 BAYERN MUNCHEN *RIBERY* SHIRT XL",
+   "zeit": "2026-10-08T03:31:02.423255+00:00"
+  },
+  "ebay:08e2af3b3d687239": {
+   "grund": "sonstiges",
+   "issue": 81,
+   "kommentar": "Zustand schwach",
+   "titel": "Flag: sonstiges · eBay-Angebot",
+   "zeit": "2026-10-09T07:20:40.804640+00:00"
+  },
+  "ebay:18ac4fbbc50bf658": {
+   "grund": "kein original",
+   "issue": 79,
+   "kommentar": "labels: Frenkie de Jong",
+   "titel": "Flag: kein original · eBay-Angebot",
+   "zeit": "2026-10-09T07:20:40.804640+00:00"
+  },
+  "ebay:19c9cd55576f27dc": {
+   "grund": "sonstiges",
+   "issue": 83,
+   "kommentar": "BVB NEIN",
+   "titel": "Flag: sonstiges · eBay-Angebot",
+   "zeit": "2026-10-09T07:20:40.804640+00:00"
+  },
+  "ebay:1f225eab1f469edd": {
+   "grund": "sonstiges",
+   "issue": 53,
+   "kommentar": "VfL Hamburg ist nicht HSV",
+   "titel": "Flag: sonstiges · eBay-Angebot",
+   "zeit": "2026-10-08T13:35:36.718502+00:00"
+  },
+  "ebay:2f7f856febbcd175": {
+   "grund": "kein original",
+   "issue": 64,
+   "kommentar": "fake",
+   "titel": "Flag: kein original · eBay-Angebot",
+   "zeit": "2026-10-08T15:05:50.466052+00:00"
+  },
+  "ebay:2fcbd9a5057c807a": {
+   "grund": "kein original",
+   "issue": 87,
+   "kommentar": "labels: Ribéry",
+   "titel": "Flag: kein original · eBay-Angebot",
+   "zeit": "2026-10-10T03:30:52.716542+00:00"
+  },
+  "ebay:34a60dae5f043722": {
+   "grund": "sonstiges",
+   "issue": 57,
+   "kommentar": "Fake Flock",
+   "titel": "Flag: sonstiges · eBay-Angebot",
+   "zeit": "2026-10-08T14:05:36.873263+00:00"
+  },
+  "ebay:36748e48bb6646d2": {
+   "grund": "sonstiges",
+   "issue": 71,
+   "kommentar": "Verschickt nicht nach DE",
+   "titel": "Flag: sonstiges · eBay-Angebot",
+   "zeit": "2026-10-09T03:30:54.280297+00:00"
+  },
+  "ebay:3b414056aab8bd35": {
+   "grund": "kein original",
+   "issue": 72,
+   "kommentar": "labels: Barça 2008-2013",
+   "titel": "Flag: kein original · eBay-Angebot",
+   "zeit": "2026-10-09T07:20:40.804640+00:00"
+  },
+  "ebay:3c10cae2af92a5e7": {
+   "grund": "kein original",
+   "issue": 67,
+   "kommentar": "Fake siehe Flock",
+   "titel": "Flag: kein original · eBay-Angebot",
+   "zeit": "2026-10-08T17:35:39.197600+00:00"
+  },
+  "ebay:4a8e9a57f44b9ae1": {
+   "grund": "falsche groesse",
+   "issue": 75,
+   "kommentar": "Jugend",
+   "titel": "Flag: falsche groesse · eBay-Angebot",
+   "zeit": "2026-10-09T07:20:40.804640+00:00"
+  },
+  "ebay:4aabe6e1c99ac538": {
+   "grund": "sonstiges",
+   "issue": 70,
+   "kommentar": "Schwache Zustand",
+   "titel": "Flag: sonstiges · eBay-Angebot",
+   "zeit": "2026-10-09T03:30:54.280297+00:00"
+  },
+  "ebay:57b17639833248bf": {
+   "grund": "kein original",
+   "issue": 54,
+   "kommentar": "labels: Henry, Nike Total 90 (2004-06)",
+   "titel": "Flag: kein original · eBay-Angebot",
+   "zeit": "2026-10-08T13:35:36.718502+00:00"
+  },
+  "ebay:5a2b9ccaa6af75b6": {
+   "grund": "unpassend",
+   "issue": 78,
+   "kommentar": "Shirt",
+   "titel": "Flag: unpassend · eBay-Angebot",
+   "zeit": "2026-10-09T07:20:40.804640+00:00"
+  },
+  "ebay:5c736d31d8f27305": {
+   "grund": "kein original",
+   "issue": 56,
+   "kommentar": "labels: Torres (Fernando)",
+   "titel": "Flag: kein original · eBay-Angebot",
+   "zeit": "2026-10-08T13:35:36.718502+00:00"
+  },
+  "ebay:740ecccc24b0e116": {
+   "grund": "sonstiges",
+   "issue": 73,
+   "kommentar": "Training",
+   "titel": "Flag: sonstiges · eBay-Angebot",
+   "zeit": "2026-10-09T07:20:40.804640+00:00"
+  },
+  "ebay:78cfc1baf7210adc": {
+   "grund": "kein original",
+   "issue": 74,
+   "kommentar": "labels: Barça 2008-2013",
+   "titel": "Flag: kein original · eBay-Angebot",
+   "zeit": "2026-10-09T07:20:40.804640+00:00"
+  },
+  "ebay:7a8945dcf27e2225": {
+   "grund": "kein original",
+   "issue": 86,
+   "kommentar": "labels: Benzema",
+   "titel": "Flag: kein original · eBay-Angebot",
+   "zeit": "2026-10-10T03:30:52.716542+00:00"
+  },
+  "ebay:82d773324492b3b3": {
+   "grund": "sonstiges",
+   "issue": 63,
+   "kommentar": "schlechter Zustand",
+   "titel": "Flag: sonstiges · eBay-Angebot",
+   "zeit": "2026-10-08T15:05:50.466052+00:00"
+  },
+  "ebay:8ae13afe6db0ef88": {
+   "grund": "kein original",
+   "issue": 90,
+   "kommentar": "labels: Henry",
+   "titel": "Flag: kein original · eBay-Angebot",
+   "zeit": "2026-10-10T03:30:52.716542+00:00"
+  },
+  "ebay:8c3b1cba94f03e3d": {
+   "grund": "sonstiges",
+   "issue": 80,
+   "kommentar": "Flock fake",
+   "titel": "Flag: sonstiges · eBay-Angebot",
+   "zeit": "2026-10-09T07:20:40.804640+00:00"
+  },
+  "ebay:8d928ffff5e68eda": {
+   "grund": "ausverkauft",
+   "issue": 69,
+   "kommentar": "Von mir gekauft 😌",
+   "titel": "Flag: ausverkauft · eBay-Angebot",
+   "zeit": "2026-10-09T03:30:54.280297+00:00"
+  },
+  "ebay:8ecde3ac8b4bf607": {
+   "grund": "juckt nicht",
+   "issue": 58,
+   "kommentar": "",
+   "titel": "Ausgeblendet · eBay-Angebot",
+   "zeit": "2026-10-08T14:05:36.873263+00:00"
+  },
+  "ebay:9556664df101a861": {
+   "grund": "sonstiges",
+   "issue": 92,
+   "kommentar": "Damen",
+   "titel": "Flag: sonstiges · eBay-Angebot",
+   "zeit": "2026-10-10T03:30:52.716542+00:00"
+  },
+  "ebay:a4ace31ee85b9455": {
+   "grund": "sonstiges",
+   "issue": 85,
+   "kommentar": "Kein Trikot",
+   "titel": "Flag: sonstiges · eBay-Angebot",
+   "zeit": "2026-10-10T03:30:52.716542+00:00"
+  },
+  "ebay:a60789b1e965e767": {
+   "grund": "kein original",
+   "issue": 88,
+   "kommentar": "labels: WM 2006",
+   "titel": "Flag: kein original · eBay-Angebot",
+   "zeit": "2026-10-10T03:30:52.716542+00:00"
+  },
+  "ebay:a9661106e8df34a3": {
+   "grund": "kein original",
+   "issue": 89,
+   "kommentar": "labels: Nike Total 90 (2004-06)",
+   "titel": "Flag: kein original · eBay-Angebot",
+   "zeit": "2026-10-10T03:30:52.716542+00:00"
+  },
+  "ebay:b449b2608b90e162": {
+   "grund": "sonstiges",
+   "issue": 76,
+   "kommentar": "Bereits befleckt",
+   "titel": "Flag: sonstiges · eBay-Angebot",
+   "zeit": "2026-10-09T07:20:40.804640+00:00"
+  },
+  "ebay:b54daf273d5b3a25": {
+   "grund": "sonstiges",
+   "issue": 91,
+   "kommentar": "Training / Fan Shirt",
+   "titel": "Flag: sonstiges · eBay-Angebot",
+   "zeit": "2026-10-10T03:30:52.716542+00:00"
+  },
+  "ebay:b65b098dfbf7c859": {
+   "grund": "kein original",
+   "issue": 66,
+   "kommentar": "Schwer erkennbar aber an den Nähten von Nike Logo : Fake",
+   "titel": "Flag: kein original · eBay-Angebot",
+   "zeit": "2026-10-08T17:35:39.197600+00:00"
+  },
+  "ebay:c36fb7f6fb9efe2f": {
+   "grund": "juckt nicht",
+   "issue": 55,
+   "kommentar": "",
+   "titel": "Ausgeblendet · eBay-Angebot",
+   "zeit": "2026-10-08T13:35:36.718502+00:00"
+  },
+  "ebay:c7045137f048103c": {
+   "grund": "kein original",
+   "issue": 62,
+   "kommentar": "labels: Ribéry",
+   "titel": "Flag: kein original · eBay-Angebot",
+   "zeit": "2026-10-08T15:05:50.466052+00:00"
+  },
+  "ebay:e620f35e2986af5b": {
+   "grund": "sonstiges",
+   "issue": 65,
+   "kommentar": "fake flock hinten",
+   "titel": "Flag: sonstiges · eBay-Angebot",
+   "zeit": "2026-10-08T15:05:50.466052+00:00"
+  },
+  "ebay:eb128d973ebd6fdb": {
+   "grund": "sonstiges",
+   "issue": 82,
+   "kommentar": "Zustand schwach",
+   "titel": "Flag: sonstiges · eBay-Angebot",
+   "zeit": "2026-10-09T07:20:40.804640+00:00"
+  },
+  "ebay:eb2c9d032270faaf": {
+   "grund": "unpassend",
+   "issue": 77,
+   "kommentar": "Lanzarote Trikot",
+   "titel": "Flag: unpassend · eBay-Angebot",
+   "zeit": "2026-10-09T07:20:40.804640+00:00"
+  },
+  "esdeepoca.com/products/chamarra-brasil-94-2006": {
+   "grund": "unpassend",
+   "issue": 26,
+   "kommentar": "Jacke",
+   "titel": "Flag: unpassend · Chamarra Brasil 94 2006",
+   "zeit": "2026-10-05T07:20:54.198289+00:00"
+  },
+  "first11shirts.com/products/2013-14-bayern-munich-kroos-39-home-shirt-xl-adidas": {
+   "grund": "juckt nicht",
+   "issue": 68,
+   "kommentar": "",
+   "titel": "Ausgeblendet · 2013/14 Bayern Munich Kroos #39 Home Shirt (XL) Adidas",
+   "zeit": "2026-10-08T18:20:37.332486+00:00"
+  },
+  "footballfinery.co.uk/products/2020-21-chile-home-football-shirt-xl-nike-8-vidal-ff302017": {
+   "grund": "unpassend",
+   "issue": 15,
+   "kommentar": "Auch exakt das gleiche wie Casual Football Shirts scheinbar",
+   "titel": "Flag: unpassend · 2020/21 Chile Home Football Shirt (XL) Nike #8 Vidal",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "footballshirtkingdom.com/products/netherlands-2004-2005-2006-home-football-shirt-xl-8357": {
+   "grund": "unpassend",
+   "issue": 12,
+   "kommentar": "Casual Football Shirts ist wohl gleicher Shop? Mindestens gleiches Foto und Text, prüfen wir mal. Auch der Preis auf der Website hier ist eigentlich reduziert",
+   "titel": "Flag: unpassend · Van Nistelrooy 10 Netherlands 2004/2005/2006 Home Football Shirt XL",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "footballthrift.shop/borussia-dortmund-2011-12-home-44-perisic-xxl": {
+   "grund": "unpassend",
+   "issue": 47,
+   "kommentar": "Dortmund no go",
+   "titel": "Flag: unpassend · Koszulka piłkarska Borussia Dortmund 2011/12 Home 44 Perisic [XXL]",
+   "zeit": "2026-10-08T03:31:02.423255+00:00"
+  },
+  "golacokits.com/products/real-madrid-2023-24-home-kroos-8": {
+   "grund": "sonstiges",
+   "issue": 43,
+   "kommentar": "Reproduzieren vom Flock ok aber das hier ist halt nicht original getreu",
+   "titel": "Flag: sonstiges · Real Madrid 2023/24 - Home - Kroos #8",
+   "zeit": "2026-10-08T03:31:02.423255+00:00"
+  },
+  "golacokits.com/products/spain-2010-world-cup-fan-kit": {
+   "grund": "kein original",
+   "issue": 39,
+   "kommentar": "Manufacturer: In-House",
+   "titel": "Flag: kein original · Spain 2010 World Cup - Fan Kit",
+   "zeit": "2026-10-08T03:31:02.423255+00:00"
+  },
+  "kitts.de/l/6a3d2448-688d-423d-8a28-0f3d3290a877": {
+   "grund": "sonstiges",
+   "issue": 49,
+   "kommentar": "Zustand meh",
+   "titel": "Flag: sonstiges · Bayern München 13/14 Robben",
+   "zeit": "2026-10-08T03:31:02.423255+00:00"
+  },
+  "le7sorelle.it/products/giacca-barcellona-nike-2011-2012": {
+   "grund": "unpassend",
+   "issue": 21,
+   "kommentar": "Jacke",
+   "titel": "Flag: unpassend · giacca barcellona nike 2011/2012",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "originaltrikot.de/de/nike-fc-arsenal-london-trikot-4-patrick-vieira-2004-05-meister-heim-herren-s-m-l-xl-xxl.html": {
+   "grund": "unpassend",
+   "issue": 27,
+   "kommentar": "Ganzen Shop entfernen, wirkt unseriös",
+   "titel": "Flag: unpassend · Nike FC Arsenal London Trikot 4 Patrick Vieira 2004/05 Meister Heim Herren XL (B-Ware)",
+   "zeit": "2026-10-05T07:20:54.198289+00:00"
+  },
+  "retroshirts.ch/products/fussballtrikot-espanyolbarcelona-2012-13-auswarts-puma-xl-100734": {
+   "grund": "unpassend",
+   "issue": 4,
+   "kommentar": "Ist Espanyol, nicht FC Barcelona",
+   "titel": "Flag: unpassend · Espanyol Barcelona 2012-13 Trikot auswärts BNWT - 10/10 - [XL]",
+   "zeit": "2026-10-04T07:45:41.743467+00:00"
+  },
+  "retroshirts.ch/products/fussballtrikot-espanyolbarcelona-2012-13-heim-puma-xxl-100736": {
+   "grund": "unpassend",
+   "issue": 24,
+   "kommentar": "Espanyol statt FC Barcelona",
+   "titel": "Flag: unpassend · Espanyol Barcelona 2012-13 Trikot heim - 9/10 - [XXL]",
+   "zeit": "2026-10-04T08:35:31.231483+00:00"
+  },
+  "senseofgoal.com/products/fc-barcelona-2011-12-trainingsjacke-xxl-nike": {
+   "grund": "unpassend",
+   "issue": 19,
+   "kommentar": "Jacke",
+   "titel": "Flag: unpassend · FC Barcelona 2011-12 Trainingsjacke (XXL) nike",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "thefootballmarket.com/products/maillot-de-foot-retro-domicile-equipe-de-france-n-22-ribery-2006-2008": {
+   "grund": "unpassend",
+   "issue": 9,
+   "kommentar": "Zustand bodenlos",
+   "titel": "Flag: unpassend · Maillot de foot rétro domicile Équipe de France N°22 RIBERY 2006-2007",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "thefootballmarket.com/products/maillot-de-football-retro-equipe-despagne-n-4-raoul-2009-2010": {
+   "grund": "unpassend",
+   "issue": 8,
+   "kommentar": "Nicht existenter Spieler, komischer Flock",
+   "titel": "Flag: unpassend · Maillot de football retro équipe d'Espagne N°4 RAOUL 2009-2010",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "thefootballmarket.com/products/maillot-de-football-retro-equipe-despagne-n-7-maravilla-2009-2010": {
+   "grund": "unpassend",
+   "issue": 7,
+   "kommentar": "Nur ohne Flock bitte",
+   "titel": "Flag: unpassend · Maillot de football retro Equipe d'Espagne N°7 MARAVILLA 2009-2010",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "thefootballmarket.com/products/maillot-equipe-de-france-vintage-domicile-10-benzema-2012-2013": {
+   "grund": "unpassend",
+   "issue": 10,
+   "kommentar": "Glaube den ganzen Shop nehmen wir raus weil alles von denen hier absurd schlechter Zustand ist",
+   "titel": "Flag: unpassend · Maillot Équipe de France vintage domicile #10 BENZEMA 2012-2013",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "thesoccerarchive.com/products/al-ittihad-2023-24-home-shirt-benzema-9-m": {
+   "grund": "unpassend",
+   "issue": 34,
+   "kommentar": "Al Ittihsd ausschließen als Verein",
+   "titel": "Flag: unpassend · AL-ITTIHAD 2023-24 HOME SHIRT - BENZEMA 9 - XL",
+   "zeit": "2026-10-05T15:35:41.269500+00:00"
+  },
+  "topbinzfootballshirts.co.uk/mint-inter-milan-barella-23-2022-23-home-shirt-player-issue-xl": {
+   "grund": "falsche groesse",
+   "issue": 40,
+   "kommentar": "Leider L wie auf den Bildern zu sehen, kein Fehler von dir",
+   "titel": "Flag: falsche groesse · *MINT* Inter Milan Barella #23 2022/23 Home Shirt - Player Issue - XL",
+   "zeit": "2026-10-08T03:31:02.423255+00:00"
+  },
+  "trikotparadies.shop/products/trikot-niederlande-arjen-robben-2004-2005-xl-heim": {
+   "grund": "sonstiges",
+   "issue": 84,
+   "kommentar": "Zustand mies",
+   "titel": "Flag: sonstiges · Trikot - Niederlande - Arjen Robben - 2004/2005 - XL - Heim",
+   "zeit": "2026-10-10T03:30:52.716542+00:00"
+  },
+  "vintagefootballarea.com/products/2004-05-juventus-xl-university-1": {
+   "grund": "unpassend",
+   "issue": 6,
+   "kommentar": "Nur ein Shirt",
+   "titel": "Flag: unpassend · 2004/05 - Juventus (XL) *university*",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "vintagefootballarea.com/products/2008-09-barcelone-2xl-12": {
+   "grund": "unpassend",
+   "issue": 35,
+   "kommentar": "Hose",
+   "titel": "Flag: unpassend · 2008/09 - Barcelone (2XL)",
+   "zeit": "2026-10-06T01:46:32.274893+00:00"
+  },
+  "vintagefootballarea.com/products/2008-09-barcelone-2xl-13": {
+   "grund": "unpassend",
+   "issue": 33,
+   "kommentar": "Trainingsshirt",
+   "titel": "Flag: unpassend · 2008/09 - Barcelone (2XL)",
+   "zeit": "2026-10-05T15:35:41.269500+00:00"
+  },
+  "vintagefootballarea.com/products/2008-09-barcelone-xl-20": {
+   "grund": "unpassend",
+   "issue": 28,
+   "kommentar": "Hose",
+   "titel": "Flag: unpassend · 2008/09 - Barcelone (XL)",
+   "zeit": "2026-10-05T07:20:54.198289+00:00"
+  },
+  "vintagefootballarea.com/products/2009-10-barcelone-l-48": {
+   "grund": "unpassend",
+   "issue": 30,
+   "kommentar": "(x)",
+   "titel": "Flag: unpassend · 2009/10 - Barcelone (L)",
+   "zeit": "2026-10-05T07:20:54.198289+00:00"
+  },
+  "vintagefootballarea.com/products/2009-10-barcelone-xl-17": {
+   "grund": "unpassend",
+   "issue": 36,
+   "kommentar": "Training Shirt",
+   "titel": "Flag: unpassend · 2009/10 - Barcelone (XL)",
+   "zeit": "2026-10-06T01:46:32.274893+00:00"
+  },
+  "vintagefootballarea.com/products/2009-10-barcelone-xl-26": {
+   "grund": "unpassend",
+   "issue": 29,
+   "kommentar": "Auch doppelt mit nächsten Eintrag und Trainingsshirt. Beide weg (ich markiere den anderen mit einem X)",
+   "titel": "Flag: unpassend · 2009/10 - Barcelone (XL)",
+   "zeit": "2026-10-05T07:20:54.198289+00:00"
+  },
+  "vintagefootballarea.com/products/2010-11-barcelone-xl-13": {
+   "grund": "unpassend",
+   "issue": 16,
+   "kommentar": "Shirt",
+   "titel": "Flag: unpassend · 2010/11 - Barcelone (XL)",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "vintagefootballarea.com/products/2010-11-barcelone-xl-16": {
+   "grund": "unpassend",
+   "issue": 22,
+   "kommentar": "Shirt",
+   "titel": "Flag: unpassend · 2010/11 - Barcelone (XL)",
+   "zeit": "2026-10-04T08:35:31.231483+00:00"
+  },
+  "vintagefootballarea.com/products/2011-12-barcelone-xl-22": {
+   "grund": "unpassend",
+   "issue": 18,
+   "kommentar": "Shirt",
+   "titel": "Flag: unpassend · 2011/12 - Barcelone (XL)",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "vintagefootballarea.com/products/2011-12-espagne-xl-15": {
+   "grund": "unpassend",
+   "issue": 1,
+   "kommentar": "Ist ein Shirt",
+   "titel": "Flag: unpassend · 2011/12 - Espagne (XL)",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "vintagefootballarea.com/products/2012-13-barcelone-xl-44": {
+   "grund": "unpassend",
+   "issue": 17,
+   "kommentar": "Shirt",
+   "titel": "Flag: unpassend · 2012/13 - Barcelone (XL)",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "vintagefootballarea.com/products/2012-13-juventus-vidal-23-xl-1": {
+   "grund": "unpassend",
+   "issue": 3,
+   "kommentar": "Sehr falsch aussehender Flock: kein Problem deiner Erkennung, aber bitte ausblenden weil unnötig.",
+   "titel": "Flag: unpassend · 2012/13 - Juventus - Vidal #23 (XL)",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "vintagefootballarea.com/products/2013-14-juventus-vidal-23-xl-2": {
+   "grund": "unpassend",
+   "issue": 14,
+   "kommentar": "Flock leider kapitt",
+   "titel": "Flag: unpassend · 2013/14 - Juventus - Vidal #23 (XL)",
+   "zeit": "2026-10-04T08:15:23.644138+00:00"
+  },
+  "vintagefootballshirts.com/products/2008-10-hamburg-adidas-away-shirt-20-xl": {
+   "grund": "juckt nicht",
+   "issue": 37,
+   "kommentar": "",
+   "titel": "Ausgeblendet · 2008-10 Hamburg adidas Away Shirt #20 XL",
+   "zeit": "2026-10-06T01:46:32.274893+00:00"
+  },
+  "wavememorabilia.com/articolo/5337/maglia-inter-home-20222023-barella-year-of-the-rabbit-versione-store": {
+   "grund": "juckt nicht",
+   "issue": 50,
+   "kommentar": "",
+   "titel": "Ausgeblendet · Maglia Inter Home 2022/2023 Barella Year of the Rabbit versione store",
+   "zeit": "2026-10-08T03:31:02.423255+00:00"
+  }
+ },
+ "fundgrube": {
+  "kandidaten": [
+   {
+    "domain": "full90prints.com",
+    "empfohlen": false,
+    "nachbau_prozent": 0,
+    "plattform": "unbekannt",
+    "seit": "2026-10-01T14:14:58.073674+00:00",
+    "treffer": 5,
+    "url": "https://full90prints.com"
+   },
+   {
+    "domain": "theshirtcollectors.co.uk",
+    "empfohlen": true,
+    "nachbau_prozent": 0,
+    "plattform": "shopify",
+    "seit": "2026-10-01T14:14:58.073674+00:00",
+    "treffer": 5,
+    "url": "https://www.theshirtcollectors.co.uk"
+   },
+   {
+    "domain": "ballerscustomprinting.com",
+    "empfohlen": false,
+    "nachbau_prozent": 0,
+    "plattform": "unbekannt",
+    "seit": "2026-10-01T14:14:58.073674+00:00",
+    "treffer": 2,
+    "url": "https://ballerscustomprinting.com"
+   },
+   {
+    "domain": "shirtsociete.com",
+    "empfohlen": false,
+    "nachbau_prozent": 0,
+    "plattform": "unbekannt",
+    "seit": "2026-10-04T04:38:13.554139+00:00",
+    "treffer": 1,
+    "url": "https://shirtsociete.com"
+   },
+   {
+    "domain": "theshirttemple.com",
+    "empfohlen": false,
+    "nachbau_prozent": 0,
+    "plattform": "unbekannt",
+    "seit": "2026-10-05T04:46:05.303906+00:00",
+    "treffer": 1,
+    "url": "https://theshirttemple.com"
+   },
+   {
+    "domain": "brechodofutebol.com",
+    "empfohlen": true,
+    "nachbau_prozent": 0,
+    "plattform": "shopify",
+    "seit": "2026-10-05T04:46:05.303906+00:00",
+    "treffer": 1,
+    "url": "https://brechodofutebol.com"
+   }
+  ],
+  "zeit": "2026-10-05T04:46:05.303906+00:00"
+ },
+ "fyj_shops": {
+  "ballerscustomprinting.com": {
+   "seit": "2026-10-01T14:14:58.073674+00:00",
+   "treffer": 2
+  },
+  "footballshirtvintage.fr": {
+   "seit": "2026-10-01T14:14:58.073674+00:00",
+   "treffer": 6
+  },
+  "full90prints.com": {
+   "seit": "2026-10-01T14:14:58.073674+00:00",
+   "treffer": 5
+  },
+  "kitts.de": {
+   "seit": "2026-10-01T14:14:58.073674+00:00",
+   "treffer": 21
+  },
+  "shirtsociete.com": {
+   "seit": "2026-10-04T04:38:13.554139+00:00",
+   "treffer": 1
+  },
+  "theshirttemple.com": {
+   "seit": "2026-10-05T04:46:05.303906+00:00",
+   "treffer": 1
+  }
+ },
+ "geschlossen": {
+  "Granny's Football Store": "2026-10-07T14:38:37.320024+00:00"
+ },
+ "known_labels": [
+  "Alonso (Xabi)",
+  "Barella",
+  "Barça 2008-2013",
+  "Bayern Wiesn-Trikot",
+  "Benzema",
+  "Cavani",
+  "Forlán",
+  "Frenkie de Jong",
+  "Grimaldo",
+  "HSV 1990-2016",
+  "Henry",
+  "Juninho (Pernambucano)",
+  "Kimmich",
+  "Kroos",
+  "Liverpool Away 2021/22",
+  "Liverpool Third 2022/23",
+  "Marcos Llorente",
+  "Nike Total 90 (2004-06)",
+  "Olić",
+  "Perišić",
+  "Ribéry",
+  "Robben",
+  "Rodri",
+  "Spanien 2010/2011",
+  "Spanien 2014",
+  "Thiago",
+  "Torres (Fernando)",
+  "Valverde (Fede)",
+  "Van Nistelrooy",
+  "Van der Vaart",
+  "Verratti",
+  "Vidal (Arturo)",
+  "WM 2006",
+  "Zé Roberto"
+ ],
+ "kurse": {
+  "datum": "2026-10-09",
+  "rates": {
+   "AUD": 1.6052,
+   "BRL": 5.6086,
+   "CAD": 1.5942,
+   "CHF": 0.9313,
+   "CNY": 7.4992,
+   "CZK": 24.369,
+   "DKK": 7.4751,
+   "EUR": 1.0,
+   "GBP": 0.84763,
+   "HKD": 8.794,
+   "HUF": 365.08,
+   "IDR": 20036.94,
+   "ILS": 3.426,
+   "INR": 108.3965,
+   "ISK": 136.8,
+   "JPY": 177.34,
+   "KRW": 1503.27,
+   "MXN": 20.395,
+   "MYR": 4.5777,
+   "NOK": 10.7155,
+   "NZD": 1.9961,
+   "PHP": 70.397,
+   "PLN": 4.3835,
+   "RON": 5.3406,
+   "SEK": 11.1675,
+   "SGD": 1.4348,
+   "THB": 37.574,
+   "TRY": 55.1033,
+   "USD": 1.1206,
+   "ZAR": 18.527
+  }
+ },
+ "laeufe": [
+  {
+   "modus": "priority",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-01T19:48:27.039534+00:00"
+  },
+  {
+   "modus": "priority",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-01T23:51:02.894045+00:00"
+  },
+  {
+   "modus": "full",
+   "neu": 2,
+   "still": 0,
+   "zeit": "2026-10-02T10:46:29.976565+00:00"
+  },
+  {
+   "modus": "priority",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-02T14:25:37.194591+00:00"
+  },
+  {
+   "modus": "full",
+   "neu": 0,
+   "still": 7,
+   "zeit": "2026-10-02T19:06:54.841007+00:00"
+  },
+  {
+   "modus": "full",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-02T21:59:41.090621+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-02T22:31:25.080957+00:00"
+  },
+  {
+   "modus": "priority",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-02T23:33:36.012457+00:00"
+  },
+  {
+   "modus": "full",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-03T10:11:34.695657+00:00"
+  },
+  {
+   "modus": "priority",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-03T13:01:11.815592+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-03T15:07:55.644740+00:00"
+  },
+  {
+   "modus": "priority",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-03T17:54:46.724440+00:00"
+  },
+  {
+   "modus": "full",
+   "neu": 2,
+   "still": 0,
+   "zeit": "2026-10-03T23:06:34.624842+00:00"
+  },
+  {
+   "modus": "full",
+   "neu": 3,
+   "still": 146,
+   "zeit": "2026-10-04T04:38:13.554139+00:00"
+  },
+  {
+   "modus": "priority",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-04T08:04:36.346679+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-04T08:15:32.545492+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-04T08:35:35.944594+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-04T10:50:49.824446+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-04T11:21:23.524064+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-04T11:50:45.881910+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-04T12:20:51.569516+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 68,
+   "zeit": "2026-10-04T12:56:56.150677+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-04T13:35:43.126419+00:00"
+  },
+  {
+   "modus": "priority",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-04T14:04:46.327261+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-04T17:05:40.067693+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-04T17:35:40.695428+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-04T17:50:53.107773+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-04T18:05:38.226794+00:00"
+  },
+  {
+   "modus": "priority",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-04T19:11:42.249103+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-04T19:12:04.843086+00:00"
+  },
+  {
+   "modus": "priority",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-04T20:04:26.712589+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-04T20:04:45.153668+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-04T20:35:40.237550+00:00"
+  },
+  {
+   "modus": "full",
+   "neu": 7,
+   "still": 160,
+   "zeit": "2026-10-05T04:46:05.303906+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-05T07:08:29.713682+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-05T07:21:03.063884+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-05T07:38:25.084799+00:00"
+  },
+  {
+   "modus": "priority",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-05T08:08:38.729922+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-05T08:12:05.839687+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-05T08:38:40.246522+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-05T09:08:33.145911+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 1,
+   "still": 0,
+   "zeit": "2026-10-05T09:38:24.441409+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-05T09:50:48.941880+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-05T10:08:30.181424+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-05T10:38:32.534397+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-05T11:08:31.901285+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-05T11:38:30.366597+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-05T12:08:31.510265+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 1,
+   "still": 0,
+   "zeit": "2026-10-05T12:38:30.381199+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-05T13:08:33.439159+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-05T13:38:26.535377+00:00"
+  },
+  {
+   "modus": "priority",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-05T14:54:59.463317+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 1,
+   "still": 0,
+   "zeit": "2026-10-05T14:58:28.816228+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-05T15:23:38.788664+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-05T15:35:47.002296+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-05T15:53:36.330444+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-05T16:23:38.740297+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-05T16:53:38.363232+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-05T17:05:41.544146+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-05T17:23:43.071815+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-05T17:35:49.144408+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-05T17:53:57.118954+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-05T18:05:42.347436+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-05T18:23:40.157057+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-05T18:35:45.244976+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-05T18:53:57.742476+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-05T19:05:48.965130+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-05T19:23:55.570601+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-05T19:57:26.554524+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-05T20:26:04.915763+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-05T21:23:53.137696+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-05T21:53:41.842620+00:00"
+  },
+  {
+   "modus": "priority",
+   "neu": 1,
+   "still": 0,
+   "zeit": "2026-10-06T01:48:59.420046+00:00"
+  },
+  {
+   "modus": "full",
+   "neu": 1,
+   "still": 55,
+   "zeit": "2026-10-06T04:42:49.641220+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T07:09:06.900819+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T07:38:25.792452+00:00"
+  },
+  {
+   "modus": "priority",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T07:48:16.979364+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T08:08:27.560973+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T08:38:25.957160+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T08:50:53.784070+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T09:08:28.228788+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T09:20:56.911040+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T09:38:31.682853+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T10:57:41.176477+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T11:23:37.635850+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T11:35:44.459125+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T11:53:42.297267+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T12:23:47.151384+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 1,
+   "still": 0,
+   "zeit": "2026-10-06T12:53:38.272585+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T13:23:41.605710+00:00"
+  },
+  {
+   "modus": "priority",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T13:48:25.682895+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T13:53:42.473375+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T14:23:43.218621+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T14:53:48.228360+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T15:23:38.545899+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T15:53:44.584736+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T16:23:42.155916+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T16:53:50.465410+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T17:06:09.135358+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T17:23:45.797283+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T17:35:42.690673+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T17:53:43.534387+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T18:05:43.879461+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T18:23:41.813397+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T18:35:47.026185+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T18:53:44.325127+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T19:05:44.899922+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T19:23:40.978888+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T19:35:40.910042+00:00"
+  },
+  {
+   "modus": "priority",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T19:48:24.381927+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T19:53:37.905458+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T20:23:40.676068+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T20:53:42.824116+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T21:23:39.141341+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-06T21:53:37.999516+00:00"
+  },
+  {
+   "modus": "full",
+   "neu": 2,
+   "still": 0,
+   "zeit": "2026-10-07T04:41:41.376781+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-07T07:08:28.273276+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-07T07:39:06.643738+00:00"
+  },
+  {
+   "modus": "priority",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-07T07:48:26.318643+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-07T08:08:32.393422+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-07T08:38:32.817378+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-07T09:08:31.136953+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-07T09:38:28.412033+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-07T10:08:28.131310+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-07T10:38:32.633958+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-07T11:08:34.978403+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-07T11:38:32.541399+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-07T12:08:28.817101+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-07T12:38:34.501660+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-07T13:08:31.356221+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-07T13:38:29.144113+00:00"
+  },
+  {
+   "modus": "priority",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-07T13:48:30.941433+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-07T14:08:36.617070+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-07T14:38:37.320024+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-07T15:23:40.438219+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-07T15:53:44.506151+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-07T16:26:15.811724+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-07T17:08:37.361630+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-07T17:38:40.560477+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-07T18:08:32.248148+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-07T18:38:43.847831+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 3,
+   "still": 0,
+   "zeit": "2026-10-07T19:08:35.443517+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-07T19:38:34.827518+00:00"
+  },
+  {
+   "modus": "priority",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-07T19:48:25.030565+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-07T20:08:34.471340+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-07T20:38:41.878527+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-07T21:08:32.546771+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-07T21:38:38.040169+00:00"
+  },
+  {
+   "modus": "full",
+   "neu": 0,
+   "still": 19,
+   "zeit": "2026-10-08T04:45:45.231872+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T07:08:46.304936+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T07:38:44.542890+00:00"
+  },
+  {
+   "modus": "priority",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T07:48:20.528114+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T08:08:50.791953+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T08:38:45.196933+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T09:08:47.780046+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T09:38:45.002843+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T10:08:38.920649+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T10:38:39.287114+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T11:08:41.555294+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T11:38:44.131891+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T11:50:41.926857+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T12:08:37.579978+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T12:20:42.085718+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T12:38:42.310959+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T12:50:51.286376+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T13:08:36.732778+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T13:21:18.113329+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T13:38:50.310221+00:00"
+  },
+  {
+   "modus": "priority",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T13:48:38.304578+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T13:50:43.574972+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T14:08:06.218188+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T14:20:48.530223+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T14:38:00.768479+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T14:50:46.278618+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T15:08:25.173103+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T15:20:45.894782+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T15:38:02.248791+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T15:50:48.325890+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T16:08:11.444486+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T16:20:57.911218+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T16:38:01.980611+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T16:50:47.162731+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T17:08:16.613975+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T17:20:45.263635+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T17:38:09.432358+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T17:50:47.407279+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 4,
+   "still": 0,
+   "zeit": "2026-10-08T18:09:26.047143+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T18:20:42.951407+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T18:37:58.532729+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T18:50:44.089065+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T19:08:01.333985+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T19:20:44.553277+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T19:38:03.371226+00:00"
+  },
+  {
+   "modus": "priority",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T19:48:21.898345+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T19:50:45.071715+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T20:08:00.517756+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T20:20:41.310355+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T20:37:59.031254+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T20:50:41.663766+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T21:07:59.968776+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T21:20:42.474613+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T21:39:05.276753+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-08T21:50:42.298172+00:00"
+  },
+  {
+   "modus": "full",
+   "neu": 0,
+   "still": 5,
+   "zeit": "2026-10-09T04:34:41.668090+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 1,
+   "still": 0,
+   "zeit": "2026-10-09T07:08:01.499783+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T07:21:01.909993+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T07:38:04.108342+00:00"
+  },
+  {
+   "modus": "priority",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T07:48:14.079519+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T08:08:03.586277+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T08:38:04.647320+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T08:50:52.552178+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T09:08:03.819185+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T09:20:45.911355+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T09:39:05.215030+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T09:50:44.862662+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T10:08:03.336918+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T10:20:59.622051+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T10:39:11.570625+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T10:50:54.677781+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T11:08:59.802752+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T11:20:50.071972+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T11:38:57.852205+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T11:50:55.503930+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T12:09:01.229545+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T12:20:50.666839+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T12:38:57.587556+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T12:50:53.212817+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T13:09:05.569056+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T13:20:53.385762+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T13:38:04.039537+00:00"
+  },
+  {
+   "modus": "priority",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T13:48:24.753156+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T13:50:48.185197+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T14:08:07.623930+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T14:20:49.778612+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T14:38:15.516746+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T14:50:47.517553+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T15:08:04.735528+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T15:20:44.247779+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T15:38:06.390859+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T16:08:07.497514+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T16:38:04.248006+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T16:50:45.014386+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 1,
+   "still": 0,
+   "zeit": "2026-10-09T17:08:11.202526+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T17:20:44.163291+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T17:38:05.010774+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T17:50:40.897145+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T18:08:02.906145+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T18:20:43.087749+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T18:38:07.648558+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T18:50:44.793320+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T19:08:11.080416+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T19:20:44.288892+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T19:38:07.247057+00:00"
+  },
+  {
+   "modus": "priority",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T19:48:19.539143+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T19:50:44.223334+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T20:08:01.771868+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T20:20:38.809495+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T20:38:02.842622+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T20:50:38.491506+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T21:08:00.059487+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T21:20:41.331014+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T21:38:01.638416+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T21:50:36.884407+00:00"
+  },
+  {
+   "modus": "radar",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-09T22:30:25.152450+00:00"
+  },
+  {
+   "modus": "full",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-10T04:35:20.370889+00:00"
+  }
+ ],
+ "last_full": "2026-10-10T04:35:20.370889+00:00",
+ "last_run": {
+  "mode": "full",
+  "time": "2026-10-10T04:35:20.370889+00:00"
+ },
+ "netzfehler": [
+  "RB-Jerseys",
+  "The Third Kit"
+ ],
+ "platforms": {
+  "https://1kloppshop.com": "shopify",
+  "https://3kots.com": "woo:https://3kots.com/wp-json/wc/store/v1/products",
+  "https://backtothefootball.com": "woo:https://backtothefootball.com/wp-json/wc/store/v1/products",
+  "https://belgianfootballclassics.com": "shopify",
+  "https://buysellfootballshirts.co.uk": "shopify",
+  "https://calciovintage.com": "shopify",
+  "https://casualfootballshirts.co.uk": "shopify",
+  "https://classic-shirts.com": "unbekannt",
+  "https://classic11.com": "shopify",
+  "https://classicpitchwear.com": "shopify",
+  "https://classicshirts-fc.com": "unbekannt",
+  "https://cultfootball.co.uk": "shopify",
+  "https://dinfodboldtroje.com": "shopify",
+  "https://esdeepoca.com": "shopify",
+  "https://euromexsports.com": "shopify",
+  "https://first11shirts.com": "shopify",
+  "https://firststreet.store": "shopify",
+  "https://footballandvintageamsterdam.com": "woo:https://footballandvintageamsterdam.com/wp-json/wc/store/v1/products",
+  "https://footballfinds.co.uk": "shopify",
+  "https://footballfinery.co.uk": "shopify",
+  "https://footballlegendskits.com": "unbekannt",
+  "https://footballsecondhand.com": "woo:https://footballsecondhand.com/wp-json/wc/store/v1/products",
+  "https://footballshirtcollective.com": "shopify",
+  "https://footballshirtkingdom.com": "shopify",
+  "https://footballshirts.com": "shopify",
+  "https://footballshirtunion.com": "shopify",
+  "https://footballthrift.shop": "woo:https://footballthrift.shop/wp-json/wc/store/v1/products",
+  "https://footballtrikotsberlin.com": "shopify",
+  "https://foreversoccerjerseys.com": "shopify",
+  "https://fshoppen.dk": "shopify",
+  "https://ftblhvn.com": "shopify",
+  "https://fulltimefits.com": "shopify",
+  "https://futmaniacos.com": "shopify",
+  "https://golacokits.com": "shopify",
+  "https://grannysfootballstore.com": "shopify",
+  "https://greensportvintage.com": "shopify",
+  "https://hetshirthuis.com": "shopify",
+  "https://houseoffootballshirts.com": "shopify",
+  "https://iconicjersey.com": "shopify",
+  "https://infinityfootballshirts.com": "shopify",
+  "https://jersely.com": "shopify",
+  "https://jerseyshermanos.com": "shopify",
+  "https://kickandrushshop.nl": "woo:https://kickandrushshop.nl/wp-json/wc/store/v1/products",
+  "https://kickitvintage.de": "shopify",
+  "https://kickoffvintage.com": "shopify",
+  "https://kitcollector.club": "shopify",
+  "https://kitfever.com": "unbekannt",
+  "https://kitlaunchfc.com": "shopify",
+  "https://lasurface.shop": "shopify",
+  "https://le7sorelle.it": "shopify",
+  "https://legacyfootballshirts.com": "shopify",
+  "https://legitfootballshirts.com": "woo:https://legitfootballshirts.com/wp-json/wc/store/v1/products",
+  "https://lockerhaus.store": "shopify",
+  "https://magliecalciovintage.it": "woo:https://magliecalciovintage.it/wp-json/wc/store/v1/products",
+  "https://modeziege.net": "shopify",
+  "https://nanosfootballjerseys.com": "shopify",
+  "https://nostalgicfootballshirts.com": "shopify",
+  "https://offsideboys.com": "shopify",
+  "https://ohcalcio.com": "shopify",
+  "https://onemoretimeshop.it": "shopify",
+  "https://originalfootball.shop": "shopify",
+  "https://pardonmykicks.se": "shopify",
+  "https://phillysoccerjerseys.com": "shopify",
+  "https://purefootballshirts.com": "shopify",
+  "https://realvintagefootball.com": "shopify",
+  "https://reshirt.dk": "unbekannt",
+  "https://retrofootballshirts.com": "shopify",
+  "https://retroriginalfootball.com": "shopify",
+  "https://retroscreamers.com": "shopify",
+  "https://retroshirts.ch": "shopify",
+  "https://saturdaysfootball.com": "shopify",
+  "https://secondhalfstore.com": "shopify",
+  "https://sg-vintage-jerseys.de": "shopify",
+  "https://shortyfootballshirts.com": "shopify",
+  "https://specialfootballshirts.com": "shopify",
+  "https://squadrafootball.com": "shopify",
+  "https://stajerseys.com": "shopify",
+  "https://sundayfootballshirts.com": "shopify",
+  "https://swiatkoszulekpilkarskich.pl": "unbekannt",
+  "https://thatvintagefootballshirt.com": "shopify",
+  "https://the12thmanretro.com": "shopify",
+  "https://thefootballmarket.com": "shopify",
+  "https://thefootballroom-mty.com": "shopify",
+  "https://thefootballshirtvault.com": "shopify",
+  "https://thefootballtemple.com": "shopify",
+  "https://thekitman97.com": "shopify",
+  "https://thesoccerarchive.com": "shopify",
+  "https://thethirdkit.co.uk": "woo:https://thethirdkit.co.uk/wp-json/wc/store/v1/products",
+  "https://tiffozifutbol.com": "shopify",
+  "https://tothejersey.com": "shopify",
+  "https://trikotparadies.shop": "shopify",
+  "https://trikotstoff.de": "shopify",
+  "https://tspncalcio.com": "shopify",
+  "https://vicefootballstore.com": "shopify",
+  "https://vintage-football-jerseys.co.uk": "shopify",
+  "https://vintageauthenticretro.com": "shopify",
+  "https://vintagehistoricsports.fr": "shopify",
+  "https://vintagekitco.com": "shopify",
+  "https://vintagescore.de": "shopify",
+  "https://vintagesportsclothing.com": "shopify",
+  "https://www.arsijstore.com": "woo:https://www.arsijstore.com/wp-json/wc/store/v1/products",
+  "https://www.cultkits.com": "shopify",
+  "https://www.firstclassfootballshirts.com": "shopify",
+  "https://www.magliecalciovintage.it": "woo:https://www.magliecalciovintage.it/wp-json/wc/store/v1/products",
+  "https://www.rb-jerseys.com": "woo:https://www.rb-jerseys.com/wp-json/wc/store/v1/products",
+  "https://www.retrofootballkits.co.uk": "unbekannt",
+  "https://www.retrofootballshirtstore.com": "unbekannt",
+  "https://www.senseofgoal.com": "shopify",
+  "https://www.thefootballboutique.com": "unbekannt",
+  "https://www.thefootballidiots.com": "shopify",
+  "https://www.thehoffclassics.com": "unbekannt",
+  "https://www.thekitdealer.com": "shopify",
+  "https://www.theshirtcollectors.co.uk": "shopify",
+  "https://www.throwbackjerseysnz.com": "unbekannt",
+  "https://www.topbinzfootballshirts.co.uk": "unbekannt",
+  "https://www.trikotcult.de": "shopify",
+  "https://www.trikottrader.com": "woo:https://www.trikottrader.com/wp-json/wc/store/v1/products",
+  "https://www.vintagefootballarea.com": "shopify",
+  "https://www.vintagefootballshirts.com": "shopify",
+  "https://www.welovefootballshirts.com": "unbekannt",
+  "https://xn--retrotrjer-6cb.dk": "shopify",
+  "https://yourvintagefootballkit.com": "shopify"
+ },
+ "push_abos": {
+  "acee4be27355439b": {
+   "blob": "v1.BC9-MFjyJDNMhiT26D1uPgJe0zDnyKNDm5xmyDxnWlayUcAvv44wjkKNwKeFSFGuAA2P9GU80y3DWr9hDDScNXI.rSQ5SofXJxhlq0DN.JrKw24cpNVdRuRG0ydPwHJN2Ll4cbTfR6dqo1lDfK5xtZuz7Hbhk3JaA2YoUWNVjycXxPyCtEzEE0KVhu0kdsdeQLcCAjtogPpFqmWUd0yw_wmNVj5Qh4UhmuUUPZuKIeIzbUeNhZl0VnkWJPc2ZkS5k1MCWC2RaPtl8_9j_xh9t1l8jXs7roQXtZl8P6eD8YJIaQDtLLoNqNXJuCPbufAKr2WzLLxmowDTwBDuZGBjQU9_0E5w7eMLBg0zj0nZ39CX2DlObMatHz6iUD9zsKZ7Rk0JglcaEIdnP2QsiclM9sq9MhWQYgBU_StXzywBrHsbK35PwkhSe1w8BC10ZrlN51U7MvHsjmsMVB4CBRlAmsZoivZCxbBsla3ZBivjVdga9d1VGpnx84t9Mg8AE0zv_v7LKXo5dIZ1l3L-KY9BUgsgXvf2CYUgYXlx8tUe-UMeAkmLyhxeZQQbpWkzBz74H-s90hhT1SPdd7vA9YraqRW0f8fVSCu9L7wsXjRjyjRnRs1XREg",
+   "issue": 31,
+   "seit": "2026-10-05T09:50:46.970370+00:00"
+  },
+  "bb02b0ab8298dfe5": {
+   "blob": "v1.BJ42uA-gW8Iyg3rT-89lffrlkRYPcWuEWUy5YwwOOfffQbIC8CEmhpSbioBKMvz8QXcj72ljIoX1XmolCAb9hyU.ffMicyuAWBIqy8tf.79lRn0YIZbdSWE67jRtNRUb5J0QXL2gevpZ973sx3ZVKzJHSo7EL3ba3qV5L7krLvcoe9UuY2JYUoiyEdme4F5mIiLeyko-sNgRFLg6ETObU_pN86Ex6Fm96kVe-OpJZqHsxNoI3ECY5C7vdUwGMckdM9rWZROyD4-cq7Tf4SavgSVeSC9DWLDjbpt-oiqJvZHCQof3x7AVcjw-iIEA_R2JrPxp0MObYVuee7WfwhT8iDbnq9mjAyFEKpDHHc0VJn-RXf2qbDqWx3ZyZ55h-SLkSv1baTvShk9MGF0AJTrPWG6GbeflJGWg0dYX5_JuQAZblJDRVDGtHstlQBGwlsITqNF_ifvceNTucyJusP1k4uAUXxa270cbaM0go8d3Tij7BNoaYNmlxucVIt--yxG07DnqQEJ7zgfLUhujP8Z7tDfcUuju9tt-m782CGYKN5sYTSavoX3e8J3iw6rux7GepVm3Nq70fzoGnF7vDwJ5o4LpgMLcmtiydiC7d6QDAA0-fXTcLSg",
+   "issue": 38,
+   "seit": "2026-10-07T07:05:37.686474+00:00"
+  }
+ },
+ "quellen": {
+  "liste": [
+   {
+    "anfragen": 131,
+    "fehler": "",
+    "name": "FindYourJersey",
+    "plattform": "fyj",
+    "produkte": 9772,
+    "sekunden": 260.2
+   },
+   {
+    "anfragen": 0,
+    "fehler": "deaktiviert (griechische Titel, über FYJ)",
+    "info": "",
+    "name": "Classic Football Collectibles",
+    "plattform": "aus",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 0,
+    "fehler": "deaktiviert (außerhalb Europas (MX))",
+    "info": "",
+    "name": "Es de Época",
+    "plattform": "aus",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 0,
+    "fehler": "deaktiviert (außerhalb Europas (US))",
+    "info": "",
+    "name": "Euromex Sports",
+    "plattform": "aus",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 0,
+    "fehler": "deaktiviert (außerhalb Europas (CA))",
+    "info": "",
+    "name": "FTBL HVN",
+    "plattform": "aus",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 0,
+    "fehler": "deaktiviert (außerhalb Europas (AU))",
+    "info": "",
+    "name": "First Street",
+    "plattform": "aus",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 0,
+    "fehler": "deaktiviert (Bot-Schutz (JS-Prüfung), wird bewusst nicht umgangen; Drop Sa 16 Uhr laut Nutzer; nicht bei FYJ)",
+    "info": "",
+    "name": "Football Cat",
+    "plattform": "aus",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 3,
+    "fehler": "gesperrt (HTTP 403), blockt vermutlich Server-Adressen",
+    "info": "",
+    "name": "Football Legends Kits",
+    "plattform": "unbekannt",
+    "produkte": 0,
+    "sekunden": 30.7
+   },
+   {
+    "anfragen": 0,
+    "fehler": "deaktiviert (außerhalb Europas (US))",
+    "info": "",
+    "name": "Football Shirt Union",
+    "plattform": "aus",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 0,
+    "fehler": "deaktiviert (ca. 20 % Nachbauten, FYJ sortiert die aus)",
+    "info": "",
+    "name": "Football Shirt Vintage FR",
+    "plattform": "aus",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 0,
+    "fehler": "deaktiviert (außerhalb Europas (US))",
+    "info": "",
+    "name": "Forever Soccer Jerseys",
+    "plattform": "aus",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 0,
+    "fehler": "deaktiviert (außerhalb Europas (US))",
+    "info": "",
+    "name": "Galactic Soccer Kits",
+    "plattform": "aus",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 0,
+    "fehler": "deaktiviert (außerhalb Europas (US))",
+    "info": "",
+    "name": "Golaço Kits",
+    "plattform": "aus",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 85,
+    "fehler": "geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop",
+    "info": "nur Suche (products.json gesperrt)",
+    "name": "Granny's Football Store",
+    "plattform": "shopify",
+    "produkte": 0,
+    "rhythmus": {
+     "letzte": "",
+     "neu_30": 0,
+     "neu_7": 0,
+     "tage_30": 0,
+     "text": "seit 30 Tagen nichts Neues (0 in 90 Tagen)",
+     "typ": "ruhig"
+    },
+    "sekunden": 972.2
+   },
+   {
+    "anfragen": 0,
+    "fehler": "deaktiviert (nur noch Laden in Den Haag, kein Online-Sortiment (01.10.2026))",
+    "info": "",
+    "name": "House of Football Shirts",
+    "plattform": "aus",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 0,
+    "fehler": "deaktiviert (außerhalb Europas (AU))",
+    "info": "",
+    "name": "Iconic Jersey",
+    "plattform": "aus",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 0,
+    "fehler": "deaktiviert (außerhalb Europas (US))",
+    "info": "",
+    "name": "Kit Collector",
+    "plattform": "aus",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 0,
+    "fehler": "deaktiviert (Marktplatz (Sharetribe), über FYJ)",
+    "info": "",
+    "name": "Kitts",
+    "plattform": "aus",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 0,
+    "fehler": "deaktiviert (außerhalb Europas (ID))",
+    "info": "",
+    "name": "Lockerhaus",
+    "plattform": "aus",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 0,
+    "fehler": "deaktiviert (außerhalb Europas (CA))",
+    "info": "",
+    "name": "Offside Boys",
+    "plattform": "aus",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 0,
+    "fehler": "deaktiviert (außerhalb Europas (US))",
+    "info": "",
+    "name": "Original 11vs11",
+    "plattform": "aus",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 0,
+    "fehler": "deaktiviert (vom Nutzer entfernt (wirkt unseriös))",
+    "info": "",
+    "name": "Originaltrikot",
+    "plattform": "aus",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 0,
+    "fehler": "deaktiviert (außerhalb Europas (US))",
+    "info": "",
+    "name": "Philly Soccer Jerseys",
+    "plattform": "aus",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 0,
+    "fehler": "deaktiviert (außerhalb Europas (US))",
+    "info": "",
+    "name": "Rare and Retro",
+    "plattform": "aus",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 0,
+    "fehler": "deaktiviert (außerhalb Europas (US))",
+    "info": "",
+    "name": "Retro Screamers",
+    "plattform": "aus",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 0,
+    "fehler": "deaktiviert (außerhalb Europas (US))",
+    "info": "",
+    "name": "STA Jerseys",
+    "plattform": "aus",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 0,
+    "fehler": "deaktiviert (außerhalb Europas (US))",
+    "info": "",
+    "name": "Saturdays Football",
+    "plattform": "aus",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 0,
+    "fehler": "deaktiviert (außerhalb Europas (MY))",
+    "info": "",
+    "name": "Sunday Football Shirts",
+    "plattform": "aus",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 0,
+    "fehler": "deaktiviert (außerhalb Europas (US))",
+    "info": "",
+    "name": "The Football Boutique",
+    "plattform": "aus",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 0,
+    "fehler": "deaktiviert (Nutzer 04.10.2026: Zustand durchweg schlecht, Fantasie-Flocks)",
+    "info": "",
+    "name": "The Football Market",
+    "plattform": "aus",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 0,
+    "fehler": "deaktiviert (außerhalb Europas (MX))",
+    "info": "",
+    "name": "The Football Room",
+    "plattform": "aus",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 0,
+    "fehler": "deaktiviert (außerhalb Europas (AU))",
+    "info": "",
+    "name": "The Kit Dealer",
+    "plattform": "aus",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 0,
+    "fehler": "deaktiviert (außerhalb Europas (NZ))",
+    "info": "",
+    "name": "Throwback Jerseys NZ",
+    "plattform": "aus",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 0,
+    "fehler": "deaktiviert (außerhalb Europas (US))",
+    "info": "",
+    "name": "Tiffozi Futbol",
+    "plattform": "aus",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 0,
+    "fehler": "deaktiviert (außerhalb Europas (AU))",
+    "info": "",
+    "name": "Vintage Authentic Retro",
+    "plattform": "aus",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 6,
+    "fehler": "",
+    "info": "",
+    "name": "089 Kits",
+    "plattform": "wix",
+    "produkte": 233,
+    "sekunden": 10.4
+   },
+   {
+    "anfragen": 3,
+    "fehler": "",
+    "info": "",
+    "name": "1Klopp Shop",
+    "plattform": "shopify",
+    "produkte": 207,
+    "rhythmus": {
+     "letzte": "",
+     "neu_30": 0,
+     "neu_7": 0,
+     "tage_30": 0,
+     "text": "seit 30 Tagen nichts Neues (0 in 90 Tagen)",
+     "typ": "ruhig"
+    },
+    "sekunden": 36.7
+   },
+   {
+    "anfragen": 8,
+    "fehler": "",
+    "info": "",
+    "name": "3kots",
+    "plattform": "woo",
+    "produkte": 553,
+    "sekunden": 47.3
+   },
+   {
+    "anfragen": 32,
+    "fehler": "",
+    "info": "",
+    "name": "Arsij Store",
+    "plattform": "woo",
+    "produkte": 2928,
+    "sekunden": 99.8
+   },
+   {
+    "anfragen": 47,
+    "fehler": "",
+    "info": "",
+    "name": "Back to the Football",
+    "plattform": "woo",
+    "produkte": 4403,
+    "sekunden": 114.3
+   },
+   {
+    "anfragen": 13,
+    "fehler": "",
+    "info": "",
+    "name": "Belgian Football Classics",
+    "plattform": "shopify",
+    "produkte": 2531,
+    "rhythmus": {
+     "abstand_tage": 7.0,
+     "anteil": 0.89,
+     "letzte": "2026-10-09T08:53:28+02:00",
+     "letzter_schub": "2026-10-09T08:30:41+02:00",
+     "minute": 29,
+     "neu_30": 108,
+     "neu_7": 20,
+     "schuebe": 9,
+     "tage_30": 7,
+     "termine": [
+      {
+       "anzahl": 8,
+       "minute": 29,
+       "streuung_min": 106,
+       "tag": "Fr",
+       "uhrzeit": 9,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 7 Tage: Fr gegen 09:29 (±106 Min., 8x); 9 Schübe in 90 Tagen, zuletzt 09.10. 08:30",
+     "typ": "drops",
+     "uhrzeit": 9,
+     "wochentag": "Fr"
+    },
+    "sekunden": 175.8
+   },
+   {
+    "anfragen": 68,
+    "fehler": "",
+    "info": "",
+    "name": "Bulishirts",
+    "plattform": "wix",
+    "produkte": 861,
+    "sekunden": 134.4
+   },
+   {
+    "anfragen": 8,
+    "fehler": "",
+    "info": "",
+    "name": "Buy Sell Football Shirts",
+    "plattform": "shopify",
+    "produkte": 1388,
+    "rhythmus": {
+     "letzte": "2026-10-08T13:02:35+01:00",
+     "neu_30": 27,
+     "neu_7": 11,
+     "tage_30": 9,
+     "text": "laufend: an 9 von 30 Tagen neue Artikel, 11 in 7 Tagen, 27 in 30 Tagen",
+     "typ": "laufend"
+    },
+    "sekunden": 111.5
+   },
+   {
+    "anfragen": 4,
+    "fehler": "",
+    "info": "",
+    "name": "Calcio Vintage",
+    "plattform": "shopify",
+    "produkte": 336,
+    "rhythmus": {
+     "letzte": "2026-09-07T12:28:07+01:00",
+     "neu_30": 0,
+     "neu_7": 0,
+     "tage_30": 0,
+     "text": "seit 30 Tagen nichts Neues (3 in 90 Tagen)",
+     "typ": "ruhig"
+    },
+    "sekunden": 52.5
+   },
+   {
+    "anfragen": 70,
+    "fehler": "",
+    "info": "",
+    "name": "Casual Football Shirts",
+    "plattform": "shopify",
+    "produkte": 16793,
+    "rhythmus": {
+     "letzte": "2026-10-09T16:13:40+01:00",
+     "neu_30": 1005,
+     "neu_7": 340,
+     "tage_30": 8,
+     "text": "laufend: an 8 von 30 Tagen neue Artikel, 340 in 7 Tagen, 1005 in 30 Tagen",
+     "typ": "laufend"
+    },
+    "sekunden": 969.9
+   },
+   {
+    "anfragen": 198,
+    "fehler": "",
+    "info": "",
+    "name": "Classic Football Shirts",
+    "plattform": "cfs",
+    "produkte": 2096,
+    "sekunden": 395.2
+   },
+   {
+    "anfragen": 3,
+    "fehler": "",
+    "info": "",
+    "name": "Classic Pitchwear",
+    "plattform": "shopify",
+    "produkte": 138,
+    "rhythmus": {
+     "letzte": "2026-08-15T19:04:15+02:00",
+     "neu_30": 0,
+     "neu_7": 0,
+     "tage_30": 0,
+     "text": "seit 30 Tagen nichts Neues (19 in 90 Tagen)",
+     "typ": "ruhig"
+    },
+    "sekunden": 41.7
+   },
+   {
+    "anfragen": 121,
+    "fehler": "",
+    "info": "HTTP 404 ×23",
+    "name": "Classic-Shirts",
+    "plattform": "idosell",
+    "produkte": 1510,
+    "sekunden": 297.7
+   },
+   {
+    "anfragen": 25,
+    "fehler": "",
+    "info": "",
+    "name": "Classic11",
+    "plattform": "shopify",
+    "produkte": 5705,
+    "rhythmus": {
+     "letzte": "2026-10-09T11:54:20+01:00",
+     "neu_30": 215,
+     "neu_7": 63,
+     "tage_30": 21,
+     "text": "laufend: an 21 von 30 Tagen neue Artikel, 63 in 7 Tagen, 215 in 30 Tagen",
+     "typ": "laufend"
+    },
+    "sekunden": 304.4
+   },
+   {
+    "anfragen": 0,
+    "fehler": "",
+    "info": "wird über FindYourJersey abgedeckt",
+    "name": "ClassicShirts-FC",
+    "plattform": "über FYJ",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 6,
+    "fehler": "",
+    "info": "",
+    "name": "Cult Football",
+    "plattform": "shopify",
+    "produkte": 927,
+    "rhythmus": {
+     "abstand_tage": 13.0,
+     "anteil": 0.43,
+     "letzte": "2026-09-28T15:07:01+01:00",
+     "letzter_schub": "2026-09-28T14:30:08+01:00",
+     "minute": 17,
+     "neu_30": 65,
+     "neu_7": 0,
+     "schuebe": 7,
+     "tage_30": 3,
+     "termine": [
+      {
+       "anzahl": 3,
+       "minute": 17,
+       "streuung_min": 113,
+       "tag": "Sa",
+       "uhrzeit": 10,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 13 Tage: Sa gegen 10:17 (±113 Min., 3x); 7 Schübe in 90 Tagen, zuletzt 28.09. 15:30",
+     "typ": "drops",
+     "uhrzeit": 10,
+     "wochentag": "Sa"
+    },
+    "sekunden": 84.4
+   },
+   {
+    "anfragen": 88,
+    "fehler": "",
+    "info": "",
+    "name": "Cult Kits",
+    "plattform": "shopify",
+    "produkte": 21497,
+    "rhythmus": {
+     "letzte": "2026-10-09T16:55:14+01:00",
+     "neu_30": 547,
+     "neu_7": 65,
+     "tage_30": 27,
+     "text": "laufend: an 27 von 30 Tagen neue Artikel, 65 in 7 Tagen, 547 in 30 Tagen",
+     "typ": "laufend"
+    },
+    "sekunden": 1000.8
+   },
+   {
+    "anfragen": 4,
+    "fehler": "",
+    "info": "",
+    "name": "Din Fodboldtrøje",
+    "plattform": "shopify",
+    "produkte": 277,
+    "rhythmus": {
+     "letzte": "2026-09-30T19:05:09+02:00",
+     "neu_30": 21,
+     "neu_7": 0,
+     "tage_30": 5,
+     "text": "unregelmäßig: an 5 von 30 Tagen neue Artikel, 21 in 30 Tagen, zuletzt 30.09.",
+     "typ": "unregelmäßig"
+    },
+    "sekunden": 52.0
+   },
+   {
+    "anfragen": 29,
+    "fehler": "",
+    "info": "",
+    "name": "First 11 Shirts",
+    "plattform": "shopify",
+    "produkte": 6584,
+    "rhythmus": {
+     "abstand_tage": 7.0,
+     "anteil": 1.0,
+     "letzte": "2026-10-08T18:31:10+02:00",
+     "letzter_schub": "2026-10-08T18:30:29+02:00",
+     "minute": 30,
+     "neu_30": 566,
+     "neu_7": 127,
+     "schuebe": 13,
+     "tage_30": 7,
+     "termine": [
+      {
+       "anzahl": 13,
+       "minute": 30,
+       "streuung_min": 7,
+       "tag": "Do",
+       "uhrzeit": 18,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 7 Tage: Do gegen 18:30 (±7 Min., 13x); 13 Schübe in 90 Tagen, zuletzt 08.10. 18:30",
+     "typ": "drops",
+     "uhrzeit": 18,
+     "wochentag": "Do"
+    },
+    "sekunden": 393.7
+   },
+   {
+    "anfragen": 3,
+    "fehler": "",
+    "info": "",
+    "name": "First Class Football Shirts",
+    "plattform": "shopify",
+    "produkte": 196,
+    "rhythmus": {
+     "abstand_tage": 7.7,
+     "anteil": 0.0,
+     "letzte": "2026-10-05T21:10:22+01:00",
+     "letzter_schub": "2026-10-03T22:16:11+01:00",
+     "minute": 0,
+     "neu_30": 39,
+     "neu_7": 29,
+     "schuebe": 6,
+     "tage_30": 4,
+     "termine": [],
+     "text": "Drops etwa alle 8 Tage: kein fester Wochentag; 6 Schübe in 90 Tagen, zuletzt 03.10. 23:16",
+     "typ": "drops",
+     "uhrzeit": 23,
+     "wochentag": "Sa"
+    },
+    "sekunden": 35.2
+   },
+   {
+    "anfragen": 5,
+    "fehler": "",
+    "info": "",
+    "name": "Fodbold Shoppen",
+    "plattform": "shopify",
+    "produkte": 640,
+    "rhythmus": {
+     "abstand_tage": 14.0,
+     "anteil": 1.0,
+     "letzte": "2026-09-28T07:59:10+02:00",
+     "letzter_schub": "2026-09-18T15:55:45+02:00",
+     "minute": 36,
+     "neu_30": 34,
+     "neu_7": 0,
+     "schuebe": 6,
+     "tage_30": 2,
+     "termine": [
+      {
+       "anzahl": 6,
+       "minute": 36,
+       "streuung_min": 24,
+       "tag": "Fr",
+       "uhrzeit": 15,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 14 Tage: Fr gegen 15:36 (±24 Min., 6x); 6 Schübe in 90 Tagen, zuletzt 18.09. 15:55",
+     "typ": "drops",
+     "uhrzeit": 15,
+     "wochentag": "Fr"
+    },
+    "sekunden": 54.0
+   },
+   {
+    "anfragen": 9,
+    "fehler": "",
+    "info": "",
+    "name": "Football & Vintage Amsterdam",
+    "plattform": "woo",
+    "produkte": 667,
+    "sekunden": 54.0
+   },
+   {
+    "anfragen": 3,
+    "fehler": "",
+    "info": "",
+    "name": "Football Finds",
+    "plattform": "shopify",
+    "produkte": 214,
+    "rhythmus": {
+     "letzte": "2026-09-21T12:12:21+01:00",
+     "neu_30": 1,
+     "neu_7": 0,
+     "tage_30": 1,
+     "text": "unregelmäßig: an 1 von 30 Tagen neue Artikel, 1 in 30 Tagen, zuletzt 21.09.",
+     "typ": "unregelmäßig"
+    },
+    "sekunden": 39.3
+   },
+   {
+    "anfragen": 28,
+    "fehler": "",
+    "info": "",
+    "name": "Football Finery",
+    "plattform": "shopify",
+    "produkte": 6445,
+    "rhythmus": {
+     "abstand_tage": 3.0,
+     "anteil": 0.87,
+     "letzte": "2026-10-09T10:00:18+01:00",
+     "letzter_schub": "2026-10-09T09:59:28+01:00",
+     "minute": 59,
+     "neu_30": 392,
+     "neu_7": 71,
+     "schuebe": 30,
+     "tage_30": 14,
+     "termine": [
+      {
+       "anzahl": 13,
+       "minute": 59,
+       "streuung_min": 0,
+       "tag": "Di",
+       "uhrzeit": 10,
+       "verschoben": false
+      },
+      {
+       "anzahl": 13,
+       "minute": 59,
+       "streuung_min": 0,
+       "tag": "Fr",
+       "uhrzeit": 10,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 3 Tage: Di gegen 10:59 (±0 Min., 13x); Fr gegen 10:59 (±0 Min., 13x); 30 Schübe in 90 Tagen, zuletzt 09.10. 10:59",
+     "typ": "drops",
+     "uhrzeit": 10,
+     "wochentag": "Di"
+    },
+    "sekunden": 391.9
+   },
+   {
+    "anfragen": 17,
+    "fehler": "",
+    "info": "",
+    "name": "Football Second Hand",
+    "plattform": "woo",
+    "produkte": 1429,
+    "sekunden": 51.8
+   },
+   {
+    "anfragen": 17,
+    "fehler": "",
+    "info": "",
+    "name": "Football Shirt Collective",
+    "plattform": "shopify",
+    "produkte": 3723,
+    "rhythmus": {
+     "abstand_tage": 11.8,
+     "anteil": 0.33,
+     "letzte": "2026-10-07T16:16:40+01:00",
+     "letzter_schub": "2026-09-28T19:16:40+01:00",
+     "minute": 9,
+     "neu_30": 89,
+     "neu_7": 1,
+     "schuebe": 9,
+     "tage_30": 6,
+     "termine": [
+      {
+       "anzahl": 3,
+       "minute": 9,
+       "streuung_min": 421,
+       "tag": "Fr",
+       "uhrzeit": 13,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 12 Tage: Fr gegen 13:09 (±421 Min., 3x); 9 Schübe in 90 Tagen, zuletzt 28.09. 20:16",
+     "typ": "drops",
+     "uhrzeit": 13,
+     "wochentag": "Fr"
+    },
+    "sekunden": 238.3
+   },
+   {
+    "anfragen": 27,
+    "fehler": "",
+    "info": "",
+    "name": "Football Shirt Kingdom",
+    "plattform": "shopify",
+    "produkte": 6171,
+    "rhythmus": {
+     "letzte": "2026-10-09T20:13:41+01:00",
+     "neu_30": 235,
+     "neu_7": 86,
+     "tage_30": 8,
+     "text": "laufend: an 8 von 30 Tagen neue Artikel, 86 in 7 Tagen, 235 in 30 Tagen",
+     "typ": "laufend"
+    },
+    "sekunden": 332.5
+   },
+   {
+    "anfragen": 20,
+    "fehler": "",
+    "info": "",
+    "name": "Football Thrift Shop",
+    "plattform": "woo",
+    "produkte": 1785,
+    "sekunden": 63.6
+   },
+   {
+    "anfragen": 5,
+    "fehler": "",
+    "info": "",
+    "name": "Football Trikots Berlin",
+    "plattform": "shopify",
+    "produkte": 540,
+    "rhythmus": {
+     "letzte": "2026-08-20T22:42:25+02:00",
+     "neu_30": 0,
+     "neu_7": 0,
+     "tage_30": 0,
+     "text": "seit 30 Tagen nichts Neues (37 in 90 Tagen)",
+     "typ": "ruhig"
+    },
+    "sekunden": 65.8
+   },
+   {
+    "anfragen": 4,
+    "fehler": "",
+    "info": "",
+    "name": "FootballShirts.com",
+    "plattform": "shopify",
+    "produkte": 485,
+    "rhythmus": {
+     "letzte": "2026-10-07T19:28:50+02:00",
+     "neu_30": 45,
+     "neu_7": 3,
+     "tage_30": 13,
+     "text": "laufend: an 13 von 30 Tagen neue Artikel, 3 in 7 Tagen, 45 in 30 Tagen",
+     "typ": "laufend"
+    },
+    "sekunden": 39.0
+   },
+   {
+    "anfragen": 5,
+    "fehler": "",
+    "info": "",
+    "name": "Full Time Fits",
+    "plattform": "shopify",
+    "produkte": 688,
+    "rhythmus": {
+     "abstand_tage": 7.0,
+     "anteil": 0.91,
+     "letzte": "2026-10-08T16:32:54+01:00",
+     "letzter_schub": "2026-10-04T11:25:00+01:00",
+     "minute": 0,
+     "neu_30": 108,
+     "neu_7": 63,
+     "schuebe": 11,
+     "tage_30": 8,
+     "termine": [
+      {
+       "anzahl": 10,
+       "minute": 0,
+       "streuung_min": 3,
+       "tag": "So",
+       "uhrzeit": 13,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 7 Tage: So gegen 13:00 (±3 Min., 10x); 11 Schübe in 90 Tagen, zuletzt 04.10. 12:25",
+     "typ": "drops",
+     "uhrzeit": 13,
+     "wochentag": "So"
+    },
+    "sekunden": 54.1
+   },
+   {
+    "anfragen": 4,
+    "fehler": "",
+    "info": "",
+    "name": "Futmaniacos",
+    "plattform": "shopify",
+    "produkte": 334,
+    "rhythmus": {
+     "abstand_tage": 18.0,
+     "anteil": 0.0,
+     "letzte": "2026-10-01T12:42:19+02:00",
+     "letzter_schub": "2026-09-29T16:29:21+02:00",
+     "minute": 0,
+     "neu_30": 330,
+     "neu_7": 0,
+     "schuebe": 2,
+     "tage_30": 6,
+     "termine": [],
+     "text": "Drops etwa alle 18 Tage: kein fester Wochentag; 2 Schübe in 90 Tagen, zuletzt 29.09. 16:29",
+     "typ": "drops",
+     "uhrzeit": 16,
+     "wochentag": "Di"
+    },
+    "sekunden": 55.8
+   },
+   {
+    "anfragen": 9,
+    "fehler": "",
+    "info": "",
+    "name": "Green Sport Vintage",
+    "plattform": "shopify",
+    "produkte": 1556,
+    "rhythmus": {
+     "letzte": "2026-09-25T22:19:12+02:00",
+     "neu_30": 1,
+     "neu_7": 0,
+     "tage_30": 1,
+     "text": "unregelmäßig: an 1 von 30 Tagen neue Artikel, 1 in 30 Tagen, zuletzt 25.09.",
+     "typ": "unregelmäßig"
+    },
+    "sekunden": 125.5
+   },
+   {
+    "anfragen": 3,
+    "fehler": "",
+    "info": "",
+    "name": "Het Shirthuis",
+    "plattform": "shopify",
+    "produkte": 232,
+    "rhythmus": {
+     "letzte": "2026-09-05T17:47:14+02:00",
+     "neu_30": 0,
+     "neu_7": 0,
+     "tage_30": 0,
+     "text": "seit 30 Tagen nichts Neues (232 in 90 Tagen)",
+     "typ": "ruhig"
+    },
+    "sekunden": 36.9
+   },
+   {
+    "anfragen": 3,
+    "fehler": "",
+    "info": "",
+    "name": "Infinity Football Shirts",
+    "plattform": "shopify",
+    "produkte": 160,
+    "rhythmus": {
+     "letzte": "2026-09-26T12:42:43+01:00",
+     "neu_30": 2,
+     "neu_7": 0,
+     "tage_30": 1,
+     "text": "unregelmäßig: an 1 von 30 Tagen neue Artikel, 2 in 30 Tagen, zuletzt 26.09.",
+     "typ": "unregelmäßig"
+    },
+    "sekunden": 36.4
+   },
+   {
+    "anfragen": 13,
+    "fehler": "",
+    "info": "",
+    "name": "Jersely",
+    "plattform": "shopify",
+    "produkte": 2600,
+    "rhythmus": {
+     "abstand_tage": 7.0,
+     "anteil": 0.64,
+     "letzte": "2026-10-04T20:00:14+02:00",
+     "letzter_schub": "2026-10-04T20:00:03+02:00",
+     "minute": 0,
+     "neu_30": 95,
+     "neu_7": 34,
+     "schuebe": 14,
+     "tage_30": 3,
+     "termine": [
+      {
+       "anzahl": 9,
+       "minute": 0,
+       "streuung_min": 6,
+       "tag": "So",
+       "uhrzeit": 20,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 7 Tage: So gegen 20:00 (±6 Min., 9x); 14 Schübe in 90 Tagen, zuletzt 04.10. 20:00",
+     "typ": "drops",
+     "uhrzeit": 20,
+     "wochentag": "So"
+    },
+    "sekunden": 182.3
+   },
+   {
+    "anfragen": 3,
+    "fehler": "",
+    "info": "",
+    "name": "Jerseys Hermanos",
+    "plattform": "shopify",
+    "produkte": 79,
+    "rhythmus": {
+     "letzte": "2026-09-26T22:57:50+02:00",
+     "neu_30": 1,
+     "neu_7": 0,
+     "tage_30": 1,
+     "text": "unregelmäßig: an 1 von 30 Tagen neue Artikel, 1 in 30 Tagen, zuletzt 26.09.",
+     "typ": "unregelmäßig"
+    },
+    "sekunden": 33.6
+   },
+   {
+    "anfragen": 4,
+    "fehler": "",
+    "info": "",
+    "name": "Kick It Vintage",
+    "plattform": "shopify",
+    "produkte": 358,
+    "rhythmus": {
+     "abstand_tage": 20.9,
+     "anteil": 0.0,
+     "letzte": "2026-10-08T16:24:43+02:00",
+     "letzter_schub": "2026-10-06T19:55:22+02:00",
+     "minute": 0,
+     "neu_30": 80,
+     "neu_7": 31,
+     "schuebe": 4,
+     "tage_30": 5,
+     "termine": [],
+     "text": "Drops etwa alle 21 Tage: kein fester Wochentag; 4 Schübe in 90 Tagen, zuletzt 06.10. 19:55",
+     "typ": "drops",
+     "uhrzeit": 19,
+     "wochentag": "Di"
+    },
+    "sekunden": 47.9
+   },
+   {
+    "anfragen": 16,
+    "fehler": "",
+    "info": "",
+    "name": "Kick and Rush",
+    "plattform": "woo",
+    "produkte": 1368,
+    "sekunden": 56.3
+   },
+   {
+    "anfragen": 14,
+    "fehler": "",
+    "info": "",
+    "name": "Kickoff Vintage",
+    "plattform": "shopify",
+    "produkte": 2782,
+    "rhythmus": {
+     "abstand_tage": 7.0,
+     "anteil": 1.0,
+     "letzte": "2026-10-08T17:48:22+02:00",
+     "letzter_schub": "2026-10-08T17:12:41+02:00",
+     "minute": 1,
+     "neu_30": 478,
+     "neu_7": 90,
+     "schuebe": 13,
+     "tage_30": 5,
+     "termine": [
+      {
+       "anzahl": 13,
+       "minute": 1,
+       "streuung_min": 50,
+       "tag": "Do",
+       "uhrzeit": 17,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 7 Tage: Do gegen 17:01 (±50 Min., 13x); 13 Schübe in 90 Tagen, zuletzt 08.10. 17:12",
+     "typ": "drops",
+     "uhrzeit": 17,
+     "wochentag": "Do"
+    },
+    "sekunden": 161.0
+   },
+   {
+    "anfragen": 5,
+    "fehler": "",
+    "info": "",
+    "name": "Kit Launch",
+    "plattform": "shopify",
+    "produkte": 662,
+    "rhythmus": {
+     "abstand_tage": 3.2,
+     "anteil": 0.47,
+     "letzte": "2026-10-09T12:00:34+02:00",
+     "letzter_schub": "2026-10-09T12:00:02+02:00",
+     "minute": 0,
+     "neu_30": 222,
+     "neu_7": 47,
+     "schuebe": 17,
+     "tage_30": 10,
+     "termine": [
+      {
+       "anzahl": 8,
+       "minute": 0,
+       "streuung_min": 0,
+       "tag": "Fr",
+       "uhrzeit": 12,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 3 Tage: Fr gegen 12:00 (±0 Min., 8x); 17 Schübe in 90 Tagen, zuletzt 09.10. 12:00",
+     "typ": "drops",
+     "uhrzeit": 12,
+     "wochentag": "Fr"
+    },
+    "sekunden": 51.0
+   },
+   {
+    "anfragen": 3,
+    "fehler": "",
+    "info": "",
+    "name": "La Surface",
+    "plattform": "shopify",
+    "produkte": 172,
+    "rhythmus": {
+     "letzte": "2026-08-20T17:54:36+02:00",
+     "neu_30": 0,
+     "neu_7": 0,
+     "tage_30": 0,
+     "text": "seit 30 Tagen nichts Neues (95 in 90 Tagen)",
+     "typ": "ruhig"
+    },
+    "sekunden": 42.1
+   },
+   {
+    "anfragen": 52,
+    "fehler": "",
+    "info": "",
+    "name": "Le 7 Sorelle",
+    "plattform": "shopify",
+    "produkte": 12337,
+    "rhythmus": {
+     "letzte": "2026-10-07T23:24:20+02:00",
+     "neu_30": 167,
+     "neu_7": 75,
+     "tage_30": 10,
+     "text": "laufend: an 10 von 30 Tagen neue Artikel, 75 in 7 Tagen, 167 in 30 Tagen",
+     "typ": "laufend"
+    },
+    "sekunden": 717.7
+   },
+   {
+    "anfragen": 6,
+    "fehler": "",
+    "info": "",
+    "name": "Legacy Football Shirts",
+    "plattform": "shopify",
+    "produkte": 795,
+    "rhythmus": {
+     "abstand_tage": 8.4,
+     "anteil": 0.44,
+     "letzte": "2026-10-08T18:34:38+02:00",
+     "letzter_schub": "2026-10-08T18:30:06+02:00",
+     "minute": 34,
+     "neu_30": 137,
+     "neu_7": 55,
+     "schuebe": 9,
+     "tage_30": 6,
+     "termine": [
+      {
+       "anzahl": 4,
+       "minute": 34,
+       "streuung_min": 134,
+       "tag": "So",
+       "uhrzeit": 19,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 8 Tage: So gegen 19:34 (±134 Min., 4x); 9 Schübe in 90 Tagen, zuletzt 08.10. 18:30",
+     "typ": "drops",
+     "uhrzeit": 19,
+     "wochentag": "So"
+    },
+    "sekunden": 83.5
+   },
+   {
+    "anfragen": 4,
+    "fehler": "",
+    "info": "",
+    "name": "Legit Football Shirts",
+    "plattform": "woo",
+    "produkte": 163,
+    "sekunden": 27.7
+   },
+   {
+    "anfragen": 23,
+    "fehler": "",
+    "info": "",
+    "name": "Lineup Vintage",
+    "plattform": "wix",
+    "produkte": 2174,
+    "sekunden": 44.4
+   },
+   {
+    "anfragen": 67,
+    "fehler": "",
+    "info": "",
+    "name": "Maglie Calcio Vintage",
+    "plattform": "woo",
+    "produkte": 6466,
+    "sekunden": 232.4
+   },
+   {
+    "anfragen": 3,
+    "fehler": "",
+    "info": "",
+    "name": "Modeziege",
+    "plattform": "shopify",
+    "produkte": 182,
+    "rhythmus": {
+     "letzte": "2026-10-08T16:15:38+02:00",
+     "neu_30": 26,
+     "neu_7": 19,
+     "tage_30": 6,
+     "text": "unregelmäßig: an 6 von 30 Tagen neue Artikel, 26 in 30 Tagen, zuletzt 08.10.",
+     "typ": "unregelmäßig"
+    },
+    "sekunden": 37.4
+   },
+   {
+    "anfragen": 5,
+    "fehler": "",
+    "info": "",
+    "name": "Nanos Football Jerseys",
+    "plattform": "shopify",
+    "produkte": 608,
+    "rhythmus": {
+     "abstand_tage": 7.0,
+     "anteil": 0.67,
+     "letzte": "2026-10-05T19:00:27+02:00",
+     "letzter_schub": "2026-10-05T19:00:01+02:00",
+     "minute": 0,
+     "neu_30": 139,
+     "neu_7": 27,
+     "schuebe": 6,
+     "tage_30": 5,
+     "termine": [
+      {
+       "anzahl": 4,
+       "minute": 0,
+       "streuung_min": 0,
+       "tag": "Mo",
+       "uhrzeit": 19,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 7 Tage: Mo gegen 19:00 (±0 Min., 4x); 6 Schübe in 90 Tagen, zuletzt 05.10. 19:00",
+     "typ": "drops",
+     "uhrzeit": 19,
+     "wochentag": "Mo"
+    },
+    "sekunden": 59.2
+   },
+   {
+    "anfragen": 8,
+    "fehler": "",
+    "info": "",
+    "name": "Nostalgic Football Shirts",
+    "plattform": "shopify",
+    "produkte": 1260,
+    "rhythmus": {
+     "abstand_tage": 14.0,
+     "anteil": 0.8,
+     "letzte": "2026-10-03T11:43:28+02:00",
+     "letzter_schub": "2026-10-03T11:41:09+02:00",
+     "minute": 1,
+     "neu_30": 120,
+     "neu_7": 60,
+     "schuebe": 5,
+     "tage_30": 2,
+     "termine": [
+      {
+       "anzahl": 4,
+       "minute": 1,
+       "streuung_min": 35,
+       "tag": "Sa",
+       "uhrzeit": 12,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 14 Tage: Sa gegen 12:01 (±35 Min., 4x); 5 Schübe in 90 Tagen, zuletzt 03.10. 11:41",
+     "typ": "drops",
+     "uhrzeit": 12,
+     "wochentag": "Sa"
+    },
+    "sekunden": 93.8
+   },
+   {
+    "anfragen": 3,
+    "fehler": "",
+    "info": "",
+    "name": "Oh Calcio",
+    "plattform": "shopify",
+    "produkte": 221,
+    "rhythmus": {
+     "letzte": "2026-09-30T16:44:07+02:00",
+     "neu_30": 120,
+     "neu_7": 0,
+     "tage_30": 4,
+     "text": "unregelmäßig: an 4 von 30 Tagen neue Artikel, 120 in 30 Tagen, zuletzt 30.09.",
+     "typ": "unregelmäßig"
+    },
+    "sekunden": 42.9
+   },
+   {
+    "anfragen": 3,
+    "fehler": "",
+    "info": "",
+    "name": "One More Time",
+    "plattform": "shopify",
+    "produkte": 189,
+    "rhythmus": {
+     "letzte": "2026-09-26T17:31:32+02:00",
+     "neu_30": 1,
+     "neu_7": 0,
+     "tage_30": 1,
+     "text": "unregelmäßig: an 1 von 30 Tagen neue Artikel, 1 in 30 Tagen, zuletzt 26.09.",
+     "typ": "unregelmäßig"
+    },
+    "sekunden": 41.7
+   },
+   {
+    "anfragen": 3,
+    "fehler": "",
+    "info": "",
+    "name": "Original Football Shop",
+    "plattform": "shopify",
+    "produkte": 132,
+    "rhythmus": {
+     "abstand_tage": 7.0,
+     "anteil": 0.0,
+     "letzte": "2026-10-09T14:00:35+02:00",
+     "letzter_schub": "2026-10-09T13:59:58+02:00",
+     "minute": 0,
+     "neu_30": 65,
+     "neu_7": 38,
+     "schuebe": 2,
+     "tage_30": 2,
+     "termine": [],
+     "text": "Drops etwa alle 7 Tage: kein fester Wochentag; 2 Schübe in 90 Tagen, zuletzt 09.10. 13:59",
+     "typ": "drops",
+     "uhrzeit": 13,
+     "wochentag": "Fr"
+    },
+    "sekunden": 39.7
+   },
+   {
+    "anfragen": 6,
+    "fehler": "",
+    "info": "",
+    "name": "Pardon My Kicks",
+    "plattform": "shopify",
+    "produkte": 901,
+    "rhythmus": {
+     "letzte": "2026-10-09T19:57:50+02:00",
+     "neu_30": 114,
+     "neu_7": 27,
+     "tage_30": 6,
+     "text": "unregelmäßig: an 6 von 30 Tagen neue Artikel, 114 in 30 Tagen, zuletzt 09.10.",
+     "typ": "unregelmäßig"
+    },
+    "sekunden": 80.1
+   },
+   {
+    "anfragen": 8,
+    "fehler": "",
+    "info": "",
+    "name": "Pure Football Shirts",
+    "plattform": "shopify",
+    "produkte": 1485,
+    "rhythmus": {
+     "letzte": "2026-10-09T13:19:58+02:00",
+     "neu_30": 62,
+     "neu_7": 58,
+     "tage_30": 5,
+     "text": "unregelmäßig: an 5 von 30 Tagen neue Artikel, 62 in 30 Tagen, zuletzt 09.10.",
+     "typ": "unregelmäßig"
+    },
+    "sekunden": 65.5
+   },
+   {
+    "anfragen": 9,
+    "fehler": "",
+    "info": "",
+    "name": "RB-Jerseys",
+    "plattform": "woo",
+    "produkte": 608,
+    "sekunden": 32.6
+   },
+   {
+    "anfragen": 79,
+    "fehler": "",
+    "info": "",
+    "name": "ReShirt",
+    "plattform": "smartweb",
+    "produkte": 8,
+    "sekunden": 156.2
+   },
+   {
+    "anfragen": 10,
+    "fehler": "",
+    "info": "",
+    "name": "Real Vintage Football",
+    "plattform": "shopify",
+    "produkte": 1941,
+    "rhythmus": {
+     "abstand_tage": 25.0,
+     "anteil": 0.0,
+     "letzte": "2026-09-10T09:08:19+02:00",
+     "letzter_schub": "2026-09-09T18:24:31+02:00",
+     "minute": 0,
+     "neu_30": 6,
+     "neu_7": 0,
+     "schuebe": 3,
+     "tage_30": 1,
+     "termine": [],
+     "text": "Drops etwa alle 25 Tage: kein fester Wochentag; 3 Schübe in 90 Tagen, zuletzt 09.09. 18:24",
+     "typ": "drops",
+     "uhrzeit": 18,
+     "wochentag": "Mi"
+    },
+    "sekunden": 121.9
+   },
+   {
+    "anfragen": 6,
+    "fehler": "",
+    "info": "",
+    "name": "RetrOriginalFootball",
+    "plattform": "shopify",
+    "produkte": 891,
+    "rhythmus": {
+     "abstand_tage": 52.0,
+     "anteil": 0.0,
+     "letzte": "2026-09-18T11:10:12+02:00",
+     "letzter_schub": "2026-09-13T18:14:50+02:00",
+     "minute": 0,
+     "neu_30": 102,
+     "neu_7": 0,
+     "schuebe": 2,
+     "tage_30": 2,
+     "termine": [],
+     "text": "Drops etwa alle 52 Tage: kein fester Wochentag; 2 Schübe in 90 Tagen, zuletzt 13.09. 18:14",
+     "typ": "drops",
+     "uhrzeit": 18,
+     "wochentag": "So"
+    },
+    "sekunden": 72.4
+   },
+   {
+    "anfragen": 0,
+    "fehler": "",
+    "info": "wird über FindYourJersey abgedeckt",
+    "name": "Retro Football Shirt Store",
+    "plattform": "über FYJ",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 4,
+    "fehler": "",
+    "info": "",
+    "name": "Retro Football Shirts",
+    "plattform": "shopify",
+    "produkte": 313,
+    "rhythmus": {
+     "letzte": "2026-09-14T10:46:15+01:00",
+     "neu_30": 1,
+     "neu_7": 0,
+     "tage_30": 1,
+     "text": "unregelmäßig: an 1 von 30 Tagen neue Artikel, 1 in 30 Tagen, zuletzt 14.09.",
+     "typ": "unregelmäßig"
+    },
+    "sekunden": 56.0
+   },
+   {
+    "anfragen": 38,
+    "fehler": "",
+    "info": "",
+    "name": "Retroshirts CH",
+    "plattform": "shopify",
+    "produkte": 8786,
+    "rhythmus": {
+     "abstand_tage": 7.0,
+     "anteil": 1.0,
+     "letzte": "2026-10-09T12:30:29+02:00",
+     "letzter_schub": "2026-10-09T12:30:03+02:00",
+     "minute": 30,
+     "neu_30": 305,
+     "neu_7": 61,
+     "schuebe": 13,
+     "tage_30": 7,
+     "termine": [
+      {
+       "anzahl": 13,
+       "minute": 30,
+       "streuung_min": 0,
+       "tag": "Fr",
+       "uhrzeit": 12,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 7 Tage: Fr gegen 12:30 (±0 Min., 13x); 13 Schübe in 90 Tagen, zuletzt 09.10. 12:30",
+     "typ": "drops",
+     "uhrzeit": 12,
+     "wochentag": "Fr"
+    },
+    "sekunden": 461.2
+   },
+   {
+    "anfragen": 5,
+    "fehler": "",
+    "info": "",
+    "name": "Retrotrøjer",
+    "plattform": "shopify",
+    "produkte": 606,
+    "rhythmus": {
+     "letzte": "2026-10-08T20:03:36+02:00",
+     "neu_30": 47,
+     "neu_7": 3,
+     "tage_30": 11,
+     "text": "laufend: an 11 von 30 Tagen neue Artikel, 3 in 7 Tagen, 47 in 30 Tagen",
+     "typ": "laufend"
+    },
+    "sekunden": 70.5
+   },
+   {
+    "anfragen": 3,
+    "fehler": "",
+    "info": "",
+    "name": "SG Vintage Jerseys",
+    "plattform": "shopify",
+    "produkte": 117,
+    "rhythmus": {
+     "abstand_tage": 41.0,
+     "anteil": 0.0,
+     "letzte": "2026-10-03T18:00:14+02:00",
+     "letzter_schub": "2026-10-03T18:00:03+02:00",
+     "minute": 0,
+     "neu_30": 34,
+     "neu_7": 32,
+     "schuebe": 3,
+     "tage_30": 3,
+     "termine": [],
+     "text": "Drops etwa alle 41 Tage: kein fester Wochentag; 3 Schübe in 90 Tagen, zuletzt 03.10. 18:00",
+     "typ": "drops",
+     "uhrzeit": 18,
+     "wochentag": "Sa"
+    },
+    "sekunden": 42.9
+   },
+   {
+    "anfragen": 4,
+    "fehler": "",
+    "info": "",
+    "name": "Secondhalf",
+    "plattform": "shopify",
+    "produkte": 409,
+    "rhythmus": {
+     "letzte": "2026-10-05T19:59:29+02:00",
+     "neu_30": 21,
+     "neu_7": 6,
+     "tage_30": 4,
+     "text": "unregelmäßig: an 4 von 30 Tagen neue Artikel, 21 in 30 Tagen, zuletzt 05.10.",
+     "typ": "unregelmäßig"
+    },
+    "sekunden": 44.1
+   },
+   {
+    "anfragen": 4,
+    "fehler": "",
+    "info": "",
+    "name": "Sense of Goal",
+    "plattform": "shopify",
+    "produkte": 384,
+    "rhythmus": {
+     "abstand_tage": 9.8,
+     "anteil": 0.0,
+     "letzte": "2026-09-10T16:26:18+02:00",
+     "letzter_schub": "2026-09-10T16:21:55+02:00",
+     "minute": 0,
+     "neu_30": 38,
+     "neu_7": 0,
+     "schuebe": 4,
+     "tage_30": 1,
+     "termine": [],
+     "text": "Drops etwa alle 10 Tage: kein fester Wochentag; 4 Schübe in 90 Tagen, zuletzt 10.09. 16:21",
+     "typ": "drops",
+     "uhrzeit": 16,
+     "wochentag": "Do"
+    },
+    "sekunden": 39.9
+   },
+   {
+    "anfragen": 4,
+    "fehler": "",
+    "info": "",
+    "name": "Shorty Football Shirts",
+    "plattform": "shopify",
+    "produkte": 469,
+    "rhythmus": {
+     "letzte": "2026-09-25T14:05:22+02:00",
+     "neu_30": 49,
+     "neu_7": 0,
+     "tage_30": 2,
+     "text": "unregelmäßig: an 2 von 30 Tagen neue Artikel, 49 in 30 Tagen, zuletzt 25.09.",
+     "typ": "unregelmäßig"
+    },
+    "sekunden": 45.1
+   },
+   {
+    "anfragen": 3,
+    "fehler": "",
+    "info": "",
+    "name": "Special Football Shirts",
+    "plattform": "shopify",
+    "produkte": 82,
+    "rhythmus": {
+     "letzte": "",
+     "neu_30": 0,
+     "neu_7": 0,
+     "tage_30": 0,
+     "text": "seit 30 Tagen nichts Neues (0 in 90 Tagen)",
+     "typ": "ruhig"
+    },
+    "sekunden": 41.3
+   },
+   {
+    "anfragen": 3,
+    "fehler": "",
+    "info": "",
+    "name": "Squadra Football",
+    "plattform": "shopify",
+    "produkte": 178,
+    "rhythmus": {
+     "letzte": "2026-09-09T15:39:20+01:00",
+     "neu_30": 0,
+     "neu_7": 0,
+     "tage_30": 0,
+     "text": "seit 30 Tagen nichts Neues (15 in 90 Tagen)",
+     "typ": "ruhig"
+    },
+    "sekunden": 35.2
+   },
+   {
+    "anfragen": 86,
+    "fehler": "",
+    "info": "",
+    "name": "Swiat Koszulek Pilkarskich",
+    "plattform": "prestashop",
+    "produkte": 131,
+    "sekunden": 172.7
+   },
+   {
+    "anfragen": 8,
+    "fehler": "",
+    "info": "",
+    "name": "TSPN Calcio",
+    "plattform": "shopify",
+    "produkte": 1336,
+    "rhythmus": {
+     "letzte": "2026-10-09T14:30:42+01:00",
+     "neu_30": 17,
+     "neu_7": 5,
+     "tage_30": 9,
+     "text": "laufend: an 9 von 30 Tagen neue Artikel, 5 in 7 Tagen, 17 in 30 Tagen",
+     "typ": "laufend"
+    },
+    "sekunden": 103.6
+   },
+   {
+    "anfragen": 3,
+    "fehler": "",
+    "info": "",
+    "name": "That Vintage Football Shirt",
+    "plattform": "shopify",
+    "produkte": 176,
+    "rhythmus": {
+     "letzte": "2026-09-01T10:17:38+01:00",
+     "neu_30": 0,
+     "neu_7": 0,
+     "tage_30": 0,
+     "text": "seit 30 Tagen nichts Neues (1 in 90 Tagen)",
+     "typ": "ruhig"
+    },
+    "sekunden": 42.4
+   },
+   {
+    "anfragen": 8,
+    "fehler": "",
+    "info": "",
+    "name": "The 12th Man Retro",
+    "plattform": "shopify",
+    "produkte": 1270,
+    "rhythmus": {
+     "letzte": "2026-10-01T16:18:20+01:00",
+     "neu_30": 940,
+     "neu_7": 0,
+     "tage_30": 1,
+     "text": "unregelmäßig: an 1 von 30 Tagen neue Artikel, 940 in 30 Tagen, zuletzt 01.10.",
+     "typ": "unregelmäßig"
+    },
+    "sekunden": 84.5
+   },
+   {
+    "anfragen": 4,
+    "fehler": "",
+    "info": "",
+    "name": "The Football Idiots",
+    "plattform": "shopify",
+    "produkte": 373,
+    "rhythmus": {
+     "letzte": "2026-10-09T11:54:01+02:00",
+     "neu_30": 81,
+     "neu_7": 27,
+     "tage_30": 12,
+     "text": "laufend: an 12 von 30 Tagen neue Artikel, 27 in 7 Tagen, 81 in 30 Tagen",
+     "typ": "laufend"
+    },
+    "sekunden": 45.9
+   },
+   {
+    "anfragen": 11,
+    "fehler": "",
+    "info": "",
+    "name": "The Football Temple",
+    "plattform": "shopify",
+    "produkte": 2248,
+    "rhythmus": {
+     "abstand_tage": 7.0,
+     "anteil": 0.76,
+     "letzte": "2026-10-09T20:49:54+02:00",
+     "letzter_schub": "2026-10-09T20:47:29+02:00",
+     "minute": 0,
+     "neu_30": 426,
+     "neu_7": 189,
+     "schuebe": 17,
+     "tage_30": 6,
+     "termine": [
+      {
+       "anzahl": 13,
+       "minute": 0,
+       "streuung_min": 0,
+       "tag": "Sa",
+       "uhrzeit": 13,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 7 Tage: Sa gegen 13:00 (±0 Min., 13x); 17 Schübe in 90 Tagen, zuletzt 09.10. 20:47",
+     "typ": "drops",
+     "uhrzeit": 13,
+     "wochentag": "Sa"
+    },
+    "sekunden": 151.7
+   },
+   {
+    "anfragen": 3,
+    "fehler": "",
+    "info": "",
+    "name": "The Footballshirt Vault",
+    "plattform": "shopify",
+    "produkte": 81,
+    "rhythmus": {
+     "letzte": "2026-09-17T00:10:29+02:00",
+     "neu_30": 19,
+     "neu_7": 0,
+     "tage_30": 2,
+     "text": "unregelmäßig: an 2 von 30 Tagen neue Artikel, 19 in 30 Tagen, zuletzt 17.09.",
+     "typ": "unregelmäßig"
+    },
+    "sekunden": 39.8
+   },
+   {
+    "anfragen": 0,
+    "fehler": "",
+    "info": "wird über FindYourJersey abgedeckt",
+    "name": "The Hoff Classics",
+    "plattform": "über FYJ",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 8,
+    "fehler": "",
+    "info": "",
+    "name": "The Kitman 97",
+    "plattform": "shopify",
+    "produkte": 1420,
+    "rhythmus": {
+     "abstand_tage": 7.2,
+     "anteil": 0.88,
+     "letzte": "2026-10-02T22:31:30+02:00",
+     "letzter_schub": "2026-09-30T18:23:41+02:00",
+     "minute": 52,
+     "neu_30": 66,
+     "neu_7": 0,
+     "schuebe": 8,
+     "tage_30": 4,
+     "termine": [
+      {
+       "anzahl": 7,
+       "minute": 52,
+       "streuung_min": 72,
+       "tag": "Sa",
+       "uhrzeit": 16,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 7 Tage: Sa gegen 16:52 (±72 Min., 7x); 8 Schübe in 90 Tagen, zuletzt 30.09. 18:23",
+     "typ": "drops",
+     "uhrzeit": 16,
+     "wochentag": "Sa"
+    },
+    "sekunden": 112.4
+   },
+   {
+    "anfragen": 6,
+    "fehler": "",
+    "info": "",
+    "name": "The Shirt Collectors",
+    "plattform": "shopify",
+    "produkte": 833,
+    "rhythmus": {
+     "letzte": "",
+     "neu_30": 0,
+     "neu_7": 0,
+     "tage_30": 0,
+     "text": "seit 30 Tagen nichts Neues (0 in 90 Tagen)",
+     "typ": "ruhig"
+    },
+    "sekunden": 69.4
+   },
+   {
+    "anfragen": 19,
+    "fehler": "",
+    "info": "",
+    "name": "The Soccer Archive",
+    "plattform": "shopify",
+    "produkte": 4101,
+    "rhythmus": {
+     "letzte": "2026-10-09T16:23:14+01:00",
+     "neu_30": 288,
+     "neu_7": 65,
+     "tage_30": 22,
+     "text": "laufend: an 22 von 30 Tagen neue Artikel, 65 in 7 Tagen, 288 in 30 Tagen",
+     "typ": "laufend"
+    },
+    "sekunden": 227.8
+   },
+   {
+    "anfragen": 15,
+    "fehler": "",
+    "info": "",
+    "name": "The Third Kit",
+    "plattform": "woo",
+    "produkte": 1294,
+    "sekunden": 54.8
+   },
+   {
+    "anfragen": 28,
+    "fehler": "",
+    "info": "",
+    "name": "To The Jersey",
+    "plattform": "shopify",
+    "produkte": 6399,
+    "rhythmus": {
+     "abstand_tage": 4.7,
+     "anteil": 0.67,
+     "letzte": "2026-10-09T17:54:17+02:00",
+     "letzter_schub": "2026-10-09T12:43:23+02:00",
+     "minute": 46,
+     "neu_30": 959,
+     "neu_7": 341,
+     "schuebe": 18,
+     "tage_30": 10,
+     "termine": [
+      {
+       "anzahl": 6,
+       "minute": 46,
+       "streuung_min": 98,
+       "tag": "Fr",
+       "uhrzeit": 14,
+       "verschoben": false
+      },
+      {
+       "anzahl": 6,
+       "minute": 52,
+       "streuung_min": 149,
+       "tag": "Sa",
+       "uhrzeit": 15,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 5 Tage: Fr gegen 14:46 (±98 Min., 6x); Sa gegen 15:52 (±149 Min., 6x); 18 Schübe in 90 Tagen, zuletzt 09.10. 12:43",
+     "typ": "drops",
+     "uhrzeit": 14,
+     "wochentag": "Fr"
+    },
+    "sekunden": 392.6
+   },
+   {
+    "anfragen": 79,
+    "fehler": "",
+    "info": "",
+    "name": "Top Vintage Football Shirts",
+    "plattform": "html",
+    "produkte": 420,
+    "sekunden": 156.7
+   },
+   {
+    "anfragen": 240,
+    "fehler": "",
+    "info": "",
+    "name": "Topbinz",
+    "plattform": "html",
+    "produkte": 9548,
+    "sekunden": 2391.0
+   },
+   {
+    "anfragen": 8,
+    "fehler": "",
+    "info": "",
+    "name": "TrikotTrader",
+    "plattform": "woo",
+    "produkte": 561,
+    "sekunden": 36.7
+   },
+   {
+    "anfragen": 3,
+    "fehler": "",
+    "info": "",
+    "name": "Trikotcult",
+    "plattform": "shopify",
+    "produkte": 238,
+    "rhythmus": {
+     "letzte": "2026-08-16T17:33:28+02:00",
+     "neu_30": 0,
+     "neu_7": 0,
+     "tage_30": 0,
+     "text": "seit 30 Tagen nichts Neues (73 in 90 Tagen)",
+     "typ": "ruhig"
+    },
+    "sekunden": 31.2
+   },
+   {
+    "anfragen": 17,
+    "fehler": "",
+    "info": "",
+    "name": "Trikotparadies",
+    "plattform": "shopify",
+    "produkte": 3631,
+    "rhythmus": {
+     "abstand_tage": 7.0,
+     "anteil": 0.93,
+     "letzte": "2026-10-09T19:00:37+02:00",
+     "letzter_schub": "2026-10-09T19:00:02+02:00",
+     "minute": 0,
+     "neu_30": 576,
+     "neu_7": 119,
+     "schuebe": 15,
+     "tage_30": 8,
+     "termine": [
+      {
+       "anzahl": 14,
+       "minute": 0,
+       "streuung_min": 0,
+       "tag": "Fr",
+       "uhrzeit": 19,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 7 Tage: Fr gegen 19:00 (±0 Min., 14x); 15 Schübe in 90 Tagen, zuletzt 09.10. 19:00",
+     "typ": "drops",
+     "uhrzeit": 19,
+     "wochentag": "Fr"
+    },
+    "sekunden": 228.5
+   },
+   {
+    "anfragen": 7,
+    "fehler": "",
+    "info": "",
+    "name": "Trikotstoff",
+    "plattform": "shopify",
+    "produkte": 1084,
+    "rhythmus": {
+     "abstand_tage": 28.1,
+     "anteil": 1.0,
+     "letzte": "2026-10-09T12:43:19+02:00",
+     "letzter_schub": "2026-10-02T14:39:23+02:00",
+     "minute": 38,
+     "neu_30": 197,
+     "neu_7": 1,
+     "schuebe": 3,
+     "tage_30": 5,
+     "termine": [
+      {
+       "anzahl": 3,
+       "minute": 38,
+       "streuung_min": 100,
+       "tag": "Fr",
+       "uhrzeit": 13,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 28 Tage: Fr gegen 13:38 (±100 Min., 3x); 3 Schübe in 90 Tagen, zuletzt 02.10. 14:39",
+     "typ": "drops",
+     "uhrzeit": 13,
+     "wochentag": "Fr"
+    },
+    "sekunden": 95.3
+   },
+   {
+    "anfragen": 5,
+    "fehler": "",
+    "info": "",
+    "name": "Vice Football Store",
+    "plattform": "shopify",
+    "produkte": 616,
+    "rhythmus": {
+     "abstand_tage": 13.9,
+     "anteil": 0.0,
+     "letzte": "2026-10-08T11:42:27+01:00",
+     "letzter_schub": "2026-10-05T12:59:56+01:00",
+     "minute": 0,
+     "neu_30": 104,
+     "neu_7": 40,
+     "schuebe": 4,
+     "tage_30": 9,
+     "termine": [],
+     "text": "Drops etwa alle 14 Tage: kein fester Wochentag; 4 Schübe in 90 Tagen, zuletzt 05.10. 13:59",
+     "typ": "drops",
+     "uhrzeit": 13,
+     "wochentag": "Mo"
+    },
+    "sekunden": 70.5
+   },
+   {
+    "anfragen": 739,
+    "fehler": "",
+    "info": "Katalog bei 25000 gekappt, ältere Artikel per Kollektionen (4) und Suche",
+    "name": "Vintage Football Area",
+    "plattform": "shopify",
+    "produkte": 25000,
+    "rhythmus": {
+     "letzte": "2026-10-09T15:55:55+02:00",
+     "neu_30": 2734,
+     "neu_7": 648,
+     "tage_30": 26,
+     "text": "laufend: an 26 von 30 Tagen neue Artikel, 648 in 7 Tagen, 2734 in 30 Tagen",
+     "typ": "laufend"
+    },
+    "sekunden": 3476.2
+   },
+   {
+    "anfragen": 6,
+    "fehler": "",
+    "info": "",
+    "name": "Vintage Football FR",
+    "plattform": "wix",
+    "produkte": 222,
+    "sekunden": 10.3
+   },
+   {
+    "anfragen": 5,
+    "fehler": "",
+    "info": "",
+    "name": "Vintage Football Jerseys",
+    "plattform": "shopify",
+    "produkte": 572,
+    "rhythmus": {
+     "letzte": "2026-09-27T11:22:55+01:00",
+     "neu_30": 16,
+     "neu_7": 0,
+     "tage_30": 3,
+     "text": "unregelmäßig: an 3 von 30 Tagen neue Artikel, 16 in 30 Tagen, zuletzt 27.09.",
+     "typ": "unregelmäßig"
+    },
+    "sekunden": 65.2
+   },
+   {
+    "anfragen": 317,
+    "fehler": "",
+    "info": "Katalog bei 25000 gekappt, ältere Artikel per Kollektionen (6) und Suche",
+    "name": "Vintage Football Shirts",
+    "plattform": "shopify",
+    "produkte": 25000,
+    "rhythmus": {
+     "letzte": "2026-10-09T16:00:01+01:00",
+     "neu_30": 868,
+     "neu_7": 163,
+     "tage_30": 22,
+     "text": "laufend: an 22 von 30 Tagen neue Artikel, 163 in 7 Tagen, 868 in 30 Tagen",
+     "typ": "laufend"
+    },
+    "sekunden": 2944.8
+   },
+   {
+    "anfragen": 7,
+    "fehler": "",
+    "info": "",
+    "name": "Vintage Historic Sports",
+    "plattform": "shopify",
+    "produkte": 1029,
+    "rhythmus": {
+     "abstand_tage": 5.3,
+     "anteil": 0.0,
+     "letzte": "2026-10-07T16:30:28+02:00",
+     "letzter_schub": "2026-10-06T17:32:24+02:00",
+     "minute": 0,
+     "neu_30": 112,
+     "neu_7": 16,
+     "schuebe": 13,
+     "tage_30": 8,
+     "termine": [],
+     "text": "Drops etwa alle 5 Tage: kein fester Wochentag; 13 Schübe in 90 Tagen, zuletzt 06.10. 17:32",
+     "typ": "drops",
+     "uhrzeit": 17,
+     "wochentag": "Di"
+    },
+    "sekunden": 97.3
+   },
+   {
+    "anfragen": 3,
+    "fehler": "",
+    "info": "",
+    "name": "Vintage Kit Co",
+    "plattform": "shopify",
+    "produkte": 101,
+    "rhythmus": {
+     "letzte": "2026-09-13T20:38:47+01:00",
+     "neu_30": 35,
+     "neu_7": 0,
+     "tage_30": 4,
+     "text": "unregelmäßig: an 4 von 30 Tagen neue Artikel, 35 in 30 Tagen, zuletzt 13.09.",
+     "typ": "unregelmäßig"
+    },
+    "sekunden": 34.7
+   },
+   {
+    "anfragen": 12,
+    "fehler": "",
+    "info": "",
+    "name": "Vintage Sports Clothing",
+    "plattform": "shopify",
+    "produkte": 2281,
+    "rhythmus": {
+     "letzte": "",
+     "neu_30": 0,
+     "neu_7": 0,
+     "tage_30": 0,
+     "text": "seit 30 Tagen nichts Neues (0 in 90 Tagen)",
+     "typ": "ruhig"
+    },
+    "sekunden": 131.1
+   },
+   {
+    "anfragen": 6,
+    "fehler": "",
+    "info": "",
+    "name": "Vintagescore",
+    "plattform": "shopify",
+    "produkte": 994,
+    "rhythmus": {
+     "abstand_tage": 4.2,
+     "anteil": 0.43,
+     "letzte": "2026-10-02T15:54:02+02:00",
+     "letzter_schub": "2026-09-30T11:13:41+02:00",
+     "minute": 9,
+     "neu_30": 62,
+     "neu_7": 0,
+     "schuebe": 7,
+     "tage_30": 4,
+     "termine": [
+      {
+       "anzahl": 3,
+       "minute": 9,
+       "streuung_min": 350,
+       "tag": "Di",
+       "uhrzeit": 22,
+       "verschoben": false
+      }
+     ],
+     "text": "Drops etwa alle 4 Tage: Di gegen 22:09 (±350 Min., 3x); 7 Schübe in 90 Tagen, zuletzt 30.09. 11:13",
+     "typ": "drops",
+     "uhrzeit": 22,
+     "wochentag": "Di"
+    },
+    "sekunden": 68.2
+   },
+   {
+    "anfragen": 97,
+    "fehler": "",
+    "info": "",
+    "name": "Wave Memorabilia",
+    "plattform": "html",
+    "produkte": 41,
+    "sekunden": 192.4
+   },
+   {
+    "anfragen": 0,
+    "fehler": "",
+    "info": "wird über FindYourJersey abgedeckt",
+    "name": "We Love Football Shirts",
+    "plattform": "über FYJ",
+    "produkte": 0,
+    "sekunden": 0.0
+   },
+   {
+    "anfragen": 4,
+    "fehler": "",
+    "info": "",
+    "name": "Your Vintage Football Kit",
+    "plattform": "shopify",
+    "produkte": 277,
+    "rhythmus": {
+     "letzte": "2026-09-30T19:05:09+02:00",
+     "neu_30": 21,
+     "neu_7": 0,
+     "tage_30": 5,
+     "text": "unregelmäßig: an 5 von 30 Tagen neue Artikel, 21 in 30 Tagen, zuletzt 30.09.",
+     "typ": "unregelmäßig"
+    },
+    "sekunden": 45.0
+   }
+  ],
+  "zeit": "2026-10-10T04:35:20.370889+00:00"
+ },
+ "radar_checks": {
+  "1Klopp Shop": "2026-10-09T22:27:57.883350+00:00",
+  "3kots": "2026-10-09T22:27:57.883350+00:00",
+  "Arsij Store": "2026-10-09T22:27:57.883350+00:00",
+  "Back to the Football": "2026-10-09T22:27:57.883350+00:00",
+  "Belgian Football Classics": "2026-10-09T22:27:57.883350+00:00",
+  "Buy Sell Football Shirts": "2026-10-09T22:27:57.883350+00:00",
+  "Calcio Vintage": "2026-10-09T22:27:57.883350+00:00",
+  "Casual Football Shirts": "2026-10-09T22:27:57.883350+00:00",
+  "Classic Pitchwear": "2026-10-09T22:27:57.883350+00:00",
+  "Classic11": "2026-10-09T22:27:57.883350+00:00",
+  "Cult Football": "2026-10-09T22:27:57.883350+00:00",
+  "Cult Kits": "2026-10-09T22:27:57.883350+00:00",
+  "Din Fodboldtrøje": "2026-10-09T22:27:57.883350+00:00",
+  "Es de Época": "2026-10-08T13:35:45.893081+00:00",
+  "Euromex Sports": "2026-10-08T13:35:45.893081+00:00",
+  "FTBL HVN": "2026-10-08T13:35:45.893081+00:00",
+  "First 11 Shirts": "2026-10-09T22:27:57.883350+00:00",
+  "First Class Football Shirts": "2026-10-09T22:27:57.883350+00:00",
+  "First Street": "2026-10-08T13:35:45.893081+00:00",
+  "Fodbold Shoppen": "2026-10-09T22:27:57.883350+00:00",
+  "Football & Vintage Amsterdam": "2026-10-09T22:27:57.883350+00:00",
+  "Football Finds": "2026-10-09T22:27:57.883350+00:00",
+  "Football Finery": "2026-10-09T22:27:57.883350+00:00",
+  "Football Second Hand": "2026-10-09T22:27:57.883350+00:00",
+  "Football Shirt Collective": "2026-10-09T22:27:57.883350+00:00",
+  "Football Shirt Kingdom": "2026-10-09T22:27:57.883350+00:00",
+  "Football Shirt Union": "2026-10-08T13:35:45.893081+00:00",
+  "Football Thrift Shop": "2026-10-09T22:27:57.883350+00:00",
+  "Football Trikots Berlin": "2026-10-09T22:27:57.883350+00:00",
+  "FootballShirts.com": "2026-10-09T22:27:57.883350+00:00",
+  "Forever Soccer Jerseys": "2026-10-08T13:35:45.893081+00:00",
+  "Full Time Fits": "2026-10-09T22:27:57.883350+00:00",
+  "Futmaniacos": "2026-10-09T22:27:57.883350+00:00",
+  "Golaço Kits": "2026-10-08T13:35:45.893081+00:00",
+  "Granny's Football Store": "2026-10-07T14:05:44.369327+00:00",
+  "Green Sport Vintage": "2026-10-09T22:27:57.883350+00:00",
+  "Het Shirthuis": "2026-10-09T22:27:57.883350+00:00",
+  "Iconic Jersey": "2026-10-08T13:35:45.893081+00:00",
+  "Infinity Football Shirts": "2026-10-09T22:27:57.883350+00:00",
+  "Jersely": "2026-10-09T22:27:57.883350+00:00",
+  "Jerseys Hermanos": "2026-10-09T22:27:57.883350+00:00",
+  "Kick It Vintage": "2026-10-09T22:27:57.883350+00:00",
+  "Kick and Rush": "2026-10-09T22:27:57.883350+00:00",
+  "Kickoff Vintage": "2026-10-09T22:27:57.883350+00:00",
+  "Kit Collector": "2026-10-08T13:35:45.893081+00:00",
+  "Kit Launch": "2026-10-09T22:27:57.883350+00:00",
+  "La Surface": "2026-10-09T22:27:57.883350+00:00",
+  "Le 7 Sorelle": "2026-10-09T22:27:57.883350+00:00",
+  "Legacy Football Shirts": "2026-10-09T22:27:57.883350+00:00",
+  "Legit Football Shirts": "2026-10-08T11:05:34.907840+00:00",
+  "Lockerhaus": "2026-10-08T13:35:45.893081+00:00",
+  "Maglie Calcio Vintage": "2026-10-09T22:27:57.883350+00:00",
+  "Modeziege": "2026-10-09T22:27:57.883350+00:00",
+  "Nanos Football Jerseys": "2026-10-09T22:27:57.883350+00:00",
+  "Nostalgic Football Shirts": "2026-10-09T22:27:57.883350+00:00",
+  "Offside Boys": "2026-10-08T13:35:45.893081+00:00",
+  "Oh Calcio": "2026-10-09T22:27:57.883350+00:00",
+  "One More Time": "2026-10-09T22:27:57.883350+00:00",
+  "Original Football Shop": "2026-10-09T22:27:57.883350+00:00",
+  "Pardon My Kicks": "2026-10-09T22:27:57.883350+00:00",
+  "Philly Soccer Jerseys": "2026-10-08T13:35:45.893081+00:00",
+  "Pure Football Shirts": "2026-10-09T22:27:57.883350+00:00",
+  "RB-Jerseys": "2026-10-09T21:35:35.143567+00:00",
+  "Real Vintage Football": "2026-10-09T22:27:57.883350+00:00",
+  "RetrOriginalFootball": "2026-10-09T22:27:57.883350+00:00",
+  "Retro Football Shirts": "2026-10-09T22:27:57.883350+00:00",
+  "Retro Screamers": "2026-10-08T13:35:45.893081+00:00",
+  "Retroshirts CH": "2026-10-09T22:27:57.883350+00:00",
+  "Retrotrøjer": "2026-10-09T22:27:57.883350+00:00",
+  "SG Vintage Jerseys": "2026-10-09T22:27:57.883350+00:00",
+  "STA Jerseys": "2026-10-08T13:35:45.893081+00:00",
+  "Saturdays Football": "2026-10-08T13:35:45.893081+00:00",
+  "Secondhalf": "2026-10-09T22:27:57.883350+00:00",
+  "Sense of Goal": "2026-10-09T22:27:57.883350+00:00",
+  "Shorty Football Shirts": "2026-10-09T22:27:57.883350+00:00",
+  "Special Football Shirts": "2026-10-09T22:27:57.883350+00:00",
+  "Squadra Football": "2026-10-09T22:27:57.883350+00:00",
+  "Sunday Football Shirts": "2026-10-08T13:35:45.893081+00:00",
+  "TSPN Calcio": "2026-10-09T22:27:57.883350+00:00",
+  "That Vintage Football Shirt": "2026-10-09T22:27:57.883350+00:00",
+  "The 12th Man Retro": "2026-10-09T22:27:57.883350+00:00",
+  "The Football Idiots": "2026-10-09T22:27:57.883350+00:00",
+  "The Football Room": "2026-10-08T13:35:45.893081+00:00",
+  "The Football Temple": "2026-10-09T22:27:57.883350+00:00",
+  "The Footballshirt Vault": "2026-10-09T22:27:57.883350+00:00",
+  "The Kit Dealer": "2026-10-08T13:35:45.893081+00:00",
+  "The Kitman 97": "2026-10-09T22:27:57.883350+00:00",
+  "The Shirt Collectors": "2026-10-09T22:27:57.883350+00:00",
+  "The Soccer Archive": "2026-10-09T22:27:57.883350+00:00",
+  "The Third Kit": "2026-10-09T21:35:35.143567+00:00",
+  "Tiffozi Futbol": "2026-10-08T13:35:45.893081+00:00",
+  "To The Jersey": "2026-10-09T22:27:57.883350+00:00",
+  "Top Vintage Football Shirts": "2026-10-09T22:27:57.883350+00:00",
+  "Topbinz": "2026-10-09T22:27:57.883350+00:00",
+  "TrikotTrader": "2026-10-09T22:27:57.883350+00:00",
+  "Trikotcult": "2026-10-09T22:27:57.883350+00:00",
+  "Trikotparadies": "2026-10-09T22:27:57.883350+00:00",
+  "Trikotstoff": "2026-10-09T22:27:57.883350+00:00",
+  "Vice Football Store": "2026-10-09T22:27:57.883350+00:00",
+  "Vintage Authentic Retro": "2026-10-08T13:35:45.893081+00:00",
+  "Vintage Football Area": "2026-10-09T22:27:57.883350+00:00",
+  "Vintage Football Jerseys": "2026-10-09T22:27:57.883350+00:00",
+  "Vintage Football Shirts": "2026-10-09T22:27:57.883350+00:00",
+  "Vintage Historic Sports": "2026-10-09T22:27:57.883350+00:00",
+  "Vintage Kit Co": "2026-10-09T22:27:57.883350+00:00",
+  "Vintage Sports Clothing": "2026-10-09T22:27:57.883350+00:00",
+  "Vintagescore": "2026-10-09T22:27:57.883350+00:00",
+  "Your Vintage Football Kit": "2026-10-09T22:27:57.883350+00:00"
+ },
+ "radar_zeit": "2026-10-09T22:27:57.883350+00:00",
+ "sources_ok": [
+  "089 Kits",
+  "1Klopp Shop",
+  "3kots",
+  "Arsij Store",
+  "Back to the Football",
+  "Belgian Football Classics",
+  "Bulishirts",
+  "Buy Sell Football Shirts",
+  "Calcio Vintage",
+  "Casual Football Shirts",
+  "Classic Football Shirts",
+  "Classic Pitchwear",
+  "Classic-Shirts",
+  "Classic11",
+  "Cult Football",
+  "Cult Kits",
+  "Din Fodboldtrøje",
+  "Es de Época",
+  "Euromex Sports",
+  "FTBL HVN",
+  "FindYourJersey",
+  "First 11 Shirts",
+  "First Class Football Shirts",
+  "First Street",
+  "Fodbold Shoppen",
+  "Football & Vintage Amsterdam",
+  "Football Finds",
+  "Football Finery",
+  "Football Second Hand",
+  "Football Shirt Collective",
+  "Football Shirt Kingdom",
+  "Football Shirt Union",
+  "Football Thrift Shop",
+  "Football Trikots Berlin",
+  "FootballShirts.com",
+  "Forever Soccer Jerseys",
+  "Full Time Fits",
+  "Futmaniacos",
+  "Galactic Soccer Kits",
+  "Golaço Kits",
+  "Granny's Football Store",
+  "Green Sport Vintage",
+  "Het Shirthuis",
+  "Iconic Jersey",
+  "Infinity Football Shirts",
+  "Jersely",
+  "Jerseys Hermanos",
+  "Kick It Vintage",
+  "Kick and Rush",
+  "Kickoff Vintage",
+  "Kit Collector",
+  "Kit Launch",
+  "La Surface",
+  "Le 7 Sorelle",
+  "Legacy Football Shirts",
+  "Legit Football Shirts",
+  "Lineup Vintage",
+  "Lockerhaus",
+  "Maglie Calcio Vintage",
+  "Modeziege",
+  "Nanos Football Jerseys",
+  "Nostalgic Football Shirts",
+  "Offside Boys",
+  "Oh Calcio",
+  "One More Time",
+  "Original 11vs11",
+  "Original Football Shop",
+  "Originaltrikot",
+  "Pardon My Kicks",
+  "Philly Soccer Jerseys",
+  "Pure Football Shirts",
+  "RB-Jerseys",
+  "Rare and Retro",
+  "ReShirt",
+  "Real Vintage Football",
+  "RetrOriginalFootball",
+  "Retro Football Shirts",
+  "Retro Screamers",
+  "Retroshirts CH",
+  "Retrotrøjer",
+  "SG Vintage Jerseys",
+  "STA Jerseys",
+  "Saturdays Football",
+  "Secondhalf",
+  "Sense of Goal",
+  "Shorty Football Shirts",
+  "Special Football Shirts",
+  "Squadra Football",
+  "Sunday Football Shirts",
+  "Swiat Koszulek Pilkarskich",
+  "TSPN Calcio",
+  "That Vintage Football Shirt",
+  "The 12th Man Retro",
+  "The Football Boutique",
+  "The Football Idiots",
+  "The Football Market",
+  "The Football Room",
+  "The Football Temple",
+  "The Footballshirt Vault",
+  "The Kit Dealer",
+  "The Kitman 97",
+  "The Shirt Collectors",
+  "The Soccer Archive",
+  "The Third Kit",
+  "Throwback Jerseys NZ",
+  "Tiffozi Futbol",
+  "To The Jersey",
+  "Top Vintage Football Shirts",
+  "Topbinz",
+  "TrikotTrader",
+  "Trikotcult",
+  "Trikotparadies",
+  "Trikotstoff",
+  "Vice Football Store",
+  "Vintage Authentic Retro",
+  "Vintage Football Area",
+  "Vintage Football FR",
+  "Vintage Football Jerseys",
+  "Vintage Football Shirts",
+  "Vintage Historic Sports",
+  "Vintage Kit Co",
+  "Vintage Sports Clothing",
+  "Vintagescore",
+  "Wave Memorabilia",
+  "Your Vintage Football Kit"
+ ]
+}
