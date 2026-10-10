@@ -7350,7 +7350,7 @@
   "labels": [
    "Van der Vaart"
   ],
-  "last": "2026-10-10T17:38:02.247325+00:00",
+  "last": "2026-10-10T18:08:01.488913+00:00",
   "price": "198.95 EUR",
   "prios": [
    "normal"
@@ -8072,7 +8072,7 @@
   "labels": [
    "Benzema"
   ],
-  "last": "2026-10-10T17:38:02.247325+00:00",
+  "last": "2026-10-10T18:08:01.488913+00:00",
   "price": "89.99 EUR",
   "prios": [
    "normal"
@@ -8948,7 +8948,7 @@
   "labels": [
    "Barça 2008-2013"
   ],
-  "last": "2026-10-10T17:38:02.247325+00:00",
+  "last": "2026-10-10T18:08:01.488913+00:00",
   "price": "400.00 PLN",
   "prios": [
    "hoch"
@@ -9038,7 +9038,7 @@
   "labels": [
    "WM 2006"
   ],
-  "last": "2026-10-10T17:38:02.247325+00:00",
+  "last": "2026-10-10T18:08:01.488913+00:00",
   "price": "149.90 EUR",
   "prios": [
    "normal"
@@ -10033,7 +10033,7 @@
   "labels": [
    "WM 2006"
   ],
-  "last": "2026-10-10T17:38:02.247325+00:00",
+  "last": "2026-10-10T18:08:01.488913+00:00",
   "price": "199.90 EUR",
   "prios": [
    "normal"
@@ -10519,6 +10519,28 @@
   "zustand": "Very Good",
   "zustand_notiz": "Zustand: Gut – der Flock hat Gebrauchsspuren und es gibt ein paar kleine Fäden , ansonsten in gutem Vintage-Zustand (siehe Fotos). Besonderheiten: Original …"
  },
+ "jersely.com/products/brasilien-2004-auswartstrikot-ronaldinho-10-nike-xl": {
+  "first": "2026-10-10T18:08:01.488913+00:00",
+  "groesse_quelle": "auswahl",
+  "image": "https://cdn.shopify.com/s/files/1/0934/7874/8489/files/brazil-2004-away-ronaldinho-10-xl-back.jpg?v=1791640089",
+  "labels": [
+   "Nike Total 90 (2004-06)"
+  ],
+  "last": "2026-10-10T18:08:01.488913+00:00",
+  "price": "199.99 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Jersely",
+  "size": "XL",
+  "teuer": true,
+  "title": "Brasilien/Brazil – 2004 Auswärtstrikot – Ronaldinho #10 – Nike – XL",
+  "url": "https://jersely.com/products/brasilien-2004-auswartstrikot-ronaldinho-10-nike-xl",
+  "via": "direkt",
+  "warum": {
+   "Nike Total 90 (2004-06)": "Team „brazil“, Saison „2004“, Variante „auswartstrikot“, mit Flock"
+  }
+ },
  "jersely.com/products/brasilien-2004-heimtrikot-ronaldinho-10-grosse-xl-1": {
   "first": "2026-10-04T04:38:13.554139+00:00",
   "groesse_quelle": "auswahl",
@@ -10680,6 +10702,28 @@
    "WM 2006": "Team „england“, Saison „2006“, Variante „heimtrikot“, mit Flock"
   },
   "weg": "2026-10-09T04:34:41.668090+00:00"
+ },
+ "jersely.com/products/fc-barcelona-2004-05-drittes-trikot-ronaldinho-10-2xl-1": {
+  "first": "2026-10-10T18:08:01.488913+00:00",
+  "groesse_quelle": "auswahl",
+  "image": "https://cdn.shopify.com/s/files/1/0934/7874/8489/files/IMG_2060_b8ffa242-afb3-4406-8def-4997abc60d15.jpg?v=1791642965",
+  "labels": [
+   "Nike Total 90 (2004-06)"
+  ],
+  "last": "2026-10-10T18:08:01.488913+00:00",
+  "price": "249.99 EUR",
+  "prios": [
+   "normal"
+  ],
+  "shop": "Jersely",
+  "size": "XXL",
+  "teuer": true,
+  "title": "FC Barcelona 2004/05 Drittes Trikot – Ronaldinho #10 – 2XL",
+  "url": "https://jersely.com/products/fc-barcelona-2004-05-drittes-trikot-ronaldinho-10-2xl-1",
+  "via": "direkt",
+  "warum": {
+   "Nike Total 90 (2004-06)": "Team „barcelona“, Saison „2004/05“, Variante „drittes“, mit Flock"
+  }
  },
  "jersely.com/products/fc-barcelona-2010-11-auswartstrikot-langarm-messi-10-xxl": {
   "first": "2026-09-30T22:29:38.239492+00:00",
@@ -10870,7 +10914,7 @@
   "labels": [
    "WM 2006"
   ],
-  "last": "2026-10-10T17:38:02.247325+00:00",
+  "last": "2026-10-10T18:08:01.488913+00:00",
   "price": "109.00 EUR",
   "prios": [
    "normal"
@@ -10895,7 +10939,7 @@
   "labels": [
    "Henry"
   ],
-  "last": "2026-10-10T17:38:02.247325+00:00",
+  "last": "2026-10-10T18:08:01.488913+00:00",
   "price": "199.00 EUR",
   "prios": [
    "normal"
@@ -11215,7 +11259,7 @@
   "labels": [
    "Ribéry"
   ],
-  "last": "2026-10-10T17:38:02.247325+00:00",
+  "last": "2026-10-10T18:08:01.488913+00:00",
   "price": "129.99 EUR",
   "prios": [
    "normal"
@@ -13728,7 +13772,7 @@
   "labels": [
    "Henry"
   ],
-  "last": "2026-10-10T17:38:02.247325+00:00",
+  "last": "2026-10-10T18:08:01.488913+00:00",
   "price": "134.95 EUR",
   "prios": [
    "normal"
@@ -15639,7 +15683,7 @@
    "Henry",
    "Nike Total 90 (2004-06)"
   ],
-  "last": "2026-10-10T17:38:02.247325+00:00",
+  "last": "2026-10-10T18:08:01.488913+00:00",
   "price": "163.95 EUR",
   "prios": [
    "normal"
@@ -15763,7 +15807,7 @@
   "labels": [
    "Ribéry"
   ],
-  "last": "2026-10-10T17:38:02.247325+00:00",
+  "last": "2026-10-10T18:08:01.488913+00:00",
   "price": "84.99 EUR",
   "prios": [
    "normal"
@@ -15787,7 +15831,7 @@
   "labels": [
    "Ribéry"
   ],
-  "last": "2026-10-10T17:38:02.247325+00:00",
+  "last": "2026-10-10T18:08:01.488913+00:00",
   "price": "89.99 EUR",
   "prios": [
    "normal"
@@ -16719,7 +16763,7 @@
   "labels": [
    "WM 2006"
   ],
-  "last": "2026-10-10T17:38:02.247325+00:00",
+  "last": "2026-10-10T18:08:01.488913+00:00",
   "price": "114.95 EUR",
   "prios": [
    "normal"
@@ -16793,7 +16837,7 @@
   "labels": [
    "WM 2006"
   ],
-  "last": "2026-10-10T17:38:02.247325+00:00",
+  "last": "2026-10-10T18:08:01.488913+00:00",
   "price": "359.99 EUR",
   "prios": [
    "normal"
@@ -16818,7 +16862,7 @@
   "labels": [
    "WM 2006"
   ],
-  "last": "2026-10-10T17:38:02.247325+00:00",
+  "last": "2026-10-10T18:08:01.488913+00:00",
   "price": "125.00 EUR",
   "prios": [
    "normal"
@@ -16843,7 +16887,7 @@
   "labels": [
    "Benzema"
   ],
-  "last": "2026-10-10T17:38:02.247325+00:00",
+  "last": "2026-10-10T18:08:01.488913+00:00",
   "price": "99.00 EUR",
   "prios": [
    "normal"
@@ -17192,7 +17236,7 @@
   "labels": [
    "Nike Total 90 (2004-06)"
   ],
-  "last": "2026-10-10T17:38:02.247325+00:00",
+  "last": "2026-10-10T18:08:01.488913+00:00",
   "price": "219.95 EUR",
   "prios": [
    "normal"
@@ -17241,7 +17285,7 @@
   "labels": [
    "Frenkie de Jong"
   ],
-  "last": "2026-10-10T17:38:02.247325+00:00",
+  "last": "2026-10-10T18:08:01.488913+00:00",
   "price": "109.95 EUR",
   "prios": [
    "normal"
@@ -17265,7 +17309,7 @@
   "labels": [
    "HSV 1990-2016"
   ],
-  "last": "2026-10-10T17:38:02.247325+00:00",
+  "last": "2026-10-10T18:08:01.488913+00:00",
   "price": "238.95 EUR",
   "prios": [
    "normal"
@@ -22006,7 +22050,7 @@
   "labels": [
    "Nike Total 90 (2004-06)"
   ],
-  "last": "2026-10-10T17:38:02.247325+00:00",
+  "last": "2026-10-10T18:08:01.488913+00:00",
   "price": "129.99 GBP",
   "prios": [
    "normal"
@@ -22450,7 +22494,7 @@
   "labels": [
    "Henry"
   ],
-  "last": "2026-10-10T17:38:02.247325+00:00",
+  "last": "2026-10-10T18:08:01.488913+00:00",
   "price": "274.99 EUR",
   "prios": [
    "normal"
@@ -24002,7 +24046,7 @@
   "labels": [
    "Nike Total 90 (2004-06)"
   ],
-  "last": "2026-10-10T17:38:02.247325+00:00",
+  "last": "2026-10-10T18:08:01.488913+00:00",
   "price": "269.00 EUR",
   "prios": [
    "normal"
@@ -24107,7 +24151,7 @@
   "labels": [
    "WM 2006"
   ],
-  "last": "2026-10-10T17:38:02.247325+00:00",
+  "last": "2026-10-10T18:08:01.488913+00:00",
   "price": "120.00 EUR",
   "prios": [
    "normal"
