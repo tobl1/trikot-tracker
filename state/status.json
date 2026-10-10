@@ -3299,16 +3299,20 @@
    "neu": 0,
    "still": 0,
    "zeit": "2026-10-10T19:38:02.380165+00:00"
+  },
+  {
+   "modus": "priority",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-10T19:48:06.267329+00:00"
   }
  ],
  "last_full": "2026-10-10T04:35:20.370889+00:00",
  "last_run": {
-  "mode": "drop",
-  "time": "2026-10-10T19:38:02.380165+00:00"
+  "mode": "priority",
+  "time": "2026-10-10T19:48:06.267329+00:00"
  },
- "netzfehler": [
-  "RB-Jerseys"
- ],
+ "netzfehler": [],
  "platforms": {
   "https://1kloppshop.com": "shopify",
   "https://3kots.com": "woo:https://3kots.com/wp-json/wc/store/v1/products",

@@ -313,6 +313,16 @@
   ],
   "quelle": "Saturdays Football"
  },
+ "Seitenprüfung|classic-shirts.com: 1 Seite(n) nicht prüfbar (Verbindung ×1)": {
+  "anzahl": 1,
+  "erst": "2026-10-10T19:48:06.267329+00:00",
+  "letzt": "2026-10-10T19:48:06.267329+00:00",
+  "meldung": "classic-shirts.com: 1 Seite(n) nicht prüfbar (Verbindung ×1)",
+  "modi": [
+   "priority"
+  ],
+  "quelle": "Seitenprüfung"
+ },
  "Seitenprüfung|classic-shirts.com: 75 Seite(n) nicht prüfbar (Verbindung ×75)": {
   "anzahl": 1,
   "erst": "2026-10-06T04:42:49.641220+00:00",
