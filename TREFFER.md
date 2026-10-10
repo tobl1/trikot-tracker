@@ -1,6 +1,6 @@
 # Trikot-Tracker
 
-Stand: 10.10.2026 06:40 Uhr (full), 304 aktuelle Treffer in XL/XXL
+Stand: 10.10.2026 09:08 Uhr (drop), 305 aktuelle Treffer in XL/XXL
 
 ## Thiago (2)
 
@@ -15,7 +15,7 @@ Stand: 10.10.2026 06:40 Uhr (full), 304 aktuelle Treffer in XL/XXL
 |---|---|---|---|---|---|
 | [FC Barcelona 2012/13 Away Shirt (XL)](https://secondhalfstore.com/products/fc-barcelona-2012-13-away-shirt-xl) | XL |  | 59.95 EUR | Secondhalf | 08.10. |
 | [2008-09 FC BARCELONA SHIRT XL](https://classic-shirts.com/product-eng-303089-2008-09-FC-BARCELONA-SHIRT-XL.html) | XL | 8/10 | £99.99 | Classic-Shirts | 05.10. |
-| [Koszulka piłkarska FC Barcelona 2009/10 Away [XL]](https://footballthrift.shop/koszulka-pilkarska-fc-barcelona-2009-10-away-xl/) | XL |  | 105.00 USD | Football Thrift Shop | 05.10. |
+| [Koszulka piłkarska FC Barcelona 2009/10 Away [XL]](https://footballthrift.shop/koszulka-pilkarska-fc-barcelona-2009-10-away-xl/) | XL |  | 400.00 PLN | Football Thrift Shop | 05.10. |
 | [FC Barcelona 08/09 Auswärts XL](https://ohcalcio.com/products/barca-auswarts) | XL | 9/10 | 99.95 EUR | Oh Calcio | 05.10. |
 | [Barcelona 2008/2009 Away Shirt (XXL)](https://thekitman97.com/products/barcelona-2008-2009-away-shirt-xxl) | XXL |  | 79.95 EUR | The Kitman 97 | 05.10. |
 | [Trikot - FC Barcelona - 2008/2009 - XXL - Heim](https://trikotparadies.shop/products/trikot-fc-barcelona-2008-2009-xxl-heim) | XXL |  | 59.00 EUR | Trikotparadies | 05.10. |
@@ -376,7 +376,7 @@ Stand: 10.10.2026 06:40 Uhr (full), 304 aktuelle Treffer in XL/XXL
 | [Bayern München 15/16 Arturo Vidal](https://www.kitts.de/l/6aa05f71-df22-4392-b915-ebdcbbdf0a2d) | XL | Excellent | 86.31 EUR | kitts.de | 01.10. |
 | [2016-17 Bayern Munich Home Shirt Vidal #23 (LS)](https://www.legacyfootballshirts.com/products/bayern-munich-home-shirt-2016-17-vidal-23-longsleeve-a0641) | XL | Very Good | 74.99 EUR | Legacy Football Shirts | 01.10. |
 
-## WM 2006 (47)
+## WM 2006 (48)
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
@@ -384,6 +384,7 @@ Stand: 10.10.2026 06:40 Uhr (full), 304 aktuelle Treffer in XL/XXL
 | [Brazil 2006 Away MARCELO 17 XL 9/10](https://www.trikottrader.com/product/brazil-2006-away-marcelo-17-xl-9-10/) | XL | 9/10 | 135.00 EUR | TrikotTrader | 08.10. |
 | [Germany 2006 Away BALLACK 13 XL 9/10](https://www.trikottrader.com/product/germany-2006-away-ballack-13-xl-9-10/) | XL | 9/10 | 85.00 EUR | TrikotTrader | 08.10. |
 | [Spanien 2006 Torres #9 Heim Trikot](https://vintagescore.de/products/spanien-2006-torres-9-heim-trikot-1) | XL |  | 120.00 EUR | Vintagescore | 08.10. |
+| [2006-08 Spain home jersey (#9 F. TORRES) – XL](https://www.rb-jerseys.com/shop/national-teams/spain/2006-08-spain-home-jersey-9-f-torres-xl/) | XL | Excellent | 139.99 EUR | RB-Jerseys | 06.10. |
 | [Schweiz Trikot WM 2006 Heim #19 (XL) Puma](https://kickitvintage.de/products/schweiz-trikot-wm-2006-heim-19-xl-puma) | XL |  | 84.99 EUR | Kick It Vintage | 06.10. |
 | [Czech Republic Nedved #11 2006/08 Puma Basic Home Shirt - XL](https://www.topbinzfootballshirts.co.uk/czech-republic-nedved-11-2006-08-puma-basic-home-shirt-xl) | XL | Very Good | 59 GBP | Topbinz | 06.10. |
 | [Italy Gattuso #4 2006/07 Away Shirt - XL](https://www.topbinzfootballshirts.co.uk/italy-gattuso-4-2006-07-away-shirt-xl) | XL | Good | 45 GBP | Topbinz | 06.10. |
