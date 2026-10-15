@@ -127,6 +127,15 @@ def fixed_slot(spec, ref=None):
     return berlin.weekday(), berlin.hour, berlin.minute
 
 
+DATE_RX = re.compile(r"(\d{4})-(\d{2})-(\d{2})\s+(\d{1,2}):(\d{2})$")
+
+
+def dated_drop(spec):
+    """Einzeltermin '2026-10-17 06:00' (deutsche Zeit) -> datetime oder None (Nutzer 15.10.2026: Nostalgic, Mr.Skully)"""
+    m = DATE_RX.match(str(spec).strip())
+    return dt.datetime(*map(int, m.groups()), tzinfo=TZ) if m else None
+
+
 def drop_calendar(shops, status_store):
     """Alle Drop-Termine fürs Dashboard: feste (shops.yaml) und gemessene (Rhythmus)"""
     rhythms = {q.get("name"): q.get("rhythmus") or {} for q in (status_store.get("quellen") or {}).get("liste", [])}
@@ -139,13 +148,19 @@ def drop_calendar(shops, status_store):
             if slot:
                 out.append({"shop": shop["name"], "tag": WEEKDAYS[slot[0]], "zeit": f"{slot[1]:02d}:{slot[2]:02d}",
                             "quelle": "fest"})
+            when = dated_drop(x)
+            if when and when > now() - dt.timedelta(minutes=DROP_WINDOW_MIN):   # vergangene Termine ausblenden
+                out.append({"shop": shop["name"], "tag": f"{WEEKDAYS[when.weekday()]} {when:%d.%m.}",
+                            "zeit": f"{when:%H:%M}", "quelle": "termin", "datum": when.isoformat()})
         r = rhythms.get(shop["name"]) or {}
         if r.get("typ") == "drops" and r.get("anteil", 0) >= DROP_MIN_SHARE:
             for x in r.get("termine") or []:
                 out.append({"shop": shop["name"], "tag": x["tag"], "zeit": f"{x['uhrzeit']:02d}:{x['minute']:02d}",
                             "quelle": "gemessen", "streuung": x.get("streuung_min", 0), "anzahl": x.get("anzahl", 0),
                             "abstand": r.get("abstand_tage"), "verschoben": x.get("verschoben", False)})
-    out.sort(key=lambda d: (WEEKDAYS.index(d["tag"]), d["zeit"], d["shop"]))
+    # Einzeltermine zuerst (nach Datum), dann die wöchentlichen nach Wochentag
+    out.sort(key=lambda d: (d.get("datum") is None, d.get("datum") or "",
+                            WEEKDAYS.index(d["tag"]) if d["tag"] in WEEKDAYS else 0, d["zeit"], d["shop"]))
     return out
 
 
@@ -155,6 +170,10 @@ def drop_due(shop, status_store, t):
     if last and t - dt.datetime.fromisoformat(last) < dt.timedelta(minutes=DROP_RECHECK_MIN):
         return None
     local = t.astimezone(TZ)
+    for x in drop_specs(shop):
+        when = dated_drop(x)
+        if when and dt.timedelta(0) <= local - when <= dt.timedelta(minutes=DROP_WINDOW_MIN):
+            return f"{when:%d.%m. %H:%M} (Termin)"
     for wd, h, mi, src, window in drop_slots(shop, status_store):
         start = (local - dt.timedelta(days=(local.weekday() - wd) % 7)).replace(hour=h, minute=mi, second=0,
                                                                                  microsecond=0)

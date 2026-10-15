@@ -987,7 +987,7 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     $("dropsum").textContent = `Drop-Kalender (${new Set(drops.map(d => d.shop)).size} Shops)`;
     $("dropbody").innerHTML = drops.map(d => `<tr><td>${esc(d.tag)}</td><td>${esc(d.zeit)}` +
       (d.streuung ? ` <small>±${d.streuung} Min.</small>` : "") + `</td><td>${esc(d.shop)}</td><td class="${d.quelle === "fest" ? "off" : ""}">` +
-      (d.quelle === "fest" ? "feste Angabe" + fixedVsMeasured(d.shop)
+      (d.quelle === "termin" ? "Termin laut Shop" : d.quelle === "fest" ? "feste Angabe" + fixedVsMeasured(d.shop)
         : `gemessen, ${d.anzahl}x` + (d.abstand ? `, etwa alle ${Math.round(d.abstand)} Tage` : "") + (d.verschoben ? ", Zeit zuletzt verschoben" : "")) +
       `</td></tr>`).join("");
     const fyj = Object.entries(data.fyj_shops || {});

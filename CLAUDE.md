@@ -433,6 +433,13 @@ alle Kategorien zusammen (Bulishirts: 67 Anfragen). Beschreibung (`description`)
 bei direkt abgefragten Shops wie FYJ-Reissue behandelt, zählt also nur für Thiago (Kennzeichen REPRO-FLOCK)
 und Kategorien aus `nachbau_erlaubt_fuer`
 
+**Sitemap-Shops (15.10.2026):** `plattform: html` mit `sitemap: "/sitemap.xml"` (Shops ohne Suche, z. B. Webador): alle
+Produkt-Adressen (`produktpfad`, Standard `/product/`) aus der Sitemap, Titel aus der Adresse fürs Vorfiltern, Produktseite
+nur für passende, Name aus JSON-LD bzw. og:title. Erster Shop: Mr.Skully (mrskully.de, 144 Produkte, viele BNWT, "XXL-Drop
+am 01.11.2026"). **Drop-Termine mit Datum** in shops.yaml: `drop: ["2026-10-17 06:00"]` (deutsche Zeit, `rhythmus.dated_drop`,
+Fenster 3 Std., im Drop-Kalender als "Termin laut Shop"). Achtung: Drop-Runs laufen über cron-job.org nur 9 bis 23 Uhr,
+frühere Termine brauchen einen zusätzlichen cron-job.org-Auftrag
+
 **Eigene Shopsysteme (`html`, seit 05.10.2026):** allgemeine Anbindung über die Such-Ergebnisseite,
 pro Shop in shops.yaml konfiguriert (`suche` mit {q}, `link` CSS-Selektor, optional `groessen`). Produktseite
 nur für passende Titel (JSON-LD für Preis/Bild/Verfügbarkeit, Größe aus Auswahl oder "Size:/Taglia:").

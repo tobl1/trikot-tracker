@@ -121,6 +121,19 @@ def idosell_run(http, shop, base, queries, matcher, max_pages=6):
     return items, n
 
 
+class SitemapLink:
+    """Sitemap-Eintrag mit derselben Schnittstelle wie ein Link aus BeautifulSoup (href, title, Text)"""
+    def __init__(self, url):
+        self.url = url
+        self.slug = re.sub(r"[-_]+", " ", url.rstrip("/").rsplit("/", 1)[-1])
+
+    def get(self, key, default=None):
+        return {"href": self.url, "title": self.slug}.get(key, default)
+
+    def get_text(self, *args, **kwargs):
+        return self.slug
+
+
 def html_run(http, shop, base, queries, matcher, cfg, newest=False):
     """Allgemeine Anbindung über Such-Ergebnisseiten (z. B. Gambio, ShopWired, eigene Shopsysteme), konfiguriert
     in shops.yaml: suche (URL mit {q}), link (CSS-Selektor der Produktlinks), optional groessen (CSS
@@ -129,11 +142,19 @@ def html_run(http, shop, base, queries, matcher, cfg, newest=False):
     from urllib.parse import quote_plus
     items, n, urls = [], 0, set()
     pages = [cfg["neu"]] if newest and cfg.get("neu") else [cfg["suche"].format(q=quote_plus(q)) for q in queries]
+    if cfg.get("sitemap"):
+        # Shops ohne Suche (z. B. Webador, Mr.Skully 15.10.2026): eine Sitemap mit allen Produkten, Titel aus der Adresse
+        # ("…/product/24416061/deutschland-…-mesut-oezil-8-gr-2xl"), Produktseite nur für passende
+        pages = [cfg["sitemap"]]
     for path in pages:
         txt = http.get(base + path, want="text")
         if not txt:
             continue
-        links = BeautifulSoup(txt, "html.parser").select(cfg["link"])
+        if cfg.get("sitemap"):
+            pfad = cfg.get("produktpfad", "/product/")
+            links = [SitemapLink(u) for u in re.findall(r"<loc>\s*([^<\s]+)\s*</loc>", txt) if pfad in u]
+        else:
+            links = BeautifulSoup(txt, "html.parser").select(cfg["link"])
         n += len(links)
         for a in links:
             url = urljoin(base + "/", a.get("href", ""))
@@ -143,13 +164,14 @@ def html_run(http, shop, base, queries, matcher, cfg, newest=False):
             urls.add(url)
             page = http.get(url, want="text") or ""
             soup = BeautifulSoup(page, "html.parser")
-            desc, img, price, avail = "", "", "", []
+            desc, img, price, avail, ld_name = "", "", "", [], ""
             for tag in soup.find_all("script", type="application/ld+json"):
                 try:
                     data = json.loads(tag.string or "")
                 except ValueError:
                     continue
                 for prod in ld_products(data):
+                    ld_name = ld_name or plain(prod.get("name"))
                     desc = desc or plain(prod.get("description"))
                     im = prod.get("image")
                     img = img or (im[0] if isinstance(im, list) and im else im if isinstance(im, str) else "")
@@ -177,6 +199,12 @@ def html_run(http, shop, base, queries, matcher, cfg, newest=False):
                 og = soup.find("meta", property="og:image")
                 img = og.get("content", "") if og else ""
             cond = re.search(r"(?i)(?:condizioni|condition|zustand)\s*:\s*([a-z ]{3,20})", text)
+            if cfg.get("sitemap") and not ld_name:   # Webador: Name nur im og:title ("… – Gr. 2XL | Mr.Skully")
+                og_t = soup.find("meta", property="og:title")
+                ld_name = re.sub(r"\s*\|[^|]*$", "", og_t.get("content", "")).strip() if og_t else ""
+            if cfg.get("sitemap") and ld_name:
+                title = ld_name   # echter Produktname statt des Textes aus der Adresse
+                size_text = size_text if size_text != a.get("title") else f"{ld_name} {a.get('title')}"
             items.append(item("direkt", shop, url, title, size_text, price, urljoin(base + "/", img) if img else "",
                               desc=f"{desc} {'Condition: ' + cond.group(1) if cond else ''}".strip()))
     return items, n

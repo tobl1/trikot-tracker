@@ -754,3 +754,30 @@ def test_radar_nein():
     shops = [{"name": "A", "url": "https://a.com"}, {"name": "B", "url": "https://b.com", "radar": "nein"}]
     plats = {"https://a.com": "shopify", "https://b.com": "woo:https://b.com/wp-json/wc/store/v1/products"}
     assert [s["name"] for s in radar_shops(shops, plats)] == ["A"]
+
+
+def test_sitemap_shop_webador():
+    # Mr.Skully (Webador): keine Suche, alle Produkte in der Sitemap, Titel und Größe stehen in der Adresse
+    sitemap = """<urlset><url><loc>https://www.mrskully.de/ueber-uns</loc></url>
+    <url><loc>https://www.mrskully.de/product/1/fc-bayern-muenchen-2013-14-heimtrikot-thiago-6-gr-xl</loc></url>
+    <url><loc>https://www.mrskully.de/product/2/fc-bayern-muenchen-2013-14-heimtrikot-thiago-6-gr-m</loc></url></urlset>"""
+    page = """<script type="application/ld+json">{"@type": "Product", "name": "FC Bayern München 2013/14 Heimtrikot Thiago #6 Gr. XL",
+    "offers": {"price": "89.95", "priceCurrency": "EUR", "availability": "https://schema.org/InStock"}}</script>"""
+    http = FakeHttp([("sitemap.xml", sitemap), ("/product/1/", page), ("/product/2/", page.replace("Gr. XL", "Gr. M"))])
+    cfg = {"sitemap": "/sitemap.xml", "neu": "/sitemap.xml", "suche": "/sitemap.xml?{q}"}
+    items, n = tracker.html_run(http, "Mr.Skully", "https://www.mrskully.de", ["thiago", "kroos"], M, cfg)
+    assert n == 2 and len(items) == 2
+    xl = [it for it in items if passt(it)]
+    assert len(xl) == 1 and xl[0]["title"].startswith("FC Bayern München 2013/14") and xl[0]["price"] == "89.95 EUR"
+    assert sum(1 for c in http.calls if "sitemap" in c[0]) == 1          # eine Sitemap statt einer Suche je Begriff
+
+
+def test_drop_termin_mit_datum():
+    from trikot.rhythmus import drop_due, drop_calendar
+    shop = {"name": "Nostalgic", "url": "https://n.com", "drop": ["2026-10-17 06:00"]}
+    at = lambda s: _dt.datetime.fromisoformat(s)
+    assert drop_due(shop, {}, at("2026-10-17T06:10:00+02:00")) == "17.10. 06:00 (Termin)"
+    assert drop_due(shop, {}, at("2026-10-17T05:50:00+02:00")) is None
+    assert drop_due(shop, {}, at("2026-10-17T10:00:00+02:00")) is None   # nach 3 Std. vorbei
+    cal = drop_calendar([shop], {})
+    assert cal == [] or cal[0]["quelle"] == "termin"                       # vergangene Termine ausgeblendet
