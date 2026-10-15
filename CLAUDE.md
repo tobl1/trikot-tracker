@@ -317,6 +317,16 @@ auf dem Foto erkennbar sind (z. B. Trainingsshirt ohne Hinweis im Titel), über 
 - **Shop wieder offen**: Shops mit Shopify-Passwortseite (HTTP 401, oft vor einem Drop) merkt sich `status.json` → `geschlossen` (`lauf.reopened`); ins Fehler-Log nur beim ersten Mal. Liefert der Shop wieder Artikel (Radar prüft Shopify-Shops alle 30 Min.), kommt eine Push "🔓 … ist wieder offen". Anlass: Kick It Vintage, Oh Calcio
 - **Preissenkungen bei allen Treffern** (`lauf.price_drop`, nur direkte Quellen, gleiche Währung, mind. 5 % und 1 Einheit): `preis_runter` am Treffer, Dashboard-Badge "PREIS ↓ x %", Push nur bei Thiago/Sondertrikots (hoch). Favoriten-Preisalarm (unten) bleibt zusätzlich
 
+## Neukunden-Rabatte (15.10.2026)
+
+- Nutzerwunsch: bei Shops festhalten, ob es Neukunden-Codes gibt (wichtig für den Preis). `rabatt:` in shops.yaml
+  (Text laut Shop-Seite), Export `rabatte` in treffer.json (Name + Domain, damit auch FYJ-Treffer passen), Kachel zeigt
+  "🏷 10 % …". Erste Prüfung 15.10.2026 per Skript über alle 99 aktiven Shops (Startseite nach "% off", "first order",
+  "newsletter", "welcome" …): 14 Shops eingetragen. Unklar (kein Prozentwert): First Class Football Shirts, Football Finds.
+  Fehltreffer der Suche: RetrOriginalFootball (Bundle), Nostalgic, Modeziege. 21 weitere Shops haben ein Newsletter-Popup
+  ohne erkennbaren Rabatt (Inhalt oft erst per Skript geladen, also nicht ausgeschlossen). Bei neuen Shops mitprüfen,
+  Rabatte nicht automatisch übernehmen (Codes ändern sich, Angaben selten belastbar)
+
 ## Preisalarm für Favoriten
 
 - Glocke in der Favoriten-Ansicht → GitHub-Issue mit Label `alarm` (`grund: alarm`, `id:`). `check_alarms()`

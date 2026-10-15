@@ -781,3 +781,15 @@ def test_drop_termin_mit_datum():
     assert drop_due(shop, {}, at("2026-10-17T10:00:00+02:00")) is None   # nach 3 Std. vorbei
     cal = drop_calendar([shop], {})
     assert cal == [] or cal[0]["quelle"] == "termin"                       # vergangene Termine ausgeblendet
+
+
+def test_rabatte_im_dashboard(tmp_path, monkeypatch):
+    """Neukunden-Rabatte aus shops.yaml landen mit Name und Domain in treffer.json (Nutzer 15.10.2026)"""
+    import json
+    from trikot import berichte, speicher
+    monkeypatch.setattr(speicher, "DASHBOARD_FILE", tmp_path / "treffer.json")
+    shops = [{"name": "Cult Kits", "url": "https://www.cultkits.com", "rabatt": "10 % auf die erste Bestellung"},
+             {"name": "Ohne", "url": "https://ohne.example"}]
+    berichte.write_dashboard({}, {}, "full", "2026-10-15T05:30:00+02:00", {}, shops)
+    data = json.loads((tmp_path / "treffer.json").read_text())
+    assert data["rabatte"] == [{"shop": "Cult Kits", "host": "cultkits.com", "text": "10 % auf die erste Bestellung"}]

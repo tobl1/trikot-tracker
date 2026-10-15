@@ -135,6 +135,8 @@ select{flex:0 1 auto;max-width:100%;appearance:none;-webkit-appearance:none;padd
 .size{font-weight:600;font-size:11px;border:1px solid currentColor;border-radius:999px;padding:2px 7px;white-space:nowrap}
 .shop{font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .dupes{font-size:12px;color:var(--muted)}
+.deal{font-size:12px;color:var(--good);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.card.th .deal{color:#fff}
 .card.gone{opacity:.5}
 .fav,.flag,.bell{position:absolute;top:12px;width:36px;height:36px;border-radius:11px;border:0;cursor:pointer;display:flex;
   align-items:center;justify-content:center;background:rgba(0,0,0,.55);color:#fff;font-size:16px;line-height:1;
@@ -808,7 +810,7 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
       <div class="body"><div class="labels">${esc(t.labels.join(" · "))}</div>
       <div class="title">${esc(t.titel)}</div>${note}
       <div class="foot"><div class="price">${price}</div><div>${cond}${t.groesse ? `<span class="size">${esc(shortSize(t.groesse))}</span>` : ""}</div></div>
-      ${dup}<div class="shop" title="seit ${fmtDate(t.erst)}">${esc(t.shopName)} · ${age(t.erst)}</div></div></a>`;
+      ${dup}${t.rabatt ? `<div class="deal" title="Neukunden-Rabatt laut Shop-Seite">🏷 ${esc(t.rabatt)}</div>` : ""}<div class="shop" title="seit ${fmtDate(t.erst)}">${esc(t.shopName)} · ${age(t.erst)}</div></div></a>`;
   }
 
   function renderFeed(list){
@@ -953,13 +955,17 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     const exc = Array.isArray(pg.ausnahmen) ? Object.fromEntries(pg.ausnahmen.map(l => [l, 0])) : (pg.ausnahmen || {});
     const limitFor = labels => { const own = labels.filter(l => l in exc).map(l => +exc[l] || 0);
       return !own.length ? limit : own.includes(0) ? 0 : Math.max(limit, ...own); };
+    // Neukunden-Rabatte (shops.yaml): per Shopname oder, bei FYJ-Treffern, per Domain
+    const deals = {};
+    (data.rabatte || []).forEach(r => { deals[r.shop] = r.text; deals[r.host] = r.text; });
     all = data.treffer.map(t => {
       const lim = limitFor(t.labels);
       t.teuer = !!(lim && t.eur != null && t.eur > lim);
       const shopName = /^[a-z0-9.-]+\.[a-z]{2,}$/i.test(t.shop) || t.shop === "FYJ" ? (host(t.url) || t.shop) : t.shop;
       const ev = [t.unter_grenze, t.preis_zeit].filter(Boolean).sort().pop() || "";
       const evNeu = !!ev && (Date.now() - new Date(ev)) / 36e5 < NEW_H;
-      return Object.assign(t, {shopName, ev, evNeu, akt: ev > t.erst ? ev : t.erst, neu: isNew(t), thiago: t.labels.some(l => l.startsWith("Thiago")),
+      const rabatt = deals[t.shop] || deals[shopName] || deals[host(t.url)] || "";
+      return Object.assign(t, {shopName, rabatt, ev, evNeu, akt: ev > t.erst ? ev : t.erst, neu: isNew(t), thiago: t.labels.some(l => l.startsWith("Thiago")),
         hay: (t.titel + " " + t.labels.join(" ") + " " + shopName + " " + (t.notiz || "")).toLowerCase()});
     });
     // Gleiche Angebote eines Shops (gleicher Titel, gleiche Größe) zusammenfassen: günstigstes zeigen

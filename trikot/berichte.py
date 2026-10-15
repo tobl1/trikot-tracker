@@ -63,6 +63,9 @@ def write_dashboard(seen, status_store, mode, ts, watch_cfg, shops):
             "push_links": status_store.get("push_links") or {},   # Sammel-Pushes -> Trikots (App: #push=<Kennung>)
             "laeufe": status_store.get("laeufe") or [],
             "drops": drop_calendar(shops, status_store),
+            # Neukunden-Rabatte laut Shop-Seite (shops.yaml, Nutzer 15.10.2026), App ordnet per Name oder Domain zu
+            "rabatte": [{"shop": s["name"], "host": speicher._host(s["url"]), "text": s["rabatt"]}
+                        for s in shops if s.get("rabatt")],
             "preisgrenze": (watch_cfg.get("preisgrenze") or {}),
             "kurse_datum": kurse.get("datum", ""), "treffer": items,
             "push_abos": len(status_store.get("push_abos") or {}),   # 0: Dashboard warnt (keine Pushes)
