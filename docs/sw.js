@@ -18,11 +18,19 @@ self.addEventListener("notificationclick", e => {
   e.notification.close();
   const url = new URL((e.notification.data && e.notification.data.url) || "./#eingaenge", self.registration.scope).href;
   e.waitUntil((async () => {
+    // Ziel zusätzlich ablegen: das iPhone holt die schon offene App oft nur nach vorn, ohne navigate() auszuführen.
+    // Die App liest das Ziel beim Sichtbarwerden selbst (Nutzer 15.10.2026: Push landete in der Übersicht)
+    try {
+      const c = await caches.open("ttt-push");
+      await c.put("ziel", new Response(JSON.stringify({url, at: Date.now()})));
+    } catch (err) {}
     const wins = await self.clients.matchAll({type: "window", includeUncontrolled: true});
     for (const w of wins) {
       if (w.url.startsWith(self.registration.scope) && url.startsWith(self.registration.scope)) {
-        await w.focus();
-        return w.navigate(url);
+        w.postMessage({typ: "push-ziel", url});
+        try { await w.focus(); } catch (err) {}
+        try { await w.navigate(url); } catch (err) {}
+        return;
       }
     }
     return self.clients.openWindow(url);

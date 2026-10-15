@@ -135,7 +135,7 @@ select{flex:0 1 auto;max-width:100%;appearance:none;-webkit-appearance:none;padd
 .size{font-weight:600;font-size:11px;border:1px solid currentColor;border-radius:999px;padding:2px 7px;white-space:nowrap}
 .shop{font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .dupes{font-size:12px;color:var(--muted)}
-.deal{font-size:12px;color:var(--good);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.deal{color:var(--good)}
 .card.th .deal{color:#fff}
 .card.gone{opacity:.5}
 .fav,.flag,.bell{position:absolute;top:12px;width:36px;height:36px;border-radius:11px;border:0;cursor:pointer;display:flex;
@@ -797,6 +797,9 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     const price = t.eur != null ? `<b>${eur(t.eur)}</b>${orig}` : `<b>${esc(t.preis || "?")}</b>`;
     const img = t.bild ? `<img loading="lazy" referrerpolicy="no-referrer" src="${esc(t.bild)}" alt="" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph',textContent:'👕'}))">`
                        : '<span class="ph">👕</span>';
+    // Neukunden-Rabatt nur als kleines Preisschild mit Prozentwert, Details beim Antippen/Überfahren (Nutzer 15.10.2026)
+    const pct = t.rabatt ? (t.rabatt.match(/\d+\s?%/) || ["Rabatt"])[0].replace(/\s/, "\u202f") : "";
+    const deal = pct ? ` · <span class="deal" title="Neukunden: ${esc(t.rabatt)}">🏷\u202f${esc(pct)}</span>` : "";
     const same = t.dupes ? t.dupes.filter(d => d.shopName === t.shopName).length : 0;
     const dup = !st.dupes && t.dupes && t.dupes.length ? `<div class="dupes">` +
       [same ? `+${same} gleiche im Shop` : "", t.dupShops && t.dupShops.length ? `auch bei ${esc(t.dupShops.join(", "))}` : ""]
@@ -810,7 +813,7 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
       <div class="body"><div class="labels">${esc(t.labels.join(" · "))}</div>
       <div class="title">${esc(t.titel)}</div>${note}
       <div class="foot"><div class="price">${price}</div><div>${cond}${t.groesse ? `<span class="size">${esc(shortSize(t.groesse))}</span>` : ""}</div></div>
-      ${dup}${t.rabatt ? `<div class="deal" title="Neukunden-Rabatt laut Shop-Seite">🏷 ${esc(t.rabatt)}</div>` : ""}<div class="shop" title="seit ${fmtDate(t.erst)}">${esc(t.shopName)} · ${age(t.erst)}</div></div></a>`;
+      ${dup}<div class="shop" title="seit ${fmtDate(t.erst)}">${esc(t.shopName)} · ${age(t.erst)}${deal}</div></div></a>`;
   }
 
   function renderFeed(list){
@@ -1157,14 +1160,44 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     shown = PAGE; retryLoads = 0; ebayAt = 0;   // frisch laden, die Push ist neuer als die Daten
     loadData(); window.scrollTo({top: 0});
   });
+  // Sprungziel aus einer Push übernehmen. Auf dem iPhone kommt die neue Adresse bei schon offener App oft nicht an,
+  // deshalb legt der Service Worker das Ziel zusätzlich ab (Cache "ttt-push") und schickt es als Nachricht
+  function goTo(url){
+    let h = "";
+    try { h = new URL(url, location.href).hash; } catch (e) { return; }
+    if (!h) return;
+    if (h !== location.hash) { location.hash = h; return; }   // löst hashchange aus: Fokus setzen, frisch laden
+    if (readHash()) { shown = PAGE; retryLoads = 0; ebayAt = 0; loadData(); window.scrollTo({top: 0}); }
+  }
+  async function pendingTarget(){
+    if (!("caches" in window)) return;
+    try {
+      const c = await caches.open("ttt-push"), r = await c.match("ziel");
+      if (!r) return;
+      await c.delete("ziel");
+      const d = await r.json();
+      if (Date.now() - d.at < 15 * 60e3) goTo(d.url);
+    } catch (e) {}
+  }
+  if ("serviceWorker" in navigator)
+    navigator.serviceWorker.addEventListener("message", e => { if (e.data && e.data.typ === "push-ziel") goTo(e.data.url); });
+  // Zurück in die App: Push-Ziel prüfen und Daten auffrischen (vorher blieb der alte Stand stehen, neue Treffer fehlten)
+  let loadedAt = 0;
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState !== "visible") return;
+    pendingTarget();
+    if (Date.now() - loadedAt > 60e3) loadData();
+  });
+  window.addEventListener("pageshow", e => { if (e.persisted) { pendingTarget(); loadData(); } });
   // Daten laden; ?t= umgeht jeden Zwischenspeicher (GitHub Pages hält Dateien sonst bis zu 10 Min.)
   function loadData(){
+    loadedAt = Date.now();
     return fetch(`treffer.json?t=${Date.now()}`, {cache: "no-store"})
       .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
       .then(data => { pushLinks = data.push_links || {}; setup(data); })
       .catch(e => { if (!all.length) { $("grid").innerHTML = `<div class="err">Daten konnten nicht geladen werden (${esc(e.message)}).</div>`; $("stand").textContent = ""; } });
   }
-  loadData().then(() => syncFavs());
+  loadData().then(() => { syncFavs(); pendingTarget(); });
 })();
 </script>
 </body>
