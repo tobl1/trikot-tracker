@@ -104,6 +104,22 @@ def item_link(e):
     return f"{board}/#treffer={quote(canon_url(e['url']), safe='')}" if board else e["url"]
 
 
+def bundle_link(status_store, entries, ts, title, fallback=None):
+    """Sammel-Push: App zeigt oben genau diese Trikots (#push=<Kennung>, Kennung -> Schlüssel in status.json
+    "push_links", geht mit treffer.json raus). Vorher landete man in der Übersicht und wusste nicht, welche gemeint
+    waren (Nutzer 15.10.2026)"""
+    import uuid
+    board = (os.environ.get("DASHBOARD_URL") or "").rstrip("/")
+    if not board:
+        return fallback
+    pid = uuid.uuid4().hex[:8]
+    links = status_store.setdefault("push_links", {})
+    links[pid] = {"zeit": ts, "titel": title[:120], "ids": [canon_url(e["url"]) for e in entries][:60]}
+    for k in sorted(links, key=lambda k: links[k]["zeit"])[:-40]:   # die letzten 40 reichen
+        del links[k]
+    return f"{board}/#push={pid}"
+
+
 def net_error(fehler):
     """Fehler eines Shops ist ein reiner Netzaussetzer (keine Sperre, kein Datenfehler)"""
     return str(fehler or "").split(":")[0] in NET_ERRORS
@@ -199,9 +215,13 @@ def main():
     # Reissues (Nachbauten) werden seit 01.10.2026 nicht mehr erfasst; gezielt ausgeschlossene
     # Links und zu schlechter Zustand (min_zustand je Shop) fliegen sofort raus
     min_grade = {s["name"]: s["min_zustand"] for s in shops_cfg.get("shops") or [] if s.get("min_zustand")}
+    # Mindestnote für alle Shops (watchlist "min_zustand", seit 15.10.2026 7/10 nach sechs Meldungen "Zustand
+    # schwach"), je Shop überschreibbar; Thiago ausgenommen, damit kein Thiago-Trikot verloren geht
+    min_all = watch.get("min_zustand")
+    too_worn = lambda grade, shop, labels: "Thiago" not in labels and below_min(grade, min_grade.get(shop, min_all))
     seen = {k: v for k, v in seen.items()
             if "(Reissue)" not in v["title"] and k not in matcher.url_ex
-            and not below_min(v.get("zustand", ""), min_grade.get(v["shop"]))}
+            and not too_worn(v.get("zustand", ""), v["shop"], v.get("labels") or [])}
     first_run = not seen
     # Treffer gesperrter Shops (sperren: ja, z. B. Originaltrikot) sofort ausblenden, nicht erst nach 36 Std.
     blocked = {domain(s["url"]): s["name"] for s in shops_cfg.get("shops") or []
@@ -354,7 +374,7 @@ def main():
             key = canon_url(it["url"])
             size = SIZE_RX.search(norm(it["size_text"]))
             grade, note = condition_info(it["title"], it.get("desc"), it.get("fyj_condition", ""))
-            if below_min(grade, min_grade.get(it["shop"])):
+            if too_worn(grade, it["shop"], {l for l, _ in labs}):
                 continue
             entry = seen.get(key)
             if entry:
@@ -492,7 +512,8 @@ def main():
                  "\n".join(f"• {push_label(e)}: {short(e, shop=True)}"
                            for e in bundle[:20]) +
                  (f"\n… und {len(bundle) - 20} weitere" if len(bundle) > 20 else ""),
-                 3, report_url, None, ["soccer"], args.dry_run)
+                 3, bundle_link(status_store, bundle, ts, f"{len(bundle)} neue Treffer", report_url), None, ["soccer"],
+                 args.dry_run)
 
     # Preissenkungen bei Thiago und Sondertrikots (alle anderen: nur Markierung im Dashboard)
     for e in price_drops[:MAX_PUSH_HIGH]:
@@ -535,7 +556,7 @@ def main():
              f"Aus {len(srcs)} Quellen: {', '.join(srcs[:8])}{' …' if len(srcs) > 8 else ''}\n" +
              "\n".join(f"• {push_label(e)}: {short(e, shop=True)}" for e in silent[:15]) +
              (f"\n… und {len(silent) - 15} weitere" if len(silent) > 15 else ""),
-             3, report_url, None, ["new"], args.dry_run)
+             3, bundle_link(status_store, silent, ts, f"{len(silent)} aus neuen Shops", report_url), None, ["new"], args.dry_run)
 
     # eBay (eigener Bereich, eigene Pushes, verschlüsselte Daten): Fehler dort stoppen nie den Run der Shops
     ebay_problems = []

@@ -286,3 +286,10 @@ def test_kontingent_knapp_nur_radar(monkeypatch, tmp_path):
             return 20
     _, summary, problems = run({}, Leer({}), mode="full")
     assert calls == [] and problems and "Pause" in summary
+
+
+def test_damen_und_kinder_raus():
+    assert ebay.bad_department({"localizedAspects": [{"name": "Abteilung", "value": "Damen"}]})
+    assert ebay.bad_department({"localizedAspects": [{"name": "Department", "value": "Boys"}]})
+    assert not ebay.bad_department({"localizedAspects": [{"name": "Abteilung", "value": "Herren"}]})
+    assert not ebay.bad_department({})

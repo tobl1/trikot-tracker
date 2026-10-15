@@ -23,6 +23,10 @@ preisgrenze:
   max_eur: 150
   ausnahmen: {"Thiago": 200}
 
+# Mindestnote für alle Shops (z. B. "6/10" fliegt raus), Thiago ausgenommen. Nutzer meldete bis 15.10.2026 sechsmal
+# schlechten Zustand. Je Shop überschreibbar mit min_zustand in shops.yaml
+min_zustand: 7
+
 # Produkte, die keine Trikots sind oder nicht gewünscht sind
 produkt_ausschluss: [# England grundsätzlich nicht (Nutzer 08.10.2026, betraf vor allem WM 2006)
                      "england", "anglia", "inglaterra", "angleterre", "inghilterra", "engeland",

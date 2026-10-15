@@ -60,6 +60,7 @@ def write_dashboard(seen, status_store, mode, ts, watch_cfg, shops):
     data = {"stand": ts, "modus": mode, "letzter_gesamtlauf": status_store.get("last_full", ""),
             "fyj_shops": status_store.get("fyj_shops") or {},
             "fundgrube": status_store.get("fundgrube") or {},
+            "push_links": status_store.get("push_links") or {},   # Sammel-Pushes -> Trikots (App: #push=<Kennung>)
             "laeufe": status_store.get("laeufe") or [],
             "drops": drop_calendar(shops, status_store),
             "preisgrenze": (watch_cfg.get("preisgrenze") or {}),

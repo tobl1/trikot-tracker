@@ -245,6 +245,19 @@ def ships_to_de(detail):
                                              "european union", "europäische union"})
 
 
+BAD_DEPARTMENT = ("damen", "women", "woman", "frauen", "kinder", "kids", "jungen", "mädchen", "maedchen", "boys", "girls",
+                  "youth", "baby", "jugend")
+
+
+def bad_department(detail):
+    """Damen- oder Kindertrikot laut Merkmal "Abteilung" (eBay-Meldung 09.10.2026: "Damen" bei HSV)"""
+    for a in (detail or {}).get("localizedAspects") or []:
+        if any(k in (a.get("name") or "").lower() for k in ("abteilung", "department", "geschlecht", "gender")):
+            if any(b in str(a.get("value") or "").lower() for b in BAD_DEPARTMENT):
+                return True
+    return False
+
+
 def item_size(detail):
     """Größe aus den Merkmalen des Einzelabrufs ("Größe: XL")"""
     for a in detail.get("localizedAspects") or []:
@@ -442,7 +455,7 @@ def run(mode, status_store, matcher, watch, rates, ts, notify, client=None, dry=
                 lookups -= 1
                 status, detail = client.item(iid, it["wo"])
                 fetched[iid] = (status, detail)
-                sizes[iid] = item_size(detail) if status == 200 else ""
+                sizes[iid] = ("__damen_kinder__" if bad_department(detail) else item_size(detail)) if status == 200 else ""
             size_text = sizes.get(iid, "")
         if not matcher.size_ok(size_text, norm(it["title"])):
             continue
@@ -464,6 +477,9 @@ def run(mode, status_store, matcher, watch, rates, ts, notify, client=None, dry=
         if entry is None and not first and id_key(iid) not in state["gepusht"]:
             # neuer Treffer: vor der Push einzeln prüfen (noch verfügbar, Versand nach Deutschland)
             status, detail = fetched.get(iid) or client.item(iid, it["wo"])
+            if status == 200 and bad_department(detail):
+                sizes[iid] = "__damen_kinder__"   # merken, damit es nicht wieder abgerufen wird
+                continue
             if status == 200 and not (still_available(detail) and ships_to_de(detail)):
                 continue
         if entry is None:
@@ -516,13 +532,16 @@ def run(mode, status_store, matcher, watch, rates, ts, notify, client=None, dry=
     loud = [e for e in new_entries if not e["teuer"]]
     high = [e for e in loud if is_high(e)]
     for e in high[:5]:
-        notify(f"🛒 eBay: {', '.join(e['labels'])}", f"{e['title']}\n{_price_line(e)} · {e['size']}", 5, e["url"])
+        board = (os.environ.get("DASHBOARD_URL") or "").rstrip("/")
+        # in die App zum Angebot (Bereich "Aus der Push"), von dort zu eBay (Nutzer 15.10.2026)
+        notify(f"🛒 eBay: {', '.join(e['labels'])}", f"{e['title']}\n{_price_line(e)} · {e['size']}", 5,
+               f"{board}/#ebay={id_key(e['id'])}" if board else e["url"])
     rest = [e for e in loud if e not in high[:5]]
     if rest:
         board = (os.environ.get("DASHBOARD_URL") or "").rstrip("/")
         notify(f"🛒 eBay: {len(rest)} neue Treffer",
                "\n".join(f"• {', '.join(e['labels'])}: {e['title'][:70]} ({_price_line(e)})" for e in rest[:8]), 3,
-               f"{board}/#ebay" if board else None)
+               f"{board}/#ebay=" + ",".join(id_key(e["id"]) for e in rest[:30]) if board else None)
 
     # 5) Speichern: Zustand verschlüsselt, App-Daten je Gerät verschlüsselt
     state["init"] = True

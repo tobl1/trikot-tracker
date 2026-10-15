@@ -383,8 +383,18 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
   else if (location.hash === "#alle") st.view = "all";
   else if (location.hash === "#ebay") st.view = "ebay";
   // Push zu einem einzelnen Trikot: #treffer=<Schlüssel> zeigt genau dieses oben (Nutzer 09.10.2026)
-  let focusId = location.hash.startsWith("#treffer=") ? decodeURIComponent(location.hash.slice(9)) : "";
-  if (focusId) st.view = "all";
+  // Sprungziele aus Pushes: #treffer=<Schlüssel> (ein Trikot), #push=<Kennung> (Sammel-Push), #ebay=<k1,k2> (eBay)
+  let focusId = "", focusPush = "", ebFocus = [], pushLinks = {}, retryLoads = 0;
+  function readHash(){
+    const h = location.hash;
+    focusId = h.startsWith("#treffer=") ? decodeURIComponent(h.slice(9)) : "";
+    focusPush = h.startsWith("#push=") ? h.slice(6) : "";
+    ebFocus = h.startsWith("#ebay=") ? h.slice(6).split(",").filter(Boolean).map(k => "ebay:" + k) : [];
+    if (focusId || focusPush) st.view = "all";
+    if (ebFocus.length) st.view = "ebay";
+    return !!(focusId || focusPush || ebFocus.length);
+  }
+  readHash();
   const fmtRun = iso => new Date(iso).toLocaleString("de-DE", {weekday:"short", day:"2-digit", month:"2-digit", hour:"2-digit", minute:"2-digit"});
 
   function isNew(t){ return (Date.now() - new Date(t.erst)) / 36e5 < NEW_H; }
@@ -713,11 +723,22 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     const cmp = {prio: (a, b) => (b.thiago - a.thiago) || (b.hoch - a.hoch) || (b.neu - a.neu) || byNew(a, b),
                  new: byNew, pasc: byPrice(1), pdesc: byPrice(-1)}[st.sort] || byNew;
     const list = base.filter(t => !st.ebLabels.length || t.labels.some(l => st.ebLabels.includes(l))).sort(cmp);
+    const ebFound = ebFocus.map(id => items.find(t => t.id === id)).filter(Boolean);
+    const ebWaiting = ebFocus.length && ebFound.length < ebFocus.length && retryLoads < 9;
+    if (ebWaiting && !ebayLoading && !reloadTimer) {   // Push neuer als die eBay-Daten: gleich nochmal laden
+      reloadTimer = setTimeout(() => { reloadTimer = null; retryLoads++; ebayAt = 0; renderEbay(); }, 20000);
+    }
+    const ebFocusHtml = ebFocus.length ? `<section class="focus"><h2><span>Aus der Push</span><button id="ebfocusclose">schließen</button></h2>` +
+      (ebFound.length ? `<div class="grid">${ebFound.map(ebayCard).join("")}</div>` : "") +
+      (ebWaiting ? '<p class="fyjnote">Wird gerade veröffentlicht, erscheint hier gleich von selbst …</p>'
+       : ebFound.length < ebFocus.length ? '<p class="fyjnote">Nicht mehr verfügbar oder schon ausgeblendet.</p>' : "") + `</section>` : "";
     const old = items.length - fresh.length;
-    box.innerHTML = `<p class="ebhead"><b>${list.length}${list.length !== fresh.length ? " von " + fresh.length : ""} Angebote</b> · Stand ${esc(fmtDate(ebayData.stand))}` +
+    box.innerHTML = ebFocusHtml + `<p class="ebhead"><b>${list.length}${list.length !== fresh.length ? " von " + fresh.length : ""} Angebote</b> · Stand ${esc(fmtDate(ebayData.stand))}` +
       (old ? ` · ${old} warten auf die nächste Prüfung` : "") +
       `<br>Bei eBay gibt es viele Fälschungen: Fotos, Etiketten und Verkäufer vor dem Kauf genau ansehen. Preise ohne Gewähr, maßgeblich ist eBay.</p>` +
       (list.length ? `<div class="grid">${list.map(ebayCard).join("")}</div>` : '<div class="empty">Gerade keine passenden Angebote.</div>');
+    const fc = $("ebfocusclose");
+    if (fc) fc.addEventListener("click", () => { ebFocus = []; history.replaceState(null, "", "#ebay"); renderEbay(); });
   }
 
   function filtered(){
@@ -797,11 +818,8 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     // Preis gesenkt / unter die Grenze gefallen: zusätzlich beim Run, in dem das passierte
     list.forEach(t => { if (t.ev && t.ev !== t.erst) (evRun[t.ev] = evRun[t.ev] || []).push(t); });
     const info = Object.fromEntries(runs.map(r => [r.zeit, r]));
-    const week = Date.now() - 7 * 864e5;
-    // leere Runs nur für Gesamt- und Schnell-Runs zeigen (Radar und Drops laufen tagsüber alle 15 bis 30 Min.)
-    const keys = [...new Set([...Object.keys(byRun), ...Object.keys(evRun), ...runs.filter(r => new Date(r.zeit) > week &&
-      (r.modus === "full" || r.modus === "priority")).map(r => r.zeit)])]
-      .sort().reverse();
+    // nur Runs mit Treffern (Nutzer 15.10.2026: Listen erfolgloser Runs störten)
+    const keys = [...new Set([...Object.keys(byRun), ...Object.keys(evRun)])].sort().reverse();
     const html = keys.slice(0, groupsShown).map(k => {
       const items = byRun[k] || [], r = info[k], evs = evRun[k] || [];
       const loud = items.filter(t => !t.still), quiet = items.filter(t => t.still);
@@ -849,15 +867,31 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     });
   }
 
+  // "Aus der Push": die gemeinten Trikots oben, von dort weiter zum Shop. Sind die Daten noch nicht online (Push kam
+  // kurz vor dem Dashboard), lädt die App ein paar Minuten lang selbst nach
   function renderFocus(){
     const box = $("focus");
-    if (!focusId || st.view !== "all") { box.hidden = true; box.innerHTML = ""; return; }
-    const t = all.find(x => x.id === focusId);
+    if (!(focusId || focusPush) || st.view !== "all") { box.hidden = true; box.innerHTML = ""; return; }
+    const link = focusPush ? pushLinks[focusPush] : null;
+    const ids = focusId ? [focusId] : link ? link.ids : [];
+    const found = ids.map(id => all.find(x => x.id === id)).filter(Boolean);
+    const waiting = (focusPush && !link) || (found.length < ids.length && retryLoads < 9);
+    if (waiting) scheduleReload();
+    const missing = ids.length - found.length;
     box.hidden = false;
-    box.innerHTML = `<section class="focus"><h2><span>Aus der Push</span><button id="focusclose">schließen</button></h2>` +
-      (t ? `<div class="grid">${card(t)}</div>` : '<p class="fyjnote">Nicht mehr in der Liste: inzwischen verkauft, gemeldet oder wieder über der Preisgrenze.</p>') +
+    box.innerHTML = `<section class="focus"><h2><span>Aus der Push${link ? ": " + esc(link.titel) : ""}</span>` +
+      `<button id="focusclose">schließen</button></h2>` +
+      (found.length ? `<div class="grid">${found.map(card).join("")}</div>` : "") +
+      (waiting ? '<p class="fyjnote">Wird gerade veröffentlicht, erscheint hier gleich von selbst …</p>'
+       : missing ? `<p class="fyjnote">${missing === 1 && !found.length ? "Nicht" : missing + " davon nicht"} mehr in der Liste: ` +
+                   `inzwischen verkauft, gemeldet oder über der Preisgrenze.</p>` : "") +
       `</section>`;
-    $("focusclose").addEventListener("click", () => { focusId = ""; history.replaceState(null, "", "#alle"); render(); });
+    $("focusclose").addEventListener("click", () => { focusId = ""; focusPush = ""; history.replaceState(null, "", "#alle"); render(); });
+  }
+  let reloadTimer = null;
+  function scheduleReload(){
+    if (reloadTimer || retryLoads >= 9) return;
+    reloadTimer = setTimeout(() => { reloadTimer = null; retryLoads++; loadData(); }, 20000);
   }
 
   function render(){
@@ -1017,7 +1051,7 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
   $("sort").addEventListener("click", e => { const b = e.target.closest("button"); if (b) { st.sort = b.dataset.s; reset(); } });
   $("tabs").addEventListener("click", e => {
     const b = e.target.closest("button"); if (!b) return;
-    st.view = b.dataset.view; focusId = "";
+    st.view = b.dataset.view; focusId = ""; focusPush = ""; ebFocus = [];
     history.replaceState(null, "", {feed: "#eingaenge", favs: "#favoriten", ebay: "#ebay"}[st.view] || "#alle"); reset();
     window.scrollTo({top: 0, behavior: "smooth"});   // nach dem Scrollen immer zurück an den Anfang
   });
@@ -1092,17 +1126,39 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
   $("more").addEventListener("click", () => { if (st.view === "feed") groupsShown += 12; else shown += PAGE; render(); });
 
   document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") syncFavs(); });
+
+  // Untere Leiste: das iPhone rechnet nach dem Öffnen aus einer Push oder beim Zurückkehren in die App den sichtbaren
+  // Bereich kurz falsch, eine mit bottom:0 verankerte Leiste stand dann mitten im Bild (Nutzer 15.10.2026). Deshalb an
+  // den unteren Rand des tatsächlich sichtbaren Bereichs (visualViewport) setzen und bei jeder Änderung neu rechnen
+  function placeBar(){
+    const bar = $("tabs"), vv = window.visualViewport;
+    if (!vv || !matchMedia("(max-width:720px)").matches) { bar.style.top = ""; bar.style.bottom = ""; return; }
+    bar.style.bottom = "auto";
+    bar.style.top = Math.round(vv.offsetTop + vv.height - bar.offsetHeight) + "px";
+  }
+  if (window.visualViewport) {
+    visualViewport.addEventListener("resize", placeBar);
+    visualViewport.addEventListener("scroll", placeBar);
+  }
+  ["resize", "orientationchange", "pageshow", "focus"].forEach(ev => window.addEventListener(ev, placeBar));
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") [0, 150, 600, 1500].forEach(ms => setTimeout(placeBar, ms));
+  });
+  [0, 300, 1000].forEach(ms => setTimeout(placeBar, ms));
   // App schon offen und die Push ändert nur die Adresse (#treffer=…): Fokus ohne Neuladen setzen
   window.addEventListener("hashchange", () => {
-    if (!location.hash.startsWith("#treffer=")) return;
-    focusId = decodeURIComponent(location.hash.slice(9)); st.view = "all"; shown = PAGE;
-    render(); window.scrollTo({top: 0});
+    if (!readHash()) return;
+    shown = PAGE; retryLoads = 0; ebayAt = 0;   // frisch laden, die Push ist neuer als die Daten
+    loadData(); window.scrollTo({top: 0});
   });
-  fetch("treffer.json", {cache: "no-store"})
-    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-    .then(setup)
-    .then(() => syncFavs())
-    .catch(e => { $("grid").innerHTML = `<div class="err">Daten konnten nicht geladen werden (${esc(e.message)}).</div>`; $("stand").textContent = ""; });
+  // Daten laden; ?t= umgeht jeden Zwischenspeicher (GitHub Pages hält Dateien sonst bis zu 10 Min.)
+  function loadData(){
+    return fetch(`treffer.json?t=${Date.now()}`, {cache: "no-store"})
+      .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(data => { pushLinks = data.push_links || {}; setup(data); })
+      .catch(e => { if (!all.length) { $("grid").innerHTML = `<div class="err">Daten konnten nicht geladen werden (${esc(e.message)}).</div>`; $("stand").textContent = ""; } });
+  }
+  loadData().then(() => syncFavs());
 })();
 </script>
 </body>

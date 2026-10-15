@@ -121,6 +121,34 @@ jobs:
           fi
           echo "geaendert=ja" >> "$GITHUB_OUTPUT"
 
+      - name: Dashboard anstoßen
+        # Eigener Workflow statt Job hier drin: am 06.10.2026 hing der Pages-Job über eine Stunde im Status "waiting"
+        # und blockierte damit alle folgenden Runs (Concurrency). So ist der Run sofort fertig
+        if: steps.speichern.outputs.geaendert == 'ja' && env.ZWEIG == 'daten' && inputs.stumm != true
+        continue-on-error: true   # Dashboard ist Beiwerk, der Run bleibt gültig
+        run: gh workflow run dashboard.yml --ref main
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Auf das Dashboard warten
+        # Pushes erst, wenn die neuen Daten online sind: sonst öffnet man die App und der Treffer fehlt noch (Nutzer
+        # 15.10.2026). Nur wenn Pushes anstehen, höchstens 5 Min.; hängt Pages, gehen die Pushes trotzdem raus
+        if: steps.speichern.outputs.geaendert == 'ja' && env.ZWEIG == 'daten' && inputs.stumm != true
+        continue-on-error: true
+        timeout-minutes: 5
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python -c "import json,sys; sys.exit(0 if json.load(open('daten/state/postausgang.json')) else 1)" 2>/dev/null || exit 0
+          START=$(date -u -d '-2 minutes' +%Y-%m-%dT%H:%M:%SZ)
+          for i in 1 2 3 4 5 6; do
+            ID=$(gh run list --workflow dashboard.yml --limit 3 --json databaseId,createdAt -q "[.[] | select(.createdAt >= \"$START\")][0].databaseId")
+            [ -n "$ID" ] && [ "$ID" != "null" ] && break
+            sleep 5
+          done
+          if [ -n "$ID" ] && [ "$ID" != "null" ]; then gh run watch "$ID" --interval 10 > /dev/null || true; fi
+          sleep 15   # GitHub Pages braucht nach dem Deploy noch einen Moment
+
       - name: Pushes senden
         # Erst jetzt, nachdem gespeichert ist: scheitert das Speichern, geht nichts raus (keine doppelten Pushes)
         if: inputs.stumm != true
@@ -137,15 +165,6 @@ jobs:
             git commit -q -m "Pushes versendet"
             pushen origin "HEAD:$ZWEIG"
           fi
-
-      - name: Dashboard anstoßen
-        # Eigener Workflow statt Job hier drin: am 06.10.2026 hing der Pages-Job über eine Stunde im Status "waiting"
-        # und blockierte damit alle folgenden Runs (Concurrency). So ist der Run sofort fertig
-        if: steps.speichern.outputs.geaendert == 'ja' && env.ZWEIG == 'daten' && inputs.stumm != true
-        continue-on-error: true   # Dashboard ist Beiwerk, der Run bleibt gültig
-        run: gh workflow run dashboard.yml --ref main
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Fehlschlag ins Fehler-Log
         if: failure()

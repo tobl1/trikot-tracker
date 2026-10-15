@@ -675,3 +675,10 @@ def test_spanien_ohne_vereine_und_kein_bvb():
     assert M.labels("Borussia Dortmund 2015/16 Home Perisic #14 XL") == []
     assert M.labels("BVB Trikot Perisic 14 XL") == []
     assert {l for l, _ in M.labels("Inter 2017/18 Home Perisic #44 XL")} == {"Perišić"}
+
+
+def test_mindestnote_global_ausser_thiago():
+    w = yaml.safe_load(open(Path(__file__).resolve().parent.parent / "watchlist.yaml", encoding="utf-8"))
+    assert w["min_zustand"] == 7
+    from trikot.zustand import below_min
+    assert below_min("6/10", 7) and not below_min("7/10", 7) and not below_min("Very Good", 7)
