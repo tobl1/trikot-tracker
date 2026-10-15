@@ -166,6 +166,27 @@ jobs:
             pushen origin "HEAD:$ZWEIG"
           fi
 
+      - name: Drop-Run nachschieben
+        # Die Drop-Runs von cron-job.org laufen erst ab 9 Uhr. Ist nach dem Gesamt-Run schon ein Drop fällig (z. B.
+        # Nostalgic 17.10.2026 um 6 Uhr), startet hier direkt ein Drop-Run, ohne Extra-Auftrag bei cron-job.org
+        if: steps.mode.outputs.mode == 'full' && env.ZWEIG == 'daten' && inputs.stumm != true
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          FAELLIG=$(python - <<'PY'
+          from trikot import speicher
+          from trikot.basis import now
+          from trikot.rhythmus import drop_due
+          status = speicher.load_json(speicher.STATUS_FILE, {})
+          t = now()
+          print(", ".join(f"{s['name']} {drop_due(s, status, t)}" for s in speicher.load_shops()["shops"]
+                          if (s.get("plattform") or "auto").lower() not in ("aus", "fyj") and drop_due(s, status, t)))
+          PY
+          )
+          # ab 9 Uhr übernimmt cron-job.org, ein zusätzlicher Start würde dort einen wartenden Run verdrängen
+          if [ -n "$FAELLIG" ] && [ "$(TZ=Europe/Berlin date +%H)" -lt 9 ]; then echo "Fällig: $FAELLIG"; gh workflow run tracker.yml --ref main -f mode=drop; fi
+
       - name: Fehlschlag ins Fehler-Log
         if: failure()
         env:

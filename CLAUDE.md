@@ -450,8 +450,9 @@ und Kategorien aus `nachbau_erlaubt_fuer`
 Produkt-Adressen (`produktpfad`, Standard `/product/`) aus der Sitemap, Titel aus der Adresse fürs Vorfiltern, Produktseite
 nur für passende, Name aus JSON-LD bzw. og:title. Erster Shop: Mr.Skully (mrskully.de, 144 Produkte, viele BNWT, "XXL-Drop
 am 01.11.2026"). **Drop-Termine mit Datum** in shops.yaml: `drop: ["2026-10-17 06:00"]` (deutsche Zeit, `rhythmus.dated_drop`,
-Fenster 3 Std., im Drop-Kalender als "Termin laut Shop"). Achtung: Drop-Runs laufen über cron-job.org nur 9 bis 23 Uhr,
-frühere Termine brauchen einen zusätzlichen cron-job.org-Auftrag
+Fenster 3 Std., im Drop-Kalender als "Termin laut Shop"). Drop-Runs laufen über cron-job.org nur 9 bis 23 Uhr. Seit 15.10.2026 schiebt der
+Gesamt-Run (Schritt "Drop-Run nachschieben") selbst einen Drop-Run an, wenn danach vor 9 Uhr schon ein Drop fällig ist (z. B.
+Nostalgic 17.10. 6 Uhr). Termine zwischen Ende des Gesamt-Runs und 9 Uhr bräuchten weiter einen cron-job.org-Auftrag
 
 **Eigene Shopsysteme (`html`, seit 05.10.2026):** allgemeine Anbindung über die Such-Ergebnisseite,
 pro Shop in shops.yaml konfiguriert (`suche` mit {q}, `link` CSS-Selektor, optional `groessen`). Produktseite
@@ -504,7 +505,8 @@ Token-Ablauf-Erinnerung cron-job.org ca. 04.10.2027, Module). Stufe 2 Neuheiten-
 Artikel aller Shopify-/Woo-Shops über die bestehenden cron-job.org-Starts), Kollektionen statt Suche,
 Prüfen vor dem Push + "warum Treffer"/Sicherheit, Vereinsfilter mit Tags/Kategorie. Stufe 3 eBay Browse API
 (Nutzer legt Entwicklerkonto an), Web Push aus der Dashboard-App statt ntfy (erst parallel), Ein-Tipp-Aktionen
-per GitHub-Schlüssel nur auf dem Handy; cron-job.org bleibt. Vinted/Kleinanzeigen/Depop: nur App-Suchaufträge
+per GitHub-Schlüssel nur auf dem Handy; cron-job.org bleibt. Vinted/Kleinanzeigen/Depop: nur App-Suchaufträge (15.10.2026 erneut geprüft: robots.txt von vinted.de und kleinanzeigen.de
+sperren alle Bots mit `Disallow: /`, keine offene Such-Schnittstelle, also weiterhin nicht automatisch)
 
 ## Offene Punkte (Priorität von oben nach unten)
 
