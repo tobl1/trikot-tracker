@@ -1,6 +1,6 @@
 # Trikot-Tracker
 
-Stand: 17.10.2026 06:43 Uhr (drop), 305 aktuelle Treffer in XL/XXL
+Stand: 17.10.2026 09:08 Uhr (drop), 303 aktuelle Treffer in XL/XXL
 
 ## Thiago (3)
 
@@ -89,7 +89,7 @@ Stand: 17.10.2026 06:43 Uhr (drop), 305 aktuelle Treffer in XL/XXL
 | [2024/25 - Inter Milan - Barella #23 (XL)](https://www.vintagefootballarea.com/products/2024-25-inter-milan-barella-23-xl-1) | XL | Very Good | 89.99 EUR | Vintage Football Area | 01.10. |
 | [2024/25 - Inter Milan - Barella #23 (XL)](https://www.vintagefootballarea.com/products/2024-25-inter-milan-barella-23-xl-3) | XL | Very Good | 79.99 EUR | Vintage Football Area | 01.10. |
 
-## Benzema (28)
+## Benzema (26)
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
@@ -111,8 +111,6 @@ Stand: 17.10.2026 06:43 Uhr (drop), 305 aktuelle Treffer in XL/XXL
 | [2019-20 Real Madrid Third Shirt Benzema #9 (XL)](https://www.classicfootballshirts.co.uk/2019-20-real-madrid-third-shirt-benzema-9-xl-rmdt19913907.html) | XL |  | £124.99 | Classic Football Shirts | 01.10. |
 | [2014/15 France Away Football Shirt (XL) Nike #10 Benzema](https://www.footballfinery.co.uk/products/2014-15-france-away-football-shirt-xl-nike-10-benzema-ff302502) | XL | Excellent | 96.95 EUR | Football Finery | 01.10. |
 | [France 2022 HOME 19 BENZEMA (XXL)](https://www.footballshirtvintage.fr/products/maillot-france-2022-home-19-benzema-xxl-24514) | XXL | Very Good | 138.41 EUR | footballshirtvintage.fr | 01.10. |
-| [Karim Benzema - Frankrig 2021 hjemmebane trøje XL VAPOR 🇫🇷](https://fshoppen.dk/products/karim-benzema-frankrig-2021-hjemmebane-troje-xl-vapor) | XL | Very Good | 149.95 EUR | Fodbold Shoppen | 01.10. |
-| [Karim Benzema - Frankrig 2021 udebane trøje XL VAPOR 🇫🇷](https://fshoppen.dk/products/karim-benzema-frankrig-2021-udebane-troje-xl-vapor) | XL | Very Good | 149.95 EUR | Fodbold Shoppen | 01.10. |
 | [Maillot Adidas Football FFF Equipe de France Away Vintage BENZEMA 2008/09 - L,XL](https://www.lineupvintageshop.com/product-page/maillot-adidas-football-fff-equipe-de-france-away-vintage-benzema-2008-09-m) | XL | Used | 130.0 EUR | Lineup Vintage | 01.10. |
 | [Real Madrid 2012 - 2013 Home Football Shirt #9 Benzema XL](https://www.specialfootballshirts.com/products/real-madrid-2012-2013-home-football-shirt-9-benzema-xl) | XL | 9/10 | 99.00 EUR | Special Football Shirts | 01.10. |
 | [Real Madrid Benzema #9 2019/20 XL 3rd Shirt Adidas Excellent Condition EH5128](https://www.theshirtcollectors.co.uk/products/real-madrid-benzema-9-2019-20-xl-3rd-shirt-adidas-excellent-condition-eh5128) | XL | Very Good | 99.99 GBP | The Shirt Collectors | 01.10. |
