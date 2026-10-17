@@ -1,6 +1,6 @@
 # Trikot-Tracker
 
-Stand: 17.10.2026 15:50 Uhr (drop), 303 aktuelle Treffer in XL/XXL
+Stand: 17.10.2026 16:08 Uhr (drop), 304 aktuelle Treffer in XL/XXL
 
 ## Thiago (3)
 
@@ -374,10 +374,11 @@ Stand: 17.10.2026 15:50 Uhr (drop), 303 aktuelle Treffer in XL/XXL
 | [Bayern München 15/16 Arturo Vidal](https://www.kitts.de/l/6aa05f71-df22-4392-b915-ebdcbbdf0a2d) | XL | Excellent | 86.31 EUR | kitts.de | 01.10. |
 | [2016-17 Bayern Munich Home Shirt Vidal #23 (LS)](https://www.legacyfootballshirts.com/products/bayern-munich-home-shirt-2016-17-vidal-23-longsleeve-a0641) | XL | Very Good | 74.99 EUR | Legacy Football Shirts | 01.10. |
 
-## WM 2006 (48)
+## WM 2006 (49)
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
+| [France 2006-07 Home Zidane #10 Shirt XL](https://nostalgicfootballshirts.com/products/france-2006-07-home-zidane-10-shirt-xl) | XL |  | 129.95 EUR | Nostalgic Football Shirts | 17.10. |
 | [2006 - Equipe de France #17 (XL)](https://www.vintagefootballarea.com/products/2006-equipe-de-france-17-xl-1) | XL |  | 59.99 EUR | Vintage Football Area | 15.10. |
 | [Maillot Italie Coupe du Monde 2006 Domicile - Totti N°10 (XXL)](https://purefootballshirts.com/products/maillot-italie-mondial-2006-domicile-totti-10-xxl) | XXL | 9/10 | 114.99 EUR | Pure Football Shirts | 09.10. |
 | [Brazil 2006 Away MARCELO 17 XL 9/10](https://www.trikottrader.com/product/brazil-2006-away-marcelo-17-xl-9-10/) | XL | 9/10 | 135.00 EUR | TrikotTrader | 08.10. |
