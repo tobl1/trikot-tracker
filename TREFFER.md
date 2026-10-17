@@ -1,6 +1,6 @@
 # Trikot-Tracker
 
-Stand: 17.10.2026 18:08 Uhr (drop), 304 aktuelle Treffer in XL/XXL
+Stand: 17.10.2026 18:38 Uhr (drop), 305 aktuelle Treffer in XL/XXL
 
 ## Thiago (3)
 
@@ -303,10 +303,11 @@ Stand: 17.10.2026 18:08 Uhr (drop), 304 aktuelle Treffer in XL/XXL
 | [Bayern München 10/11 Arjen Robben](https://www.kitts.de/l/6aa05e9b-7d0e-49de-b9a0-026211a88318) | XL | Excellent | 115.07 EUR | kitts.de | 01.10. |
 | [Bayern München 14/15 Arjen Robben](https://www.kitts.de/l/6aa062f4-440e-4a00-b104-7529c55b1dc0) | XL | Excellent | 80.55 EUR | kitts.de | 01.10. |
 
-## Torres (Fernando) (18)
+## Torres (Fernando) (19)
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
+| [2006/08 Liverpool Torres #9 Home Shirt (XL) Adidas](https://www.cultkits.com/products/2006-08-liverpool-torres-9-home-shirt-xl-adidas-4jnvnejs) | XL | Very Good | 120.95 EUR | Cult Kits | 17.10. |
 | [Atlético De Madrid F. Torres #9 2017/18 Away Shirt - XL](https://www.topbinzfootballshirts.co.uk/atltico-de-madrid-201718-away-shirt-f-torres-9-xl-excellent) | XL | Excellent | 79 GBP | Topbinz | 06.10. |
 | [Liverpool F.C Torres #9 2008/09 Third Shirt - 2XL](https://www.topbinzfootballshirts.co.uk/liverpool-fc-200809-third-shirt-torres-9-2xl-excellent) | XXL | Excellent | 99 GBP | Topbinz | 06.10. |
 | [2008/9 Liverpool Torres #9 Home Shirt (XL) Adidas](https://first11shirts.com/products/2008-9-liverpool-torres-9-home-shirt-xl-adidas) | XL |  | 139.99 EUR | First 11 Shirts | 02.10. |
