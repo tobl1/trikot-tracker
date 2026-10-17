@@ -283,7 +283,7 @@
   "Maglie Calcio Vintage": "2026-10-04T12:56:56.150677+00:00",
   "Modeziege": "2026-10-04T12:56:56.150677+00:00",
   "Nanos Football Jerseys": "2026-10-12T19:50:49.227279+00:00",
-  "Nostalgic Football Shirts": "2026-10-17T04:43:14.258754+00:00",
+  "Nostalgic Football Shirts": "2026-10-17T09:20:40.137766+00:00",
   "Offside Boys": "2026-10-06T18:53:44.325127+00:00",
   "Oh Calcio": "2026-10-04T12:56:56.150677+00:00",
   "One More Time": "2026-10-04T12:56:56.150677+00:00",
@@ -1510,12 +1510,6 @@
   }
  },
  "laeufe": [
-  {
-   "modus": "radar",
-   "neu": 0,
-   "still": 0,
-   "zeit": "2026-10-08T21:07:59.968776+00:00"
-  },
   {
    "modus": "drop",
    "neu": 0,
@@ -3909,16 +3903,20 @@
    "neu": 0,
    "still": 0,
    "zeit": "2026-10-17T09:08:07.804459+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-17T09:20:40.137766+00:00"
   }
  ],
  "last_full": "2026-10-17T04:33:07.875105+00:00",
  "last_run": {
   "mode": "drop",
-  "time": "2026-10-17T09:08:07.804459+00:00"
+  "time": "2026-10-17T09:20:40.137766+00:00"
  },
- "netzfehler": [
-  "RB-Jerseys"
- ],
+ "netzfehler": [],
  "platforms": {
   "https://1kloppshop.com": "shopify",
   "https://3kots.com": "woo:https://3kots.com/wp-json/wc/store/v1/products",
