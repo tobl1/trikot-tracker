@@ -283,7 +283,7 @@
   "Maglie Calcio Vintage": "2026-10-04T12:56:56.150677+00:00",
   "Modeziege": "2026-10-04T12:56:56.150677+00:00",
   "Nanos Football Jerseys": "2026-10-12T19:50:49.227279+00:00",
-  "Nostalgic Football Shirts": "2026-10-17T09:50:41.231063+00:00",
+  "Nostalgic Football Shirts": "2026-10-17T10:20:44.361772+00:00",
   "Offside Boys": "2026-10-06T18:53:44.325127+00:00",
   "Oh Calcio": "2026-10-04T12:56:56.150677+00:00",
   "One More Time": "2026-10-04T12:56:56.150677+00:00",
@@ -1510,12 +1510,6 @@
   }
  },
  "laeufe": [
-  {
-   "modus": "full",
-   "neu": 0,
-   "still": 5,
-   "zeit": "2026-10-09T04:34:41.668090+00:00"
-  },
   {
    "modus": "radar",
    "neu": 1,
@@ -3909,16 +3903,20 @@
    "neu": 0,
    "still": 0,
    "zeit": "2026-10-17T10:09:10.315904+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-17T10:20:44.361772+00:00"
   }
  ],
  "last_full": "2026-10-17T04:33:07.875105+00:00",
  "last_run": {
   "mode": "drop",
-  "time": "2026-10-17T10:09:10.315904+00:00"
+  "time": "2026-10-17T10:20:44.361772+00:00"
  },
- "netzfehler": [
-  "Football & Vintage Amsterdam"
- ],
+ "netzfehler": [],
  "platforms": {
   "https://1kloppshop.com": "shopify",
   "https://3kots.com": "woo:https://3kots.com/wp-json/wc/store/v1/products",
