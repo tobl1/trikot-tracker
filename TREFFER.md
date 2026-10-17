@@ -1,6 +1,6 @@
 # Trikot-Tracker
 
-Stand: 17.10.2026 09:38 Uhr (drop), 303 aktuelle Treffer in XL/XXL
+Stand: 17.10.2026 09:48 Uhr (priority), 303 aktuelle Treffer in XL/XXL
 
 ## Thiago (3)
 
@@ -20,7 +20,7 @@ Stand: 17.10.2026 09:38 Uhr (drop), 303 aktuelle Treffer in XL/XXL
 | [FC Barcelona – LaLiga – Heimtrikot – 2012/13 – Longsleeve – BNWT – Gr. 2XL](https://www.mrskully.de/product/24420139/fc-barcelona-laliga-heimtrikot-2012-13-longsleeve-bnwt-gr-2xl) | XXL | BNWT | 144,95 € | Mr.Skully | 15.10. |
 | [FC Barcelona 2012/13 Away Shirt (XL)](https://secondhalfstore.com/products/fc-barcelona-2012-13-away-shirt-xl) | XL |  | 59.95 EUR | Secondhalf | 08.10. |
 | [2008-09 FC BARCELONA SHIRT XL](https://classic-shirts.com/product-eng-303089-2008-09-FC-BARCELONA-SHIRT-XL.html) | XL | 8/10 | £99.99 | Classic-Shirts | 05.10. |
-| [Koszulka piłkarska FC Barcelona 2009/10 Away [XL]](https://footballthrift.shop/koszulka-pilkarska-fc-barcelona-2009-10-away-xl/) | XL |  | 105.00 USD | Football Thrift Shop | 05.10. |
+| [Koszulka piłkarska FC Barcelona 2009/10 Away [XL]](https://footballthrift.shop/koszulka-pilkarska-fc-barcelona-2009-10-away-xl/) | XL |  | 400.00 PLN | Football Thrift Shop | 05.10. |
 | [FC Barcelona 08/09 Auswärts XL](https://ohcalcio.com/products/barca-auswarts) | XL | 9/10 | 99.95 EUR | Oh Calcio | 05.10. |
 | [Barcelona 2012/2013 Visitante (2XL)](https://futmaniacos.com/products/camiseta-barcelona-2012-2013-visitante-1) | 2XL |  | 55.95 EUR | Futmaniacos | 04.10. |
 | [2012-13 FC BARCELONA SHIRT XXL](https://classic-shirts.com/product-eng-272150-2012-13-FC-BARCELONA-SHIRT-XXL.html) | XXL | 9/10 | £69.99 | Classic-Shirts | 01.10. |
