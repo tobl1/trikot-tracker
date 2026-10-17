@@ -444,9 +444,9 @@
   "quelle": "The Kit Dealer"
  },
  "The Kitman 97|geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop": {
-  "anzahl": 1,
+  "anzahl": 2,
   "erst": "2026-10-10T16:38:01.864284+00:00",
-  "letzt": "2026-10-10T16:38:01.864284+00:00",
+  "letzt": "2026-10-17T16:08:09.136462+00:00",
   "meldung": "geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop",
   "modi": [
    "drop"

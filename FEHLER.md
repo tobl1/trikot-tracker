@@ -1,9 +1,10 @@
 # Fehler-Log
 
-Probleme der letzten 30 Tage, zusammengefasst. Stand 17.10. 17:50 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
+Probleme der letzten 30 Tage, zusammengefasst. Stand 17.10. 18:08 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
 
 | zuletzt | seit | Anzahl | Quelle | Meldung | Runs |
 |---|---|---|---|---|---|
+| 17.10. 18:08 | 10.10. 18:38 | 2 | The Kitman 97 | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
 | 17.10. 10:38 | 17.10. 10:38 | 1 | Nostalgic Football Shirts | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
 | 17.10. 06:33 | 05.10. 06:46 | 13 | Football Legends Kits | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | full |
 | 17.10. 06:33 | 09.10. 06:34 | 5 | The Third Kit | keine Produkte erhalten (HTTP 202 ×4) | full |
@@ -18,7 +19,6 @@ Probleme der letzten 30 Tage, zusammengefasst. Stand 17.10. 17:50 Uhr. Wird bei 
 | 11.10. 15:48 | 10.10. 21:48 | 3 | Seitenprüfung | classic-shirts.com: 1 Seite(n) nicht prüfbar (Verbindung ×1) | priority |
 | 11.10. 06:35 | 11.10. 06:35 | 1 | Kick and Rush | keine Produkte erhalten | full |
 | 11.10. 06:35 | 11.10. 06:35 | 1 | Seitenprüfung | classic-shirts.com: 71 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×68, Verbindung ×3) | full |
-| 10.10. 18:38 | 10.10. 18:38 | 1 | The Kitman 97 | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
 | 09.10. 23:50 | 09.10. 18:38 | 22 | eBay | Tageslimit von 4500 Abrufen erreicht, Pause bis morgen | drop |
 | 09.10. 11:08 | 09.10. 11:08 | 1 | Het Shirthuis | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
 | 08.10. 10:38 | 08.10. 09:38 | 2 | Legit Football Shirts | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | drop |
