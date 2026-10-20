@@ -124,7 +124,8 @@ temporären Workflow aus GitHub heraus (Beispiel 05.10.2026: CFS-Suche "thiago" 
   1860-Wiesn-Trikots); Stichwörter seit 05.10.2026 auch "octoberfest", "wiesntrikot". **Check 05.10.2026:**
   FYJ hat das 21/22-Trikot in keiner einzigen Größe, nur 2013/14 (Thiagos erste Bayern-Saison!), 2024/25 und
   2025/26 als Oktoberfest-Trikot. Es ist also selten, kein Suchbegriff-Problem. Thiago war 21/22 schon in Liverpool; seit 05.10.2026 deshalb zusätzlich das Oktoberfest-Trikot 2013/14 (Thiagos erste
-  Bayern-Saison), beide unter dem Label "Bayern Wiesn-Trikot" (zwei Einträge, gleicher Name); Liverpool Away 21/22; Liverpool Third 22/23; Spanien 2010/2011 und 2014
+  Bayern-Saison), beide unter dem Label "Bayern Wiesn-Trikot" (zwei Einträge, gleicher Name); Liverpool Away 21/22; ~~Liverpool Third 22/23~~ (dunkelgrün, am 20.10.2026 auf Wunsch des Nutzers entfernt,
+  mit Thiago-Flock kommt es weiter über den Spieler Thiago; Tests nutzen den Eintrag noch über `M_LFC`); Spanien 2010/2011 und 2014
   jeweils Home und Away
 - Varianten-Logik: erlaubtes Wort im Titel → ok; anderes Variantenwort → nein; gar keins → nur ok,
   wenn "home" erlaubt ist
@@ -617,6 +618,11 @@ sperren alle Bots mit `Disallow: /`, keine offene Such-Schnittstelle, also weite
 - GitHub-Störung bei Actions am 05.10.2026 21:11 bis 0:49 Uhr: Jobs bekamen keinen Rechner, wurden nach 15 Min.
   abgebrochen (Runs "failure"/"cancelled" ohne Schritte, deshalb nicht im Fehler-Log). Bei solchen Ausfällen zuerst
   githubstatus.com prüfen
+- trikotwahnsinn.de (Nutzer 20.10.2026): Cloudflare sperrt jeden automatischen Abruf (403 "Attention Required", sogar
+  robots.txt), nicht bei FYJ, also nicht anbindbar
+- Nostalgic Football Shirts: Artikel stehen vor dem Drop schon mit `published_at` im Katalog, der Shop ist aber per Passwort
+  zu (401) und öffnet erst zur Drop-Zeit (17.10.2026: eingestellt 11:33, offen kurz vor 16 Uhr, Treffer 16:08). Der gemessene
+  Rhythmus (Sa ca. 11:40) zeigt also das Einstellen, nicht die Öffnung; das Radar fängt die Öffnung trotzdem
 - footballcat.eu (Drop Sa 16 Uhr laut Nutzer): JS-Bot-Schutz ("challenge_passed"-Cookie), wird
   **bewusst nicht umgangen**, nicht bei FYJ. Nur per Instagram/Newsletter verfolgbar
 - **Topbinz seit 05.10.2026 direkt** (vorher 403): ShopWired, `plattform: html` mit Suche, Zustand aus "Condition rating - GOOD" (seit 06.10.2026), Neuheiten-Seite `/new-in` (Radar und Drop-Run lesen nur diese), `pause: 10` (robots.txt Crawl-delay 10), `schnellcheck: nein` (Schnell-Run dauerte 14 Min.). Drop Fr 19 Uhr laut Nutzer. first11shirts.com laut Nutzer ebenfalls Fr 19 Uhr (feste Drop-Zeit),

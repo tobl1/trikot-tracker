@@ -64,7 +64,8 @@ CASES = [
     ("2021-22 1860 Munchen Wiesn Trikot XL", set()),
     ("2021-22 Liverpool Away Shirt (XL)", {"Liverpool Away 2021/22"}),
     ("2021-22 Liverpool Shirt (XL)", set()),
-    ("2022-23 Liverpool Third Shirt (XXL)", {"Liverpool Third 2022/23"}),
+    ("2022-23 Liverpool Third Shirt (XXL)", set()),          # seit 20.10.2026 kein Sondertrikot mehr
+    ("2022-23 Liverpool Third Shirt Thiago #6 (XXL)", {"Thiago"}),
     ("2022-23 Liverpool Away Shirt (XXL)", set()),
     ("2010-11 Spain Home Shirt (XL)", {"Spanien 2010/2011"}),
     ("2014-15 Spain Away Shirt XL", {"Spanien 2014"}),
@@ -93,7 +94,7 @@ CASES = [
     ("Spanje 2014 Thuis Shirt Thiago #6 (XL)", {"Thiago", "Spanien 2014"}),
     ("Barcelona 2012/2013 Uit Shirt (XL)", {"Barça 2008-2013"}),
     ("Barcelona 2012/2013 Uit Shirt Messi #10 (XL)", set()),
-    ("Liverpool 2022/2023 Derde Shirt (XL)", {"Liverpool Third 2022/23"}),
+    ("Liverpool 2022/2023 Derde Shirt (XL)", set()),
     ("Liverpool 2022/2023 Uit Shirt (XL)", set()),
     ("Spanje 2010 Keeper Shirt Casillas (XL)", set()),
     ("Nederland 2018 Thuis Shirt De Jong #21 (XL)", {"Frenkie de Jong"}),
@@ -372,7 +373,16 @@ def test_desc_title_vorrang():
     assert tracker.desc_not_jersey("Liverpool adidas T-Shirt", "2025-26 Liverpool adidas '95 T-Shirt *w/tags*")
 
 
+# Liverpool Third 2022/23 ist seit 20.10.2026 kein Sondertrikot mehr; als Beispiel für Artikelcodes und "drittes Trikot"
+# taugt es weiter, deshalb hier ein Matcher mit dem alten Eintrag
+_W = yaml.safe_load((ROOT / "watchlist.yaml").read_text(encoding="utf-8"))
+_W["sondertrikots"].append({"name": "Liverpool Third 2022/23", "prioritaet": "hoch", "verein": ["liverpool"],
+                            "saisons": ["2022/23"], "varianten": ["third"], "codes": ["DM1835-377"]})
+M_LFC = tracker.Matcher(_W)
+
+
 def test_artikelcode_sondertrikot():
+    M = M_LFC
     title = "2022-23 LIVERPOOL SHIRT XXL"
     desc = "CONDITION: 9/10 DESCRIPTION: SPONSOR: STANDARD CHARTERED CODE: DM1835-377"
     assert M.labels(title) == []                       # ohne Variante im Titel: nein

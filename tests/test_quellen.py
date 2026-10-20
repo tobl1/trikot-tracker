@@ -454,7 +454,8 @@ def test_groesse_im_titel_schlaegt_schlagwort():
 
 
 def test_drittes_trikot_ist_third():
-    assert {l for l, _ in M.labels("Liverpool FC drittes Trikot 2022/23 - XL")} == {"Liverpool Third 2022/23"}
+    from test_matching import M_LFC   # Matcher mit dem früheren Eintrag Liverpool Third 2022/23
+    assert {l for l, _ in M_LFC.labels("Liverpool FC drittes Trikot 2022/23 - XL")} == {"Liverpool Third 2022/23"}
     assert {l for l, _ in M.labels("Liverpool FC Heimtrikot 2022/23 - XL")} == set()
     assert {l for l, _ in M.labels("Chamarra Brasil 94 2006")} == set()
 

@@ -305,13 +305,8 @@ sondertrikots:
     varianten: [away]
     suchanfragen: ["liverpool 2021"]
 
-  - name: "Liverpool Third 2022/23"
-    prioritaet: hoch
-    verein: ["liverpool"]
-    saisons: ["2022/23"]
-    varianten: [third]
-    codes: ["DM1835-377"]      # Nike-Artikelcode, zählt auch ohne "Third" im Titel (z. B. classic-shirts)
-    suchanfragen: ["liverpool 2022"]
+  # Liverpool Third 2022/23 (dunkelgrün, Nike DM1835-377) am 20.10.2026 entfernt (Nutzer): ohne Flock nicht mehr gewünscht,
+  # mit Thiago-Flock findet es weiter der Spieler-Eintrag Thiago
 
   - name: "Spanien 2010/2011"
     prioritaet: hoch
