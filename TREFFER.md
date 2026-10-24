@@ -1,6 +1,6 @@
 # Trikot-Tracker
 
-Stand: 24.10.2026 12:50 Uhr (drop), 296 aktuelle Treffer in XL/XXL
+Stand: 24.10.2026 13:08 Uhr (drop), 297 aktuelle Treffer in XL/XXL
 
 ## Thiago (2)
 
@@ -208,10 +208,11 @@ Stand: 24.10.2026 12:50 Uhr (drop), 296 aktuelle Treffer in XL/XXL
 | [2012/13 - Bayern Munich - Kroos #39 (2XL)](https://www.vintagefootballarea.com/products/2012-13-bayern-munich-kroos-39-2xl-1) | XXL | Very Good | 84.99 EUR | Vintage Football Area | 01.10. |
 | [2022-23 Real Madrid adidas Third Shirt Kroos #8 *w/tags* XL](https://www.vintagefootballshirts.com/products/2022-23-real-madrid-adidas-third-shirt-kroos-8-w-tags-xl) | XL |  | 119.95 EUR | Vintage Football Shirts | 01.10. |
 
-## Nike Total 90 (2004-06) (6)
+## Nike Total 90 (2004-06) (7)
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
+| [Nederland 2004 Thuis Shirt Seedorf #20 (XXL)](https://thefootballtemple.com/products/nederland-2004-thuis-shirt-seedorf-20-xxl-6916) | XXL | 7/10 | 134.95 EUR | The Football Temple | 24.10. |
 | [Juventus Auswärtstrikot 2004/05 – Cannavaro #28 – Nike – Größe XXL](https://jersely.com/products/juventus-auswartstrikot-2004-05-cannavaro-28-nike-grosse-xxl) | XXL |  | 139.99 EUR | Jersely | 04.10. |
 | [Niederlande 2004 Heimtrikot – Robben #19 – Größe XL](https://jersely.com/products/niederlande-2004-heimtrikot-robben-19-grosse-xl) | XL |  | 129.99 EUR | Jersely | 04.10. |
 | [Juventus 2004-05 "Zambrotta" Auswärts Trikot (XL) nike](https://www.senseofgoal.com/products/juventus-2004-05-zambrotta-auswarts-trikot-xxl-nike) | XL |  | 99.95 EUR | Sense of Goal | 04.10. |
