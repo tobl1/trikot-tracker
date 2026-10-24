@@ -565,9 +565,9 @@
   "quelle": "The Third Kit"
  },
  "Topbinz|gesperrt (HTTP 403), blockt vermutlich Server-Adressen": {
-  "anzahl": 26,
+  "anzahl": 27,
   "erst": "2026-10-23T17:08:46.187023+00:00",
-  "letzt": "2026-10-24T14:08:18.023533+00:00",
+  "letzt": "2026-10-24T14:38:18.840101+00:00",
   "meldung": "gesperrt (HTTP 403), blockt vermutlich Server-Adressen",
   "modi": [
    "drop",
