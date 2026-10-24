@@ -1,10 +1,10 @@
 # Fehler-Log
 
-Probleme der letzten 30 Tage, zusammengefasst. Stand 24.10. 12:20 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
+Probleme der letzten 30 Tage, zusammengefasst. Stand 24.10. 12:38 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
 
 | zuletzt | seit | Anzahl | Quelle | Meldung | Runs |
 |---|---|---|---|---|---|
-| 24.10. 12:08 | 23.10. 19:08 | 18 | Topbinz | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | drop, full |
+| 24.10. 12:38 | 23.10. 19:08 | 19 | Topbinz | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | drop, full |
 | 24.10. 06:35 | 05.10. 06:46 | 20 | Football Legends Kits | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | full |
 | 24.10. 06:35 | 09.10. 06:34 | 9 | The Third Kit | keine Produkte erhalten (HTTP 202 ×4) | full |
 | 23.10. 11:38 | 08.10. 18:38 | 4 | First 11 Shirts | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
