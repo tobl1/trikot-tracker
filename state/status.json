@@ -311,7 +311,7 @@
   "The 12th Man Retro": "2026-10-04T12:56:56.150677+00:00",
   "The Football Boutique": "2026-10-04T12:56:56.150677+00:00",
   "The Football Room": "2026-10-04T12:56:56.150677+00:00",
-  "The Football Temple": "2026-10-31T13:20:50.819382+00:00",
+  "The Football Temple": "2026-10-31T13:50:44.433494+00:00",
   "The Footballshirt Vault": "2026-10-04T12:56:56.150677+00:00",
   "The Kit Dealer": "2026-10-04T12:56:56.150677+00:00",
   "The Kitman 97": "2026-10-24T18:20:50.745899+00:00",
@@ -1635,12 +1635,6 @@
   }
  },
  "laeufe": [
-  {
-   "modus": "drop",
-   "neu": 0,
-   "still": 0,
-   "zeit": "2026-10-23T10:21:04.229737+00:00"
-  },
   {
    "modus": "radar",
    "neu": 0,
@@ -4034,16 +4028,20 @@
    "neu": 0,
    "still": 0,
    "zeit": "2026-10-31T13:38:12.795568+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-10-31T13:50:44.433494+00:00"
   }
  ],
  "last_full": "2026-10-31T05:41:09.263201+00:00",
  "last_run": {
   "mode": "drop",
-  "time": "2026-10-31T13:38:12.795568+00:00"
+  "time": "2026-10-31T13:50:44.433494+00:00"
  },
- "netzfehler": [
-  "RB-Jerseys"
- ],
+ "netzfehler": [],
  "platforms": {
   "https://1kloppshop.com": "shopify",
   "https://3kots.com": "woo:https://3kots.com/wp-json/wc/store/v1/products",
