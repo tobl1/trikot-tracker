@@ -1,12 +1,12 @@
 # Fehler-Log
 
-Probleme der letzten 30 Tage, zusammengefasst. Stand 31.10. 06:41 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
+Probleme der letzten 30 Tage, zusammengefasst. Stand 31.10. 09:08 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
 
 | zuletzt | seit | Anzahl | Quelle | Meldung | Runs |
 |---|---|---|---|---|---|
+| 31.10. 09:08 | 23.10. 19:08 | 229 | Topbinz | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | drop, full |
 | 31.10. 06:41 | 05.10. 06:46 | 27 | Football Legends Kits | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | full |
 | 31.10. 06:41 | 25.10. 06:35 | 7 | Seitenprüfung | www.topbinzfootballshirts.co.uk: 31 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×28, 403 ×3) | full |
-| 31.10. 06:41 | 23.10. 19:08 | 228 | Topbinz | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | drop, full |
 | 30.10. 06:41 | 30.10. 06:41 | 1 | Seitenprüfung | full90prints.com: 1 Seite(n) nicht prüfbar (404 ×1) | full |
 | 29.10. 18:08 | 08.10. 16:08 | 4 | Kickoff Vintage | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
 | 29.10. 17:08 | 08.10. 18:38 | 5 | First 11 Shirts | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
