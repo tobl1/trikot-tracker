@@ -1,10 +1,11 @@
 # Fehler-Log
 
-Probleme der letzten 30 Tage, zusammengefasst. Stand 31.10. 16:20 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
+Probleme der letzten 30 Tage, zusammengefasst. Stand 31.10. 16:38 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
 
 | zuletzt | seit | Anzahl | Quelle | Meldung | Runs |
 |---|---|---|---|---|---|
-| 31.10. 16:08 | 23.10. 19:08 | 243 | Topbinz | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | drop, full |
+| 31.10. 16:38 | 10.10. 18:38 | 3 | The Kitman 97 | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
+| 31.10. 16:38 | 23.10. 19:08 | 244 | Topbinz | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | drop, full |
 | 31.10. 06:41 | 05.10. 06:46 | 27 | Football Legends Kits | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | full |
 | 31.10. 06:41 | 25.10. 06:35 | 7 | Seitenprüfung | www.topbinzfootballshirts.co.uk: 31 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×28, 403 ×3) | full |
 | 30.10. 06:41 | 30.10. 06:41 | 1 | Seitenprüfung | full90prints.com: 1 Seite(n) nicht prüfbar (404 ×1) | full |
@@ -26,7 +27,6 @@ Probleme der letzten 30 Tage, zusammengefasst. Stand 31.10. 16:20 Uhr. Wird bei 
 | 19.10. 16:38 | 07.10. 16:38 | 2 | Granny's Football Store | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
 | 19.10. 06:33 | 19.10. 06:33 | 1 | 3kots | ConnectTimeout: HTTPSConnectionPool(host='3kots.com', port=443): Max retries exceeded with url: /products.json?limit=1 (Caused by Connec | full |
 | 18.10. 17:38 | 05.10. 06:46 | 15 | Kick It Vintage | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | full, drop, priority |
-| 17.10. 18:08 | 10.10. 18:38 | 2 | The Kitman 97 | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
 | 17.10. 10:38 | 17.10. 10:38 | 1 | Nostalgic Football Shirts | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
 | 15.10. 21:48 | 15.10. 09:48 | 3 | Seitenprüfung | classic-shirts.com: 14 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×11, Verbindung ×3) | priority |
 | 15.10. 06:33 | 15.10. 06:33 | 1 | The Third Kit | ConnectTimeout: HTTPSConnectionPool(host='thethirdkit.co.uk', port=443): Max retries exceeded with url: /products.json?limit=1 (Caused b | full |
