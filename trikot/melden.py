@@ -4,6 +4,8 @@ import datetime as dt
 import os
 import sys
 import uuid
+from collections import Counter
+from urllib.parse import urlsplit
 
 import requests
 
@@ -60,7 +62,7 @@ def send_outbox(status_store=None, key=None):
     if not pending:
         return 0, 0, 0, []
     abos = app_abos(status_store or {}, key)
-    keep, sent, dropped, problems = [], 0, 0, []
+    keep, sent, dropped, problems, codes = [], 0, 0, [], Counter()
     if not abos:
         problems.append(("App-Push", "kein aktives Abo (oder Schlüssel fehlt): im Dashboard unter Einstellungen Push aktivieren"))
     for e in pending:
@@ -76,6 +78,8 @@ def send_outbox(status_store=None, key=None):
         ok = False
         for aid, sub in targets.items():
             code = webpush.send(sub, msg, key)
+            # nur Dienst und Antwort ins Log (z. B. web.push.apple.com = iPhone/Mac-Safari), nie die Abo-Adresse selbst
+            codes[(urlsplit(sub.get("endpoint", "")).hostname or "?", code)] += 1
             ok = ok or code in (200, 201, 202)
             if code in (404, 410):   # Abo erloschen (z. B. App neu installiert): austragen
                 (status_store.get("push_abos") or {}).pop(aid, None)
@@ -88,6 +92,8 @@ def send_outbox(status_store=None, key=None):
         else:
             keep.append(e)
     speicher.save_json(speicher.OUTBOX_FILE, keep)
+    if codes:
+        print("App-Push: " + ", ".join(f"{h} HTTP {c or 'Verbindung'} ×{n}" for (h, c), n in sorted(codes.items(), key=str)))
     return sent, len(keep), dropped, problems
 
 

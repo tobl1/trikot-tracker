@@ -618,6 +618,16 @@ sperren alle Bots mit `Disallow: /`, keine offene Such-Schnittstelle, also weite
 - GitHub-Störung bei Actions am 05.10.2026 21:11 bis 0:49 Uhr: Jobs bekamen keinen Rechner, wurden nach 15 Min.
   abgebrochen (Runs "failure"/"cancelled" ohne Schritte, deshalb nicht im Fehler-Log). Bei solchen Ausfällen zuerst
   githubstatus.com prüfen
+- **Recherche 02.11.2026** (Nutzer: "Portfolio erweitern"): neu Studio Football Shirts (NL, Shopify), Classic Football Kit
+  (UK, Chesterfield, Shopify, ca. 17.000 Artikel), Memoria (FR, Shopify, auch Neuauflagen, die `nachbau` aussortiert), Saving
+  Football Shirts (London, Wix, viel unter £50, 4.700 Artikel); Retro Football Shirt Store von FYJ auf `wix` umgestellt
+  (2.600 Artikel). Topbinz seit 23.10.2026 aus GitHub 403 (lokal 200), daher `plattform: fyj`. Geprüft und verworfen:
+  fodboldshoppen.dk (allgemeiner Sportshop), retrotrojer.dk (= Retrotrøjer), legendsfootballshirts.com (Ägypten),
+  vintagesportsfashion.com (allgemeine Vintage-Sportmode), 201retrokits (US). Noch offen: We Love Football Shirts (Lightspeed,
+  `?format=json` liefert JSON, bräuchte eigene Anbindung), ClassicShirts-FC (Ecwid), The Hoff Classics (System unklar)
+- **Push-Diagnose 02.11.2026:** Nutzer bekam scheinbar keine Pushes, obwohl alle Runs verschickten ("Postausgang: N
+  verschickt") und Apples Dienst annahm. `send_outbox` schreibt seitdem je Versand Dienst und Antwort ins Log
+  ("App-Push: web.push.apple.com HTTP 201 ×2"), nie die Abo-Adresse. Ursache lag also auf dem Gerät (Mitteilungen, Fokus)
 - trikotwahnsinn.de (Nutzer 20.10.2026): Cloudflare sperrt jeden automatischen Abruf (403 "Attention Required", sogar
   robots.txt), nicht bei FYJ, also nicht anbindbar
 - Nostalgic Football Shirts: Artikel stehen vor dem Drop schon mit `published_at` im Katalog, der Shop ist aber per Passwort
