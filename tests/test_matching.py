@@ -566,6 +566,7 @@ def test_add_shops_from_issues(tmp_path, monkeypatch):
 def test_fundgrube(tmp_path, monkeypatch):
     monkeypatch.setattr(trikot.speicher, "FUNDGRUBE_REPORT", tmp_path / "FUNDGRUBE.md")
     monkeypatch.setattr(trikot.quellen, "detect_platform", lambda base: "shopify" if "good" in base else "unbekannt")
+    monkeypatch.setattr(trikot.quellen.fyj, "fyj_retailers", lambda: ["good.com"])   # ohne Netz
     tracker.FYJ_DOMAIN_STATS.clear()
     tracker.FYJ_DOMAIN_STATS.update({"good.com": [20, 1], "remake.com": [10, 5]})
     monkeypatch.setattr(trikot.quellen, "detect_platform", lambda base: "shopify" if ("good" in base or "remake" in base) else "unbekannt")
@@ -577,6 +578,19 @@ def test_fundgrube(tmp_path, monkeypatch):
     assert set(by) == {"good.com", "remake.com", "odd.net"}            # bekannte und Marktplätze raus
     assert by["good.com"]["empfohlen"] and not by["remake.com"]["empfohlen"] and not by["odd.net"]["empfohlen"]
     assert tracker.fundgrube(st, [], tracker.now().isoformat()) is None   # erst nach einer Woche wieder
+
+
+def test_fyj_haendler(monkeypatch):
+    shops = [{"url": "https://www.direkt.com"}, {"url": "https://zu.de", "plattform": "aus", "sperren": True}]
+    liste = ["direkt.com", "alt.nl", "verkaeufer-ebay"]
+    monkeypatch.setattr(trikot.quellen.fyj, "fyj_retailers", lambda: list(liste))
+    st = {}
+    assert tracker.fyj_haendler(st, shops, tracker.now().isoformat()) == (3, [], [])   # erster Abgleich: niemand neu
+    liste[:] = ["direkt.com", "neu.it", "zu.de", "verkaeufer-ebay"]
+    alle, neu, weg = tracker.fyj_haendler(st, shops, tracker.now().isoformat())
+    assert alle == 4 and neu == [("neu.it", "nicht angebunden"), ("zu.de", "gesperrt")] and weg == [("alt.nl", "nicht angebunden")]
+    monkeypatch.setattr(trikot.quellen.fyj, "fyj_retailers", lambda: None)            # FYJ nicht erreichbar
+    assert tracker.fyj_haendler(st, shops, tracker.now().isoformat())[0] == 4          # alter Stand bleibt
 
 
 def test_short_size():

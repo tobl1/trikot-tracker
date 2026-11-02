@@ -26,6 +26,7 @@ SHOPIFY_INTERVAL = 2.0   # Mindestabstand zwischen zwei Shopify-Anfragen, über 
 MAX_PUSH_HIGH = 5        # max. Einzel-Pushes (Thiago/Sondertrikots) pro Lauf, Rest gebündelt
 REPORT_HOURS = 36        # wie lange ein Treffer ohne Neusichtung in TREFFER.md bleibt
 FYJ_API = "https://www.findyourjersey.org/api/jerseys"
+FYJ_RETAILERS = "https://www.findyourjersey.org/api/retailers"   # Händlerliste (Domains), wöchentlich in der Fundgrube
 FYJ_SIZES = ["XL", "XXL"]
 FX_API = "https://api.frankfurter.dev/v1/latest"
 FYJ_MARKETPLACES = ("ebay.", "depop.", "vinted.", "etsy.")   # über FYJ nicht übernehmen
@@ -109,7 +110,8 @@ FLOCK_NUM_RX = re.compile(r"#\s?\d{1,2}(?!\d)|(?<![a-z0-9])(no|nr|num|number)\.?
 VARIANT_WORDS = {
     "home": ["home", "heim", "heimtrikot", "local", "thuis", "domicile", "casa", "1st"],
     "away": ["away", "auswarts", "auswartstrikot", "visitante", "uit", "exterieur", "trasferta", "2nd"],
-    "third": ["third", "3rd", "ausweich", "ausweichtrikot", "drittes", "dritte", "tercera", "troisieme", "terza", "derde"],
+    "third": ["third", "3rd", "ausweich", "ausweichtrikot", "drittes", "dritte", "tercera", "troisieme", "terza", "derde",
+              "3th"],
 }
 VARIANT_RX = {k: any_rx(v) for k, v in VARIANT_WORDS.items()}
 

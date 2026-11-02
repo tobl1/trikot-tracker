@@ -28,6 +28,9 @@ Aufbau, getroffene Entscheidungen und offene Punkte. Bitte bei größeren Änder
    nein; `speicher.load_shops()` führt sie mit shops.yaml zusammen)
    und schließt das Issue. Bewusst nur über FYJ: Einträge mit `plattform: aus` (z. B. footballshirtvintage.fr).
    Ganz gesperrt (auch nicht über FYJ): `sperren: ja` (The Football Market)
+   Seit 02.11.2026 vergleicht die Fundgrube außerdem die FYJ-Händlerliste (`/api/retailers`) mit der Vorwoche
+   (`status.json` → `fyj_haendler`): Abschnitt "Händlerliste von FindYourJersey" in FUNDGRUBE.md mit neuen und
+   verschwundenen Händlern (30 Tage) und wie sie bei uns laufen. Neue Händler prüfen (Land per `/meta.json`, System)
 
 ## Ziel
 
@@ -47,7 +50,7 @@ Einzeltrikots zum Nachbeflocken dazukommen, das sagt der Nutzer gesondert an.
 |---|---|
 | `tracker.py` + `trikot/` | Einstieg `tracker.py`, Code seit 05.10.2026 im Paket `trikot/` (vorher eine Datei mit 2.200 Zeilen): `basis` (Konstanten, Text), `speicher` (Pfade, Laden/Speichern), `abgleich` (Matcher), `netz` (HTTP), `quellen/` (shopify, woo, wix, suchseiten = CFS/IdoSell/html/PrestaShop/SmartWeb, fyj, `run_shop`), `zustand`, `pruefung`, `preise`, `rhythmus`, `melden`, `issues`, `berichte`, `lauf` (main). `tracker.py` stellt alle Namen weiter unter `tracker.*` bereit (Tests); Tests, die etwas umbiegen, müssen das echte Modul treffen (z. B. `trikot.speicher.ERROR_LOG`) |
 | `watchlist.yaml` | Spieler mit Suchbegriffen, Ausschlüssen, Vereinsfilter; Sondertrikots; Größen; Produktausschlüsse |
-| `shops.yaml` | direkt abgefragte Shops mit `plattform` (auto, cfs, idosell, smartweb, prestashop, fyj, aus), optional `schnellcheck: nein` |
+| `shops.yaml` | direkt abgefragte Shops mit `plattform` (auto, cfs, idosell, smartweb, prestashop, html, wix, lightspeed, fyj, aus), optional `schnellcheck: nein` |
 | `.github/workflows/tracker.yml` | **Hauptauslöser cron-job.org** (seit 04.10.2026, `workflow_dispatch`): Gesamt-Run 5:30, Schnell-Run 9:45/15:45/21:45, Drop-Run `5-59/15 9-23` (deutsche Zeit, bewusst versetzt zu :45). GitHub-Zeitpläne nur Rückfall mit `--rueckfall` (überspringt, wenn Gesamt-Run < 20 h bzw. Schnell-Run < 5,5 h her): `30 5`, `15 9,15,21` UTC. Am 04.10.2026 startete ein Rückfall-Schnell-Run 4 h verspätet, lief trotz 4-h-Sperre, 63 Min. mit vielen 429 und verdrängte drei Drop-Runs (deshalb 5,5 h und spätere Zeiten, auch im Winter nach den cron-job.org-Runs). **GitHub-Concurrency hält nur einen wartenden Run**, ein weiterer Start verdrängt ihn (`cancelled`). Deshalb Startzeiten entzerrt und kein Drop-Rückfall |
 | Zweig **`daten`** (seit 05.10.2026) | alles, was Runs schreiben, getrennt vom Code: `state/seen.json` (bekannte Treffer, Schlüssel = kanonische URL), `state/status.json` (Plattformen, Quellen, Läufe, Flags, Alarme, Radar), `state/fehlerlog.json` + `FEHLER.md`, `state/postausgang.json`, `treffer.json` (Dashboard), `TREFFER.md`, `FUNDGRUBE.md`, `shops_fundgrube.yaml`. Im Workflow und lokal als Unterordner `daten/` ausgecheckt (`TRIKOT_DATEN` überschreibt den Pfad). Der Gesamt-Run fasst den Zweig täglich zu **einem** Commit zusammen (orphan + force push), die anderen Runs committen normal. Grund: Rebase-Konflikt am 04.10.2026 (Run-Ergebnis verloren) und wachsende Repo-Größe |
 | Ablauf `tracker.yml` | Code-Zweig (`ref: github.ref_name`) + Daten-Zweig holen, Tests, Run, **Ergebnisse speichern**, dann **Pushes senden** (`--mode senden`, Postausgang) und **Versand speichern**, danach Schritt **Dashboard anstoßen** (`gh workflow run dashboard.yml`, seit 06.10.2026 entkoppelt: der Pages-Job hing über 1 Std. in "waiting" und blockierte über die Concurrency alle Runs). Eingaben zum Testen: `zweig` (z. B. `daten-test`) und `stumm` (Probelauf: `--dry-run`, keine Pushes, keine Issues schließen, kein Dashboard). Test eines Umbaus: `gh workflow run tracker.yml --ref <zweig> -f mode=full -f zweig=daten-test -f stumm=true` |
@@ -462,6 +465,14 @@ originaltrikot.de (Gambio, Suchseiten ca. 2 MB; Größen-Auswahl zeigt nur verf�
 Beflockung auf Wunsch nachträglich an), wavememorabilia.com (IT, Matchworn/Player Issue).
 classicfootballcollectibles.com bewusst nicht: griechische Titel, bleibt über FYJ
 
+**Lightspeed (`lightspeed`, seit 02.11.2026, We Love Football Shirts, NL):** jede Seite liefert mit `?format=json` ihre
+Daten; Kollektion seitenweise über `/en/collection/page<N>.ajax?format=json&limit=100` (max. 100 je Seite, `?page=` wirkt
+nicht), neueste zuerst, nur Verfügbares. Titel nennt nur Verein und Größe ("FC Barcelona (XL) *BNWT"), alles andere steht
+im Artikelcode ("FC_Barcelona_Nike_Away_2012-2013_#11_Thiago_XL(*BNWT)"), der deshalb mit in den Abgleich geht (Sternchen
+entfernt, sonst gälte "*BNWT … (*" als Sternchen-Flock). Größe aus der Variante ("Size XL"): der Titel irrt manchmal
+("Senegal (XL)" bei Variante und Code M). "3th" = Third (Wortliste). Radar: erste Seite mit 40 Artikeln. Erster Probelauf:
+4.484 Artikel, 766 in XL/XXL, 2 Treffer (T90 Niederlande EURO 2004 mit Flock)
+
 **ReShirt (`smartweb`):** `/json/products?currencyIso=DKK&field=search&filter={}&id=<begriff>&limit=48&orderBy=-Id&page=N`;
 Größe steht im Titel ("… - XL"); Felder `Stock`/`Online` wirken unzuverlässig, nur `Soldout` wird genutzt.
 **Gegen den echten Shop noch nicht getestet.**
@@ -536,8 +547,8 @@ sperren alle Bots mit `Disallow: /`, keine offene Such-Schnittstelle, also weite
 5. **Wix-Shops anbinden:** The Football Boutique und Throwback Jerseys NZ (beide `plattform: aus`).
    Throwback NZ droppt **jeden Freitag 20:00 NZ-Zeit** (aktuell Fr 07:00 UTC wegen NZDT, ab April
    08:00 UTC). Danach Extra-Lauf kurz nach dem Drop einplanen, Zeitzonenwechsel beachten
-6. Optional direkte Anbindung der FYJ-gedeckten Shops (We Love Football Shirts läuft z. B. auf
-   Lightspeed, das hat oft `?format=json`; Classic-Shirts ist vermutlich IdoSell), weil FYJ nur
+6. Optional direkte Anbindung der FYJ-gedeckten Shops (We Love Football Shirts seit 02.11.2026 über
+   Lightspeed; Classic-Shirts ist IdoSell, angebunden), weil FYJ nur
    nächtlich aktualisiert
 7. **Adaptiver Zeitplan** aus dem Drop-Rhythmus: Drop-Shops nur kurz nach ihrem typischen Drop
    gezielt prüfen, "laufend"-Shops im Schnellcheck, "ruhig" nur nachts. Erst ein paar Gesamtläufe
@@ -623,8 +634,9 @@ sperren alle Bots mit `Disallow: /`, keine offene Such-Schnittstelle, also weite
   Football Shirts (London, Wix, viel unter £50, 4.700 Artikel); Retro Football Shirt Store von FYJ auf `wix` umgestellt
   (2.600 Artikel). Topbinz seit 23.10.2026 aus GitHub 403 (lokal 200), daher `plattform: fyj`. Geprüft und verworfen:
   fodboldshoppen.dk (allgemeiner Sportshop), retrotrojer.dk (= Retrotrøjer), legendsfootballshirts.com (Ägypten),
-  vintagesportsfashion.com (allgemeine Vintage-Sportmode), 201retrokits (US). Noch offen: We Love Football Shirts (Lightspeed,
-  `?format=json` liefert JSON, bräuchte eigene Anbindung), ClassicShirts-FC (Ecwid), The Hoff Classics (System unklar)
+  vintagesportsfashion.com (allgemeine Vintage-Sportmode), 201retrokits (US). We Love Football Shirts seit 02.11.2026 direkt
+  (siehe Lightspeed). Noch offen: ClassicShirts-FC (Ecwid), The Hoff Classics (System unklar). FYJ-Händler, die nicht bei uns
+  sind und nicht taugen: 7sorelle.it und essexdesignerbrands.co.uk (offline), yaelitomix.com (Shop geschlossen)
 - **Push-Diagnose 02.11.2026:** Nutzer bekam scheinbar keine Pushes, obwohl alle Runs verschickten ("Postausgang: N
   verschickt") und Apples Dienst annahm. `send_outbox` schreibt seitdem je Versand Dienst und Antwort ins Log
   ("App-Push: web.push.apple.com HTTP 201 ×2"), nie die Abo-Adresse. Ursache lag also auf dem Gerät (Mitteilungen, Fokus)

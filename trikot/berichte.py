@@ -140,6 +140,33 @@ def log_problems(problems, mode, ts):
     speicher.save_text(speicher.ERROR_REPORT, "\n".join(lines) + "\n")
 
 
+def fyj_haendler(status_store, shops, ts):
+    """FYJ-Händlerliste mit dem Stand der Vorwoche vergleichen. Gibt (alle, neu, weg) zurück, neu und weg mit
+    Hinweis, wie der Händler bei uns läuft; neu/weg zählen 30 Tage. Beim ersten Abgleich gilt niemand als neu"""
+    liste = quellen.fyj.fyj_retailers()
+    st = status_store.setdefault("fyj_haendler", {})
+    alt, weg = st.get("liste") or {}, st.setdefault("weg", {})
+    if liste:
+        st["liste"] = {d: alt[d] if d in alt else (ts if alt else "") for d in liste}
+        weg.update({d: ts for d in alt if d not in st["liste"]})
+    cutoff = now() - dt.timedelta(days=30)
+    for d in list(weg):
+        if d in (st.get("liste") or {}) or dt.datetime.fromisoformat(weg[d]) < cutoff:
+            del weg[d]
+    bare = lambda u: (lambda d: d[4:] if d.startswith("www.") else d)(domain(u) if "/" in u else u.lower())
+    ours = {bare(s["url"]): s for s in shops}
+
+    def bei_uns(d):
+        s = ours.get(bare(d))
+        if not s:
+            return "Marktplatz" if any(m in d for m in FYJ_MARKETPLACES) or d.endswith("-ebay") else "nicht angebunden"
+        plat = (s.get("plattform") or "auto").lower()
+        return "gesperrt" if s.get("sperren") else {"aus": "bewusst aus", "fyj": "nur über FYJ"}.get(plat, "direkt")
+    neu = [(d, bei_uns(d)) for d, t in sorted((st.get("liste") or {}).items())
+           if t and dt.datetime.fromisoformat(t) >= cutoff]
+    return len(st.get("liste") or {}), neu, [(d, bei_uns(d)) for d in sorted(weg)]
+
+
 def fundgrube(status_store, shops, ts, force=False):
     """Wöchentlich: Shops, die nur über FYJ Treffer liefern, prüfen (System, Nachbau-Anteil) und als
     Kandidaten für die direkte Anbindung merken. Gibt die Kandidaten zurück, wenn neu berechnet"""
@@ -178,5 +205,13 @@ def fundgrube(status_store, shops, ts, force=False):
                      f"{'anbindbar' if c['empfohlen'] else 'eher nicht' if c['plattform'] != 'unbekannt' else 'System unklar'} |")
     if not cands:
         lines.append("| | | | | keine Kandidaten |")
+    # Händlerliste von FYJ: Neuzugänge sind Kandidaten für die direkte Anbindung (Nutzer 02.11.2026)
+    alle, neu, weg = fyj_haendler(status_store, shops, ts)
+    lines += ["", "## Händlerliste von FindYourJersey", "",
+              f"{alle} Händler bei FYJ, verglichen mit der Vorwoche (neu und weg zählen 30 Tage)." if alle else
+              "Händlerliste nicht abrufbar.", ""]
+    for head, rows in (("Neu bei FYJ", neu), ("Nicht mehr bei FYJ", weg)):
+        lines.append(f"**{head}:** " + (", ".join(f"{d} ({h})" for d, h in rows) if rows else "keine"))
+        lines.append("")
     speicher.save_text(speicher.FUNDGRUBE_REPORT, "\n".join(lines) + "\n")
     return cands

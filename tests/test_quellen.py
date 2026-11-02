@@ -794,3 +794,41 @@ def test_rabatte_im_dashboard(tmp_path, monkeypatch):
     berichte.write_dashboard({}, {}, "full", "2026-10-15T05:30:00+02:00", {}, shops)
     data = json.loads((tmp_path / "treffer.json").read_text())
     assert data["rabatte"] == [{"shop": "Cult Kits", "host": "cultkits.com", "text": "10 % auf die erste Bestellung"}]
+
+
+# ---------------------------------------------------------------------------
+# Lightspeed (We Love Football Shirts)
+# ---------------------------------------------------------------------------
+def ls_prod(title, code, variant, price=49.95, available=True, desc=""):
+    return {"title": title, "code": code, "variant": variant, "available": available, "description": desc,
+            "url": f"https://www.welovefootballshirts.com/en/{code.lower()}.html",
+            "image": "https://cdn.webshopapp.com/shops/278870/files/1/50x50x2/x.jpg",
+            "price": {"price": price, "price_incl": price, "currency": "eur"}, "brand": {"title": "Nike"}}
+
+
+def test_lightspeed_liest_code_und_variante():
+    pages = {1: [ls_prod("FC Barcelona (XL) *BNWT", "FC_Barcelona_Nike_Home_2011-2012_XL(*BNWT)", "Size XL"),
+                 ls_prod("FC Barcelona (XL)", "FC_Barcelona_Nike_Away_2012-2013_#11_Thiago_XL", "Size XL", 89.95)],
+             2: [ls_prod("Senegal (XL) *BNWT", "Senegal_Puma_2022-2023_Home_M(*BNWT)", "Size M"),
+                 ls_prod("FC Barcelona (XXL)", "FC_Barcelona_Nike_Home_2010-2011_XXL", "Size XXL", available=False),
+                 ls_prod("Netherlands (YXL)", "Netherlands_Nike_Home_2014-2015_164(YXL)", "Size YXL (164)")]}
+    http = FakeHttp([("collection/page", lambda p: None)])
+    http.get = lambda url, params=None, want="json": (
+        http.calls.append((url, params)) or
+        {"pages": 2, "products": {str(i): x for i, x in enumerate(pages.get(int(url.split("page")[1].split(".")[0]), []))}})
+    items, n = tracker.lightspeed_run(http, "WLFS", "https://www.welovefootballshirts.com")
+    assert n == 5 and len(http.calls) == 2 and http.calls[0][1] == {"format": "json", "limit": 100}
+    assert "/en/collection/page1.ajax" in http.calls[0][0]
+    by = {it["url"].split("/en/")[1]: it for it in items}
+    assert len(items) == 4                                                     # ausverkauft raus
+    plain_barca = by["fc_barcelona_nike_home_2011-2012_xl(*bnwt).html"]
+    assert labels(plain_barca) == {"Barça 2008-2013"} and passt(plain_barca)  # "*BNWT" ist kein Flock
+    assert plain_barca["price"] == "49.95 EUR" and "/600x600x2/" in plain_barca["image"]
+    assert "Thiago" in labels(by["fc_barcelona_nike_away_2012-2013_#11_thiago_xl.html"])
+    assert not passt(by["senegal_puma_2022-2023_home_m(*bnwt).html"])        # Variante M schlägt "(XL)" im Titel
+    assert not passt(by["netherlands_nike_home_2014-2015_164(yxl).html"])     # Kindergröße
+
+
+def test_lightspeed_drittes_trikot_3th():
+    mk = lambda v: tracker.lightspeed_to_item("WLFS", ls_prod("Spain (XL)", f"Spain_Adidas_{v}_2010-2011_XL", "Size XL"))
+    assert labels(mk("Home")) and labels(mk("3th")) == set()   # Spanien nur Heim/Auswärts, "3th" darf nicht als Heim gelten

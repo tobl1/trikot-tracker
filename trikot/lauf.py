@@ -68,7 +68,7 @@ def radar_due(status_store, t):
 
 
 def radar_shops(shops, platforms):
-    """Shops fürs Radar: automatisch erkannte Shopify- und WooCommerce-Shops (ein kleiner Abruf je Shop).
+    """Shops fürs Radar: automatisch erkannte Shopify- und WooCommerce-Shops, Lightspeed (ein kleiner Abruf je Shop).
     Nicht: Wix (ganzer Katalog), Such-Shops (CFS, IdoSell, eigene Systeme), deaktivierte und gesperrte"""
     out = []
     for s in shops:
@@ -78,6 +78,9 @@ def radar_shops(shops, platforms):
             continue   # z. B. kleine Shops, die häufige Abrufe aus Rechenzentren blocken (Legit Football Shirts, 403)
         if (s.get("plattform") or "").lower() == "html" and s.get("neu"):
             out.append(s)   # eigene Shopsysteme mit Neuheiten-Seite: eine Seite pro Radar
+            continue
+        if (s.get("plattform") or "").lower() == "lightspeed":
+            out.append(s)   # neueste zuerst, eine Seite pro Radar
             continue
         if (s.get("plattform") or "auto").lower() != "auto":
             continue
@@ -255,7 +258,7 @@ def main():
         # WooCommerce-Shops; ist nichts fällig, sofort ohne jede Änderung beenden (außer es gab Meldungen)
         if args.alle:
             # Testdrop: alle Shops mit leichtem Drop-Abruf (neueste Artikel), keine Such-Shops (CFS, IdoSell, html …)
-            due = {s["name"]: "Testdrop" for s in shops if (s.get("plattform") or "auto").lower() in ("auto", "wix")}
+            due = {s["name"]: "Testdrop" for s in shops if (s.get("plattform") or "auto").lower() in ("auto", "wix", "lightspeed")}
         else:
             due = {s["name"]: drop_due(s, status_store, t_start) for s in shops
                    if (s.get("plattform") or "auto").lower() not in ("aus", "fyj")}

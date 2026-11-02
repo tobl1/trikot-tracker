@@ -1,6 +1,7 @@
 """FindYourJersey als Lückenfüller (Shops ohne direkte Anbindung)"""
 
-from ..basis import FYJ_API, FYJ_EUROPE_CURRENCIES, FYJ_MARKETPLACES, FYJ_SIZES, domain, norm
+from ..basis import FYJ_API, FYJ_RETAILERS, FYJ_EUROPE_CURRENCIES, FYJ_MARKETPLACES, FYJ_SIZES, domain, norm
+from ..netz import Http
 from .gemeinsam import item
 
 
@@ -50,3 +51,9 @@ def fyj_run(http, matcher, priority, skip_domains=()):
                 if len(rows) < 200:
                     break
     return items, n
+
+
+def fyj_retailers():
+    """Händlerliste von FYJ (Domains, Marktplatz-Verkäufer als "name-ebay"), None bei Fehler"""
+    data = Http().get(FYJ_RETAILERS)
+    return [str(d).lower() for d in data] if isinstance(data, list) and data else None

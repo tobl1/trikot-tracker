@@ -8,6 +8,7 @@ from ..rhythmus import rhythm
 from .shopify import (
     shopify_collections, shopify_currency, shopify_full, shopify_newest, shopify_recent, shopify_search,
 )
+from .lightspeed import lightspeed_run
 from .suchseiten import cfs_run, html_run, idosell_run, prestashop_run, smartweb_run
 from .wix import WIX_STORES_APP, wix_run
 from .woo import woo_endpoint, woo_recent, woo_run
@@ -43,6 +44,11 @@ def run_shop(shop, mode, matcher, platforms, currencies):
             return items, status
         if plat == "wix":
             items, n = wix_run(http, name, base)
+            status.update(produkte=n)
+            return items, status
+        if plat == "lightspeed":
+            items, n = lightspeed_run(http, name, base, pages=1 if mode in ("drop", "radar") else None,
+                                      limit=RADAR_LIMIT if mode == "radar" else 100)
             status.update(produkte=n)
             return items, status
         if plat == "idosell":

@@ -27,6 +27,7 @@ from trikot.quellen.woo import *  # noqa: F401,F403
 from trikot.quellen.suchseiten import *  # noqa: F401,F403
 from trikot.quellen.fyj import *  # noqa: F401,F403
 from trikot.quellen.wix import *  # noqa: F401,F403
+from trikot.quellen.lightspeed import *  # noqa: F401,F403
 from trikot.quellen import *  # noqa: F401,F403
 from trikot.pruefung import *  # noqa: F401,F403
 from trikot.melden import *  # noqa: F401,F403
