@@ -284,8 +284,8 @@ details[open] summary::after{content:"−"}
     <div class="row chips" id="labels"></div>
     <div class="row filters" id="filters">
       <select id="shop" aria-label="Shop"><option value="">Alle Shops</option></select>
-      <select id="ebland" aria-label="Standort" hidden><option value="">EU, UK, Ukraine</option><option value="EU">nur EU</option>
-        <option value="GB">nur UK</option><option value="UA">nur Ukraine</option></select>
+      <select id="ebland" aria-label="Standort" hidden><option value="">EU und Ukraine</option><option value="EU">nur EU</option>
+        <option value="UA">nur Ukraine</option></select>
       <select id="size" aria-label="Größe">
         <option value="">XL + XXL</option><option value="XL">nur XL</option><option value="XXL">nur XXL</option>
       </select>
@@ -379,6 +379,7 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
   let all = [], shown = PAGE, runs = [], groupsShown = 12;
   const st = Object.assign({q:"", sort:"prio", labels:[], shop:"", size:"", onlynew:false, expensive:false, dupes:false, view:"all", ebLabels:[], ebLand:""},
                            store.get("filter") || {});
+  if (st.ebLand === "GB") st.ebLand = "";   // gemerkter Filter von vor dem 03.11.2026, UK gibt es nicht mehr
   const MODE = {full: "Gesamt-Run", priority: "Schnell-Run", drop: "Drop-Run", radar: "Radar"};
   if (location.hash === "#eingaenge") st.view = "feed";
   else if (location.hash === "#favoriten") st.view = "favs";
@@ -655,7 +656,7 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
   }
   function ebayCard(t){
     const badges = [t.neu && '<span class="badge new">NEU</span>',
-      t.land && t.land !== "DE" && `<span class="badge eb">${esc(t.land === "GB" ? "UK" : t.land)}</span>`,
+      t.land && t.land !== "DE" && `<span class="badge eb">${esc(t.land)}</span>`,
       t.auktion && '<span class="badge eb" title="Auktion mit Sofort-Kaufen: die Option verschwindet mit dem ersten Gebot">AUKTION + SOFORT</span>',
       t.verdacht && '<span class="badge chk" title="Altes Trikot als neu und günstig angeboten: typisch für Fälschungen, genau prüfen">FAKE?</span>',
       t.teuer && '<span class="badge gone">ÜBER GRENZE</span>'].filter(Boolean).join("");
@@ -680,7 +681,7 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     $("controls").hidden = !(store.get("ebaykey") && ebayData && !ebayData.wartet && !ebayErr);
     if (!window.crypto || !crypto.subtle) { box.innerHTML = '<div class="err">Dieser Browser kann die eBay-Daten nicht entschlüsseln.</div>'; return; }
     if (!store.get("ebaykey")) {
-      box.innerHTML = `<div class="ebintro"><h2>eBay in dieser App</h2><p>Sofortkauf-Angebote aus der EU, UK und der Ukraine, ` +
+      box.innerHTML = `<div class="ebintro"><h2>eBay in dieser App</h2><p>Sofortkauf-Angebote aus der EU und der Ukraine, ` +
         `nur XL/XXL, mit denselben Filtern wie bei den Shops. Die Angebote sind nur auf freigeschalteten Geräten lesbar.` +
         `${store.get("token") ? "" : " Ohne GitHub-Schlüssel (Einstellungen) öffnet sich zum Freischalten die GitHub-Seite."}</p>` +
         `<button class="addbtn big" id="ebayon">eBay freischalten</button></div>`;
@@ -715,7 +716,7 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
       t.gesamt = p == null ? null : p + (t.versand || 0);   // Preis-Sortierung mit Versand und ggf. Zoll
     });
     const base = fresh.filter(t => (!st.size || shortSize(t.groesse) === st.size) && (!st.onlynew || t.neu) &&
-      (!st.ebLand || (st.ebLand === "EU" ? !["GB", "UA"].includes(t.land) : t.land === st.ebLand)) &&
+      (!st.ebLand || (st.ebLand === "EU" ? t.land !== "UA" : t.land === st.ebLand)) &&
       words.every(w => t.hay.includes(w)));
     buildChips(fresh, "ebay");
     st.ebLabels = st.ebLabels.filter(l => fresh.some(t => t.labels.includes(l)));

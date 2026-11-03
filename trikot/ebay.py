@@ -1,6 +1,6 @@
 """eBay über die offizielle Browse API, eigener Bereich in der App, getrennt von den Shops (seit 08.10.2026).
 
-Suche: Sofortkauf (auch Auktionen mit Sofort-Kaufen), Versand nach Deutschland, Standort EU, UK oder Ukraine, nur in der
+Suche: Sofortkauf (auch Auktionen mit Sofort-Kaufen), Versand nach Deutschland, Standort EU oder Ukraine, nur in der
 Trikot-Kategorie. Treffer wie bei den Shops über den Matcher, Größe aus dem Titel oder dem Merkmal "Größe" des Angebots
 (Einzelabruf, gemerkt). Radar alle EBAY_RADAR_MIN Minuten (neueste Angebote), nachts im Gesamt-Run alles.
 
@@ -32,12 +32,11 @@ from .preise import price_limit, to_eur
 API = "https://api.ebay.com"
 SCOPE = "https://api.ebay.com/oauth/api_scope"
 BASE_FILTER = "buyingOptions:{FIXED_PRICE},deliveryCountry:DE"
-# Standorte: EU über eBay.de, UK über eBay.co.uk, Ukraine über eBay.de. Kategorie = Elternknoten "Fußball-Trikots"
-# (DE 179288) bzw. "Football Shirts" (UK 53597), per Taxonomie-Schnittstelle ermittelt am 08.10.2026.
-# "CONTINENTAL_EUROPE" bewusst nicht: enthält auch GB und UA, die getrennt laufen
+# Standorte: EU und Ukraine über eBay.de. Kategorie = Elternknoten "Fußball-Trikots" (DE 179288), per Taxonomie-
+# Schnittstelle ermittelt am 08.10.2026. "CONTINENTAL_EUROPE" bewusst nicht: enthält auch GB und UA.
+# UK seit 03.11.2026 raus (Nutzer: teils 50 € Trikot plus 40 € Versand und Steuern)
 WHERE = {
     "EU": {"market": "EBAY_DE", "cat": "179288", "filter": "itemLocationRegion:EUROPEAN_UNION"},
-    "UK": {"market": "EBAY_GB", "cat": "53597", "filter": "itemLocationCountry:GB"},
     "UA": {"market": "EBAY_DE", "cat": "179288", "filter": "itemLocationCountry:UA"},
 }
 EBAY_RADAR_MIN = 30        # Radar: neueste Angebote je Suche und Standort
@@ -212,7 +211,7 @@ def summary_item(s, where):
             ship = f"{c['value']} {c.get('currency', '')}".strip()
             break
     legacy = s.get("legacyItemId") or ""
-    url = f"https://www.ebay.{'co.uk' if where == 'UK' else 'de'}/itm/{legacy}" if legacy else s.get("itemWebUrl", "")
+    url = f"https://www.ebay.de/itm/{legacy}" if legacy else s.get("itemWebUrl", "")
     return {"id": s.get("itemId", ""), "title": s.get("title", ""), "url": url,
             "image": (s.get("image") or {}).get("imageUrl", ""),
             "price": f"{pr.get('value', '')} {pr.get('currency', '')}".strip(), "versand": ship,
@@ -274,8 +273,8 @@ def still_available(detail):
 
 
 def landed(eur, land):
-    """Geschätzter Endpreis inkl. Einfuhrabgaben für Angebote außerhalb der EU (UK, Ukraine)"""
-    if eur is None or land not in ("GB", "UA"):
+    """Geschätzter Endpreis inkl. Einfuhrabgaben für Angebote außerhalb der EU (Ukraine)"""
+    if eur is None or land != "UA":
         return None
     if eur <= 150:
         return round(eur * (1 + EUST) + ZOLL_PAUSCHALE, 2)
@@ -394,7 +393,7 @@ def run(mode, status_store, matcher, watch, rates, ts, notify, client=None, dry=
     for iid in list(hits):
         e = hits[iid]
         labs = matcher.labels(e["title"])
-        if not labs:
+        if not labs or e.get("wo") == "UK" or e.get("land") == "GB":   # gemerkte UK-Angebote von vor dem 03.11.2026
             del hits[iid]
             continue
         e["labels"], e["prios"] = sorted({l for l, _ in labs}), sorted({p for _, p in labs})
@@ -443,7 +442,7 @@ def run(mode, status_store, matcher, watch, rates, ts, notify, client=None, dry=
     lookups = SIZE_LOOKUPS.get(mode, 60)
     fetched = {}   # Einzelabrufe dieses Runs (Größe), für die Prüfung neuer Treffer wiederverwenden
     for iid, it in found.items():
-        if id_key(iid) in flagged or relist_key(it["title"], it["price"]) in gemeldet:
+        if id_key(iid) in flagged or relist_key(it["title"], it["price"]) in gemeldet or it["land"] == "GB":
             continue
         why = {}
         labs = matcher.labels(it["title"], why=why)

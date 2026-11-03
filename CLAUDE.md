@@ -556,7 +556,10 @@ sperren alle Bots mit `Disallow: /`, keine offene Such-Schnittstelle, also weite
    Zeitstempel, dort müsste man neue Produkt-IDs selbst mitzählen
 8. Backlog: Social-Media-Accounts der Shops auf Drop-Ankündigungen beobachten (Nutzer: eher später)
 9. **eBay gebaut (08.10.2026)**, `trikot/ebay.py`, eigener Bereich (Reiter "eBay" in der App, `#ebay`), Tests
-   `tests/test_ebay.py`. Nutzer: Standorte EU, UK und Ukraine, Auktionen mit Sofort-Kaufen erlaubt (Kennzeichen), nur XL/XXL.
+   `tests/test_ebay.py`. Nutzer: Standorte EU und Ukraine, Auktionen mit Sofort-Kaufen erlaubt (Kennzeichen), nur XL/XXL.
+   **UK seit 03.11.2026 raus** (Nutzer: teils 50 € Trikot plus 40 € Versand und Steuern, "No-Go"): `WHERE` ohne UK, gemerkte
+   UK-Treffer löscht der nächste eBay-Run, Standort GB wird auch in der EU-Suche nicht aufgenommen. Gilt nur für eBay, die
+   direkt angebundenen UK-Shops bleiben. Angaben zu UK weiter unten sind Historie.
    Suchen als Oder-Gruppen in `watchlist.yaml` → `ebay.suchen` (Kategorie DE 179288 "Fußball-Trikots", UK 53597 "Football
    Shirts"), Verkäufer ab 10 Bewertungen und 97 %. Größe aus Titel oder Merkmal "Größe/Size" (Einzelabruf, gemerkt).
    Radar alle 30 Min. im Drop-Run (neueste je Gruppe und Standort, ca. 24 Abrufe), Gesamt-Run komplett (bis 20 Seiten),

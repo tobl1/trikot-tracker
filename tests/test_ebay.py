@@ -78,7 +78,7 @@ def test_sofortkauf_auktion_und_verkaeufer():
     assert ebay.summary_item(summ("v1|1|0", "x", opts=("AUCTION",)), "EU") is None
     it = ebay.summary_item(summ("v1|1|0", "x", opts=("AUCTION", "FIXED_PRICE")), "EU")
     assert it["auktion"] and it["url"] == "https://www.ebay.de/itm/1"
-    assert ebay.summary_item(summ("v1|2|0", "x"), "UK")["url"] == "https://www.ebay.co.uk/itm/2"
+    assert ebay.summary_item(summ("v1|2|0", "x"), "UA")["url"] == "https://www.ebay.de/itm/2"
     cfg = WATCH["ebay"]
     assert ebay.seller_ok(summ("v1|1|0", "x"), cfg)
     assert not ebay.seller_ok(summ("v1|1|0", "x", score=3), cfg) and not ebay.seller_ok(summ("v1|1|0", "x", pct="91.0"), cfg)
@@ -86,7 +86,7 @@ def test_sofortkauf_auktion_und_verkaeufer():
 
 def test_endpreis_uk_und_ukraine():
     assert ebay.landed(100, "DE") is None
-    assert ebay.landed(100, "GB") == 122.0                      # 19 % MwSt. + 3 € Pauschalzoll
+    assert ebay.landed(100, "UA") == 122.0                      # 19 % MwSt. + 3 € Pauschalzoll
     assert ebay.landed(200, "UA") == round(200 * 1.12 * 1.19 + 12, 2)
 
 
@@ -120,19 +120,36 @@ def test_ablauf_erstlauf_still_dann_push_groesse_loeschen(monkeypatch, tmp_path)
     assert pushes == []
 
 
-def test_falsche_groesse_teuer_und_uk(monkeypatch, tmp_path):
+def test_falsche_groesse_und_teuer_mit_abgaben(monkeypatch, tmp_path):
     setup(monkeypatch, tmp_path)
     status = {}
     run(status, FakeEbay({}))                                   # Erstlauf leer
     res = {("EU", "(thiago, alcantara)"): [summ("v1|1|0", "Bayern Trikot 2013/14 Thiago #6 Gr. L")],
-           ("UK", "(verratti, perisic, olic, vaart, nistelrooy, nistelrooij, henry, torres, robben, alonso, cavani, "
+           ("UA", "(verratti, perisic, olic, vaart, nistelrooy, nistelrooij, henry, torres, robben, alonso, cavani, "
                   "forlan, ribery, juninho, benzema, kroos, rodri, valverde, vidal, kimmich, barella, grimaldo, jong, "
-                  "llorente, roberto)"): [summ("v1|2|0", "Arsenal 2003/04 Home Shirt Henry 14 XL", price="120.00", cur="GBP",
-                                               country="GB")]}
+                  "llorente, roberto)"): [summ("v1|2|0", "Arsenal 2003/04 Home Shirt Henry 14 XL", price="130.00", cur="EUR",
+                                               country="UA")]}
     pushes, _, _ = run(status, FakeEbay(res))
     state = ebay.open_state(trikot.speicher.load_json(ebay.state_path(), None), "geheim")
-    # L fliegt raus, Henry aus UK: 120 £ = 141 €, mit Zoll und Versand über 150 € -> gar nicht erst aufgenommen
+    # L fliegt raus, Henry aus der Ukraine: 130 €, mit Zoll und Versand über 150 € -> gar nicht erst aufgenommen
     assert state["treffer"] == {} and pushes == []
+
+
+def test_uk_raus(monkeypatch, tmp_path):
+    setup(monkeypatch, tmp_path)
+    assert "UK" not in ebay.WHERE and all(w["market"] == "EBAY_DE" for w in ebay.WHERE.values())
+    status = {}
+    q = "(thiago, alcantara)"
+    run(status, FakeEbay({("EU", q): [summ(*THIAGO)]}))
+    state = ebay.open_state(trikot.speicher.load_json(ebay.state_path(), None), "geheim")
+    assert len(state["treffer"]) == 1
+    for e in state["treffer"].values():               # Treffer von früher, als UK noch gesucht wurde
+        e.update(wo="UK", land="GB")
+    trikot.speicher.save_json(ebay.state_path(), ebay.seal_state(state, "geheim"))
+    client = FakeEbay({("EU", q): [summ("v1|9|0", "Bayern Trikot 2013/14 Thiago #6 XL", country="GB")]})
+    run(status, client)
+    state = ebay.open_state(trikot.speicher.load_json(ebay.state_path(), None), "geheim")
+    assert state["treffer"] == {} and client.item_calls == []   # gelöscht, ohne eBay.co.uk zu fragen; GB nie aufgenommen
 
 
 def test_app_daten_je_geraet(monkeypatch, tmp_path):
