@@ -51,7 +51,7 @@ def write_dashboard(seen, status_store, mode, ts, watch_cfg, shops):
             "erst": e["first"], "zuletzt": e["last"], "via": e.get("via", ""),
             "still": bool(e.get("still")), "teuer": bool(e.get("teuer")), "repro": bool(e.get("repro")), "reissue": bool(e.get("reissue")),
             "warum": "; ".join(f"{l}: {r}" for l, r in (e.get("warum") or {}).items() if l in e["labels"]),
-            "pruefen": doubt(e),
+            "pruefen": doubt(e), "offen": bool(e.get("push_offen")),   # offen: Push steht noch aus
             "preis_runter": (e.get("preis_runter") or {}).get("prozent", 0),
             "preis_zeit": (e.get("preis_runter") or {}).get("zeit", ""),   # Run, in dem der Preis fiel
             "unter_grenze": e.get("unter_grenze", ""),                      # Run, in dem er unter die Grenze fiel
@@ -66,6 +66,8 @@ def write_dashboard(seen, status_store, mode, ts, watch_cfg, shops):
             # Neukunden-Rabatte laut Shop-Seite (shops.yaml, Nutzer 15.10.2026), App ordnet per Name oder Domain zu
             "rabatte": [{"shop": s["name"], "host": speicher._host(s["url"]), "text": s["rabatt"]}
                         for s in shops if s.get("rabatt")],
+            "versand": [{"shop": s["name"], "host": speicher._host(s["url"]), "text": s["versand"]}
+                        for s in shops if s.get("versand")],
             "preisgrenze": (watch_cfg.get("preisgrenze") or {}),
             "kurse_datum": kurse.get("datum", ""), "treffer": items,
             "push_abos": len(status_store.get("push_abos") or {}),   # 0: Dashboard warnt (keine Pushes)

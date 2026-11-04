@@ -121,8 +121,15 @@ def hold_unchecked(new_entries, seen, ts):
     """Prüfen vor dem Push: neue Treffer, deren Seite noch nicht geprüft werden konnte, zurückhalten (push_offen,
     nächster Run prüft sie zuerst); zurückgehaltene, die inzwischen geprüft sind, freigeben. Gesperrte Seiten
     (401/403) sind nicht prüfbar: sofort pushen, markiert. Nach PUSH_WAIT_HOURS ohne Prüfung ebenso.
-    Gibt die Treffer zurück, die jetzt gepusht werden"""
+    Gibt die Treffer zurück, die jetzt gepusht werden. Freigegebene zählen ab jetzt als neu (first), sonst stehen sie in
+    der App Stunden vor ihrer Push einsortiert (Nutzer 04.11.2026: Classic-Shirts, gefunden 6:43, Push 9:08)"""
     out = []
+
+    def release(e, held):
+        if e.get("first") == held:
+            e["first"] = ts
+        e.pop("push_offen")
+        out.append(e)
     for e in new_entries:
         if needs_check(e) and e.get("geprueft") != ts and e.get("pruef_fehler") not in (401, 403):
             e["push_offen"] = ts
@@ -137,11 +144,9 @@ def hold_unchecked(new_entries, seen, ts):
         if e.get("verkauft") or e.get("aussortiert") or e.get("teuer"):
             e.pop("push_offen")                         # hat sich erledigt, keine Push
         elif e.get("geprueft") and e["geprueft"] >= held:
-            e.pop("push_offen")
-            out.append(e)
+            release(e, held)
         elif e.get("pruef_fehler") in (401, 403) or \
                 now() - dt.datetime.fromisoformat(held) > dt.timedelta(hours=PUSH_WAIT_HOURS):
-            e.pop("push_offen")
             e["ungeprueft"] = True
-            out.append(e)
+            release(e, held)
     return out

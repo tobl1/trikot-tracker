@@ -25,6 +25,10 @@ self.addEventListener("notificationclick", e => {
       await c.put("ziel", new Response(JSON.stringify({url, at: Date.now()})));
     } catch (err) {}
     const wins = await self.clients.matchAll({type: "window", includeUncontrolled: true});
+    try {   // für die Technik-Zeile in den Einstellungen
+      const c = await caches.open("ttt-push");
+      await c.put("zuletzt", new Response(JSON.stringify({url, at: Date.now(), fenster: wins.length})));
+    } catch (err) {}
     for (const w of wins) {
       if (w.url.startsWith(self.registration.scope) && url.startsWith(self.registration.scope)) {
         w.postMessage({typ: "push-ziel", url});

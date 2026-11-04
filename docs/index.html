@@ -117,7 +117,6 @@ select{flex:0 1 auto;max-width:100%;appearance:none;-webkit-appearance:none;padd
 .ebintro{background:var(--card);border-radius:22px;padding:20px;margin:0 0 14px}
 .ebintro h2{font-size:18px;margin:0 0 8px}
 .ebintro p{font-size:14px;color:var(--muted);margin:0 0 12px;line-height:1.5}
-#ebay{min-height:calc(100vh - 120px)}   /* iPhone: wird die Seite kürzer als der Bildschirm, rutscht die untere Leiste hoch */
 .price small.eb{display:block;font-size:11px;color:var(--muted);font-weight:500}
 .body{padding:10px 8px 6px;display:flex;flex-direction:column;gap:5px;flex:1}
 .labels{font-family:"Inter",system-ui,sans-serif;font-size:12px;font-weight:600;color:var(--accent);letter-spacing:-.005em}
@@ -223,9 +222,13 @@ details[open] summary::after{content:"−"}
   .controls{position:sticky;top:calc(64px + env(safe-area-inset-top));z-index:5;background:var(--bg);padding-top:8px}
 }
 @media (max-width:720px){
-  body{padding-bottom:calc(70px + env(safe-area-inset-bottom))}
+  /* App-Gerüst: die Seite selbst scrollt nie, nur der Inhalt (.wrap), die Leiste steht darunter im normalen Fluss. Vorher
+     war sie fixiert und rutschte auf dem iPhone hoch, sobald sich die Seitenhöhe änderte (Neuladen, kurze Listen, Rückkehr) */
+  html,body{height:100%;overflow:hidden;overscroll-behavior:none}
+  body{position:fixed;top:0;left:0;right:0;height:100dvh;display:flex;flex-direction:column}
+  .wrap{flex:1 1 auto;min-height:0;width:100%;overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
   /* Bewusst schlicht: dunkle Leiste, Icons mit Text, aktiver Eintrag weiß mit rotem Punkt */
-  .tabs{position:fixed;left:0;right:0;bottom:0;z-index:15;margin:0;gap:0;justify-content:space-around;
+  .tabs{flex:0 0 auto;z-index:15;margin:0;gap:0;justify-content:space-around;
     border-top:1px solid color-mix(in srgb,var(--line) 70%,transparent);padding:6px 8px calc(4px + env(safe-area-inset-bottom));
     background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(20px) saturate(140%);-webkit-backdrop-filter:blur(20px) saturate(140%)}
   .tabs button{flex:1 1 0;flex-direction:column;gap:3px;font-size:11px;padding:6px 2px 4px;border:0;border-radius:0;background:none;position:relative}
@@ -238,6 +241,8 @@ details[open] summary::after{content:"−"}
   .filters.open{display:flex}
   .chips{-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent);padding-right:24px}
 }
+/* Vom Homebildschirm gibt es keine Browserleisten: immer die volle Höhe, auch wenn das iPhone den Bereich kurz falsch misst */
+@media (max-width:720px) and (display-mode:standalone){body{height:100lvh}}
 @media (max-width:520px){
   h1{font-size:20px}
   .seg{width:100%}
@@ -295,6 +300,7 @@ details[open] summary::after{content:"−"}
     </div>
   </div>
 
+  <div id="inbox" hidden></div>
   <div id="focus" hidden></div>
   <div class="grid" id="grid"></div>
   <div id="feed" hidden></div>
@@ -325,6 +331,8 @@ details[open] summary::after{content:"−"}
     <h4 class="sethead">Push direkt aus der App</h4>
     <p class="fyjnote" id="pushstate"></p>
     <button class="addbtn big" id="pushon">Push in dieser App aktivieren</button>
+    <h4 class="sethead">Technik</h4>
+    <p class="fyjnote" id="diag"></p>
     <h4 class="sethead">Melden mit einem Tipp</h4>
     <p class="fyjnote" id="tokstate"></p>
     <ol class="steps">
@@ -379,7 +387,10 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
   let all = [], shown = PAGE, runs = [], groupsShown = 12;
   const st = Object.assign({q:"", sort:"prio", labels:[], shop:"", size:"", onlynew:false, expensive:false, dupes:false, view:"all", ebLabels:[], ebLand:""},
                            store.get("filter") || {});
-  if (st.ebLand === "GB") st.ebLand = "";   // gemerkter Filter von vor dem 03.11.2026, UK gibt es nicht mehr
+  // Beim Start nur Sortierung und Größe übernehmen: eine vergessene Suche oder Kategorie versteckte sonst auch neue Treffer
+  Object.assign(st, {q: "", labels: [], ebLabels: [], shop: "", ebLand: "", onlynew: false});
+  const phone = matchMedia("(max-width:720px)");
+  const toTop = smooth => (phone.matches ? document.querySelector(".wrap") : window).scrollTo({top: 0, behavior: smooth ? "smooth" : "auto"});
   const MODE = {full: "Gesamt-Run", priority: "Schnell-Run", drop: "Drop-Run", radar: "Radar"};
   if (location.hash === "#eingaenge") st.view = "feed";
   else if (location.hash === "#favoriten") st.view = "favs";
@@ -800,7 +811,9 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
                        : '<span class="ph">👕</span>';
     // Neukunden-Rabatt nur als kleines Preisschild mit Prozentwert, Details beim Antippen/Überfahren (Nutzer 15.10.2026)
     const pct = t.rabatt ? (t.rabatt.match(/\d+\s?%/) || ["Rabatt"])[0].replace(/\s/, "\u202f") : "";
-    const deal = pct ? ` · <span class="deal" title="Neukunden: ${esc(t.rabatt)}">🏷\u202f${esc(pct)}</span>` : "";
+    const ship = t.versand ? (t.versand.match(/[£€]\s?[\d.,]+/) || ["Versand"])[0] : "";
+    const deal = (pct ? ` · <span class="deal" title="Neukunden: ${esc(t.rabatt)}">🏷\u202f${esc(pct)}</span>` : "") +
+      (ship ? ` · <span class="deal" title="Versand laut Shop: ${esc(t.versand)}, dazu ggf. Zoll und Einfuhrumsatzsteuer">🚚\u202f${esc(ship)}</span>` : "");
     const same = t.dupes ? t.dupes.filter(d => d.shopName === t.shopName).length : 0;
     const dup = !st.dupes && t.dupes && t.dupes.length ? `<div class="dupes">` +
       [same ? `+${same} gleiche im Shop` : "", t.dupShops && t.dupShops.length ? `auch bei ${esc(t.dupShops.join(", "))}` : ""]
@@ -894,6 +907,41 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
       `</section>`;
     $("focusclose").addEventListener("click", () => { focusId = ""; focusPush = ""; history.replaceState(null, "", "#alle"); render(); });
   }
+  // "Neu für dich": alles, wozu seit dem letzten "Gesehen" eine Push kam, immer ganz oben und unabhängig von Sortierung,
+  // Filtern und davon, ob die Push angetippt wurde (Nutzer 04.11.2026: Push da, Trikots in der App nicht zu finden)
+  let seenAt = store.get("seenat") || "", dataStand = "";
+  function unseen(){
+    return all.filter(t => !t.still && !t.offen && !t.teuer && !flagged.has(t.id) && !hiddenIds.has(t.id) && (t.neu || t.evNeu) && t.akt > seenAt)
+      .sort((a, b) => (b.thiago - a.thiago) || (b.hoch - a.hoch) || b.akt.localeCompare(a.akt));
+  }
+  function unseenEbay(){
+    if (!ebayData || !ebayData.treffer) return [];
+    const key = t => t.id.startsWith("ebay:") ? t.id : "ebay:" + t.id;
+    return ebayData.treffer.filter(t => !t.still && !t.teuer && t.erst > seenAt && isNew(t) && !flagged.has(key(t)) && !hiddenIds.has(key(t)));
+  }
+  function renderInbox(){
+    const box = $("inbox"), inFocus = new Set(focusId ? [focusId] : (pushLinks[focusPush] || {}).ids || []);
+    const list = st.view === "all" ? unseen().filter(t => !inFocus.has(t.id)) : [], eb = st.view === "all" ? unseenEbay() : [];
+    box.hidden = !list.length && !eb.length;
+    if (box.hidden) { box.innerHTML = ""; return; }
+    box.innerHTML = `<section class="focus"><h2><span>Neu für dich (${list.length + eb.length})</span><button id="inboxseen">gesehen</button></h2>` +
+      (list.length ? `<div class="grid">${list.slice(0, 12).map(card).join("")}</div>` : "") +
+      (list.length > 12 ? `<p class="fyjnote">… und ${list.length - 12} weitere unter "Neu pro Run".</p>` : "") +
+      (eb.length ? `<button class="addbtn big" id="inboxebay">eBay: ${eb.length} neu ansehen</button>` : "") + `</section>`;
+    $("inboxseen").addEventListener("click", () => {
+      seenAt = [dataStand, (ebayData || {}).stand || ""].sort().pop(); store.set("seenat", seenAt); render();
+    });
+    const go = $("inboxebay");
+    if (go) go.addEventListener("click", () => { st.view = "ebay"; history.replaceState(null, "", "#ebay"); reset(); toTop(); });
+  }
+  // Kommt eine neue Push dazu, einmal zu "Alle" nach oben springen, damit "Neu für dich" auch zu sehen ist
+  function announce(){
+    const newest = unseen().map(t => t.akt).sort().pop() || "";
+    if (newest <= (store.get("angesagt") || "")) return;
+    store.set("angesagt", newest);
+    if (st.view !== "all" && !ebFocus.length) { st.view = "all"; history.replaceState(null, "", "#alle"); reset(); }
+    if (!ebFocus.length) toTop();
+  }
   let reloadTimer = null;
   function scheduleReload(){
     if (reloadTimer || retryLoads >= 9) return;
@@ -902,6 +950,7 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
 
   function render(){
     store.set("filter", st);
+    renderInbox();
     renderFocus();
     const list = filtered();
     const feed = st.view === "feed", favView = st.view === "favs", ebView = st.view === "ebay";
@@ -962,6 +1011,8 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     // Neukunden-Rabatte (shops.yaml): per Shopname oder, bei FYJ-Treffern, per Domain
     const deals = {};
     (data.rabatte || []).forEach(r => { deals[r.shop] = r.text; deals[r.host] = r.text; });
+    const ships = {};   // Versandkosten von UK-Shops, soweit der Shop sie nennt
+    (data.versand || []).forEach(r => { ships[r.shop] = r.text; ships[r.host] = r.text; });
     all = data.treffer.map(t => {
       const lim = limitFor(t.labels);
       t.teuer = !!(lim && t.eur != null && t.eur > lim);
@@ -969,7 +1020,8 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
       const ev = [t.unter_grenze, t.preis_zeit].filter(Boolean).sort().pop() || "";
       const evNeu = !!ev && (Date.now() - new Date(ev)) / 36e5 < NEW_H;
       const rabatt = deals[t.shop] || deals[shopName] || deals[host(t.url)] || "";
-      return Object.assign(t, {shopName, rabatt, ev, evNeu, akt: ev > t.erst ? ev : t.erst, neu: isNew(t), thiago: t.labels.some(l => l.startsWith("Thiago")),
+      const versand = ships[t.shop] || ships[shopName] || ships[host(t.url)] || "";
+      return Object.assign(t, {shopName, rabatt, versand, ev, evNeu, akt: ev > t.erst ? ev : t.erst, neu: isNew(t), thiago: t.labels.some(l => l.startsWith("Thiago")),
         hay: (t.titel + " " + t.labels.join(" ") + " " + shopName + " " + (t.notiz || "")).toLowerCase()});
     });
     // Gleiche Angebote eines Shops (gleicher Titel, gleiche Größe) zusammenfassen: günstigstes zeigen
@@ -1063,7 +1115,7 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     const b = e.target.closest("button"); if (!b) return;
     st.view = b.dataset.view; focusId = ""; focusPush = ""; ebFocus = [];
     history.replaceState(null, "", {feed: "#eingaenge", favs: "#favoriten", ebay: "#ebay"}[st.view] || "#alle"); reset();
-    window.scrollTo({top: 0, behavior: "smooth"});   // nach dem Scrollen immer zurück an den Anfang
+    toTop(true);   // nach dem Scrollen immer zurück an den Anfang
   });
   $("labels").addEventListener("click", e => {
     const b = e.target.closest(".chip"); if (!b) return;
@@ -1137,29 +1189,21 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
 
   document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") syncFavs(); });
 
-  // Untere Leiste: das iPhone rechnet nach dem Öffnen aus einer Push oder beim Zurückkehren in die App den sichtbaren
-  // Bereich kurz falsch, eine mit bottom:0 verankerte Leiste stand dann mitten im Bild (Nutzer 15.10.2026). Deshalb an
-  // den unteren Rand des tatsächlich sichtbaren Bereichs (visualViewport) setzen und bei jeder Änderung neu rechnen
-  function placeBar(){
-    const bar = $("tabs"), vv = window.visualViewport;
-    if (!vv || !matchMedia("(max-width:720px)").matches) { bar.style.top = ""; bar.style.bottom = ""; return; }
-    bar.style.bottom = "auto";
-    bar.style.top = Math.round(vv.offsetTop + vv.height - bar.offsetHeight) + "px";
+  // Untere Leiste: auf dem Handy steht sie unter dem scrollenden Inhalt (siehe CSS), am Rechner in der Seite
+  function placeTabs(){
+    if (phone.matches) document.querySelector(".wrap").after($("tabs")); else $("controls").before($("tabs"));
   }
-  if (window.visualViewport) {
-    visualViewport.addEventListener("resize", placeBar);
-    visualViewport.addEventListener("scroll", placeBar);
-  }
-  ["resize", "orientationchange", "pageshow", "focus"].forEach(ev => window.addEventListener(ev, placeBar));
-  document.addEventListener("visibilitychange", () => {
-    if (document.visibilityState === "visible") [0, 150, 600, 1500].forEach(ms => setTimeout(placeBar, ms));
-  });
-  [0, 300, 1000].forEach(ms => setTimeout(placeBar, ms));
+  phone.addEventListener("change", placeTabs);
+  placeTabs();
+  // Die Tastatur schiebt die Seite auf dem iPhone manchmal hoch und vergisst das Zurückschieben
+  const unshift = () => { if (phone.matches) window.scrollTo(0, 0); };
+  document.addEventListener("focusout", () => setTimeout(unshift, 60));
+  document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") unshift(); });
   // App schon offen und die Push ändert nur die Adresse (#treffer=…): Fokus ohne Neuladen setzen
   window.addEventListener("hashchange", () => {
     if (!readHash()) return;
     shown = PAGE; retryLoads = 0; ebayAt = 0;   // frisch laden, die Push ist neuer als die Daten
-    loadData(); window.scrollTo({top: 0});
+    loadData(); toTop();
   });
   // Sprungziel aus einer Push übernehmen. Auf dem iPhone kommt die neue Adresse bei schon offener App oft nicht an,
   // deshalb legt der Service Worker das Ziel zusätzlich ab (Cache "ttt-push") und schickt es als Nachricht
@@ -1168,8 +1212,10 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     try { h = new URL(url, location.href).hash; } catch (e) { return; }
     if (!h) return;
     if (h !== location.hash) { location.hash = h; return; }   // löst hashchange aus: Fokus setzen, frisch laden
-    if (readHash()) { shown = PAGE; retryLoads = 0; ebayAt = 0; loadData(); window.scrollTo({top: 0}); }
+    if (readHash()) { shown = PAGE; retryLoads = 0; ebayAt = 0; loadData(); toTop(); }
   }
+  // Mehrfach schauen: beim Antippen wird die App oft sichtbar, bevor der Service Worker das Ziel abgelegt hat
+  const checkTarget = () => [0, 400, 1200, 3000].forEach(ms => setTimeout(pendingTarget, ms));
   async function pendingTarget(){
     if (!("caches" in window)) return;
     try {
@@ -1186,19 +1232,33 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
   let loadedAt = 0;
   document.addEventListener("visibilitychange", () => {
     if (document.visibilityState !== "visible") return;
-    pendingTarget();
+    checkTarget();
     if (Date.now() - loadedAt > 60e3) loadData();
   });
-  window.addEventListener("pageshow", e => { if (e.persisted) { pendingTarget(); loadData(); } });
+  window.addEventListener("pageshow", e => { if (e.persisted) { checkTarget(); loadData(); } });
   // Daten laden; ?t= umgeht jeden Zwischenspeicher (GitHub Pages hält Dateien sonst bis zu 10 Min.)
   function loadData(){
     loadedAt = Date.now();
     return fetch(`treffer.json?t=${Date.now()}`, {cache: "no-store"})
       .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-      .then(data => { pushLinks = data.push_links || {}; setup(data); })
+      .then(data => {
+        pushLinks = data.push_links || {}; dataStand = data.stand || "";
+        setup(data); announce(); showDiag();
+        if (store.get("ebaykey")) loadEbay().then(renderInbox);
+      })
       .catch(e => { if (!all.length) { $("grid").innerHTML = `<div class="err">Daten konnten nicht geladen werden (${esc(e.message)}).</div>`; $("stand").textContent = ""; } });
   }
-  loadData().then(() => { syncFavs(); pendingTarget(); });
+  // Technik-Zeile in den Einstellungen: zeigt auf dem Gerät selbst, was ankommt (Fehlersuche ohne Zugriff aufs iPhone)
+  async function showDiag(){
+    let last = "noch keine";
+    try {
+      const r = await (await caches.open("ttt-push")).match("zuletzt");
+      if (r) { const d = await r.json(); last = `${fmtDate(new Date(d.at).toISOString())}, ${new URL(d.url).hash || "ohne Ziel"}, ${d.fenster} Fenster offen`; }
+    } catch (e) {}
+    $("diag").textContent = `App vom ${document.lastModified} · Daten ${fmtDate(dataStand)} · ` +
+      (matchMedia("(display-mode:standalone)").matches ? "vom Homebildschirm" : "im Browser") + ` · zuletzt angetippte Push: ${last}`;
+  }
+  loadData().then(() => { syncFavs(); checkTarget(); });
 })();
 </script>
 </body>

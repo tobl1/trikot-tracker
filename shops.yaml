@@ -27,10 +27,10 @@ fyj: an
 
 shops:
   - {name: Classic Football Shirts, url: "https://www.classicfootballshirts.co.uk", plattform: cfs, min_zustand: 7}
-  - {name: Cult Kits, rabatt: "10 % auf die erste Bestellung (Newsletter)", url: "https://www.cultkits.com", drop: ["täglich 18:00 Europe/London"]}   # "Daily Drop" laut Shop
+  - {name: Cult Kits, rabatt: "10 % auf die erste Bestellung (Newsletter)", versand: "ab £14.95 (DHL Economy Europe)", url: "https://www.cultkits.com", drop: ["täglich 18:00 Europe/London"]}   # "Daily Drop" laut Shop
   - {name: Classic11, url: "https://classic11.com"}
   - {name: RB-Jerseys, url: "https://www.rb-jerseys.com"}
-  - {name: Vintage Football Shirts, url: "https://www.vintagefootballshirts.com"}
+  - {name: Vintage Football Shirts, versand: "£9.99 (Royal Mail Europe)", url: "https://www.vintagefootballshirts.com"}
   - {name: Retro Football Shirt Store, url: "https://www.retrofootballshirtstore.com", plattform: wix, schnellcheck: nein}   # UK, GBP, seit 02.11.2026 direkt (vorher FYJ), 2.600 Artikel
   - {name: First Class Football Shirts, url: "https://www.firstclassfootballshirts.com"}
   - {name: Football Shirt Kingdom, url: "https://footballshirtkingdom.com"}
@@ -79,7 +79,7 @@ shops:
 #   footballshirtvintage.fr (first11shirts.com benennt Nachbauten im Titel, läuft daher direkt)
 # ---------------------------------------------------------------------
   - {name: Casual Football Shirts, url: "https://casualfootballshirts.co.uk", schnellcheck: nein}
-  - {name: Football Finery, rabatt: "10 % bei Club-Anmeldung (Code WELCOME10 auf der Seite)", url: "https://footballfinery.co.uk", schnellcheck: nein}
+  - {name: Football Finery, rabatt: "10 % bei Club-Anmeldung (Code WELCOME10 auf der Seite)", versand: "£20 (Deutschland, unter 1 kg)", url: "https://footballfinery.co.uk", schnellcheck: nein}
   - {name: Green Sport Vintage, rabatt: "15 % Gutschein (Hinweis auf der Startseite)", url: "https://greensportvintage.com", schnellcheck: nein}
   - {name: Jersely, url: "https://jersely.com", schnellcheck: nein, drop: ["So 20:00"]}
   - {name: The Kitman 97, url: "https://thekitman97.com", schnellcheck: nein}
@@ -165,6 +165,8 @@ shops:
   - {name: Football & Vintage Amsterdam, url: "https://footballandvintageamsterdam.com", schnellcheck: nein}
 # The Shirt Collectors (UK): beflockte Trikots, Größe und Zustand im Titel, 6 Treffer (vorher nur über FYJ, Fundgrube)
   - {name: The Shirt Collectors, url: "https://www.theshirtcollectors.co.uk", schnellcheck: nein}
+# Trikot Store (Karlsruhe, Shopify, gebrauchte Originale mit Maßangaben, 533 Artikel), Nutzer 04.11.2026
+  - {name: Trikot Store, url: "https://trikotstoremsz.de", schnellcheck: nein}
 # Vintagescore (Moers, NRW, "erster Store für Vintage Fußballtrikots in NRW"): Größe in der Variante, 2 Treffer
   - {name: Vintagescore, rabatt: "10 % bei Newsletter-Anmeldung", url: "https://vintagescore.de", schnellcheck: nein}
 # Studio Football Shirts (NL, Borne, Shopify, "authentic vintage"), Nutzer 02.11.2026: 161 Artikel, 25 in XL/XXL

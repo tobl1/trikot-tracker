@@ -497,6 +497,15 @@ def test_zurueckgehaltene_werden_spaeter_freigegeben_oder_verworfen():
     assert "push_offen" not in weg and noch["push_offen"] == t0
 
 
+def test_freigegebener_treffer_zaehlt_ab_der_push_als_neu():
+    t0 = (tracker.now() - _dt.timedelta(hours=2)).isoformat()
+    ts = tracker.now().isoformat()
+    neu = entry("https://x/neu", first=t0, push_offen=t0, geprueft=ts)
+    billiger = entry("https://x/alt", first="2026-09-01T00:00:00+00:00", push_offen=t0, geprueft=ts)   # alter Treffer
+    assert hold_unchecked([], {"a": neu, "b": billiger}, ts) == [neu, billiger]
+    assert neu["first"] == ts and billiger["first"] == "2026-09-01T00:00:00+00:00"
+
+
 def test_seitenpruefung_zaehlt_fehler_und_sortiert_aus(monkeypatch):
     ts = tracker.now().isoformat()
     official = """<script type="application/ld+json">{"@type": "Product", "description": "CONDITION: 8/10",
@@ -789,11 +798,12 @@ def test_rabatte_im_dashboard(tmp_path, monkeypatch):
     import json
     from trikot import berichte, speicher
     monkeypatch.setattr(speicher, "DASHBOARD_FILE", tmp_path / "treffer.json")
-    shops = [{"name": "Cult Kits", "url": "https://www.cultkits.com", "rabatt": "10 % auf die erste Bestellung"},
+    shops = [{"name": "Cult Kits", "url": "https://www.cultkits.com", "rabatt": "10 % auf die erste Bestellung", "versand": "ab £14.95"},
              {"name": "Ohne", "url": "https://ohne.example"}]
     berichte.write_dashboard({}, {}, "full", "2026-10-15T05:30:00+02:00", {}, shops)
     data = json.loads((tmp_path / "treffer.json").read_text())
     assert data["rabatte"] == [{"shop": "Cult Kits", "host": "cultkits.com", "text": "10 % auf die erste Bestellung"}]
+    assert data["versand"] == [{"shop": "Cult Kits", "host": "cultkits.com", "text": "ab £14.95"}]
 
 
 # ---------------------------------------------------------------------------
