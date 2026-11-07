@@ -1,9 +1,10 @@
 # Fehler-Log
 
-Probleme der letzten 30 Tage, zusammengefasst. Stand 07.11. 09:08 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
+Probleme der letzten 30 Tage, zusammengefasst. Stand 07.11. 09:38 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
 
 | zuletzt | seit | Anzahl | Quelle | Meldung | Runs |
 |---|---|---|---|---|---|
+| 07.11. 09:38 | 17.10. 10:38 | 2 | Nostalgic Football Shirts | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
 | 07.11. 06:46 | 05.10. 06:46 | 34 | Football Legends Kits | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | full |
 | 07.11. 06:46 | 03.11. 06:44 | 5 | Seitenprüfung | www.topbinzfootballshirts.co.uk: 30 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×27, 403 ×3) | full |
 | 07.11. 06:46 | 06.11. 06:46 | 2 | Wave Memorabilia | keine Produkte erhalten (HTTP 404 ×78) | full |
@@ -35,7 +36,6 @@ Probleme der letzten 30 Tage, zusammengefasst. Stand 07.11. 09:08 Uhr. Wird bei 
 | 19.10. 16:38 | 07.10. 16:38 | 2 | Granny's Football Store | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
 | 19.10. 06:33 | 19.10. 06:33 | 1 | 3kots | ConnectTimeout: HTTPSConnectionPool(host='3kots.com', port=443): Max retries exceeded with url: /products.json?limit=1 (Caused by Connec | full |
 | 18.10. 17:38 | 05.10. 06:46 | 15 | Kick It Vintage | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | full, drop, priority |
-| 17.10. 10:38 | 17.10. 10:38 | 1 | Nostalgic Football Shirts | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
 | 15.10. 21:48 | 15.10. 09:48 | 3 | Seitenprüfung | classic-shirts.com: 14 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×11, Verbindung ×3) | priority |
 | 15.10. 06:33 | 15.10. 06:33 | 1 | The Third Kit | ConnectTimeout: HTTPSConnectionPool(host='thethirdkit.co.uk', port=443): Max retries exceeded with url: /products.json?limit=1 (Caused b | full |
 | 14.10. 16:38 | 08.10. 18:38 | 2 | Legacy Football Shirts | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
