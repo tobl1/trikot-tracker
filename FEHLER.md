@@ -1,6 +1,6 @@
 # Fehler-Log
 
-Probleme der letzten 30 Tage, zusammengefasst. Stand 07.11. 09:38 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
+Probleme der letzten 30 Tage, zusammengefasst. Stand 07.11. 09:47 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
 
 | zuletzt | seit | Anzahl | Quelle | Meldung | Runs |
 |---|---|---|---|---|---|
@@ -45,4 +45,3 @@ Probleme der letzten 30 Tage, zusammengefasst. Stand 07.11. 09:38 Uhr. Wird bei 
 | 11.10. 06:35 | 11.10. 06:35 | 1 | Seitenprüfung | classic-shirts.com: 71 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×68, Verbindung ×3) | full |
 | 09.10. 23:50 | 09.10. 18:38 | 22 | eBay | Tageslimit von 4500 Abrufen erreicht, Pause bis morgen | drop |
 | 09.10. 11:08 | 09.10. 11:08 | 1 | Het Shirthuis | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
-| 08.10. 10:38 | 08.10. 09:38 | 2 | Legit Football Shirts | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | drop |

@@ -1671,12 +1671,6 @@
  },
  "laeufe": [
   {
-   "modus": "radar",
-   "neu": 0,
-   "still": 0,
-   "zeit": "2026-10-29T20:08:17.673462+00:00"
-  },
-  {
    "modus": "drop",
    "neu": 0,
    "still": 0,
@@ -4069,14 +4063,22 @@
    "neu": 0,
    "still": 0,
    "zeit": "2026-11-07T08:38:20.435952+00:00"
+  },
+  {
+   "modus": "priority",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-11-07T08:47:19.965371+00:00"
   }
  ],
  "last_full": "2026-11-07T05:46:39.473701+00:00",
  "last_run": {
-  "mode": "drop",
-  "time": "2026-11-07T08:38:20.435952+00:00"
+  "mode": "priority",
+  "time": "2026-11-07T08:47:19.965371+00:00"
  },
- "netzfehler": [],
+ "netzfehler": [
+  "3kots"
+ ],
  "platforms": {
   "https://1kloppshop.com": "shopify",
   "https://3kots.com": "woo:https://3kots.com/wp-json/wc/store/v1/products",

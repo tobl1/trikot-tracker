@@ -151,16 +151,6 @@
   ],
   "quelle": "Legacy Football Shirts"
  },
- "Legit Football Shirts|gesperrt (HTTP 403), blockt vermutlich Server-Adressen": {
-  "anzahl": 2,
-  "erst": "2026-10-08T07:38:44.542890+00:00",
-  "letzt": "2026-10-08T08:38:45.196933+00:00",
-  "meldung": "gesperrt (HTTP 403), blockt vermutlich Server-Adressen",
-  "modi": [
-   "drop"
-  ],
-  "quelle": "Legit Football Shirts"
- },
  "Modeziege|Bestandseinbruch: 87 statt 184 Produkte (1. Gesamt-Run in Folge), Abruffehler?": {
   "anzahl": 1,
   "erst": "2026-10-21T04:35:38.474740+00:00",
