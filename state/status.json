@@ -324,7 +324,7 @@
   "The Football Boutique": "2026-10-04T12:56:56.150677+00:00",
   "The Football Idiots": "2026-11-06T13:38:17.111211+00:00",
   "The Football Room": "2026-10-04T12:56:56.150677+00:00",
-  "The Football Temple": "2026-11-07T13:50:47.972685+00:00",
+  "The Football Temple": "2026-11-07T14:20:45.499587+00:00",
   "The Footballshirt Vault": "2026-10-04T12:56:56.150677+00:00",
   "The Kit Dealer": "2026-10-04T12:56:56.150677+00:00",
   "The Kitman 97": "2026-10-31T19:20:48.391219+00:00",
@@ -332,7 +332,7 @@
   "The Third Kit": "2026-10-04T12:56:56.150677+00:00",
   "Throwback Jerseys NZ": "2026-10-04T12:56:56.150677+00:00",
   "Tiffozi Futbol": "2026-10-04T12:56:56.150677+00:00",
-  "To The Jersey": "2026-11-07T13:50:47.972685+00:00",
+  "To The Jersey": "2026-11-07T14:20:45.499587+00:00",
   "Topbinz": "2026-10-30T20:38:13.512933+00:00",
   "Trikotparadies": "2026-11-06T20:50:41.376042+00:00",
   "Trikotstoff": "2026-10-30T15:20:52.057805+00:00",
@@ -1670,12 +1670,6 @@
   }
  },
  "laeufe": [
-  {
-   "modus": "drop",
-   "neu": 0,
-   "still": 0,
-   "zeit": "2026-10-30T10:20:54.360897+00:00"
-  },
   {
    "modus": "radar",
    "neu": 0,
@@ -4069,16 +4063,20 @@
    "neu": 0,
    "still": 0,
    "zeit": "2026-11-07T14:08:20.351140+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-11-07T14:20:45.499587+00:00"
   }
  ],
  "last_full": "2026-11-07T05:46:39.473701+00:00",
  "last_run": {
   "mode": "drop",
-  "time": "2026-11-07T14:08:20.351140+00:00"
+  "time": "2026-11-07T14:20:45.499587+00:00"
  },
- "netzfehler": [
-  "3kots"
- ],
+ "netzfehler": [],
  "platforms": {
   "https://1kloppshop.com": "shopify",
   "https://3kots.com": "woo:https://3kots.com/wp-json/wc/store/v1/products",
