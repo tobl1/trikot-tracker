@@ -1,6 +1,6 @@
 # Trikot-Tracker
 
-Stand: 07.11.2026 15:50 Uhr (drop), 323 aktuelle Treffer in XL/XXL
+Stand: 07.11.2026 16:08 Uhr (drop), 324 aktuelle Treffer in XL/XXL
 
 ## Thiago (3)
 
@@ -225,10 +225,11 @@ Stand: 07.11.2026 15:50 Uhr (drop), 323 aktuelle Treffer in XL/XXL
 | [2012/13 - Bayern Munich - Kroos #39 (2XL)](https://www.vintagefootballarea.com/products/2012-13-bayern-munich-kroos-39-2xl-1) | XXL | Very Good | 84.99 EUR | Vintage Football Area | 01.10. |
 | [2022-23 Real Madrid adidas Third Shirt Kroos #8 *w/tags* XL](https://www.vintagefootballshirts.com/products/2022-23-real-madrid-adidas-third-shirt-kroos-8-w-tags-xl) | XL |  | 119.95 EUR | Vintage Football Shirts | 01.10. |
 
-## Nike Total 90 (2004-06) (10)
+## Nike Total 90 (2004-06) (11)
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
+| [Netherlands 2004-06 Home Davids #8 Shirt XL](https://nostalgicfootballshirts.com/products/netherlands-2004-06-home-davids-8-shirt-xl) | XL |  | 104.95 EUR | Nostalgic Football Shirts | 07.11. |
 | [Trikot - Valencia CF - Pablo Aimar - 2004/2005 - XL - Auswärts](https://trikotparadies.shop/products/trikot-valencia-cf-pablo-aimar-2004-2005-xl-auswaerts-10132) | XL | 7.5/10 | 69.00 EUR | Trikotparadies | 06.11. |
 | [Netherlands (XL) *EURO 2004](https://www.welovefootballshirts.com/en/netherlands-euro-2004-164597602.html) | XL | 9.5/10 | 149.95 EUR | We Love Football Shirts | 03.11. |
 | [Netherlands (XXL) *EURO 2004](https://www.welovefootballshirts.com/en/netherlands-xxl-euro-2004-rvn.html) | XXL | 9.5/10 | 149.95 EUR | We Love Football Shirts | 03.11. |

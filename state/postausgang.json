@@ -1,1 +1,26 @@
-[]
+[
+ {
+  "click": "https://tobl1.github.io/trikot-tracker/#treffer=nostalgicfootballshirts.com%2Fproducts%2Fnetherlands-2004-06-home-davids-8-shirt-xl",
+  "id": "d664d8be9eb74209ab90e0df3382dd44",
+  "image": "https://cdn.shopify.com/s/files/1/0886/2456/2507/files/Netherlands-2004-2006-Home-Davids-8-Shirt-Euro-XL-116606-nostalgic-football-shirts.jpg?v=1793948325",
+  "message": "Netherlands 2004-06 Home Davids #8 Shirt XL\nGröße XL · 104.95 EUR",
+  "prio": 3,
+  "tags": [
+   "soccer"
+  ],
+  "title": "⚽ Nike Total 90 (2004-06) · Nostalgic Football Shirts",
+  "zeit": "2026-11-07T15:08:18.808673+00:00"
+ },
+ {
+  "click": "https://nostalgicfootballshirts.com",
+  "id": "95ab6db3e03f4dfe96f55150aaa74c2a",
+  "image": "",
+  "message": "War seit 07.11. 09:38 mit Passwort geschlossen, oft kommt danach ein Drop. Neue Treffer meldet der Tracker wie gewohnt.",
+  "prio": 4,
+  "tags": [
+   "unlock"
+  ],
+  "title": "🔓 Nostalgic Football Shirts ist wieder offen",
+  "zeit": "2026-11-07T15:08:18.808771+00:00"
+ }
+]
