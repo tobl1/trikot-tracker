@@ -649,10 +649,9 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     const k = store.get("ebaykey"); if (!k) return;
     ebayAt = Date.now(); ebayErr = "";
     try {
-      const r = await fetch("ebay.json", {cache: "no-store"});
-      if (r.status === 404) { ebayData = {wartet: true}; return; }
-      if (!r.ok) throw new Error("HTTP " + r.status);
-      const d = await r.json(), box = (d.fuer || {})[k.kid];
+      let d;
+      try { d = await fetchNewest("ebay.json"); } catch (e) { if (e.message === "404") { ebayData = {wartet: true}; return; } throw e; }
+      const box = (d.fuer || {})[k.kid];
       if (!box) { ebayData = {wartet: true, stand: d.stand}; return; }
       const enc = new TextEncoder();
       const priv = await crypto.subtle.importKey("jwk", k.jwk, {name: "ECDH", namedCurve: "P-256"}, false, ["deriveBits"]);
@@ -1237,10 +1236,20 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
   });
   window.addEventListener("pageshow", e => { if (e.persisted) { checkTarget(); loadData(); } });
   // Daten laden; ?t= umgeht jeden Zwischenspeicher (GitHub Pages hält Dateien sonst bis zu 10 Min.)
+  // Zwei Quellen, die neuere gewinnt: GitHub Pages lieferte am 07.11.2026 stundenlang einen alten Stand aus, obwohl jede
+  // Veröffentlichung "erfolgreich" war. Der Daten-Zweig direkt (raw.githubusercontent.com) ist sofort nach dem Run aktuell
+  const RAW = `https://raw.githubusercontent.com/${REPO}/daten/`;
+  function fetchNewest(file){
+    const get = url => fetch(`${url}?t=${Date.now()}`, {cache: "no-store"}).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); });
+    return Promise.allSettled([get(file), get(RAW + file)]).then(rs => {
+      const ok = rs.filter(r => r.status === "fulfilled").map(r => r.value);
+      if (!ok.length) throw rs[0].reason;
+      return ok.sort((a, b) => String(b.stand || "").localeCompare(String(a.stand || "")))[0];
+    });
+  }
   function loadData(){
     loadedAt = Date.now();
-    return fetch(`treffer.json?t=${Date.now()}`, {cache: "no-store"})
-      .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    return fetchNewest("treffer.json")
       .then(data => {
         pushLinks = data.push_links || {}; dataStand = data.stand || "";
         setup(data); announce(); showDiag();
