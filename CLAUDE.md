@@ -200,6 +200,14 @@ temporären Workflow aus GitHub heraus (Beispiel 05.10.2026: CFS-Suche "thiago" 
   Liverpool 21/22 ohne "away" = nein, "Hamburger SV" = HSV, 3XL/XXXL = nein, "Short Sleeve" darf
   nicht als Shorts ausgeschlossen werden
 
+## Wunschtrikots ohne Flock (09.11.2026)
+
+- Nutzer: Inter 04/05 Heim, Auswärts, Third und 05/06 Heim, Third (Third 04/05 = 05/06), Label "Inter 2004-06";
+  Inter Away 2021/22; Holland Heim 2010/11 (WM-2010-Trikot). **Nur ohne Flock** (Standard-Fremdflock-Regel), Priorität
+  normal (gebündelt), Preisgrenze 150 €. Beflockte Inter 04/05 laufen weiter über T90. Inter ohne Miami, Turku, Baku …;
+  Holland nur Jahr 2010 (FYJ-Probe: "2011-13" ist das EM-2012-Trikot), nicht 2008-10. eBay-Gruppen "Inter" und "Holland".
+  FYJ-Probe: Holland ca. 10 passende in XL/XXL (viele bei VFA, 30 bis 60 €), Inter kaum etwas
+
 ## Kategorie Nike Total 90 (2004-06)
 
 - Wunsch des Nutzers (04.10.2026): Nike-T90-Template (runde Brustnummer), Priorität normal (gebündelte

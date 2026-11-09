@@ -334,6 +334,43 @@ sondertrikots:
     suchanfragen: ["spain 2014"]
 
   # -------------------------------------------------------------------
+  # Wunschtrikots ohne Flock (Nutzer 09.11.2026): fremd beflockte raus (Standard bei Sondertrikots), Push gebündelt,
+  # Preisgrenze gilt. Beflockte Inter 04/05 laufen weiter über "Nike Total 90"
+  # -------------------------------------------------------------------
+  - name: "Inter 2004-06"              # 04/05 Heim, Auswärts, Third (Third 04/05 = 05/06)
+    prioritaet: normal
+    verein: ["inter", "internazionale"]
+    ausschluss: ["inter miami", "miami", "turku", "baku", "bratislava", "zapresic", "escaldes", "allies", "internacional"]
+    saisons: ["2004/05", "2004/06"]
+    varianten: [home, away, third]
+    suchanfragen: ["inter 2004"]
+
+  - name: "Inter 2004-06"              # 05/06 Heim und Third
+    prioritaet: normal
+    verein: ["inter", "internazionale"]
+    ausschluss: ["inter miami", "miami", "turku", "baku", "bratislava", "zapresic", "escaldes", "allies", "internacional"]
+    saisons: ["2005/06", "2004/06"]
+    varianten: [home, third]
+    suchanfragen: ["inter 2005"]
+
+  - name: "Inter Away 2021/22"
+    prioritaet: normal
+    verein: ["inter", "internazionale"]
+    ausschluss: ["inter miami", "miami", "turku", "baku", "bratislava", "zapresic", "escaldes", "allies", "internacional"]
+    saisons: ["2021/22"]
+    varianten: [away]
+    suchanfragen: ["inter 2021"]
+
+  - name: "Holland Heim 2010/11"       # WM-2010-Heimtrikot, getragen bis 2011
+    prioritaet: normal
+    verein: ["netherlands", "holland", "niederlande", "nederland", "pays-bas", "olanda", "holanda"]
+    saisons: ["2010/11", "2010/12"]
+    jahre: ["2010"]                    # nicht 2011: "2011-13" ist das EM-2012-Trikot (FYJ-Probe 09.11.2026)
+    ausschluss: ["2008-10", "2008/10", "2008-2010", "2008/2010", "2009-10", "2009/10", "2009-2010", "2009/2010"]
+    varianten: [home]
+    suchanfragen: ["holland 2010", "netherlands 2010"]
+
+  # -------------------------------------------------------------------
   # Eigene Kategorie: Nike Total 90 (2004-06), NUR beflockt (jeder Spieler), Nutzer 05.10.2026
   # Template mit runder Brustnummer: Nationalteams von der EM 2004 bis vor der WM 2006,
   # Vereine in der Saison 2004/05. Achtung: Nike hat 2025 Neuauflagen gebracht, die laufen
@@ -558,6 +595,8 @@ ebay:
     - {name: Spanien, q: "(spanien, spain, espana, españa, espagne, spagna)", hoch: ja}
     - {name: Spieler, q: "(verratti, perisic, olic, vaart, nistelrooy, nistelrooij, henry, torres, robben, alonso, cavani, forlan, ribery, juninho, benzema, kroos, rodri, valverde, vidal, kimmich, barella, grimaldo, jong, llorente, roberto)"}
     - {name: HSV, q: "(hsv, hamburg, hamburger)"}
+    - {name: Inter, q: "(inter, internazionale)"}
+    - {name: Holland, q: "(holland, niederlande, netherlands, nederland)"}
     - {name: 2004 bis 2006, q: "(2004, 2005, 2006)"}
   # Verkäufer: mindestens so viele Bewertungen und so viel Prozent positiv (gegen Fälschungen), nur beim Abruf geprüft
   min_bewertungen: 10

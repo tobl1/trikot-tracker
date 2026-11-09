@@ -63,6 +63,22 @@ CASES = [
     ("2023-24 Bayern Munich Oktoberfest Shirt green (XL)", set()),
     ("2021-22 1860 Munchen Wiesn Trikot XL", set()),
     ("2021-22 Liverpool Away Shirt (XL)", {"Liverpool Away 2021/22"}),
+    ("2004-05 Inter Milan Home Shirt (XL)", {"Inter 2004-06"}),
+    ("2004-05 Inter Milan Away Shirt XL", {"Inter 2004-06"}),
+    ("2005-06 Inter Milan Third Shirt XL", {"Inter 2004-06"}),
+    ("2005-06 Inter Milan Away Shirt XL", set()),                  # 05/06 nur Heim und Third
+    ("2004-05 Inter Milan Home Shirt Adriano #10 (XL)", {"Nike Total 90 (2004-06)"}),   # beflockt: nur T90
+    ("2021-22 Inter Milan Away Shirt (XXL)", {"Inter Away 2021/22"}),
+    ("2021-22 Inter Milan Home Shirt (XXL)", set()),
+    ("2021-22 Inter Milan Away Shirt Barella #23 (XL)", {"Barella"}),
+    ("2021 Inter Miami Away Shirt XL", set()),
+    ("2010-11 Holland Home Shirt (XL)", {"Holland Heim 2010/11"}),
+    ("Nederland 2010 Thuis Shirt XL", {"Holland Heim 2010/11"}),
+    ("2010-11 Netherlands Away Shirt XL", set()),
+    ("2011-13 NETHERLANDS SHIRT XL", set()),
+    ("2008-10 Holland Home Shirt XL", set()),
+    ("Trikot - Niederlande - 2010 - XL - Heim", {"Holland Heim 2010/11"}),
+    ("2010-11 Holland Home Shirt Sneijder #10 XL", set()),
     ("2021-22 Liverpool Shirt (XL)", set()),
     ("2022-23 Liverpool Third Shirt (XXL)", set()),          # seit 20.10.2026 kein Sondertrikot mehr
     ("2022-23 Liverpool Third Shirt Thiago #6 (XXL)", {"Thiago"}),
