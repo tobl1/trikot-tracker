@@ -63,6 +63,11 @@ CASES = [
     ("2023-24 Bayern Munich Oktoberfest Shirt green (XL)", set()),
     ("2021-22 1860 Munchen Wiesn Trikot XL", set()),
     ("2021-22 Liverpool Away Shirt (XL)", {"Liverpool Away 2021/22"}),
+    ("2009-11 Barcelona Away Shirt (XL)", {"Barça 2008-2013"}),    # orange, Zweijahres-Angabe
+    ("2008-10 Barcelona Away Shirt XL", {"Barça 2008-2013"}),      # gelb
+    ("2007-08 Barcelona Away Shirt XL", set()),
+    ("2006-08 Barcelona Away Shirt XL", set()),
+    ("2013-14 Barcelona Away Shirt XL", set()),
     ("2004-05 Inter Milan Home Shirt (XL)", {"Inter 2004-06"}),
     ("2004-05 Inter Milan Away Shirt XL", {"Inter 2004-06"}),
     ("2005-06 Inter Milan Third Shirt XL", {"Inter 2004-06"}),
@@ -76,6 +81,16 @@ CASES = [
     ("Nederland 2010 Thuis Shirt XL", {"Holland Heim 2010/11"}),
     ("2010-11 Netherlands Away Shirt XL", set()),
     ("2011-13 NETHERLANDS SHIRT XL", set()),
+    ("Nike Niederlande Trikot 2010 weiss XL", set()),              # Auswärts ohne das Wort (eBay-Meldung #123)
+    ("Nike Niederlande Trikot 2010 orange XL", {"Holland Heim 2010/11"}),
+    ("2019-20 Inter Milan Third Shirt Lukaku #9 (XL)", {"Inter Third 2019/20"}),
+    ("Inter 19/20 3rd - XL", {"Inter Third 2019/20"}),
+    ("2019-20 Inter Milan Home Shirt (XL)", set()),
+    ("2018-19 Bayern Munich Away Shirt (XL)", {"Bayern Away 2018/19"}),
+    ("2018-19 Bayern Munich Away Shirt Thiago #6 (XL)", {"Bayern Away 2018/19", "Thiago"}),
+    ("2018-19 Bayern Munich Away Shirt Robben #10 (XL)", {"Robben"}),
+    ("2018-19 Bayern Munich Home Shirt (XL)", set()),
+    ("Bayern München 18/19 Away - XL", {"Bayern Away 2018/19"}),
     ("2008-10 Holland Home Shirt XL", set()),
     ("Trikot - Niederlande - 2010 - XL - Heim", {"Holland Heim 2010/11"}),
     ("2010-11 Holland Home Shirt Sneijder #10 XL", set()),

@@ -208,6 +208,20 @@ temporären Workflow aus GitHub heraus (Beispiel 05.10.2026: CFS-Suche "thiago" 
   Holland nur Jahr 2010 (FYJ-Probe: "2011-13" ist das EM-2012-Trikot), nicht 2008-10. eBay-Gruppen "Inter" und "Holland".
   FYJ-Probe: Holland ca. 10 passende in XL/XXL (viele bei VFA, 30 bis 60 €), Inter kaum etwas
 
+- Nachtrag 09.11.2026 abends: **Inter Third 2019/20** (Flock egal), **Bayern Away 2018/19** (mintgrün, hoch, nur ohne Flock
+  oder Thiago). **Barça: Zweijahres-Angaben fehlten** ("2009-11 … Away" orange, "2008-10 … Away" gelb wurden nie gefunden,
+  weil nur Einzelsaisons eingetragen waren), jetzt "2008/10" bis "2011/13" ergänzt. Bei neuen Sondertrikots mit `saisons`
+  immer auch die Zweijahres-Schreibweise prüfen (HSV ist über `jahre` abgedeckt). Holland Heim: Titel mit Weiß/Schwarz raus
+  (eBay-Meldungen #123/#124 "Ist auswärts", eBay-Titel nennen die Variante oft nicht). FYJ-Probe Inter 2004-06: fast alles
+  mit Adriano-/Figo-Flock und über 150 €, unbeflockt in XL/XXL nichts, nur L (Topbinz £266) und M (RetrOriginal 122 €)
+- Shops 09.11.2026: 2nd Season Kits (2ndseasonkits.ch, Shopify, CHF, ca. 50 Artikel, Schweiz = Zoll) neu. Vintage Sports
+  Fashion (Magento): Cloudflare sperrt nach fünf Suchabrufen, bleibt über FYJ. Wave Memorabilia: neue Seite ohne die alte
+  Suche (404 seit 06.11.), jetzt `plattform: fyj`. 1Klopp Shop: TLS-Fehler des Shops seit 09.11. morgens, beobachten
+- Stabilitäts-Check 09.11.2026: 999 von 1.000 Runs seit 25.10. erfolgreich (einer "workflow file issue" ohne Job, einmalig
+  bei GitHub), keine Lücke über 45 Min. tagsüber, Gesamt-Run 78 bis 84 Min. von 180, eBay ca. 1.600 von 4.500 Abrufen,
+  seen.json 1,1 MB. Schwachstellen bleiben außerhalb des Codes: Shops ändern ihre Seiten (Wave), Push-Abo erlischt still
+  auf dem iPhone (08.11.), GitHub Pages hing (07.11.), Token bei cron-job.org läuft ca. 04.10.2027 ab
+
 ## Kategorie Nike Total 90 (2004-06)
 
 - Wunsch des Nutzers (04.10.2026): Nike-T90-Template (runde Brustnummer), Priorität normal (gebündelte

@@ -267,7 +267,8 @@ sondertrikots:
   - name: "Barça 2008-2013"         # 08/09 und 09/10 seit 05.10.2026 (Nutzer), alle Varianten
     prioritaet: hoch
     verein: ["barcelona", "barca", "barcelone", "barcellona"]
-    saisons: ["2008/09", "2009/10", "2010/11", "2011/12", "2012/13"]
+    # mit Zweijahres-Angaben: Auswärts gelb "2008-10" und orange "2009-11" (Nutzer 09.11.2026, wurden bis dahin verpasst)
+    saisons: ["2008/09", "2009/10", "2010/11", "2011/12", "2012/13", "2008/10", "2009/11", "2010/12", "2011/13"]
     varianten: alle
     suchanfragen: ["barcelona 2008", "barcelona 2009", "barcelona 2010", "barcelona 2011", "barcelona 2012"]
     codes: ["419877-486", "478323-410"]   # Nike Heim 11/12 und 12/13 (belegt aus Angeboten, 05.10.2026)
@@ -361,12 +362,31 @@ sondertrikots:
     varianten: [away]
     suchanfragen: ["inter 2021"]
 
+  - name: "Inter Third 2019/20"        # Nutzer 09.11.2026: mit oder ohne Flock
+    prioritaet: normal
+    verein: ["inter", "internazionale"]
+    ausschluss: ["inter miami", "miami", "turku", "baku", "bratislava", "zapresic", "escaldes", "allies", "internacional"]
+    saisons: ["2019/20"]
+    varianten: [third]
+    fremdflock: egal
+    suchanfragen: ["inter 2019"]
+
+  - name: "Bayern Away 2018/19"        # mintgrün, Thiago-Trikot: nur ohne Flock oder mit Thiago (Nutzer 09.11.2026)
+    prioritaet: hoch
+    verein: ["bayern"]
+    saisons: ["2018/19"]
+    varianten: [away]
+    suchanfragen: ["bayern 2018"]
+
   - name: "Holland Heim 2010/11"       # WM-2010-Heimtrikot, getragen bis 2011
     prioritaet: normal
     verein: ["netherlands", "holland", "niederlande", "nederland", "pays-bas", "olanda", "holanda"]
     saisons: ["2010/11", "2010/12"]
     jahre: ["2010"]                    # nicht 2011: "2011-13" ist das EM-2012-Trikot (FYJ-Probe 09.11.2026)
-    ausschluss: ["2008-10", "2008/10", "2008-2010", "2008/2010", "2009-10", "2009/10", "2009-2010", "2009/2010"]
+    # Farben: das Heimtrikot ist orange; Titel ohne "away", aber mit Weiß/Schwarz sind Auswärtstrikots (eBay-Meldungen
+    # #123/#124 vom 09.11.2026 "Ist auswärts")
+    ausschluss: ["2008-10", "2008/10", "2008-2010", "2008/2010", "2009-10", "2009/10", "2009-2010", "2009/2010",
+                 "white", "weiss", "weiß", "wit", "witte", "blanc", "bianco", "blanco", "black", "schwarz", "zwart", "noir"]
     varianten: [home]
     suchanfragen: ["holland 2010", "netherlands 2010"]
 
