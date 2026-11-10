@@ -381,6 +381,8 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
   };
   const fmtDate = iso => iso ? new Date(iso).toLocaleString("de-DE", {day:"2-digit", month:"2-digit", hour:"2-digit", minute:"2-digit"}) : "";
   const eur = v => v == null ? "" : v.toLocaleString("de-DE", {style:"currency", currency:"EUR", maximumFractionDigits: v < 100 ? 2 : 0});
+  // Links nur zu Web-Adressen: Daten kommen von fremden Shops, "javascript:…" darf nie anklickbar werden
+  const web = u => /^https?:\/\//i.test(String(u || "")) ? u : "#";
   const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   const host = u => { try { return new URL(u).hostname.replace(/^www\./, ""); } catch(e){ return ""; } };
 
@@ -676,7 +678,7 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     const price = t.eur != null ? `<b>${eur(t.eur)}</b>${extra}` : `<b>${esc(t.preis || "?")}</b>${extra}`;
     const img = t.bild ? `<img loading="lazy" referrerpolicy="no-referrer" src="${esc(t.bild)}" alt="" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph',textContent:'👕'}))">`
                        : '<span class="ph">👕</span>';
-    return `<a class="card${t.thiago ? " th" : t.hoch ? " hi" : ""}" href="${esc(t.url)}" target="_blank" rel="noopener">
+    return `<a class="card${t.thiago ? " th" : t.hoch ? " hi" : ""}" href="${esc(web(t.url))}" target="_blank" rel="noopener">
       <div class="img">${img}</div><div class="badges">${badges}</div>
       <button class="flag" data-eb="${esc(t.id)}" title="Angebot melden oder ausblenden" aria-label="Ausblenden oder melden">${IC.flag}</button>
       <div class="body"><div class="labels" title="${esc(t.warum || "")}">${esc(t.labels.join(" · "))}</div>
@@ -817,7 +819,7 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     const dup = !st.dupes && t.dupes && t.dupes.length ? `<div class="dupes">` +
       [same ? `+${same} gleiche im Shop` : "", t.dupShops && t.dupShops.length ? `auch bei ${esc(t.dupShops.join(", "))}` : ""]
         .filter(Boolean).join(" · ") + ` (${t.dupRange})</div>` : "";
-    return `<a class="card${t.thiago && !t.gone ? " th" : t.hoch ? " hi" : ""}${t.gone ? " gone" : ""}" href="${esc(t.url)}" target="_blank" rel="noopener">
+    return `<a class="card${t.thiago && !t.gone ? " th" : t.hoch ? " hi" : ""}${t.gone ? " gone" : ""}" href="${esc(web(t.url))}" target="_blank" rel="noopener">
       <div class="img">${img}</div><div class="badges">${badges}</div>
       <button class="fav" data-id="${esc(t.id)}" aria-pressed="${f ? "true" : "false"}" title="Favorit" aria-label="Favorit">${f ? IC.starOn : IC.star}</button>
       ${t.gone ? "" : st.view === "favs"
@@ -1066,7 +1068,7 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     const asked = new Set(store.get("shopadds") || []);
     $("fgsum").textContent = `Fundgrube` + (fg.zeit ? ` vom ${fmtDate(fg.zeit).slice(0, 6)}` : "") +
       `: ${fgc.filter(c => c.empfohlen).length} empfohlen, ${fgc.length} geprüft`;
-    $("fgbody").innerHTML = fgc.length ? fgc.map(c => `<tr><td><a href="${esc(c.url)}" target="_blank" rel="noopener">${esc(c.domain)}</a></td>` +
+    $("fgbody").innerHTML = fgc.length ? fgc.map(c => `<tr><td><a href="${esc(web(c.url))}" target="_blank" rel="noopener">${esc(c.domain)}</a></td>` +
       `<td class="n">${c.treffer}</td><td>${esc(c.plattform)}</td>` +
       `<td>${c.nachbau_prozent == null ? "?" : c.nachbau_prozent + " %"}</td><td>` +
       (c.empfohlen ? `<button class="addbtn" data-url="${esc(c.url)}" data-plat="${esc(c.plattform)}" ${asked.has(c.url) ? "disabled" : ""}>` +

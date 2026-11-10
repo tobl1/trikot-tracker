@@ -29,6 +29,9 @@ from .speicher import load_json
 from .zustand import below_min, condition_info, desc_excluded, desc_flock
 
 
+WORN = "Zustand unter der Mindestnote"
+
+
 def recently_done(status_store, mode):
     """Hat ein Run dieses Modus kürzlich stattgefunden? (Sperre für die GitHub-Rückfall-Zeitpläne)"""
     limit = FALLBACK_SKIP_HOURS.get(mode)
@@ -222,9 +225,17 @@ def main():
     # schwach"), je Shop überschreibbar; Thiago ausgenommen, damit kein Thiago-Trikot verloren geht
     min_all = watch.get("min_zustand")
     too_worn = lambda grade, shop, labels: "Thiago" not in labels and below_min(grade, min_grade.get(shop, min_all))
-    seen = {k: v for k, v in seen.items()
-            if "(Reissue)" not in v["title"] and k not in matcher.url_ex
-            and not too_worn(v.get("zustand", ""), v["shop"], v.get("labels") or [])}
+    seen = {k: v for k, v in seen.items() if "(Reissue)" not in v["title"] and k not in matcher.url_ex}
+
+    def mark_worn(e):
+        """Note unter der Mindestnote: ausblenden, aber merken. Bis 10.11.2026 flog der Eintrag ganz raus; stand die
+        Note nur auf der Shop-Seite (Classic-Shirts, FYJ), kam er beim nächsten Fund als "neu" zurück, samt Push"""
+        if too_worn(e.get("zustand", ""), e["shop"], e.get("labels") or []):
+            e["aussortiert"] = WORN
+        elif e.get("aussortiert") == WORN:
+            e.pop("aussortiert")
+    for e in seen.values():
+        mark_worn(e)
     first_run = not seen
     # Treffer gesperrter Shops (sperren: ja, z. B. Originaltrikot) sofort ausblenden, nicht erst nach 36 Std.
     blocked = {domain(s["url"]): s["name"] for s in shops_cfg.get("shops") or []
@@ -372,8 +383,10 @@ def main():
             labs = matcher.labels(it["match_text"], it.get("fyj_reissue", False), it.get("desc", ""), it.get("ctx", ""), why)
             if not labs or not matcher.size_ok(it["size_text"], norm(it["match_text"])):
                 continue
-            if not it["url"]:
-                continue
+            if not str(it["url"]).startswith(("https://", "http://")):
+                continue   # nie etwas anderes als Web-Adressen in die App geben (z. B. "javascript:" aus fremden Daten)
+            if not str(it.get("image") or "").startswith(("https://", "http://")):
+                it["image"] = ""
             key = canon_url(it["url"])
             size = SIZE_RX.search(norm(it["size_text"]))
             grade, note = condition_info(it["title"], it.get("desc"), it.get("fyj_condition", ""))
@@ -462,6 +475,7 @@ def main():
     cheaper = []
     for e in seen.values():
         if e["last"] == ts:
+            mark_worn(e)   # Note kam evtl. erst jetzt von der Shop-Seite
             was = e.get("teuer")
             e["teuer"] = too_expensive(e)
             # war über der Preisgrenze (also unsichtbar), jetzt darunter: wie ein neuer Treffer melden
@@ -567,7 +581,7 @@ def main():
         try:
             summary, ebay_problems = ebay.run(args.mode, status_store, matcher, watch, rates, ts,
                                               lambda title, msg, prio, url: push(title, msg, prio, url, None, ["shopping_cart"],
-                                                                                 args.dry_run), dry=args.dry_run)
+                                                                                 args.dry_run, geheim=True), dry=args.dry_run)
             if summary:
                 print(summary)
         except Exception as e:

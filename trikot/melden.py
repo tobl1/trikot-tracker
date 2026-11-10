@@ -20,15 +20,20 @@ OUTBOX_MAX_HOURS = 12   # ältere, nie verschickte Pushes verwerfen statt veralt
 POSTAUSGANG = []
 
 
-def push(title, message, prio=3, click=None, image=None, tags=None, dry=False, nur_abo=None):
-    """Push vormerken (Probelauf: nur anzeigen). nur_abo: nur an dieses App-Abo (z. B. Bestätigung)"""
+def push(title, message, prio=3, click=None, image=None, tags=None, dry=False, nur_abo=None, geheim=False):
+    """Push vormerken (Probelauf: nur anzeigen). nur_abo: nur an dieses App-Abo (z. B. Bestätigung).
+    geheim: Inhalt verschlüsselt ablegen (eBay). Der Postausgang liegt im öffentlichen Daten-Zweig, eBay-Inhalte
+    dürfen dort und im Log nicht lesbar sein; lesen kann sie nur der Schritt "Pushes senden" (VAPID_PRIVATE_KEY)"""
     entry = {"id": uuid.uuid4().hex, "zeit": now().isoformat(), "title": title[:250], "message": message[:3500],
              "prio": prio, "click": click or "", "image": image or "", "tags": tags or []}
     if nur_abo:
         entry["nur_abo"] = nur_abo
     if dry:
-        print(f"[PUSH p{prio}] {title}\n    {message}\n    {click or ''}")
+        print(f"[PUSH p{prio}] (Inhalt nicht im Log)" if geheim else f"[PUSH p{prio}] {title}\n    {message}\n    {click or ''}")
         return
+    if geheim:
+        inner = {k: entry.pop(k) for k in ("title", "message", "click", "image")}
+        entry["geheim"] = webpush.seal_abo(inner, webpush.VAPID_PUBLIC)
     POSTAUSGANG.append(entry)
 
 
@@ -73,8 +78,18 @@ def send_outbox(status_store=None, key=None):
         if age > dt.timedelta(hours=OUTBOX_MAX_HOURS):
             dropped += 1
             continue
+        inner = e
+        if e.get("geheim"):   # verschlüsselt abgelegt (eBay): erst hier lesbar
+            inner = webpush.open_blob(e["geheim"], key) if key else None
+            if key and not inner:
+                dropped += 1
+                problems.append(("App-Push", "verschlüsselte Push nicht lesbar (Schlüssel passt nicht), verworfen"))
+                continue
+            if not inner:
+                keep.append(e)
+                continue
         targets = {k: v for k, v in abos.items() if not e.get("nur_abo") or k == e["nur_abo"]}
-        msg = {"title": e["title"], "body": e["message"], "url": e.get("click") or ""}
+        msg = {"title": inner["title"], "body": inner["message"], "url": inner.get("click") or ""}
         ok = False
         for aid, sub in targets.items():
             code = webpush.send(sub, msg, key)

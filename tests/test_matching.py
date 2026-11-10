@@ -737,3 +737,9 @@ def test_mindestnote_global_ausser_thiago():
     assert w["min_zustand"] == 7
     from trikot.zustand import below_min
     assert below_min("6/10", 7) and not below_min("7/10", 7) and not below_min("Very Good", 7)
+
+
+def test_leverkusen_grundsaetzlich_raus():
+    # Meldung #130 (10.11.2026): "Niemals von Leverkusen bitte", vorher schon bei Kroos und Vidal
+    assert M.labels("2025-26 Bayer Leverkusen Fourth Shirt Grimaldo #20 (XL)") == []
+    assert M.labels("2023-24 Benfica Home Shirt Grimaldo #3 (XL)") != []

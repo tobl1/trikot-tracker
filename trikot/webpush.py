@@ -22,6 +22,9 @@ from cryptography.hazmat.primitives.kdf.hkdf import HKDF
 
 ABO_SALT = b"trikot-tracker-1"     # muss zu docs/index.html passen
 ABO_INFO = b"trikot-push-abo"
+# öffentlicher Schlüssel, derselbe wie VAPID_PUBLIC in docs/index.html (Test prüft das): damit verschlüsselt der Run
+# Inhalte, die nur der Schritt "Pushes senden" lesen darf
+VAPID_PUBLIC = "BCXT9cNDczzA3flMfkeef2Gr0aBk9UVtdKOYSd6O5MguRtzvdRQ6HbMieWGNFrJUNDznXu31GMbd9xkf4hY--08"
 VAPID_SUB = "https://tobl1.github.io/trikot-tracker/"   # Absender-Angabe (Pflicht bei VAPID), keine Mailadresse
 
 
@@ -47,20 +50,28 @@ def _abo_key(shared):
     return HKDF(algorithm=hashes.SHA256(), length=32, salt=ABO_SALT, info=ABO_INFO).derive(shared)
 
 
-def open_abo(blob, key):
-    """Verschlüsseltes Abo aus der App ("v1.<ephemeral>.<iv>.<daten>") entschlüsseln -> dict oder None"""
+def open_blob(blob, key):
+    """Mit dem öffentlichen VAPID-Schlüssel Verschlüsseltes ("v1.<ephemeral>.<iv>.<daten>") lesen -> dict oder None"""
     try:
         version, eph, iv, data = blob.strip().split(".")
         if version != "v1":
             return None
         peer = ec.EllipticCurvePublicKey.from_encoded_point(ec.SECP256R1(), unb64u(eph))
         plain = AESGCM(_abo_key(key.exchange(ec.ECDH(), peer))).decrypt(unb64u(iv), unb64u(data), None)
-        sub = json.loads(plain)
-        return sub if sub.get("endpoint", "").startswith("https://") and sub.get("keys") else None
-    except (ValueError, KeyError, TypeError, AttributeError):
+        obj = json.loads(plain)
+        return obj if isinstance(obj, dict) else None
+    except Exception:   # kaputter Text, falscher Schlüssel (InvalidTag) …
         return None
-    except Exception:   # z. B. falscher Schlüssel (InvalidTag)
-        return None
+
+
+def open_abo(blob, key):
+    """Verschlüsseltes Abo aus der App entschlüsseln -> dict oder None. Nur vollständige Abos (Adresse und beide
+    Schlüssel), ein unvollständiges würde sonst erst beim Verschicken auffallen"""
+    sub = open_blob(blob, key)
+    keys = (sub or {}).get("keys")
+    ok = (sub and str(sub.get("endpoint", "")).startswith("https://") and isinstance(keys, dict)
+          and isinstance(keys.get("p256dh"), str) and isinstance(keys.get("auth"), str))
+    return sub if ok else None
 
 
 def seal_abo(sub, public_b64):
@@ -97,10 +108,12 @@ def encrypt(sub, payload):
 def send(sub, message, key, ttl=24 * 3600):
     """Eine Push an ein Abo schicken. message: {"title", "body", "url"}. Gibt den HTTP-Status zurück
     (201 = angenommen, 404/410 = Abo erloschen, in der App neu aktivieren)"""
-    body = encrypt(sub, json.dumps(message, ensure_ascii=False).encode())
-    headers = {"Authorization": vapid_header(sub["endpoint"], key), "TTL": str(ttl), "Urgency": "high",
-               "Content-Encoding": "aes128gcm", "Content-Type": "application/octet-stream"}
     try:
+        body = encrypt(sub, json.dumps(message, ensure_ascii=False).encode())
+        headers = {"Authorization": vapid_header(sub["endpoint"], key), "TTL": str(ttl), "Urgency": "high",
+                   "Content-Encoding": "aes128gcm", "Content-Type": "application/octet-stream"}
         return requests.post(sub["endpoint"], data=body, headers=headers, timeout=20).status_code
     except requests.RequestException:
+        return 0
+    except Exception:   # unbrauchbares Abo (kaputte Schlüssel): ein Abo darf nie den ganzen Versand stoppen
         return 0

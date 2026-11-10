@@ -32,6 +32,9 @@ produkt_ausschluss: [# England grundsätzlich nicht (Nutzer 08.10.2026, betraf v
                      "england", "anglia", "inglaterra", "angleterre", "inghilterra", "engeland",
                      # Dortmund grundsätzlich nicht (eBay-Meldung 09.10.2026 bei Perišić: "BVB NEIN")
                      "dortmund", "bvb",
+                     # Leverkusen grundsätzlich nicht (dritte Meldung dazu am 10.11.2026, #130 Grimaldo: "Niemals von
+                     # Leverkusen bitte"; vorher schon Kroos und Vidal)
+                     "leverkusen", "bayer 04",
                      "shorts", "socks", "sock", "jacket", "track top", "tracksuit",
                      "hoodie", "sweatshirt", "sweater", "pants", "trousers", "scarf", "bag",
                      "cap", "hat", "programme", "ball", "boots", "poster", "sticker", "mug",

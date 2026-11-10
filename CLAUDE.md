@@ -694,3 +694,19 @@ sperren alle Bots mit `Disallow: /`, keine offene Such-Schnittstelle, also weite
   und eine bekannte Plattform wird nicht mit "unbekannt" überschrieben
 - Marktplätze (eBay-Händler, Depop) werden bewusst nicht abgefragt; dem Nutzer wurde empfohlen,
   dort in den Apps Verkäufern zu folgen bzw. gespeicherte Suchen anzulegen
+
+## Gesamtprüfung 10.11.2026 (Code, Sicherheit, Abläufe, App)
+
+- Behoben: (1) Mindestnote griff nicht, wenn die Note nur auf der Shop-Seite stand (Classic-Shirts, FYJ): Push kam trotzdem,
+  Eintrag wurde vergessen und beim nächsten Fund erneut gemeldet. Jetzt `aussortiert` = `lauf.WORN`, Eintrag bleibt gemerkt
+  (`mark_worn`). (2) eBay-Pushes standen zwischen Speichern und Versand im Klartext im öffentlichen `postausgang.json`:
+  jetzt verschlüsselt (`push(..., geheim=True)`, `webpush.VAPID_PUBLIC`, lesbar nur im Schritt "Pushes senden"), im
+  Probelauf nicht im Log. (3) Nur http(s)-Adressen kommen in die Daten und als Link in die App (`web()` in index.html).
+  (4) Unvollständiges Push-Abo stoppt den Versand nicht mehr. (5) `parse_price` nimmt nur echte Währungscodes ("Von 45 €"
+  wurde Währung "VON", Preisgrenze griff nicht). (6) Leverkusen grundsätzlich raus (Meldung #130)
+- Neu `tests/test_ablauf.py`: spielt ganze Runs durch (`main`), vorher waren nur die Bausteine getestet
+- Offen, bewusst nicht geändert: Push-Abo oder Geräteschlüssel geht verloren, wenn der Run nach dem Schließen des Issues
+  scheitert (neu aktivieren); `aussortiert` durch Shop-Sperre bleibt nach Entsperren hängen; App lädt treffer.json doppelt
+  (Pages und Daten-Zweig, je ca. 360 kB); keine Content-Security-Policy möglich ohne Umbau der Inline-Skripte; kleine Schrift
+  (10,5 bis 11 px bei Badges, Zustand, Größe); Handy-Layout in dieser Prüfung nicht getestet (Fenster ließ sich nicht
+  schmal stellen); Meldungen #125/#127 (eBay, Flock nicht erkannt bzw. Spieler ohne Flock) und #131 ohne Regel

@@ -7,7 +7,12 @@ import requests
 from .basis import FX_API, TIMEOUT
 
 
-CUR_CODE_RX = re.compile(r"\b([A-Z]{3})\b")   # ISO-Code, ob es einen Kurs gibt, prüft to_eur()
+CUR_CODE_RX = re.compile(r"\b([A-Z]{3})\b")
+# nur echte Währungscodes: sonst wurde aus "Von 45,00 €" die Währung "VON", der Preis ließ sich nicht umrechnen und die
+# Preisgrenze griff nicht (10.11.2026)
+CUR_CODES = {"EUR", "GBP", "USD", "CHF", "DKK", "SEK", "NOK", "PLN", "CZK", "HUF", "RON", "BGN", "ISK", "UAH", "TRY",
+             "AUD", "CAD", "NZD", "MXN", "BRL", "MYR", "IDR", "JPY", "CNY", "HKD", "SGD", "INR", "KRW", "THB", "ZAR",
+             "AED", "ARS", "CLP", "COP", "RSD", "ILS", "PHP"}
 CUR_SYMBOLS = [("£", "GBP"), ("€", "EUR"), ("zł", "PLN"), ("$", "USD")]
 NUM_RX = re.compile(r"\d[\d.,\s]*\d|\d")
 
@@ -15,8 +20,8 @@ NUM_RX = re.compile(r"\d[\d.,\s]*\d|\d")
 def parse_price(s):
     """'£124.99', '79.35 GBP', '1.299,00 kr DKK' -> (Betrag, Währung) bzw. (None, '')"""
     s = str(s or "")
-    m = CUR_CODE_RX.search(s.upper())
-    cur = m.group(1) if m else next((c for sym, c in CUR_SYMBOLS if sym in s), "")
+    cur = next((c for c in CUR_CODE_RX.findall(s.upper()) if c in CUR_CODES), "") \
+        or next((c for sym, c in CUR_SYMBOLS if sym in s), "")
     m = NUM_RX.search(s)
     if not m:
         return None, cur
