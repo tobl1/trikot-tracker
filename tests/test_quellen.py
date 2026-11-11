@@ -842,3 +842,30 @@ def test_lightspeed_liest_code_und_variante():
 def test_lightspeed_drittes_trikot_3th():
     mk = lambda v: tracker.lightspeed_to_item("WLFS", ls_prod("Spain (XL)", f"Spain_Adidas_{v}_2010-2011_XL", "Size XL"))
     assert labels(mk("Home")) and labels(mk("3th")) == set()   # Spanien nur Heim/Auswärts, "3th" darf nicht als Heim gelten
+
+
+def test_woo_abbruch_beim_blaettern_ist_fehler(monkeypatch):
+    """Football & Vintage Amsterdam 11.11.2026: Seite 2 kam mit 403, 100 statt 657 Produkte galten als ganzer Bestand"""
+    full = [woo_prod(f"Shirt {i}", ["XL"]) for i in range(100)]
+
+    def antwort(p):
+        if p.get("page") == 1:
+            http.last_status = 200
+            return full
+        http.last_status = 403
+        http.codes[403] += 1
+        return None
+    http = FakeHttp([("/wc/store", antwort)])
+    _, n = tracker.woo_run(http, "FVA", "https://w.com/wp-json/wc/store/v1/products")
+    assert n == 100 and http.abgebrochen == 403
+    # Ende des Katalogs (leere Seite) ist kein Abbruch
+    http2 = FakeHttp([("/wc/store", lambda p: full if p.get("page") == 1 else [])])
+    tracker.woo_run(http2, "FVA", "https://w.com/wp-json/wc/store/v1/products")
+    assert not getattr(http2, "abgebrochen", None)
+
+
+def test_run_shop_meldet_abbruch_beim_blaettern(monkeypatch):
+    http = FakeHttp([("/catalogsearch/result/", CFS_PAGE)])
+    http.abgebrochen = 403
+    items, st = run_shop_mit(monkeypatch, http, {"name": "CFS", "url": "https://cfs.co.uk", "plattform": "cfs"})
+    assert st["fehler"].startswith("unvollständig, Abruf brach nach") and "403" in st["fehler"]

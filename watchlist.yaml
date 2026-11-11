@@ -226,7 +226,21 @@ fremdflock:
     # Spanien 2010 bis 2014
     "casillas", "ramos", "capdevila", "alonso", "torres", "fabregas", "silva", "navas",
     "llorente", "mata", "arbeloa", "albiol", "marchena", "reina", "de gea", "koke", "costa",
-    "azpilicueta", "cazorla", "juanfran", "javi martinez", "martinez", "santi cazorla"]
+    "azpilicueta", "cazorla", "juanfran", "javi martinez", "martinez", "santi cazorla",
+    # Bayern 2018/19 (Sondertrikot Away, seit 09.11.2026; Meldung aus der Prüfung 11.11.2026: "Away 5 Hummels")
+    "hummels", "boateng", "suele", "alaba", "rafinha", "bernat", "ribery", "robben", "wagner", "sanches",
+    "renato sanches", "james rodriguez", "lewandowski",
+    # Inter 2004 bis 2006 (Wunschtrikots ohne Flock, seit 09.11.2026)
+    "vieri", "martins", "recoba", "stankovic", "veron", "figo", "zanetti", "cambiasso", "materazzi", "cordoba",
+    "toldo", "julio cesar", "mihajlovic", "kily gonzalez", "emre", "solari", "burdisso", "samuel", "favalli",
+    "cruz", "davids",
+    # Inter 2019/20 bis 2021/22
+    "lautaro", "lukaku", "dzeko", "correa", "barella", "brozovic", "calhanoglu", "skriniar", "bastoni", "de vrij",
+    "dumfries", "perisic", "handanovic", "vidal", "dimarco", "darmian", "gagliardini", "vecino", "hakimi",
+    "eriksen", "sensi", "godin",
+    # Holland 2010/11
+    "van persie", "sneijder", "kuyt", "van bommel", "de jong", "van der vaart", "huntelaar", "stekelenburg",
+    "heitinga", "mathijsen", "van bronckhorst", "van der wiel", "elia", "afellay", "ooijer", "boulahrouz"]
 
 # Zusätzliche Namen NUR für "nur beflockt" (fremdflock: pflicht, z. B. Total 90): Flock ohne Rückennummer
 # erkennen ("BRASILE 2004 - RONALDO - HOME"). Bewusst nicht in fremdflock.namen, weil Wörter wie "park",

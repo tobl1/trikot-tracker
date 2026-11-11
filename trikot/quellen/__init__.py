@@ -141,7 +141,11 @@ def run_shop(shop, mode, matcher, platforms, currencies):
         return [], status
     finally:
         if not status["fehler"] and plat not in ("aus", "fyj"):
-            if http.limited:
+            if mode == "full" and getattr(http, "abgebrochen", None) and status["produkte"]:
+                # zählt als Fehler: Treffer der fehlenden Seiten werden so nicht als "weg" ausgeblendet, FYJ springt ein
+                status["fehler"] = (f"unvollständig, Abruf brach nach {status['produkte']} Produkten ab "
+                                    f"(HTTP {http.abgebrochen})")
+            elif http.limited:
                 status["fehler"] = f"unvollständig, {http.limited}x gedrosselt (HTTP 429)"
             elif status["produkte"] == 0 and blocked_text(http):
                 status["fehler"] = blocked_text(http)

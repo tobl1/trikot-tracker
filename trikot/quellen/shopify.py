@@ -4,7 +4,7 @@ import datetime as dt
 import re
 
 from ..basis import ANY_SIZE_RX, RADAR_LIMIT, SHOPIFY_PAGE_CAP, SIZE_RX, any_rx, hit, norm, now
-from .gemeinsam import item
+from .gemeinsam import item, page_failed
 
 _SIZES = r"(?:xxs|xs|s|m|l|xl|xxl|2xl|3xl|xxxl|x-large|xx-large)"
 TITLE_SIZE_RX = re.compile(rf"(?i)\(\s*{_SIZES}(?:\s+\w+)?\s*\)|(?:size|taille|talla|taglia|gr[oö](?:ß|ss)e)\s*[:\-]?\s*{_SIZES}\b"
@@ -76,6 +76,8 @@ def shopify_full(http, shop, base, path="/products.json", currency="", stamps=No
         data = http.get(f"{base}{path}", {"limit": 250, "page": page})
         prods = (data or {}).get("products") or []
         if not prods:
+            if page > 1:
+                page_failed(http, data)
             break
         n += len(prods)
         for p in prods:

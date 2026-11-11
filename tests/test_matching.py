@@ -743,3 +743,37 @@ def test_leverkusen_grundsaetzlich_raus():
     # Meldung #130 (10.11.2026): "Niemals von Leverkusen bitte", vorher schon bei Kroos und Vidal
     assert M.labels("2025-26 Bayer Leverkusen Fourth Shirt Grimaldo #20 (XL)") == []
     assert M.labels("2023-24 Benfica Home Shirt Grimaldo #3 (XL)") != []
+
+
+@pytest.mark.parametrize("title,yes", [
+    # Meldungen #131 "Flick blöd" und #133 "Kein Name beim Flock" (10.11.2026): nur Nummer zählt nicht als Flock
+    ("2008-10 Hamburg adidas Away Shirt #20 XL", False),
+    ("Croatia Player Issue Home Football Shirt 2006-2008 XL 17 Nike", False),
+    ("2004-06 Brazil Home Shirt #9 - 8/10 - (XL)", False),
+    ("Schweiz Trikot WM 2006 Heim #19 (XL) Puma", False),
+    ("2006/07 - Italie #14 (XL) [MATCH ISSUE]", False),
+    ("2004 Netherlands Nike T90 Remake Shirt XL", False),
+    # Name an der Nummer, auch unbekannte Spieler
+    ("Czech Republic 2006 Away Football Shirt XL #15 Baros", True),
+    ("Ivory Coast Away Shirt 2006/07 (XL) Toure Yaya 19 BNWT", True),
+    ("Hamburger SV 1998-2000 Auswärts Trikot Doll #10 (10/10) XL mit Hose", True),
+    ("2004-06 NETHERLANDS *DAVIDS* SHIRT XL", True),
+])
+def test_flock_pflicht_braucht_namen(title, yes):
+    pfl = {k["name"] for k in M.kits if k["flock_pflicht"]}
+    assert bool({l for l, _ in M.labels(title)} & pfl) == yes
+
+
+@pytest.mark.parametrize("title,yes", [
+    # freistehende Nummer mit Namen ist fremder Flock (Football Thrift Shop 11.11.2026)
+    ("Koszulka piłkarska FC Bayern Monachium 2018/19 Away 5 Hummels [XXL]", False),
+    ("Koszulka piłkarska FC Bayern Monachium 2018/19 Away [XXL]", True),
+    ("Koszulka piłkarska FC Bayern Monachium 2018/19 Away 6 Thiago [XXL]", True),
+    # Größe "2XL" und Note sind keine Rückennummer
+    ("FC Barcelona Uitshirt 2009-2011 (2XL) (9/10)", True),
+    ("2010/12 - Pays-Bas (2XL)", True),
+    ("Spain 2010 Home Shirt 1 Star XL", True),
+])
+def test_nummer_mit_name_ist_fremdflock(title, yes):
+    kits = {"Bayern Away 2018/19", "Barça 2008-2013", "Holland Heim 2010/11", "Spanien 2010/2011"}
+    assert bool({l for l, _ in M.labels(title)} & kits) == yes

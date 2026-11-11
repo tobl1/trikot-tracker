@@ -9,6 +9,20 @@ from .basis import (
 
 
 
+# Rückennummer (1 bis 99), nicht Teil einer Saison, Note oder Größe
+NUM_RX = re.compile(r"(?<![\d/.\-a-z])(?:#\s?|(?<![a-z])(?:no|nr|n)\.?\s?)?([1-9]\d?)(?![\d/.\-a-z]|\s?(?:ans|years|jahre|/10))")
+# Wörter, die neben einer Nummer stehen, aber kein Spielername sind
+NO_NAME = set("""shirt shirts jersey trikot maglia maillot camiseta camisola koszulka trui shirtje football fussball soccer
+calcio futbol home away third heim auswarts auswaerts thuis uit domicile exterieur casa trasferta local visitante player
+players issue issued match worn prepared signed autographed autografata bnwt bnib bnwot mint vintage original retro rare
+new nike adidas puma lotto umbro kappa diadora reebok uhlsport jako hummel errea legea joma macron erima
+size sizes taille talla taglia maat grosse gr xl xxl 2xl xxxl large medium small extra and with the von mit und del des
+der die das sky tamoil long short sleeve sleeves manica lunga corta l/s s/s kit top tee version edition season saison
+world cup euro mondiale coupe monde wm wc mundial copa nationalmannschaft national team reprezentacji pilkarska
+no nr num number nummer numero rucken back name flock flocked fan replica authentic star stars sterne stern estrellas
+etoiles stelle champions league patch patches badge badges""".split())
+
+
 def found(rxs, text):
     """Erster Treffer einer Regex-Liste im Text (für Begründungen), sonst """""
     for r in rxs:
@@ -107,7 +121,19 @@ class Matcher:
             return False
         if star:
             return True
-        return bool(FLOCK_NUM_RX.search(t)) or hit(self.flock_names, t)
+        return bool(FLOCK_NUM_RX.search(t)) or hit(self.flock_names, t) or self._name_at_number(t)
+
+    def _name_at_number(self, t):
+        """Freistehende Rückennummer mit einem Wort daneben, das kein Trikot-, Größen-, Marken- oder Teamwort ist
+        ("Away 5 Hummels", Football Thrift Shop 11.11.2026; mit # davor fing es FLOCK_NUM_RX schon)"""
+        for m in NUM_RX.finditer(t):
+            before = re.findall(r"[a-z][a-z'.]*", t[:m.start()])[-1:]
+            after = re.findall(r"[a-z][a-z'.]*", t[m.end():])[:1]
+            for w in before + after:
+                w = w.strip(".'")
+                if len(w) >= 3 and w not in NO_NAME and not hit(self.all_clubs, w):
+                    return True
+        return False
 
     def has_flock(self, t, star=False):
         """Irgendein Flock erkennbar: Rückennummer, Sternchen-Name, bekannter Spielername oder
@@ -116,6 +142,16 @@ class Matcher:
                     or hit(self.flock_extra, t)
                     or any(hit(p["suche"], t) for p in self.players)
                     or re.search(r"(?<![\d/.\-])\b([1-9]|[1-9]\d)\b(?![\d/.\-]|\s?(ans|years|jahre|/10))", t))
+
+    def has_name(self, t, star=False, kit=None):
+        """Flock mit Namen, nicht nur eine Nummer (Kategorien mit fremdflock: pflicht). Meldungen #131 "Flick blöd"
+        (HSV "Away Shirt #20") und #133 "Kein Name beim Flock" (Kroatien "#17"), 10.11.2026: Nummer allein zählt nicht.
+        Name = Sternchen-Wort, bekannter Name aus den Listen oder ein unbekanntes Wort direkt an der Rückennummer
+        ("Baros #15", "#15 Baros", "Toure Yaya 19"), das kein Trikot-, Größen-, Marken- oder Teamwort ist"""
+        if star or hit(self.flock_names, t) or hit(self.flock_ok, t) or hit(self.flock_extra, t) \
+                or any(hit(p["suche"], t) for p in self.players) or (kit and hit(kit["flock_namen"], t)):
+            return True
+        return self._name_at_number(t)
 
     def _variant_ok(self, kit, t):
         allowed = kit["varianten"]
@@ -187,7 +223,7 @@ class Matcher:
                 continue
             if not k["fremdflock_egal"] and self.foreign_flock(t, star):
                 continue
-            if k["flock_pflicht"] and not (self.has_flock(t, star) or hit(k["flock_namen"], t)):
+            if k["flock_pflicht"] and not self.has_name(t, star, k):
                 continue
             if k["stich"] or k["kombi_b"]:
                 ok = hit(k["stich"], t) or (hit(k["kombi_b"], t) and hit(k["kombi_f"], t))

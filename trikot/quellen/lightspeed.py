@@ -2,7 +2,7 @@
 
 import re
 
-from .gemeinsam import item
+from .gemeinsam import item, page_failed
 
 LIGHTSPEED_PAGE_CAP = 100   # 10.000 Artikel (We Love Football Shirts: 4.484 am 02.11.2026)
 VARIANT_SIZE_RX = re.compile(r"(?i)^(?:size|maat|grösse|größe|taille)\s+(.+)$")
@@ -35,6 +35,8 @@ def lightspeed_run(http, shop, base, pages=None, limit=100, lang="en"):
         prods = (data or {}).get("products") if isinstance(data, dict) else None
         prods = list(prods.values()) if isinstance(prods, dict) else prods or []
         if not prods:
+            if page > 1:
+                page_failed(http, data)
             break
         n += len(prods)
         items += [it for it in (lightspeed_to_item(shop, p) for p in prods) if it]

@@ -709,4 +709,21 @@ sperren alle Bots mit `Disallow: /`, keine offene Such-Schnittstelle, also weite
   scheitert (neu aktivieren); `aussortiert` durch Shop-Sperre bleibt nach Entsperren hängen; App lädt treffer.json doppelt
   (Pages und Daten-Zweig, je ca. 360 kB); keine Content-Security-Policy möglich ohne Umbau der Inline-Skripte; kleine Schrift
   (10,5 bis 11 px bei Badges, Zustand, Größe); Handy-Layout in dieser Prüfung nicht getestet (Fenster ließ sich nicht
-  schmal stellen); Meldungen #125/#127 (eBay, Flock nicht erkannt bzw. Spieler ohne Flock) und #131 ohne Regel
+  schmal stellen); Meldungen #125/#127 (eBay, Flock nicht erkannt bzw. Spieler ohne Flock) ohne Regel
+
+## Zweite Prüfung 11.11.2026
+
+- Korrekturen vom 10.11. laufen im Betrieb (eBay-Push verschlüsselt im Postausgang gesehen). 3 Runs am 11.11. 21:20 bis
+  21:45 Uhr "startup_failure" ohne Job (GitHub-seitig, danach wieder normal)
+- **Abbruch beim Blättern** (`quellen.gemeinsam.page_failed`, `Http.abgebrochen`): Woo, Shopify, Lightspeed werteten eine
+  Fehlerseite (403, 429, 5xx) als Katalogende. Football & Vintage Amsterdam: Seite 2 mit 403, 100 statt 657 Produkte. Jetzt
+  im Gesamt-Run Fehler "unvollständig, Abruf brach nach N Produkten ab", damit nichts fälschlich als "weg" gilt
+- **Flock-Pflicht braucht einen Namen** (Meldungen #131 "Flick blöd", #133 "Kein Name beim Flock"): `Matcher.has_name`,
+  Nummer allein zählt bei `fremdflock: pflicht` (T90, WM 2006, HSV) nicht mehr. Name = Sternchen, Namenslisten oder
+  unbekanntes Wort direkt an der Nummer (`NUM_RX`, `NO_NAME`)
+- **Fremdflock auch ohne #** ("Away 5 Hummels" kam als Bayern Away 18/19): `_name_at_number` in `foreign_flock`; Kader
+  von Bayern 18/19, Inter 04-06 und 19-22, Holland 2010 in `fremdflock.namen`. "(2XL)" ist keine Rückennummer
+  (Vergleich über alle 1.325 gespeicherten Treffer: nur passende fallen raus, kein Thiago- oder Barça-Treffer)
+- Handy-Layout getestet (App in einem Rahmen mit 390 x 844, so greifen die Handy-Regeln): kein seitliches Scrollen, Leiste
+  bleibt beim Scrollen und in allen Reitern unten, Eingaben 16 px, keine Skriptfehler. Knopf "gesehen" hat jetzt eine
+  größere Tippfläche

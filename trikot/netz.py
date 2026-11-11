@@ -44,6 +44,7 @@ class Http:
         self.limited = 0     # Anfragen, die trotz Wiederholung gedrosselt blieben (429)
         self.codes = Counter()   # andere Antworten als 200 (z. B. 403 = gesperrt, 404), für ehrliche Quellenwerte
         self.last_status = None  # Status der letzten Antwort von get() ("Verbindung" bei Netzfehler)
+        self.abgebrochen = None  # Blättern brach mit Fehler ab (Status), der Rest des Katalogs fehlt
 
     def post(self, url, json=None, headers=None):
         """POST mit derselben Pause und Wiederholung bei Drosselung wie get(); liefert JSON oder None"""

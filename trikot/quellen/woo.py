@@ -4,7 +4,7 @@ import html
 import re
 
 from ..basis import norm
-from .gemeinsam import SIZE_ATTR_RX, item
+from .gemeinsam import SIZE_ATTR_RX, item, page_failed
 from .shopify import TITLE_SIZE_RX
 
 # Größe am Titelende, optional mit Note (Trikottrader: "Netherlands 2004 Home v.NISTLEROOY 10 Large 8/10")
@@ -64,6 +64,7 @@ def woo_run(http, shop, endpoint, queries=None):
         for page in range(1, WOO_PAGE_CAP + 1):
             data = http.get(endpoint, {"per_page": 100, "page": page, **extra})
             if not isinstance(data, list) or not data:
+                page_failed(http, data)
                 break
             n += len(data)
             for p in data:
