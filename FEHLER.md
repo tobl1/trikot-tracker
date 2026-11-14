@@ -1,10 +1,10 @@
 # Fehler-Log
 
-Probleme der letzten 30 Tage, zusammengefasst. Stand 14.11. 22:08 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
+Probleme der letzten 30 Tage, zusammengefasst. Stand 14.11. 22:38 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
 
 | zuletzt | seit | Anzahl | Quelle | Meldung | Runs |
 |---|---|---|---|---|---|
-| 14.11. 21:38 | 09.11. 09:38 | 91 | 1Klopp Shop | SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=40&page=1 (Cau | drop |
+| 14.11. 22:38 | 09.11. 09:38 | 92 | 1Klopp Shop | SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=40&page=1 (Cau | drop |
 | 14.11. 18:08 | 05.10. 06:46 | 16 | Kick It Vintage | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | full, drop, priority |
 | 14.11. 16:38 | 14.11. 16:38 | 1 | Legacy Football Shirts | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
 | 14.11. 06:48 | 10.11. 06:45 | 5 | 1Klopp Shop | SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=1 (Caused by S | full |
