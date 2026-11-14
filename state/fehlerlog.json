@@ -10,9 +10,9 @@
   "quelle": "1Klopp Shop"
  },
  "1Klopp Shop|SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=40&page=1 (Cau": {
-  "anzahl": 89,
+  "anzahl": 90,
   "erst": "2026-11-09T08:38:30.001435+00:00",
-  "letzt": "2026-11-14T10:08:24.094702+00:00",
+  "letzt": "2026-11-14T20:08:28.178817+00:00",
   "meldung": "SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=40&page=1 (Cau",
   "modi": [
    "drop"
@@ -248,16 +248,6 @@
   "erst": "2026-10-25T08:47:21.330263+00:00",
   "letzt": "2026-11-12T20:48:06.550261+00:00",
   "meldung": "classic-shirts.com: 13 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×10, Verbindung ×3)",
-  "modi": [
-   "priority"
-  ],
-  "quelle": "Seitenprüfung"
- },
- "Seitenprüfung|classic-shirts.com: 14 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×11, Verbindung ×3)": {
-  "anzahl": 3,
-  "erst": "2026-10-15T07:48:11.846836+00:00",
-  "letzt": "2026-10-15T19:48:26.902219+00:00",
-  "meldung": "classic-shirts.com: 14 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×11, Verbindung ×3)",
   "modi": [
    "priority"
   ],
