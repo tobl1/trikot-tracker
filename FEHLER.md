@@ -1,9 +1,10 @@
 # Fehler-Log
 
-Probleme der letzten 30 Tage, zusammengefasst. Stand 14.11. 17:50 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
+Probleme der letzten 30 Tage, zusammengefasst. Stand 14.11. 18:08 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
 
 | zuletzt | seit | Anzahl | Quelle | Meldung | Runs |
 |---|---|---|---|---|---|
+| 14.11. 18:08 | 05.10. 06:46 | 16 | Kick It Vintage | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | full, drop, priority |
 | 14.11. 16:38 | 14.11. 16:38 | 1 | Legacy Football Shirts | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
 | 14.11. 11:08 | 09.11. 09:38 | 89 | 1Klopp Shop | SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=40&page=1 (Cau | drop |
 | 14.11. 06:48 | 10.11. 06:45 | 5 | 1Klopp Shop | SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=1 (Caused by S | full |
@@ -50,5 +51,4 @@ Probleme der letzten 30 Tage, zusammengefasst. Stand 14.11. 17:50 Uhr. Wird bei 
 | 23.10. 06:35 | 23.10. 06:35 | 1 | Seitenprüfung | www.kitts.de: 1 Seite(n) nicht prüfbar (404 ×1) | full |
 | 21.10. 06:35 | 21.10. 06:35 | 1 | Modeziege | Bestandseinbruch: 87 statt 184 Produkte (1. Gesamt-Run in Folge), Abruffehler? | full |
 | 19.10. 16:38 | 07.10. 16:38 | 2 | Granny's Football Store | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
-| 18.10. 17:38 | 05.10. 06:46 | 15 | Kick It Vintage | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | full, drop, priority |
 | 15.10. 21:48 | 15.10. 09:48 | 3 | Seitenprüfung | classic-shirts.com: 14 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×11, Verbindung ×3) | priority |

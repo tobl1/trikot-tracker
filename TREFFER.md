@@ -1,6 +1,6 @@
 # Trikot-Tracker
 
-Stand: 14.11.2026 17:50 Uhr (drop), 330 aktuelle Treffer in XL/XXL
+Stand: 14.11.2026 18:08 Uhr (drop), 331 aktuelle Treffer in XL/XXL
 
 ## Thiago (3)
 
@@ -410,10 +410,11 @@ Stand: 14.11.2026 17:50 Uhr (drop), 330 aktuelle Treffer in XL/XXL
 | [Bayern München 15/16 Arturo Vidal](https://www.kitts.de/l/6aa05f71-df22-4392-b915-ebdcbbdf0a2d) | XL | Excellent | 86.31 EUR | kitts.de | 01.10. |
 | [2016-17 Bayern Munich Home Shirt Vidal #23 (LS)](https://www.legacyfootballshirts.com/products/bayern-munich-home-shirt-2016-17-vidal-23-longsleeve-a0641) | XL | Very Good | 79.99 EUR | Legacy Football Shirts | 01.10. |
 
-## WM 2006 (52)
+## WM 2006 (53)
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
+| [2006/08 Germany Ballack #13 Home Shirt (XL) Adidas](https://www.cultkits.com/products/2006-08-germany-ballack-13-home-shirt-xl-adidas-sku-bp76dw4u) | XL | Excellent | 134.95 EUR | Cult Kits | 14.11. |
 | [NETHERLANDS 2006 VAN NISTELROOY AWAY BNWT SHIRT (XXL) NIKE](https://kickoffvintage.com/products/netherlands-2006-van-nistelrooy-away-bnwt-shirt-xxl-nike-cft90-0253) | XXL | BNWT | 149.99 EUR | Kickoff Vintage | 12.11. |
 | [USA 2006 DONOVAN HOME SHIRT (XL) NIKE](https://kickoffvintage.com/products/usa-2006-donovan-home-shirt-xl-nike-usa-00018) | XL | Excellent | 124.99 EUR | Kickoff Vintage | 12.11. |
 | [2006/07 Italy Materazzi #23 Away Shirt (XL) Puma](https://first11shirts.com/products/2006-07-italy-materazzi-23-away-shirt-xl-puma) | XL |  | 134.99 EUR | First 11 Shirts | 05.11. |
