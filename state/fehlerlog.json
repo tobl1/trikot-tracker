@@ -10,9 +10,9 @@
   "quelle": "1Klopp Shop"
  },
  "1Klopp Shop|SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=40&page=1 (Cau": {
-  "anzahl": 92,
+  "anzahl": 93,
   "erst": "2026-11-09T08:38:30.001435+00:00",
-  "letzt": "2026-11-14T21:38:31.621406+00:00",
+  "letzt": "2026-11-14T22:08:27.132132+00:00",
   "meldung": "SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=40&page=1 (Cau",
   "modi": [
    "drop"
