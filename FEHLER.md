@@ -1,16 +1,16 @@
 # Fehler-Log
 
-Probleme der letzten 30 Tage, zusammengefasst. Stand 14.11. 06:48 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
+Probleme der letzten 30 Tage, zusammengefasst. Stand 14.11. 09:08 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
 
 | zuletzt | seit | Anzahl | Quelle | Meldung | Runs |
 |---|---|---|---|---|---|
+| 14.11. 09:08 | 09.11. 09:38 | 86 | 1Klopp Shop | SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=40&page=1 (Cau | drop |
 | 14.11. 06:48 | 10.11. 06:45 | 5 | 1Klopp Shop | SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=1 (Caused by S | full |
 | 14.11. 06:48 | 05.10. 06:46 | 41 | Football Legends Kits | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | full |
-| 14.11. 06:48 | 10.11. 06:45 | 5 | Seitenprüfung | www.classicfootballcollectibles.com: 1 Seite(n) nicht prüfbar (403 ×1) | full |
-| 14.11. 06:48 | 03.11. 06:44 | 12 | Seitenprüfung | www.topbinzfootballshirts.co.uk: 30 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×27, 403 ×3) | full |
 | 14.11. 06:48 | 14.11. 06:48 | 1 | Legit Football Shirts | keine Produkte erhalten (HTTP 404 ×4) | full |
 | 14.11. 06:48 | 14.11. 06:48 | 1 | Seitenprüfung | classic-shirts.com: 89 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×86, Verbindung ×3) | full |
-| 13.11. 23:39 | 09.11. 09:38 | 85 | 1Klopp Shop | SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=40&page=1 (Cau | drop |
+| 14.11. 06:48 | 10.11. 06:45 | 5 | Seitenprüfung | www.classicfootballcollectibles.com: 1 Seite(n) nicht prüfbar (403 ×1) | full |
+| 14.11. 06:48 | 03.11. 06:44 | 12 | Seitenprüfung | www.topbinzfootballshirts.co.uk: 30 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×27, 403 ×3) | full |
 | 13.11. 23:39 | 13.11. 22:39 | 3 | TrikotTrader | ReadTimeout: HTTPSConnectionPool(host='www.trikottrader.com', port=443): Read timed out. (read timeout=25) | drop |
 | 13.11. 21:48 | 13.11. 06:42 | 4 | Seitenprüfung | classic-shirts.com: 19 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×16, Verbindung ×3) | full, priority |
 | 13.11. 20:08 | 09.10. 11:08 | 3 | Het Shirthuis | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
