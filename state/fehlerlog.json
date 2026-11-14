@@ -171,6 +171,16 @@
   ],
   "quelle": "Kickoff Vintage"
  },
+ "Legacy Football Shirts|geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop": {
+  "anzahl": 1,
+  "erst": "2026-11-14T15:38:25.293953+00:00",
+  "letzt": "2026-11-14T15:38:25.293953+00:00",
+  "meldung": "geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop",
+  "modi": [
+   "drop"
+  ],
+  "quelle": "Legacy Football Shirts"
+ },
  "Legit Football Shirts|keine Produkte erhalten (HTTP 404 ×4)": {
   "anzahl": 1,
   "erst": "2026-11-14T05:48:11.491339+00:00",
