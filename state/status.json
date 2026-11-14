@@ -299,7 +299,7 @@
   "Modeziege": "2026-10-04T12:56:56.150677+00:00",
   "Mr.Skully": "2026-11-01T19:38:15.631550+00:00",
   "Nanos Football Jerseys": "2026-11-09T20:38:33.760907+00:00",
-  "Nostalgic Football Shirts": "2026-11-07T13:20:55.690523+00:00",
+  "Nostalgic Football Shirts": "2026-11-14T10:20:49.326694+00:00",
   "Offside Boys": "2026-10-06T18:53:44.325127+00:00",
   "Oh Calcio": "2026-10-04T12:56:56.150677+00:00",
   "One More Time": "2026-10-04T12:56:56.150677+00:00",
@@ -1811,12 +1811,6 @@
   }
  },
  "laeufe": [
-  {
-   "modus": "drop",
-   "neu": 0,
-   "still": 0,
-   "zeit": "2026-11-05T16:50:45.344743+00:00"
-  },
   {
    "modus": "radar",
    "neu": 1,
@@ -4210,16 +4204,20 @@
    "neu": 0,
    "still": 0,
    "zeit": "2026-11-14T10:08:24.094702+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-11-14T10:20:49.326694+00:00"
   }
  ],
  "last_full": "2026-11-14T05:48:11.491339+00:00",
  "last_run": {
   "mode": "drop",
-  "time": "2026-11-14T10:08:24.094702+00:00"
+  "time": "2026-11-14T10:20:49.326694+00:00"
  },
- "netzfehler": [
-  "1Klopp Shop"
- ],
+ "netzfehler": [],
  "platforms": {
   "https://1kloppshop.com": "shopify",
   "https://2ndseasonkits.ch": "shopify",
