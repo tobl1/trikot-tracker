@@ -333,7 +333,7 @@
   "The Football Temple": "2026-11-14T14:50:55.501866+00:00",
   "The Footballshirt Vault": "2026-10-04T12:56:56.150677+00:00",
   "The Kit Dealer": "2026-10-04T12:56:56.150677+00:00",
-  "The Kitman 97": "2026-11-14T17:50:54.047586+00:00",
+  "The Kitman 97": "2026-11-14T18:20:43.896171+00:00",
   "The Soccer Archive": "2026-10-04T12:56:56.150677+00:00",
   "The Third Kit": "2026-10-04T12:56:56.150677+00:00",
   "Throwback Jerseys NZ": "2026-10-04T12:56:56.150677+00:00",
@@ -1813,12 +1813,6 @@
   }
  },
  "laeufe": [
-  {
-   "modus": "drop",
-   "neu": 0,
-   "still": 0,
-   "zeit": "2026-11-06T10:50:46.430502+00:00"
-  },
   {
    "modus": "radar",
    "neu": 0,
@@ -4212,16 +4206,20 @@
    "neu": 0,
    "still": 0,
    "zeit": "2026-11-14T18:08:33.823888+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-11-14T18:20:43.896171+00:00"
   }
  ],
  "last_full": "2026-11-14T05:48:11.491339+00:00",
  "last_run": {
   "mode": "drop",
-  "time": "2026-11-14T18:08:33.823888+00:00"
+  "time": "2026-11-14T18:20:43.896171+00:00"
  },
- "netzfehler": [
-  "1Klopp Shop"
- ],
+ "netzfehler": [],
  "platforms": {
   "https://1kloppshop.com": "shopify",
   "https://2ndseasonkits.ch": "shopify",
