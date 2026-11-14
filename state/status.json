@@ -1815,12 +1815,6 @@
  },
  "laeufe": [
   {
-   "modus": "drop",
-   "neu": 0,
-   "still": 0,
-   "zeit": "2026-11-06T12:50:53.502095+00:00"
-  },
-  {
    "modus": "radar",
    "neu": 0,
    "still": 0,
@@ -4213,15 +4207,21 @@
    "neu": 0,
    "still": 0,
    "zeit": "2026-11-14T20:38:31.085175+00:00"
+  },
+  {
+   "modus": "priority",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-11-14T20:48:00.092329+00:00"
   }
  ],
  "last_full": "2026-11-14T05:48:11.491339+00:00",
  "last_run": {
-  "mode": "drop",
-  "time": "2026-11-14T20:38:31.085175+00:00"
+  "mode": "priority",
+  "time": "2026-11-14T20:48:00.092329+00:00"
  },
  "netzfehler": [
-  "1Klopp Shop"
+  "RB-Jerseys"
  ],
  "platforms": {
   "https://1kloppshop.com": "shopify",
