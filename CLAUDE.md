@@ -727,3 +727,16 @@ sperren alle Bots mit `Disallow: /`, keine offene Such-Schnittstelle, also weite
 - Handy-Layout getestet (App in einem Rahmen mit 390 x 844, so greifen die Handy-Regeln): kein seitliches Scrollen, Leiste
   bleibt beim Scrollen und in allen Reitern unten, Eingaben 16 px, keine Skriptfehler. Knopf "gesehen" hat jetzt eine
   größere Tippfläche
+
+## Meldungen und Recherche 19.11.2026
+
+- Henry nur bis 2007 (Ausschluss 2011/12, Leihe mit der 12; Meldung #135), Juventus-T90 ohne "Juve Stabia" (#141),
+  Valencia-T90 nur Heim (Auswärts 04/05 ohne T90-Design, #136, Aimar). Einzelfälle ohne Regel: #134 Classic-Shirts
+  "2010-11 NETHERLANDS SHIRT XL" ist Auswärts (Seite nennt nur Nike-Code 376907-105, Endung 105 = weiß), #137 falscher
+  Flock (CFS), #138 schiefer Flock, #143 eBay-Fälschung, #144 eBay doppelt
+- **shirt-scout.com** (NL, Aggregator): 240 von 240 Stichproben sind eBay-Angebote (EU, UK, USA, über Partnerlinks),
+  keine Shops. Nichts zu übernehmen, eBay läuft bei uns über die offizielle Schnittstelle
+- **thosedays.com** (Marktplatz für Sammler, Europa, ca. 1.000 Angebote laut Sitemap, robots.txt erlaubt alles): Seiten
+  werden komplett per Skript gebaut (Lovable/Supabase), im HTML stehen keine Angebote, Adressen nennen keinen Flock und
+  keine Größe ("germany-1994-home-td-3185"). Die interne Datenschnittstelle direkt anzusprechen wurde blockiert (nicht
+  ohne ausdrückliche Freigabe), nicht bei FYJ. Entscheidung beim Nutzer

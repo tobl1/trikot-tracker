@@ -122,6 +122,9 @@ spieler:
   - name: Henry
     suche: ["henry"]
     vereine: ["arsenal"]
+    # nur die erste Arsenal-Zeit bis 2007 (Meldung #135, 12.11.2026: "Zu neu, will Henry aus älteren Zeiten mit Nr 14"),
+    # nicht die Leihe 2011/12 mit der 12
+    ausschluss: ["2011", "2012", "11/12", "11-12", "2011/12", "2011-12"]
 
   - name: Torres (Fernando)
     suche: ["fernando torres", "torres"]
@@ -459,6 +462,7 @@ sondertrikots:
     marke: nike
     prioritaet: normal
     verein: ["juventus", "juve"]
+    ausschluss: ["stabia"]                # Juve Stabia ist ein anderer Verein (Meldung #141, 12.11.2026)
     saisons: ["2004/05"]
     varianten: alle
     fremdflock: pflicht
@@ -541,7 +545,7 @@ sondertrikots:
     prioritaet: normal
     verein: ["valencia", "valence"]
     saisons: ["2004/05"]
-    varianten: alle
+    varianten: [home]                     # Auswärts 04/05 hat nicht das T90-Design (Meldung #136, 12.11.2026, Aimar)
     fremdflock: pflicht
     suchanfragen: ["valencia 2004"]
 

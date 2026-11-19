@@ -777,3 +777,16 @@ def test_flock_pflicht_braucht_namen(title, yes):
 def test_nummer_mit_name_ist_fremdflock(title, yes):
     kits = {"Bayern Away 2018/19", "Barça 2008-2013", "Holland Heim 2010/11", "Spanien 2010/2011"}
     assert bool({l for l, _ in M.labels(title)} & kits) == yes
+
+
+@pytest.mark.parametrize("title,label,yes", [
+    # Meldungen vom 12.11.2026
+    ("2011-12 Arsenal Henry #12 Away Shirt XL Nike", "Henry", False),           # #135 Leihe, zu neu
+    ("2004-05 Arsenal Home Shirt Henry #14 - 8/10 - (XL)", "Henry", True),
+    ("Maglia Away Juve Stabia N20 2004-2005", "Nike Total 90 (2004-06)", False),  # #141 anderer Verein
+    ("2004-05 Juventus Home Shirt Del Piero #10 (XL)", "Nike Total 90 (2004-06)", True),
+    ("Trikot - Valencia CF - Pablo Aimar - 2004/2005 - XL - Auswärts", "Nike Total 90 (2004-06)", False),   # #136
+    ("Valence 2004-2005 HOME 16 SISSOKO", "Nike Total 90 (2004-06)", True),
+])
+def test_meldungen_12_11(title, label, yes):
+    assert (label in {l for l, _ in M.labels(title)}) == yes
