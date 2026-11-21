@@ -1,9 +1,10 @@
 # Fehler-Log
 
-Probleme der letzten 30 Tage, zusammengefasst. Stand 21.11. 18:20 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
+Probleme der letzten 30 Tage, zusammengefasst. Stand 21.11. 18:38 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
 
 | zuletzt | seit | Anzahl | Quelle | Meldung | Runs |
 |---|---|---|---|---|---|
+| 21.11. 18:38 | 14.11. 16:38 | 2 | Legacy Football Shirts | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
 | 21.11. 18:08 | 10.10. 18:38 | 4 | The Kitman 97 | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
 | 21.11. 15:48 | 15.11. 15:47 | 10 | Classic Football Shirts | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | priority |
 | 21.11. 11:09 | 09.11. 09:38 | 201 | 1Klopp Shop | SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=40&page=1 (Cau | drop |
@@ -30,7 +31,6 @@ Probleme der letzten 30 Tage, zusammengefasst. Stand 21.11. 18:20 Uhr. Wird bei 
 | 15.11. 06:45 | 15.11. 06:45 | 1 | Football Thrift Shop | keine Produkte erhalten (HTTP 500 ×4) | full |
 | 15.11. 06:45 | 15.11. 06:45 | 1 | Seitenprüfung | classic-shirts.com: 70 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×67, Verbindung ×3) | full |
 | 14.11. 18:08 | 05.10. 06:46 | 16 | Kick It Vintage | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | full, drop, priority |
-| 14.11. 16:38 | 14.11. 16:38 | 1 | Legacy Football Shirts | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
 | 14.11. 06:48 | 14.11. 06:48 | 1 | Legit Football Shirts | keine Produkte erhalten (HTTP 404 ×4) | full |
 | 14.11. 06:48 | 14.11. 06:48 | 1 | Seitenprüfung | classic-shirts.com: 89 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×86, Verbindung ×3) | full |
 | 13.11. 23:39 | 13.11. 22:39 | 3 | TrikotTrader | ReadTimeout: HTTPSConnectionPool(host='www.trikottrader.com', port=443): Read timed out. (read timeout=25) | drop |
