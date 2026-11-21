@@ -1,9 +1,10 @@
 # Fehler-Log
 
-Probleme der letzten 30 Tage, zusammengefasst. Stand 21.11. 15:39 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
+Probleme der letzten 30 Tage, zusammengefasst. Stand 21.11. 15:48 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
 
 | zuletzt | seit | Anzahl | Quelle | Meldung | Runs |
 |---|---|---|---|---|---|
+| 21.11. 15:48 | 15.11. 15:47 | 10 | Classic Football Shirts | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | priority |
 | 21.11. 11:09 | 09.11. 09:38 | 201 | 1Klopp Shop | SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=40&page=1 (Cau | drop |
 | 21.11. 11:09 | 20.11. 23:09 | 6 | Top Vintage Football Shirts | ReadTimeout: HTTPSConnectionPool(host='www.topvintagefootballshirts.com', port=443): Read timed out. (read timeout=25) | drop, full |
 | 21.11. 10:09 | 17.10. 10:38 | 3 | Nostalgic Football Shirts | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
@@ -11,7 +12,6 @@ Probleme der letzten 30 Tage, zusammengefasst. Stand 21.11. 15:39 Uhr. Wird bei 
 | 21.11. 06:41 | 05.10. 06:46 | 48 | Football Legends Kits | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | full |
 | 21.11. 06:41 | 10.11. 06:45 | 12 | Seitenprüfung | www.classicfootballcollectibles.com: 1 Seite(n) nicht prüfbar (403 ×1) | full |
 | 21.11. 06:41 | 09.10. 06:34 | 14 | The Third Kit | keine Produkte erhalten (HTTP 202 ×4) | full |
-| 20.11. 21:48 | 15.11. 15:47 | 9 | Classic Football Shirts | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | priority |
 | 20.11. 18:38 | 09.10. 11:08 | 4 | Het Shirthuis | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
 | 20.11. 10:38 | 08.10. 18:38 | 9 | First 11 Shirts | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
 | 20.11. 09:49 | 20.11. 09:49 | 1 | Seitenprüfung | classic-shirts.com: 12 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×9, Verbindung ×3) | priority |
