@@ -1,6 +1,6 @@
 # Trikot-Tracker
 
-Stand: 21.11.2026 12:20 Uhr (drop), 328 aktuelle Treffer in XL/XXL
+Stand: 21.11.2026 12:40 Uhr (drop), 329 aktuelle Treffer in XL/XXL
 
 ## Thiago (3)
 
@@ -407,7 +407,7 @@ Stand: 21.11.2026 12:20 Uhr (drop), 328 aktuelle Treffer in XL/XXL
 | [Bayern München 15/16 Arturo Vidal](https://www.kitts.de/l/6aa05f71-df22-4392-b915-ebdcbbdf0a2d) | XL | Excellent | 86.31 EUR | kitts.de | 01.10. |
 | [2016-17 Bayern Munich Home Shirt Vidal #23 (LS)](https://www.legacyfootballshirts.com/products/bayern-munich-home-shirt-2016-17-vidal-23-longsleeve-a0641) | XL | Very Good | 79.99 EUR | Legacy Football Shirts | 01.10. |
 
-## WM 2006 (58)
+## WM 2006 (59)
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
@@ -465,6 +465,7 @@ Stand: 21.11.2026 12:20 Uhr (drop), 328 aktuelle Treffer in XL/XXL
 | [Italy 2006 Away Materazzi #23 Shirt XL](https://nostalgicfootballshirts.com/products/italy-2006-away-materazzi-23-shirt-xl) | XL |  | 119.95 EUR | Nostalgic Football Shirts | 04.10. |
 | [Original Holland Home Jersey 2006-2008 #11 Robben - XL](https://retroriginalfootball.com/products/original-holland-home-jersey-2006-2008-11-robben-xl-6782) | XL |  | 109.00 EUR | RetrOriginalFootball | 04.10. |
 | [Original Holland Home Jersey 2006-2008 #7 Kuyt - XL](https://retroriginalfootball.com/products/original-holland-home-jersey-2006-2008-7-kuyt-xl-6815) | XL |  | 109.00 EUR | RetrOriginalFootball | 04.10. |
+| [Spanien 2006-08 "Reyes" Heim Trikot (XL) adidas](https://www.senseofgoal.com/products/spanien-2006-08-reyes-heim-trikot-xl-adidas) | XL |  | 114.95 EUR | Sense of Goal | 04.10. |
 | [Czech Republic 2006 Away Football Shirt XL #15 Baros](https://specialfootballshirts.com/products/czech-republic-2006-away-football-shirt-xl-15-baros) | XL | 8.5/10 | 125.00 EUR | Special Football Shirts | 04.10. |
 | [2006-08 NETHERLANDS *V.NISTELROOY* SHIRT XL](https://classic-shirts.com/product-eng-355615-2006-08-NETHERLANDS-V-NISTELROOY-SHIRT-XL.html) | XL | 8/10 | £59.99 | Classic-Shirts | 01.10. |
 | [2006-08 NETHERLANDS *V.NISTELROOY* SHIRT XL](https://classic-shirts.com/product-eng-369338-2006-08-NETHERLANDS-V-NISTELROOY-SHIRT-XL.html) | XL | 8/10 | £79.99 | Classic-Shirts | 01.10. |
