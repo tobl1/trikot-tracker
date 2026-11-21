@@ -1,1 +1,26 @@
-[]
+[
+ {
+  "click": "https://tobl1.github.io/trikot-tracker/#treffer=thekitman97.com%2Fproducts%2Fgermany-2006-home-shirt-16-lahm-xxl",
+  "id": "968ae32b42ad447fa8b45e6f49722c3e",
+  "image": "https://cdn.shopify.com/s/files/1/0905/6642/7003/files/P1043717.jpg?v=1795280349",
+  "message": "Germany 2006 Home Shirt (#16 Lahm) (XXL)\nGröße XXL · 74.95 EUR",
+  "prio": 3,
+  "tags": [
+   "soccer"
+  ],
+  "title": "⚽ WM 2006 · The Kitman 97",
+  "zeit": "2026-11-21T19:08:31.639484+00:00"
+ },
+ {
+  "click": "https://thekitman97.com",
+  "id": "a12c14efa9604b31a3b45bf75522dded",
+  "image": "",
+  "message": "War seit 21.11. 18:08 mit Passwort geschlossen, oft kommt danach ein Drop. Neue Treffer meldet der Tracker wie gewohnt.",
+  "prio": 4,
+  "tags": [
+   "unlock"
+  ],
+  "title": "🔓 The Kitman 97 ist wieder offen",
+  "zeit": "2026-11-21T19:08:31.639634+00:00"
+ }
+]

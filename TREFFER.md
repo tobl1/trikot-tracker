@@ -1,6 +1,6 @@
 # Trikot-Tracker
 
-Stand: 21.11.2026 19:50 Uhr (drop), 328 aktuelle Treffer in XL/XXL
+Stand: 21.11.2026 20:08 Uhr (drop), 329 aktuelle Treffer in XL/XXL
 
 ## Thiago (3)
 
@@ -409,10 +409,11 @@ Stand: 21.11.2026 19:50 Uhr (drop), 328 aktuelle Treffer in XL/XXL
 | [Bayern München 15/16 Arturo Vidal](https://www.kitts.de/l/6aa05f71-df22-4392-b915-ebdcbbdf0a2d) | XL | Excellent | 86.31 EUR | kitts.de | 01.10. |
 | [2016-17 Bayern Munich Home Shirt Vidal #23 (LS)](https://www.legacyfootballshirts.com/products/bayern-munich-home-shirt-2016-17-vidal-23-longsleeve-a0641) | XL | Very Good | 79.99 EUR | Legacy Football Shirts | 01.10. |
 
-## WM 2006 (55)
+## WM 2006 (56)
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
+| [Germany 2006 Home Shirt (#16 Lahm) (XXL)](https://thekitman97.com/products/germany-2006-home-shirt-16-lahm-xxl) | XXL |  | 74.95 EUR | The Kitman 97 | 21.11. |
 | [2006/08 Holland Away Football Shirt (XL) Nike #11 Van Der Vaart](https://footballfinery.co.uk/products/2006-08-holland-away-football-shirt-xl-nike-11-van-der-vaart-ff307463) | XL | Excellent | 121.95 EUR | Football Finery | 20.11. |
 | [2006-08 NETHERLANDS *ARJAN* SHIRT XXL](https://classic-shirts.com/product-eng-309961-2006-08-NETHERLANDS-ARJAN-SHIRT-XXL.html?query_id=46) | XXL | 8/10 | £24.99 | Classic-Shirts | 20.11. |
 | [2006-08 BRAZIL *RONALDINHO* SHIRT XL](https://classic-shirts.com/product-eng-356610-2006-08-BRAZIL-RONALDINHO-SHIRT-XL.html?query_id=47) | XL | 8/10 | £99.99 | Classic-Shirts | 20.11. |
