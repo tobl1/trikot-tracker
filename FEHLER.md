@@ -1,13 +1,13 @@
 # Fehler-Log
 
-Probleme der letzten 30 Tage, zusammengefasst. Stand 21.11. 20:38 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
+Probleme der letzten 30 Tage, zusammengefasst. Stand 21.11. 21:08 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
 
 | zuletzt | seit | Anzahl | Quelle | Meldung | Runs |
 |---|---|---|---|---|---|
+| 21.11. 21:08 | 09.11. 09:38 | 202 | 1Klopp Shop | SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=40&page=1 (Cau | drop |
 | 21.11. 18:38 | 14.11. 16:38 | 2 | Legacy Football Shirts | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
 | 21.11. 18:08 | 10.10. 18:38 | 4 | The Kitman 97 | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
 | 21.11. 15:48 | 15.11. 15:47 | 10 | Classic Football Shirts | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | priority |
-| 21.11. 11:09 | 09.11. 09:38 | 201 | 1Klopp Shop | SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=40&page=1 (Cau | drop |
 | 21.11. 11:09 | 20.11. 23:09 | 6 | Top Vintage Football Shirts | ReadTimeout: HTTPSConnectionPool(host='www.topvintagefootballshirts.com', port=443): Read timed out. (read timeout=25) | drop, full |
 | 21.11. 10:09 | 17.10. 10:38 | 3 | Nostalgic Football Shirts | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
 | 21.11. 06:41 | 10.11. 06:45 | 12 | 1Klopp Shop | SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=1 (Caused by S | full |

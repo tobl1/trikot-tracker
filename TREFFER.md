@@ -1,6 +1,6 @@
 # Trikot-Tracker
 
-Stand: 21.11.2026 20:38 Uhr (drop), 329 aktuelle Treffer in XL/XXL
+Stand: 21.11.2026 21:08 Uhr (drop), 330 aktuelle Treffer in XL/XXL
 
 ## Thiago (3)
 
@@ -10,10 +10,11 @@ Stand: 21.11.2026 20:38 Uhr (drop), 329 aktuelle Treffer in XL/XXL
 | [2013-14 BAYERN MUNCHEN *THIAGO* SHIRT XL](https://classic-shirts.com/product-eng-321702-2013-14-BAYERN-MUNCHEN-THIAGO-SHIRT-XL.html) | XL | 8/10 | £54.99 | Classic-Shirts | 01.10. |
 | [2019/20 - Bayern Munich - Thiago #6 (2XL)](https://www.vintagefootballarea.com/products/2019-20-bayern-munich-thiago-6-2xl-1) | XXL | Very Good | 79.99 EUR | Vintage Football Area | 01.10. |
 
-## Barça 2008-2013 (29)
+## Barça 2008-2013 (30)
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
+| [FC Barcelona Home Football Shirt 2011-2012 (XL Youths)](https://vintagesportsclothing.com/products/fc-barcelona-home-football-shirt-2011-2012-xl-youths-nike-419859-496) | XL |  | 34.99 EUR | Vintage Sports Clothing | 21.11. |
 | [Barcelona 2011/2012 Local (XXL)](https://futmaniacos.com/products/barcelona-2011-2012-local-xxl) | XXL |  | 79.95 EUR | Futmaniacos | 12.11. |
 | [FC Barcelona uitshirt 2008-2010 maat XL](https://kickandrushshop.nl/fc-barcelona-uitshirt-2008-2010-maat-xl/) | XL |  | 104.90 EUR | Kick and Rush | 10.11. |
 | [2008-10 FC BARCELONA SHIRT XXL](https://classic-shirts.com/product-eng-212880-2008-10-FC-BARCELONA-SHIRT-XXL.html) | XXL | 8/10 | £69.99 | Classic-Shirts | 10.11. |
