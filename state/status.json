@@ -1826,12 +1826,6 @@
  },
  "laeufe": [
   {
-   "modus": "drop",
-   "neu": 0,
-   "still": 0,
-   "zeit": "2026-11-13T14:53:11.249931+00:00"
-  },
-  {
    "modus": "radar",
    "neu": 0,
    "still": 0,
@@ -4224,16 +4218,20 @@
    "neu": 0,
    "still": 0,
    "zeit": "2026-11-21T20:38:30.355172+00:00"
+  },
+  {
+   "modus": "priority",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-11-21T20:48:18.969250+00:00"
   }
  ],
  "last_full": "2026-11-21T05:41:32.685460+00:00",
  "last_run": {
-  "mode": "drop",
-  "time": "2026-11-21T20:38:30.355172+00:00"
+  "mode": "priority",
+  "time": "2026-11-21T20:48:18.969250+00:00"
  },
- "netzfehler": [
-  "1Klopp Shop"
- ],
+ "netzfehler": [],
  "platforms": {
   "https://1kloppshop.com": "shopify",
   "https://2ndseasonkits.ch": "shopify",
