@@ -1,6 +1,6 @@
 # Trikot-Tracker
 
-Stand: 21.11.2026 11:20 Uhr (drop), 327 aktuelle Treffer in XL/XXL
+Stand: 21.11.2026 11:39 Uhr (drop), 328 aktuelle Treffer in XL/XXL
 
 ## Thiago (3)
 
@@ -173,10 +173,11 @@ Stand: 21.11.2026 11:20 Uhr (drop), 327 aktuelle Treffer in XL/XXL
 | [2010/12 - Pays-Bas (XL)](https://www.vintagefootballarea.com/products/2010-12-pays-bas-xl-4) | XL |  | 54.99 EUR | Vintage Football Area | 10.11. |
 | [Niederlande Nationalmannschaft – FIFA Weltmeisterschaft 2010 – Player Version – Gr. XXL](https://www.mrskully.de/product/24416853/niederlande-nationalmannschaft-fifa-weltmeisterschaft-2010-player-version-gr-xxl) | XXL |  | 49,95 € | Mr.Skully | 09.11. |
 
-## HSV 1990-2016 (2)
+## HSV 1990-2016 (3)
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
+| [Hamburger SV thuisshirt 2009-2010 Ruud van Nistelrooy Maat – XXL](https://kickandrushshop.nl/hamburger-sv-thuisshirt-2009-2010-ruud-van-nistelrooy-maat-xxl/) | XXL |  | 129.90 EUR | Kick and Rush | 21.11. |
 | [2006-07 Hamburg Away Shirt van der Vaart #23 - 7/10 - (XXL)](https://www.classicfootballshirts.co.uk/2006-07-hamburg-away-shirt-van-der-vaart-23-710-xxl-hama06519341.html) | XXL | 7/10 | £124.99 | Classic Football Shirts | 07.11. |
 | [Trikot - Hamburger SV - Müller - 2016/2017 - XL - Auswärts](https://trikotparadies.shop/products/trikot-hamburger-sv-2016-2017-xl-auswarts) | XL |  | 69.00 EUR | Trikotparadies | 05.10. |
 
@@ -361,10 +362,11 @@ Stand: 21.11.2026 11:20 Uhr (drop), 327 aktuelle Treffer in XL/XXL
 | [2000/01 Ajax Van der Vaart #23 Home Shirt (XL) Adidas](https://first11shirts.com/products/2000-01-ajax-van-der-vaart-23-home-shirt-xl-adidas) | XL |  | 126.99 EUR | First 11 Shirts | 19.11. |
 | [2006-07 Hamburg Away Shirt van der Vaart #23 - 7/10 - (XXL)](https://www.classicfootballshirts.co.uk/2006-07-hamburg-away-shirt-van-der-vaart-23-710-xxl-hama06519341.html) | XXL | 7/10 | £124.99 | Classic Football Shirts | 07.11. |
 
-## Van Nistelrooy (15)
+## Van Nistelrooy (16)
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
+| [Hamburger SV thuisshirt 2009-2010 Ruud van Nistelrooy Maat – XXL](https://kickandrushshop.nl/hamburger-sv-thuisshirt-2009-2010-ruud-van-nistelrooy-maat-xxl/) | XXL |  | 129.90 EUR | Kick and Rush | 21.11. |
 | [2008-10 NETHERLANDS *V. NISTELROOY* SHIRT XL](https://classic-shirts.com/product-eng-387089-2008-10-NETHERLANDS-V-NISTELROOY-SHIRT-XL.html) | XL | 9/10 | £79.99 | Classic-Shirts | 18.11. |
 | [NETHERLANDS 2006 VAN NISTELROOY AWAY BNWT SHIRT (XXL) NIKE](https://kickoffvintage.com/products/netherlands-2006-van-nistelrooy-away-bnwt-shirt-xxl-nike-cft90-0253) | XXL | BNWT | 149.99 EUR | Kickoff Vintage | 12.11. |
 | [2008-10 NETHERLANDS *V. NISTELROOY* SHIRT XXL](https://classic-shirts.com/product-eng-386206-2008-10-NETHERLANDS-V-NISTELROOY-SHIRT-XXL.html) | XXL | 8/10 | £69.99 | Classic-Shirts | 11.11. |
