@@ -1,9 +1,10 @@
 # Fehler-Log
 
-Probleme der letzten 30 Tage, zusammengefasst. Stand 21.11. 09:48 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
+Probleme der letzten 30 Tage, zusammengefasst. Stand 21.11. 10:09 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
 
 | zuletzt | seit | Anzahl | Quelle | Meldung | Runs |
 |---|---|---|---|---|---|
+| 21.11. 10:09 | 17.10. 10:38 | 3 | Nostalgic Football Shirts | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
 | 21.11. 09:39 | 09.11. 09:38 | 199 | 1Klopp Shop | SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=40&page=1 (Cau | drop |
 | 21.11. 09:39 | 20.11. 23:09 | 4 | Top Vintage Football Shirts | ReadTimeout: HTTPSConnectionPool(host='www.topvintagefootballshirts.com', port=443): Read timed out. (read timeout=25) | drop, full |
 | 21.11. 06:41 | 10.11. 06:45 | 12 | 1Klopp Shop | SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=1 (Caused by S | full |
@@ -44,7 +45,6 @@ Probleme der letzten 30 Tage, zusammengefasst. Stand 21.11. 09:48 Uhr. Wird bei 
 | 09.11. 17:38 | 04.10. 16:04 | 17 | RB-Jerseys | ConnectionError: HTTPSConnectionPool(host='www.rb-jerseys.com', port=443): Max retries exceeded with url: /wp-json/wc/store/v1/products?p | priority, drop |
 | 09.11. 06:43 | 06.11. 06:46 | 4 | Wave Memorabilia | keine Produkte erhalten (HTTP 404 ×78) | full |
 | 08.11. 06:50 | 12.10. 15:48 | 2 | App-Push | Abo erloschen und ausgetragen, in der App unter Einstellungen neu aktivieren | senden |
-| 07.11. 09:38 | 17.10. 10:38 | 2 | Nostalgic Football Shirts | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
 | 06.11. 12:08 | 06.11. 12:08 | 1 | Trikotstoff | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
 | 05.11. 06:43 | 05.11. 06:43 | 1 | Seitenprüfung | classic-shirts.com: 80 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×77, Verbindung ×3) | full |
 | 04.11. 17:38 | 04.11. 17:38 | 1 | Studio Football Shirts | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
