@@ -1824,12 +1824,6 @@
  },
  "laeufe": [
   {
-   "modus": "drop",
-   "neu": 0,
-   "still": 0,
-   "zeit": "2026-11-12T18:20:45.150609+00:00"
-  },
-  {
    "modus": "radar",
    "neu": 0,
    "still": 0,
@@ -4222,17 +4216,20 @@
    "neu": 0,
    "still": 0,
    "zeit": "2026-11-21T08:39:48.250295+00:00"
+  },
+  {
+   "modus": "priority",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-11-21T08:48:16.189673+00:00"
   }
  ],
  "last_full": "2026-11-21T05:41:32.685460+00:00",
  "last_run": {
-  "mode": "drop",
-  "time": "2026-11-21T08:39:48.250295+00:00"
+  "mode": "priority",
+  "time": "2026-11-21T08:48:16.189673+00:00"
  },
- "netzfehler": [
-  "1Klopp Shop",
-  "Top Vintage Football Shirts"
- ],
+ "netzfehler": [],
  "platforms": {
   "https://1kloppshop.com": "shopify",
   "https://2ndseasonkits.ch": "shopify",
