@@ -10,9 +10,9 @@
   "quelle": "1Klopp Shop"
  },
  "1Klopp Shop|SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=40&page=1 (Cau": {
-  "anzahl": 198,
+  "anzahl": 199,
   "erst": "2026-11-09T08:38:30.001435+00:00",
-  "letzt": "2026-11-20T22:39:39.433565+00:00",
+  "letzt": "2026-11-21T08:39:48.250295+00:00",
   "meldung": "SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=40&page=1 (Cau",
   "modi": [
    "drop"
@@ -496,9 +496,9 @@
   "quelle": "The Third Kit"
  },
  "Top Vintage Football Shirts|ReadTimeout: HTTPSConnectionPool(host='www.topvintagefootballshirts.com', port=443): Read timed out. (read timeout=25)": {
-  "anzahl": 3,
+  "anzahl": 4,
   "erst": "2026-11-20T22:09:49.578905+00:00",
-  "letzt": "2026-11-21T05:41:32.685460+00:00",
+  "letzt": "2026-11-21T08:39:48.250295+00:00",
   "meldung": "ReadTimeout: HTTPSConnectionPool(host='www.topvintagefootballshirts.com', port=443): Read timed out. (read timeout=25)",
   "modi": [
    "drop",
