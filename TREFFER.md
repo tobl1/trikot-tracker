@@ -1,6 +1,6 @@
 # Trikot-Tracker
 
-Stand: 21.11.2026 18:38 Uhr (drop), 332 aktuelle Treffer in XL/XXL
+Stand: 21.11.2026 18:50 Uhr (drop), 328 aktuelle Treffer in XL/XXL
 
 ## Thiago (3)
 
@@ -365,7 +365,7 @@ Stand: 21.11.2026 18:38 Uhr (drop), 332 aktuelle Treffer in XL/XXL
 | [2000/01 Ajax Van der Vaart #23 Home Shirt (XL) Adidas](https://first11shirts.com/products/2000-01-ajax-van-der-vaart-23-home-shirt-xl-adidas) | XL |  | 126.99 EUR | First 11 Shirts | 19.11. |
 | [2006-07 Hamburg Away Shirt van der Vaart #23 - 7/10 - (XXL)](https://www.classicfootballshirts.co.uk/2006-07-hamburg-away-shirt-van-der-vaart-23-710-xxl-hama06519341.html) | XXL | 7/10 | £124.99 | Classic Football Shirts | 07.11. |
 
-## Van Nistelrooy (16)
+## Van Nistelrooy (15)
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
@@ -380,7 +380,6 @@ Stand: 21.11.2026 18:38 Uhr (drop), 332 aktuelle Treffer in XL/XXL
 | [Van Nistelrooy 10 Netherlands 2004/2005/2006 Home Football Shirt XL](https://casualfootballshirts.co.uk/products/van-nistelrooy-10-netherlands-2004-2005-2006-home-football-shirt-xl) | XL | Excellent | 119.99 GBP | Casual Football Shirts | 01.10. |
 | [2006-08 NETHERLANDS *V.NISTELROOY* SHIRT XL](https://classic-shirts.com/product-eng-355615-2006-08-NETHERLANDS-V-NISTELROOY-SHIRT-XL.html) | XL | 8/10 | £59.99 | Classic-Shirts | 01.10. |
 | [2006-08 NETHERLANDS *V.NISTELROOY* SHIRT XL](https://classic-shirts.com/product-eng-369338-2006-08-NETHERLANDS-V-NISTELROOY-SHIRT-XL.html) | XL | 8/10 | £79.99 | Classic-Shirts | 01.10. |
-| [Original Holland Home Jersey 2006-2008 #9 Van Nistelrooy - XL](https://retroriginalfootball.com/products/original-holland-home-jersey-2006-2008-9-van-nistelrooy-xl-6788) | XL | Very Good | 109.00 EUR | RetrOriginalFootball | 01.10. |
 | [Netherlands 2004 Home Shirt (#10 Van Nistelrooy) (XXL)](https://thekitman97.com/products/netherlands-2004-home-shirt-10-van-nistelrooy-xxl) | XXL | Very Good | 99.95 EUR | The Kitman 97 | 01.10. |
 | [Trikot - Niederlande - Ruud van Nistelrooy - 2000 - XL - Heim](https://trikotparadies.shop/products/trikot-niederlande-ruud-van-nistelrooy-2000-xl-heim) | XL | 9/10 | 129.00 EUR | Trikotparadies | 01.10. |
 | [2000/02 - Pays-Bas - v.Nistelrooy #9 (2XL)](https://www.vintagefootballarea.com/products/2000-02-pays-bas-v-nistelrooy-9-2xl) | XXL | Very Good | 129.99 EUR | Vintage Football Area | 01.10. |
@@ -410,7 +409,7 @@ Stand: 21.11.2026 18:38 Uhr (drop), 332 aktuelle Treffer in XL/XXL
 | [Bayern München 15/16 Arturo Vidal](https://www.kitts.de/l/6aa05f71-df22-4392-b915-ebdcbbdf0a2d) | XL | Excellent | 86.31 EUR | kitts.de | 01.10. |
 | [2016-17 Bayern Munich Home Shirt Vidal #23 (LS)](https://www.legacyfootballshirts.com/products/bayern-munich-home-shirt-2016-17-vidal-23-longsleeve-a0641) | XL | Very Good | 79.99 EUR | Legacy Football Shirts | 01.10. |
 
-## WM 2006 (59)
+## WM 2006 (55)
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
@@ -429,7 +428,6 @@ Stand: 21.11.2026 18:38 Uhr (drop), 332 aktuelle Treffer in XL/XXL
 | [Deutschland 06/07 Michael Ballack](https://www.kitts.de/l/6ae4fb83-dc5d-40b7-ab82-296d70091547) | XL | 8/10 | 133.87 EUR | kitts.de | 02.11. |
 | [Trikot - Deutschland - Michael Ballack - 2006 - XL - Heim](https://trikotparadies.shop/products/trikot-deutschland-michael-ballack-2006-xl-heim-10503) | XL | 9/10 | 99.00 EUR | Trikotparadies | 30.10. |
 | [Adidas - Germany 2006 Home Football Shirt 'LAHM'](https://pardonmykicks.se/products/adidas-germany-2006-home-football-shirt-lahm-1) | XXL | 8/10 | 72.95 EUR | Pardon My Kicks | 29.10. |
-| [Original Germany Home Jersey 2006 #11 Klose - XL](https://retroriginalfootball.com/products/original-germany-home-jersey-2006-11-klose-xl-7289) | XL |  | 124.00 EUR | RetrOriginalFootball | 27.10. |
 | [2006/08 Serbia & Montenegro Away Football Shirt (XL) Lotto #9 Milosevic (BNWTs)](https://casualfootballshirts.co.uk/products/2006-08-serbia-montenegro-away-football-shirt-xl-lotto-9-milosevic-bnwts-1) | XL | Excellent | 120.00 GBP | Casual Football Shirts | 27.10. |
 | [2006/08 Czech Republic Koller #9 Home Shirt (XL) Puma](https://www.cultkits.com/products/2006-08-czech-republic-koller-9-home-shirt-xl-puma-mr7e63n1) | XL | Excellent | 97.95 EUR | Cult Kits | 23.10. |
 | [2006/08 Serbia & Montenegro Away Football Shirt (XL) Lotto #9 Milosevic (BNWTs)](https://footballfinery.co.uk/products/2006-08-serbia-montenegro-away-football-shirt-xl-lotto-9-milosevic-bnwts-ff306697) | XL | Excellent | 145.95 EUR | Football Finery | 23.10. |
@@ -466,13 +464,10 @@ Stand: 21.11.2026 18:38 Uhr (drop), 332 aktuelle Treffer in XL/XXL
 | [Maillot Nike Football Pays-Bas Home Vintage SNEIJDER 2006/07 - M, L, XL](https://www.lineupvintageshop.com/product-page/maillot-nike-football-pays-bas-home-vintage-sneijder-2006-07-xl) | XL |  | 145.0 EUR | Lineup Vintage | 04.10. |
 | [Germany 2005-07 Home Ballack #13 Shirt XL](https://nostalgicfootballshirts.com/products/germany-2005-07-home-ballack-13-shirt-xl) | XL |  | 84.95 EUR | Nostalgic Football Shirts | 04.10. |
 | [Italy 2006 Away Materazzi #23 Shirt XL](https://nostalgicfootballshirts.com/products/italy-2006-away-materazzi-23-shirt-xl) | XL |  | 119.95 EUR | Nostalgic Football Shirts | 04.10. |
-| [Original Holland Home Jersey 2006-2008 #11 Robben - XL](https://retroriginalfootball.com/products/original-holland-home-jersey-2006-2008-11-robben-xl-6782) | XL |  | 109.00 EUR | RetrOriginalFootball | 04.10. |
-| [Original Holland Home Jersey 2006-2008 #7 Kuyt - XL](https://retroriginalfootball.com/products/original-holland-home-jersey-2006-2008-7-kuyt-xl-6815) | XL |  | 109.00 EUR | RetrOriginalFootball | 04.10. |
 | [Spanien 2006-08 "Reyes" Heim Trikot (XL) adidas](https://www.senseofgoal.com/products/spanien-2006-08-reyes-heim-trikot-xl-adidas) | XL |  | 114.95 EUR | Sense of Goal | 04.10. |
 | [Czech Republic 2006 Away Football Shirt XL #15 Baros](https://specialfootballshirts.com/products/czech-republic-2006-away-football-shirt-xl-15-baros) | XL | 8.5/10 | 125.00 EUR | Special Football Shirts | 04.10. |
 | [2006-08 NETHERLANDS *V.NISTELROOY* SHIRT XL](https://classic-shirts.com/product-eng-355615-2006-08-NETHERLANDS-V-NISTELROOY-SHIRT-XL.html) | XL | 8/10 | £59.99 | Classic-Shirts | 01.10. |
 | [2006-08 NETHERLANDS *V.NISTELROOY* SHIRT XL](https://classic-shirts.com/product-eng-369338-2006-08-NETHERLANDS-V-NISTELROOY-SHIRT-XL.html) | XL | 8/10 | £79.99 | Classic-Shirts | 01.10. |
-| [Original Holland Home Jersey 2006-2008 #9 Van Nistelrooy - XL](https://retroriginalfootball.com/products/original-holland-home-jersey-2006-2008-9-van-nistelrooy-xl-6788) | XL | Very Good | 109.00 EUR | RetrOriginalFootball | 01.10. |
 
 ## Zé Roberto (10)
 
