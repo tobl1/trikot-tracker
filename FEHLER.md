@@ -1,9 +1,10 @@
 # Fehler-Log
 
-Probleme der letzten 30 Tage, zusammengefasst. Stand 21.11. 17:50 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
+Probleme der letzten 30 Tage, zusammengefasst. Stand 21.11. 18:08 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
 
 | zuletzt | seit | Anzahl | Quelle | Meldung | Runs |
 |---|---|---|---|---|---|
+| 21.11. 18:08 | 10.10. 18:38 | 4 | The Kitman 97 | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
 | 21.11. 15:48 | 15.11. 15:47 | 10 | Classic Football Shirts | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | priority |
 | 21.11. 11:09 | 09.11. 09:38 | 201 | 1Klopp Shop | SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=40&page=1 (Cau | drop |
 | 21.11. 11:09 | 20.11. 23:09 | 6 | Top Vintage Football Shirts | ReadTimeout: HTTPSConnectionPool(host='www.topvintagefootballshirts.com', port=443): Read timed out. (read timeout=25) | drop, full |
@@ -54,7 +55,6 @@ Probleme der letzten 30 Tage, zusammengefasst. Stand 21.11. 17:50 Uhr. Wird bei 
 | 02.11. 11:38 | 23.10. 19:08 | 296 | Topbinz | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | drop, full |
 | 02.11. 06:38 | 25.10. 06:35 | 9 | Seitenprüfung | www.topbinzfootballshirts.co.uk: 31 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×28, 403 ×3) | full |
 | 01.11. 06:41 | 30.10. 06:41 | 2 | Seitenprüfung | full90prints.com: 1 Seite(n) nicht prüfbar (404 ×1) | full |
-| 31.10. 16:38 | 10.10. 18:38 | 3 | The Kitman 97 | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
 | 29.10. 11:38 | 29.10. 11:38 | 1 | Sense of Goal | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
 | 29.10. 06:38 | 29.10. 06:38 | 1 | Football & Vintage Amsterdam | Bestandseinbruch: 100 statt 661 Produkte (1. Gesamt-Run in Folge), Abruffehler? | full |
 | 26.10. 12:08 | 26.10. 12:08 | 1 | Jerseys Hermanos | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
