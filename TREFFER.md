@@ -1,6 +1,6 @@
 # Trikot-Tracker
 
-Stand: 21.11.2026 13:51 Uhr (drop), 331 aktuelle Treffer in XL/XXL
+Stand: 21.11.2026 14:09 Uhr (drop), 332 aktuelle Treffer in XL/XXL
 
 ## Thiago (3)
 
@@ -210,10 +210,11 @@ Stand: 21.11.2026 13:51 Uhr (drop), 331 aktuelle Treffer in XL/XXL
 | [2020/21 - Bayern Munich - Kimmich #6 (XL)](https://www.vintagefootballarea.com/products/2020-21-bayern-munich-kimmich-6-xl-3) | XL | Very Good | 79.99 EUR | Vintage Football Area | 01.10. |
 | [2016-17 Bayern Munich adidas Home Shirt Kimmich #32 XL](https://www.vintagefootballshirts.com/products/2016-17-bayern-munich-adidas-home-shirt-kimmich-32-xl) | XL |  | 79.95 EUR | Vintage Football Shirts | 01.10. |
 
-## Kroos (21)
+## Kroos (22)
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
+| [FC Bayern München – Bundesliga / Champions League – Toni Kroos #39 – Auswärtstrikot – 2013/14 – Gr. XL](https://www.mrskully.de/product/24990610/fc-bayern-muenchen-bundesliga-champions-league-toni-kroos-39-auswaertstrikot-2013-14-gr-xl) | XL |  | 99,95 € | Mr.Skully | 21.11. |
 | [Maillot Adidas Football Allemagne Away Vintage KROOS 2016/17 - XL](https://www.lineupvintageshop.com/product-page/maillot-adidas-football-allemagne-away-vintage-kroos-2016-17) | XL |  | 145.0 EUR | Lineup Vintage | 13.11. |
 | [Germany 2010/11 Home Shirt - Kroos #18 (XL)](https://secondhalfstore.com/products/germany-2010-11-home-shirt-kroos-18-xl) | XL |  | 74.95 EUR | Secondhalf | 08.10. |
 | [Germany 2014 Home KROOS 18 XL 9/10](https://www.trikottrader.com/product/germany-2014-home-kroos-18-xl-9-10/) | XL | 9/10 | 135.00 EUR | TrikotTrader | 08.10. |
