@@ -1,6 +1,6 @@
 # Trikot-Tracker
 
-Stand: 21.11.2026 13:09 Uhr (drop), 331 aktuelle Treffer in XL/XXL
+Stand: 21.11.2026 13:21 Uhr (drop), 331 aktuelle Treffer in XL/XXL
 
 ## Thiago (3)
 
@@ -144,8 +144,8 @@ Stand: 21.11.2026 13:09 Uhr (drop), 331 aktuelle Treffer in XL/XXL
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
-| [Nederland 2026 Thuis Shirt Frenkie De Jong #21 (XL)](https://thefootballtemple.com/products/nederland-2026-thuis-shirt-de-jong-21-xl-7439) | XL | 9/10 | 124.95 EUR | The Football Temple | 21.11. |
 | [Nederland 2026 Thuis Shirt Frenkie De Jong #21 (XL)](https://devoetbaltempel.nl/products/nederland-2026-thuis-shirt-de-jong-21-xl-7439) | XL | 9/10 | 140.00 EUR | Devoetbaltempel | 21.11. |
+| [Nederland 2026 Thuis Shirt Frenkie De Jong #21 (XL)](https://thefootballtemple.com/products/nederland-2026-thuis-shirt-de-jong-21-xl-7439) | XL | 9/10 | 124.95 EUR | The Football Temple | 21.11. |
 | [2020-21 Barcelona Home Shirt F.De Jong #21 - 9/10 - (XL)](https://www.classicfootballshirts.co.uk/2020-21-barcelona-home-shirt-fde-jong-21-910-xl-barh20881407.html) | XL | 9/10 | £99.99 | Classic Football Shirts | 11.11. |
 | [2019-20 Barcelona Home Shirt F.De Jong #21 - 8/10 - (XXL)](https://www.classicfootballshirts.co.uk/2019-20-barcelona-home-shirt-fde-jong-21-810-xxl-barh19004144.html) | XXL | 8/10 | £99.99 | Classic Football Shirts | 22.10. |
 | [Netherlands World Cup 2026 Home Shirt - F. De Jong #21 (XL)](https://secondhalfstore.com/products/netherlands-world-cup-2026-home-shirt-f-de-jong-21-xl) | XL |  | 94.95 EUR | Secondhalf | 08.10. |
