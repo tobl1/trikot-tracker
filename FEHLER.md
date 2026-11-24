@@ -1,9 +1,10 @@
 # Fehler-Log
 
-Probleme der letzten 30 Tage, zusammengefasst. Stand 24.11. 09:38 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
+Probleme der letzten 30 Tage, zusammengefasst. Stand 24.11. 09:48 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
 
 | zuletzt | seit | Anzahl | Quelle | Meldung | Runs |
 |---|---|---|---|---|---|
+| 24.11. 09:48 | 15.11. 15:47 | 13 | Classic Football Shirts | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | priority |
 | 24.11. 09:38 | 09.11. 09:38 | 236 | 1Klopp Shop | SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=40&page=1 (Cau | drop |
 | 24.11. 06:40 | 10.11. 06:45 | 15 | 1Klopp Shop | SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=1 (Caused by S | full |
 | 24.11. 06:40 | 05.10. 06:46 | 51 | Football Legends Kits | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | full |
@@ -14,7 +15,6 @@ Probleme der letzten 30 Tage, zusammengefasst. Stand 24.11. 09:38 Uhr. Wird bei 
 | 24.11. 06:40 | 24.11. 06:40 | 1 | Top Vintage Football Shirts | keine Produkte erhalten (HTTP 404 ×84) | full |
 | 23.11. 06:41 | 22.11. 06:41 | 2 | Top Vintage Football Shirts | keine Produkte erhalten (HTTP 521 ×84) | full |
 | 22.11. 23:08 | 21.10. 13:38 | 7 | Football Thrift Shop | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | drop |
-| 22.11. 21:48 | 15.11. 15:47 | 12 | Classic Football Shirts | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | priority |
 | 21.11. 18:38 | 14.11. 16:38 | 2 | Legacy Football Shirts | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
 | 21.11. 18:08 | 10.10. 18:38 | 4 | The Kitman 97 | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
 | 21.11. 11:09 | 20.11. 23:09 | 6 | Top Vintage Football Shirts | ReadTimeout: HTTPSConnectionPool(host='www.topvintagefootballshirts.com', port=443): Read timed out. (read timeout=25) | drop, full |

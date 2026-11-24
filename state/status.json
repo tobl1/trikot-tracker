@@ -1835,12 +1835,6 @@
  },
  "laeufe": [
   {
-   "modus": "drop",
-   "neu": 0,
-   "still": 0,
-   "zeit": "2026-11-15T16:50:48.404673+00:00"
-  },
-  {
    "modus": "radar",
    "neu": 0,
    "still": 0,
@@ -4233,17 +4227,20 @@
    "neu": 0,
    "still": 0,
    "zeit": "2026-11-24T08:38:22.301461+00:00"
+  },
+  {
+   "modus": "priority",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-11-24T08:48:20.781693+00:00"
   }
  ],
  "last_full": "2026-11-24T05:40:58.461480+00:00",
  "last_run": {
-  "mode": "drop",
-  "time": "2026-11-24T08:38:22.301461+00:00"
+  "mode": "priority",
+  "time": "2026-11-24T08:48:20.781693+00:00"
  },
- "netzfehler": [
-  "1Klopp Shop",
-  "RB-Jerseys"
- ],
+ "netzfehler": [],
  "platforms": {
   "https://1kloppshop.com": "shopify",
   "https://2ndseasonkits.ch": "shopify",

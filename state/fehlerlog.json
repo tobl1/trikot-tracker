@@ -51,9 +51,9 @@
   "quelle": "App-Push"
  },
  "Classic Football Shirts|gesperrt (HTTP 403), blockt vermutlich Server-Adressen": {
-  "anzahl": 12,
+  "anzahl": 13,
   "erst": "2026-11-15T14:47:58.000997+00:00",
-  "letzt": "2026-11-22T20:48:25.920104+00:00",
+  "letzt": "2026-11-24T08:48:20.781693+00:00",
   "meldung": "gesperrt (HTTP 403), blockt vermutlich Server-Adressen",
   "modi": [
    "priority"
