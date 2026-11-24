@@ -790,3 +790,10 @@ def test_nummer_mit_name_ist_fremdflock(title, yes):
 ])
 def test_meldungen_12_11(title, label, yes):
     assert (label in {l for l, _ in M.labels(title)}) == yes
+
+
+def test_youths_ist_kindergroesse():
+    # Meldung #145 (21.11.2026): "fc-barcelona-home-football-shirt-2011-2012-xl-youths-nike"
+    t = "FC Barcelona Home Football Shirt 2011-2012 XL Youths Nike"
+    assert not M.size_ok(t, tracker.norm(t))
+    assert M.size_ok("FC Barcelona Home Football Shirt 2011-2012 XL Nike", "fc barcelona home football shirt 2011-2012 xl nike")

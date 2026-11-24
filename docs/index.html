@@ -137,6 +137,7 @@ select{flex:0 1 auto;max-width:100%;appearance:none;-webkit-appearance:none;padd
 .dupes{font-size:12px;color:var(--muted)}
 .deal{color:var(--good)}
 .card.th .deal{color:#fff}
+.badge.sale{background:#000;color:#fff;border:1px solid var(--accent)}
 .card.gone{opacity:.5}
 .fav,.flag,.bell{position:absolute;top:12px;width:36px;height:36px;border-radius:11px;border:0;cursor:pointer;display:flex;
   align-items:center;justify-content:center;background:rgba(0,0,0,.55);color:#fff;font-size:16px;line-height:1;
@@ -372,6 +373,8 @@ details[open] summary::after{content:"−"}
 </div>
 
 <script>
+// Aktion als kurzes Badge: "bis zu 50 %" -> "BIS −50 %", "20 % auf alles" -> "−20 %", sonst "SALE"
+const saleTag = txt => { const m = String(txt).match(/(bis zu\s)?(\d+)\s?%/i); return m ? (m[1] ? "BIS " : "") + "−" + m[2] + " %" : "SALE"; };
 const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL" : /^(xl|x[- ]large|extra large)$/i.test(String(g).trim()) ? "XL" : g;
 (function(){
   const $ = id => document.getElementById(id);
@@ -536,7 +539,8 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     flagItem = t; flagReason = "unpassend"; $("flagnote").value = "";
     $("flagwhat").textContent = `${t.titel} · ${t.shopName}`;
     // Warum wurde das gefunden? Hilft beim Melden (und mir beim Ableiten von Regeln)
-    $("flagwhy").textContent = [t.warum ? `Warum Treffer: ${t.warum}` : "", t.pruefen ? `Achtung: ${t.pruefen}` : ""]
+    $("flagwhy").textContent = [t.warum ? `Warum Treffer: ${t.warum}` : "", t.pruefen ? `Achtung: ${t.pruefen}` : "",
+      t.aktion ? `Aktion im Shop: ${t.aktion.text}${t.aktion.bis ? ", bis " + t.aktion.bis.split("-").reverse().join(".") : ""} (Preis hier ohne Abzug)` : ""]
       .filter(Boolean).join(" · ");
     $("flaghint").textContent = store.get("token") ? "Geht direkt raus. Der nächste Run blendet den Treffer dauerhaft aus."
       : "Ohne Schlüssel (Einstellungen) öffnet sich die GitHub-Seite, dort \"Submit\" tippen.";
@@ -803,7 +807,8 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
                       '<span class="badge down" title="War über der Preisgrenze, jetzt darunter">JETZT IM BUDGET</span>', t.thiago && t.gone && '<span class="badge hi">THIAGO</span>',
                     t.repro && '<span class="badge re" title="Original-Trikot, Name und Nummer nachgedruckt">REPRO-FLOCK</span>',
                     t.reissue && '<span class="badge re" title="Neuauflage, z. B. Nikes T90-Reissue von 2025, kein Original von damals">NEUAUFLAGE</span>',
-                    t.pruefen && !t.gone && `<span class="badge chk" title="${esc(t.pruefen)}">PRÜFEN</span>`]
+                    t.pruefen && !t.gone && `<span class="badge chk" title="${esc(t.pruefen)}">PRÜFEN</span>`,
+                    t.aktion && !t.gone && `<span class="badge sale" title="${esc(t.aktion.text)}">🔥 ${esc(saleTag(t.aktion.text))}</span>`]
       .filter(Boolean).join("");
     const cond = t.zustand ? `<span class="cond">${esc(t.zustand)}</span>` : "";
     const note = t.notiz ? `<div class="note" title="${esc(t.notiz)}">${esc(t.notiz)}</div>` : "";
@@ -814,7 +819,7 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     // Neukunden-Rabatt nur als kleines Preisschild mit Prozentwert, Details beim Antippen/Überfahren (Nutzer 15.10.2026)
     const pct = t.rabatt ? (t.rabatt.match(/\d+\s?%/) || ["Rabatt"])[0].replace(/\s/, "\u202f") : "";
     const ship = t.versand ? (t.versand.match(/[£€]\s?[\d.,]+/) || ["Versand"])[0] : "";
-    const deal = (pct ? ` · <span class="deal" title="Neukunden: ${esc(t.rabatt)}">🏷\u202f${esc(pct)}</span>` : "") +
+    const deal = (pct && !t.aktion ? ` · <span class="deal" title="Neukunden: ${esc(t.rabatt)}">🏷\u202f${esc(pct)}</span>` : "") +
       (ship ? ` · <span class="deal" title="Versand laut Shop: ${esc(t.versand)}, dazu ggf. Zoll und Einfuhrumsatzsteuer">🚚\u202f${esc(ship)}</span>` : "");
     const same = t.dupes ? t.dupes.filter(d => d.shopName === t.shopName).length : 0;
     const dup = !st.dupes && t.dupes && t.dupes.length ? `<div class="dupes">` +
@@ -1013,6 +1018,9 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     // Neukunden-Rabatte (shops.yaml): per Shopname oder, bei FYJ-Treffern, per Domain
     const deals = {};
     (data.rabatte || []).forEach(r => { deals[r.shop] = r.text; deals[r.host] = r.text; });
+    // zeitlich begrenzte Aktionen (Black Friday …), nur bis zum Enddatum
+    const sales = {}, today = new Date().toLocaleDateString("sv", {timeZone: "Europe/Berlin"});
+    (data.aktionen || []).filter(a => !a.bis || a.bis >= today).forEach(a => { sales[a.shop] = a; sales[a.host] = a; });
     const ships = {};   // Versandkosten von UK-Shops, soweit der Shop sie nennt
     (data.versand || []).forEach(r => { ships[r.shop] = r.text; ships[r.host] = r.text; });
     all = data.treffer.map(t => {
@@ -1022,8 +1030,9 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
       const ev = [t.unter_grenze, t.preis_zeit].filter(Boolean).sort().pop() || "";
       const evNeu = !!ev && (Date.now() - new Date(ev)) / 36e5 < NEW_H;
       const rabatt = deals[t.shop] || deals[shopName] || deals[host(t.url)] || "";
+      const aktion = sales[t.shop] || sales[shopName] || sales[host(t.url)] || null;
       const versand = ships[t.shop] || ships[shopName] || ships[host(t.url)] || "";
-      return Object.assign(t, {shopName, rabatt, versand, ev, evNeu, akt: ev > t.erst ? ev : t.erst, neu: isNew(t), thiago: t.labels.some(l => l.startsWith("Thiago")),
+      return Object.assign(t, {shopName, rabatt, aktion, versand, ev, evNeu, akt: ev > t.erst ? ev : t.erst, neu: isNew(t), thiago: t.labels.some(l => l.startsWith("Thiago")),
         hay: (t.titel + " " + t.labels.join(" ") + " " + shopName + " " + (t.notiz || "")).toLowerCase()});
     });
     // Gleiche Angebote eines Shops (gleicher Titel, gleiche Größe) zusammenfassen: günstigstes zeigen

@@ -869,3 +869,22 @@ def test_run_shop_meldet_abbruch_beim_blaettern(monkeypatch):
     http.abgebrochen = 403
     items, st = run_shop_mit(monkeypatch, http, {"name": "CFS", "url": "https://cfs.co.uk", "plattform": "cfs"})
     assert st["fehler"].startswith("unvollständig, Abruf brach nach") and "403" in st["fehler"]
+
+
+def test_aktionen_nur_bis_zum_enddatum():
+    """Black-Friday-Aktionen (24.11.2026): nach "bis" fallen sie aus dem Export"""
+    from trikot.berichte import active_deals
+    shops = [{"name": "A", "url": "https://a.de", "aktion": {"text": "Black Friday: 20 % auf alles", "bis": "2026-12-01"}},
+             {"name": "B", "url": "https://www.b.com", "aktion": {"text": "Black Week", "bis": "2026-11-29"}},
+             {"name": "C", "url": "https://c.de"}]
+    assert [a["shop"] for a in active_deals(shops, "2026-11-29")] == ["A", "B"]
+    assert [a["shop"] for a in active_deals(shops, "2026-11-30")] == ["A"]
+    assert active_deals(shops, "2026-12-02") == []
+    assert active_deals(shops, "2026-11-24")[1]["host"] == "b.com"
+
+
+def test_shops_yaml_aktionen_gueltig():
+    cfg = yaml.safe_load((ROOT / "shops.yaml").read_text(encoding="utf-8"))
+    for s in cfg["shops"]:
+        if "aktion" in s:
+            assert s["aktion"]["text"] and len(s["aktion"]["bis"]) == 10, s["name"]

@@ -35,6 +35,14 @@ def doubt(e):
     return ""
 
 
+def active_deals(shops, today=None):
+    """Aktionen aus shops.yaml (aktion: {text, bis}), die heute noch laufen ("bis" einschließlich, deutsche Zeit)"""
+    today = today or now().astimezone(TZ).date().isoformat()
+    return [{"shop": s["name"], "host": speicher._host(s["url"]), "text": s["aktion"]["text"], "bis": s["aktion"]["bis"]}
+            for s in shops if isinstance(s.get("aktion"), dict) and s["aktion"].get("text")
+            and str(s["aktion"].get("bis") or "9999") >= today]
+
+
 def write_dashboard(seen, status_store, mode, ts, watch_cfg, shops):
     """docs/treffer.json für das Dashboard auf GitHub Pages"""
     kurse = status_store.get("kurse") or {}
@@ -68,6 +76,8 @@ def write_dashboard(seen, status_store, mode, ts, watch_cfg, shops):
                         for s in shops if s.get("rabatt")],
             "versand": [{"shop": s["name"], "host": speicher._host(s["url"]), "text": s["versand"]}
                         for s in shops if s.get("versand")],
+            # zeitlich begrenzte Aktionen laut Shop-Seite (z. B. Black Friday, Nutzer 24.11.2026), nach "bis" automatisch weg
+            "aktionen": active_deals(shops),
             "preisgrenze": (watch_cfg.get("preisgrenze") or {}),
             "kurse_datum": kurse.get("datum", ""), "treffer": items,
             "push_abos": len(status_store.get("push_abos") or {}),   # 0: Dashboard warnt (keine Pushes)

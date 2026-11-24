@@ -7,7 +7,8 @@
 groessen:
   # Erkannt werden: XL, XXL, 2XL, X-Large, XX-Large, Extra Large
   # Kinder- und Damengrößen werden ausgeschlossen:
-  ausschliessen: ["boys", "boy", "youth", "kids", "kid", "junior", "jnr", "jr",
+  ausschliessen: ["boys", "boy", "youth", "youths", "kids",   # "youths": Meldung #145 (21.11.2026)
+                  "kid", "junior", "jnr", "jr",
                   "enfant", "enfants", "kinder", "nino", "ninos", "child", "children",
                   "infant", "baby", "yxl", "xlb", "womens", "women", "ladies", "damen",
                   "young xl", "young xxl", "young 2xl",

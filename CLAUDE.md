@@ -740,3 +740,21 @@ sperren alle Bots mit `Disallow: /`, keine offene Such-Schnittstelle, also weite
   werden komplett per Skript gebaut (Lovable/Supabase), im HTML stehen keine Angebote, Adressen nennen keinen Flock und
   keine Größe ("germany-1994-home-td-3185"). Die interne Datenschnittstelle direkt anzusprechen wurde blockiert (nicht
   ohne ausdrückliche Freigabe), nicht bei FYJ. Entscheidung beim Nutzer
+
+## Black Friday, neue Shops, Meldungen 24.11.2026
+
+- **Aktionen** (`aktion: {text, bis}` in shops.yaml, `berichte.active_deals`, Export `aktionen`, App-Badge "🔥 −20 %" bzw.
+  "🔥 BIS −50 %" auf dem Bild, ganzer Text im Melde-Fenster; nach "bis" automatisch weg, App prüft das Datum zusätzlich).
+  Preise in der App sind ohne Abzug, die Preisgrenze rechnet ohne Aktion. Scan 24.11. über alle 111 Startseiten
+  (Skript im Verlauf: Startseite laden, "black friday|black week|cyber" suchen): 20 Shops mit Aktion, 18 eingetragen (meist
+  bis 01.12.2026). Nicht eingetragen: Topbinz (kündigt nur an), To The Jersey (Aktion lief am 02.11. eine Woche),
+  Football Legends Kits (nur für Newsletter-Abonnenten vorab), Kickoff Vintage (Pop-up in Berlin). Codes: Football Second
+  Hand BLACKWEEK (27. bis 29.11.), Buy Sell BLACKFRIDAY20, Retrotrøjer BLACK, Vintagescore BLACK20
+- **Neue Shops** (Recherche über Suche und das Shop-Verzeichnis footyheadlines.com/stores): Secondfootballshirts (DK,
+  Shopify, 1.700+ Originale), Mezek (HU, Shopify, HUF), Football Shirt Paradise (NL, Shopify), Kultkits (DE, Shopware 6,
+  `plattform: html`, Suche `/search?search={q}`, Links `a.product-name`; Titel ohne Saison, also nur Spieler-Treffer).
+  Verworfen: Matchwinner (Geschenkartikel), Retro NUFC/EH Retro Kits (UK, ein Verein), Tacchettee (Merch), Eternal Pitch und
+  Retrofootball.co.uk (Neuauflagen), Foot & Loot/Mystique (Mystery-Boxen), vintagefootballshop92 ("Replica Kits"),
+  Le Parc à Maillots (Neuware). Lokal antworten Shopify-Shops nach ein paar Abrufen mit 429 (eigene IP), aus GitHub ok
+- Meldung #145: "youths" ist Kindergröße. Inter-Probe über FYJ 24.11.: weiterhin kein unbeflocktes Inter 2004-06 in XL/XXL
+  (nur L: Topbinz £262), Inter Away 21/22 bei CFS in XL (7/10, £79.99) ist in der App
