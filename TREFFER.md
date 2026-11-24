@@ -1,6 +1,6 @@
 # Trikot-Tracker
 
-Stand: 24.11.2026 18:20 Uhr (drop), 337 aktuelle Treffer in XL/XXL
+Stand: 24.11.2026 18:53 Uhr (drop), 334 aktuelle Treffer in XL/XXL
 
 ## Thiago (3)
 
@@ -86,7 +86,7 @@ Stand: 24.11.2026 18:20 Uhr (drop), 337 aktuelle Treffer in XL/XXL
 | [2023 - Italie - Barella #18 (XL)](https://www.vintagefootballarea.com/products/2023-italie-barella-18-xl-2) | XL | Very Good | 74.99 EUR | Vintage Football Area | 01.10. |
 | [2024/25 - Inter Milan - Barella #23 (XL)](https://www.vintagefootballarea.com/products/2024-25-inter-milan-barella-23-xl-1) | XL | Very Good | 89.99 EUR | Vintage Football Area | 01.10. |
 
-## Benzema (24)
+## Benzema (23)
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
@@ -96,7 +96,6 @@ Stand: 24.11.2026 18:20 Uhr (drop), 337 aktuelle Treffer in XL/XXL
 | [Frankreich 22/23 Benzema](https://www.kitts.de/l/6ae4700e-9c7a-4422-bd30-6fde38f1a63a) | XL | Excellent | 55.80 EUR | kitts.de | 02.11. |
 | [Frankreich 08/09 Karim Benzema](https://www.kitts.de/l/6ae50165-6878-45c4-a081-7e35536fabd0) | XL | 8/10 | 111.55 EUR | kitts.de | 02.11. |
 | [2014/15 France Benzema #10 Home Shirt (XL) Nike](https://first11shirts.com/products/2014-15-france-benzema-10-home-shirt-xlnike) | XL |  | 87.99 EUR | First 11 Shirts | 29.10. |
-| [Koszulka piłkarska Real Madryt 2022/23 Third Adidas Karim Benzema #9 [XL] Authentic Long](https://footballsecondhand.com/koszulka-pilkarska-real-madryt-2022-23-third-adidas-karim-benzema-9-xl-authentic-long/) | XL |  | 649.99 PLN | Football Second Hand | 16.10. |
 | [Maillot Adidas Football Real Madrid CF Home BENZEMA 2021/22 - XL](https://www.lineupvintageshop.com/product-page/maillot-adidas-football-real-madrid-cf-home-benzema-2021-22) | XL |  | 140.0 EUR | Lineup Vintage | 04.10. |
 | [Maillot Nike Football FFF Equipe de France Away Vintage BENZEMA 2014/15 - XL](https://www.lineupvintageshop.com/product-page/maillot-nike-football-fff-equipe-de-france-away-rétro-benzema-2014-15) | XL |  | 140.0 EUR | Lineup Vintage | 04.10. |
 | [Maglia FRANCIA BENZEMA XL Home 2008](https://www.arsijstore.com/prodotti/nazionale/europa/francia/maglia-francia-benzema-xl-home-2008/) | XL | Very Good | 89.99 EUR | Arsij Store | 01.10. |
@@ -209,7 +208,7 @@ Stand: 24.11.2026 18:20 Uhr (drop), 337 aktuelle Treffer in XL/XXL
 | [2020/21 - Bayern Munich - Kimmich #6 (XL)](https://www.vintagefootballarea.com/products/2020-21-bayern-munich-kimmich-6-xl-3) | XL | Very Good | 79.99 EUR | Vintage Football Area | 01.10. |
 | [2016-17 Bayern Munich adidas Home Shirt Kimmich #32 XL](https://www.vintagefootballshirts.com/products/2016-17-bayern-munich-adidas-home-shirt-kimmich-32-xl) | XL |  | 79.95 EUR | Vintage Football Shirts | 01.10. |
 
-## Kroos (22)
+## Kroos (21)
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
@@ -229,7 +228,6 @@ Stand: 24.11.2026 18:20 Uhr (drop), 337 aktuelle Treffer in XL/XXL
 | [2013-14 BAYERN MUNCHEN *KROOS* SHIRT XL](https://classic-shirts.com/product-eng-344976-2013-14-BAYERN-MUNCHEN-KROOS-SHIRT-XL.html) | XL | 9/10 | £79.99 | Classic-Shirts | 01.10. |
 | [2013-14 BAYERN MUNCHEN *KROOS* SHIRT XL](https://classic-shirts.com/product-eng-356734-2013-14-BAYERN-MUNCHEN-KROOS-SHIRT-XL.html) | XL | 9/10 | £69.99 | Classic-Shirts | 01.10. |
 | [2013-14 BAYERN MUNCHEN *KROOS* SHIRT XXL](https://classic-shirts.com/product-eng-368231-2013-14-BAYERN-MUNCHEN-KROOS-SHIRT-XXL.html) | XXL | 8/10 | £69.99 | Classic-Shirts | 01.10. |
-| [Koszulka piłkarska Real Madryt 2018/19 Third Adidas Toni Kroos #8 [XL] Authentic](https://footballsecondhand.com/koszulka-pilkarska-real-madryt-2018-19-third-adidas-toni-kroos-8-xl-authentic/) | XL |  | 499.99 PLN | Football Second Hand | 01.10. |
 | [GERMANY 2020 KROOS HOME SHIRT (XXL) ADIDAS](https://kickoffvintage.com/products/germany-2020-kroos-home-shirt-xxl-adidas-ger-00113) | XX-LARGE | Excellent | 89.99 EUR | Kickoff Vintage | 01.10. |
 | [Deutschland 12/13 Kroos](https://www.kitts.de/l/6a30063a-af06-48f4-9bc5-67b2b9696cd8) | XL | 8/10 | 103.51 EUR | kitts.de | 01.10. |
 | [Deutschland 18/19 Toni Kroos](https://www.kitts.de/l/6aa591bd-85e8-4918-bc71-bd6877a9e39b) | XL | 8/10 | 92.00 EUR | kitts.de | 01.10. |
@@ -413,7 +411,7 @@ Stand: 24.11.2026 18:20 Uhr (drop), 337 aktuelle Treffer in XL/XXL
 | [Bayern München 15/16 Arturo Vidal](https://www.kitts.de/l/6aa05f71-df22-4392-b915-ebdcbbdf0a2d) | XL | Excellent | 86.31 EUR | kitts.de | 01.10. |
 | [2016-17 Bayern Munich Home Shirt Vidal #23 (LS)](https://www.legacyfootballshirts.com/products/bayern-munich-home-shirt-2016-17-vidal-23-longsleeve-a0641) | XL | Very Good | 64.99 EUR | Legacy Football Shirts | 01.10. |
 
-## WM 2006 (61)
+## WM 2006 (60)
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
@@ -451,7 +449,6 @@ Stand: 24.11.2026 18:20 Uhr (drop), 337 aktuelle Treffer in XL/XXL
 | [Netherlands Home Shirt 2006/08 (XL) Robben 11](https://casualfootballshirts.co.uk/products/netherlands-home-shirt-2006-08-xl-robben-11) | XL | Good | 69.99 GBP | Casual Football Shirts | 05.10. |
 | [2006/08 Holland Home Football Shirt (2XL) Nike #11 Robben](https://footballfinery.co.uk/products/2006-08-holland-home-football-shirt-2xl-nike-11-robben-ff306010) | XXL | Excellent | 121.95 EUR | Football Finery | 05.10. |
 | [2006/08 Serbia & Montenegro Away Football Shirt (XL) Lotto #9 Milosevic (BNWTs)](https://footballfinery.co.uk/products/2006-08-serbia-montenegro-away-football-shirt-xl-lotto-9-milosevic-bnwts-ff304623) | XL | BNWT | 146.95 EUR | Football Finery | 05.10. |
-| [Koszulka piłkarska reprezentacji Polska 2006/08 Away Puma Grzegorz Bronowicki? #3 [XL] Match Issue](https://footballsecondhand.com/koszulka-pilkarska-reprezentacji-polska-2006-08-away-puma-grzegorz-bronowicki-3-xl-match-issue/) | XL |  | 599.99 PLN | Football Second Hand | 05.10. |
 | [maglia Korea Park Ji Sung WC 2006 Japan Korea shirt home XL jersey vintage](https://greensportvintage.com/products/maglia-korea-park-ji-sung-wc-2006-japan-korea-shirt-home-xl-jersey-vintage) | XL | 8/10 | 149.95 EUR | Green Sport Vintage | 05.10. |
 | [Argentinien 2006 Heimtrikot – Lionel Messi #19 – Adidas (XL)](https://jersely.com/products/argentinien-2006-heimtrikot-lionel-messi-19-adidas-xl-1) | XL |  | 139.99 EUR | Jersely | 05.10. |
 | [Brasilien 2006 Auswärtstrikot – Ronaldinho #10 – XL](https://jersely.com/products/brasilien-2006-auswartstrikot-ronaldinho-10-l) | XL |  | 149.99 EUR | Jersely | 05.10. |
