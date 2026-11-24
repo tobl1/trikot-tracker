@@ -1,17 +1,17 @@
 # Fehler-Log
 
-Probleme der letzten 30 Tage, zusammengefasst. Stand 24.11. 06:40 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
+Probleme der letzten 30 Tage, zusammengefasst. Stand 24.11. 09:08 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
 
 | zuletzt | seit | Anzahl | Quelle | Meldung | Runs |
 |---|---|---|---|---|---|
+| 24.11. 09:08 | 09.11. 09:38 | 235 | 1Klopp Shop | SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=40&page=1 (Cau | drop |
 | 24.11. 06:40 | 10.11. 06:45 | 15 | 1Klopp Shop | SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=1 (Caused by S | full |
 | 24.11. 06:40 | 05.10. 06:46 | 51 | Football Legends Kits | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | full |
 | 24.11. 06:40 | 19.11. 06:39 | 3 | Football Second Hand | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | full |
+| 24.11. 06:40 | 24.11. 06:40 | 1 | Pardon My Kicks | Bestandseinbruch: 272 statt 1011 Produkte (1. Gesamt-Run in Folge), Abruffehler? | full |
 | 24.11. 06:40 | 10.11. 06:45 | 15 | Seitenprüfung | www.classicfootballcollectibles.com: 1 Seite(n) nicht prüfbar (403 ×1) | full |
 | 24.11. 06:40 | 09.10. 06:34 | 15 | The Third Kit | keine Produkte erhalten (HTTP 202 ×4) | full |
-| 24.11. 06:40 | 24.11. 06:40 | 1 | Pardon My Kicks | Bestandseinbruch: 272 statt 1011 Produkte (1. Gesamt-Run in Folge), Abruffehler? | full |
 | 24.11. 06:40 | 24.11. 06:40 | 1 | Top Vintage Football Shirts | keine Produkte erhalten (HTTP 404 ×84) | full |
-| 23.11. 23:08 | 09.11. 09:38 | 234 | 1Klopp Shop | SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=40&page=1 (Cau | drop |
 | 23.11. 06:41 | 22.11. 06:41 | 2 | Top Vintage Football Shirts | keine Produkte erhalten (HTTP 521 ×84) | full |
 | 22.11. 23:08 | 21.10. 13:38 | 7 | Football Thrift Shop | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | drop |
 | 22.11. 21:48 | 15.11. 15:47 | 12 | Classic Football Shirts | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | priority |

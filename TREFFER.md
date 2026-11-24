@@ -1,6 +1,6 @@
 # Trikot-Tracker
 
-Stand: 24.11.2026 06:47 Uhr (full), 337 aktuelle Treffer in XL/XXL
+Stand: 24.11.2026 09:08 Uhr (drop), 337 aktuelle Treffer in XL/XXL
 
 ## Thiago (3)
 
@@ -147,7 +147,7 @@ Stand: 24.11.2026 06:47 Uhr (full), 337 aktuelle Treffer in XL/XXL
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
-| [Nederland 2026 Thuis Shirt Frenkie De Jong #21 (XL)](https://devoetbaltempel.nl/products/nederland-2026-thuis-shirt-de-jong-21-xl-7439) | XL | 9/10 | 140.00 EUR | Devoetbaltempel | 21.11. |
+| [Nederland 2026 Thuis Shirt Frenkie De Jong #21 (XL)](https://devoetbaltempel.nl/products/nederland-2026-thuis-shirt-de-jong-21-xl-7439) | XL | 9/10 | 139.00 EUR | Devoetbaltempel | 21.11. |
 | [Nederland 2026 Thuis Shirt Frenkie De Jong #21 (XL)](https://thefootballtemple.com/products/nederland-2026-thuis-shirt-de-jong-21-xl-7439) | XL | 9/10 | 124.95 EUR | The Football Temple | 21.11. |
 | [2020-21 Barcelona Home Shirt F.De Jong #21 - 9/10 - (XL)](https://www.classicfootballshirts.co.uk/2020-21-barcelona-home-shirt-fde-jong-21-910-xl-barh20881407.html) | XL | 9/10 | £99.99 | Classic Football Shirts | 11.11. |
 | [2019-20 Barcelona Home Shirt F.De Jong #21 - 8/10 - (XXL)](https://www.classicfootballshirts.co.uk/2019-20-barcelona-home-shirt-fde-jong-21-810-xxl-barh19004144.html) | XXL | 8/10 | £99.99 | Classic Football Shirts | 22.10. |
@@ -268,7 +268,7 @@ Stand: 24.11.2026 06:47 Uhr (full), 337 aktuelle Treffer in XL/XXL
 | [2007-08 Bayern Munich Third Shirt Ribery #7 - 7/10 - (XXL)](https://www.classicfootballshirts.co.uk/2007-08-bayern-munich-third-shirt-ribery-7-710-xxl-bynt07652445.html) | XXL | 7/10 | £124.99 | Classic Football Shirts | 20.11. |
 | [FC Bayern München 2013/14 Homw RIBÉRY 7 XL 7/10](https://www.trikottrader.com/product/fc-bayern-munchen-2013-14-homw-ribery-7-xl-7-10/) | XL | 7/10 | 60.00 EUR | TrikotTrader | 10.11. |
 | [2006-07 Olympique Marseille Home Shirt Ribery #7 - 8/10 - (XL)](https://www.classicfootballshirts.co.uk/2006-07-olympique-marseille-home-shirt-ribery-7-810-xl-marh06697671.html) | XL | 8/10 | £124.99 | Classic Football Shirts | 10.11. |
-| [Adidas - Bayern Munchen 2007/09 Home Football Shirt 'RIBERY'](https://pardonmykicks.se/products/adidas-bayern-munchen-2007-09-home-football-shirt-ribery-6) | XL | 8/10 | 90.95 EUR | Pardon My Kicks | 05.11. |
+| [Adidas - Bayern Munchen 2007/09 Home Football Shirt 'RIBERY'](https://pardonmykicks.se/products/adidas-bayern-munchen-2007-09-home-football-shirt-ribery-6) | XL | 8/10 | 91.95 EUR | Pardon My Kicks | 05.11. |
 | [Bayern München 07/08 Franck Ribery](https://www.kitts.de/l/6ae4fe80-23c3-4854-ac28-28dede32ba9f) | XL | 8/10 | 105.97 EUR | kitts.de | 02.11. |
 | [2006/7 Olympique Marseille Ribery #7 Away Shirt (XL) Adidas](https://first11shirts.com/products/2006-7-olympique-marseille-ribery-7-away-shirt-xladidas) | XL |  | 111.99 EUR | First 11 Shirts | 29.10. |
 | [2013/14 Bayern Munich Ribery #7 Home Shirt (XL) Adidas](https://www.cultkits.com/products/2013-14-bayern-munich-ribery-7-home-shirt-xl-adidas-eo74s4bl) | XL | Excellent | 121.95 EUR | Cult Kits | 18.10. |
