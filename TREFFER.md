@@ -1,6 +1,6 @@
 # Trikot-Tracker
 
-Stand: 24.11.2026 19:05 Uhr (drop), 334 aktuelle Treffer in XL/XXL
+Stand: 24.11.2026 19:23 Uhr (drop), 334 aktuelle Treffer in XL/XXL
 
 ## Thiago (3)
 
@@ -239,7 +239,7 @@ Stand: 24.11.2026 19:05 Uhr (drop), 334 aktuelle Treffer in XL/XXL
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
 | [Mexico Away Shirt 2004/06 (XL) R.Marquez 4](https://casualfootballshirts.co.uk/products/mexico-away-shirt-2004-06-xl-r-marquez-4) | XL | Good | 99.99 GBP | Casual Football Shirts | 23.11. |
-| [Mexico Away Shirt 2004/06 (XL) R.Marquez 4](https://infinityfootballshirts.com/products/mexico-away-shirt-2004-06-xl-r-marquez-4) | XL | Good | 121.95 EUR | Infinity Football Shirts | 15.11. |
+| [Mexico Away Shirt 2004/06 (XL) R.Marquez 4](https://infinityfootballshirts.com/products/mexico-away-shirt-2004-06-xl-r-marquez-4) | XL | Good | 122.95 EUR | Infinity Football Shirts | 15.11. |
 | [maglia calcio vintage Juventus Del Piero Nike shirt 2004 2005 jersey TAMOIL XL](https://greensportvintage.com/products/maglia-calcio-vintage-juventus-del-piero-nike-shirt-2004-2005-jersey-tamoil-xl) | XL |  | 149.90 EUR | Green Sport Vintage | 09.11. |
 | [Netherlands 2004-06 Home Davids #8 Shirt XL](https://nostalgicfootballshirts.com/products/netherlands-2004-06-home-davids-8-shirt-xl) | XL |  | 104.95 EUR | Nostalgic Football Shirts | 07.11. |
 | [Netherlands (XL) *EURO 2004](https://www.welovefootballshirts.com/en/netherlands-euro-2004-164597602.html) | XL | 9.5/10 | 149.95 EUR | We Love Football Shirts | 03.11. |
