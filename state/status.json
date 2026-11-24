@@ -266,7 +266,7 @@
   "First Street": "2026-10-08T11:38:44.131891+00:00",
   "Fodbold Shoppen": "2026-11-20T17:38:31.939832+00:00",
   "Football Finds": "2026-10-04T12:56:56.150677+00:00",
-  "Football Finery": "2026-11-24T09:50:49.215592+00:00",
+  "Football Finery": "2026-11-24T10:20:54.945675+00:00",
   "Football Legends Kits": "2026-10-04T12:56:56.150677+00:00",
   "Football Second Hand": "2026-10-04T12:56:56.150677+00:00",
   "Football Shirt Collective": "2026-10-04T12:56:56.150677+00:00",
@@ -1834,12 +1834,6 @@
   }
  },
  "laeufe": [
-  {
-   "modus": "drop",
-   "neu": 0,
-   "still": 0,
-   "zeit": "2026-11-15T18:50:44.069888+00:00"
-  },
   {
    "modus": "radar",
    "neu": 1,
@@ -4233,16 +4227,20 @@
    "neu": 0,
    "still": 0,
    "zeit": "2026-11-24T10:08:26.441761+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-11-24T10:20:54.945675+00:00"
   }
  ],
  "last_full": "2026-11-24T05:40:58.461480+00:00",
  "last_run": {
   "mode": "drop",
-  "time": "2026-11-24T10:08:26.441761+00:00"
+  "time": "2026-11-24T10:20:54.945675+00:00"
  },
- "netzfehler": [
-  "1Klopp Shop"
- ],
+ "netzfehler": [],
  "platforms": {
   "https://1kloppshop.com": "shopify",
   "https://2ndseasonkits.ch": "shopify",
