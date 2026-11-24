@@ -1,6 +1,6 @@
 # Trikot-Tracker
 
-Stand: 24.11.2026 10:50 Uhr (drop), 337 aktuelle Treffer in XL/XXL
+Stand: 24.11.2026 11:08 Uhr (drop), 337 aktuelle Treffer in XL/XXL
 
 ## Thiago (3)
 
@@ -241,7 +241,7 @@ Stand: 24.11.2026 10:50 Uhr (drop), 337 aktuelle Treffer in XL/XXL
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
 | [Mexico Away Shirt 2004/06 (XL) R.Marquez 4](https://casualfootballshirts.co.uk/products/mexico-away-shirt-2004-06-xl-r-marquez-4) | XL | Good | 99.99 GBP | Casual Football Shirts | 23.11. |
-| [Mexico Away Shirt 2004/06 (XL) R.Marquez 4](https://infinityfootballshirts.com/products/mexico-away-shirt-2004-06-xl-r-marquez-4) | XL | Good | 122.95 EUR | Infinity Football Shirts | 15.11. |
+| [Mexico Away Shirt 2004/06 (XL) R.Marquez 4](https://infinityfootballshirts.com/products/mexico-away-shirt-2004-06-xl-r-marquez-4) | XL | Good | 121.95 EUR | Infinity Football Shirts | 15.11. |
 | [maglia calcio vintage Juventus Del Piero Nike shirt 2004 2005 jersey TAMOIL XL](https://greensportvintage.com/products/maglia-calcio-vintage-juventus-del-piero-nike-shirt-2004-2005-jersey-tamoil-xl) | XL |  | 149.90 EUR | Green Sport Vintage | 09.11. |
 | [Netherlands 2004-06 Home Davids #8 Shirt XL](https://nostalgicfootballshirts.com/products/netherlands-2004-06-home-davids-8-shirt-xl) | XL |  | 104.95 EUR | Nostalgic Football Shirts | 07.11. |
 | [Netherlands (XL) *EURO 2004](https://www.welovefootballshirts.com/en/netherlands-euro-2004-164597602.html) | XL | 9.5/10 | 149.95 EUR | We Love Football Shirts | 03.11. |
@@ -427,7 +427,7 @@ Stand: 24.11.2026 10:50 Uhr (drop), 337 aktuelle Treffer in XL/XXL
 | [2006-08 SOUTH KOREA *JISUNG* SHIRT XL](https://classic-shirts.com/product-eng-372930-2006-08-SOUTH-KOREA-JISUNG-SHIRT-XL.html?query_id=50) | XL | 8/10 | £99.99 | Classic-Shirts | 20.11. |
 | [2006-08 CROATIA *PRSO* SHIRT XL](https://classic-shirts.com/product-eng-384572-2006-08-CROATIA-PRSO-SHIRT-XL.html?query_id=52) | XL | 8/10 | £99.99 | Classic-Shirts | 20.11. |
 | [Espagne 2006 HOME 9 F.TORRES (XL)](https://www.footballshirtvintage.fr/products/maillot-espagne-2006-home-9-f-torres-xl-30086) | XL | Very Good | 142.70 EUR | footballshirtvintage.fr | 19.11. |
-| [Puma - Italy 2006 Away Football Shirt 'CANNAVARO'](https://pardonmykicks.se/products/puma-italy-2006-away-football-shirt-cannavaro) | XL | 8/10 | 109.95 EUR | Pardon My Kicks | 18.11. |
+| [Puma - Italy 2006 Away Football Shirt 'CANNAVARO'](https://pardonmykicks.se/products/puma-italy-2006-away-football-shirt-cannavaro) | XL | 8/10 | 108.95 EUR | Pardon My Kicks | 18.11. |
 | [2006/08 Germany Ballack #13 Home Shirt (XL) Adidas](https://www.cultkits.com/products/2006-08-germany-ballack-13-home-shirt-xl-adidas-sku-bp76dw4u) | XL | Excellent | 134.95 EUR | Cult Kits | 14.11. |
 | [NETHERLANDS 2006 VAN NISTELROOY AWAY BNWT SHIRT (XXL) NIKE](https://kickoffvintage.com/products/netherlands-2006-van-nistelrooy-away-bnwt-shirt-xxl-nike-cft90-0253) | XXL | BNWT | 149.99 EUR | Kickoff Vintage | 12.11. |
 | [USA 2006 DONOVAN HOME SHIRT (XL) NIKE](https://kickoffvintage.com/products/usa-2006-donovan-home-shirt-xl-nike-usa-00018) | XL | Excellent | 124.99 EUR | Kickoff Vintage | 12.11. |
