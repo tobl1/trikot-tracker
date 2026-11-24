@@ -1,6 +1,6 @@
 # Trikot-Tracker
 
-Stand: 24.11.2026 21:05 Uhr (drop), 334 aktuelle Treffer in XL/XXL
+Stand: 24.11.2026 21:23 Uhr (drop), 334 aktuelle Treffer in XL/XXL
 
 ## Thiago (3)
 
@@ -425,7 +425,7 @@ Stand: 24.11.2026 21:05 Uhr (drop), 334 aktuelle Treffer in XL/XXL
 | [2006-08 SOUTH KOREA *JISUNG* SHIRT XL](https://classic-shirts.com/product-eng-372930-2006-08-SOUTH-KOREA-JISUNG-SHIRT-XL.html?query_id=50) | XL | 8/10 | £99.99 | Classic-Shirts | 20.11. |
 | [2006-08 CROATIA *PRSO* SHIRT XL](https://classic-shirts.com/product-eng-384572-2006-08-CROATIA-PRSO-SHIRT-XL.html?query_id=52) | XL | 8/10 | £99.99 | Classic-Shirts | 20.11. |
 | [Espagne 2006 HOME 9 F.TORRES (XL)](https://www.footballshirtvintage.fr/products/maillot-espagne-2006-home-9-f-torres-xl-30086) | XL | Very Good | 142.70 EUR | footballshirtvintage.fr | 19.11. |
-| [Puma - Italy 2006 Away Football Shirt 'CANNAVARO'](https://pardonmykicks.se/products/puma-italy-2006-away-football-shirt-cannavaro) | XL | 8/10 | 108.95 EUR | Pardon My Kicks | 18.11. |
+| [Puma - Italy 2006 Away Football Shirt 'CANNAVARO'](https://pardonmykicks.se/products/puma-italy-2006-away-football-shirt-cannavaro) | XL | 8/10 | 109.95 EUR | Pardon My Kicks | 18.11. |
 | [2006/08 Germany Ballack #13 Home Shirt (XL) Adidas](https://www.cultkits.com/products/2006-08-germany-ballack-13-home-shirt-xl-adidas-sku-bp76dw4u) | XL | Excellent | 134.95 EUR | Cult Kits | 14.11. |
 | [NETHERLANDS 2006 VAN NISTELROOY AWAY BNWT SHIRT (XXL) NIKE](https://kickoffvintage.com/products/netherlands-2006-van-nistelrooy-away-bnwt-shirt-xxl-nike-cft90-0253) | XXL | BNWT | 149.99 EUR | Kickoff Vintage | 12.11. |
 | [USA 2006 DONOVAN HOME SHIRT (XL) NIKE](https://kickoffvintage.com/products/usa-2006-donovan-home-shirt-xl-nike-usa-00018) | XL | Excellent | 124.99 EUR | Kickoff Vintage | 12.11. |
