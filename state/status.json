@@ -1838,12 +1838,6 @@
  },
  "laeufe": [
   {
-   "modus": "drop",
-   "neu": 0,
-   "still": 0,
-   "zeit": "2026-11-16T20:06:01.203617+00:00"
-  },
-  {
    "modus": "radar",
    "neu": 0,
    "still": 0,
@@ -4236,16 +4230,20 @@
    "neu": 0,
    "still": 0,
    "zeit": "2026-11-24T22:23:40.970990+00:00"
+  },
+  {
+   "modus": "priority",
+   "neu": 0,
+   "still": 2,
+   "zeit": "2026-11-24T22:54:10.064568+00:00"
   }
  ],
  "last_full": "2026-11-24T05:40:58.461480+00:00",
  "last_run": {
-  "mode": "drop",
-  "time": "2026-11-24T22:23:40.970990+00:00"
+  "mode": "priority",
+  "time": "2026-11-24T22:54:10.064568+00:00"
  },
- "netzfehler": [
-  "1Klopp Shop"
- ],
+ "netzfehler": [],
  "platforms": {
   "https://1kloppshop.com": "shopify",
   "https://2ndseasonkits.ch": "shopify",
@@ -4610,6 +4608,14 @@
    ],
    "titel": "1 aus neuen Shops",
    "zeit": "2026-11-09T08:38:30.001435+00:00"
+  },
+  "d3d32f8d": {
+   "ids": [
+    "thosedays.com/listing/real-madrid-21-22-away-9-benzema-td-11920",
+    "thosedays.com/listing/arsenal-02-03-home-14-henry-td-11776"
+   ],
+   "titel": "2 aus neuen Shops",
+   "zeit": "2026-11-24T22:54:10.064568+00:00"
   },
   "d92c855f": {
    "ids": [

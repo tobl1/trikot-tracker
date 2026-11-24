@@ -1,6 +1,6 @@
 # Trikot-Tracker
 
-Stand: 24.11.2026 23:24 Uhr (drop), 334 aktuelle Treffer in XL/XXL
+Stand: 24.11.2026 23:54 Uhr (priority), 336 aktuelle Treffer in XL/XXL
 
 ## Thiago (3)
 
@@ -86,10 +86,11 @@ Stand: 24.11.2026 23:24 Uhr (drop), 334 aktuelle Treffer in XL/XXL
 | [2023 - Italie - Barella #18 (XL)](https://www.vintagefootballarea.com/products/2023-italie-barella-18-xl-2) | XL | Very Good | 74.99 EUR | Vintage Football Area | 01.10. |
 | [2024/25 - Inter Milan - Barella #23 (XL)](https://www.vintagefootballarea.com/products/2024-25-inter-milan-barella-23-xl-1) | XL | Very Good | 89.99 EUR | Vintage Football Area | 01.10. |
 
-## Benzema (23)
+## Benzema (24)
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
+| [Real Madrid 21/22 Away BENZEMA #9](https://thosedays.com/listing/real-madrid-21-22-away-9-benzema-td-11920) | XL | Excellent | 52.00 EUR | Those Days | 24.11. |
 | [2020-21 Real Madrid Home L/S Shirt Benzema #9 - 10/10 - (XL)](https://www.classicfootballshirts.co.uk/2020-21-real-madrid-home-ls-shirt-benzema-9-1010-xl-rmdh20234297.html) | XL | 10/10 | £124.99 | Classic Football Shirts | 24.11. |
 | [2022-23 Real Madrid Home Shirt Benzema #9 - 9/10 - (XL)](https://www.classicfootballshirts.co.uk/2022-23-real-madrid-home-shirt-benzema-9-910-xl-rmdh22465556.html) | XL | 9/10 | £89.99 | Classic Football Shirts | 17.11. |
 | [2014/15 France Benzema #10 Away Shirt (XL) Nike](https://classicfootballkit.co.uk/products/2014-15-france-benzema-10-away-shirt-xl-nike-xl-fran38219-21-ck) | XL |  | 79.99 GBP | Classic Football Kit | 03.11. |
@@ -154,10 +155,11 @@ Stand: 24.11.2026 23:24 Uhr (drop), 334 aktuelle Treffer in XL/XXL
 | [Nike Netherlands Home 22/23 F. De Jong 21 - 9/10](https://www.thefootballidiots.com/products/nike-netherlands-home-22-23-f-de-jong-21-9-10) | XXL | 9/10 | 109.95 EUR | The Football Idiots | 08.10. |
 | [FC Barcelona 2019-20 Away De Jong #21 Shirt XXL](https://nostalgicfootballshirts.com/products/barcelona-2019-20-away-de-jong-21-bnwt-shirt-xxl) | XXL |  | 99.95 EUR | Nostalgic Football Shirts | 04.10. |
 
-## Henry (2)
+## Henry (3)
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
+| [Arsenal 02/03 Home HENRY #14](https://thosedays.com/listing/arsenal-02-03-home-14-henry-td-11776) | XL | Excellent | 140.00 EUR | Those Days | 24.11. |
 | [Maglia calcio vintage Arsenal Henry Nike Fly Emirates *NEW* XXL Premier League](https://greensportvintage.com/products/maglia-calcio-vintage-arsenal-henry-nike-fly-emirates-new-xxl-premier-league) | XXL |  | 149.90 EUR | Green Sport Vintage | 01.10. |
 | [maglia henry Arsenal vintage Nike 2002 2003 Invicibles O2 XL Highbury Premier](https://greensportvintage.com/products/maglia-henry-arsenal-vintage-nike-2002-2003-invicibles-o2-xl-highbury-premier) | XL |  | 119.90 EUR | Green Sport Vintage | 01.10. |
 
