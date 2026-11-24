@@ -1,6 +1,6 @@
 # Trikot-Tracker
 
-Stand: 24.11.2026 10:08 Uhr (drop), 337 aktuelle Treffer in XL/XXL
+Stand: 24.11.2026 10:38 Uhr (drop), 337 aktuelle Treffer in XL/XXL
 
 ## Thiago (3)
 
@@ -365,7 +365,7 @@ Stand: 24.11.2026 10:08 Uhr (drop), 337 aktuelle Treffer in XL/XXL
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
 | [2006/08 Holland Away Football Shirt (XL) Nike #11 Van Der Vaart](https://casualfootballshirts.co.uk/products/2006-08-holland-away-football-shirt-xl-nike-11-van-der-vaart) | XL | Excellent | 100.00 GBP | Casual Football Shirts | 23.11. |
-| [2006/08 Holland Away Football Shirt (XL) Nike #11 Van Der Vaart](https://footballfinery.co.uk/products/2006-08-holland-away-football-shirt-xl-nike-11-van-der-vaart-ff307463) | XL | Excellent | 121.95 EUR | Football Finery | 20.11. |
+| [2006/08 Holland Away Football Shirt (XL) Nike #11 Van Der Vaart](https://footballfinery.co.uk/products/2006-08-holland-away-football-shirt-xl-nike-11-van-der-vaart-ff307463) | XL | Excellent | 122.95 EUR | Football Finery | 20.11. |
 | [2000/01 Ajax Van der Vaart #23 Home Shirt (XL) Adidas](https://first11shirts.com/products/2000-01-ajax-van-der-vaart-23-home-shirt-xl-adidas) | XL |  | 126.99 EUR | First 11 Shirts | 19.11. |
 
 ## Van Nistelrooy (16)
@@ -421,7 +421,7 @@ Stand: 24.11.2026 10:08 Uhr (drop), 337 aktuelle Treffer in XL/XXL
 | [Deutschland - 2006 - Vintage - Heim - XL - adidas - Lahm #16](https://tothejersey.com/products/deutschland-2006-heim-xl-adidas-lahm-16-n6956) | XL | 8/10 | 97.95 EUR | To The Jersey | 22.11. |
 | [Italien - 2006 - Authentic - Heim - XL - Puma - Cannavaro #5](https://tothejersey.com/products/italien-2006-heim-xl-puma-cannavaro-5-n6972) | XL | 8/10 | 106.95 EUR | To The Jersey | 22.11. |
 | [Germany 2006 Home Shirt (#16 Lahm) (XXL)](https://thekitman97.com/products/germany-2006-home-shirt-16-lahm-xxl) | XXL |  | 74.95 EUR | The Kitman 97 | 21.11. |
-| [2006/08 Holland Away Football Shirt (XL) Nike #11 Van Der Vaart](https://footballfinery.co.uk/products/2006-08-holland-away-football-shirt-xl-nike-11-van-der-vaart-ff307463) | XL | Excellent | 121.95 EUR | Football Finery | 20.11. |
+| [2006/08 Holland Away Football Shirt (XL) Nike #11 Van Der Vaart](https://footballfinery.co.uk/products/2006-08-holland-away-football-shirt-xl-nike-11-van-der-vaart-ff307463) | XL | Excellent | 122.95 EUR | Football Finery | 20.11. |
 | [2006-08 NETHERLANDS *ARJAN* SHIRT XXL](https://classic-shirts.com/product-eng-309961-2006-08-NETHERLANDS-ARJAN-SHIRT-XXL.html?query_id=46) | XXL | 8/10 | £24.99 | Classic-Shirts | 20.11. |
 | [2006-08 BRAZIL *RONALDINHO* SHIRT XL](https://classic-shirts.com/product-eng-356610-2006-08-BRAZIL-RONALDINHO-SHIRT-XL.html?query_id=47) | XL | 8/10 | £99.99 | Classic-Shirts | 20.11. |
 | [2006-08 SOUTH KOREA *JISUNG* SHIRT XL](https://classic-shirts.com/product-eng-372930-2006-08-SOUTH-KOREA-JISUNG-SHIRT-XL.html?query_id=50) | XL | 8/10 | £99.99 | Classic-Shirts | 20.11. |
