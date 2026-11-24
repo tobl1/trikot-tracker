@@ -800,8 +800,8 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     const f = favs[t.id];
     const down = f && !t.gone && f.eur != null && t.eur != null && t.eur < f.eur - 0.5;
     const badges = [t.gone && '<span class="badge gone">NICHT MEHR GELISTET</span>',
-                    down && `<span class="badge down">PREIS ↓ von ${eur(f.eur)}</span>`,
-                    !down && t.preis_runter && !t.gone && `<span class="badge down" title="Preis gesenkt">PREIS ↓ ${t.preis_runter} %</span>`,
+                    down && `<span class="badge down" title="Preis gesenkt">↓ von ${eur(f.eur)}</span>`,
+                    !down && t.preis_runter && !t.gone && `<span class="badge down" title="Preis gesenkt">↓ ${t.preis_runter} %</span>`,
                     t.neu && !t.gone && '<span class="badge new">NEU</span>',
                     !t.neu && t.evNeu && !t.gone && t.unter_grenze && t.unter_grenze === t.ev &&
                       '<span class="badge down" title="War über der Preisgrenze, jetzt darunter">JETZT IM BUDGET</span>', t.thiago && t.gone && '<span class="badge hi">THIAGO</span>',

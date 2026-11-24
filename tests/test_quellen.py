@@ -888,3 +888,46 @@ def test_shops_yaml_aktionen_gueltig():
     for s in cfg["shops"]:
         if "aktion" in s:
             assert s["aktion"]["text"] and len(s["aktion"]["bis"]) == 10, s["name"]
+
+
+# ---------------------------------------------------------------------------
+# Those Days (Karten aus dem unsichtbaren Browser, 24.11.2026)
+# ---------------------------------------------------------------------------
+def test_thosedays_karten():
+    from trikot.quellen.thosedays import card_item, card_price
+    assert card_price(["€159", ".99"]) == "159.99 EUR"
+    assert card_price(["€75", ".96", "€94.95", "-20%"]) == "75.96 EUR"         # reduziert: aktueller Preis
+    assert card_price(["€1,250", ".00"]) == "1250.00 EUR"
+    assert card_price([]) == ""
+    it = card_item("Those Days", {"href": "https://thosedays.com/listing/italy-2002-away-10-totti-td-2197?x=1",
+                                  "title": "Italy 2002 Away [#10 TOTTI] #TD-2197", "tags": ["XL", "VERY GOOD"],
+                                  "prices": ["€120", ".00"], "img": "https://x.supabase.co/a.jpeg?r=4"})
+    assert it["title"] == "Italy 2002 Away TOTTI #10" and it["url"].endswith("td-2197")
+    assert it["size_text"] == "XL" and it["price"] == "120.00 EUR" and it["fyj_condition"] == "Very Good"
+    assert card_item("Those Days", {"href": "", "title": "x"}) is None
+    # Barça 08/09 ohne Flock = Thiago-Sondertrikot, Inter 04/05 ohne Flock = Wunschtrikot
+    for title, label in [("FC Barcelona 08/09 Away #TD-10575", "Barça 2008-2013"), ("Inter Milan 04/05 Home #TD-7252", "Inter 2004-06")]:
+        it = card_item("Those Days", {"href": "https://thosedays.com/listing/a", "title": title, "tags": ["XL", "GOOD"], "prices": ["€50"]})
+        assert label in {l for l, _ in M.labels(it["match_text"])}
+    it = card_item("Those Days", {"href": "https://thosedays.com/listing/b", "title": "FC Barcelona 10/11 Home [#10 MESSI] #TD-1",
+                                  "tags": ["XL", "GOOD"], "prices": ["€90"]})
+    assert "Barça 2008-2013" not in {l for l, _ in M.labels(it["match_text"])}     # fremder Flock
+
+
+def test_thosedays_nur_gesamt_und_schnell_run(monkeypatch):
+    calls = []
+    monkeypatch.setattr(trikot.quellen, "thosedays_run", lambda name, base, mode: calls.append(mode) or ([], 7))
+    shop = {"name": "Those Days", "url": "https://thosedays.com", "plattform": "thosedays"}
+    for mode in ("full", "priority", "drop", "radar"):
+        _, st = trikot.quellen.run_shop(shop, mode, M, {}, {})
+        if mode in ("drop", "radar"):
+            assert st["info"].startswith("nur Gesamt") and not st["fehler"]
+    assert calls == ["full", "priority"]
+
+
+def test_thosedays_ohne_browser_ist_fehler(monkeypatch):
+    import builtins
+    real = builtins.__import__
+    monkeypatch.setattr(builtins, "__import__", lambda n, *a, **k: (_ for _ in ()).throw(ImportError(n)) if n.startswith("playwright") else real(n, *a, **k))
+    _, st = trikot.quellen.run_shop({"name": "Those Days", "url": "https://thosedays.com", "plattform": "thosedays"}, "full", M, {}, {})
+    assert "Playwright" in st["fehler"]

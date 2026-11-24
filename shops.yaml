@@ -174,6 +174,9 @@ shops:
   - {name: Mezek, url: "https://mezek.hu", schnellcheck: nein}
 # Football Shirt Paradise (NL, Shopify, EUR, original Vintage und Retro)
   - {name: Football Shirt Paradise, url: "https://footballshirtparadise.com", schnellcheck: nein}
+# Those Days (Marktplatz für Sammler aus Europa, Echtheit von Those Days geprüft, Seiten nur per Skript): unsichtbarer
+# Browser im Gesamt- und Schnell-Run, siehe trikot/quellen/thosedays.py. Nutzer 24.11.2026: "glaub da geht einiges"
+  - {name: Those Days, url: "https://thosedays.com", plattform: thosedays}
 # Kultkits (DE, Shopware 6, gebrauchte Originale, Größe im Titel "(XL)", Zustand auf der Produktseite)
   - {name: Kultkits, url: "https://kultkits.de", plattform: html, suche: "/search?search={q}", link: "a.product-name", schnellcheck: nein}
 # 2nd Season Kits (Schweiz, Shopify, CHF, klein: ca. 50 Artikel, viele beflockt), Nutzer 09.11.2026. Schweiz = nicht EU,

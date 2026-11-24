@@ -344,7 +344,7 @@ auf dem Foto erkennbar sind (z. B. Trainingsshirt ohne Hinweis im Titel), über 
 ## Shop wieder offen, Preissenkungen (05.10.2026)
 
 - **Shop wieder offen**: Shops mit Shopify-Passwortseite (HTTP 401, oft vor einem Drop) merkt sich `status.json` → `geschlossen` (`lauf.reopened`); ins Fehler-Log nur beim ersten Mal. Liefert der Shop wieder Artikel (Radar prüft Shopify-Shops alle 30 Min.), kommt eine Push "🔓 … ist wieder offen". Anlass: Kick It Vintage, Oh Calcio
-- **Preissenkungen bei allen Treffern** (`lauf.price_drop`, nur direkte Quellen, gleiche Währung, mind. 5 % und 1 Einheit): `preis_runter` am Treffer, Dashboard-Badge "PREIS ↓ x %", Push nur bei Thiago/Sondertrikots (hoch). Favoriten-Preisalarm (unten) bleibt zusätzlich
+- **Preissenkungen bei allen Treffern** (`lauf.price_drop`, nur direkte Quellen, gleiche Währung, mind. 5 % und 1 Einheit): `preis_runter` am Treffer, Dashboard-Badge "↓ x %" (Nutzer 24.11.2026: Wort "Preis" raus), Push nur bei Thiago/Sondertrikots (hoch). Favoriten-Preisalarm (unten) bleibt zusätzlich
 
 ## Neukunden-Rabatte (15.10.2026)
 
@@ -736,10 +736,7 @@ sperren alle Bots mit `Disallow: /`, keine offene Such-Schnittstelle, also weite
   Flock (CFS), #138 schiefer Flock, #143 eBay-Fälschung, #144 eBay doppelt
 - **shirt-scout.com** (NL, Aggregator): 240 von 240 Stichproben sind eBay-Angebote (EU, UK, USA, über Partnerlinks),
   keine Shops. Nichts zu übernehmen, eBay läuft bei uns über die offizielle Schnittstelle
-- **thosedays.com** (Marktplatz für Sammler, Europa, ca. 1.000 Angebote laut Sitemap, robots.txt erlaubt alles): Seiten
-  werden komplett per Skript gebaut (Lovable/Supabase), im HTML stehen keine Angebote, Adressen nennen keinen Flock und
-  keine Größe ("germany-1994-home-td-3185"). Die interne Datenschnittstelle direkt anzusprechen wurde blockiert (nicht
-  ohne ausdrückliche Freigabe), nicht bei FYJ. Entscheidung beim Nutzer
+- **thosedays.com**: seit 24.11.2026 angebunden, siehe Abschnitt "Those Days" unten
 
 ## Black Friday, neue Shops, Meldungen 24.11.2026
 
@@ -758,3 +755,18 @@ sperren alle Bots mit `Disallow: /`, keine offene Such-Schnittstelle, also weite
   Le Parc à Maillots (Neuware). Lokal antworten Shopify-Shops nach ein paar Abrufen mit 429 (eigene IP), aus GitHub ok
 - Meldung #145: "youths" ist Kindergröße. Inter-Probe über FYJ 24.11.: weiterhin kein unbeflocktes Inter 2004-06 in XL/XXL
   (nur L: Topbinz £262), Inter Away 21/22 bei CFS in XL (7/10, £79.99) ist in der App
+
+## Those Days (24.11.2026)
+
+- Nutzer: "glaub da geht einiges, probier bitte intensiv". Marktplatz für Sammler aus Europa (4.873 Trikots, davon 1.684 in
+  XL/XXL, Echtheit laut Seite von Those Days geprüft, viele Verkäufer versenden nur in EU/Norwegen). Seiten nur per Skript
+- **Unsichtbarer Browser** (`plattform: thosedays`, `trikot/quellen/thosedays.py`, Playwright 1.64.1, Chromium Headless
+  Shell): Übersicht `/browse?size=XL,XXL&sort=newest` (Filter "Men's"), scrollen bis alles geladen ist (24 Karten je
+  Nachladen, `MAX_FULL` 120), Karten per JS lesen: Titel (Flock als "[#10 TOTTI]", wird zu "TOTTI #10"), Größe, Zustand,
+  Preis (reduziert eine Ebene tiefer: `<div><p>€75 .96</p> €94.95 -20%</div>`). Bilder/Schriften werden nicht geladen.
+  Gesamt-Run alles (lokal ca. 2 Min.), Schnell-Run nur die neuesten (`MAX_FAST` 4 Nachladungen), Drop-Run/Radar nicht.
+  Workflow-Schritt "Browser für Those Days" (nur full/priority, `continue-on-error`); fehlt der Browser, Fehler im
+  Fehler-Log, Run läuft weiter. Nicht `pruefen` setzen: die Produktseite hat im HTML keine Daten, die Seitenprüfung würde
+  scheitern und die Push 24 Std. zurückhalten. Die interne Datenschnittstelle (Supabase) bewusst nicht nutzen
+- Erste Probe 24.11.: 14 Treffer, u. a. Barça 08/09 Away XL 50 € (Spanien), Inter 04/05 Home ohne Flock XL, Barça 12/13
+  Away, 11/12 Home, Henry Arsenal 02/03, Xabi Alonso Real 10/11. Beim ersten Gesamt-Run still übernommen (neue Quelle)
