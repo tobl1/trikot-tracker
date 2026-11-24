@@ -1,6 +1,6 @@
 # Trikot-Tracker
 
-Stand: 24.11.2026 19:23 Uhr (drop), 334 aktuelle Treffer in XL/XXL
+Stand: 24.11.2026 19:35 Uhr (drop), 334 aktuelle Treffer in XL/XXL
 
 ## Thiago (3)
 
@@ -70,7 +70,7 @@ Stand: 24.11.2026 19:23 Uhr (drop), 334 aktuelle Treffer in XL/XXL
 | [2014/15 Bayern Munich Home Football Shirt (2XL) Adidas #3 Alonso](https://footballfinery.co.uk/products/2014-15-bayern-munich-home-football-shirt-2xl-adidas-3-alonso-ff302752) | 2XL | Excellent | 97.95 EUR | Football Finery | 01.10. |
 | [2005-06 Liverpool Away L/S Shirt Alonso #14 - 7/10 - (XXL)](https://www.classicfootballshirts.co.uk/2005-06-liverpool-away-ls-shirt-alonso-14-710-xxl-liva05298749.html) | XXL | 7/10 | £124.99 | Classic Football Shirts | 01.10. |
 | [2003/05 Alonso #14 Vintage Liverpool Reebok Away Football Shirt (XL)](https://www.cultfootball.co.uk/products/2003-05-alonso-14-vintage-liverpool-reebok-away-football-shirt-xl) | XL | Very Good | 121.89 EUR | Cult Football | 01.10. |
-| [2012/14 Spain Alonso #14 Away Shirt (XL) Adidas](https://www.cultkits.com/products/2012-14-spain-alonso-14-away-shirt-xl-adidas1441) | XL | Very Good | 121.95 EUR | Cult Kits | 01.10. |
+| [2012/14 Spain Alonso #14 Away Shirt (XL) Adidas](https://www.cultkits.com/products/2012-14-spain-alonso-14-away-shirt-xl-adidas1441) | XL | Very Good | 122.95 EUR | Cult Kits | 01.10. |
 | [2003/05 Alonso #14 Vintage Liverpool Reebok Away Football Shirt (XL)](https://footballshirtcollective.com/products/2003-05-alonso-14-vintage-liverpool-reebok-away-football-shirt-xl) | XL | Very Good | 121.95 EUR | Football Shirt Collective | 01.10. |
 | [Maillot Adidas Football Espagne Home Vintage ALONSO 2004/05 - M, XL](https://www.lineupvintageshop.com/product-page/maillot-adidas-football-espagne-home-vintage-alonso-2004-05) | XL | Used | 145.0 EUR | Lineup Vintage | 01.10. |
 
