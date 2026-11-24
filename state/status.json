@@ -251,7 +251,7 @@
   "Bulishirts": "2026-10-04T12:56:56.150677+00:00",
   "Buy Sell Football Shirts": "2026-10-04T12:56:56.150677+00:00",
   "Calcio Vintage": "2026-10-04T12:56:56.150677+00:00",
-  "Casual Football Shirts": "2026-11-24T12:50:59.675821+00:00",
+  "Casual Football Shirts": "2026-11-24T13:21:00.636489+00:00",
   "Classic Pitchwear": "2026-10-04T12:56:56.150677+00:00",
   "Classic11": "2026-10-04T12:56:56.150677+00:00",
   "Cult Football": "2026-10-24T11:08:16.794989+00:00",
@@ -1834,12 +1834,6 @@
   }
  },
  "laeufe": [
-  {
-   "modus": "radar",
-   "neu": 0,
-   "still": 0,
-   "zeit": "2026-11-15T21:38:26.375757+00:00"
-  },
   {
    "modus": "drop",
    "neu": 0,
@@ -4233,16 +4227,20 @@
    "neu": 0,
    "still": 0,
    "zeit": "2026-11-24T13:08:30.638029+00:00"
+  },
+  {
+   "modus": "drop",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-11-24T13:21:00.636489+00:00"
   }
  ],
  "last_full": "2026-11-24T05:40:58.461480+00:00",
  "last_run": {
   "mode": "drop",
-  "time": "2026-11-24T13:08:30.638029+00:00"
+  "time": "2026-11-24T13:21:00.636489+00:00"
  },
- "netzfehler": [
-  "1Klopp Shop"
- ],
+ "netzfehler": [],
  "platforms": {
   "https://1kloppshop.com": "shopify",
   "https://2ndseasonkits.ch": "shopify",
