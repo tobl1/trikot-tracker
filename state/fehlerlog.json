@@ -1,0 +1,580 @@
+{
+ "1Klopp Shop|SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=1 (Caused by S": {
+  "anzahl": 15,
+  "erst": "2026-11-10T05:45:30.086565+00:00",
+  "letzt": "2026-11-24T05:40:58.461480+00:00",
+  "meldung": "SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=1 (Caused by S",
+  "modi": [
+   "full"
+  ],
+  "quelle": "1Klopp Shop"
+ },
+ "1Klopp Shop|SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=40&page=1 (Cau": {
+  "anzahl": 234,
+  "erst": "2026-11-09T08:38:30.001435+00:00",
+  "letzt": "2026-11-23T22:08:43.173506+00:00",
+  "meldung": "SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=40&page=1 (Cau",
+  "modi": [
+   "drop"
+  ],
+  "quelle": "1Klopp Shop"
+ },
+ "3kots|ConnectTimeout: HTTPSConnectionPool(host='3kots.com', port=443): Max retries exceeded with url: /products.json?limit=1 (Caused by Connec": {
+  "anzahl": 2,
+  "erst": "2026-10-19T04:33:28.655394+00:00",
+  "letzt": "2026-11-11T05:48:34.985318+00:00",
+  "meldung": "ConnectTimeout: HTTPSConnectionPool(host='3kots.com', port=443): Max retries exceeded with url: /products.json?limit=1 (Caused by Connec",
+  "modi": [
+   "full"
+  ],
+  "quelle": "3kots"
+ },
+ "3kots|gesperrt (HTTP 403), blockt vermutlich Server-Adressen": {
+  "anzahl": 3,
+  "erst": "2026-11-18T10:38:35.084256+00:00",
+  "letzt": "2026-11-18T14:48:13.124938+00:00",
+  "meldung": "gesperrt (HTTP 403), blockt vermutlich Server-Adressen",
+  "modi": [
+   "drop",
+   "priority"
+  ],
+  "quelle": "3kots"
+ },
+ "App-Push|Abo erloschen und ausgetragen, in der App unter Einstellungen neu aktivieren": {
+  "anzahl": 2,
+  "erst": "2026-10-12T13:48:23.700027+00:00",
+  "letzt": "2026-11-08T05:50:28.563395+00:00",
+  "meldung": "Abo erloschen und ausgetragen, in der App unter Einstellungen neu aktivieren",
+  "modi": [
+   "senden"
+  ],
+  "quelle": "App-Push"
+ },
+ "Classic Football Shirts|gesperrt (HTTP 403), blockt vermutlich Server-Adressen": {
+  "anzahl": 12,
+  "erst": "2026-11-15T14:47:58.000997+00:00",
+  "letzt": "2026-11-22T20:48:25.920104+00:00",
+  "meldung": "gesperrt (HTTP 403), blockt vermutlich Server-Adressen",
+  "modi": [
+   "priority"
+  ],
+  "quelle": "Classic Football Shirts"
+ },
+ "First 11 Shirts|geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop": {
+  "anzahl": 9,
+  "erst": "2026-10-08T16:38:01.980611+00:00",
+  "letzt": "2026-11-20T09:38:29.300416+00:00",
+  "meldung": "geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop",
+  "modi": [
+   "drop"
+  ],
+  "quelle": "First 11 Shirts"
+ },
+ "Football & Vintage Amsterdam|Bestandseinbruch: 100 statt 657 Produkte (1. Gesamt-Run in Folge), Abruffehler?": {
+  "anzahl": 1,
+  "erst": "2026-11-11T05:48:34.985318+00:00",
+  "letzt": "2026-11-11T05:48:34.985318+00:00",
+  "meldung": "Bestandseinbruch: 100 statt 657 Produkte (1. Gesamt-Run in Folge), Abruffehler?",
+  "modi": [
+   "full"
+  ],
+  "quelle": "Football & Vintage Amsterdam"
+ },
+ "Football & Vintage Amsterdam|Bestandseinbruch: 100 statt 661 Produkte (1. Gesamt-Run in Folge), Abruffehler?": {
+  "anzahl": 1,
+  "erst": "2026-10-29T05:38:36.560764+00:00",
+  "letzt": "2026-10-29T05:38:36.560764+00:00",
+  "meldung": "Bestandseinbruch: 100 statt 661 Produkte (1. Gesamt-Run in Folge), Abruffehler?",
+  "modi": [
+   "full"
+  ],
+  "quelle": "Football & Vintage Amsterdam"
+ },
+ "Football & Vintage Amsterdam|unvollständig, Abruf brach nach 100 Produkten ab (HTTP 403)": {
+  "anzahl": 1,
+  "erst": "2026-11-12T05:45:22.187195+00:00",
+  "letzt": "2026-11-12T05:45:22.187195+00:00",
+  "meldung": "unvollständig, Abruf brach nach 100 Produkten ab (HTTP 403)",
+  "modi": [
+   "full"
+  ],
+  "quelle": "Football & Vintage Amsterdam"
+ },
+ "Football Legends Kits|gesperrt (HTTP 403), blockt vermutlich Server-Adressen": {
+  "anzahl": 51,
+  "erst": "2026-10-05T04:46:05.303906+00:00",
+  "letzt": "2026-11-24T05:40:58.461480+00:00",
+  "meldung": "gesperrt (HTTP 403), blockt vermutlich Server-Adressen",
+  "modi": [
+   "full"
+  ],
+  "quelle": "Football Legends Kits"
+ },
+ "Football Second Hand|gesperrt (HTTP 403), blockt vermutlich Server-Adressen": {
+  "anzahl": 3,
+  "erst": "2026-11-19T05:39:10.181348+00:00",
+  "letzt": "2026-11-24T05:40:58.461480+00:00",
+  "meldung": "gesperrt (HTTP 403), blockt vermutlich Server-Adressen",
+  "modi": [
+   "full"
+  ],
+  "quelle": "Football Second Hand"
+ },
+ "Football Thrift Shop|gesperrt (HTTP 403), blockt vermutlich Server-Adressen": {
+  "anzahl": 7,
+  "erst": "2026-10-21T11:38:07.764571+00:00",
+  "letzt": "2026-11-22T22:08:35.636729+00:00",
+  "meldung": "gesperrt (HTTP 403), blockt vermutlich Server-Adressen",
+  "modi": [
+   "drop"
+  ],
+  "quelle": "Football Thrift Shop"
+ },
+ "Football Thrift Shop|keine Produkte erhalten (HTTP 500 ×4)": {
+  "anzahl": 1,
+  "erst": "2026-11-15T05:45:31.823047+00:00",
+  "letzt": "2026-11-15T05:45:31.823047+00:00",
+  "meldung": "keine Produkte erhalten (HTTP 500 ×4)",
+  "modi": [
+   "full"
+  ],
+  "quelle": "Football Thrift Shop"
+ },
+ "Het Shirthuis|geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop": {
+  "anzahl": 4,
+  "erst": "2026-10-09T09:08:03.819185+00:00",
+  "letzt": "2026-11-20T17:38:31.939832+00:00",
+  "meldung": "geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop",
+  "modi": [
+   "drop"
+  ],
+  "quelle": "Het Shirthuis"
+ },
+ "Infinity Football Shirts|geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop": {
+  "anzahl": 2,
+  "erst": "2026-11-05T13:38:17.380590+00:00",
+  "letzt": "2026-11-15T16:08:21.307191+00:00",
+  "meldung": "geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop",
+  "modi": [
+   "drop"
+  ],
+  "quelle": "Infinity Football Shirts"
+ },
+ "Jerseys Hermanos|geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop": {
+  "anzahl": 1,
+  "erst": "2026-10-26T11:08:11.957834+00:00",
+  "letzt": "2026-10-26T11:08:11.957834+00:00",
+  "meldung": "geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop",
+  "modi": [
+   "drop"
+  ],
+  "quelle": "Jerseys Hermanos"
+ },
+ "Kick It Vintage|geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop": {
+  "anzahl": 16,
+  "erst": "2026-10-05T04:46:05.303906+00:00",
+  "letzt": "2026-11-14T17:08:19.344129+00:00",
+  "meldung": "geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop",
+  "modi": [
+   "full",
+   "drop",
+   "priority"
+  ],
+  "quelle": "Kick It Vintage"
+ },
+ "Kickoff Vintage|geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop": {
+  "anzahl": 7,
+  "erst": "2026-10-08T14:08:06.218188+00:00",
+  "letzt": "2026-11-19T16:38:21.024928+00:00",
+  "meldung": "geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop",
+  "modi": [
+   "drop"
+  ],
+  "quelle": "Kickoff Vintage"
+ },
+ "Legacy Football Shirts|geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop": {
+  "anzahl": 2,
+  "erst": "2026-11-14T15:38:25.293953+00:00",
+  "letzt": "2026-11-21T17:38:28.075169+00:00",
+  "meldung": "geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop",
+  "modi": [
+   "drop"
+  ],
+  "quelle": "Legacy Football Shirts"
+ },
+ "Legit Football Shirts|keine Produkte erhalten (HTTP 404 ×4)": {
+  "anzahl": 1,
+  "erst": "2026-11-14T05:48:11.491339+00:00",
+  "letzt": "2026-11-14T05:48:11.491339+00:00",
+  "meldung": "keine Produkte erhalten (HTTP 404 ×4)",
+  "modi": [
+   "full"
+  ],
+  "quelle": "Legit Football Shirts"
+ },
+ "Nostalgic Football Shirts|geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop": {
+  "anzahl": 3,
+  "erst": "2026-10-17T08:38:03.140057+00:00",
+  "letzt": "2026-11-21T09:09:52.851154+00:00",
+  "meldung": "geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop",
+  "modi": [
+   "drop"
+  ],
+  "quelle": "Nostalgic Football Shirts"
+ },
+ "Pardon My Kicks|Bestandseinbruch: 272 statt 1011 Produkte (1. Gesamt-Run in Folge), Abruffehler?": {
+  "anzahl": 1,
+  "erst": "2026-11-24T05:40:58.461480+00:00",
+  "letzt": "2026-11-24T05:40:58.461480+00:00",
+  "meldung": "Bestandseinbruch: 272 statt 1011 Produkte (1. Gesamt-Run in Folge), Abruffehler?",
+  "modi": [
+   "full"
+  ],
+  "quelle": "Pardon My Kicks"
+ },
+ "RB-Jerseys|ConnectionError: HTTPSConnectionPool(host='www.rb-jerseys.com', port=443): Max retries exceeded with url: /products.json?limit=1 (Caused ": {
+  "anzahl": 4,
+  "erst": "2026-10-23T04:35:42.529271+00:00",
+  "letzt": "2026-11-12T05:45:22.187195+00:00",
+  "meldung": "ConnectionError: HTTPSConnectionPool(host='www.rb-jerseys.com', port=443): Max retries exceeded with url: /products.json?limit=1 (Caused ",
+  "modi": [
+   "full"
+  ],
+  "quelle": "RB-Jerseys"
+ },
+ "RB-Jerseys|ConnectionError: HTTPSConnectionPool(host='www.rb-jerseys.com', port=443): Max retries exceeded with url: /wp-json/wc/store/v1/products?p": {
+  "anzahl": 17,
+  "erst": "2026-10-04T14:04:46.327261+00:00",
+  "letzt": "2026-11-09T16:38:34.076982+00:00",
+  "meldung": "ConnectionError: HTTPSConnectionPool(host='www.rb-jerseys.com', port=443): Max retries exceeded with url: /wp-json/wc/store/v1/products?p",
+  "modi": [
+   "priority",
+   "drop"
+  ],
+  "quelle": "RB-Jerseys"
+ },
+ "RetrOriginalFootball|geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop": {
+  "anzahl": 1,
+  "erst": "2026-11-20T08:08:27.358172+00:00",
+  "letzt": "2026-11-20T08:08:27.358172+00:00",
+  "meldung": "geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop",
+  "modi": [
+   "drop"
+  ],
+  "quelle": "RetrOriginalFootball"
+ },
+ "Seitenprüfung|classic-shirts.com: 1 Seite(n) nicht prüfbar (Verbindung ×1)": {
+  "anzahl": 5,
+  "erst": "2026-10-10T19:48:06.267329+00:00",
+  "letzt": "2026-11-03T05:44:03.778995+00:00",
+  "meldung": "classic-shirts.com: 1 Seite(n) nicht prüfbar (Verbindung ×1)",
+  "modi": [
+   "priority",
+   "full"
+  ],
+  "quelle": "Seitenprüfung"
+ },
+ "Seitenprüfung|classic-shirts.com: 12 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×9, Verbindung ×3)": {
+  "anzahl": 1,
+  "erst": "2026-11-20T08:49:20.145985+00:00",
+  "letzt": "2026-11-20T08:49:20.145985+00:00",
+  "meldung": "classic-shirts.com: 12 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×9, Verbindung ×3)",
+  "modi": [
+   "priority"
+  ],
+  "quelle": "Seitenprüfung"
+ },
+ "Seitenprüfung|classic-shirts.com: 13 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×10, Verbindung ×3)": {
+  "anzahl": 11,
+  "erst": "2026-10-25T08:47:21.330263+00:00",
+  "letzt": "2026-11-12T20:48:06.550261+00:00",
+  "meldung": "classic-shirts.com: 13 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×10, Verbindung ×3)",
+  "modi": [
+   "priority"
+  ],
+  "quelle": "Seitenprüfung"
+ },
+ "Seitenprüfung|classic-shirts.com: 19 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×16, Verbindung ×3)": {
+  "anzahl": 4,
+  "erst": "2026-11-13T05:42:16.911363+00:00",
+  "letzt": "2026-11-13T20:48:13.075704+00:00",
+  "meldung": "classic-shirts.com: 19 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×16, Verbindung ×3)",
+  "modi": [
+   "full",
+   "priority"
+  ],
+  "quelle": "Seitenprüfung"
+ },
+ "Seitenprüfung|classic-shirts.com: 5 Seite(n) nicht prüfbar (Verbindung ×3, übersprungen (Shop nicht erreichbar) ×2)": {
+  "anzahl": 2,
+  "erst": "2026-11-19T20:49:07.158601+00:00",
+  "letzt": "2026-11-20T02:24:38.373590+00:00",
+  "meldung": "classic-shirts.com: 5 Seite(n) nicht prüfbar (Verbindung ×3, übersprungen (Shop nicht erreichbar) ×2)",
+  "modi": [
+   "priority"
+  ],
+  "quelle": "Seitenprüfung"
+ },
+ "Seitenprüfung|classic-shirts.com: 6 Seite(n) nicht prüfbar (Verbindung ×3, übersprungen (Shop nicht erreichbar) ×3)": {
+  "anzahl": 1,
+  "erst": "2026-11-19T14:49:24.530388+00:00",
+  "letzt": "2026-11-19T14:49:24.530388+00:00",
+  "meldung": "classic-shirts.com: 6 Seite(n) nicht prüfbar (Verbindung ×3, übersprungen (Shop nicht erreichbar) ×3)",
+  "modi": [
+   "priority"
+  ],
+  "quelle": "Seitenprüfung"
+ },
+ "Seitenprüfung|classic-shirts.com: 70 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×67, Verbindung ×3)": {
+  "anzahl": 1,
+  "erst": "2026-11-15T05:45:31.823047+00:00",
+  "letzt": "2026-11-15T05:45:31.823047+00:00",
+  "meldung": "classic-shirts.com: 70 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×67, Verbindung ×3)",
+  "modi": [
+   "full"
+  ],
+  "quelle": "Seitenprüfung"
+ },
+ "Seitenprüfung|classic-shirts.com: 74 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×71, Verbindung ×3)": {
+  "anzahl": 1,
+  "erst": "2026-11-20T05:38:55.839167+00:00",
+  "letzt": "2026-11-20T05:38:55.839167+00:00",
+  "meldung": "classic-shirts.com: 74 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×71, Verbindung ×3)",
+  "modi": [
+   "full"
+  ],
+  "quelle": "Seitenprüfung"
+ },
+ "Seitenprüfung|classic-shirts.com: 80 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×77, Verbindung ×3)": {
+  "anzahl": 1,
+  "erst": "2026-11-05T05:43:54.251429+00:00",
+  "letzt": "2026-11-05T05:43:54.251429+00:00",
+  "meldung": "classic-shirts.com: 80 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×77, Verbindung ×3)",
+  "modi": [
+   "full"
+  ],
+  "quelle": "Seitenprüfung"
+ },
+ "Seitenprüfung|classic-shirts.com: 84 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×81, Verbindung ×3)": {
+  "anzahl": 1,
+  "erst": "2026-11-04T05:43:55.696117+00:00",
+  "letzt": "2026-11-04T05:43:55.696117+00:00",
+  "meldung": "classic-shirts.com: 84 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×81, Verbindung ×3)",
+  "modi": [
+   "full"
+  ],
+  "quelle": "Seitenprüfung"
+ },
+ "Seitenprüfung|classic-shirts.com: 89 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×86, Verbindung ×3)": {
+  "anzahl": 1,
+  "erst": "2026-11-14T05:48:11.491339+00:00",
+  "letzt": "2026-11-14T05:48:11.491339+00:00",
+  "meldung": "classic-shirts.com: 89 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×86, Verbindung ×3)",
+  "modi": [
+   "full"
+  ],
+  "quelle": "Seitenprüfung"
+ },
+ "Seitenprüfung|full90prints.com: 1 Seite(n) nicht prüfbar (404 ×1)": {
+  "anzahl": 2,
+  "erst": "2026-10-30T05:41:08.378276+00:00",
+  "letzt": "2026-11-01T05:41:01.518862+00:00",
+  "meldung": "full90prints.com: 1 Seite(n) nicht prüfbar (404 ×1)",
+  "modi": [
+   "full"
+  ],
+  "quelle": "Seitenprüfung"
+ },
+ "Seitenprüfung|wavememorabilia.com: 1 Seite(n) nicht prüfbar (404 ×1)": {
+  "anzahl": 1,
+  "erst": "2026-11-10T05:45:30.086565+00:00",
+  "letzt": "2026-11-10T05:45:30.086565+00:00",
+  "meldung": "wavememorabilia.com: 1 Seite(n) nicht prüfbar (404 ×1)",
+  "modi": [
+   "full"
+  ],
+  "quelle": "Seitenprüfung"
+ },
+ "Seitenprüfung|www.classicfootballcollectibles.com: 1 Seite(n) nicht prüfbar (403 ×1)": {
+  "anzahl": 15,
+  "erst": "2026-11-10T05:45:30.086565+00:00",
+  "letzt": "2026-11-24T05:40:58.461480+00:00",
+  "meldung": "www.classicfootballcollectibles.com: 1 Seite(n) nicht prüfbar (403 ×1)",
+  "modi": [
+   "full"
+  ],
+  "quelle": "Seitenprüfung"
+ },
+ "Seitenprüfung|www.topbinzfootballshirts.co.uk: 3 Seite(n) nicht prüfbar (403 ×3)": {
+  "anzahl": 1,
+  "erst": "2026-11-20T05:38:55.839167+00:00",
+  "letzt": "2026-11-20T05:38:55.839167+00:00",
+  "meldung": "www.topbinzfootballshirts.co.uk: 3 Seite(n) nicht prüfbar (403 ×3)",
+  "modi": [
+   "full"
+  ],
+  "quelle": "Seitenprüfung"
+ },
+ "Seitenprüfung|www.topbinzfootballshirts.co.uk: 30 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×27, 403 ×3)": {
+  "anzahl": 14,
+  "erst": "2026-11-03T05:44:03.778995+00:00",
+  "letzt": "2026-11-16T05:42:28.223144+00:00",
+  "meldung": "www.topbinzfootballshirts.co.uk: 30 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×27, 403 ×3)",
+  "modi": [
+   "full"
+  ],
+  "quelle": "Seitenprüfung"
+ },
+ "Seitenprüfung|www.topbinzfootballshirts.co.uk: 31 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×28, 403 ×3)": {
+  "anzahl": 9,
+  "erst": "2026-10-25T05:35:43.492423+00:00",
+  "letzt": "2026-11-02T05:38:37.361805+00:00",
+  "meldung": "www.topbinzfootballshirts.co.uk: 31 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×28, 403 ×3)",
+  "modi": [
+   "full"
+  ],
+  "quelle": "Seitenprüfung"
+ },
+ "Sense of Goal|geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop": {
+  "anzahl": 1,
+  "erst": "2026-10-29T10:38:13.628085+00:00",
+  "letzt": "2026-10-29T10:38:13.628085+00:00",
+  "meldung": "geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop",
+  "modi": [
+   "drop"
+  ],
+  "quelle": "Sense of Goal"
+ },
+ "Studio Football Shirts|geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop": {
+  "anzahl": 1,
+  "erst": "2026-11-04T16:38:20.353339+00:00",
+  "letzt": "2026-11-04T16:38:20.353339+00:00",
+  "meldung": "geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop",
+  "modi": [
+   "drop"
+  ],
+  "quelle": "Studio Football Shirts"
+ },
+ "The Kitman 97|geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop": {
+  "anzahl": 4,
+  "erst": "2026-10-10T16:38:01.864284+00:00",
+  "letzt": "2026-11-21T17:08:31.851923+00:00",
+  "meldung": "geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop",
+  "modi": [
+   "drop"
+  ],
+  "quelle": "The Kitman 97"
+ },
+ "The Third Kit|keine Produkte erhalten (HTTP 202 ×4)": {
+  "anzahl": 15,
+  "erst": "2026-10-09T04:34:41.668090+00:00",
+  "letzt": "2026-11-24T05:40:58.461480+00:00",
+  "meldung": "keine Produkte erhalten (HTTP 202 ×4)",
+  "modi": [
+   "full"
+  ],
+  "quelle": "The Third Kit"
+ },
+ "Top Vintage Football Shirts|ReadTimeout: HTTPSConnectionPool(host='www.topvintagefootballshirts.com', port=443): Read timed out. (read timeout=25)": {
+  "anzahl": 6,
+  "erst": "2026-11-20T22:09:49.578905+00:00",
+  "letzt": "2026-11-21T10:09:47.751150+00:00",
+  "meldung": "ReadTimeout: HTTPSConnectionPool(host='www.topvintagefootballshirts.com', port=443): Read timed out. (read timeout=25)",
+  "modi": [
+   "drop",
+   "full"
+  ],
+  "quelle": "Top Vintage Football Shirts"
+ },
+ "Top Vintage Football Shirts|keine Produkte erhalten (HTTP 404 ×84)": {
+  "anzahl": 1,
+  "erst": "2026-11-24T05:40:58.461480+00:00",
+  "letzt": "2026-11-24T05:40:58.461480+00:00",
+  "meldung": "keine Produkte erhalten (HTTP 404 ×84)",
+  "modi": [
+   "full"
+  ],
+  "quelle": "Top Vintage Football Shirts"
+ },
+ "Top Vintage Football Shirts|keine Produkte erhalten (HTTP 521 ×84)": {
+  "anzahl": 2,
+  "erst": "2026-11-22T05:41:23.129526+00:00",
+  "letzt": "2026-11-23T05:41:08.645130+00:00",
+  "meldung": "keine Produkte erhalten (HTTP 521 ×84)",
+  "modi": [
+   "full"
+  ],
+  "quelle": "Top Vintage Football Shirts"
+ },
+ "Topbinz|gesperrt (HTTP 403), blockt vermutlich Server-Adressen": {
+  "anzahl": 296,
+  "erst": "2026-10-23T17:08:46.187023+00:00",
+  "letzt": "2026-11-02T10:38:54.490189+00:00",
+  "meldung": "gesperrt (HTTP 403), blockt vermutlich Server-Adressen",
+  "modi": [
+   "drop",
+   "full"
+  ],
+  "quelle": "Topbinz"
+ },
+ "Trikot Store|geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop": {
+  "anzahl": 1,
+  "erst": "2026-11-13T19:08:27.855419+00:00",
+  "letzt": "2026-11-13T19:08:27.855419+00:00",
+  "meldung": "geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop",
+  "modi": [
+   "drop"
+  ],
+  "quelle": "Trikot Store"
+ },
+ "TrikotTrader|ReadTimeout: HTTPSConnectionPool(host='www.trikottrader.com', port=443): Read timed out. (read timeout=25)": {
+  "anzahl": 3,
+  "erst": "2026-11-13T21:39:17.314937+00:00",
+  "letzt": "2026-11-13T22:39:17.320370+00:00",
+  "meldung": "ReadTimeout: HTTPSConnectionPool(host='www.trikottrader.com', port=443): Read timed out. (read timeout=25)",
+  "modi": [
+   "drop"
+  ],
+  "quelle": "TrikotTrader"
+ },
+ "Trikotcult|geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop": {
+  "anzahl": 1,
+  "erst": "2026-11-10T12:38:31.509730+00:00",
+  "letzt": "2026-11-10T12:38:31.509730+00:00",
+  "meldung": "geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop",
+  "modi": [
+   "drop"
+  ],
+  "quelle": "Trikotcult"
+ },
+ "Trikotstoff|geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop": {
+  "anzahl": 1,
+  "erst": "2026-11-06T11:08:16.746427+00:00",
+  "letzt": "2026-11-06T11:08:16.746427+00:00",
+  "meldung": "geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop",
+  "modi": [
+   "drop"
+  ],
+  "quelle": "Trikotstoff"
+ },
+ "Vintage Kit Co|geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop": {
+  "anzahl": 1,
+  "erst": "2026-11-02T21:38:14.910260+00:00",
+  "letzt": "2026-11-02T21:38:14.910260+00:00",
+  "meldung": "geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop",
+  "modi": [
+   "drop"
+  ],
+  "quelle": "Vintage Kit Co"
+ },
+ "Wave Memorabilia|keine Produkte erhalten (HTTP 404 ×78)": {
+  "anzahl": 4,
+  "erst": "2026-11-06T05:46:16.208583+00:00",
+  "letzt": "2026-11-09T05:43:54.706786+00:00",
+  "meldung": "keine Produkte erhalten (HTTP 404 ×78)",
+  "modi": [
+   "full"
+  ],
+  "quelle": "Wave Memorabilia"
+ }
+}
