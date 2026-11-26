@@ -183,6 +183,9 @@ shops:
   - {name: Le Maillot Vintage, url: "https://www.lemaillotvintage.com", schnellcheck: nein}
 # Vintage Football Jerseys (UK, Shopify, "Dealers of Original Vintage Football Shirts", viel XL)
   - {name: Vintage Football Jerseys, url: "https://vintage-football-jerseys.co.uk", schnellcheck: nein}
+# Trikotlab (DE, Shopify, Nutzer 26.11.2026): kleiner Händler aus der Sammlerszene (vorher Flohmärkte), gebrauchte Trikots
+# 30 bis 55 €, viel Bundesliga und DFB, ca. 90 Artikel, Größe im Titel "(M)". Keine ausdrückliche Echtheitsgarantie
+  - {name: Trikotlab, url: "https://trikotlab.de"}
 # Kultkits (DE, Shopware 6, gebrauchte Originale, Größe im Titel "(XL)", Zustand auf der Produktseite)
   - {name: Kultkits, url: "https://kultkits.de", plattform: html, suche: "/search?search={q}", link: "a.product-name", schnellcheck: nein}
 # 2nd Season Kits (Schweiz, Shopify, CHF, klein: ca. 50 Artikel, viele beflockt), Nutzer 09.11.2026. Schweiz = nicht EU,

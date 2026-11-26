@@ -788,3 +788,5 @@ sperren alle Bots mit `Disallow: /`, keine offene Such-Schnittstelle, also weite
   borisshirts.hemsida24.se (privater Sammler, Baukasten-Seite). Suchen in PL, PT, ES, SE/DK, IT lieferten nur eBay-Verkäufer,
   Neuware (Decathlon/COPA, Futbol Emotion) oder Shops, die wir schon haben. Der Markt ist mit gut 120 Shops weitgehend abgedeckt
 - Quellen vom 24.11. laufen: Those Days 1.861, Secondfootballshirts 2.024, Mezek 2.213, Football Shirt Paradise 467, Kultkits 31
+- Trikotlab (trikotlab.de, DE, Shopify) auf Wunsch des Nutzers am 26.11.2026 aufgenommen: kleiner Händler, ca. 90 gebrauchte
+  Trikots (30 bis 55 €), viel Bundesliga/DFB, Größe im Titel, beim Aufnehmen kein passender Treffer
