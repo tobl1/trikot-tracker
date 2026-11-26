@@ -770,3 +770,12 @@ sperren alle Bots mit `Disallow: /`, keine offene Such-Schnittstelle, also weite
   scheitern und die Push 24 Std. zurückhalten. Die interne Datenschnittstelle (Supabase) bewusst nicht nutzen
 - Erste Probe 24.11.: 14 Treffer, u. a. Barça 08/09 Away XL 50 € (Spanien), Inter 04/05 Home ohne Flock XL, Barça 12/13
   Away, 11/12 Home, Henry Arsenal 02/03, Xabi Alonso Real 10/11. Beim ersten Gesamt-Run still übernommen (neue Quelle)
+
+## Fehlende Produktbilder (26.11.2026)
+
+- Nutzer: "immer häufiger fehlen die Produktbilder". Alle 354 Treffer hatten eine Bildadresse, 14 davon lieferten 404 (alle
+  Shopify: Secondhalf 6, First 11 3, Cult Kits 2, Football Finery 2), die App zeigte dort den Platzhalter 👕. Ursache: das
+  Bild wurde nur bei der ersten Sichtung gespeichert, Shops tauschen aber Fotos aus. Seitdem erneuert jede Sichtung aus
+  derselben Quelle das Bild (`lauf`, gleiche Stelle wie der Titel), Favoriten-Kopien übernehmen das neue Bild aus den
+  aktuellen Daten. In Chrome mit Handy-Maßen luden sonst alle Bilder (310 von 320, die 10 übrigen = die kaputten Adressen).
+  Bulishirts (Wix) liefert Bilder als `application/octet-stream`, Browser zeigen sie trotzdem an (nicht auf dem iPhone geprüft)

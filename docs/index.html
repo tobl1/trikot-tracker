@@ -981,6 +981,10 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     $("unhide").hidden = !nHidden; $("unhide").textContent = `${nHidden} ausgeblendet · zurückholen`;
     if (favView) {
       const byId = Object.fromEntries(all.map(t => [t.id, t]));
+      // Kopie der Favoriten aktuell halten (Shops tauschen Fotos aus, alte Bildadressen liefern dann 404)
+      let favChanged = false;
+      Object.values(favs).forEach(f => { const c = byId[f.id]; if (c && c.bild && c.bild !== f.bild) { f.bild = c.bild; favChanged = true; } });
+      if (favChanged) store.set("favs", favs);
       const list = Object.values(favs).sort((a, b) => b.added.localeCompare(a.added))
         .map(f => byId[f.id] || Object.assign({}, f, {gone: true, neu: false, hoch: false, thiago: (f.labels || []).some(l => l.startsWith("Thiago"))}));
       $("favs").innerHTML = list.length ? `<div class="grid">${list.map(card).join("")}</div>`

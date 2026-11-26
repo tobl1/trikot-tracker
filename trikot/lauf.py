@@ -423,6 +423,10 @@ def main():
                     entry["zustand"] = grade
                 if it["source"] == entry.get("via"):
                     entry["title"] = it["title"]
+                    # Bild bei jeder Sichtung erneuern: Shops tauschen Fotos aus, die alte Adresse liefert dann 404 und die
+                    # App zeigt nur den Platzhalter (26.11.2026: 14 von 354 Bildern kaputt, alle bei Shopify-Shops)
+                    if it.get("image"):
+                        entry["image"] = it["image"]
                 continue
             entry = {"title": it["title"], "url": it["url"], "shop": it["shop"],
                      "price": it["price"], "image": it["image"],

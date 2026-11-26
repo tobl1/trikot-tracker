@@ -152,3 +152,13 @@ def test_kaputtes_abo_stoppt_den_versand_nicht():
 ])
 def test_waehrung_nur_echte_codes(text, erwartet):
     assert parse_price(text) == erwartet
+
+
+def test_run_erneuert_bild(lauf):
+    """Shop tauscht das Foto aus: die neue Adresse ersetzt die alte (sonst 404 und Platzhalter in der App)"""
+    lauf([kroos(1)])
+    neu = dict(kroos(1), image="https://testshop.example/neues-foto.jpg")
+    seen, _ = lauf([neu])
+    assert seen["testshop.example/kroos-1.html"]["image"] == "https://testshop.example/neues-foto.jpg"
+    seen, _ = lauf([dict(kroos(1), image="")])                     # ohne Bild in der Quelle: altes behalten
+    assert seen["testshop.example/kroos-1.html"]["image"] == "https://testshop.example/neues-foto.jpg"
