@@ -26,7 +26,7 @@
 fyj: an
 
 shops:
-  - {name: Classic Football Shirts, url: "https://www.classicfootballshirts.co.uk", plattform: cfs, min_zustand: 7}
+  - {name: Classic Football Shirts, aktion: {text: "Black Friday: 20 % auf alles (laut Nutzer)", bis: "2026-12-01"}, url: "https://www.classicfootballshirts.co.uk", plattform: cfs, min_zustand: 7}
   - {name: Cult Kits, rabatt: "10 % auf die erste Bestellung (Newsletter)", versand: "ab £14.95 (DHL Economy Europe)", url: "https://www.cultkits.com", drop: ["täglich 18:00 Europe/London"]}   # "Daily Drop" laut Shop
   - {name: Classic11, url: "https://classic11.com"}
   - {name: RB-Jerseys, url: "https://www.rb-jerseys.com"}
@@ -40,7 +40,7 @@ shops:
   - {name: The Third Kit, url: "https://thethirdkit.co.uk"}
   # Topbinz (ShopWired): bis 05.10.2026 403, dann erreichbar, seit 23.10.2026 wieder 403 aus GitHub (lokal 200), daher über FYJ. robots.txt verlangt
   # 10 Sek. Pause (Crawl-delay), Drop Fr 19 Uhr laut Nutzer. Drop-Run und Radar lesen nur die Neuheiten-Seite
-  - {name: Topbinz, rabatt: "10 % bei Newsletter-Anmeldung", url: "https://www.topbinzfootballshirts.co.uk", plattform: fyj,   # seit 23.10.2026 403 aus GitHub (lokal 200), vorher html:
+  - {name: Topbinz, aktion: {text: "Black Friday: 20 % auf alles (laut Nutzer)", bis: "2026-12-01"}, rabatt: "10 % bei Newsletter-Anmeldung", url: "https://www.topbinzfootballshirts.co.uk", plattform: fyj,   # seit 23.10.2026 403 aus GitHub (lokal 200), vorher html:
      pause: 10, drop: ["Fr 19:00"], schnellcheck: nein,
      suche: "/search/products?keywords={q}", link: "article.product-box h3 a", neu: "/new-in"}
   - {name: The Soccer Archive, rabatt: "10 % auf die nächste Bestellung (Newsletter)", url: "https://thesoccerarchive.com"}

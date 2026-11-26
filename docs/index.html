@@ -168,6 +168,12 @@ details[open] summary::after{content:"−"}
 .src td.rh{min-width:220px;color:var(--muted)}
 .src td.rh.drops{color:var(--accent);font-weight:500}
 .tablewrap{overflow-x:auto}
+.shoprow{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid var(--line,#222);font-size:14px}
+.shoprow:last-child{border-bottom:0}
+.shoprow a{color:var(--ink);text-decoration:none;font-weight:500;min-height:24px}
+.shoprow span{color:var(--muted);font-size:12.5px;text-align:right}
+.shoprow.sale span{color:var(--accent)}
+.shophead{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:16px 0 2px}
 .fyjnote{font-size:13px;color:var(--muted);margin:10px 0 0}
 .fyjnote b{color:var(--ink);font-weight:500}
 .addbtn{font:inherit;font-size:12px;font-weight:600;border:0;border-radius:999px;padding:6px 12px;cursor:pointer;background:var(--accent);color:#fff;white-space:nowrap}
@@ -320,6 +326,12 @@ details[open] summary::after{content:"−"}
     <summary id="fgsum">Fundgrube</summary>
     <p class="fyjnote">Shops, die nur über FindYourJersey Treffer liefern. Wöchentlich automatisch geprüft. "Aufnehmen" öffnet ein GitHub-Issue, der nächste Gesamt-Run trägt den Shop dann selbst ein.</p>
     <div class="tablewrap"><table class="src"><thead><tr><th>Shop</th><th class="n">Treffer</th><th>System</th><th>Nachbauten</th><th></th></tr></thead><tbody id="fgbody"></tbody></table></div>
+  </details>
+
+  <details id="shoplist">
+    <summary id="shopsum">Alle Shops</summary>
+    <p class="fyjnote">Zum schnellen Selbst-Nachschauen, z. B. nach Rabatten. 🔥 = Aktion laut Shop, 🏷 = Neukunden-Rabatt.</p>
+    <div id="shopbody"></div>
   </details>
 
   <details id="sources">
@@ -1025,6 +1037,15 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     // zeitlich begrenzte Aktionen (Black Friday …), nur bis zum Enddatum
     const sales = {}, today = new Date().toLocaleDateString("sv", {timeZone: "Europe/Berlin"});
     (data.aktionen || []).filter(a => !a.bis || a.bis >= today).forEach(a => { sales[a.shop] = a; sales[a.host] = a; });
+    // Bereich "Alle Shops": erst die mit Aktion, dann alle alphabetisch, jeweils mit Link (Nutzer 26.11.2026)
+    const shopsAll = (data.shops || []).slice().sort((a, b) => a.name.localeCompare(b.name, "de"));
+    const row = s => { const a = sales[s.name], r = deals[s.name];
+      return `<div class="shoprow${a ? " sale" : ""}"><a href="${esc(web(s.url))}" target="_blank" rel="noopener">${esc(s.name)}</a>` +
+        `<span>${a ? "🔥 " + esc(a.text.replace(/^Black (Friday|Week)( Week)?:\s*/i, "")) : r ? "🏷 " + esc(r) : ""}</span></div>`; };
+    const withSale = shopsAll.filter(s => sales[s.name]);
+    $("shopsum").textContent = `Alle Shops (${shopsAll.length})` + (withSale.length ? ` · ${withSale.length} mit Aktion` : "");
+    $("shopbody").innerHTML = (withSale.length ? `<div class="shophead">Gerade mit Aktion</div>${withSale.map(row).join("")}` : "") +
+      `<div class="shophead">Alle</div>${shopsAll.map(row).join("")}`;
     const ships = {};   // Versandkosten von UK-Shops, soweit der Shop sie nennt
     (data.versand || []).forEach(r => { ships[r.shop] = r.text; ships[r.host] = r.text; });
     all = data.treffer.map(t => {

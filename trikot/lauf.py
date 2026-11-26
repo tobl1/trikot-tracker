@@ -1,6 +1,7 @@
 """Ein Run von Anfang bis Ende (Modi full, priority, drop, test)"""
 
 import argparse
+import json
 import concurrent.futures as cf
 import datetime as dt
 import os
@@ -20,7 +21,7 @@ from .berichte import fundgrube, log_problems, write_dashboard, write_report
 from .issues import add_shops_from_issues, apply_flags, check_alarms, collect_push_abos, owner_issues
 from .melden import OUTBOX_MAX_HOURS, detail_line, push, push_label, save_outbox, send_outbox, short
 from .netz import Http
-from .preise import fetch_rates, parse_price, price_limit, to_eur
+from .preise import effective_pg, fetch_rates, parse_price, price_limit, to_eur
 from .pruefung import enrich, hold_unchecked
 from .quellen import run_shop
 from .quellen.fyj import fyj_run
@@ -199,6 +200,8 @@ def main():
         return
 
     watch = yaml.safe_load((ROOT / "watchlist.yaml").read_text(encoding="utf-8"))
+    # zeitweise höhere Preisgrenze (z. B. Black Friday) gilt überall gleich: Shops, eBay, Dashboard
+    watch["preisgrenze"] = effective_pg(watch.get("preisgrenze"))
     if args.mode == "full" and not args.only and not args.dry_run:
         n_added = add_shops_from_issues()
         if n_added:
@@ -477,6 +480,9 @@ def main():
     checked, check_fails = enrich(seen, ts, ENRICH_BUDGET.get(args.mode, 0), matcher,
                                   deadline=started + 60 * ENRICH_DEADLINE_MIN.get(args.mode, 10))
     cheaper = []
+    grenze = json.dumps(pg, sort_keys=True)
+    grenze_neu = status_store.get("preisgrenze") != grenze   # Grenze selbst geändert: nicht als Preissenkung melden
+    status_store["preisgrenze"] = grenze
     for e in seen.values():
         if e["last"] == ts:
             mark_worn(e)   # Note kam evtl. erst jetzt von der Shop-Seite
@@ -484,7 +490,7 @@ def main():
             e["teuer"] = too_expensive(e)
             # war über der Preisgrenze (also unsichtbar), jetzt darunter: wie ein neuer Treffer melden
             # nur einmal je Treffer (Wechselkurse lassen Preise um die Grenze pendeln)
-            if was and not e["teuer"] and e not in new_entries and not e.get("unter_grenze") \
+            if was and not e["teuer"] and e not in new_entries and not e.get("unter_grenze") and not grenze_neu \
                     and not (e.get("verkauft") or e.get("aussortiert")):
                 e["unter_grenze"] = ts
                 cheaper.append(e)

@@ -23,6 +23,9 @@ groessen:
 preisgrenze:
   max_eur: 150
   ausnahmen: {"Thiago": 200}
+  # zeitweise höhere Grenze (Nutzer 26.11.2026, Black Friday: "zeig mal temporär alle für bis zu 175 euro"), gilt bis
+  # einschließlich "bis", danach automatisch wieder max_eur. Höhere eigene Grenzen (Thiago 200) bleiben
+  zeitweise: {max_eur: 175, bis: "2026-12-01"}
 
 # Mindestnote für alle Shops (z. B. "6/10" fliegt raus), Thiago ausgenommen. Nutzer meldete bis 15.10.2026 sechsmal
 # schlechten Zustand. Je Shop überschreibbar mit min_zustand in shops.yaml

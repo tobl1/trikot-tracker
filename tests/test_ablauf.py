@@ -162,3 +162,20 @@ def test_run_erneuert_bild(lauf):
     assert seen["testshop.example/kroos-1.html"]["image"] == "https://testshop.example/neues-foto.jpg"
     seen, _ = lauf([dict(kroos(1), image="")])                     # ohne Bild in der Quelle: altes behalten
     assert seen["testshop.example/kroos-1.html"]["image"] == "https://testshop.example/neues-foto.jpg"
+
+
+def test_run_grenze_geaendert_keine_push_unter_grenze(lauf, monkeypatch):
+    """Wird die Preisgrenze selbst angehoben, sind Trikots dazwischen ohne "Jetzt unter der Preisgrenze"-Push sichtbar"""
+    teuer = dict(kroos(1), price="£150.00")       # 176 € bei Kurs 0.85
+    lauf([teuer])
+    import trikot.lauf as tl
+    real = tl.effective_pg
+    monkeypatch.setattr(tl, "effective_pg", lambda pg: dict(real(pg), max_eur=200))
+    seen, out = lauf([teuer])
+    e = seen["testshop.example/kroos-1.html"]
+    assert not e["teuer"] and not e.get("unter_grenze") and out == []
+    # danach echte Preissenkung unter die Grenze: wieder mit Push
+    monkeypatch.setattr(tl, "effective_pg", lambda pg: dict(real(pg), max_eur=150))
+    lauf([teuer])
+    seen, out = lauf([dict(teuer, price="£100.00")])
+    assert any("unter der Preisgrenze" in p["title"] for p in out)

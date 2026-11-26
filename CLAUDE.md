@@ -790,3 +790,16 @@ sperren alle Bots mit `Disallow: /`, keine offene Such-Schnittstelle, also weite
 - Quellen vom 24.11. laufen: Those Days 1.861, Secondfootballshirts 2.024, Mezek 2.213, Football Shirt Paradise 467, Kultkits 31
 - Trikotlab (trikotlab.de, DE, Shopify) auf Wunsch des Nutzers am 26.11.2026 aufgenommen: kleiner Händler, ca. 90 gebrauchte
   Trikots (30 bis 55 €), viel Bundesliga/DFB, Größe im Titel, beim Aufnehmen kein passender Treffer
+
+## Black Friday, Teil 2 (26.11.2026)
+
+- **Zeitweise Preisgrenze** (Nutzer: "zeig mal temporär alle für bis zu 175 euro"): `preisgrenze.zeitweise: {max_eur: 175, bis:
+  "2026-12-01"}` in watchlist.yaml, `preise.effective_pg` rechnet sie beim Laden ein (gilt für Shops, eBay und App gleich),
+  danach automatisch wieder 150 €. Ändert sich die Grenze selbst, gibt es keine "Jetzt unter der Preisgrenze"-Pushes
+  (`status.json` → `preisgrenze`, sonst eine Push je Trikot zwischen 150 und 175 €). eBay speichert Angebote über der Grenze
+  nicht, die zwischen 150 und 175 € kommen dort also als neue Treffer (gebündelte Push möglich). Nach dem 01.12. den Eintrag
+  `zeitweise` löschen
+- Aktion 20 % bei Classic Football Shirts und Topbinz laut Nutzer (bis 01.12.)
+- **"Alle Shops"** in der App (aufklappbarer Bereich unten über dem Quellen-Status, Export `shops` in treffer.json: alle
+  nicht gesperrten, nicht abgeschalteten Shops mit Link): erst "Gerade mit Aktion" (🔥 Text), dann alle alphabetisch, Neukunden-
+  Rabatt mit 🏷

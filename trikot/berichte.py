@@ -78,6 +78,10 @@ def write_dashboard(seen, status_store, mode, ts, watch_cfg, shops):
                         for s in shops if s.get("versand")],
             # zeitlich begrenzte Aktionen laut Shop-Seite (z. B. Black Friday, Nutzer 24.11.2026), nach "bis" automatisch weg
             "aktionen": active_deals(shops),
+            # alle Shops mit Link (App: Bereich "Alle Shops", Nutzer 26.11.2026: Rabatte selbst schnell prüfen)
+            "shops": [{"name": s["name"], "url": s["url"]} for s in shops
+                      if str(s.get("sperren", "")).lower() not in ("ja", "true", "yes")
+                      and (s.get("plattform") or "auto").lower() != "aus"],
             "preisgrenze": (watch_cfg.get("preisgrenze") or {}),
             "kurse_datum": kurse.get("datum", ""), "treffer": items,
             "push_abos": len(status_store.get("push_abos") or {}),   # 0: Dashboard warnt (keine Pushes)

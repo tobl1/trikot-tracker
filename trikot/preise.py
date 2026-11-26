@@ -51,6 +51,20 @@ def fetch_rates(status_store):
     return status_store.get("kurse") or {"datum": "", "rates": {"EUR": 1.0}}
 
 
+def effective_pg(pg, today=None):
+    """Preisgrenze mit zeitweiser Erhöhung (preisgrenze.zeitweise {max_eur, bis}): bis einschließlich "bis" (deutsches
+    Datum) gilt der höhere Wert als max_eur, danach wieder der normale. Gibt eine Kopie ohne "zeitweise" zurück"""
+    import datetime as dt
+    from zoneinfo import ZoneInfo
+    pg = dict(pg or {})
+    tmp = pg.pop("zeitweise", None) or {}
+    today = today or dt.datetime.now(ZoneInfo("Europe/Berlin")).date().isoformat()
+    if tmp.get("max_eur") and str(tmp.get("bis") or "0") >= today:
+        pg["max_eur"] = max(float(pg.get("max_eur") or 0), float(tmp["max_eur"]))
+        pg["zeitweise_bis"] = tmp.get("bis")
+    return pg
+
+
 def price_limit(labels, pg):
     """Preisgrenze für einen Treffer: eigene Grenze eines Labels aus preisgrenze.ausnahmen (0 = ohne Grenze),
     sonst max_eur. Ältere Form: Liste von Labels ohne Grenze"""

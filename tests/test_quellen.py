@@ -931,3 +931,14 @@ def test_thosedays_ohne_browser_ist_fehler(monkeypatch):
     monkeypatch.setattr(builtins, "__import__", lambda n, *a, **k: (_ for _ in ()).throw(ImportError(n)) if n.startswith("playwright") else real(n, *a, **k))
     _, st = trikot.quellen.run_shop({"name": "Those Days", "url": "https://thosedays.com", "plattform": "thosedays"}, "full", M, {}, {})
     assert "Playwright" in st["fehler"]
+
+
+def test_zeitweise_preisgrenze():
+    """Black Friday 26.11.2026: zeitweise 175 € statt 150 €, danach automatisch zurück; Thiago (200) bleibt höher"""
+    from trikot.preise import effective_pg, price_limit
+    pg = {"max_eur": 150, "ausnahmen": {"Thiago": 200}, "zeitweise": {"max_eur": 175, "bis": "2026-12-01"}}
+    an, aus = effective_pg(pg, "2026-12-01"), effective_pg(pg, "2026-12-02")
+    assert price_limit(["Kroos"], an) == 175 and price_limit(["Kroos"], aus) == 150
+    assert price_limit(["Thiago"], an) == 200 and "zeitweise" not in an and pg["max_eur"] == 150
+    wl = yaml.safe_load((ROOT / "watchlist.yaml").read_text(encoding="utf-8"))
+    assert effective_pg(wl["preisgrenze"], "2026-11-27")["max_eur"] == 175
