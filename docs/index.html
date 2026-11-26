@@ -1036,7 +1036,7 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     (data.rabatte || []).forEach(r => { deals[r.shop] = r.text; deals[r.host] = r.text; });
     // zeitlich begrenzte Aktionen (Black Friday …), nur bis zum Enddatum
     const sales = {}, today = new Date().toLocaleDateString("sv", {timeZone: "Europe/Berlin"});
-    (data.aktionen || []).filter(a => !a.bis || a.bis >= today).forEach(a => { sales[a.shop] = a; sales[a.host] = a; });
+    (data.aktionen || []).filter(a => (!a.bis || a.bis >= today) && (!a.ab || a.ab <= today)).forEach(a => { sales[a.shop] = a; sales[a.host] = a; });
     // Bereich "Alle Shops": erst die mit Aktion, dann alle alphabetisch, jeweils mit Link (Nutzer 26.11.2026)
     const shopsAll = (data.shops || []).slice().sort((a, b) => a.name.localeCompare(b.name, "de"));
     const row = s => { const a = sales[s.name], r = deals[s.name];
@@ -1044,7 +1044,7 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
         `<span>${a ? "🔥 " + esc(a.text.replace(/^Black (Friday|Week)( Week)?:\s*/i, "")) : r ? "🏷 " + esc(r) : ""}</span></div>`; };
     const withSale = shopsAll.filter(s => sales[s.name]);
     $("shopsum").textContent = `Alle Shops (${shopsAll.length})` + (withSale.length ? ` · ${withSale.length} mit Aktion` : "");
-    $("shopbody").innerHTML = (withSale.length ? `<div class="shophead">Gerade mit Aktion</div>${withSale.map(row).join("")}` : "") +
+    $("shopbody").innerHTML = !shopsAll.length ? '<p class="fyjnote">Die Liste kommt mit dem nächsten Run.</p>' : (withSale.length ? `<div class="shophead">Gerade mit Aktion</div>${withSale.map(row).join("")}` : "") +
       `<div class="shophead">Alle</div>${shopsAll.map(row).join("")}`;
     const ships = {};   // Versandkosten von UK-Shops, soweit der Shop sie nennt
     (data.versand || []).forEach(r => { ships[r.shop] = r.text; ships[r.host] = r.text; });

@@ -803,3 +803,8 @@ sperren alle Bots mit `Disallow: /`, keine offene Such-Schnittstelle, also weite
 - **"Alle Shops"** in der App (aufklappbarer Bereich unten über dem Quellen-Status, Export `shops` in treffer.json: alle
   nicht gesperrten, nicht abgeschalteten Shops mit Link): erst "Gerade mit Aktion" (🔥 Text), dann alle alphabetisch, Neukunden-
   Rabatt mit 🏷
+- 26.11. abends: "Alle Shops" war leer, weil die App-Seite sofort neu war, die Daten aber erst mit dem nächsten Run (Code-Push
+  21:36, erster Run mit neuem Code 21:50). Leere Liste zeigt jetzt "Die Liste kommt mit dem nächsten Run". Aktion mit Startdatum
+  (`aktion.ab`, App blendet ab dem Tag ein): Mr.Skully 25 % ab 27.11. laut Nutzer. Fehlende Bilder bei First 11, Secondhalf, Cult
+  Kits: zuletzt im Gesamt-Run 26.11. 5:38 gesehen, also vor der Bild-Korrektur, der Gesamt-Run 27.11. tauscht sie aus. The 12th Man
+  Retro: neuer Artikel ohne Fotos ("…-copy"), kommt mit, sobald der Shop Fotos ergänzt

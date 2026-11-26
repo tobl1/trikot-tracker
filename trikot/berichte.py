@@ -36,11 +36,14 @@ def doubt(e):
 
 
 def active_deals(shops, today=None):
-    """Aktionen aus shops.yaml (aktion: {text, bis}), die heute noch laufen ("bis" einschließlich, deutsche Zeit)"""
+    """Aktionen aus shops.yaml (aktion: {text, bis, optional ab}), die noch nicht vorbei sind ("bis" einschließlich, deutsche
+    Zeit). Startet eine Aktion erst ("ab", z. B. Mr.Skully 25 % ab Freitag 27.11.2026 00:01), blendet die App sie ab dem Tag
+    selbst ein, damit sie pünktlich um Mitternacht erscheint und nicht erst nach dem nächsten Run"""
     today = today or now().astimezone(TZ).date().isoformat()
-    return [{"shop": s["name"], "host": speicher._host(s["url"]), "text": s["aktion"]["text"], "bis": s["aktion"]["bis"]}
+    return [{"shop": s["name"], "host": speicher._host(s["url"]), "text": s["aktion"]["text"], "bis": s["aktion"]["bis"],
+             "ab": s["aktion"].get("ab", "")}
             for s in shops if isinstance(s.get("aktion"), dict) and s["aktion"].get("text")
-            and str(s["aktion"].get("bis") or "9999") >= today]
+            and str(s["aktion"].get("bis") or "9999") >= today]   # "ab" prüft die App (so erscheint die Aktion pünktlich, auch ohne Run)
 
 
 def write_dashboard(seen, status_store, mode, ts, watch_cfg, shops):

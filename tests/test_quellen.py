@@ -942,3 +942,10 @@ def test_zeitweise_preisgrenze():
     assert price_limit(["Thiago"], an) == 200 and "zeitweise" not in an and pg["max_eur"] == 150
     wl = yaml.safe_load((ROOT / "watchlist.yaml").read_text(encoding="utf-8"))
     assert effective_pg(wl["preisgrenze"], "2026-11-27")["max_eur"] == 175
+
+
+def test_aktion_mit_startdatum():
+    from trikot.berichte import active_deals
+    shops = [{"name": "Mr.Skully", "url": "https://www.mrskully.de", "aktion": {"text": "25 %", "ab": "2026-11-27", "bis": "2026-12-01"}}]
+    assert active_deals(shops, "2026-11-26")[0]["ab"] == "2026-11-27"     # schon dabei, die App zeigt sie erst ab dem 27.
+    assert active_deals(shops, "2026-12-02") == []

@@ -216,7 +216,7 @@ shops:
 # Eigene Shopsysteme über die Such-Ergebnisseite (plattform: html), seit 05.10.2026
   # Mr.Skully (DE, Webador-Baukasten ohne Suche): Produkte über die Sitemap, Titel und Größe stehen in der Adresse.
   # Laut Startseite "XXL-Drop am 01.11.2026" (Uhrzeit unbekannt, ganzer Tag im Blick), Nutzer 15.10.2026
-  - {name: Mr.Skully, url: "https://www.mrskully.de", plattform: html, schnellcheck: nein, sitemap: "/sitemap.xml",
+  - {name: Mr.Skully, aktion: {text: "Black Friday: 25 % (laut Nutzer, ab Freitag 00:01)", ab: "2026-11-27", bis: "2026-12-01"}, url: "https://www.mrskully.de", plattform: html, schnellcheck: nein, sitemap: "/sitemap.xml",
      neu: "/sitemap.xml", suche: "/sitemap.xml", drop: ["2026-11-01 09:00", "2026-11-01 12:00", "2026-11-01 15:00", "2026-11-01 18:00"]}
   # Top Vintage Football Shirts (IT, Storeden, "only originals" aus Sammlungen und Restposten), seit 08.10.2026
   # Vintage Sports Fashion (Magento, Nutzer 09.11.2026): Cloudflare sperrte nach fünf Abrufen der Suche (403), wird nicht
