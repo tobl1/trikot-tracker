@@ -779,3 +779,12 @@ sperren alle Bots mit `Disallow: /`, keine offene Such-Schnittstelle, also weite
   derselben Quelle das Bild (`lauf`, gleiche Stelle wie der Titel), Favoriten-Kopien übernehmen das neue Bild aus den
   aktuellen Daten. In Chrome mit Handy-Maßen luden sonst alle Bilder (310 von 320, die 10 übrigen = die kaputten Adressen).
   Bulishirts (Wix) liefert Bilder als `application/octet-stream`, Browser zeigen sie trotzdem an (nicht auf dem iPhone geprüft)
+
+## Shop-Recherche 26.11.2026
+
+- Neu: Le Maillot Vintage (FR, Shopify), Vintage Football Jerseys (UK, Shopify). FYJ-Händlerliste ausgeschöpft (alle 14
+  fehlenden schon früher verworfen). Geprüft und verworfen: classicfootballkit.fr (gleicher Bestand wie Classic Football
+  Kit UK), Trincamp (FR, fast nur Saint-Étienne), Friptadium (Kleiderboxen für Wiederverkäufer), boutique.so (So-Foot-Merch),
+  borisshirts.hemsida24.se (privater Sammler, Baukasten-Seite). Suchen in PL, PT, ES, SE/DK, IT lieferten nur eBay-Verkäufer,
+  Neuware (Decathlon/COPA, Futbol Emotion) oder Shops, die wir schon haben. Der Markt ist mit gut 120 Shops weitgehend abgedeckt
+- Quellen vom 24.11. laufen: Those Days 1.861, Secondfootballshirts 2.024, Mezek 2.213, Football Shirt Paradise 467, Kultkits 31

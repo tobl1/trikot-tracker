@@ -177,6 +177,12 @@ shops:
 # Those Days (Marktplatz für Sammler aus Europa, Echtheit von Those Days geprüft, Seiten nur per Skript): unsichtbarer
 # Browser im Gesamt- und Schnell-Run, siehe trikot/quellen/thosedays.py. Nutzer 24.11.2026: "glaub da geht einiges"
   - {name: Those Days, url: "https://thosedays.com", plattform: thosedays}
+# Recherche 26.11.2026 (Nutzer: "neue Shops, die vertrauenswürdig sind"), Land per /meta.json geprüft
+# Le Maillot Vintage (FR, Valognes, Shopify, "100 % authentiques", Trustpilot 4,6 bis 4,9; Titel mit Saison, Variante, Flock
+# und Größe; Preise eher hoch, 160 bis 350 €)
+  - {name: Le Maillot Vintage, url: "https://www.lemaillotvintage.com", schnellcheck: nein}
+# Vintage Football Jerseys (UK, Shopify, "Dealers of Original Vintage Football Shirts", viel XL)
+  - {name: Vintage Football Jerseys, url: "https://vintage-football-jerseys.co.uk", schnellcheck: nein}
 # Kultkits (DE, Shopware 6, gebrauchte Originale, Größe im Titel "(XL)", Zustand auf der Produktseite)
   - {name: Kultkits, url: "https://kultkits.de", plattform: html, suche: "/search?search={q}", link: "a.product-name", schnellcheck: nein}
 # 2nd Season Kits (Schweiz, Shopify, CHF, klein: ca. 50 Artikel, viele beflockt), Nutzer 09.11.2026. Schweiz = nicht EU,
