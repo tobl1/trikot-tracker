@@ -808,3 +808,27 @@ sperren alle Bots mit `Disallow: /`, keine offene Such-Schnittstelle, also weite
   (`aktion.ab`, App blendet ab dem Tag ein): Mr.Skully 25 % ab 27.11. laut Nutzer. Fehlende Bilder bei First 11, Secondhalf, Cult
   Kits: zuletzt im Gesamt-Run 26.11. 5:38 gesehen, also vor der Bild-Korrektur, der Gesamt-Run 27.11. tauscht sie aus. The 12th Man
   Retro: neuer Artikel ohne Fotos ("…-copy"), kommt mit, sobald der Shop Fotos ergänzt
+
+## Rabatte im Preis (27.11.2026)
+
+- Nutzer: "rechne die alle direkt rein auf die preise". `aktion.prozent` (fester Wert, gilt zwischen `ab` und `bis`) und der
+  erste Prozentwert aus `rabatt:` (Neukunden/Newsletter, abschaltbar je Shop mit `rabatt_einrechnen: nein`) werden vom
+  Euro-Preis abgezogen, nicht addiert, der höhere zählt (`preise.shop_discounts`, `discount_for`, `net_eur`; Zuordnung per
+  Shopname und Domain, also auch FYJ-Treffer). Gilt für Preisgrenze (Backend `too_expensive`, App `limitFor`), Sortierung und
+  App-Preis. Export: `eur` = nach Rabatt, `eur_voll` = laut Shop, `abzug` {prozent, art: aktion|neukunden, text}. App zeigt
+  den Shop-Preis durchgestrichen mit 🔥/🏷 und Prozent. `preis` und Preissenkungen bleiben roh (keine Fehl-Pushes "Preis
+  gesenkt"). Favoriten merken den Preis ohne Rabatt. Staffeln und "bis zu" ohne `prozent` werden nicht eingerechnet
+  (First 11, Legacy, Secondhalf, Shorty, Trikotstoff); RetrOriginal 15 % und Football Idiots 10 % = Wert für ein Trikot
+- Liste des Nutzers vom 27.11.: Classic11 20, Cult Kits 20, Your Vintage Football Kit 20 (plus 10 Newsletter), Football
+  Finery 15, Football Legends Kits 25, Football Shirt Collective 20, Football Shirt Paradise 10 Newsletter, Football Thrift
+  Shop 20, Full Time Fits 25 ("Full Time Futs"), Futmaniacos 25 (statt 15), Kit Launch 10, Kultkits 10, Le 7 Sorelle 15 (bis
+  150 €, darüber bis 50 %), Memoria 25, Original Football Shop 20, The Soccer Archive 20, Top Vintage Football Shirts 25,
+  Vintage Kit Co 20 ("Vintage co uk"), Vintage Football Area 20. "Devoetbal 10 % Newsletter" nicht eingetragen
+  (devoetbaltempel.nl ist kein eigener Shop bei uns, gleicher Bestand wie The Football Temple)
+- **Push-Welle behoben:** nach der zeitweisen Grenze 175 € kamen am 26.11. abends 63 und am 27.11. früh 18 "Jetzt unter der
+  Preisgrenze", obwohl still gedacht. Grund: `grenze_neu` wurde im ersten Run nach der Änderung vermerkt (Drop-Run), die
+  Trikots sah aber erst der Gesamt-Run. Jetzt werden bei geänderter Grenze oder geänderten Rabatten (Fingerabdruck in
+  `status.json` → `preisgrenze`) alle gemerkten Treffer still neu eingeordnet
+- Vintage Football Jerseys stand doppelt in shops.yaml (seit 26.11.), entfernt; Test gegen doppelte Namen und Domains
+- Nach dem 01.12.: `prozent`-Aktionen laufen von selbst aus (Preise springen zurück, Trikots über der Grenze verschwinden still)
+

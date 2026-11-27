@@ -26,13 +26,13 @@
 fyj: an
 
 shops:
-  - {name: Classic Football Shirts, aktion: {text: "Black Friday: 20 % auf alles (laut Nutzer)", bis: "2026-12-01"}, url: "https://www.classicfootballshirts.co.uk", plattform: cfs, min_zustand: 7}
-  - {name: Cult Kits, rabatt: "10 % auf die erste Bestellung (Newsletter)", versand: "ab £14.95 (DHL Economy Europe)", url: "https://www.cultkits.com", drop: ["täglich 18:00 Europe/London"]}   # "Daily Drop" laut Shop
-  - {name: Classic11, url: "https://classic11.com"}
+  - {name: Classic Football Shirts, aktion: {text: "Black Friday: 20 % auf alles (laut Nutzer)", prozent: 20, bis: "2026-12-01"}, url: "https://www.classicfootballshirts.co.uk", plattform: cfs, min_zustand: 7}
+  - {name: Cult Kits, aktion: {text: "Black Friday: 20 % (laut Nutzer)", prozent: 20, bis: "2026-12-01"}, rabatt: "10 % auf die erste Bestellung (Newsletter)", versand: "ab £14.95 (DHL Economy Europe)", url: "https://www.cultkits.com", drop: ["täglich 18:00 Europe/London"]}   # "Daily Drop" laut Shop
+  - {name: Classic11, aktion: {text: "Black Friday: 20 % (laut Nutzer)", prozent: 20, bis: "2026-12-01"}, url: "https://classic11.com"}
   - {name: RB-Jerseys, url: "https://www.rb-jerseys.com"}
   - {name: Vintage Football Shirts, versand: "£9.99 (Royal Mail Europe)", url: "https://www.vintagefootballshirts.com"}
   - {name: Retro Football Shirt Store, url: "https://www.retrofootballshirtstore.com", plattform: wix, schnellcheck: nein}   # UK, GBP, seit 02.11.2026 direkt (vorher FYJ), 2.600 Artikel
-  - {name: First Class Football Shirts, aktion: {text: "Black Friday: 20 % auf alles", bis: "2026-12-01"}, url: "https://www.firstclassfootballshirts.com"}
+  - {name: First Class Football Shirts, aktion: {text: "Black Friday: 20 % auf alles", prozent: 20, bis: "2026-12-01"}, url: "https://www.firstclassfootballshirts.com"}
   - {name: Football Shirt Kingdom, url: "https://footballshirtkingdom.com"}
   - {name: Calcio Vintage, url: "https://calciovintage.com"}
   - {name: Granny's Football Store, url: "https://grannysfootballstore.com"}
@@ -40,32 +40,32 @@ shops:
   - {name: The Third Kit, url: "https://thethirdkit.co.uk"}
   # Topbinz (ShopWired): bis 05.10.2026 403, dann erreichbar, seit 23.10.2026 wieder 403 aus GitHub (lokal 200), daher über FYJ. robots.txt verlangt
   # 10 Sek. Pause (Crawl-delay), Drop Fr 19 Uhr laut Nutzer. Drop-Run und Radar lesen nur die Neuheiten-Seite
-  - {name: Topbinz, aktion: {text: "Black Friday: 20 % auf alles (laut Nutzer)", bis: "2026-12-01"}, rabatt: "10 % bei Newsletter-Anmeldung", url: "https://www.topbinzfootballshirts.co.uk", plattform: fyj,   # seit 23.10.2026 403 aus GitHub (lokal 200), vorher html:
+  - {name: Topbinz, aktion: {text: "Black Friday: 20 % auf alles (laut Nutzer)", prozent: 20, bis: "2026-12-01"}, rabatt: "10 % bei Newsletter-Anmeldung", url: "https://www.topbinzfootballshirts.co.uk", plattform: fyj,   # seit 23.10.2026 403 aus GitHub (lokal 200), vorher html:
      pause: 10, drop: ["Fr 19:00"], schnellcheck: nein,
      suche: "/search/products?keywords={q}", link: "article.product-box h3 a", neu: "/new-in"}
-  - {name: The Soccer Archive, rabatt: "10 % auf die nächste Bestellung (Newsletter)", url: "https://thesoccerarchive.com"}
+  - {name: The Soccer Archive, aktion: {text: "Black Friday: 20 % (laut Nutzer)", prozent: 20, bis: "2026-12-01"}, rabatt: "10 % auf die nächste Bestellung (Newsletter)", url: "https://thesoccerarchive.com"}
   # NL, Lightspeed eCom (seit 02.11.2026 direkt, vorher FYJ), robots.txt Crawl-delay 2 = unsere Standardpause
   - {name: We Love Football Shirts, url: "https://www.welovefootballshirts.com", plattform: lightspeed, schnellcheck: nein}
-  - {name: RetrOriginalFootball, aktion: {text: "Black Friday: bis zu 25 % (1 Trikot 15 %, 2 Trikots 20 %, 3 Trikots 25 %)", bis: "2026-12-01"}, url: "https://retroriginalfootball.com"}
+  - {name: RetrOriginalFootball, aktion: {text: "Black Friday: bis zu 25 % (1 Trikot 15 %, 2 Trikots 20 %, 3 Trikots 25 %)", prozent: 15, bis: "2026-12-01"}, url: "https://retroriginalfootball.com"}
   - {name: House of Football Shirts, url: "https://houseoffootballshirts.com", plattform: aus, hinweis: "nur noch Laden in Den Haag, kein Online-Sortiment (01.10.2026)"}
   - {name: ClassicShirts-FC, url: "https://classicshirts-fc.com", plattform: fyj}
   # Drop-Termine laut Mail an den Nutzer (15.10.2026): 17.10. 6 Uhr, 31.10. 16 Uhr (deutsche Zeit)
   - {name: Nostalgic Football Shirts, url: "https://nostalgicfootballshirts.com", drop: ["2026-10-17 06:00", "2026-10-31 16:00"]}
   - {name: Back to the Football, url: "https://backtothefootball.com"}
-  - {name: Vintage Football Area, aktion: {text: "Black Friday: Rabatt-Staffel, je größer der Warenkorb, desto mehr", bis: "2026-12-01"}, rabatt: "10 % auf die erste Bestellung (Newsletter)", url: "https://www.vintagefootballarea.com"}
+  - {name: Vintage Football Area, aktion: {text: "Black Friday: 20 % (laut Nutzer)", prozent: 20, bis: "2026-12-01"}, rabatt: "10 % auf die erste Bestellung (Newsletter)", url: "https://www.vintagefootballarea.com"}
   - {name: 3kots, url: "https://3kots.com"}
-  - {name: Kit Launch, url: "https://kitlaunchfc.com"}
+  - {name: Kit Launch, aktion: {text: "Black Friday: 10 % (laut Nutzer)", prozent: 10, bis: "2026-12-01"}, url: "https://kitlaunchfc.com"}
   - {name: ReShirt, url: "https://reshirt.dk", plattform: smartweb, waehrung: DKK}
   - {name: Fodbold Shoppen, url: "https://fshoppen.dk"}
-  - {name: Football Second Hand, aktion: {text: "Black Week: 15 % auf alles, Code BLACKWEEK, 27. bis 29.11.", bis: "2026-11-29"}, url: "https://footballsecondhand.com"}
-  - {name: Football Thrift Shop, url: "https://footballthrift.shop"}
+  - {name: Football Second Hand, aktion: {text: "Black Week: 15 % auf alles, Code BLACKWEEK, 27. bis 29.11.", prozent: 15, ab: "2026-11-27", bis: "2026-11-29"}, url: "https://footballsecondhand.com"}
+  - {name: Football Thrift Shop, aktion: {text: "Black Friday: 20 % (laut Nutzer)", prozent: 20, bis: "2026-12-01"}, url: "https://footballthrift.shop"}
   - {name: Swiat Koszulek Pilkarskich, url: "https://swiatkoszulekpilkarskich.pl", plattform: prestashop}
   - {name: Classic-Shirts, url: "https://classic-shirts.com", plattform: idosell}
   - {name: FootballShirts.com, url: "https://footballshirts.com"}
   - {name: Sense of Goal, url: "https://www.senseofgoal.com"}
   - {name: Kickoff Vintage, url: "https://kickoffvintage.com"}
   - {name: Jerseys Hermanos, url: "https://jerseyshermanos.com"}
-  - {name: Nanos Football Jerseys, aktion: {text: "Black Week: 20 % auf alles, 23. bis 30.11.", bis: "2026-11-30"}, url: "https://nanosfootballjerseys.com"}
+  - {name: Nanos Football Jerseys, aktion: {text: "Black Week: 20 % auf alles, 23. bis 30.11.", prozent: 20, bis: "2026-11-30"}, url: "https://nanosfootballjerseys.com"}
   - {name: 1Klopp Shop, rabatt: "10 % auf die erste Bestellung", url: "https://1kloppshop.com"}
   - {name: Kick It Vintage, url: "https://kickitvintage.de"}
   - {name: The Hoff Classics, url: "https://www.thehoffclassics.com", plattform: fyj}
@@ -79,25 +79,25 @@ shops:
 #   footballshirtvintage.fr (first11shirts.com benennt Nachbauten im Titel, läuft daher direkt)
 # ---------------------------------------------------------------------
   - {name: Casual Football Shirts, url: "https://casualfootballshirts.co.uk", schnellcheck: nein}
-  - {name: Football Finery, rabatt: "10 % bei Club-Anmeldung (Code WELCOME10 auf der Seite)", versand: "£20 (Deutschland, unter 1 kg)", url: "https://footballfinery.co.uk", schnellcheck: nein}
+  - {name: Football Finery, aktion: {text: "Black Friday: 15 % (laut Nutzer)", prozent: 15, bis: "2026-12-01"}, rabatt: "10 % bei Club-Anmeldung (Code WELCOME10 auf der Seite)", versand: "£20 (Deutschland, unter 1 kg)", url: "https://footballfinery.co.uk", schnellcheck: nein}
   - {name: Green Sport Vintage, rabatt: "15 % Gutschein (Hinweis auf der Startseite)", url: "https://greensportvintage.com", schnellcheck: nein}
   - {name: Jersely, url: "https://jersely.com", schnellcheck: nein, drop: ["So 20:00"]}
   - {name: The Kitman 97, url: "https://thekitman97.com", schnellcheck: nein}
   - {name: To The Jersey, url: "https://tothejersey.com", schnellcheck: nein}
-  - {name: Buy Sell Football Shirts, aktion: {text: "Black Friday: 20 % auf alles, Code BLACKFRIDAY20", bis: "2026-12-01"}, rabatt: "10 % auf die erste Bestellung (Newsletter)", url: "https://buysellfootballshirts.co.uk", schnellcheck: nein}
-  - {name: Le 7 Sorelle, aktion: {text: "Black Friday: bis zu 50 % je nach Warenkorb", bis: "2026-12-01"}, url: "https://le7sorelle.it", schnellcheck: nein}
+  - {name: Buy Sell Football Shirts, aktion: {text: "Black Friday: 20 % auf alles, Code BLACKFRIDAY20", prozent: 20, bis: "2026-12-01"}, rabatt: "10 % auf die erste Bestellung (Newsletter)", url: "https://buysellfootballshirts.co.uk", schnellcheck: nein}
+  - {name: Le 7 Sorelle, aktion: {text: "Black Friday: 15 % bis 150 €, darüber bis zu 50 % (laut Nutzer)", prozent: 15, bis: "2026-12-01"}, url: "https://le7sorelle.it", schnellcheck: nein}
   - {name: Vintage Historic Sports, url: "https://vintagehistoricsports.fr", schnellcheck: nein}
-  - {name: Retrotrøjer, aktion: {text: "Black Friday Week: 15 % auf alle Trikots, Code BLACK", bis: "2026-12-01"}, url: "https://xn--retrotrjer-6cb.dk", schnellcheck: nein}
+  - {name: Retrotrøjer, aktion: {text: "Black Friday Week: 15 % auf alle Trikots, Code BLACK", prozent: 15, bis: "2026-12-01"}, url: "https://xn--retrotrjer-6cb.dk", schnellcheck: nein}
   - {name: Classic Pitchwear, url: "https://classicpitchwear.com", schnellcheck: nein}
   - {name: Cult Football, url: "https://cultfootball.co.uk", schnellcheck: nein}
-  - {name: Football Shirt Collective, url: "https://footballshirtcollective.com", schnellcheck: nein}
+  - {name: Football Shirt Collective, aktion: {text: "Black Friday: 20 % (laut Nutzer)", prozent: 20, bis: "2026-12-01"}, url: "https://footballshirtcollective.com", schnellcheck: nein}
   - {name: Legacy Football Shirts, aktion: {text: "Black Friday: bis zu 30 % auf über 400 Trikots", bis: "2026-12-01"}, url: "https://legacyfootballshirts.com", schnellcheck: nein}
   - {name: Oh Calcio, url: "https://ohcalcio.com", schnellcheck: nein}
   - {name: One More Time, url: "https://onemoretimeshop.it", schnellcheck: nein}
   - {name: Retro Football Shirts, url: "https://retrofootballshirts.com", schnellcheck: nein}
-  - {name: Special Football Shirts, aktion: {text: "Black Friday: 20 % auf alle Trikots, automatisch im Warenkorb", bis: "2026-12-01"}, url: "https://specialfootballshirts.com", schnellcheck: nein}
+  - {name: Special Football Shirts, aktion: {text: "Black Friday: 20 % auf alle Trikots, automatisch im Warenkorb", prozent: 20, bis: "2026-12-01"}, url: "https://specialfootballshirts.com", schnellcheck: nein}
   - {name: That Vintage Football Shirt, url: "https://thatvintagefootballshirt.com", schnellcheck: nein}
-  - {name: Vice Football Store, aktion: {text: "Black Friday: 25 % auf alles", bis: "2026-12-01"}, rabatt: "20 % auf die erste Bestellung", url: "https://vicefootballstore.com", schnellcheck: nein}
+  - {name: Vice Football Store, aktion: {text: "Black Friday: 25 % auf alles", prozent: 25, bis: "2026-12-01"}, rabatt: "20 % auf die erste Bestellung", url: "https://vicefootballstore.com", schnellcheck: nein}
   - {name: Vintage Football Jerseys, url: "https://vintage-football-jerseys.co.uk", schnellcheck: nein}
 
   - {name: First 11 Shirts, aktion: {text: "Black Friday: bis zu 75 % auf ausgewählte Trikots", bis: "2026-12-01"}, rabatt: "11 % Gutschein (Newsletter)", url: "https://first11shirts.com", drop: ["Fr 19:00"]}
@@ -117,7 +117,7 @@ shops:
   - {name: SG Vintage Jerseys, url: "https://sg-vintage-jerseys.de", schnellcheck: nein}
   - {name: 089 Kits, url: "https://www.089kits.de", plattform: wix, schnellcheck: nein}
   - {name: Retroshirts CH, url: "https://retroshirts.ch", schnellcheck: nein}
-  - {name: Original Football Shop, url: "https://originalfootball.shop", schnellcheck: nein}
+  - {name: Original Football Shop, aktion: {text: "Black Friday: 20 % (laut Nutzer)", prozent: 20, bis: "2026-12-01"}, url: "https://originalfootball.shop", schnellcheck: nein}
 # Benelux
   - {name: The Footballshirt Vault, url: "https://thefootballshirtvault.com", schnellcheck: nein}
   - {name: Kick and Rush, url: "https://kickandrushshop.nl", schnellcheck: nein}
@@ -130,19 +130,19 @@ shops:
   - {name: La Surface, url: "https://lasurface.shop", schnellcheck: nein}
   - {name: Vintage Football FR, url: "https://www.vintage-football.com", plattform: wix, schnellcheck: nein}
   - {name: Real Vintage Football, url: "https://realvintagefootball.com", schnellcheck: nein}
-  - {name: Futmaniacos, aktion: {text: "Rebajas: 15 % auf alles", bis: "2026-12-01"}, url: "https://futmaniacos.com", schnellcheck: nein}
+  - {name: Futmaniacos, aktion: {text: "Black Friday: 25 % auf alles (laut Nutzer, vorher 15 %)", prozent: 25, bis: "2026-12-01"}, url: "https://futmaniacos.com", schnellcheck: nein}
   - {name: Arsij Store, url: "https://www.arsijstore.com", schnellcheck: nein}
   - {name: Maglie Calcio Vintage, url: "https://www.magliecalciovintage.it", schnellcheck: nein}
 # UK
   - {name: Football Finds, url: "https://footballfinds.co.uk", schnellcheck: nein}
   - {name: The 12th Man Retro, url: "https://the12thmanretro.com", schnellcheck: nein}
-  - {name: Full Time Fits, url: "https://fulltimefits.com", schnellcheck: nein}
+  - {name: Full Time Fits, aktion: {text: "Black Friday: 25 % (laut Nutzer)", prozent: 25, bis: "2026-12-01"}, url: "https://fulltimefits.com", schnellcheck: nein}
   - {name: Squadra Football, url: "https://squadrafootball.com", schnellcheck: nein}
   - {name: Infinity Football Shirts, url: "https://infinityfootballshirts.com", schnellcheck: nein}
 # Herkunft unklar (EUR)
   - {name: Vintage Sports Clothing, url: "https://vintagesportsclothing.com", schnellcheck: nein}
   - {name: Modeziege, url: "https://modeziege.net", schnellcheck: nein}
-  - {name: Football Legends Kits, rabatt: "10 % auf den ersten Kauf (Code PREMIER10 auf der Seite)", url: "https://footballlegendskits.com", schnellcheck: nein}
+  - {name: Football Legends Kits, aktion: {text: "Black Friday: 25 % (laut Nutzer)", prozent: 25, bis: "2026-12-01"}, rabatt: "10 % auf den ersten Kauf (Code PREMIER10 auf der Seite)", url: "https://footballlegendskits.com", schnellcheck: nein}
 # Weitere (Bulishirts ist ein deutscher Shop, stand früher unter "Außerhalb Europas")
   - {name: Bulishirts, url: "https://www.bulishirts.com", plattform: wix, schnellcheck: nein}
 
@@ -150,7 +150,7 @@ shops:
   - {name: Trikotcult, url: "https://www.trikotcult.de"}
 # Vom Nutzer genannt (07.10.2026): dänischer Vintage-Shop, Shopify, ca. 280 Artikel (Original Vintage, Player Issue),
 # Größe im Titel ("… - Str. XL", "Str.XL"), Preise in EUR
-  - {name: Your Vintage Football Kit, url: "https://yourvintagefootballkit.com"}
+  - {name: Your Vintage Football Kit, aktion: {text: "Black Friday: 20 % (laut Nutzer)", prozent: 20, bis: "2026-12-01"}, rabatt: "10 % bei Newsletter-Anmeldung (laut Nutzer)", url: "https://yourvintagefootballkit.com"}
 
 # Recherche 08.10.2026 (Nutzer: "renommierte Shops aus Europa, sicher Originale"), vorab mit unseren Filtern getestet
 # Secondhalf (NL, "trusted reseller of original vintage football shirts", ValuedShops-geprüft): 6 Treffer, u. a. Barça Away 12/13 XL
@@ -160,7 +160,7 @@ shops:
 # Shorty Football Shirts: "Original" in jedem Titel, viele Bundesliga-Trikots, 1 Treffer
   - {name: Shorty Football Shirts, aktion: {text: "Black Friday: bis zu 55 % auf 88 Trikots", bis: "2026-12-01"}, url: "https://shortyfootballshirts.com", schnellcheck: nein}
 # Vintage Kit Co (UK, "All items are authentic", 80er bis 00er), klein, derzeit ohne Treffer
-  - {name: Vintage Kit Co, url: "https://vintagekitco.com", schnellcheck: nein}
+  - {name: Vintage Kit Co, aktion: {text: "Black Friday: 20 % (laut Nutzer)", prozent: 20, bis: "2026-12-01"}, url: "https://vintagekitco.com", schnellcheck: nein}
 # Football & Vintage Amsterdam (KVK-registriert, viel Match worn/issued), derzeit ohne Treffer
   - {name: Football & Vintage Amsterdam, url: "https://footballandvintageamsterdam.com", schnellcheck: nein}
 # The Shirt Collectors (UK): beflockte Trikots, Größe und Zustand im Titel, 6 Treffer (vorher nur über FYJ, Fundgrube)
@@ -173,7 +173,7 @@ shops:
 # Mezek.hu (HU, Shopify, HUF, "Eredeti vintage és retró focimezek" = originale Vintage-Trikots)
   - {name: Mezek, url: "https://mezek.hu", schnellcheck: nein}
 # Football Shirt Paradise (NL, Shopify, EUR, original Vintage und Retro)
-  - {name: Football Shirt Paradise, url: "https://footballshirtparadise.com", schnellcheck: nein}
+  - {name: Football Shirt Paradise, rabatt: "10 % bei Newsletter-Anmeldung (laut Nutzer)", url: "https://footballshirtparadise.com", schnellcheck: nein}
 # Those Days (Marktplatz für Sammler aus Europa, Echtheit von Those Days geprüft, Seiten nur per Skript): unsichtbarer
 # Browser im Gesamt- und Schnell-Run, siehe trikot/quellen/thosedays.py. Nutzer 24.11.2026: "glaub da geht einiges"
   - {name: Those Days, url: "https://thosedays.com", plattform: thosedays}
@@ -181,25 +181,23 @@ shops:
 # Le Maillot Vintage (FR, Valognes, Shopify, "100 % authentiques", Trustpilot 4,6 bis 4,9; Titel mit Saison, Variante, Flock
 # und Größe; Preise eher hoch, 160 bis 350 €)
   - {name: Le Maillot Vintage, url: "https://www.lemaillotvintage.com", schnellcheck: nein}
-# Vintage Football Jerseys (UK, Shopify, "Dealers of Original Vintage Football Shirts", viel XL)
-  - {name: Vintage Football Jerseys, url: "https://vintage-football-jerseys.co.uk", schnellcheck: nein}
 # Trikotlab (DE, Shopify, Nutzer 26.11.2026): kleiner Händler aus der Sammlerszene (vorher Flohmärkte), gebrauchte Trikots
 # 30 bis 55 €, viel Bundesliga und DFB, ca. 90 Artikel, Größe im Titel "(M)". Keine ausdrückliche Echtheitsgarantie
   - {name: Trikotlab, url: "https://trikotlab.de"}
 # Kultkits (DE, Shopware 6, gebrauchte Originale, Größe im Titel "(XL)", Zustand auf der Produktseite)
-  - {name: Kultkits, url: "https://kultkits.de", plattform: html, suche: "/search?search={q}", link: "a.product-name", schnellcheck: nein}
+  - {name: Kultkits, aktion: {text: "Black Friday: 10 % (laut Nutzer)", prozent: 10, bis: "2026-12-01"}, url: "https://kultkits.de", plattform: html, suche: "/search?search={q}", link: "a.product-name", schnellcheck: nein}
 # 2nd Season Kits (Schweiz, Shopify, CHF, klein: ca. 50 Artikel, viele beflockt), Nutzer 09.11.2026. Schweiz = nicht EU,
 # bei Versand nach DE fallen Zoll/EUSt. an
   - {name: 2nd Season Kits, url: "https://2ndseasonkits.ch", schnellcheck: nein}
 # Vintagescore (Moers, NRW, "erster Store für Vintage Fußballtrikots in NRW"): Größe in der Variante, 2 Treffer
-  - {name: Vintagescore, aktion: {text: "Black Week: 20 % auf alles, Code BLACK20", bis: "2026-12-01"}, rabatt: "10 % bei Newsletter-Anmeldung", url: "https://vintagescore.de", schnellcheck: nein}
+  - {name: Vintagescore, aktion: {text: "Black Week: 20 % auf alles, Code BLACK20", prozent: 20, bis: "2026-12-01"}, rabatt: "10 % bei Newsletter-Anmeldung", url: "https://vintagescore.de", schnellcheck: nein}
 # Studio Football Shirts (NL, Borne, Shopify, "authentic vintage"), Nutzer 02.11.2026: 161 Artikel, 25 in XL/XXL
   - {name: Studio Football Shirts, url: "https://studiofootballshirts.com", schnellcheck: nein}
 # Recherche 02.11.2026 (Nutzer: "Portfolio erweitern"), Land per /meta.json bzw. Shop-Währung geprüft
 # Classic Football Kit (UK, Chesterfield, Shopify, "Specialist in original classic football shirts", ca. 17.000 Artikel)
   - {name: Classic Football Kit, url: "https://classicfootballkit.co.uk", schnellcheck: nein}
 # Memoria (FR, Shopify, Originale plus offizielle Neuauflagen, die unser Nachbau-Filter aussortiert)
-  - {name: Memoria, url: "https://memoriafootballshop.com", schnellcheck: nein}
+  - {name: Memoria, aktion: {text: "Black Friday: 25 % (laut Nutzer)", prozent: 25, bis: "2026-12-01"}, url: "https://memoriafootballshop.com", schnellcheck: nein}
 # Saving Football Shirts (London, Wix, GBP, viel unter £50; Stand auf dem Greenwich Market, auch bei FYJ)
   - {name: Saving Football Shirts, url: "https://www.savingfootballshirts.com", plattform: wix, schnellcheck: nein}
 # Het Shirthuis (NL, "100% originele Voetbalshirts", "Alle artikelen worden gecontroleerd op echtheid"), Note im Titel
@@ -207,7 +205,7 @@ shops:
 # Legit Football Shirts (Stettin, PL, "Tylko oryginały", prüft Etiketten und Herstellercodes), WooCommerce, klein
   - {name: Legit Football Shirts, url: "https://legitfootballshirts.com", schnellcheck: nein, radar: nein}   # Radar ergab 403 (08.10.2026), nachts ok
 # The Football Idiots (Oslo/Stavanger, "Norway's home for authentic vintage"), beflockte Klassiker mit Note, Preise in NOK
-  - {name: The Football Idiots, aktion: {text: "Black Week: bis zu 20 % (1 Trikot 10 %, 2 Trikots 15 %, ab 3 Trikots 20 %, nur eigener Bestand)", bis: "2026-12-01"}, url: "https://www.thefootballidiots.com", schnellcheck: nein}
+  - {name: The Football Idiots, aktion: {text: "Black Week: bis zu 20 % (1 Trikot 10 %, 2 Trikots 15 %, ab 3 Trikots 20 %, nur eigener Bestand)", prozent: 10, bis: "2026-12-01"}, url: "https://www.thefootballidiots.com", schnellcheck: nein}
 # Pure Football Shirts (FR laut meta.json, vom Nutzer genannt 08.10.2026): beflockt, Größe im Titel, "100% authentique",
 # prüft Etiketten und Produktcodes ("Pas de contrefaçons, pas de rééditions modernes"), 5 Treffer bei Aufnahme.
 # Hatte ein Thiago Bayern Third 2015/16 in XL (ausverkauft)
@@ -216,13 +214,13 @@ shops:
 # Eigene Shopsysteme über die Such-Ergebnisseite (plattform: html), seit 05.10.2026
   # Mr.Skully (DE, Webador-Baukasten ohne Suche): Produkte über die Sitemap, Titel und Größe stehen in der Adresse.
   # Laut Startseite "XXL-Drop am 01.11.2026" (Uhrzeit unbekannt, ganzer Tag im Blick), Nutzer 15.10.2026
-  - {name: Mr.Skully, aktion: {text: "Black Friday: 25 % (laut Nutzer, ab Freitag 00:01)", ab: "2026-11-27", bis: "2026-12-01"}, url: "https://www.mrskully.de", plattform: html, schnellcheck: nein, sitemap: "/sitemap.xml",
+  - {name: Mr.Skully, aktion: {text: "Black Friday: 25 % (laut Nutzer, ab Freitag 00:01)", prozent: 25, ab: "2026-11-27", bis: "2026-12-01"}, url: "https://www.mrskully.de", plattform: html, schnellcheck: nein, sitemap: "/sitemap.xml",
      neu: "/sitemap.xml", suche: "/sitemap.xml", drop: ["2026-11-01 09:00", "2026-11-01 12:00", "2026-11-01 15:00", "2026-11-01 18:00"]}
   # Top Vintage Football Shirts (IT, Storeden, "only originals" aus Sammlungen und Restposten), seit 08.10.2026
   # Vintage Sports Fashion (Magento, Nutzer 09.11.2026): Cloudflare sperrte nach fünf Abrufen der Suche (403), wird nicht
   # umgangen. Der Shop ist bei FYJ gelistet, Treffer kommen darüber
   - {name: Vintage Sports Fashion, url: "https://vintagesportsfashion.com", plattform: fyj}
-  - {name: Top Vintage Football Shirts, url: "https://www.topvintagefootballshirts.com", plattform: html, schnellcheck: nein,
+  - {name: Top Vintage Football Shirts, aktion: {text: "Black Friday: 25 % (laut Nutzer)", prozent: 25, bis: "2026-12-01"}, url: "https://www.topvintagefootballshirts.com", plattform: html, schnellcheck: nein,
      suche: "/shop/search/{q}", link: 'a[href^="/product/"]', neu: "/shop/category/19277411/new-now"}
   # Originaltrikot: Nutzer 05.10.2026 "ganzen Shop entfernen, wirkt unseriös" (B-Ware, Angaben wie "Herren S, M, L, XL, XXL")
   - {name: Originaltrikot, url: "https://www.originaltrikot.de", plattform: aus, sperren: ja,

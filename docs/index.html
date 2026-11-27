@@ -472,7 +472,7 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
   function toggleFav(t){
     const nowIso = new Date().toISOString();
     if (favs[t.id]) { delete favs[t.id]; favRemoved[t.id] = nowIso; }
-    else { favs[t.id] = {id: t.id, titel: t.titel, url: t.url, bild: t.bild, preis: t.preis, eur: t.eur, shopName: t.shopName,
+    else { favs[t.id] = {id: t.id, titel: t.titel, url: t.url, bild: t.bild, preis: t.preis, eur: t.eur_voll ?? t.eur, shopName: t.shopName,
                          groesse: t.groesse, labels: t.labels, zustand: t.zustand, notiz: t.notiz, erst: t.erst, added: nowIso};
            delete favRemoved[t.id]; }
     store.set("favs", favs); store.set("favremoved", favRemoved); render();
@@ -552,7 +552,8 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
     $("flagwhat").textContent = `${t.titel} · ${t.shopName}`;
     // Warum wurde das gefunden? Hilft beim Melden (und mir beim Ableiten von Regeln)
     $("flagwhy").textContent = [t.warum ? `Warum Treffer: ${t.warum}` : "", t.pruefen ? `Achtung: ${t.pruefen}` : "",
-      t.aktion ? `Aktion im Shop: ${t.aktion.text}${t.aktion.bis ? ", bis " + t.aktion.bis.split("-").reverse().join(".") : ""} (Preis hier ohne Abzug)` : ""]
+      t.aktion ? `Aktion im Shop: ${t.aktion.text}${t.aktion.bis ? ", bis " + t.aktion.bis.split("-").reverse().join(".") : ""} ${t.abzug && t.abzug.art === "aktion" ? " (im Preis eingerechnet)" : " (Preis hier ohne Abzug)"}` : "",
+      t.abzug && t.abzug.art === "neukunden" ? `Neukunden-Rabatt im Preis eingerechnet: ${t.abzug.text}` : ""]
       .filter(Boolean).join(" · ");
     $("flaghint").textContent = store.get("token") ? "Geht direkt raus. Der nächste Run blendet den Treffer dauerhaft aus."
       : "Ohne Schlüssel (Einstellungen) öffnet sich die GitHub-Seite, dort \"Submit\" tippen.";
@@ -810,7 +811,7 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
 
   function card(t){
     const f = favs[t.id];
-    const down = f && !t.gone && f.eur != null && t.eur != null && t.eur < f.eur - 0.5;
+    const down = f && !t.gone && f.eur != null && t.eur != null && (t.eur_voll ?? t.eur) < f.eur - 0.5;   // Favorit gemerkt ohne Rabatt
     const badges = [t.gone && '<span class="badge gone">NICHT MEHR GELISTET</span>',
                     down && `<span class="badge down" title="Preis gesenkt">↓ von ${eur(f.eur)}</span>`,
                     !down && t.preis_runter && !t.gone && `<span class="badge down" title="Preis gesenkt">↓ ${t.preis_runter} %</span>`,
@@ -820,18 +821,20 @@ const shortSize = g => /^(xxl|2xl|xx[- ]large)$/i.test(String(g).trim()) ? "XXL"
                     t.repro && '<span class="badge re" title="Original-Trikot, Name und Nummer nachgedruckt">REPRO-FLOCK</span>',
                     t.reissue && '<span class="badge re" title="Neuauflage, z. B. Nikes T90-Reissue von 2025, kein Original von damals">NEUAUFLAGE</span>',
                     t.pruefen && !t.gone && `<span class="badge chk" title="${esc(t.pruefen)}">PRÜFEN</span>`,
-                    t.aktion && !t.gone && `<span class="badge sale" title="${esc(t.aktion.text)}">🔥 ${esc(saleTag(t.aktion.text))}</span>`]
+                    t.aktion && !t.gone && `<span class="badge sale" title="${esc(t.aktion.text)}">🔥 ${esc(t.abzug && t.abzug.art === "aktion" ? "−" + t.abzug.prozent + " %" : saleTag(t.aktion.text))}</span>`]
       .filter(Boolean).join("");
     const cond = t.zustand ? `<span class="cond">${esc(t.zustand)}</span>` : "";
     const note = t.notiz ? `<div class="note" title="${esc(t.notiz)}">${esc(t.notiz)}</div>` : "";
     const orig = t.preis && (t.eur == null || !/EUR|€/.test(t.preis)) ? `<small>${esc(t.preis)}</small>` : "";
-    const price = t.eur != null ? `<b>${eur(t.eur)}</b>${orig}` : `<b>${esc(t.preis || "?")}</b>`;
+    // Rabatt eingerechnet (Aktion oder Neukunden-Rabatt, Nutzer 27.11.2026): Preis danach groß, Shop-Preis durchgestrichen
+    const abz = t.abzug && t.eur_voll != null ? `<small class="abz" title="${esc((t.abzug.art === "aktion" ? "Aktion eingerechnet: " : "Neukunden-Rabatt eingerechnet: ") + t.abzug.text)}"><s>${eur(t.eur_voll)}</s> ${t.abzug.art === "aktion" ? "🔥" : "🏷"} −${t.abzug.prozent} %</small>` : "";
+    const price = t.eur != null ? `<b>${eur(t.eur)}</b>${abz}${orig}` : `<b>${esc(t.preis || "?")}</b>`;
     const img = t.bild ? `<img loading="lazy" referrerpolicy="no-referrer" src="${esc(t.bild)}" alt="" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph',textContent:'👕'}))">`
                        : '<span class="ph">👕</span>';
     // Neukunden-Rabatt nur als kleines Preisschild mit Prozentwert, Details beim Antippen/Überfahren (Nutzer 15.10.2026)
     const pct = t.rabatt ? (t.rabatt.match(/\d+\s?%/) || ["Rabatt"])[0].replace(/\s/, "\u202f") : "";
     const ship = t.versand ? (t.versand.match(/[£€]\s?[\d.,]+/) || ["Versand"])[0] : "";
-    const deal = (pct && !t.aktion ? ` · <span class="deal" title="Neukunden: ${esc(t.rabatt)}">🏷\u202f${esc(pct)}</span>` : "") +
+    const deal = (pct && !t.aktion && !t.abzug ? ` · <span class="deal" title="Neukunden: ${esc(t.rabatt)}">🏷\u202f${esc(pct)}</span>` : "") +
       (ship ? ` · <span class="deal" title="Versand laut Shop: ${esc(t.versand)}, dazu ggf. Zoll und Einfuhrumsatzsteuer">🚚\u202f${esc(ship)}</span>` : "");
     const same = t.dupes ? t.dupes.filter(d => d.shopName === t.shopName).length : 0;
     const dup = !st.dupes && t.dupes && t.dupes.length ? `<div class="dupes">` +

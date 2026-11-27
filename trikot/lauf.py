@@ -21,7 +21,7 @@ from .berichte import fundgrube, log_problems, write_dashboard, write_report
 from .issues import add_shops_from_issues, apply_flags, check_alarms, collect_push_abos, owner_issues
 from .melden import OUTBOX_MAX_HOURS, detail_line, push, push_label, save_outbox, send_outbox, short
 from .netz import Http
-from .preise import effective_pg, fetch_rates, parse_price, price_limit, to_eur
+from .preise import discount_for, effective_pg, fetch_rates, net_eur, parse_price, price_limit, shop_discounts, to_eur
 from .pruefung import enrich, hold_unchecked
 from .quellen import run_shop
 from .quellen.fyj import fyj_run
@@ -343,9 +343,10 @@ def main():
     ts = now().isoformat()
     rates = fetch_rates(status_store)["rates"]
     pg = watch.get("preisgrenze") or {}
+    rabatte = shop_discounts(shops_cfg.get("shops") or [])   # Aktionen und Neukunden-Rabatte in den Preis eingerechnet
 
     def too_expensive(e):
-        eur = to_eur(e.get("price"), rates)
+        eur = net_eur(to_eur(e.get("price"), rates), discount_for(e, rabatte))
         limit = price_limit(e["labels"], pg)
         return bool(limit and eur and eur > limit)
     new_entries, price_drops = [], []
@@ -480,9 +481,16 @@ def main():
     checked, check_fails = enrich(seen, ts, ENRICH_BUDGET.get(args.mode, 0), matcher,
                                   deadline=started + 60 * ENRICH_DEADLINE_MIN.get(args.mode, 10))
     cheaper = []
-    grenze = json.dumps(pg, sort_keys=True)
-    grenze_neu = status_store.get("preisgrenze") != grenze   # Grenze selbst geändert: nicht als Preissenkung melden
+    grenze = json.dumps({"grenze": pg, "rabatte": {k: v["prozent"] for k, v in rabatte.items()}}, sort_keys=True)
+    grenze_neu = status_store.get("preisgrenze") != grenze   # Grenze/Rabatte geändert: nicht als Preissenkung melden
     status_store["preisgrenze"] = grenze
+    if grenze_neu:
+        # alle gemerkten Treffer still neu einordnen, nicht nur die in diesem Run gesehenen. Sonst kamen sie im nächsten
+        # Gesamt-Run als "Jetzt unter der Preisgrenze" (26.11.2026: 63 Pushes nach der zeitweisen Grenze 175 €, weil der
+        # erste Run danach ein Drop-Run war und die Änderung schon vermerkt hatte)
+        for e in seen.values():
+            if e.get("labels") and e["last"] != ts:
+                e["teuer"] = too_expensive(e)
     for e in seen.values():
         if e["last"] == ts:
             mark_worn(e)   # Note kam evtl. erst jetzt von der Shop-Seite

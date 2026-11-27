@@ -10,7 +10,7 @@ from .basis import (
     ERROR_KEEP_DAYS, FUNDGRUBE_DAYS, FUNDGRUBE_MAX, FUNDGRUBE_MAX_REISSUE, FYJ_MARKETPLACES, REPORT_HOURS, TZ,
     domain, is_high, now, short_size,
 )
-from .preise import to_eur
+from .preise import discount_for, net_eur, shop_discounts, to_eur
 from .quellen.fyj import FYJ_DOMAIN_STATS
 from .rhythmus import drop_calendar
 from .speicher import load_json
@@ -51,12 +51,17 @@ def write_dashboard(seen, status_store, mode, ts, watch_cfg, shops):
     kurse = status_store.get("kurse") or {}
     rates = kurse.get("rates") or {"EUR": 1.0}
     items = []
+    rabatte = shop_discounts(shops)
     for key, e in current_entries(seen).items():
         if e.get("teuer"):
             continue   # über der Preisgrenze: konsequent raus (Nutzer 09.10.2026)
+        voll = to_eur(e.get("price"), rates)
+        disc = discount_for(e, rabatte) if voll is not None else None
         items.append({
             "id": key, "titel": e["title"], "url": e["url"], "shop": e["shop"],
-            "preis": e.get("price", ""), "eur": to_eur(e.get("price"), rates),
+            "preis": e.get("price", ""), "eur": net_eur(voll, disc),
+            # eingerechneter Rabatt (Nutzer 27.11.2026): eur ist der Preis danach, eur_voll der Preis laut Shop
+            "eur_voll": voll if disc else None, "abzug": disc,
             "groesse": short_size(e.get("size", "")), "labels": e["labels"], "hoch": is_high(e),
             "zustand": e.get("zustand", ""), "notiz": e.get("zustand_notiz", ""), "bild": e.get("image", ""),
             "erst": e["first"], "zuletzt": e["last"], "via": e.get("via", ""),

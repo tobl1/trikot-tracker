@@ -78,6 +78,45 @@ def price_limit(labels, pg):
     return 0 if 0 in own else max(own + [base])
 
 
+PCT_RX = re.compile(r"(\d+(?:[.,]\d+)?)\s?%")
+
+
+def shop_discounts(shops, today=None):
+    """Rabatt je Shop zum Einrechnen in den Euro-Preis (Nutzer 27.11.2026: "rechne die alle direkt rein"):
+    laufende Aktion mit festem Prozentwert (aktion.prozent, zwischen "ab" und "bis" einschließlich, deutsches Datum) oder
+    Neukunden-Rabatt (erster Prozentwert im Text von rabatt:, abschaltbar mit rabatt_einrechnen: nein). Rabatte werden
+    nicht addiert, es zählt der höhere. Schlüssel: Shopname und Domain (FYJ-Treffer haben nur die Domain)"""
+    import datetime as dt
+    from zoneinfo import ZoneInfo
+    from .speicher import _host
+    today = today or dt.datetime.now(ZoneInfo("Europe/Berlin")).date().isoformat()
+    out = {}
+    for s in shops:
+        cands = []
+        a = s.get("aktion")
+        if isinstance(a, dict) and a.get("prozent") and str(a.get("ab") or "0") <= today <= str(a.get("bis") or "9999"):
+            cands.append({"prozent": float(a["prozent"]), "art": "aktion", "text": a.get("text", "")})
+        m = PCT_RX.search(str(s.get("rabatt") or ""))
+        if m and str(s.get("rabatt_einrechnen", "ja")).lower() not in ("nein", "false", "no"):
+            cands.append({"prozent": float(m.group(1).replace(",", ".")), "art": "neukunden", "text": s["rabatt"]})
+        cands = [c for c in cands if 0 < c["prozent"] < 100]
+        if cands:
+            best = max(cands, key=lambda c: c["prozent"])
+            out[s["name"]] = best
+            out[_host(s["url"])] = best
+    return out
+
+
+def discount_for(entry, discounts):
+    from .speicher import _host
+    return discounts.get(_host(entry.get("url") or "")) or discounts.get(entry.get("shop") or "")
+
+
+def net_eur(eur, disc):
+    """Euro-Preis nach Rabatt (disc aus discount_for, None = ohne)"""
+    return round(eur * (1 - disc["prozent"] / 100), 2) if eur is not None and disc else eur
+
+
 def to_eur(price, rates):
     amount, cur = parse_price(price)
     rate = rates.get(cur)

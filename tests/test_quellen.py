@@ -949,3 +949,33 @@ def test_aktion_mit_startdatum():
     shops = [{"name": "Mr.Skully", "url": "https://www.mrskully.de", "aktion": {"text": "25 %", "ab": "2026-11-27", "bis": "2026-12-01"}}]
     assert active_deals(shops, "2026-11-26")[0]["ab"] == "2026-11-27"     # schon dabei, die App zeigt sie erst ab dem 27.
     assert active_deals(shops, "2026-12-02") == []
+
+
+def test_rabatte_eingerechnet():
+    """Aktion mit prozent nur im Zeitraum, Neukunden-Rabatt aus dem Text, nicht addiert, der höhere zählt"""
+    from trikot.preise import discount_for, net_eur, shop_discounts
+    shops = [{"name": "A", "url": "https://www.a.de", "aktion": {"text": "BF", "prozent": 20, "bis": "2026-12-01"},
+              "rabatt": "10 % auf die erste Bestellung"},
+             {"name": "B", "url": "https://b.com", "rabatt": "15 % Gutschein"},
+             {"name": "C", "url": "https://c.com", "aktion": {"text": "25 %", "prozent": 25, "ab": "2026-11-28", "bis": "2026-12-01"}},
+             {"name": "D", "url": "https://d.com", "aktion": {"text": "bis zu 50 %", "bis": "2026-12-01"}},
+             {"name": "E", "url": "https://e.com", "rabatt": "10 %", "rabatt_einrechnen": "nein"},
+             {"name": "F", "url": "https://f.com", "aktion": {"text": "BF", "prozent": 30, "bis": "2026-11-26"}, "rabatt": "5 %"}]
+    d = shop_discounts(shops, today="2026-11-27")
+    assert d["a.de"]["prozent"] == 20 and d["A"]["art"] == "aktion"
+    assert d["B"] == {"prozent": 15.0, "art": "neukunden", "text": "15 % Gutschein"}
+    assert "C" not in d and "D" not in d and "E" not in d and d["F"]["prozent"] == 5   # C startet erst, D ohne festen Wert
+    assert shop_discounts(shops, today="2026-11-28")["C"]["prozent"] == 25
+    assert discount_for({"url": "https://www.a.de/p/1", "shop": "FYJ"}, d)["prozent"] == 20      # FYJ-Treffer per Domain
+    assert net_eur(100.0, d["A"]) == 80.0 and net_eur(100.0, None) == 100.0 and net_eur(None, d["A"]) is None
+
+
+def test_shops_yaml_ohne_doppelte():
+    import yaml
+    shops = yaml.safe_load((Path(__file__).parent.parent / "shops.yaml").read_text(encoding="utf-8"))["shops"]
+    names = [s["name"] for s in shops]
+    hosts = [s["url"].split("://")[-1].split("/")[0].removeprefix("www.") for s in shops]
+    assert len(names) == len(set(names)) and len(hosts) == len(set(hosts))
+    for s in shops:   # Aktion mit Prozentwert: Zahl zwischen 0 und 100
+        if isinstance(s.get("aktion"), dict) and "prozent" in s["aktion"]:
+            assert 0 < float(s["aktion"]["prozent"]) < 100, s["name"]

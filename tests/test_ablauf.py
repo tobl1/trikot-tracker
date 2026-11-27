@@ -33,7 +33,8 @@ def lauf(tmp_path, monkeypatch):
     for var in ("GITHUB_TOKEN", "GITHUB_REPOSITORY", "EBAY_CLIENT_ID", "EBAY_CLIENT_SECRET", "DASHBOARD_URL"):
         monkeypatch.delenv(var, raising=False)
     monkeypatch.setattr(sp, "load_shops", lambda: {"shops": [SHOP], "fyj": "aus"})
-    monkeypatch.setattr(trikot.lauf, "fetch_rates", lambda st: {"rates": {"EUR": 1.0, "GBP": 0.85}})
+    monkeypatch.setattr(trikot.lauf, "fetch_rates",   # wie das echte: Kurse auch für das Dashboard merken
+                        lambda st: st.setdefault("kurse", {"datum": "", "rates": {"EUR": 1.0, "GBP": 0.85}}))
     monkeypatch.setattr(trikot.lauf, "add_shops_from_issues", lambda: 0)
 
     def run(artikel, seiten=None):
@@ -179,3 +180,34 @@ def test_run_grenze_geaendert_keine_push_unter_grenze(lauf, monkeypatch):
     lauf([teuer])
     seen, out = lauf([dict(teuer, price="£100.00")])
     assert any("unter der Preisgrenze" in p["title"] for p in out)
+
+
+def test_run_grenze_geaendert_auch_ungesehene_still(lauf, monkeypatch):
+    """26.11.2026: nach der zeitweisen Grenze 175 € kamen 63 "Jetzt unter der Preisgrenze"-Pushes, weil der erste Run danach
+    die Änderung vermerkte, die Trikots aber nicht sah. Jetzt werden bei einer Änderung alle gemerkten still neu eingeordnet"""
+    teuer = dict(kroos(1), price="£150.00")       # 176 €
+    lauf([teuer, kroos(2)])
+    import trikot.lauf as tl
+    real = tl.effective_pg
+    monkeypatch.setattr(tl, "effective_pg", lambda pg: dict(real(pg), max_eur=200))
+    seen, out = lauf([kroos(2)])                  # Run ohne das teure Trikot (z. B. Drop-Run anderer Shops)
+    assert not seen["testshop.example/kroos-1.html"]["teuer"]
+    seen, out = lauf([teuer, kroos(2)])
+    assert out == [] and not seen["testshop.example/kroos-1.html"].get("unter_grenze")
+
+
+def test_run_rabatt_eingerechnet(lauf, monkeypatch):
+    """Aktion mit Prozentwert (Nutzer 27.11.2026): zählt für Preisgrenze und App-Preis, ohne Push-Welle beim Einführen"""
+    teuer = dict(kroos(1), price="£150.00")       # 176,47 € laut Shop, 141,18 € mit 20 %
+    lauf([teuer, kroos(2)])
+    shop = dict(SHOP, aktion={"text": "Black Friday: 20 %", "prozent": 20, "bis": "2099-12-31"})
+    monkeypatch.setattr(trikot.speicher, "load_shops", lambda: {"shops": [shop], "fyj": "aus"})
+    seen, out = lauf([teuer, kroos(2)])
+    assert not seen["testshop.example/kroos-1.html"]["teuer"] and out == []
+    data = json.loads(trikot.speicher.DASHBOARD_FILE.read_text(encoding="utf-8"))
+    t = next(t for t in data["treffer"] if t["id"] == "testshop.example/kroos-1.html")
+    assert t["eur"] == 141.18 and t["eur_voll"] == 176.47 and t["abzug"]["prozent"] == 20 and t["abzug"]["art"] == "aktion"
+    # Aktion vorbei: wieder über der Grenze, raus aus der App
+    monkeypatch.setattr(trikot.speicher, "load_shops", lambda: {"shops": [SHOP], "fyj": "aus"})
+    seen, out = lauf([teuer, kroos(2)])
+    assert seen["testshop.example/kroos-1.html"]["teuer"]
