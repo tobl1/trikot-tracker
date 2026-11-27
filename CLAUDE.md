@@ -831,4 +831,6 @@ sperren alle Bots mit `Disallow: /`, keine offene Such-Schnittstelle, also weite
   `status.json` → `preisgrenze`) alle gemerkten Treffer still neu eingeordnet
 - Vintage Football Jerseys stand doppelt in shops.yaml (seit 26.11.), entfernt; Test gegen doppelte Namen und Domains
 - Nach dem 01.12.: `prozent`-Aktionen laufen von selbst aus (Preise springen zurück, Trikots über der Grenze verschwinden still)
-
+- 27.11. nachmittags: zeitweise Grenze 175 € auf Wunsch des Nutzers wieder raus (zurück auf 150 €, Rabatte bleiben
+  eingerechnet). Zählung auf den Daten: 364 Treffer bis 150 € ohne Rabatt, 395 mit Rabatt (+31, v. a. Classic Football Shirts 9,
+  Classic11 6), 480 bei 175 € mit Rabatt
