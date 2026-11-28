@@ -1,10 +1,10 @@
 # Fehler-Log
 
-Probleme der letzten 30 Tage, zusammengefasst. Stand 28.11. 13:51 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
+Probleme der letzten 30 Tage, zusammengefasst. Stand 28.11. 14:09 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
 
 | zuletzt | seit | Anzahl | Quelle | Meldung | Runs |
 |---|---|---|---|---|---|
-| 28.11. 13:09 | 21.10. 13:38 | 15 | Football Thrift Shop | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | drop, full |
+| 28.11. 14:09 | 21.10. 13:38 | 16 | Football Thrift Shop | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | drop, full |
 | 28.11. 11:09 | 09.11. 09:38 | 275 | 1Klopp Shop | SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=40&page=1 (Cau | drop |
 | 28.11. 11:09 | 27.11. 09:39 | 4 | Vintage Kit Co | SSLError: HTTPSConnectionPool(host='vintagekitco.com', port=443): Max retries exceeded with url: /products.json?limit=40&page=1 (C | drop |
 | 28.11. 06:36 | 10.11. 06:45 | 21 | 1Klopp Shop | SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=1 (Caused by S | full |

@@ -1,6 +1,6 @@
 # Trikot-Tracker
 
-Stand: 28.11.2026 13:51 Uhr (drop), 391 aktuelle Treffer in XL/XXL
+Stand: 28.11.2026 14:09 Uhr (drop), 392 aktuelle Treffer in XL/XXL
 
 ## Thiago (4)
 
@@ -11,10 +11,11 @@ Stand: 28.11.2026 13:51 Uhr (drop), 391 aktuelle Treffer in XL/XXL
 | [2013-14 BAYERN MUNCHEN *THIAGO* SHIRT XL](https://classic-shirts.com/product-eng-321702-2013-14-BAYERN-MUNCHEN-THIAGO-SHIRT-XL.html) | XL | 8/10 | £43.99 | Classic-Shirts | 01.10. |
 | [2019/20 - Bayern Munich - Thiago #6 (2XL)](https://www.vintagefootballarea.com/products/2019-20-bayern-munich-thiago-6-2xl-1) | XXL | Very Good | 79.99 EUR | Vintage Football Area | 01.10. |
 
-## Barça 2008-2013 (37)
+## Barça 2008-2013 (38)
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
+| [Barcelona 2011/2012 Local (XL) Basic](https://futmaniacos.com/products/barcelona-2011-2012-local-xl-basic) | XL |  | 52.46 EUR | Futmaniacos | 28.11. |
 | [Trikot - FC Barcelona - 2010/2011 - XL - Heim](https://trikotparadies.shop/products/trikot-fc-barcelona-2010-2011-xl-heim-10201) | XL | 10/10 | 59.00 EUR | Trikotparadies | 27.11. |
 | [FC Barcelona 08/09 Away](https://thosedays.com/listing/fc-barcelona-08-09-away-td-3534) | XXL | Very Good | 107.96 EUR | Those Days | 25.11. |
 | [FC Barcelona 11/12 Home](https://thosedays.com/listing/fc-barcelona-11-12-home-td-3360) | XL | Mint | 119.96 EUR | Those Days | 25.11. |
