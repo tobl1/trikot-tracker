@@ -1900,12 +1900,6 @@
  },
  "laeufe": [
   {
-   "modus": "radar",
-   "neu": 0,
-   "still": 0,
-   "zeit": "2026-11-20T12:38:36.561315+00:00"
-  },
-  {
    "modus": "drop",
    "neu": 0,
    "still": 0,
@@ -4298,17 +4292,20 @@
    "neu": 0,
    "still": 0,
    "zeit": "2026-11-28T08:39:24.016745+00:00"
+  },
+  {
+   "modus": "priority",
+   "neu": 0,
+   "still": 0,
+   "zeit": "2026-11-28T08:48:52.706592+00:00"
   }
  ],
  "last_full": "2026-11-28T05:36:18.926537+00:00",
  "last_run": {
-  "mode": "drop",
-  "time": "2026-11-28T08:39:24.016745+00:00"
+  "mode": "priority",
+  "time": "2026-11-28T08:48:52.706592+00:00"
  },
- "netzfehler": [
-  "1Klopp Shop",
-  "Vintage Kit Co"
- ],
+ "netzfehler": [],
  "platforms": {
   "https://1kloppshop.com": "shopify",
   "https://2ndseasonkits.ch": "shopify",
