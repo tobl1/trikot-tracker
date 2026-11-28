@@ -1,6 +1,6 @@
 # Fehler-Log
 
-Probleme der letzten 30 Tage, zusammengefasst. Stand 28.11. 11:20 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
+Probleme der letzten 30 Tage, zusammengefasst. Stand 28.11. 11:39 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
 
 | zuletzt | seit | Anzahl | Quelle | Meldung | Runs |
 |---|---|---|---|---|---|
@@ -65,4 +65,3 @@ Probleme der letzten 30 Tage, zusammengefasst. Stand 28.11. 11:20 Uhr. Wird bei 
 | 02.11. 11:38 | 23.10. 19:08 | 296 | Topbinz | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | drop, full |
 | 02.11. 06:38 | 25.10. 06:35 | 9 | Seitenprüfung | www.topbinzfootballshirts.co.uk: 31 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×28, 403 ×3) | full |
 | 01.11. 06:41 | 30.10. 06:41 | 2 | Seitenprüfung | full90prints.com: 1 Seite(n) nicht prüfbar (404 ×1) | full |
-| 29.10. 11:38 | 29.10. 11:38 | 1 | Sense of Goal | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |

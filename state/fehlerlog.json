@@ -467,16 +467,6 @@
   ],
   "quelle": "Seitenprüfung"
  },
- "Sense of Goal|geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop": {
-  "anzahl": 1,
-  "erst": "2026-10-29T10:38:13.628085+00:00",
-  "letzt": "2026-10-29T10:38:13.628085+00:00",
-  "meldung": "geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop",
-  "modi": [
-   "drop"
-  ],
-  "quelle": "Sense of Goal"
- },
  "Studio Football Shirts|geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop": {
   "anzahl": 2,
   "erst": "2026-11-04T16:38:20.353339+00:00",
