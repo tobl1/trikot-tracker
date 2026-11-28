@@ -10,9 +10,9 @@
   "quelle": "1Klopp Shop"
  },
  "1Klopp Shop|SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=40&page=1 (Cau": {
-  "anzahl": 272,
+  "anzahl": 273,
   "erst": "2026-11-09T08:38:30.001435+00:00",
-  "letzt": "2026-11-27T08:39:32.970418+00:00",
+  "letzt": "2026-11-28T08:39:24.016745+00:00",
   "meldung": "SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=40&page=1 (Cau",
   "modi": [
    "drop"
@@ -602,9 +602,9 @@
   "quelle": "Vintage Kit Co"
  },
  "Vintage Kit Co|SSLError: HTTPSConnectionPool(host='vintagekitco.com', port=443): Max retries exceeded with url: /products.json?limit=40&page=1 (C": {
-  "anzahl": 1,
+  "anzahl": 2,
   "erst": "2026-11-27T08:39:32.970418+00:00",
-  "letzt": "2026-11-27T08:39:32.970418+00:00",
+  "letzt": "2026-11-28T08:39:24.016745+00:00",
   "meldung": "SSLError: HTTPSConnectionPool(host='vintagekitco.com', port=443): Max retries exceeded with url: /products.json?limit=40&page=1 (C",
   "modi": [
    "drop"

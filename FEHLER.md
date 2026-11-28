@@ -1,9 +1,11 @@
 # Fehler-Log
 
-Probleme der letzten 30 Tage, zusammengefasst. Stand 28.11. 09:09 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
+Probleme der letzten 30 Tage, zusammengefasst. Stand 28.11. 09:39 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
 
 | zuletzt | seit | Anzahl | Quelle | Meldung | Runs |
 |---|---|---|---|---|---|
+| 28.11. 09:39 | 09.11. 09:38 | 273 | 1Klopp Shop | SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=40&page=1 (Cau | drop |
+| 28.11. 09:39 | 27.11. 09:39 | 2 | Vintage Kit Co | SSLError: HTTPSConnectionPool(host='vintagekitco.com', port=443): Max retries exceeded with url: /products.json?limit=40&page=1 (C | drop |
 | 28.11. 09:09 | 21.10. 13:38 | 12 | Football Thrift Shop | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | drop, full |
 | 28.11. 06:36 | 10.11. 06:45 | 21 | 1Klopp Shop | SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=1 (Caused by S | full |
 | 28.11. 06:36 | 15.11. 15:47 | 18 | Classic Football Shirts | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | priority, full |
@@ -15,8 +17,6 @@ Probleme der letzten 30 Tage, zusammengefasst. Stand 28.11. 09:09 Uhr. Wird bei 
 | 27.11. 16:24 | 27.11. 16:24 | 1 | Football Trikots Berlin | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
 | 27.11. 11:01 | 27.11. 11:01 | 1 | Seitenprüfung | classic-shirts.com: 67 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×64, Verbindung ×3) | full |
 | 27.11. 11:01 | 04.11. 17:38 | 2 | Studio Football Shirts | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop, full |
-| 27.11. 09:39 | 09.11. 09:38 | 272 | 1Klopp Shop | SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=40&page=1 (Cau | drop |
-| 27.11. 09:39 | 27.11. 09:39 | 1 | Vintage Kit Co | SSLError: HTTPSConnectionPool(host='vintagekitco.com', port=443): Max retries exceeded with url: /products.json?limit=40&page=1 (C | drop |
 | 26.11. 19:21 | 08.10. 16:08 | 8 | Kickoff Vintage | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
 | 26.11. 19:08 | 08.10. 18:38 | 10 | First 11 Shirts | geschlossen (Passwortseite, HTTP 401), z. B. vor einem Drop | drop |
 | 26.11. 06:38 | 20.11. 23:09 | 7 | Top Vintage Football Shirts | ReadTimeout: HTTPSConnectionPool(host='www.topvintagefootballshirts.com', port=443): Read timed out. (read timeout=25) | drop, full |
