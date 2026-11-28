@@ -1,0 +1,4 @@
+- name: Devoetbaltempel
+  url: https://devoetbaltempel.nl
+  schnellcheck: nein
+  quelle: 'Fundgrube, Issue #139'
