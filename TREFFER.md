@@ -1,6 +1,6 @@
 # Trikot-Tracker
 
-Stand: 28.11.2026 06:43 Uhr (full), 391 aktuelle Treffer in XL/XXL
+Stand: 28.11.2026 09:09 Uhr (drop), 391 aktuelle Treffer in XL/XXL
 
 ## Thiago (4)
 
@@ -362,8 +362,8 @@ Stand: 28.11.2026 06:43 Uhr (full), 391 aktuelle Treffer in XL/XXL
 
 | Trikot | Größe | Zustand | Preis | Shop | seit |
 |---|---|---|---|---|---|
-| [Rodri Manchester City 23/24 - XXL](https://secondfootballshirts.dk/products/080685) | XXL | 9/10 | 976.65 DKK | Secondfootballshirts | 28.11. |
 | [Rodri Manchester City 20/21 - XXL](https://secondfootballshirts.dk/products/080673) | XXL | 9/10 | 934.15 DKK | Secondfootballshirts | 28.11. |
+| [Rodri Manchester City 23/24 - XXL](https://secondfootballshirts.dk/products/080685) | XXL | 9/10 | 976.65 DKK | Secondfootballshirts | 28.11. |
 | [Rodri Manchester City 24/25 - XXL](https://secondfootballshirts.dk/products/071685) | XXL | 9/10 | 934.15 DKK | Secondfootballshirts | 27.11. |
 | [Manchester City 2019-2020 HOME 16 RODRI (XL)](https://www.footballshirtvintage.fr/products/maillot-manchester-city-2019-2020-home-16-rodri-xl-26049) | XL | Very Good | 100.45 EUR | footballshirtvintage.fr | 02.11. |
 

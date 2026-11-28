@@ -1,13 +1,13 @@
 # Fehler-Log
 
-Probleme der letzten 30 Tage, zusammengefasst. Stand 28.11. 06:36 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
+Probleme der letzten 30 Tage, zusammengefasst. Stand 28.11. 09:09 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
 
 | zuletzt | seit | Anzahl | Quelle | Meldung | Runs |
 |---|---|---|---|---|---|
+| 28.11. 09:09 | 21.10. 13:38 | 12 | Football Thrift Shop | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | drop, full |
 | 28.11. 06:36 | 10.11. 06:45 | 21 | 1Klopp Shop | SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=1 (Caused by S | full |
 | 28.11. 06:36 | 15.11. 15:47 | 18 | Classic Football Shirts | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | priority, full |
 | 28.11. 06:36 | 05.10. 06:46 | 57 | Football Legends Kits | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | full |
-| 28.11. 06:36 | 21.10. 13:38 | 11 | Football Thrift Shop | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | drop, full |
 | 28.11. 06:36 | 27.11. 06:39 | 2 | Kick and Rush | keine Produkte erhalten | full |
 | 28.11. 06:36 | 10.11. 06:45 | 21 | Seitenprüfung | www.classicfootballcollectibles.com: 1 Seite(n) nicht prüfbar (403 ×1) | full |
 | 28.11. 06:36 | 27.11. 11:01 | 2 | Seitenprüfung | www.topbinzfootballshirts.co.uk: 26 Seite(n) nicht prüfbar (übersprungen (Shop nicht erreichbar) ×23, 403 ×3) | full |
