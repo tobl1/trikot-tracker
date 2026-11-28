@@ -112,9 +112,9 @@
   "quelle": "Football Second Hand"
  },
  "Football Thrift Shop|gesperrt (HTTP 403), blockt vermutlich Server-Adressen": {
-  "anzahl": 16,
+  "anzahl": 17,
   "erst": "2026-10-21T11:38:07.764571+00:00",
-  "letzt": "2026-11-28T13:09:28.595911+00:00",
+  "letzt": "2026-11-28T13:39:30.817259+00:00",
   "meldung": "gesperrt (HTTP 403), blockt vermutlich Server-Adressen",
   "modi": [
    "drop",
