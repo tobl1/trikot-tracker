@@ -1,12 +1,12 @@
 # Fehler-Log
 
-Probleme der letzten 30 Tage, zusammengefasst. Stand 28.11. 09:48 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
+Probleme der letzten 30 Tage, zusammengefasst. Stand 28.11. 10:09 Uhr. Wird bei jedem Run aktualisiert und von Claude bei jeder neuen Anfrage gelesen.
 
 | zuletzt | seit | Anzahl | Quelle | Meldung | Runs |
 |---|---|---|---|---|---|
+| 28.11. 10:09 | 21.10. 13:38 | 13 | Football Thrift Shop | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | drop, full |
 | 28.11. 09:39 | 09.11. 09:38 | 273 | 1Klopp Shop | SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=40&page=1 (Cau | drop |
 | 28.11. 09:39 | 27.11. 09:39 | 2 | Vintage Kit Co | SSLError: HTTPSConnectionPool(host='vintagekitco.com', port=443): Max retries exceeded with url: /products.json?limit=40&page=1 (C | drop |
-| 28.11. 09:09 | 21.10. 13:38 | 12 | Football Thrift Shop | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | drop, full |
 | 28.11. 06:36 | 10.11. 06:45 | 21 | 1Klopp Shop | SSLError: HTTPSConnectionPool(host='1kloppshop.com', port=443): Max retries exceeded with url: /products.json?limit=1 (Caused by S | full |
 | 28.11. 06:36 | 15.11. 15:47 | 18 | Classic Football Shirts | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | priority, full |
 | 28.11. 06:36 | 05.10. 06:46 | 57 | Football Legends Kits | gesperrt (HTTP 403), blockt vermutlich Server-Adressen | full |
